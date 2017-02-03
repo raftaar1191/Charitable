@@ -285,11 +285,17 @@ CHARITABLE = window.CHARITABLE || {};
      *
      * @return  string
      */
-    Donation_Form.prototype.get_amount = function() {
+    Donation_Form.prototype.get_amount = function() {        
         var amount = suggested = parseFloat( this.form.find( '[name=donation_amount]:checked' ).val() );
 
         if ( isNaN( suggested ) ) {
-            amount = parseFloat( this.form.find( '.custom-donation-input' ).val() );
+            var custom = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
+
+            if ( 0 === custom.length ) {
+                custom = this.form.find( '.custom-donation-input' );
+            }
+
+            amount = parseFloat( custom.val() );
         }
 
         if ( isNaN( amount ) || amount <= 0 ) {

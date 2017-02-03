@@ -1,17 +1,17 @@
 <?php
 /**
- * Returns an array of all countries, with the country code as the key. 
+ * Returns an array of all countries, with the country code as the key.
  *
  * Credit to WooThemes, mikejolly and shivapoudel. This is shamelessly based on their implementation in WooCommerce.
  *
  * @since		1.0.0
  * @package		Charitable/i18n
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2015, Studio 164a
- * @license    	http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @copyright 	Copyright (c) 2017, Studio 164a
+ * @license    	http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly. 
+if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
 return array(
 	'AF' => __( 'Afghanistan', 'charitable' ),
@@ -257,5 +257,5 @@ return array(
 	'WS' => __( 'Western Samoa', 'charitable' ),
 	'YE' => __( 'Yemen', 'charitable' ),
 	'ZM' => __( 'Zambia', 'charitable' ),
-	'ZW' => __( 'Zimbabwe', 'charitable' )
+	'ZW' => __( 'Zimbabwe', 'charitable' ),
 );
