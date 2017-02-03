@@ -719,19 +719,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_end_date( $value ) {
-			global $wp_locale;
-
-			if ( empty( $value ) || ! $value ) {
-				return 0;
-			}
-
-			list( $month, $day, $year ) = explode( ' ', $value );
-
-			$day   = trim( $day, ',' );
-
-			$month = 1 + array_search( $month, array_values( $wp_locale->month ) );
-
-			return date( 'Y-m-d 00:00:00', mktime( 0, 0, 0, $month, $day, $year ) );
+			return charitable_sanitize_date( $value, 'Y-m-d 00:00:00' );
 		}
 
 		/**

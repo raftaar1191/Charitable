@@ -180,11 +180,11 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 			$query_args = array();
 
 			if ( strlen( $this->args['start_date'] ) ) {
-				$query_args['start_date'] = date( 'Y-m-d 00:00:00', strtotime( $this->args['start_date'] ) );
+				$query_args['start_date'] = charitable_sanitize_date( $this->args['start_date'], 'Y-m-d 00:00:00' );
 			}
 
 			if ( strlen( $this->args['end_date'] ) ) {
-				$query_args['end_date'] = date( 'Y-m-d 00:00:00', strtotime( $this->args['end_date'] ) );
+				$query_args['end_date'] = charitable_sanitize_date( $this->args['end_date'], 'Y-m-d 00:00:00' );
 			}
 
 			if ( 'all' != $this->args['campaign_id'] ) {
