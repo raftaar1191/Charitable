@@ -24,10 +24,10 @@ $extensions      = array();
 
 if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
 
-	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );
-    $extensions['payfast'] 			   = __( 'Accept donations in South African Rand', 'charitable' );
-    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );
-	$extensions['user-avatar'] 		   = __( 'Let your donors upload their own profile photo', 'charitable' );
+    $extensions['payfast']             = __( 'Accept donations in South African Rand', 'charitable' );
+    $extensions['recurring-donations'] = __( 'Accept recurring donations', 'charitable' );
+	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );    
+    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );	
 
 } elseif ( 'hi_IN' == $locale || 'INR' == $currency ) {
 
@@ -45,10 +45,10 @@ if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
 
 } else {
 
+    $extensions['recurring-donations'] = __( 'Accept recurring donations', 'charitable' );
 	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );
     $extensions['stripe'] 	           = __( 'Accept credit card donations with Stripe', 'charitable' );
-    $extensions['authorize-net']       = __( 'Collect donations with Authorize.Net', 'charitable' );
-    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );
+    $extensions['authorize-net']       = __( 'Collect donations with Authorize.Net', 'charitable' );    
 
 }
 
