@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.4.9\n"
+"Project-Id-Version: Charitable 1.4.10\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-01-18 01:32:35+00:00\n"
+"POT-Creation-Date: 2017-02-07 07:41:06+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4875,7 +4875,7 @@ msgid "Charitable Settings"
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:154
-#: includes/admin/class-charitable-admin.php:312
+#: includes/admin/class-charitable-admin.php:316
 msgid "Settings"
 msgstr ""
 
@@ -4903,7 +4903,13 @@ msgid ""
 "integration now to avoid disruption.</a>"
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:338
+#: includes/admin/class-charitable-admin.php:252
+msgid ""
+"<strong>NEW:</strong> Supercharge your online fundraising with Recurring "
+"Donations. <a href='%s'>Read more</a>"
+msgstr ""
+
+#: includes/admin/class-charitable-admin.php:342
 #: includes/admin/settings/class-charitable-settings.php:107
 msgid "Extensions"
 msgstr ""
@@ -5404,27 +5410,27 @@ msgstr ""
 msgid "Charitable needs to fix incorrect donation dates."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:178
+#: includes/admin/upgrades/class-charitable-upgrade.php:182
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:219
+#: includes/admin/upgrades/class-charitable-upgrade.php:223
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:250
+#: includes/admin/upgrades/class-charitable-upgrade.php:254
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:318
-#: includes/admin/upgrades/class-charitable-upgrade.php:353
+#: includes/admin/upgrades/class-charitable-upgrade.php:322
+#: includes/admin/upgrades/class-charitable-upgrade.php:357
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:318
-#: includes/admin/upgrades/class-charitable-upgrade.php:353
+#: includes/admin/upgrades/class-charitable-upgrade.php:322
+#: includes/admin/upgrades/class-charitable-upgrade.php:357
 #: includes/licensing/class-charitable-plugin-updater.php:290
 msgid "Error"
 msgstr ""
@@ -5779,42 +5785,45 @@ msgid "Step %d of approximately %d running"
 msgstr ""
 
 #: includes/admin/views/welcome-page/page.php:27
-#: includes/admin/views/welcome-page/page.php:34
-#: includes/admin/views/welcome-page/page.php:41
-#: includes/admin/views/welcome-page/page.php:48
-msgid "Peer to peer fundraising or crowdfunding"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:28
 msgid "Accept donations in South African Rand"
 msgstr ""
 
+#: includes/admin/views/welcome-page/page.php:28
+#: includes/admin/views/welcome-page/page.php:48
+msgid "Accept recurring donations"
+msgstr ""
+
 #: includes/admin/views/welcome-page/page.php:29
-#: includes/admin/views/welcome-page/page.php:36
-#: includes/admin/views/welcome-page/page.php:43
-#: includes/admin/views/welcome-page/page.php:51
-msgid "Let donors give anonymously"
+#: includes/admin/views/welcome-page/page.php:34
+#: includes/admin/views/welcome-page/page.php:41
+#: includes/admin/views/welcome-page/page.php:49
+msgid "Peer to peer fundraising or crowdfunding"
 msgstr ""
 
 #: includes/admin/views/welcome-page/page.php:30
-#: includes/admin/views/welcome-page/page.php:37
-#: includes/admin/views/welcome-page/page.php:44
-msgid "Let your donors upload their own profile photo"
+#: includes/admin/views/welcome-page/page.php:36
+#: includes/admin/views/welcome-page/page.php:43
+msgid "Let donors give anonymously"
 msgstr ""
 
 #: includes/admin/views/welcome-page/page.php:35
 msgid "Accept donations in Indian Rupees"
 msgstr ""
 
+#: includes/admin/views/welcome-page/page.php:37
+#: includes/admin/views/welcome-page/page.php:44
+msgid "Let your donors upload their own profile photo"
+msgstr ""
+
 #: includes/admin/views/welcome-page/page.php:42
 msgid "Collect donations with Easy Digital Downloads"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:49
+#: includes/admin/views/welcome-page/page.php:50
 msgid "Accept credit card donations with Stripe"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:50
+#: includes/admin/views/welcome-page/page.php:51
 msgid "Collect donations with Authorize.Net"
 msgstr ""
 
@@ -7286,19 +7295,19 @@ msgstr ""
 msgid "The credit card expiry date is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:188
+#: includes/public/class-charitable-public.php:186
 msgid "You can only upload %d file"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:189
+#: includes/public/class-charitable-public.php:187
 msgid "You can only upload a maximum of %d files"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:190
+#: includes/public/class-charitable-public.php:188
 msgid "%1$s exceeds the max upload size of %2$s"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:191
+#: includes/public/class-charitable-public.php:189
 msgid "%s failed to upload. Please try again."
 msgstr ""
 
@@ -7809,7 +7818,7 @@ msgid "%s donated"
 msgstr ""
 
 #: includes/charitable-utility-functions.php:137
-#: includes/charitable-utility-functions.php:143
+#: includes/charitable-utility-functions.php:142
 msgctxt "x and y"
 msgid "%s and %s"
 msgstr ""
@@ -7879,7 +7888,7 @@ msgctxt "go to campaign"
 msgid "Go to"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:187
+#: includes/public/class-charitable-public.php:185
 msgctxt "remove image button text"
 msgid "Remove"
 msgstr ""
