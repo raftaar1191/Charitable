@@ -123,7 +123,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$suffix  = '';
-				$version = time();
+				$version = '';
 			} else {
 				$suffix  = '.min';
 				$version = charitable()->get_version();

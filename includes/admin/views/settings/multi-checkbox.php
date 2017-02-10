@@ -17,8 +17,27 @@ if ( ! is_array( $value ) ) {
     $value = (array) $value;
 }
 
+$setting_attributes = '';
+
+if ( array_key_exists( 'attrs', $view_args ) ) {
+
+    $setting_attributes_keys = array( 'data-trigger-key', 'data-trigger-change-type', 'data-trigger-value' );
+
+    foreach ( $setting_attributes_keys as $key ) {
+
+        if ( ! array_key_exists( $key, $view_args['attrs'] ) ) {
+            continue;
+        }
+
+        $setting_attributes .= sprintf( ' %s="%s"', $key, esc_attr( $view_args['attrs'][ $key ] ) );
+
+        unset( $view_args['attrs'][ $key ] );        
+
+    }
+}
+
 ?>
-<ul class="charitable-checkbox-list <?php echo esc_attr( $view_args[ 'classes' ] ) ?>">
+<ul class="charitable-checkbox-list <?php echo esc_attr( $view_args[ 'classes' ] ) ?>" <?php echo $setting_attributes ?>>
 
     <?php foreach ( $view_args[ 'options' ] as $option => $label ) : ?>
 
