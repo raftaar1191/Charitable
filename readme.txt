@@ -116,6 +116,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
+= 1.4.11 = 
+* Provided a more flexible API for toggling settings based on other setting values.
+
 = 1.4.10 = 
 * Correctly filter donations by date in the CSV export. This was broken in certain non-English languages. [#299](https://github.com/Charitable/Charitable/issues/299)
 * Fixed an issue that prevented the custom donation amount from being picked up on sites using our new [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=recurring-donations).

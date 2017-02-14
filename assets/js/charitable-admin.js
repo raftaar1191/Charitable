@@ -78,6 +78,11 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 				options = $setting.data( 'trigger-value' ),
 				available;
 
+			/* If it's a radio input that isn't checked, ignore the event. */
+			if ( 'radio' === $trigger.attr( 'type' ) && ! $trigger.prop( 'checked' ) ) {
+				return;
+			}
+
 			if ( ! options.hasOwnProperty( value ) ) {
 				return;
 			}
@@ -89,10 +94,10 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 					disabled = ! ( $option.val() in available );
 
 				if ( disabled ) {
-					$option.attr( 'checked', false );
+					$option.prop( 'checked', false );
 				}
 
-				$option.attr( 'disabled', disabled );
+				$option.prop( 'disabled', disabled ).trigger( 'change' );
 			});
 		};
 
@@ -176,7 +181,9 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 			$trigger.data( 'trigger_idx', i );
 
-			$trigger.on( 'change', on_change ).trigger( 'change' );
+			$trigger.on( 'change', on_change );
+
+			$trigger.trigger( 'change' );
 		};
 	};	
 
@@ -238,7 +245,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			$suggestions = $('.charitable-campaign-suggested-donations tbody tr:not(.to-copy)'),
 			has_suggestions = $suggestions.length > 1 || false === $suggestions.first().hasClass('no-suggested-amounts');
 	
-		$custom.attr( 'disabled', ! has_suggestions );
+		$custom.prop( 'disabled', ! has_suggestions );
 
 		if ( ! has_suggestions ) {
 			$custom.prop( 'checked', true );

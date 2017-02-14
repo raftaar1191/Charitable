@@ -114,7 +114,9 @@ function charitable_get_campaign_donation_page_permalink( $url, $args = array() 
 		return $campaign_url;
 	}
 
-	if ( $wp_rewrite->using_permalinks() && ! isset( $_GET['preview'] ) ) {
+	if ( $wp_rewrite->using_permalinks()
+		&& ! in_array( get_post_status( $campaign_id ), array( 'pending', 'draft' ) )
+		&& ! isset( $_GET['preview'] ) ) {
 		return trailingslashit( $campaign_url ) . 'donate/';
 	}
 
