@@ -24,10 +24,10 @@ $extensions      = array();
 
 if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
 
-	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );
-    $extensions['payfast'] 			   = __( 'Accept donations in South African Rand', 'charitable' );
-    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );
-	$extensions['user-avatar'] 		   = __( 'Let your donors upload their own profile photo', 'charitable' );
+    $extensions['payfast']             = __( 'Accept donations in South African Rand', 'charitable' );
+    $extensions['recurring-donations'] = __( 'Accept recurring donations', 'charitable' );
+	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );    
+    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );	
 
 } elseif ( 'hi_IN' == $locale || 'INR' == $currency ) {
 
@@ -45,10 +45,10 @@ if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
 
 } else {
 
+    $extensions['recurring-donations'] = __( 'Accept recurring donations', 'charitable' );
 	$extensions['ambassadors']         = __( 'Peer to peer fundraising or crowdfunding', 'charitable' );
     $extensions['stripe'] 	           = __( 'Accept credit card donations with Stripe', 'charitable' );
-    $extensions['authorize-net']       = __( 'Collect donations with Authorize.Net', 'charitable' );
-    $extensions['anonymous-donations'] = __( 'Let donors give anonymously', 'charitable' );
+    $extensions['authorize-net']       = __( 'Collect donations with Authorize.Net', 'charitable' );    
 
 }
 
@@ -149,7 +149,7 @@ if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
                 ) ?></p>
                 <hr />
             <?php endif ?>         
-            <img src="<?php echo charitable()->get_path( 'assets', false ) ?>images/reach-mockup.png" alt="<?php _e( 'Screenshot of Reach, a WordPress fundraising theme designed to complement Charitable', 'charitable' ) ?>" title="<?php _e( 'Reach is a WordPress fundraising theme designed to complement Charitable', 'charitable' ) ?>" style="margin-bottom: 21px;" width="336" height="166" />
+            <img src="<?php echo charitable()->get_path( 'assets', false ) ?>images/reach-mockup.png" alt="<?php _e( 'Screenshot of Reach, a WordPress fundraising theme designed to complement Charitable', 'charitable' ) ?>" style="margin-bottom: 21px;" width="336" height="166" />
             <h2><?php _e( 'Try Reach, a free theme designed for fundraising', 'charitable' ) ?></h2>
             <p><?php _e( 'We built Reach to help non-profits &amp; social entrepreneurs run beautiful online fundraising campaigns. Whether you’re creating a website for your organization’s peer-to-peer fundraising event or building an online crowdfunding platform, Reach is the perfect starting point.', 'charitable' ) ?></p>
             <p><a href="https://www.wpcharitable.com/download-reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-primary" style="margin-right: 8px;" target="_blank"><?php _e( 'Download it free', 'charitable' ) ?></a><a href="http://demo.wpcharitable.com/reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-secondary" target="_blank"><?php _e( 'View demo', 'charitable' ) ?></a></p>

@@ -149,9 +149,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 				array( 'charitable-script' ),
 				$version,
 				true
-			);			
-
-			/* Enqueue credit card & 
+			);
 
 			/* Main styles */
 			wp_register_style(

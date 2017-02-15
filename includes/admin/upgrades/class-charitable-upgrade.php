@@ -152,6 +152,10 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						'prompt'   => false,
 						'callback' => array( $this, 'remove_campaign_manager_cap' ),
 					),
+					'show_recurring_donations_notice' => array(
+						'version'  => '1.4.10',
+						'notice'   => 'release-1410-recurring-donations',
+					),
 				);
 
 			}

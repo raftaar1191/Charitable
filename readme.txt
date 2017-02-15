@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.7
-Stable tag: 1.4.7
+Tested up to: 4.7.2
+Stable tag: 1.4.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,6 +57,7 @@ Charitable has been designed to work with any well-coded theme, including the de
 
 One size does *not* fit all. That's why we made Charitable an extendable platform. 
 
+* **[Recurring Donations](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=description-tab&utm_campaign=recurring-donations)** - Accept monthly donations on your website.
 * **[Ambassadors](https://www.wpcharitable.com/extensions/charitable-ambassadors?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - Add peer-to-peer fundraising or crowdfunding to your website, with front-end campaign submission.
 * **[Easy Digital Downloads](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - 
 Accept donations with Easy Digital Downloads. Compatible with any EDD payment gateway.
@@ -98,7 +99,7 @@ Easy. Just add `[campaigns]` into your page content. [Read more](https://www.wpc
 
 = Does Charitable support recurring donations? =
 
-Support for recurring donations will be added as an extension, but is not yet available.
+Yes. Recurring donations support is possible with our [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=faq-tab&utm_campaign=recurring-donations).
 
 = How do I get support? = 
 
@@ -114,6 +115,21 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area. 
 
 == Changelog ==
+
+= 1.4.11 = 
+* Provided a more flexible API for toggling settings based on other setting values.
+
+= 1.4.10 = 
+* Correctly filter donations by date in the CSV export. This was broken in certain non-English languages. [#299](https://github.com/Charitable/Charitable/issues/299)
+* Fixed an issue that prevented the custom donation amount from being picked up on sites using our new [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=recurring-donations).
+
+= 1.4.9 = 
+* Added Ghanaian Cedi and Egyptian Pound to currencies. [#288](https://github.com/Charitable/Charitable/issues/288) and [#282](https://github.com/Charitable/Charitable/issues/282)
+* Remove `$wp_version` global. [#294](https://github.com/Charitable/Charitable/pull/294)
+* Miscellaneous accessibility improvements. [#291](https://github.com/Charitable/Charitable/pull/291), [#292](https://github.com/Charitable/Charitable/pull/292) and [#293](https://github.com/Charitable/Charitable/pull/293)
+
+= 1.4.8 = 
+* Removed some code left over from plugin testing.
 
 = 1.4.7 =
 * Avoid issues with PayPal IPNs missing the 'invoice' parameter in certain cases — likely a bug on the PayPal end. This resulted in donations remaining stuck as Pending. We have reworked how IPNs are processed to avoid reliance on this and avoid further issues. [#289](https://github.com/Charitable/Charitable/issues/289)
