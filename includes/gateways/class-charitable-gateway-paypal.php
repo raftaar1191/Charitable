@@ -429,12 +429,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data = array(
 				'cmd' => '_notify-validate',
 			);
+			
+			return array_merge( $data, $_POST );
 
-			foreach ( $_POST as $key => $value ) {
-				$data[ $key ] = urlencode( $value );
-			}
-
-			return $data;
 		}
 
 		/**
