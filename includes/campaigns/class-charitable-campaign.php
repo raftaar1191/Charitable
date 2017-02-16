@@ -5,7 +5,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Campaign
  * @author      Eric Daams
- * @copyright   Copyright (c) 2015, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -719,7 +719,13 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_end_date( $value ) {
-			return charitable_sanitize_date( $value, 'Y-m-d 00:00:00' );
+			$end_date = charitable_sanitize_date( $value, 'Y-m-d 00:00:00' );
+
+			if ( ! $end_date ) {
+				$end_date = 0;
+			}
+
+			return $end_date;
 		}
 
 		/**

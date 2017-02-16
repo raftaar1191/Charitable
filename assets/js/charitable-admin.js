@@ -319,7 +319,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			});
 		}
 
-		$( '#charitable-settings' ).each( function(){
+		$( '#charitable-settings, body.post-type-campaign form#post' ).each( function(){
 			CHARITABLE_ADMIN.Settings( $(this) );
 		});
 

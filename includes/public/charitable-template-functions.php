@@ -7,7 +7,7 @@
  * @package     Charitable/Functions/Templates
  * @version     1.0.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2015, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -128,7 +128,8 @@ if ( ! function_exists( 'charitable_template_campaign_content' ) ) :
 	 * @since   1.0.0
 	 */
 	function charitable_template_campaign_content( $content ) {
-		if ( Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
+
+		if ( ! charitable_is_main_loop() || Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
 			return $content;
 		}
 
@@ -597,6 +598,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_content' ) ) :
 	 * @since   1.0.0
 	 */
 	function charitable_template_donation_receipt_content( $content ) {
+
 		if ( ! charitable_is_page( 'donation_receipt_page' ) ) {
 			return $content;
 		}
@@ -607,6 +609,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_content' ) ) :
 		}
 
 		return charitable_template_donation_receipt_output( $content );
+
 	}
 
 endif;
@@ -713,7 +716,7 @@ if ( ! function_exists( 'charitable_template_donation_form_content' ) ) :
 	 */
 	function charitable_template_donation_form_content( $content ) {
 
-		if ( ! charitable_is_page( 'campaign_donation_page' ) ) {
+		if ( ! charitable_is_main_loop() || ! charitable_is_page( 'campaign_donation_page' ) ) {
 			return $content;
 		}
 
@@ -829,6 +832,7 @@ if ( ! function_exists( 'charitable_template_donation_processing_content' ) ) :
 	 * @since   1.2.0
 	 */
 	function charitable_template_donation_processing_content( $content ) {
+
 		if ( ! charitable_is_page( 'donation_processing_page' ) ) {
 			return $content;
 		}
@@ -842,6 +846,7 @@ if ( ! function_exists( 'charitable_template_donation_processing_content' ) ) :
 		$content = apply_filters( 'charitable_processing_donation_' . $donation->get_gateway(), $content, $donation );
 
 		return $content;
+
 	}
 
 endif;
@@ -860,6 +865,7 @@ if ( ! function_exists( 'charitable_template_forgot_password_content' ) ) :
 	 * @since   1.4.0
 	 */
 	function charitable_template_forgot_password_content( $content = '' ) {
+
 		if ( ! charitable_is_page( 'forgot_password_page' ) ) {
 			return $content;
 		}

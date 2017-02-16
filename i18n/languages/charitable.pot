@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.4.10\n"
+"Project-Id-Version: Charitable 1.4.11\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-02-07 07:41:06+00:00\n"
+"POT-Creation-Date: 2017-02-15 08:11:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7101,91 +7101,91 @@ msgstr ""
 msgid "Unknown Response"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:486
+#: includes/gateways/class-charitable-gateway-paypal.php:483
 msgid "Payment made via eCheck and will clear automatically in 5-8 days"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:490
+#: includes/gateways/class-charitable-gateway-paypal.php:487
 msgid ""
 "Payment requires a confirmed customer address and must be accepted manually "
 "through PayPal"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:494
+#: includes/gateways/class-charitable-gateway-paypal.php:491
 msgid ""
 "Payment must be accepted manually through PayPal due to international "
 "account regulations"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:498
+#: includes/gateways/class-charitable-gateway-paypal.php:495
 msgid ""
 "Payment received in non-shop currency and must be accepted manually through "
 "PayPal"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:503
+#: includes/gateways/class-charitable-gateway-paypal.php:500
 msgid ""
 "Payment is being reviewed by PayPal staff as high-risk or in possible "
 "violation of government regulations"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:507
+#: includes/gateways/class-charitable-gateway-paypal.php:504
 msgid "Payment was sent to non-confirmed or non-registered email address."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:511
+#: includes/gateways/class-charitable-gateway-paypal.php:508
 msgid "PayPal account must be upgraded before this payment can be accepted"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:515
+#: includes/gateways/class-charitable-gateway-paypal.php:512
 msgid ""
 "PayPal account is not verified. Verify account in order to accept this "
 "payment"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:519
+#: includes/gateways/class-charitable-gateway-paypal.php:516
 msgid ""
 "Payment is pending for unknown reasons. Contact PayPal support for "
 "assistance. Reason code: %s"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:612
+#: includes/gateways/class-charitable-gateway-paypal.php:609
 msgid "Your PayPal integration is working"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:613
+#: includes/gateways/class-charitable-gateway-paypal.php:610
 msgid ""
 "<p>Good news! We successfuly received the Instant Payment Notification from "
 "PayPal and were able to verify it with them.</p>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:614
+#: includes/gateways/class-charitable-gateway-paypal.php:611
 msgid ""
 "<p>This means that your website is all set to continue receiving donations "
 "through PayPal. You should not experience any issues when PayPal upgrades "
 "its SSL certificates.</p>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:615
-#: includes/gateways/class-charitable-gateway-paypal.php:636
+#: includes/gateways/class-charitable-gateway-paypal.php:612
+#: includes/gateways/class-charitable-gateway-paypal.php:633
 msgid "<p>Cheers<br />Eric & Wes"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:620
+#: includes/gateways/class-charitable-gateway-paypal.php:617
 msgid "Your PayPal test failed"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:621
+#: includes/gateways/class-charitable-gateway-paypal.php:618
 msgid ""
 "<p>We received the Instant Payment Notification from PayPal but were not "
 "able to verify its authenticity."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:622
+#: includes/gateways/class-charitable-gateway-paypal.php:619
 msgid "<p>Our communicaton with PayPal failed with the following errors:</p>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:630
+#: includes/gateways/class-charitable-gateway-paypal.php:627
 msgid ""
 "<p>Unfortunately, this means that you are likely to face problems with your "
 "PayPal donations from October 2016 onwards. Your donors will still be able "
@@ -7193,11 +7193,11 @@ msgid ""
 "be automatically marked as Paid in your WordPress dashboard.</p>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:631
+#: includes/gateways/class-charitable-gateway-paypal.php:628
 msgid "<h3>Short-term fix</h3>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:632
+#: includes/gateways/class-charitable-gateway-paypal.php:629
 msgid ""
 "<p><strong>Disable IPN verification</strong>. This makes your donation "
 "verification process less secure, but it will allow your donations to "
@@ -7207,11 +7207,11 @@ msgid ""
 "Verification\" setting."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:633
+#: includes/gateways/class-charitable-gateway-paypal.php:630
 msgid "<h3>Long-term solution</h3>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:634
+#: includes/gateways/class-charitable-gateway-paypal.php:631
 msgid ""
 "<p><strong>Get in touch with your web host</strong>. Please refer them to "
 "<a "
@@ -7221,7 +7221,7 @@ msgid ""
 "you received from PayPal above.</p>"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-paypal.php:635
+#: includes/gateways/class-charitable-gateway-paypal.php:632
 msgid ""
 "<p>If your web host is unable to upgrade the software on your server, we "
 "strongly recommend switching to a hosting platform that provides a more "
@@ -7273,7 +7273,7 @@ msgstr ""
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: includes/public/charitable-page-functions.php:506
+#: includes/public/charitable-page-functions.php:516
 msgid ""
 "Password reset link should not be called when using the default WordPress "
 "login."

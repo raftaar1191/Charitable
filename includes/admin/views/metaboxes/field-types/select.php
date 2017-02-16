@@ -4,7 +4,7 @@
  *
  * @author      Eric Daams
  * @package     Charitable/Admin Views/Metaboxes
- * @copyright   Copyright (c) 2016, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @since       1.4.6
  */
 
