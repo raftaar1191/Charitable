@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.4.11\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-02-15 08:11:18+00:00\n"
+"POT-Creation-Date: 2017-02-16 06:39:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5410,27 +5410,27 @@ msgstr ""
 msgid "Charitable needs to fix incorrect donation dates."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:182
+#: includes/admin/upgrades/class-charitable-upgrade.php:188
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:223
+#: includes/admin/upgrades/class-charitable-upgrade.php:229
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:254
+#: includes/admin/upgrades/class-charitable-upgrade.php:260
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:322
-#: includes/admin/upgrades/class-charitable-upgrade.php:357
+#: includes/admin/upgrades/class-charitable-upgrade.php:328
+#: includes/admin/upgrades/class-charitable-upgrade.php:363
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
-#: includes/admin/upgrades/class-charitable-upgrade.php:322
-#: includes/admin/upgrades/class-charitable-upgrade.php:357
+#: includes/admin/upgrades/class-charitable-upgrade.php:328
+#: includes/admin/upgrades/class-charitable-upgrade.php:363
 #: includes/licensing/class-charitable-plugin-updater.php:290
 msgid "Error"
 msgstr ""
@@ -7273,7 +7273,7 @@ msgstr ""
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: includes/public/charitable-page-functions.php:516
+#: includes/public/charitable-page-functions.php:506
 msgid ""
 "Password reset link should not be called when using the default WordPress "
 "login."

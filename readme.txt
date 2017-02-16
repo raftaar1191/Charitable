@@ -118,9 +118,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 = 1.4.11 =
 * Corrected a problem that caused newly created/saved campaigns without an end date to stop showing in the `[campaigns]` shortcode output. [#301](https://github.com/Charitable/Charitable/issues/301)
-* Fixed an issue that resulted in PayPal donations left as Pending when `allow_url_fopen` was turned off on the server.
-* Avoid displaying the donation form & campaign information outside of the loop (this caused weird issues in the Layers theme).
-* Provided a more flexible API for toggling settings based on other setting values.
+* Fixed an issue that resulted in PayPal donations left as Pending when `allow_url_fopen` was turned off on the server. [#302](https://github.com/Charitable/Charitable/issues/302)
+* Avoid displaying the donation form & campaign information outside of the loop (this caused weird issues in the Layers theme). [#303](https://github.com/Charitable/Charitable/issues/303)
+* Provided a more flexible API for toggling settings based on other setting values. 
 
 = 1.4.10 = 
 * Correctly filter donations by date in the CSV export. This was broken in certain non-English languages. [#299](https://github.com/Charitable/Charitable/issues/299)
