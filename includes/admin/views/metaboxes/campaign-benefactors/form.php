@@ -7,8 +7,8 @@
  * @copyright   Copyright (c) 2017, Studio 164a 
  */
 
-$benefactor = isset( $view_args[ 'benefactor' ] ) ? $view_args[ 'benefactor' ] : null;
-$extension  = isset( $view_args['extension'] ) ? $view_args[ 'extension' ] : '';
+$benefactor           = isset( $view_args[ 'benefactor' ] ) ? $view_args[ 'benefactor' ] : null;
+$extension            = isset( $view_args['extension'] ) ? $view_args[ 'extension' ] : '';
 $is_active_benefactor = is_null( $benefactor ) || $benefactor->is_active();
 
 if ( is_null( $benefactor ) ) {
@@ -16,8 +16,8 @@ if ( is_null( $benefactor ) ) {
         'index'                           => '_0',        
         'contribution_amount'             => '',
         'contribution_amount_is_per_item' => 0, 
-        'date_created'                    => date( 'F d, Y' ), 
-        'date_deactivated'                => 0
+        'date_created'                    => date_i18n( 'F d, Y' ), 
+        'date_deactivated'                => 0,
     );
 
     $args = array_merge( $default_args, $view_args );
@@ -27,12 +27,12 @@ else {
         'index'                           => $benefactor->campaign_benefactor_id,
         'contribution_amount'             => $benefactor->get_contribution_amount(), 
         'contribution_amount_is_per_item' => $benefactor->contribution_amount_is_per_item, 
-        'date_created'                    => date( 'F d, Y', strtotime( $benefactor->date_created ) ), 
-        'date_deactivated'                => date( 'F d, Y', strtotime( $benefactor->date_deactivated ) )     
+        'date_created'                    => date_i18n( 'F d, Y', strtotime( $benefactor->date_created ) ), 
+        'date_deactivated'                => '0000-00-00 00:00:00' == $benefactor->date_deactivated ? '' : date_i18n( 'F d, Y', strtotime( $benefactor->date_deactivated ) ),
     );  
 }
 
-$id_base = 'campaign_benefactor_' . $args[ 'index' ];
+$id_base   = 'campaign_benefactor_' . $args[ 'index' ];
 $name_base = '_campaign_benefactor[' . $args[ 'index' ] . ']';
 
 ?>
