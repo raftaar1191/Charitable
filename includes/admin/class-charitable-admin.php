@@ -231,7 +231,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			$notices['release-142'] = sprintf( __( "In Charitable 1.4.2, we have improved the login and registration forms. <a href='%s'>Find out how</a>.", 'charitable' ),
 				'https://www.wpcharitable.com/how-we-improved-logins-and-registrations-in-charitable/?utm_source=notice&utm_medium=wordpress-dashboard&utm_campaign=release-notes&utm_content=release-142'
-			);			
+			);
 
 			if ( Charitable_Gateways::get_instance()->is_active_gateway( 'paypal' ) ) {
 
