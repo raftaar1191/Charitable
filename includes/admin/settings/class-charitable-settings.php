@@ -5,7 +5,7 @@
  * @package     Charitable/Classes/Charitable_Settings
  * @version     1.0.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2015, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -466,8 +466,8 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return the submitted values for the given section.
 		 *
-		 * @param   string  $section
-		 * @param   array   $submitted
+		 * @param   string $section
+		 * @param   array  $submitted
 		 * @return  array
 		 * @access  private
 		 * @since   1.0.0

@@ -7,7 +7,7 @@
  * @package     Charitable/Functions/Templates
  * @version     1.2.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2015, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
  */
 
@@ -82,4 +82,18 @@ function charitable_get_arbitrary_attributes( $field ) {
 	}
 
 	return apply_filters( 'charitable_arbitrary_field_attributes', $output );
+}
+
+/**
+ * Checks whether we are currently in the main loop on a singular page.
+ *
+ * This should be used in any functions run on the_content hook, to prevent
+ * Charitable's filters touching other the_content instances outside the main
+ * loop.
+ *
+ * @return 	boolean
+ * @since 	1.4.11
+ */
+function charitable_is_main_loop() {
+	return is_single() && in_the_loop() && is_main_query();
 }

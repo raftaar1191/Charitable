@@ -43,87 +43,153 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 	var Settings = function( $el ) {
 		var triggers = [];
 
-		var toggle_setting = function($setting, $trigger) {
-			var $tr = $setting.parents('tr').first(),
-				value = $setting.data('show-only-if-value'),
-				show = (function(){
-					if ('checked' === value) {
-						return $trigger.is(':checked');
-					}
-					else if ('selected' === value) {
-						return $trigger.selected();
-					}
-					else {
-						return $trigger.val() === value;
-					}
-				})();
-
-			if (show) {
-				$tr.show();
+		show_setting = function(value, $trigger) {
+			if ('checked' === value) {
+				return $trigger.is(':checked');
+			}
+			else if ('selected' === value) {
+				return $trigger.selected();
 			}
 			else {
-				$tr.hide();
+				return $trigger.val() === value;
 			}
+		}
+
+		toggle_setting = function($setting, $trigger) {
+			var $tr = $setting.parents('tr').first(),
+				value = get_setting_value( $setting );
+
+			$tr.toggle( show_setting(value, $trigger) );
+		};
+
+		get_setting_value = function($setting) {
+			var value = $setting.data( 'trigger-value' );
+
+			/* Backwards compatibility for pre 1.5 */
+			if ( 'undefined' === typeof value ) {
+				value = $setting.data( 'show-only-if-value' );
+			}
+
+			return value;
+		};
+
+		toggle_options = function($setting, $trigger) {
+			var value = $trigger.val(),
+				options = $setting.data( 'trigger-value' ),
+				available;
+
+			/* If it's a radio input that isn't checked, ignore the event. */
+			if ( 'radio' === $trigger.attr( 'type' ) && ! $trigger.prop( 'checked' ) ) {
+				return;
+			}
+
+			if ( ! options.hasOwnProperty( value ) ) {
+				return;
+			}
+
+			available = options[value];
+
+			$setting.find( 'input' ).each( function(){
+				var $option = $(this),
+					disabled = ! ( $option.val() in available );
+
+				if ( disabled ) {
+					$option.prop( 'checked', false );
+				}
+
+				$option.prop( 'disabled', disabled ).trigger( 'change' );
+			});
+		};
+
+		get_trigger_id = function($setting) {
+			var id = $setting.data( 'trigger-key' );
+
+			/* Backwards compatibility for pre 1.5 */
+			if ( 'undefined' === typeof id ) {
+				id = '#' + $setting.data( 'show-only-if-key' );
+			}
+
+			return id;
+		};
+
+		get_trigger = function(id) {
+			if ( '#' === id[0] ) {
+				return $( id );
+			}
+
+			return $( '[name=' + id + ']' );
+		};
+
+		get_change_type = function($setting) {
+			var type = $setting.data( 'trigger-change-type' );
+
+			if ( 'undefined' === typeof type ) {
+				type = 'visibility';
+			}
+
+			return type;
+		};
+
+		on_change = function() {
+			var $trigger = $( this ), 
+				trigger_id = $trigger.data( 'trigger_idx' ),
+				settings = triggers[trigger_id]['settings'];
+
+			for ( setting_key in settings ) {
+				if ( ! settings.hasOwnProperty( setting_key ) ) {
+					continue;
+				}
+
+				var $setting = settings[setting_key],
+					change = get_change_type( $setting );
+
+				if ( 'visibility' === change ) {
+					toggle_setting( $setting, $trigger );
+				} else if ( 'options' === change ) {
+					toggle_options( $setting, $trigger );
+				}
+			};
 		};
 
 		this.$el = $el;
 
-		this.$el.find( '[data-show-only-if-key]' ).each( function(){
+		var i = 0;
+
+		this.$el.find( '[data-trigger-key],[data-show-only-if-key]' ).each( function(){
 			var $this = $(this),
-				trigger_id = '#' + $this.data('show-only-if-key');
+				trigger_id = get_trigger_id( $this ), 
+				element = triggers[trigger_id];
 
 			if ( 'undefined' === typeof triggers[trigger_id] ) {
-				triggers[trigger_id] = [];
+				triggers[i] = {
+					trigger_id : trigger_id,
+					settings : []
+				};
 			}
 
-			triggers[trigger_id].push( $this );
+			triggers[i].settings.push( $this );
+
+			i += 1;
 		});
 
-		for ( trigger in triggers ) {
-			var $trigger = $(trigger);			
-
-			if ( ! triggers.hasOwnProperty( trigger ) ) {
+		for ( i in triggers ) {
+			if ( ! triggers.hasOwnProperty( i ) ) {
 				continue;
 			}
 
-			$trigger.on( 'change', function() {
-				var settings = triggers[trigger];
-				
-				for ( setting_key in triggers[trigger] ) {
-				
-					if ( ! triggers[trigger].hasOwnProperty( setting_key ) ) {
-						continue;
-					}
+			var $trigger = get_trigger( triggers[i]['trigger_id'] );
 
-					toggle_setting( triggers[trigger][setting_key], $trigger );
-				};
+			$trigger.data( 'trigger_idx', i );
 
-				
+			$trigger.on( 'change', on_change );
 
-				// console.log(triggers[id]);
-
-				// triggers[id].each( function(){
-				// 	console.log(this);
-
-				// 	toggle_setting(this, show);
-				// });
-
-				// if (show) {
-				// 	$tr.show();
-				// }
-				// else {
-				// 	$tr.hide();
-				// }
-
-			}).change();
-		};		
+			$trigger.trigger( 'change' );
+		};
 	};	
 
 	exports.Settings = Settings;
 
 })( CHARITABLE_ADMIN, jQuery );
-
-
 
 ( function($){
 
@@ -179,7 +245,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			$suggestions = $('.charitable-campaign-suggested-donations tbody tr:not(.to-copy)'),
 			has_suggestions = $suggestions.length > 1 || false === $suggestions.first().hasClass('no-suggested-amounts');
 	
-		$custom.attr( 'disabled', ! has_suggestions );
+		$custom.prop( 'disabled', ! has_suggestions );
 
 		if ( ! has_suggestions ) {
 			$custom.prop( 'checked', true );
@@ -253,7 +319,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			});
 		}
 
-		$( '#charitable-settings' ).each( function(){
+		$( '#charitable-settings, body.post-type-campaign form#post' ).each( function(){
 			CHARITABLE_ADMIN.Settings( $(this) );
 		});
 

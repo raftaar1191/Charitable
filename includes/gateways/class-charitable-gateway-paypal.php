@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Gateway_Paypal
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2015, Studio 164a
+ * @copyright 	Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -429,12 +429,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data = array(
 				'cmd' => '_notify-validate',
 			);
+			
+			return array_merge( $data, $_POST );
 
-			foreach ( $_POST as $key => $value ) {
-				$data[ $key ] = urlencode( $value );
-			}
-
-			return $data;
 		}
 
 		/**

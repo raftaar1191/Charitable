@@ -6,7 +6,7 @@
  *
  * @package		Charitable
  * @subpackage	Charitable/Charitable Upgrade
- * @copyright 	Copyright (c) 2015, Eric Daams
+ * @copyright 	Copyright (c) 2017, Eric Daams
  * @license     http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
  * @since 		1.0.0
  */
@@ -155,6 +155,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'show_recurring_donations_notice' => array(
 						'version'  => '1.4.10',
 						'notice'   => 'release-1410-recurring-donations',
+					),
+					'fix_empty_campaign_end_date_meta' => array(
+						'version'  => '1.4.11',
+						'message'  => '',
+						'prompt'   => false,
+						'callback' => array( $this, 'fix_empty_campaign_end_date_meta' ),
 					),
 				);
 
@@ -518,6 +524,27 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			}
 
 			$this->update_upgrade_log( 'remove_campaign_manager_cap' );
+		}
+
+		/**
+		 * Convert the campaign end date meta to 0 for any campaigns where it is currently blank.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.4.11
+		 */
+		public function fix_empty_campaign_end_date_meta() {
+			global $wpdb;
+
+			$sql = "UPDATE $wpdb->postmeta
+					INNER JOIN $wpdb->posts
+					ON $wpdb->posts.ID = $wpdb->postmeta.post_id
+					SET $wpdb->postmeta.meta_value = 0
+					WHERE $wpdb->postmeta.meta_key = '_campaign_end_date'
+					AND $wpdb->postmeta.meta_value = ''
+					AND $wpdb->posts.post_type = 'campaign';";
+
+			$wpdb->query( $sql );
 		}
 
 		/**

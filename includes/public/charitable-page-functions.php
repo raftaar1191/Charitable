@@ -5,7 +5,7 @@
  * @package 	Charitable/Functions/Page
  * @version     1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2015, Studio 164a
+ * @copyright 	Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -87,7 +87,7 @@ function charitable_get_permalink( $page, $args = array() ) {
  * @return  boolean
  * @since   1.0.0
  */
-function charitable_is_page( $page, $args = array() ) {
+function charitable_is_page( $page, $args = array() ) {	
 	return apply_filters( 'charitable_is_page_' . $page, false, $args );
 }
 
@@ -114,7 +114,9 @@ function charitable_get_campaign_donation_page_permalink( $url, $args = array() 
 		return $campaign_url;
 	}
 
-	if ( $wp_rewrite->using_permalinks() && ! isset( $_GET['preview'] ) ) {
+	if ( $wp_rewrite->using_permalinks()
+		&& ! in_array( get_post_status( $campaign_id ), array( 'pending', 'draft' ) )
+		&& ! isset( $_GET['preview'] ) ) {
 		return trailingslashit( $campaign_url ) . 'donate/';
 	}
 
@@ -278,7 +280,7 @@ add_filter( 'charitable_permalink_donation_cancel_page', 'charitable_get_donatio
 function charitable_is_campaign_donation_page( $ret, $args = array() ) {
 	global $wp_query;
 
-	if ( ! $wp_query->is_main_query() || ! $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE ) ) {
+	if ( ! $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE ) ) {
 		return false;
 	}
 
@@ -336,9 +338,7 @@ function charitable_is_donation_receipt_page() {
 	$receipt_page = charitable_get_option( 'donation_receipt_page', 'auto' );
 
 	if ( 'auto' != $receipt_page ) {
-
 		return is_page( $receipt_page );
-
 	}
 
 	return is_main_query()

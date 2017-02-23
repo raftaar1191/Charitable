@@ -27,6 +27,8 @@ activate_plugin( 'charitable/charitable.php' );
 
 echo "Installing Charitable...\n";
 
+update_option( 'WPLANG', 'en' );
+
 // Install Charitable
 charitable()->activate();
 charitable()->charitable_install();
