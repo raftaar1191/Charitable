@@ -165,7 +165,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 				}
 
 				if ( isset( $data['date_created'] ) && strlen( $data['date_created'] ) ) {
-					$data['date_created'] = date( 'Y-m-d 00:00:00', strtotime( $data['date_created'] ) );
+					$data['date_created'] = charitable_sanitize_date( $data['date_created'], 'Y-m-d 00:00:00' );
 				}
 
 				/** Sanitize end date of benefactor relationship. If the campaign has an end date, then the benefactor
@@ -173,8 +173,8 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 				$campaign_end_date = get_post_meta( $post->ID, '_campaign_end_date', true );
 
 				if ( isset( $data['date_deactivated'] ) && strlen( $data['date_deactivated'] ) ) {
-					$date_deactivated = strtotime( $data['date_deactivated'] );
-					$data['date_deactivated'] = ( strtotime( $campaign_end_date ) < $date_deactivated ) ? $campaign_end_date : date( 'Y-m-d 00:00:00', $date_deactivated );
+					$date_deactivated = charitable_sanitize_date( $data['date_deactivated'], 'Y-m-d 00:00:00' );
+					$data['date_deactivated'] = $campaign_end_date < $date_deactivated ? $campaign_end_date : $date_deactivated;
 				} elseif ( 0 != $campaign_end_date ) {
 					$data['date_deactivated'] = $campaign_end_date;
 				}
