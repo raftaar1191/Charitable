@@ -328,8 +328,8 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * @since   1.0.0
 		 */
 		public function add_endpoints() {
-			add_rewrite_endpoint( 'donate', EP_PERMALINK );
-			add_rewrite_endpoint( 'widget', EP_PERMALINK );
+			// add_rewrite_endpoint( 'donate', EP_PERMALINK );
+			// add_rewrite_endpoint( 'widget', EP_PERMALINK );
 			add_rewrite_endpoint( 'reset_password', EP_PERMALINK );
 			add_rewrite_endpoint( 'forgot_password', EP_PERMALINK );
 			add_rewrite_endpoint( 'donation_receipt', EP_ROOT );

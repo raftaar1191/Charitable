@@ -56,7 +56,24 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 
 		$this->go_to( $page );
 
+		echo PHP_EOL;
+		echo $page . PHP_EOL;
+		echo (int) charitable_is_campaign_donation_page( false ) . PHP_EOL;
+
 		$this->assertTrue( charitable_is_campaign_donation_page( false ) );
+	}
+
+	/**
+	 * @covers charitable_is_campaign_donation_page
+	 * @depends test_is_campaign_donation_page
+	 */
+	public function test_is_campaign_donation_page_with_wrapper() {
+
+		$page = charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => self::$campaign_id ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'campaign_donation_page' ) );
 	}
 
 	/**
@@ -99,6 +116,20 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 		$this->go_to( $page );
 
 		$this->assertTrue( charitable_is_campaign_widget_page( false ) );
+
+	}
+
+	/**
+	 * @covers charitable_is_campaign_widget_page
+	 * @depends test_is_campaign_widget_page
+	 */
+	public function test_is_campaign_widget_page_with_wrapper() {
+
+		$page = charitable_get_permalink( 'campaign_widget_page', array( 'campaign_id' => self::$campaign_id ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'campaign_widget_page' ) );
 
 	}
 

@@ -67,7 +67,8 @@ function charitable_get_template_path( $template, $default = '' ) {
  * @since   1.0.0
  */
 function charitable_get_permalink( $page, $args = array() ) {
-	return apply_filters( 'charitable_permalink_' . $page, false, $args );
+	return charitable()->get_endpoints()->get_page_url( $page, $args );
+	// return apply_filters( 'charitable_permalink_' . $page, false, $args );
 }
 
 /**
@@ -87,7 +88,7 @@ function charitable_get_permalink( $page, $args = array() ) {
  * @return  boolean
  * @since   1.0.0
  */
-function charitable_is_page( $page, $args = array() ) {	
+function charitable_is_page( $page, $args = array() ) {
 	return apply_filters( 'charitable_is_page_' . $page, false, $args );
 }
 
@@ -105,25 +106,10 @@ function charitable_is_page( $page, $args = array() ) {
  * @since 	1.0.0
  */
 function charitable_get_campaign_donation_page_permalink( $url, $args = array() ) {
-	global $wp_rewrite;
-
-	$campaign_id = isset( $args['campaign_id'] ) ? $args['campaign_id'] : get_the_ID();
-	$campaign_url = get_permalink( $campaign_id );
-
-	if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
-		return $campaign_url;
-	}
-
-	if ( $wp_rewrite->using_permalinks()
-		&& ! in_array( get_post_status( $campaign_id ), array( 'pending', 'draft' ) )
-		&& ! isset( $_GET['preview'] ) ) {
-		return trailingslashit( $campaign_url ) . 'donate/';
-	}
-
-	return esc_url_raw( add_query_arg( array( 'donate' => 1 ), $campaign_url ) );
+	return charitable()->get_endpoints()->get_page_url( 'campaign_donation', $args );
 }
 
-add_filter( 'charitable_permalink_campaign_donation_page', 'charitable_get_campaign_donation_page_permalink', 2, 2 );
+// add_filter( 'charitable_permalink_campaign_donation_page', 'charitable_get_campaign_donation_page_permalink', 2, 2 );
 
 /**
  * Returns the URL for the campaign donation page.
@@ -278,25 +264,10 @@ add_filter( 'charitable_permalink_donation_cancel_page', 'charitable_get_donatio
  * @since 	1.0.0
  */
 function charitable_is_campaign_donation_page( $ret, $args = array() ) {
-	global $wp_query;
-
-	if ( ! $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE ) ) {
-		return false;
-	}
-
-	if ( isset( $wp_query->query_vars['donate'] ) ) {
-		return true;
-	}
-
-	/* If 'strict' is set to `true`, this will only return true if this has the /donate/ endpoint. */
-	if ( isset( $args['strict'] ) && $args['strict'] ) {
-		return false;
-	}
-
-	return 'separate_page' != charitable_get_option( 'donation_form_display', 'separate_page' );
+	return charitable()->get_endpoints()->is_page( 'campaign_donation', $args );
 }
 
-add_filter( 'charitable_is_page_campaign_donation_page', 'charitable_is_campaign_donation_page', 2, 2 );
+// add_filter( 'charitable_is_page_campaign_donation_page', 'charitable_is_campaign_donation_page', 2, 2 );
 
 /**
  * Checks whether the current request is for the campaign widget page.
