@@ -59,6 +59,7 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 		echo PHP_EOL;
 		echo $page . PHP_EOL;
 		echo (int) charitable_is_campaign_donation_page( false ) . PHP_EOL;
+		die;
 
 		$this->assertTrue( charitable_is_campaign_donation_page( false ) );
 	}

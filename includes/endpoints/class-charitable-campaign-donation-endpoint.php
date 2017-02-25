@@ -92,6 +92,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			global $wp_query;
 
 			echo PHP_EOL . json_encode( $args );
+			echo PHP_EOL . json_encode( $wp_query->query_vars );
 			echo PHP_EOL . 'is singular: ' . (int) $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE );
 			echo PHP_EOL . 'donate query var: ' . (int) array_key_exists( 'donate', $wp_query->query_vars );
 			echo PHP_EOL . 'strict: ' . (int) array_key_exists( 'strict', $args );
