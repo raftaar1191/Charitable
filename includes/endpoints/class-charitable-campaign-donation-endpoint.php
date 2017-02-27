@@ -1,9 +1,9 @@
 <?php
 /**
- * donate endpoint.
+ * donation_receipt endpoint.
  *
  * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Campaign_Donation_Endpoint
+ * @package     Charitable/Classes/Charitable_Donation_Receipt_Endpoint
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -11,20 +11,20 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
+if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 
 	/**
-	 * Charitable_Campaign_Donation_Endpoint
+	 * Charitable_Donation_Receipt_Endpoint
 	 *
 	 * @abstract
 	 * @since       1.5.0
 	 */
-	class Charitable_Campaign_Donation_Endpoint extends Charitable_Endpoint {
+	class Charitable_Donation_Receipt_Endpoint extends Charitable_Endpoint {
 
 		/**
 		 * @var     string
 		 */
-		const ID = 'campaign_donation';
+		const ID = 'donation_receipt';
 
 		/**
 		 * Return the endpoint ID.
@@ -45,7 +45,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
-			add_rewrite_endpoint( 'donate', EP_PERMALINK );
+
+			add_rewrite_endpoint( 'donation_receipt', EP_ROOT );
+			add_rewrite_rule( 'donation-receipt/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_receipt=1', 'top' );
+
 		}
 
 		/**
@@ -90,14 +93,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		public function is_page( $args = array() ) {
 
 			global $wp_query;
-
-			echo PHP_EOL . json_encode( $args );
-			echo PHP_EOL . json_encode( $wp_query->query_vars );
-			echo PHP_EOL . 'is singular: ' . (int) $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE );
-			echo PHP_EOL . 'donate query var: ' . (int) array_key_exists( 'donate', $wp_query->query_vars );
-			echo PHP_EOL . 'strict: ' . (int) array_key_exists( 'strict', $args );
-			echo PHP_EOL . 'donation_form_display: ' . charitable_get_option( 'donation_form_display', 'separate_page' );
-			echo PHP_EOL;
 
 			if ( ! $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE ) ) {
 				return false;

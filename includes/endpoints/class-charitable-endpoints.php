@@ -48,6 +48,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @since   1.5.0
 		 */
 		public function register( Charitable_Endpoint $endpoint ) {
+
 			$endpoint_id = $endpoint->get_endpoint_id();
 
 			if ( array_key_exists( $endpoint_id, $this->endpoints ) ) {
@@ -63,6 +64,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			$this->endpoints[ $endpoint_id ] = $endpoint;
+
 		}
 
 		/**
@@ -76,7 +78,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 */
 		public function get_page_url( $endpoint, $args = array() ) {
 
-			$endpoint = str_replace( '_page', '', $endpoint );
+			$endpoint = $this->sanitize_endpoint( $endpoint );
 
 			if ( ! array_key_exists( $endpoint, $this->endpoints ) ) {
 
@@ -106,6 +108,8 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @since   1.5.0
 		 */
 		public function is_page( $endpoint, $args = array() ) {
+
+			$endpoint = $this->sanitize_endpoint( $endpoint );
 
 			if ( ! array_key_exists( $endpoint, $this->endpoints ) ) {
 
@@ -137,6 +141,20 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			foreach ( $this->endpoints as $endpoint ) {
 				$endpoint->setup_rewrite_rules();
 			}
+
+		}
+
+		/**
+		 * Remove _page from the endpoint (required for backwards compatibility).
+		 *
+		 * @param 	string $endpoint
+		 * @return  string
+		 * @access  protected
+		 * @since   1.5.0
+		 */
+		protected function sanitize_endpoint( $endpoint ) {
+
+			return str_replace( '_page', '', $endpoint );
 
 		}
 	}

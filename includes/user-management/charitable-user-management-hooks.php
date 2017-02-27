@@ -26,14 +26,14 @@ add_action( 'charitable_retrieve_password', array( 'Charitable_Forgot_Password_F
 add_action( 'charitable_reset_password', array( 'Charitable_Reset_Password_Form', 'reset_password' ) );
 
 /**
- * Save a profile. 
+ * Save a profile.
  *
  * @see     Charitable_Profile_Form::update_profile()
  */
 add_action( 'charitable_update_profile', array( 'Charitable_Profile_Form', 'update_profile' ) );
 
 /**
- * Save a user after registration. 
+ * Save a user after registration.
  *
  * @see     Charitable_Registration_Form::save_registration()
  */

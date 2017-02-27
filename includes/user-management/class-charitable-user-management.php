@@ -334,7 +334,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 			}
 
 			/* Don't prevent logging out. */
-			if ( $_SERVER[ 'REQUEST_METHOD' ] != 'GET' ) {
+			if ( 'GET' != $_SERVER['REQUEST_METHOD'] ) {
 				return;
 			}
 
@@ -356,7 +356,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 				return false;
 			}
 
-			$ret = current_user_can( 'edit_posts' ) 
+			$ret = current_user_can( 'edit_posts' )
 				|| current_user_can( 'manage_charitable_settings' );
 
 			return apply_filters( 'charitable_user_has_admin_access', $ret );

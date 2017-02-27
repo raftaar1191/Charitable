@@ -35,6 +35,8 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 		 * @see https://core.trac.wordpress.org/ticket/37207
 		 */
 		Charitable_Post_Types::get_instance()->add_endpoints();
+
+		charitable()->get_endpoints()->setup_rewrite_rules();
 	}
 
 	/**
@@ -55,11 +57,6 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 		$page = charitable_get_campaign_donation_page_permalink( false, array( 'campaign_id' => self::$campaign_id ) );
 
 		$this->go_to( $page );
-
-		echo PHP_EOL;
-		echo $page . PHP_EOL;
-		echo (int) charitable_is_campaign_donation_page( false ) . PHP_EOL;
-		die;
 
 		$this->assertTrue( charitable_is_campaign_donation_page( false ) );
 	}
@@ -148,6 +145,20 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
+	 * @covers charitable_is_donation_receipt_page
+	 * @depends test_is_donation_receipt_page
+	 */
+	public function test_is_donation_receipt_page_with_wrapper() {
+
+		$page = charitable_get_permalink( 'donation_receipt', array( 'donation_id' => self::$donation_id ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'donation_receipt' ) );
+
+	}
+
+	/**
 	 * @covers charitable_is_donation_processing_page
 	 */
 	public function test_is_donation_processing_page() {
@@ -161,6 +172,20 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
+	 * @covers charitable_is_donation_processing_page
+	 * @depends test_is_donation_processing_page
+	 */
+	public function test_is_donation_processing_page_with_wrapper() {
+
+		$page = charitable_get_permalink( 'donation_processing', array( 'donation_id' => self::$donation_id ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'donation_processing' ) );
+
+	}
+
+	/**
 	 * @covers charitable_is_donation_cancel_page
 	 */
 	public function test_charitable_is_donation_cancel_page() {
@@ -170,6 +195,21 @@ class Test_Charitable_Page_Functions extends Charitable_UnitTestCase {
 		$this->go_to( $page );
 
 		$this->assertTrue( charitable_is_donation_cancel_page( false ) );
+
+	}
+
+	/**
+	 * @covers charitable_is_donation_cancel_page
+	 * @depends test_charitable_is_donation_cancel_page
+	 */
+	public function test_charitable_is_donation_cancel_page_with_wrapper() {
+
+		$page = charitable_get_permalink( 'donation_cancel', array( 'donation_id' => self::$donation_id ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'donation_cancel' ) );
+
 	}
 
 	/**

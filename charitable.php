@@ -281,6 +281,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'endpoints/abstract-class-charitable-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-campaign-donation-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-campaign-widget-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-endpoints.php' );
 			require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
 
@@ -422,6 +424,9 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 			$api->register( new Charitable_Campaign_Donation_Endpoint );
 			$api->register( new Charitable_Campaign_Widget_Endpoint );
+			$api->register( new Charitable_Donation_Receipt_Endpoint );
+			$api->register( new Charitable_Donation_Processing_Endpoint );
+			// $api->register( new Charitable_Donation_Cancel_Endpoint );
 		}
 
 		/**

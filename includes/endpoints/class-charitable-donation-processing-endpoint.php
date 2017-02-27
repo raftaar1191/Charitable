@@ -3,7 +3,7 @@
  * donate endpoint.
  *
  * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Campaign_Widget_Endpoint
+ * @package     Charitable/Classes/Charitable_Donation_Processing_Endpoint
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -11,20 +11,20 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
+if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 
 	/**
-	 * Charitable_Campaign_Widget_Endpoint
+	 * Charitable_Donation_Processing_Endpoint
 	 *
 	 * @abstract
 	 * @since       1.5.0
 	 */
-	class Charitable_Campaign_Widget_Endpoint extends Charitable_Endpoint {
+	class Charitable_Donation_Processing_Endpoint extends Charitable_Endpoint {
 
 		/**
 		 * @var     string
 		 */
-		const ID = 'campaign_widget';
+		const ID = 'donation_processing';
 
 		/**
 		 * Return the endpoint ID.
@@ -45,13 +45,14 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
-			add_rewrite_endpoint( 'widget', EP_PERMALINK );
+			add_rewrite_endpoint( 'donation_processing', EP_ROOT );
+			add_rewrite_rule( 'donation-processing/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_processing=1', 'top' );
 		}
 
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @global  WP_Rewrite $wp_rewrite
+		 * @global 	WP_Rewrite $wp_rewrite
 		 * @param 	array      $args
 		 * @return  string
 		 * @access  public
@@ -61,12 +62,15 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 
 			global $wp_rewrite;
 
-			$campaign_id = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
+			$donation_id = array_key_exists( 'donation_id', $args ) ? $args['donation_id'] : get_the_ID();
 
-			if ( $wp_rewrite->using_permalinks() && ! isset( $_GET['preview'] ) ) {
-				$url = trailingslashit( get_permalink( $campaign_id ) ) . 'widget/';
+			if ( $wp_rewrite->using_permalinks() ) {
+				$url = sprintf( '%s/donation-processing/%d', untrailingslashit( home_url() ), $donation_id );
 			} else {
-				$url = esc_url_raw( add_query_arg( array( 'widget' => 1 ), get_permalink( $campaign_id ) ) );
+				$url = esc_url_raw( add_query_arg( array(
+					'donation_processing' => 1,
+					'donation_id' => $donation_id,
+				), home_url() ) );
 			}
 
 			return $url;
@@ -85,9 +89,9 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 
 			global $wp_query;
 
-			return $wp_query->is_main_query()
-				&& array_key_exists( 'widget', $wp_query->query_vars )
-				&& $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE );
+			return is_main_query()
+				&& array_key_exists( 'donation_processing', $wp_query->query_vars )
+				&& array_key_exists( 'donation_id', $wp_query->query_vars );
 
 		}
 	}
