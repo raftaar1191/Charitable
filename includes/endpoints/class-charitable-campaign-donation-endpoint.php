@@ -1,9 +1,9 @@
 <?php
 /**
- * donation_receipt endpoint.
+ * donate endpoint.
  *
  * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Donation_Receipt_Endpoint
+ * @package     Charitable/Classes/Charitable_Campaign_Donation_Endpoint
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -11,20 +11,20 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
+if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 
 	/**
-	 * Charitable_Donation_Receipt_Endpoint
+	 * Charitable_Campaign_Donation_Endpoint
 	 *
 	 * @abstract
 	 * @since       1.5.0
 	 */
-	class Charitable_Donation_Receipt_Endpoint extends Charitable_Endpoint {
+	class Charitable_Campaign_Donation_Endpoint extends Charitable_Endpoint {
 
 		/**
 		 * @var     string
 		 */
-		const ID = 'donation_receipt';
+		const ID = 'campaign_donation';
 
 		/**
 		 * Return the endpoint ID.
@@ -45,10 +45,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
-
-			add_rewrite_endpoint( 'donation_receipt', EP_ROOT );
-			add_rewrite_rule( 'donation-receipt/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_receipt=1', 'top' );
-
+			add_rewrite_endpoint( 'donate', EP_PERMALINK );
 		}
 
 		/**

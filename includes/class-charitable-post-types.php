@@ -58,11 +58,11 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 			add_action( 'init', array( $this, 'register_post_types' ), 5 );
 			add_action( 'init', array( $this, 'register_post_statuses' ), 5 );
 			add_action( 'init', array( $this, 'register_taxonomies' ), 6 );
-			add_action( 'init', array( $this, 'add_endpoints' ) );
-			add_action( 'init', array( $this, 'add_rewrite_tags' ) );
-			add_action( 'init', array( $this, 'add_rewrite_rule' ), 11 );
+			// add_action( 'init', array( $this, 'add_endpoints' ) );
+			// add_action( 'init', array( $this, 'add_rewrite_tags' ) );
+			// add_action( 'init', array( $this, 'add_rewrite_rule' ), 11 );
 
-			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+			// add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 		}
 
 		/**
@@ -302,23 +302,23 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 			register_taxonomy_for_object_type( 'campaign_tag', 'campaign' );
 		}
 
-		/**
-		 * Add custom query vars.
-		 *
-		 * @return  void
-		 * @access  public
-		 * @since   1.4.0
-		 */
-		public function add_query_vars( $vars ) {
-			$new_vars = array(
-				'donation_id',
-				'cancel',
-			);
+		// /**
+		//  * Add custom query vars.
+		//  *
+		//  * @return  void
+		//  * @access  public
+		//  * @since   1.4.0
+		//  */
+		// public function add_query_vars( $vars ) {
+		// 	$new_vars = array(
+		// 		'donation_id',
+		// 		'cancel',
+		// 	);
 
-			$vars = array_merge( $vars, $new_vars );
+		// 	$vars = array_merge( $vars, $new_vars );
 
-			return $vars;
-		}
+		// 	return $vars;
+		// }
 
 		/**
 		 * Add custom endpoints.
@@ -330,8 +330,8 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		public function add_endpoints() {
 			// add_rewrite_endpoint( 'donate', EP_PERMALINK );
 			// add_rewrite_endpoint( 'widget', EP_PERMALINK );
-			add_rewrite_endpoint( 'reset_password', EP_PERMALINK );
-			add_rewrite_endpoint( 'forgot_password', EP_PERMALINK );
+			// add_rewrite_endpoint( 'reset_password', EP_PERMALINK );
+			// add_rewrite_endpoint( 'forgot_password', EP_PERMALINK );
 			// add_rewrite_endpoint( 'donation_receipt', EP_ROOT );
 			// add_rewrite_endpoint( 'donation_processing', EP_ROOT );
 		}
@@ -343,9 +343,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * @access  public
 		 * @since   1.0.0
 		 */
-		public function add_rewrite_tags() {
-			add_rewrite_tag( '%donation_id%', '([0-9]+)' );
-		}
+		// public function add_rewrite_tags() {
+			// add_rewrite_tag( '%donation_id%', '([0-9]+)' );
+		// }
 
 		/**
 		 * Add endpoint for editing campaigns.
@@ -357,8 +357,8 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		public function add_rewrite_rule() {
 			// add_rewrite_rule( 'donation-receipt/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_receipt=1', 'top' );
 			// add_rewrite_rule( 'donation-processing/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_processing=1', 'top' );
-			add_rewrite_rule( '(.?.+?)(?:/([0-9]+))?/forgot-password/?$', 'index.php?pagename=$matches[1]&page=$matches[2]&forgot_password=1', 'top' );
-			add_rewrite_rule( '(.?.+?)(?:/([0-9]+))?/reset-password/?$', 'index.php?pagename=$matches[1]&page=$matches[2]&reset_password=1', 'top' );
+			// add_rewrite_rule( '(.?.+?)(?:/([0-9]+))?/forgot-password/?$', 'index.php?pagename=$matches[1]&page=$matches[2]&forgot_password=1', 'top' );
+			// add_rewrite_rule( '(.?.+?)(?:/([0-9]+))?/reset-password/?$', 'index.php?pagename=$matches[1]&page=$matches[2]&reset_password=1', 'top' );
 		}
 	}
 

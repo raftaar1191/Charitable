@@ -37,6 +37,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			$this->endpoints = array();
 
 			add_action( 'init', array( $this, 'setup_rewrite_rules' ) );
+			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 		}
 
 		/**
@@ -142,10 +143,28 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				$endpoint->setup_rewrite_rules();
 			}
 
+			/* Set up any common rewrite tags */
+			add_rewrite_tag( '%donation_id%', '([0-9]+)' );
+
 		}
 
 		/**
-		 * Remove _page from the endpoint (required for backwards compatibility).
+		 * Add custom query vars.
+		 *
+		 * @param 	string[] $vars
+		 * @return  string[]
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function add_query_vars( $vars ) {
+
+			return array_merge( $vars, array( 'donation_id', 'cancel' ) );
+
+		}
+
+		/**
+		 * Remove _page from the endpoint (required for backwards compatibility)
+		 * and make sure donation_cancel is changed to donation_cancellation.
 		 *
 		 * @param 	string $endpoint
 		 * @return  string
@@ -154,7 +173,13 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 */
 		protected function sanitize_endpoint( $endpoint ) {
 
-			return str_replace( '_page', '', $endpoint );
+			$endpoint = str_replace( '_page', '', $endpoint );
+
+			if ( 'donation_cancel' == $endpoint ) {
+				$endpoint = 'donation_cancellation';
+			}
+
+			return $endpoint;
 
 		}
 	}
