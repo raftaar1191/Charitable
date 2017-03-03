@@ -92,11 +92,11 @@ function charitable_is_campaign_page() {
  *
  * We keep both for backwards compatibility (pre 1.5).
  *
- * @uses 	Charitable_Endpoints::get_page_url()
- * @param 	string $url Deprecated argument.
- * @param 	array  $args
- * @return 	string
- * @since 	1.0.0
+ * @uses    Charitable_Endpoints::get_page_url()
+ * @param   string $url Deprecated argument.
+ * @param   array  $args
+ * @return  string
+ * @since   1.0.0
  */
 function charitable_get_campaign_donation_page_permalink( $url = null, $args = array() ) {
 	return charitable()->get_endpoints()->get_page_url( 'campaign_donation', $args );
@@ -115,11 +115,11 @@ function charitable_get_campaign_donation_page_permalink( $url = null, $args = a
  * Pass `'strict' => true` in `$args` to only return true when the `donate`
  * query var is set.
  *
- * @uses 	Charitable_Endpoints::is_page()
- * @param 	boolean $ret Unused argument.
- * @param 	array   $args
- * @return 	boolean
- * @since 	1.0.0
+ * @uses    Charitable_Endpoints::is_page()
+ * @param   boolean $ret Unused argument.
+ * @param   array   $args
+ * @return  boolean
+ * @since   1.0.0
  */
 function charitable_is_campaign_donation_page( $ret = null, $args = array() ) {
 	return charitable()->get_endpoints()->is_page( 'campaign_donation', $args );
@@ -147,8 +147,8 @@ function charitable_get_donation_receipt_page_permalink( $url = null, $args = ar
  * In general, you should use charitable_is_page() instead since it will
  * take into account any filtering by plugins/themes.
  *
- * @return 	boolean
- * @since 	1.0.0
+ * @return  boolean
+ * @since   1.0.0
  */
 function charitable_is_donation_receipt_page() {
 	return charitable()->get_endpoints()->is_page( 'donation_receipt' );
@@ -175,8 +175,8 @@ function charitable_get_donation_processing_page_permalink( $url = null, $args =
  * This is functionally equivalent to use charitable_is_page( 'donation_processing' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @return 	boolean
- * @since 	1.0.0
+ * @return  boolean
+ * @since   1.0.0
  */
 function charitable_is_donation_processing_page() {
 	return charitable()->get_endpoints()->is_page( 'donation_processing' );
@@ -188,10 +188,10 @@ function charitable_is_donation_processing_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'donation_cancellation' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @param 	string $url  Deprecated argument.
- * @param 	array  $args
- * @return 	string
- * @since 	1.4.0
+ * @param   string $url  Deprecated argument.
+ * @param   array  $args
+ * @return  string
+ * @since   1.4.0
  */
 function charitable_get_donation_cancel_page_permalink( $url = null, $args = array() ) {
 	return charitable()->get_endpoints()->get_page_url( 'donation_cancellation', $args );
@@ -203,8 +203,8 @@ function charitable_get_donation_cancel_page_permalink( $url = null, $args = arr
  * This is functionally equivalent to use charitable_is_page( 'donation_cancellation' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @return 	boolean
- * @since 	1.4.0
+ * @return  boolean
+ * @since   1.4.0
  */
 function charitable_is_donation_cancel_page() {
 	return charitable()->get_endpoints()->is_page( 'donation_cancellation' );
@@ -231,8 +231,8 @@ function charitable_get_campaign_widget_page_permalink( $url = null, $args = arr
  * This is functionally equivalent to use charitable_is_page( 'campaign_widget' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @return 	boolean
- * @since 	1.0.0
+ * @return  boolean
+ * @since   1.0.0
  */
 function charitable_is_campaign_widget_page() {
 	return charitable()->get_endpoints()->is_page( 'campaign_widget' );
@@ -378,4 +378,15 @@ function charitable_is_profile_page() {
 	return charitable()->get_endpoints()->is_page( 'profile' );
 }
 
-
+/**
+ * Checks whether the current request is for an email preview.
+ *
+ * This is functionally equivalent to use charitable_is_page( 'email_preview' ).
+ * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
+ *
+ * @return  boolean
+ * @since   1.0.0
+ */
+function charitable_is_email_preview() {
+	return charitable()->get_endpoints()->is_page( 'email_preview' );
+}

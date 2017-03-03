@@ -369,10 +369,7 @@ class Test_Charitable_Endpoints_Functions extends Charitable_UnitTestCase {
 	 */
 	public function test_is_email_preview() {
 
-		$page = esc_url_raw( add_query_arg( array(
-			'charitable_action' => 'preview_email',
-			'email_id' => 'campaign_end',
-		), home_url() ) );
+		$page = charitable_get_permalink( 'email_preview', array( 'email_id' => 'campaign_end' ) );
 
 		$this->go_to( $page );
 
@@ -386,10 +383,7 @@ class Test_Charitable_Endpoints_Functions extends Charitable_UnitTestCase {
 	 */
 	public function test_is_email_preview_with_wrapper() {
 
-		$page = esc_url_raw( add_query_arg( array(
-			'charitable_action' => 'preview_email',
-			'email_id' => 'campaign_end',
-		), home_url() ) );
+		$page = charitable_get_permalink( 'email_preview', array( 'email_id' => 'campaign_end' ) );
 
 		$this->go_to( $page );
 

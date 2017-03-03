@@ -23,11 +23,6 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
 require $_tests_dir . '/includes/bootstrap.php';
 
-function _prevent_i18n_translation( $translation, $original ) {
-    return $original;
-}
-add_filter( 'gettext', '_prevent_i18n_translation', 10, 2 );
-
 activate_plugin( 'charitable/charitable.php' );
 
 echo "Installing Charitable...\n";
