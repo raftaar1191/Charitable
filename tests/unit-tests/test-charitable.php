@@ -76,7 +76,6 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertFileExists( $includes_path . 'db/class-charitable-donors-db.php' );
         $this->assertFileExists( $includes_path . 'licensing/class-charitable-licenses.php' );
         $this->assertFileExists( $includes_path . 'licensing/class-charitable-plugin-updater.php' );
-        $this->assertFileExists( $includes_path . 'public/charitable-page-functions.php' );
         $this->assertFileExists( $includes_path . 'public/charitable-template-helpers.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-session.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-template.php' );

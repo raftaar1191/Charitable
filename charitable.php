@@ -239,7 +239,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'licensing/class-charitable-plugin-updater.php' );
 
 			/* Public */
-			require_once( $includes_path . 'public/charitable-page-functions.php' );
 			require_once( $includes_path . 'public/charitable-template-helpers.php' );
 			require_once( $includes_path . 'public/class-charitable-session.php' );
 			require_once( $includes_path . 'public/class-charitable-template.php' );
