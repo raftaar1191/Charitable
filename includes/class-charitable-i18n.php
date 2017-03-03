@@ -6,145 +6,145 @@
  * @version     1.1.2
  * @author      Eric Daams
  * @copyright   Copyright (c) 2014, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_i18n' ) ) : 
+if ( ! class_exists( 'Charitable_i18n' ) ) :
 
-/**
- * Charitable_i18n
- *
- * @since       1.1.2
- */
-class Charitable_i18n {
-    
-    /**
-     * The single instance of this class.  
-     *
-     * @var     Charitable_i18n|null
-     * @access  private
-     * @static
-     */
-    private static $instance = null;    
+	/**
+	 * Charitable_i18n
+	 *
+	 * @since       1.1.2
+	 */
+	class Charitable_i18n {
 
-    /**
-     * @var     string
-     */
-    protected $textdomain = 'charitable';
+		/**
+		 * The single instance of this class.
+		 *
+		 * @var     Charitable_i18n|null
+		 * @access  private
+		 * @static
+		 */
+		private static $instance = null;
 
-    /**
-     * The path to the languages directory. 
-     *
-     * @var     string
-     * @access  protected
-     */
-    protected $languages_directory;
+		/**
+		 * @var     string
+		 */
+		protected $textdomain = 'charitable';
 
-    /**
-     * The site locale.
-     *
-     * @var     string
-     * @access  protected
-     */
-    protected $locale;
+		/**
+		 * The path to the languages directory.
+		 *
+		 * @var     string
+		 * @access  protected
+		 */
+		protected $languages_directory;
 
-    /**
-     * The MO filename.
-     *
-     * @var     string
-     * @access  protected
-     */
-    protected $mofile;
+		/**
+		 * The site locale.
+		 *
+		 * @var     string
+		 * @access  protected
+		 */
+		protected $locale;
 
-    /**
-     * Set up the class. 
-     *
-     * @access  private
-     * @since   1.1.2
-     */
-    private function __construct() {
-        $this->languages_directory = apply_filters( 'charitable_languages_directory', 'charitable/i18n/languages' );
-        $this->locale = apply_filters( 'plugin_locale', get_locale(), $this->textdomain );
-        $this->mofile = sprintf( '%1$s-%2$s.mo', $this->textdomain, $this->locale );
+		/**
+		 * The MO filename.
+		 *
+		 * @var     string
+		 * @access  protected
+		 */
+		protected $mofile;
 
-        $this->load_textdomain();
-    }
+		/**
+		 * Set up the class.
+		 *
+		 * @access  private
+		 * @since   1.1.2
+		 */
+		private function __construct() {
+			$this->languages_directory = apply_filters( 'charitable_languages_directory', 'charitable/i18n/languages' );
+			$this->locale = apply_filters( 'plugin_locale', get_locale(), $this->textdomain );
+			$this->mofile = sprintf( '%1$s-%2$s.mo', $this->textdomain, $this->locale );
 
-    /**
-     * Returns and/or create the single instance of this class.  
-     *
-     * @return  Charitable_i18n
-     * @access  public
-     * @since   1.2.0
-     */
-    public static function get_instance() {
-        if ( is_null( self::$instance ) ) {
-            self::$instance = new Charitable_i18n();
-        }
+			$this->load_textdomain();
+		}
 
-        return self::$instance;
-    }    
+		/**
+		 * Returns and/or create the single instance of this class.
+		 *
+		 * @return  Charitable_i18n
+		 * @access  public
+		 * @since   1.2.0
+		 */
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new Charitable_i18n();
+			}
 
-    /**
-     * Create class object.
-     * 
-     * @return  void
-     * @access  public
-     * @since   1.1.2
-     */
-    public function load_textdomain() {
-        foreach ( array( 'global', 'local' ) as $source ) {
-            
-            $mofile_path = $this->get_mofile_path( $source );
+			return self::$instance;
+		}
 
-            if ( ! file_exists( $mofile_path ) ) {
-                continue;
-            }
-         
-            load_textdomain( $this->textdomain, $mofile_path );
-        }        
+		/**
+		 * Create class object.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.1.2
+		 */
+		public function load_textdomain() {
+			foreach ( array( 'global', 'local' ) as $source ) {
 
-        load_plugin_textdomain( $this->textdomain, false, $this->languages_directory );
-    }
+				$mofile_path = $this->get_mofile_path( $source );
 
-    /**
-     * Get the path to the MO file.
-     *
-     * @param   string $source Either 'local' or 'global'. 
-     * @return  string
-     * @access  private
-     * @since   1.1.2
-     */
-    private function get_mofile_path( $source = 'local' ) {
-        if ( 'global' == $source ) {
-            return WP_LANG_DIR . '/' . $this->textdomain . '/' . $this->mofile;
-        }
+				if ( ! file_exists( $mofile_path ) ) {
+					continue;
+				}
 
-        return trailingslashit( $this->languages_directory ) . $this->mofile;
-    }
+				load_textdomain( $this->textdomain, $mofile_path );
+			}
 
-    /**
-     * Instantiate the class, but only during the start phase.
-     *
-     * This method is officially deprecated as of 1.2.0 since we are removing
-     * the need for Charitable_Start_Object. It has been left intact for extensions
-     * that have not been updated yet.
-     *
-     * Expect full removal in Charitable 1.3 or after.
-     *
-     * @deprecated     
-     */
-    public static function charitable_start( Charitable $charitable ) {
-        if ( ! $charitable->is_start() ) {
-            return;
-        }
+			load_plugin_textdomain( $this->textdomain, false, $this->languages_directory );
+		}
 
-        $class = get_called_class();
-        $charitable->register_object( new $class );
-    }    
-}
+		/**
+		 * Get the path to the MO file.
+		 *
+		 * @param   string $source Either 'local' or 'global'.
+		 * @return  string
+		 * @access  private
+		 * @since   1.1.2
+		 */
+		private function get_mofile_path( $source = 'local' ) {
+			if ( 'global' == $source ) {
+				return WP_LANG_DIR . '/' . $this->textdomain . '/' . $this->mofile;
+			}
+
+			return trailingslashit( $this->languages_directory ) . $this->mofile;
+		}
+
+		/**
+		 * Instantiate the class, but only during the start phase.
+		 *
+		 * This method is officially deprecated as of 1.2.0 since we are removing
+		 * the need for Charitable_Start_Object. It has been left intact for extensions
+		 * that have not been updated yet.
+		 *
+		 * Expect full removal in Charitable 1.3 or after.
+		 *
+		 * @deprecated
+		 */
+		public static function charitable_start( Charitable $charitable ) {
+			if ( ! $charitable->is_start() ) {
+				return;
+			}
+
+			$class = get_called_class();
+			$charitable->register_object( new $class );
+		}
+	}
 
 endif; // End class_exists check

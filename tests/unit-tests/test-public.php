@@ -25,12 +25,6 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 				'email' => 'matthew.murdoch@example.com',
 			),
 		) );
-
-		/**
-		 * Temporary workaround for issue noted below.
-		 * @see https://core.trac.wordpress.org/ticket/37207
-		 */
-		Charitable_Post_Types::get_instance()->add_endpoints();
 	}
 
 	function test_load_dependencies() {
@@ -79,23 +73,6 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 	function test_comments_open_hook() {
 		$this->assertEquals( 10, has_filter( 'comments_open', array( Charitable_Public::get_instance(), 'disable_comments_on_application_pages' ) ) );
 	}
-
-	/**
-	 * @covers Charitable_Public::disable_comments_on_application_pages()
-	 */
-	// function test_comments_disabled_on_campaign_donation_page() {
-
-	// 	$this->set_charitable_option( 'donation_form_display', 'separate_page' );
-
-	// 	$page = charitable_get_campaign_donation_page_permalink( false, array( 'campaign_id' => self::$campaign_id ) );
-
-	// 	$this->go_to( $page );
-
-	// 	$comments_enabled = Charitable_Public::get_instance()->disable_comments_on_application_pages( true, self::$campaign_id );
-
-	// 	$this->assertFalse( $comments_enabled );
-
-	// }
 
 	/**
 	 * @covers Charitable_Public::disable_comments_on_application_pages()
@@ -151,24 +128,9 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 	/**
 	 * @covers Charitable_Public::disable_comments_on_application_pages()
 	 */
-	// function test_comments_disabled_on_campaign_widget_page() {
-
-	// 	$this->set_charitable_option( 'donation_form_display', 'separate_page' );
-
-	// 	$page = charitable_get_campaign_widget_page_permalink( false, array( 'campaign_id' => self::$campaign_id ) );
-
-	// 	$this->go_to( $page );
-
-	// 	$comments_enabled = Charitable_Public::get_instance()->disable_comments_on_application_pages( true, self::$campaign_id );
-
-	// 	$this->assertFalse( $comments_enabled );
-
-	// }
-
-	/**
-	 * @covers Charitable_Public::disable_comments_on_application_pages()
-	 */
 	function test_comments_disabled_on_donation_receipt_page() {
+
+		charitable()->get_endpoints()->setup_rewrite_rules();
 
 		$this->set_charitable_option( 'donation_form_display', 'separate_page' );
 
@@ -186,6 +148,8 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 	 * @covers Charitable_Public::disable_comments_on_application_pages()
 	 */
 	function test_comments_disabled_on_donation_processing_page() {
+
+		charitable()->get_endpoints()->setup_rewrite_rules();
 
 		$this->set_charitable_option( 'donation_form_display', 'separate_page' );
 

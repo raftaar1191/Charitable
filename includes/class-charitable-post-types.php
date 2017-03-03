@@ -58,11 +58,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 			add_action( 'init', array( $this, 'register_post_types' ), 5 );
 			add_action( 'init', array( $this, 'register_post_statuses' ), 5 );
 			add_action( 'init', array( $this, 'register_taxonomies' ), 6 );
-			// add_action( 'init', array( $this, 'add_endpoints' ) );
-			// add_action( 'init', array( $this, 'add_rewrite_tags' ) );
-			// add_action( 'init', array( $this, 'add_rewrite_rule' ), 11 );
-
-			// add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 		}
 
 		/**

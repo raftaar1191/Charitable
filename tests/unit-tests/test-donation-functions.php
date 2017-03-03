@@ -67,7 +67,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 		 * Temporary workaround for issue noted below.
 		 * @see https://core.trac.wordpress.org/ticket/37207
 		 */
-		Charitable_Post_Types::get_instance()->add_endpoints();
+		charitable()->get_endpoints()->setup_rewrite_rules();
 
 		$donation_id = $this->create_donation( 'charitable-pending' );
 
@@ -89,7 +89,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 		 * Temporary workaround for issue noted below.
 		 * @see https://core.trac.wordpress.org/ticket/37207
 		 */
-		Charitable_Post_Types::get_instance()->add_endpoints();
+		charitable()->get_endpoints()->setup_rewrite_rules();
 
 		$donation_id = $this->create_donation( 'charitable-pending' );
 
