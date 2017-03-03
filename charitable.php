@@ -284,6 +284,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'endpoints/class-charitable-donation-cancellation-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-email-preview-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-forgot-password-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-login-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-profile-endpoint.php' );
@@ -433,6 +434,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			$api->register( new Charitable_Donation_Cancellation_Endpoint );
 			$api->register( new Charitable_Donation_Processing_Endpoint );
 			$api->register( new Charitable_Donation_Receipt_Endpoint );
+			$api->register( new Charitable_Email_Preview_Endpoint );
 			$api->register( new Charitable_Login_Endpoint );
 			$api->register( new Charitable_Forgot_Password_Endpoint );
 			$api->register( new Charitable_Profile_Endpoint );

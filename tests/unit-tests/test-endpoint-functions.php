@@ -381,4 +381,21 @@ class Test_Charitable_Endpoints_Functions extends Charitable_UnitTestCase {
 		$this->assertTrue( charitable_is_email_preview() );
 
 	}
+
+	/**
+	 * @covers charitable_is_page
+	 * @depends test_is_email_previeww
+	 */
+	public function test_is_email_preview_with_wrapper() {
+
+		$page = esc_url_raw( add_query_arg( array(
+			'charitable_action' => 'preview_email',
+			'email_id' => 'campaign_end',
+		), home_url() ) );
+
+		$this->go_to( $page );
+
+		$this->assertTrue( charitable_is_page( 'email_preview' ) );
+
+	}
 }

@@ -76,32 +76,4 @@ class Test_Charitable_Post_Types extends Charitable_UnitTestCase {
 		$this->assertArrayHasKey( 'charitable-refunded', $wp_post_statuses );
 		$this->assertArrayHasKey( 'charitable-preapproved', $wp_post_statuses );
 	}
-
-	/**
-	 * @covers Charitable_Post_Types::add_endpoints()
-	 */
-	public function test_is_donate_endpoint_added() {
-		$this->assertContains( 'donate', $GLOBALS['wp']->public_query_vars );
-	}
-
-	/**
-	 * @covers Charitable_Post_Types::add_endpoints()
-	 */
-	public function test_is_widget_endpoint_added() {
-		$this->assertContains( 'widget', $GLOBALS['wp']->public_query_vars );
-	}
-
-	/**
-	 * @covers Charitable_Post_Types::add_endpoints()
-	 */
-	public function test_is_donation_receipt_endpoint_added() {
-		$this->assertContains( 'donation_receipt', $GLOBALS['wp']->public_query_vars );
-	}
-
-	/**
-	 * @covers Charitable_Post_Types::add_endpoints()
-	 */
-	public function test_is_donation_processing_endpoint_added() {
-		$this->assertContains( 'donation_processing', $GLOBALS['wp']->public_query_vars );
-	}
 }

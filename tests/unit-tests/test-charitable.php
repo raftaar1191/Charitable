@@ -13,6 +13,9 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertClassHasStaticAttribute( 'instance', get_class( $this->charitable ) );
     }
 
+    /**
+     * @covers Charitable::load_dependencies()
+     */
     function test_load_dependencies() {
         $includes_path = $this->charitable->get_path( 'includes' );
 
@@ -98,6 +101,9 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertFileExists( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
     }
 
+    /**
+     * @covers Charitable::attach_hooks_and_filters()
+     */
     function test_attach_hooks_and_filters() {
         $this->assertEquals( 100, has_action( 'plugins_loaded', array( $this->charitable, 'charitable_install' ) ) );
         $this->assertEquals( 100, has_action( 'plugins_loaded', array( $this->charitable, 'charitable_start' ) ) );
@@ -106,14 +112,23 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertEquals( 10, has_filter( 'charitable_sanitize_donation_meta', 'charitable_sanitize_donation_meta' ) );
     }
 
+    /**
+     * @covers Charitable::is_start()
+     */
     function test_is_start() {
         $this->assertFalse( $this->charitable->is_start() );
     }
 
+    /**
+     * @covers Charitable::started()
+     */
     function test_started() {
         $this->assertTrue( $this->charitable->started() );
     }   
 
+    /**
+     * @covers Charitable::get_path()
+     */
     function test_get_path() {
         $this->assertEquals( $this->directory_path . 'charitable.php', $this->charitable->get_path() ); // __FILE__
         $this->assertEquals( $this->directory_path, $this->charitable->get_path( 'directory' ) );
@@ -125,15 +140,52 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertEquals( $this->directory_path . 'templates/', $this->charitable->get_path( 'templates' ) );
     }
 
+    /**
+     * @covers Charitable::get_request()
+     */
     function test_get_request() {
         $this->assertEquals( 'Charitable_Request', get_class( $this->charitable->get_request() ) );
     }
 
+    /**
+     * @covers Charitable::is_activation()
+     */
     function test_is_activation() {
         $this->assertFalse( $this->charitable->is_activation() );
     }
 
+    /**
+     * @covers Charitable::is_deactivation()
+     */
     function test_is_deactivation() {
         $this->assertFalse( $this->charitable->is_deactivation() );
+    }
+
+    /**
+     * @covers Charitable::setup_endpoints()
+     */
+    public function test_is_donate_endpoint_added() {
+        $this->assertContains( 'donate', $GLOBALS['wp']->public_query_vars );
+    }
+
+    /**
+     * @covers Charitable::setup_endpoints()
+     */
+    public function test_is_widget_endpoint_added() {
+        $this->assertContains( 'widget', $GLOBALS['wp']->public_query_vars );
+    }
+
+    /**
+     * @covers Charitable::setup_endpoints()
+     */
+    public function test_is_donation_receipt_endpoint_added() {
+        $this->assertContains( 'donation_receipt', $GLOBALS['wp']->public_query_vars );
+    }
+
+    /**
+     * @covers Charitable::setup_endpoints()
+     */
+    public function test_is_donation_processing_endpoint_added() {
+        $this->assertContains( 'donation_processing', $GLOBALS['wp']->public_query_vars );
     }
 }
