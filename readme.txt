@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 4.7.2
-Stable tag: 1.4.11
+Stable tag: 1.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,7 +58,8 @@ Charitable has been designed to work with any well-coded theme, including the de
 One size does *not* fit all. That's why we made Charitable an extendable platform. 
 
 * **[Recurring Donations](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=description-tab&utm_campaign=recurring-donations)** - Accept monthly donations on your website.
-* **[Ambassadors](https://www.wpcharitable.com/extensions/charitable-ambassadors?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - Add peer-to-peer fundraising or crowdfunding to your website, with front-end campaign submission.
+* **[Ambassadors](https://www.wpcharitable.com/extensions/charitable-ambassadors/?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - Add peer-to-peer fundraising or crowdfunding to your website, with front-end campaign submission.
+* **[Newsletter Connect](https://www.wpcharitable.com/extensions/charitable-newsletter-connect/?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - Add donors to your mailing list automatically. Supports MailChimp and MailPoet.
 * **[Easy Digital Downloads](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - 
 Accept donations with Easy Digital Downloads. Compatible with any EDD payment gateway.
 * **[Stripe](https://www.wpcharitable.com/extensions/charitable-stripe?utm_source=readme&utm_medium=description-tab&utm_content=extensions&utm_campaign=plugin-page-referrals)** - Accept credit card donations on your website.
@@ -115,6 +116,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area. 
 
 == Changelog ==
+
+= 1.4.12 =
+* If you were using our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect) and your site language is not English, you may have had problems with end dates for your benefactor relationships not saving correctly. We've fixed up that bug now. [#305](https://github.com/Charitable/Charitable/issues/305)
 
 = 1.4.11 =
 * Corrected a problem that caused newly created/saved campaigns without an end date to stop showing in the `[campaigns]` shortcode output. [#301](https://github.com/Charitable/Charitable/issues/301)
