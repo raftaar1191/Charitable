@@ -330,7 +330,23 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 				$value = isset( $submitted[ $key ] ) ? $submitted[ $key ] : false;
 
+				/**
+				 * This filter is deprecated. Use charitable_sanitize_campaign_meta{$key} instead.
+				 *
+				 * @deprecated
+				 */
 				$value = apply_filters( 'charitable_sanitize_campaign_meta', $value, $key, $submitted, $campaign_id );
+
+				/**
+				 * Filter this meta value.
+				 *
+				 * The filter hook is charitable_sanitize_campaign_meta{$key}.
+				 *
+				 * For example, for _campaign_end_date the filter hook will be:
+				 *
+				 * charitable_sanitize_campaign_meta_campaign_end_date
+				 */
+				$value = apply_filters( 'charitable_sanitize_campaign_meta' . $key, $value, $submitted, $campaign_id );
 
 				update_post_meta( $campaign_id, $key, $value );
 

@@ -12,13 +12,6 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
 /**
- * Sanitize campaign meta.
- *
- * @see     Charitable_Campaign::sanitize_meta()
- */
-add_filter( 'charitable_sanitize_campaign_meta', array( 'Charitable_Campaign', 'sanitize_meta' ), 10, 3 );
-
-/**
  * Sanitize individual campaign meta fields.
  *
  * @see     Charitable_Campaign::sanitize_campaign_goal()

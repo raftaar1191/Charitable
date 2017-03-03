@@ -675,21 +675,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
-		 * Sanitize meta values before they are persisted to the database.
-		 *
-		 * @param   mixed       $value
-		 * @param   string      $key
-		 * @param   array       $submitted
-		 * @return  mixed
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
-		 */
-		public static function sanitize_meta( $value, $key, $submitted ) {
-			return apply_filters( 'charitable_sanitize_campaign_meta' . $key, $value, $submitted );
-		}
-
-		/**
 		 * Sanitize the campaign goal.
 		 *
 		 * @param   string  $value
@@ -867,6 +852,14 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		private static function get_donation_amount_cache_key( $campaign_id ) {
 			return 'charitable_campaign_' . $campaign_id . '_donation_amount';
+		}
+
+		/**
+		 * @deprecated Since 1.4.12
+		 */
+		public static function sanitize_meta( $value, $key, $submitted ) {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.2' );
+			return apply_filters( 'charitable_sanitize_campaign_meta' . $key, $value, $submitted );
 		}
 	}
 

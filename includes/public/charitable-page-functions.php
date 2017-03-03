@@ -87,7 +87,7 @@ function charitable_get_permalink( $page, $args = array() ) {
  * @return  boolean
  * @since   1.0.0
  */
-function charitable_is_page( $page, $args = array() ) {	
+function charitable_is_page( $page, $args = array() ) {
 	return apply_filters( 'charitable_is_page_' . $page, false, $args );
 }
 
