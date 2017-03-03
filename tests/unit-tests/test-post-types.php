@@ -8,12 +8,6 @@ class Test_Charitable_Post_Types extends Charitable_UnitTestCase {
 		$this->set_permalink_structure( '/%year%/%monthnum%/%day%/%postname%/' );
 
 		$this->qvs = $GLOBALS['wp']->public_query_vars;
-
-		/**
-		 * Temporary workaround for issue noted below.
-		 * @see https://core.trac.wordpress.org/ticket/37207
-		 */
-		Charitable_Post_Types::get_instance()->add_endpoints();
 	}
 
 	public function tearDown() {

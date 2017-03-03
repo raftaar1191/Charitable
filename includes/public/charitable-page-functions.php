@@ -45,31 +45,3 @@ function charitable_get_login_redirect_url() {
 	return apply_filters( 'charitable_signon_redirect_url', $redirect );
 }
 
-/**
- * Returns the current URL.
- *
- * @see 	https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
- * @global 	WP 		$wp
- * @return  string
- * @since   1.0.0
- */
-function charitable_get_current_url() {
-	return home_url( add_query_arg( null, null ) );
-}
-
-/**
- * Verifies whether the current user can access the donation receipt.
- *
- * @param   Charitable_Donation $donation
- * @return  boolean
- * @since   1.1.2
- */
-function charitable_user_can_access_receipt( Charitable_Donation $donation ) {
-	charitable_get_deprecated()->deprecated_function(
-		__FUNCTION__,
-		'1.4.0',
-		'Charitable_Donation::is_from_current_user()'
-	);
-
-	return $donation->is_from_current_user();
-}

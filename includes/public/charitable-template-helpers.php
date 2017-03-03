@@ -135,3 +135,15 @@ function charitable_get_arbitrary_attributes( $field ) {
 function charitable_is_main_loop() {
 	return is_single() && in_the_loop() && is_main_query();
 }
+
+/**
+ * Returns the current URL.
+ *
+ * @see 	https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
+ * @global 	WP 		$wp
+ * @return  string
+ * @since   1.0.0
+ */
+function charitable_get_current_url() {
+	return home_url( add_query_arg( null, null ) );
+}
