@@ -111,6 +111,49 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 				&& array_key_exists( 'reset_password', $wp_query->query_vars );
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			if ( 'wp' == charitable_get_option( 'login_page', 'wp' ) ) {
+				return $template;
+			}
+
+			new Charitable_Ghost_Page( 'reset-password-page', array(
+				'title'   => __( 'Reset Password', 'charitable' ),
+				'content' => '<!-- Silence is golden -->',
+			) );
+
+			return array( 'reset-password-page.php', 'page.php', 'index.php' );
+
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+
+			ob_start();
+
+			charitable_template( 'account/reset-password.php', array(
+				'form' => new Charitable_Reset_Password_Form(),
+			) );
+
+			return ob_get_clean();
+
+		}
 	}
 
 endif;

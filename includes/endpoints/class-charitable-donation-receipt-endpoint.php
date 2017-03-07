@@ -109,6 +109,67 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 				&& isset( $wp_query->query_vars['donation_id'] );
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			if ( 'auto' != charitable_get_option( 'donation_receipt_page', 'auto' ) ) {
+				return $template;
+			}
+
+			$donation_receipt_page_title = apply_filters( 'charitable_donation_receipt_page_title', __( 'Your Receipt', 'charitable' ) );
+
+			new Charitable_Ghost_Page( 'donation-receipt-page', array(
+				'title'     => $donation_receipt_page_title,
+				'content'   => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
+			) );
+
+			return array( 'donation-receipt-page.php', 'page.php', 'index.php' );
+
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+
+			if ( ! in_the_loop() ) {
+				return $content;
+			}
+
+			/* If we are NOT using the automatic option, this is a static page with the shortcode, so don't filter again. */
+			if ( 'auto' != charitable_get_option( 'donation_receipt_page', 'auto' ) ) {
+				return $content;
+			}
+
+			return charitable_template_donation_receipt_output( $content );
+
+		}
+
+		/**
+		 * Return the body class to add for the endpoint.
+		 *
+		 * @return 	string
+		 * @access 	public
+		 * @since 	1.5.0
+		 */
+		public function get_body_class() {
+
+			return 'campaign-donation-receipt';
+
+		}
 	}
 
 endif;

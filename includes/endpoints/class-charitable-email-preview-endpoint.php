@@ -80,6 +80,22 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 			return array_key_exists( 'charitable_action', $_GET ) && 'preview_email' == $_GET['charitable_action'];
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			do_action( 'charitable_email_preview' );
+
+			return 'emails/preview.php';
+
+		}
 	}
 
 endif;

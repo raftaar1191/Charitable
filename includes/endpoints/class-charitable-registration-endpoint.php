@@ -71,12 +71,14 @@ if ( ! class_exists( 'Charitable_Registration_Endpoint' ) ) :
 			$page = charitable_get_option( 'registration_page', 'wp' );
 
 			if ( 'wp' == $page ) {
-				$ret = wp_registration_url() == charitable_get_current_url();
-			} elseif ( is_object( $post ) ) {
-				$ret = $page == $post->ID;
+				return wp_registration_url() == charitable_get_current_url();
 			}
 
-			return $ret;
+			if ( is_object( $post ) ) {
+				return $page == $post->ID;
+			}
+
+			return false;
 
 		}
 	}

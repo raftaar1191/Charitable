@@ -37,6 +37,47 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		public function setup_rewrite_rules() {
 			/* Do nothing by default. */
 		}
+
+		/**
+		 * Set up the endpoint template.
+		 *
+		 * By default, we will return the default template that WordPress already selected.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+			return $template;
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * By default, we will return the default content that is passed by WordPress.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+			return $content;
+		}
+
+		/**
+		 * Return the body class to add for the endpoint.
+		 *
+		 * By default, this will be the endpoint ID with underscores replaced by hyphens.
+		 *
+		 * @return 	string
+		 * @access 	public
+		 * @since 	1.5.0
+		 */
+		public function get_body_class() {
+			return str_replace( '_', '-', $this->get_endpoint_id() );
+		}
 	}
 
 endif;

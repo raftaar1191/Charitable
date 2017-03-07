@@ -80,12 +80,14 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 			$page = charitable_get_option( 'login_page', 'wp' );
 
 			if ( 'wp' == $page ) {
-				$ret = wp_login_url() == charitable_get_current_url();
-			} elseif ( is_object( $post ) ) {
-				$ret = $page == $post->ID;
+				return wp_login_url() == charitable_get_current_url();
 			}
 
-			return $ret;
+			if ( is_object( $post ) ) {
+				return $page == $post->ID;
+			}
+
+			return false;
 
 		}
 	}

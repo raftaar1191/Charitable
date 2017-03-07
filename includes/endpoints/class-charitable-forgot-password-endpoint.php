@@ -102,6 +102,57 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 				&& array_key_exists( 'forgot_password', $wp_query->query_vars );
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			if ( 'wp' == charitable_get_option( 'login_page', 'wp' ) ) {
+				return $template;
+			}
+
+			new Charitable_Ghost_Page( 'forgot-password-page', array(
+				'title'   => __( 'Forgot Password', 'charitable' ),
+				'content' => '<!-- Silence is golden -->',
+			) );
+
+			return array( 'forgot-password-page.php', 'page.php', 'index.php' );
+
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+
+			ob_start();
+
+			if ( isset( $_GET['email_sent'] ) ) {
+
+				charitable_template( 'account/forgot-password-sent.php' );
+
+			} else {
+
+				charitable_template( 'account/forgot-password.php', array(
+					'form' => new Charitable_Forgot_Password_Form(),
+				) );
+
+			}
+
+			return ob_get_clean();
+
+		}
 	}
 
 endif;

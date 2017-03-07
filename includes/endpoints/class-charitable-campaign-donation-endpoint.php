@@ -107,6 +107,74 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			return 'separate_page' != charitable_get_option( 'donation_form_display', 'separate_page' );
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			/* If a donation ID is included, make sure it belongs to the current user. */
+			$donation_id = get_query_var( 'donation_id', false );
+
+			if ( $donation_id ) {
+
+				$donation = charitable_get_donation( $donation_id );
+
+				if ( ! $donation || ! $donation->is_from_current_user() ) {
+
+					wp_safe_redirect( charitable_get_permalink( 'campaign_donation' ) );
+					exit();
+
+				}
+			}
+
+			/* If the campaign has exired, redirect the user to the campaign page. */
+			$campaign = charitable_get_current_campaign();
+
+			if ( ! $campaign || $campaign->has_ended() ) {
+
+				wp_safe_redirect( get_permalink( $campaign->ID ) );
+				exit();
+
+			}
+
+			do_action( 'charitable_is_donate_page' );
+
+			return array( 'campaign-donation-page.php', 'page.php', 'index.php' );
+
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+
+			if ( ! charitable_is_main_loop() ) {
+				return $content;
+			}
+
+			if ( 'separate_page' != charitable_get_option( 'donation_form_display', 'separate_page' )
+			 	&& false === get_query_var( 'donate', false ) ) {
+				return $content;
+			}
+
+			ob_start();
+
+			charitable_template( 'content-donation-form.php' );
+
+			return ob_get_clean();
+
+		}
 	}
 
 endif;

@@ -242,8 +242,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'public/charitable-template-helpers.php' );
 			require_once( $includes_path . 'public/class-charitable-session.php' );
 			require_once( $includes_path . 'public/class-charitable-template.php' );
-			require_once( $includes_path . 'public/class-charitable-template-part.php' );
-			require_once( $includes_path . 'public/class-charitable-templates.php' );
+			require_once( $includes_path . 'public/class-charitable-template-part.php' );			
 			require_once( $includes_path . 'public/class-charitable-ghost-page.php' );
 			require_once( $includes_path . 'public/class-charitable-user-dashboard.php' );
 
@@ -278,6 +277,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			/* Endpoints */
 			require_once( $includes_path . 'endpoints/interface-charitable-endpoint.php' );
 			require_once( $includes_path . 'endpoints/abstract-class-charitable-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-campaign-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-campaign-donation-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-campaign-widget-endpoint.php' );
 			require_once( $includes_path . 'endpoints/class-charitable-donation-cancellation-endpoint.php' );
@@ -294,6 +294,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 			/* Deprecated */
 			require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
+			require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
 
 			/**
 			 * We are registering this object only for backwards compatibility. It
@@ -428,6 +429,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function setup_endpoints() {
 			$api = $this->get_endpoints();
 
+			$api->register( new Charitable_Campaign_Endpoint );
 			$api->register( new Charitable_Campaign_Donation_Endpoint );
 			$api->register( new Charitable_Campaign_Widget_Endpoint );
 			$api->register( new Charitable_Donation_Cancellation_Endpoint );

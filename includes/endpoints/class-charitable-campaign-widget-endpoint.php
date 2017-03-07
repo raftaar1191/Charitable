@@ -90,6 +90,25 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 				&& $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE );
 
 		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			do_action( 'charitable_is_widget' );
+
+			add_filter( 'show_admin_bar', '__return_false' );
+			add_action( 'wp_head', 'charitable_hide_admin_bar' );
+
+			return apply_filters( 'charitable_widget_page_template', 'campaign-widget.php' );
+
+		}
 	}
 
 endif;

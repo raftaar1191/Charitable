@@ -45,8 +45,10 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
+
 			add_rewrite_endpoint( 'donation_processing', EP_ROOT );
 			add_rewrite_rule( 'donation-processing/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_processing=1', 'top' );
+
 		}
 
 		/**
@@ -92,6 +94,58 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 			return is_main_query()
 				&& array_key_exists( 'donation_processing', $wp_query->query_vars )
 				&& array_key_exists( 'donation_id', $wp_query->query_vars );
+
+		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @param 	string $template The default template.
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_template( $template ) {
+
+			new Charitable_Ghost_Page( 'donation-processing-page', array(
+				'title'     => __( 'Thank you for your donation', 'charitable' ),
+				'content'   => sprintf( '<p>%s</p>', __( 'You will shortly be redirected to the payment gateway to complete your donation.', 'charitable' ) ),
+			) );
+
+			return array( 'donation-processing-page.php', 'page.php', 'index.php' );
+
+		}
+
+		/**
+		 * Get the content to display for the endpoint.
+		 *
+		 * @param 	string $content
+		 * @return  string
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_content( $content ) {
+
+			$donation = charitable_get_current_donation();
+
+			if ( ! $donation ) {
+				return $content;
+			}
+
+			return apply_filters( 'charitable_processing_donation_' . $donation->get_gateway(), $content, $donation );
+
+		}
+
+		/**
+		 * Return the body class to add for the endpoint.
+		 *
+		 * @return 	string
+		 * @access 	public
+		 * @since 	1.5.0
+		 */
+		public function get_body_class() {
+
+			return 'campaign-donation-processing';
 
 		}
 	}
