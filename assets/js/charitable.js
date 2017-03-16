@@ -9,9 +9,34 @@ CHARITABLE = window.CHARITABLE || {};
      * Donation_Form expects a jQuery this.form object.
      */
     var Donation_Form = function( form ) {
+
+        /**
+         * Array of errors.
+         *
+         * @access  public
+         */
         this.errors = [];
+
+        /**
+         * Form object.
+         *
+         * @access  public
+         */
         this.form = form;
+
+        /**
+         * Flag to allow processing to be paused (i.e. while something like Stripe is processing).
+         *
+         * @access  public
+         */
         this.pause_processing = false;
+
+        /**
+         * Flag to prevent the on_submit handler from sending multiple concurrent AJAX requests
+         *
+         * @access  public
+         */
+        this.submit_processing = false;
         
         var self = this;
         var $body = $( 'body' );
@@ -82,14 +107,7 @@ CHARITABLE = window.CHARITABLE || {};
 
             self.show_active_payment_methods( $(this).val() );
         
-        };        
-
-        /**
-         * Flag to prevent the on_submit handler from sending multiple concurrent AJAX requests
-         *
-         * @access  private
-         */
-        var submit_processing = false;
+        };                
 
         /**
          * Submit event handler for donation form.
@@ -98,11 +116,11 @@ CHARITABLE = window.CHARITABLE || {};
          */
         var on_submit = function() {
 
-            if ( submit_processing ) {
+            if ( self.submit_processing ) {
                 return false;
             }
 
-            submit_processing = true;            
+            self.submit_processing = true;            
 
             var $form = $( this );
             var $helper = new CHARITABLE.Donation_Form( $form );            
@@ -118,8 +136,6 @@ CHARITABLE = window.CHARITABLE || {};
                 $helper.print_errors();
 
                 $helper.scroll_to_top();
-
-                submit_processing = false; 
 
                 return false;
 
@@ -194,10 +210,6 @@ CHARITABLE = window.CHARITABLE || {};
                 helper.print_errors( [ CHARITABLE_VARS.error_unknown ] );
 
                 helper.scroll_to_top();
-
-            }).always(function (response) {
-
-                submit_processing = false;
 
             });
 
@@ -516,6 +528,8 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.hide_processing = function() {
         this.form.find( '.charitable-form-processing' ).hide();
         this.form.find( 'button[name="donate"]' ).show();
+
+        this.submit_processing = false;
     }
 
     /**
