@@ -755,6 +755,8 @@ CHARITABLE.SanitizeURL = function( input ) {
 
     $( document ).ready( function() {
 
+        $( 'html' ).addClass( 'js' );
+
         $( '.charitable-donation-form' ).each( function(){
             new CHARITABLE.Donation_Form( $( this ) );
         });
