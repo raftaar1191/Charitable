@@ -409,7 +409,14 @@ if ( ! function_exists( 'charitable_template_campaign_modal_donation_window' ) )
 	 * @since   1.0.0
 	 */
 	function charitable_template_campaign_modal_donation_window() {
+
+		global $wp_query;
+
 		if ( Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
+			return;
+		}
+
+		if ( isset( $wp_query->query_vars['donate'] ) ) {
 			return;
 		}
 
@@ -422,6 +429,7 @@ if ( ! function_exists( 'charitable_template_campaign_modal_donation_window' ) )
 		if ( 'modal' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
 			charitable_template( 'campaign/donate-modal-window.php', array( 'campaign' => $campaign ) );
 		}
+
 	}
 
 endif;

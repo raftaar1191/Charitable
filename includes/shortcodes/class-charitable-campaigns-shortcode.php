@@ -37,6 +37,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 				'order' 		   => '',
 				'number' 		   => get_option( 'posts_per_page' ),
 				'category' 		   => '',
+				'tag' 			   => '',
 				'creator'          => '',
 				'exclude'          => '',
 				'include_inactive' => false,
@@ -103,11 +104,24 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			/* Set category constraint */
 			if ( ! empty( $args['category'] ) ) {
 				$query_args['tax_query'] = array(
-				array(
-					'taxonomy'  => 'campaign_category',
-					'field'     => 'slug',
-					'terms'     => $args['category'],
-				),
+					array(
+						'taxonomy' => 'campaign_category',
+						'field'    => 'slug',
+						'terms'    => $args['category'],
+					),
+				);
+			}
+
+			/* Set tag constraint */
+			if ( ! empty( $args['tag'] ) ) {
+				if ( ! array_key_exists( 'tax_query', $query_args ) ) {
+					$query_args['tax_query'] = array();
+				}
+
+				$query_args['tax_query'][] = array(
+					'taxonomy' => 'campaign_tag',
+					'field'    => 'slug',
+					'terms'    => $args['tag'],
 				);
 			}
 
