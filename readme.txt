@@ -118,8 +118,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 == Changelog ==
 
 = 1.4.13 =
+* Added `tag` parameter to the [campaigns] shortcode. [#313](https://github.com/Charitable/Charitable/issues/313)
 * We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310) 
 * Persist un-rendered notices across page loads. [#314](https://github.com/Charitable/Charitable/issues/314)
+* Hide radio inputs when Javascript is enabled. [#312](https://github.com/Charitable/Charitable/issues/312)
 * We made some minor improvements to how the donation form submission is processed in Javascript. Needed for improvements to Stripe extension.
 
 = 1.4.12 =
