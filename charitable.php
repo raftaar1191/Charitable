@@ -247,7 +247,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'shortcodes/class-charitable-donation-receipt-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/class-charitable-login-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/class-charitable-registration-shortcode.php' );
-			require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );			
+			require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
 
 			/* Widgets */
@@ -271,6 +271,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 			/* Deprecated */
 			require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
+
+			/* Compatibility */
+			if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
+				require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
+			}
 
 			/**
 			 * We are registering this object only for backwards compatibility. It
