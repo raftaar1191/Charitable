@@ -180,6 +180,13 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 
 			}
 
+			wp_register_style(
+				'charitable-datepicker',
+				$assets_dir . 'css/charitable-datepicker' . $suffix .'.css',
+				array(),
+				$version
+			);
+
 			/* pupload Fields is also registered but NOT enqueued. */
 			$upload_vars = array(
 				'remove_image' => _x( 'Remove', 'remove image button text', 'charitable' ),

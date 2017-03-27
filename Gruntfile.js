@@ -38,6 +38,7 @@ module.exports = function(grunt) {
                     'assets/css/charitable-admin-menu.css'  : 'assets/css/scss/charitable-admin-menu.scss', 
                     'assets/css/charitable-admin.css'       : 'assets/css/scss/charitable-admin.scss',
                     'assets/css/charitable-plupload-fields.css' : 'assets/css/scss/charitable-plupload-fields.scss',
+                    'assets/css/charitable-datepicker.css'  : 'assets/css/scss/charitable-datepicker.scss',
                     'assets/css/charitable.css'             : 'assets/css/scss/charitable.scss',
                     'assets/css/modal.css'                  : 'assets/css/scss/modal.scss'
                 }

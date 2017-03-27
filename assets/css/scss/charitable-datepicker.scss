@@ -1,0 +1,24 @@
+.ui-datepicker {    
+    padding: 1em;
+    border: 1px solid #D9DEE1;
+    font-size: 1em;
+    background-color: #fff;
+}
+
+.ui-datepicker-next {
+    float: right;
+}
+
+.ui-datepicker-title {
+    text-align: center;
+
+    select {
+        margin-right: 4px;
+    }
+}
+
+.ui-datepicker-calendar {
+    td, th {
+        padding: 4px;
+    }    
+}

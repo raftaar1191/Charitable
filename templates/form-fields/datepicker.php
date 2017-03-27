@@ -43,6 +43,8 @@ wp_add_inline_script( 'jquery-ui-datepicker', "jQuery(document).ready( function(
 	});"
 );
 
+wp_enqueue_style( 'charitable-datepicker' );
+
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">
 	<?php if ( isset( $field['label'] ) ) : ?>
