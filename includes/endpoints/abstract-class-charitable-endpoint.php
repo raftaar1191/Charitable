@@ -39,6 +39,22 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		}
 
 		/**
+		 * Add new query vars for the endpoint.
+		 *
+		 * Unless the child class defines this, this won't do anything for an endpoint.
+		 *
+		 * @param 	array $vars
+		 * @access 	public
+		 * @since 	1.5.0
+		 */
+		public function add_query_vars( array $vars ) {
+
+			/* Return vars unchanged by default. */
+			return $vars;
+
+		}
+
+		/**
 		 * Set up the endpoint template.
 		 *
 		 * By default, we will return the default template that WordPress already selected.

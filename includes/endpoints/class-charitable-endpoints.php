@@ -196,6 +196,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 */
 		public function add_query_vars( $vars ) {
 
+			foreach ( $this->endpoints as $endpoint ) {
+				$vars = $endpoint->add_query_vars( $vars );
+			}
+
 			return array_merge( $vars, array( 'donation_id', 'cancel' ) );
 
 		}
@@ -211,6 +215,8 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		public function template_loader( $template ) {
 
 			$current_endpoint = $this->get_current_endpoint();
+
+			echo '<pre>'; echo 'current endpoint: ' . $current_endpoint; echo '</pre>';
 
 			if ( ! $current_endpoint ) {
 				return $template;

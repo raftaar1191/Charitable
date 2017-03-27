@@ -242,7 +242,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'public/charitable-template-helpers.php' );
 			require_once( $includes_path . 'public/class-charitable-session.php' );
 			require_once( $includes_path . 'public/class-charitable-template.php' );
-			require_once( $includes_path . 'public/class-charitable-template-part.php' );			
+			require_once( $includes_path . 'public/class-charitable-template-part.php' );
 			require_once( $includes_path . 'public/class-charitable-ghost-page.php' );
 			require_once( $includes_path . 'public/class-charitable-user-dashboard.php' );
 

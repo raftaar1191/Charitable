@@ -127,7 +127,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the end date in your preferred format.
 		 *
-		 * If a format is not provided, the user-defined date_format in Wordpress settings is used.
+		 * If a format is not provided, the user-defined date_format in WordPress settings is used.
 		 *
 		 * @param   string  $date_format    A date format accepted by PHP's date() function.
 		 * @return  string|false        String if an end date is set. False if campaign has no end date.

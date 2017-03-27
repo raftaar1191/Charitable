@@ -80,7 +80,6 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertFileExists( $includes_path . 'public/class-charitable-session.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-template.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-template-part.php' );
-        $this->assertFileExists( $includes_path . 'public/class-charitable-templates.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-ghost-page.php' );
         $this->assertFileExists( $includes_path . 'public/class-charitable-user-dashboard.php' );
         $this->assertFileExists( $includes_path . 'shortcodes/class-charitable-campaigns-shortcode.php' );
