@@ -81,6 +81,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @since 	1.0.0
 		 */
 		public function get_monetary_amount( $amount, $decimal_count = false ) {
+
 			if ( false === $decimal_count ) {
 				$decimal_count = charitable_get_option( 'decimal_count', 2 );
 			}
@@ -94,7 +95,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				charitable_get_option( 'thousands_separator', ',' )
 			);
 
-			return sprintf( $this->get_currency_format(), $this->get_currency_symbol(), $amount );
+			$formatted = sprintf( $this->get_currency_format(), $this->get_currency_symbol(), $amount );
+
+			return apply_filters( 'charitable_monetary_amount', $formatted, $amount );
+
 		}
 
 		/**

@@ -9,9 +9,34 @@ CHARITABLE = window.CHARITABLE || {};
      * Donation_Form expects a jQuery this.form object.
      */
     var Donation_Form = function( form ) {
+
+        /**
+         * Array of errors.
+         *
+         * @access  public
+         */
         this.errors = [];
+
+        /**
+         * Form object.
+         *
+         * @access  public
+         */
         this.form = form;
+
+        /**
+         * Flag to allow processing to be paused (i.e. while something like Stripe is processing).
+         *
+         * @access  public
+         */
         this.pause_processing = false;
+
+        /**
+         * Flag to prevent the on_submit handler from sending multiple concurrent AJAX requests
+         *
+         * @access  public
+         */
+        this.submit_processing = false;
         
         var self = this;
         var $body = $( 'body' );
@@ -82,61 +107,51 @@ CHARITABLE = window.CHARITABLE || {};
 
             self.show_active_payment_methods( $(this).val() );
         
-        };        
-
-        /**
-         * Flag to prevent the on_submit handler from sending multiple concurrent AJAX requests
-         *
-         * @access  private
-         */
-        var submit_processing = false;
+        };                
 
         /**
          * Submit event handler for donation form.
          * 
          * @access  private
          */
-        var on_submit = function() {
+        var on_submit = function( event ) {
 
-            if ( submit_processing ) {
+            var helper = event.data.helper;
+
+            if ( helper.submit_processing ) {
                 return false;
             }
 
-            submit_processing = true;            
-
-            var $form = $( this );
-            var $helper = new CHARITABLE.Donation_Form( $form );            
+            helper.submit_processing = true;
 
             /* Display the processing spinner and hide the button */
-            $helper.show_processing();
+            helper.show_processing();
             
             /* Validate the form submission before going further. */
-            if ( false === $helper.validate() ) {
+            if ( false === helper.validate() ) {
 
-                $helper.hide_processing();
+                helper.hide_processing();
 
-                $helper.print_errors();
+                helper.print_errors();
 
-                $helper.scroll_to_top();
-
-                submit_processing = false; 
+                helper.scroll_to_top();
 
                 return false;
 
             }
 
             /* If processing has been paused, return false now. */
-            if ( false !== $helper.pause_processing ) {
+            if ( false !== helper.pause_processing ) {
                 return false;
             }
 
             /* If we're not using AJAX to process the donation further, return now. */
-            if ( 1 !== $form.data( 'use-ajax' ) ) {
+            if ( 1 !== helper.form.data( 'use-ajax' ) ) {
                 return true;
             }
 
             /* If we're still here, trigger the processing event. */
-            $body.trigger( 'charitable:form:process', $helper );
+            $body.trigger( 'charitable:form:process', helper );
 
             return false;
         
@@ -195,10 +210,6 @@ CHARITABLE = window.CHARITABLE || {};
 
                 helper.scroll_to_top();
 
-            }).always(function (response) {
-
-                submit_processing = false;
-
             });
 
             return false;
@@ -221,6 +232,11 @@ CHARITABLE = window.CHARITABLE || {};
                 self.form.on( 'change', '#charitable-gateway-selector input[name=gateway]', on_change_payment_gateway );
             }
 
+            // Handle donation form submission
+            self.form.on( 'submit', {
+                helper : self,
+            }, on_submit );
+
             $body.trigger( 'charitable:form:loaded', self );
 
         }
@@ -239,10 +255,7 @@ CHARITABLE = window.CHARITABLE || {};
             $body.on( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
 
             // Init currency formatting        
-            $body.on( 'blur', '.custom-donation-input', on_change_custom_donation_amount );            
-
-            // Handle donation form submission            
-            $body.on( 'submit', '.charitable-donation-form', on_submit );
+            $body.on( 'blur', '.custom-donation-input', on_change_custom_donation_amount );
 
             // Process the donation on the 'charitable:form:process' event
             $body.on( 'charitable:form:process', process_donation );
@@ -516,6 +529,8 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.hide_processing = function() {
         this.form.find( '.charitable-form-processing' ).hide();
         this.form.find( 'button[name="donate"]' ).show();
+
+        this.submit_processing = false;
     }
 
     /**
@@ -556,7 +571,7 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.get_required_fields = function() {
         
         var fields = this.form.find( '.charitable-fieldset .required-field' ).not( '#charitable-gateway-fields .required-field' ),
-            method = this.get_payment_method();
+            method = this.get_payment_method();        
 
         if ( '' !== method ) {
 
@@ -607,6 +622,8 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.validate_required_fields = function() {
         
         var has_missing_vals = false;
+
+        var required = this.get_required_fields();
 
         this.get_required_fields().each( function() {
 
@@ -738,11 +755,11 @@ CHARITABLE.SanitizeURL = function( input ) {
 
     $( document ).ready( function() {
 
-        var $form = $( '.charitable-donation-form' );
+        $( 'html' ).addClass( 'js' );
 
-        if ( $form.length ) {
-            new CHARITABLE.Donation_Form( $form );
-        }
+        $( '.charitable-donation-form' ).each( function(){
+            new CHARITABLE.Donation_Form( $( this ) );
+        });
 
         CHARITABLE.Toggle();
 

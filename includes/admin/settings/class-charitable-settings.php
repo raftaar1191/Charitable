@@ -115,29 +115,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		}
 
 		/**
-		 * Display notices.
-		 *
-		 * @return  void
-		 * @access  public
-		 * @since   1.4.6
-		 */
-		public function add_notices() {
-			$messages = get_transient( 'charitable_settings_updated' );
-
-			if ( ! $messages ) {
-				return;
-			}
-
-			$helper = charitable_get_admin_notices();
-
-			foreach ( $messages as $notice ) {
-				$helper->render_notice( $notice['message'], $notice['type'], $notice['dismissible'] );
-			}
-
-			delete_transient( 'charitable_settings_updated' );
-		}
-
-		/**
 		 * Register setting.
 		 *
 		 * @return  void
@@ -210,9 +187,8 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			$values = wp_parse_args( $new_values, $old_values );
 			$values = apply_filters( 'charitable_save_settings', $values, $new_values, $old_values );
-
-			/* Save the update messages to a transient. */
-			set_transient( 'charitable_settings_updated', $this->get_update_messages(), 30 );
+			
+			$this->add_update_message( __( 'Settings saved', 'charitable' ), 'success' );
 
 			return $values;
 		}
@@ -282,21 +258,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		}
 
 		/**
-		 * Return the update messages.
-		 *
-		 * @return  string[]
-		 * @access  public
-		 * @since   1.4.6
-		 */
-		public function get_update_messages() {
-			if ( empty( $this->messages ) ) {
-				$this->add_update_message( __( 'Settings saved', 'charitable' ), 'success' );
-			}
-
-			return $this->messages;
-		}
-
-		/**
 		 * Add an update message.
 		 *
 		 * @param 	string  $message
@@ -311,11 +272,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 				$type = 'error';
 			}
 
-			$this->messages[] = array(
-				'message'     => $message,
-				'type'        => $type,
-				'dismissible' => $dismissible,
-			);
+			charitable_get_admin_notices()->add_notice( $message, $type, false, $dismissible );
 		}
 
 		/**
@@ -538,6 +495,20 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 */
 		private function is_dynamic_group( $composite_key ) {
 			return array_key_exists( $composite_key, $this->get_dynamic_groups() );
+		}
+		
+		/**
+		 * @deprecated 1.4.13
+		 */
+		public function get_update_messages() {
+			
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.4.13',
+				'Charitable_Admin_Notices::get_notices()'
+			);
+			
+			return charitable_get_admin_notices()->get_notices();
 		}
 	}
 

@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		 * @since   1.4.6
 		 */
 		private function __construct() {
-			$this->clear();
+			$this->load_notices();
 		}
 
 		/**
@@ -230,7 +230,39 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 				strlen( $notice_key ) ? 'data-notice="' . esc_attr( $notice_key ) . '"' : '',
 				$notice
 			);
+			
+			if ( strlen( $notice_key ) ) {
+				unset( $this->notices[ $type ][ $notice_key ] );
+			}
 
+		}
+
+		/**
+		 * When PHP finishes executing, stash any notices that haven't been rendered yet.
+		 *
+		 * @return	void
+		 * @access	public
+		 * @since	1.4.13
+		 */
+		public function shutdown() {
+			set_transient( 'charitable_notices', $this->notices );	
+		}
+
+		/**
+		 * Load the notices array.
+		 *
+		 * If there are any stuffed in a transient, pull those out. Otherwise, reset a clear array.
+		 *
+		 * @return	void
+		 * @access	public
+		 * @since	1.4.13
+		 */
+		public function load_notices() {
+			$this->notices = get_transient( 'charitable_notices' );
+			
+			if ( ! is_array( $this->notices ) ) {
+				$this->clear();
+			}
 		}
 
 		/**

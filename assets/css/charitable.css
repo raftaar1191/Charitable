@@ -246,6 +246,9 @@
     margin-bottom: 0;
     padding-bottom: 0; }
 
+.js .charitable-donation-form .donation-amount input[type=radio] {
+  display: none; }
+
 /* Receipts */
 .donation-summary dt {
   float: left;
