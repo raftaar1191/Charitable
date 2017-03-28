@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Displays the campaign content.
  *
@@ -12,13 +12,13 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-$campaign = $view_args[ 'campaign' ];
-$content = $view_args[ 'content' ];
+$campaign = $view_args['campaign'];
+$content = $view_args['content'];
 
 /**
  * @hook charitable_campaign_content_before
  */
-do_action( 'charitable_campaign_content_before', $campaign ); 
+do_action( 'charitable_campaign_content_before', $campaign );
 
 echo $content;
 

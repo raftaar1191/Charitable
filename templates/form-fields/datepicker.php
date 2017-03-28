@@ -38,10 +38,11 @@ if ( ! wp_script_is( 'jquery-ui-datepicker' ) ) {
 	wp_enqueue_script( 'jquery-ui-datepicker' );
 }
 
+$datepicker_json_args = json_encode( $json_args );
+
 wp_add_inline_script( 'jquery-ui-datepicker', "jQuery(document).ready( function(){
-		jQuery( '.datepicker' ).datepicker( " . json_encode( $json_args ) . ");
-	});"
-);
+	jQuery( '.datepicker' ).datepicker( {$datepicker_json_args} );
+});" );
 
 wp_enqueue_style( 'charitable-datepicker' );
 

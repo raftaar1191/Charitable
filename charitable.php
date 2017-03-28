@@ -31,51 +31,69 @@ if ( ! class_exists( 'Charitable' ) ) :
 	class Charitable {
 
 		/**
+		 * Plugin version.
+		 *
 		 * @var     string
 		 */
 		const VERSION = '1.4.13';
 
 		/**
+		 * Version of database schema.
+		 *
 		 * @var     string A date in the format: YYYYMMDD
 		 */
 		const DB_VERSION = '20150615';
 
 		/**
+		 * Campaign post type. 
+		 *
 		 * @var     string The Campaign post type.
 		 */
 		const CAMPAIGN_POST_TYPE = 'campaign';
 
 		/**
+		 * Donation post type. 
+		 *
 		 * @var     string The Donation post type.
 		 */
 		const DONATION_POST_TYPE = 'donation';
 
 		/**
+		 * Single instance of this class.
+		 *
 		 * @var     Charitable
 		 * @access  private
 		 */
 		private static $instance = null;
 
 		/**
-		 * @var     string      Directory path for the plugin.
+		 * The absolute path to this plugin's directory.
+		 * 
+		 * @var     string
 		 * @access  private
 		 */
 		private $directory_path;
 
 		/**
-		 * @var     string      Directory url for the plugin.
+		 * The URL of this plugin's directory. 
+		 *
+		 * @var     string
 		 * @access  private
 		 */
 		private $directory_url;
 
 		/**
-		 * @var     string      Directory path for the includes folder of the plugin.
+		 * Directory path for the includes folder of the plugin.
+		 *
+		 * @var     string
 		 * @access  private
 		 */
 		private $includes_path;
 
 		/**
-		 * @var     array       Store of registered objects.
+		 * Store of registered objects.
+		 *
+		 * @var     array
 		 * @access  private
 		 */
 		private $registry;
@@ -132,15 +150,15 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @since   1.0.0
 		 */
 		public function start() {
-			// If we've already started (i.e. run this function once before), do not pass go.
+			/* If we've already started (i.e. run this function once before), do not pass go. */
 			if ( $this->started() ) {
 				return;
 			}
 
-			// Set static instance
+			/* Set static instance. */
 			self::$instance = $this;
 
-			// Factory to create new donation instances
+			/* Factory to create new donation instances. */
 			$this->donation_factory = new Charitable_Donation_Factory();
 
 			$this->maybe_start_ajax();
@@ -535,7 +553,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Stores an object in the plugin's registry.
 		 *
-		 * @param   mixed $object
+		 * @param   mixed $object Object to be registered.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -553,8 +571,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns a registered object.
 		 *
-		 * @param   string $class   The type of class you want to retrieve.
-		 * @return  mixed           The object if its registered. Otherwise false.
+		 * @param   string $class The type of class you want to retrieve.
+		 * @return  mixed         The object if its registered. Otherwise false.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -565,8 +583,9 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns plugin paths.
 		 *
-		 * @param   string $type        If empty, returns the path to the plugin.
-		 * @param   bool $absolute_path If true, returns the file system path. If false, returns it as a URL.
+		 * @param   string $type          If empty, returns the path to the plugin.
+		 * @param   bool   $absolute_path If true, returns the file system path. If false, 
+		 * 								  returns it as a URL.
 		 * @return  string
 		 * @since   1.0.0
 		 */
@@ -838,4 +857,4 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 	$charitable = new Charitable();
 
-endif; // End if class_exists check
+endif; // End if class_exists check.

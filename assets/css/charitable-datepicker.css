@@ -3,6 +3,8 @@
   border: 1px solid #dedede;
   font-size: 1em;
   background-color: #fff; }
+  .ui-datepicker a {
+    cursor: pointer; }
 
 .ui-datepicker-next {
   float: right; }

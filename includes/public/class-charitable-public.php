@@ -57,7 +57,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_donation_form_scripts' ), 11 );
 			add_action( 'charitable_campaign_loop_before', array( $this, 'maybe_enqueue_donation_form_scripts' ) );
 			add_filter( 'post_class', array( $this, 'campaign_post_class' ) );
-			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ), 10, 2 );
+			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ) );
 
 			/**
 			 * We are registering this object only for backwards compatibility. It
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 				'currency_format_num_decimals' => esc_attr( charitable_get_option( 'decimal_count', 2 ) ),
 				'currency_format_decimal_sep' => esc_attr( charitable_get_option( 'decimal_separator', '.' ) ),
 				'currency_format_thousand_sep' => esc_attr( charitable_get_option( 'thousands_separator', ',' ) ),
-				'currency_format' => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ), // For accounting.js
+				'currency_format' => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ), // For accounting.js.
 				'error_invalid_amount' => sprintf( __( 'You must donate more than %s.', 'charitable' ), charitable_format_money( '0' ) ),
 				'error_required_fields' => __( 'Please fill out all required fields.', 'charitable' ),
 				'error_unknown' => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
@@ -258,6 +258,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Adds custom post classes when viewing campaign.
 		 *
+		 * @param 	string[] $classes List of classes to be added with post_class().
 		 * @return  string[]
 		 * @access  public
 		 * @since   1.0.0
@@ -277,13 +278,12 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Disable comments on application pages like the donation page.
 		 *
-		 * @param   boolean $open
-		 * @param   int     $post_id
+		 * @param   boolean $open Whether comments are open by default.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.3.0
-	 	*/
-		public function disable_comments_on_application_pages( $open, $post_id ) {
+	 	 */
+		public function disable_comments_on_application_pages( $open ) {
 
 			/* If open is already false, just hit return. */
 			if ( ! $open ) {
