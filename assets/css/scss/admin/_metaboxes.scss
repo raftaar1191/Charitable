@@ -113,6 +113,13 @@
         }
     }
 
+    .charitable-checkbox-wrap,
+    .charitable-select-wrap,
+    .charitable-textarea-wrap,
+    .charitable-image-wrap {
+        margin-bottom: 12px;
+    }
+
     .charitable-checkbox-wrap {
         label {
             display: inline-block;

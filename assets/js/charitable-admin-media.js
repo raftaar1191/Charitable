@@ -56,7 +56,8 @@
                 attachment = attachment.toJSON();
 
                 var id_field_name = $button.data( 'uploader-attachment-id-field-name' ), 
-                    src_field_name = $button.data( 'uploader-attachment-src-field-name' );
+                    src_field_name = $button.data( 'uploader-attachment-src-field-name' ),
+                    display_field_id = $button.data( 'uploader-attachment-preview-field' );
 
                 if ( 'undefined' !== typeof id_field_name ) {
                     var attachment_id_field = $( "[name='" + id_field_name + "']" );
@@ -66,6 +67,11 @@
                 if ( 'undefined' !== typeof src_field_name ) {
                     var attachment_src_field = $( '[name="' + src_field_name + '"]' );
                     attachment_src_field.val( attachment.url );
+                }
+
+                if ( 'undefined' !== typeof display_field_id ) {
+                    var display_field = $( '#' + display_field_id );
+                    display_field.html( '<img src="' + attachment.url + '" alt="" style="max-width:100%;" />' );
                 }
             } );
         } );
