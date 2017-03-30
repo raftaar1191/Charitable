@@ -5,11 +5,11 @@
  * @package     Charitable/Classes/Charitable_i18n
  * @version     1.1.2
  * @author      Eric Daams
- * @copyright   Copyright (c) 2014, Studio 164a
+ * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_i18n' ) ) :
@@ -31,6 +31,8 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		private static $instance = null;
 
 		/**
+		 * Plugin's textdomain.
+		 *
 		 * @var     string
 		 */
 		protected $textdomain = 'charitable';
@@ -136,6 +138,8 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * Expect full removal in Charitable 1.3 or after.
 		 *
 		 * @deprecated
+		 *
+		 * @param 	Charitable $charitable The core Charitable object.
 		 */
 		public static function charitable_start( Charitable $charitable ) {
 			if ( ! $charitable->is_start() ) {
@@ -147,4 +151,5 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif; // End class_exists check.
+
