@@ -245,3 +245,9 @@
         padding-bottom: 0;
     }
 }
+
+.js .charitable-donation-form {
+    .donation-amount input[type=radio] {
+        display: none;
+    }
+}

@@ -174,7 +174,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 
 				if ( isset( $data['date_deactivated'] ) && strlen( $data['date_deactivated'] ) ) {
 					$date_deactivated = charitable_sanitize_date( $data['date_deactivated'], 'Y-m-d 00:00:00' );
-					$data['date_deactivated'] = $campaign_end_date < $date_deactivated ? $campaign_end_date : $date_deactivated;
+					$data['date_deactivated'] = ( $campaign_end_date && $campaign_end_date < $date_deactivated ) ? $campaign_end_date : $date_deactivated;
 				} elseif ( 0 != $campaign_end_date ) {
 					$data['date_deactivated'] = $campaign_end_date;
 				}
