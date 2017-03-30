@@ -162,7 +162,7 @@
 .charitable-metabox .charitable-image-wrap {
   margin-bottom: 12px; }
 .charitable-metabox .charitable-checkbox-wrap label {
-  display: inline-block; }
+  display: inline; }
 .charitable-metabox .table-header {
   background: #f5f5f5; }
   .charitable-metabox .table-header label {
@@ -363,7 +363,7 @@ body.post-type-campaign .postbox-container .empty-container {
 #campaign-goal .charitable-checkbox-wrap label,
 #campaign-end-date .charitable-checkbox-wrap label,
 #campaign-description .charitable-checkbox-wrap label {
-  display: inline-block; }
+  display: inline; }
 #campaign-title .table-header,
 #campaign-goal .table-header,
 #campaign-end-date .table-header,
