@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
 
-			// Campaign columns
+			// Campaign columns.
 			add_filter( 'manage_edit-campaign_columns',                 array( $this, 'dashboard_columns' ), 11, 1 );
 
 			add_action( 'add_meta_boxes',                               array( $this, 'add_meta_boxes' ), 10 );
@@ -380,8 +380,8 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Sets the placeholder text of the campaign title field.
 		 *
-		 * @param   string      $placeholder
-		 * @param   WP_Post     $post
+		 * @param   string  $placeholder
+		 * @param   WP_Post $post
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
