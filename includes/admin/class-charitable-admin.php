@@ -188,6 +188,14 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				$version,
 				false
 			);
+
+			wp_register_script(
+				'charitable-admin-media',
+				$assets_path . 'js/charitable-admin-media' . $suffix . '.js',
+				array( 'jquery-core' ),
+				$version,
+				false
+			);
 		}
 
 		/**
