@@ -426,10 +426,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Get the submitted value for a particular setting.
 		 *
-		 * @param   string      $key
-		 * @param   array       $field
-		 * @param   array       $submitted
-		 * @return  mixed|null  Returns null if the value was not submitted or is not applicable.
+		 * @param   string $key       The key of the setting being saved.
+		 * @param   array  $field     The setting field.
+		 * @param   array  $submitted The submitted values.
+		 * @return  mixed|null        Returns null if the value was not submitted or is not applicable.
 		 * @access  private
 		 * @since   1.0.0
 		 */

@@ -149,7 +149,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$nonce = $_POST['charitable-donate-now'];
 
 			if ( ! wp_verify_nonce( $nonce, 'charitable-donate' )
-				&& ! wp_verify_nonce( $nonce, 'charitable-donate-' ) // Kept for backwards compatibility
+				&& ! wp_verify_nonce( $nonce, 'charitable-donate-' ) // Kept for backwards compatibility.
 			) {
 				return;
 			}
@@ -185,6 +185,8 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$form = $campaign->get_donation_form();
 
 			/**
+			 * Hook in before processing donation form.
+			 *
 			 * @hook charitable_before_process_donation_form
 			 */
 			do_action( 'charitable_before_process_donation_form', $processor, $form );

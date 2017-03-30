@@ -10,8 +10,7 @@
  * @since   3.7.0
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
 
 /**
  * WordPress Session class for managing user session data.
