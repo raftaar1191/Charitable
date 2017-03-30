@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.4.13\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-03-17 08:34:02+00:00\n"
+"POT-Creation-Date: 2017-03-30 07:12:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:734 charitable.php:745
+#: charitable.php:739 charitable.php:750
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -4685,7 +4685,7 @@ msgid ""
 "fields were not filled out:"
 msgstr ""
 
-#: includes/addons/charitable-benefactors/class-charitable-benefactor.php:59
+#: includes/addons/charitable-benefactors/class-charitable-benefactor.php:58
 msgid "Benefactor class does not exist for given extension."
 msgstr ""
 
@@ -4959,11 +4959,11 @@ msgstr ""
 msgid "Highlight Color"
 msgstr ""
 
-#: includes/admin/dashboard-widgets/class-charitable-donations-dashboard-widget.php:40
+#: includes/admin/dashboard-widgets/class-charitable-donations-dashboard-widget.php:39
 msgid "Charitable Donation Statistics"
 msgstr ""
 
-#: includes/admin/dashboard-widgets/class-charitable-donations-dashboard-widget.php:54
+#: includes/admin/dashboard-widgets/class-charitable-donations-dashboard-widget.php:53
 #: templates/campaign-loop/donate-modal-window.php:35
 #: templates/donation-form/form-donation.php:58
 msgid "Loading&hellip;"
@@ -5136,7 +5136,7 @@ msgstr ""
 #: includes/admin/reports/class-charitable-export-donations.php:153
 #: includes/donations/abstract-charitable-donation.php:461
 #: includes/donations/class-charitable-donation-form.php:199
-#: includes/user-management/class-charitable-password-form.php:143
+#: includes/user-management/class-charitable-password-form.php:142
 #: includes/user-management/class-charitable-profile-form.php:143
 #: includes/user-management/class-charitable-registration-form.php:92
 #: templates/donation-form/donor-fields/donor-details.php:25
@@ -5147,28 +5147,28 @@ msgstr ""
 #: includes/admin/reports/class-charitable-export-donations.php:154
 #: includes/donations/abstract-charitable-donation.php:465
 #: includes/donations/class-charitable-donation-form.php:208
-#: includes/user-management/class-charitable-password-form.php:185
+#: includes/user-management/class-charitable-password-form.php:184
 #: includes/user-management/class-charitable-profile-form.php:180
 msgid "Address"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:155
 #: includes/donations/class-charitable-donation-form.php:217
-#: includes/user-management/class-charitable-password-form.php:192
+#: includes/user-management/class-charitable-password-form.php:191
 #: includes/user-management/class-charitable-profile-form.php:187
 msgid "Address 2"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:156
 #: includes/donations/class-charitable-donation-form.php:226
-#: includes/user-management/class-charitable-password-form.php:199
+#: includes/user-management/class-charitable-password-form.php:198
 #: includes/user-management/class-charitable-profile-form.php:194
 msgid "City"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:157
 #: includes/donations/class-charitable-donation-form.php:235
-#: includes/user-management/class-charitable-password-form.php:206
+#: includes/user-management/class-charitable-password-form.php:205
 #: includes/user-management/class-charitable-profile-form.php:201
 msgid "State"
 msgstr ""
@@ -5179,7 +5179,7 @@ msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:159
 #: includes/donations/class-charitable-donation-form.php:253
-#: includes/user-management/class-charitable-password-form.php:220
+#: includes/user-management/class-charitable-password-form.php:219
 #: includes/user-management/class-charitable-profile-form.php:215
 msgid "Country"
 msgstr ""
@@ -6219,179 +6219,179 @@ msgstr ""
 msgid "Search Campaign Tags"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:116
+#: includes/currency/class-charitable-currency.php:120
 msgid "Amount must be passed as a string."
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:250
+#: includes/currency/class-charitable-currency.php:254
 msgid "Emirati Dirham (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:251
+#: includes/currency/class-charitable-currency.php:255
 msgid "Australian Dollars (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:252
+#: includes/currency/class-charitable-currency.php:256
 msgid "Argentine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:253
+#: includes/currency/class-charitable-currency.php:257
 msgid "Bangladeshi Taka (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:254
+#: includes/currency/class-charitable-currency.php:258
 msgid "Bolivian Bolíviano (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:255
+#: includes/currency/class-charitable-currency.php:259
 msgid "Brazilian Real (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:256
+#: includes/currency/class-charitable-currency.php:260
 msgid "Bulgarian Lev (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:257
+#: includes/currency/class-charitable-currency.php:261
 msgid "Canadian Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:258
+#: includes/currency/class-charitable-currency.php:262
 msgid "Swiss Franc (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:259
+#: includes/currency/class-charitable-currency.php:263
 msgid "Chilean Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:260
+#: includes/currency/class-charitable-currency.php:264
 msgid "Chinese Yuan Renminbi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:261
+#: includes/currency/class-charitable-currency.php:265
 msgid "Czech Koruna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:262
+#: includes/currency/class-charitable-currency.php:266
 msgid "Danish Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:263
+#: includes/currency/class-charitable-currency.php:267
 msgid "Egyptian Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:264
+#: includes/currency/class-charitable-currency.php:268
 msgid "Euro (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:265
+#: includes/currency/class-charitable-currency.php:269
 msgid "British Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:266
+#: includes/currency/class-charitable-currency.php:270
 msgid "Ghanaian Cedi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:267
+#: includes/currency/class-charitable-currency.php:271
 msgid "Hong Kong Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:268
+#: includes/currency/class-charitable-currency.php:272
 msgid "Croatian Kuna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:269
+#: includes/currency/class-charitable-currency.php:273
 msgid "Hungarian Forint (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:270
+#: includes/currency/class-charitable-currency.php:274
 msgid "Indonesian Rupiah (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:271
+#: includes/currency/class-charitable-currency.php:275
 msgid "Israeli Shekel (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:272
+#: includes/currency/class-charitable-currency.php:276
 msgid "Indian Rupee (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:273
+#: includes/currency/class-charitable-currency.php:277
 msgid "Icelandic Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:274
+#: includes/currency/class-charitable-currency.php:278
 msgid "Japanese Yen (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:275
+#: includes/currency/class-charitable-currency.php:279
 msgid "South Korean Won (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:276
+#: includes/currency/class-charitable-currency.php:280
 msgid "Mexican Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:277
+#: includes/currency/class-charitable-currency.php:281
 msgid "Malaysian Ringgit (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:278
+#: includes/currency/class-charitable-currency.php:282
 msgid "Nigerian Naira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:279
+#: includes/currency/class-charitable-currency.php:283
 msgid "Norwegian Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:280
+#: includes/currency/class-charitable-currency.php:284
 msgid "New Zealand Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:281
+#: includes/currency/class-charitable-currency.php:285
 msgid "Philippine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:282
+#: includes/currency/class-charitable-currency.php:286
 msgid "Polish Zloty (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:283
+#: includes/currency/class-charitable-currency.php:287
 msgid "Romanian New Leu (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:284
+#: includes/currency/class-charitable-currency.php:288
 msgid "Russian Ruble (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:285
+#: includes/currency/class-charitable-currency.php:289
 msgid "Swedish Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:286
+#: includes/currency/class-charitable-currency.php:290
 msgid "Singapore Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:287
+#: includes/currency/class-charitable-currency.php:291
 msgid "Thai Baht (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:288
+#: includes/currency/class-charitable-currency.php:292
 msgid "Turkish Lira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:289
+#: includes/currency/class-charitable-currency.php:293
 msgid "Taiwan New Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:290
+#: includes/currency/class-charitable-currency.php:294
 msgid "US Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:291
+#: includes/currency/class-charitable-currency.php:295
 msgid "Vietnamese Dong (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:292
+#: includes/currency/class-charitable-currency.php:296
 msgid "South African Rand (%s)"
 msgstr ""
 
@@ -6486,25 +6486,25 @@ msgid "Refunded"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:181
-#: includes/user-management/class-charitable-password-form.php:129
+#: includes/user-management/class-charitable-password-form.php:128
 #: includes/user-management/class-charitable-profile-form.php:129
 msgid "First name"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:190
-#: includes/user-management/class-charitable-password-form.php:136
+#: includes/user-management/class-charitable-password-form.php:135
 #: includes/user-management/class-charitable-profile-form.php:136
 msgid "Last name"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:244
-#: includes/user-management/class-charitable-password-form.php:213
+#: includes/user-management/class-charitable-password-form.php:212
 #: includes/user-management/class-charitable-profile-form.php:208
 msgid "Postcode / ZIP code"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:263
-#: includes/user-management/class-charitable-password-form.php:228
+#: includes/user-management/class-charitable-password-form.php:227
 #: includes/user-management/class-charitable-profile-form.php:223
 msgid "Phone"
 msgstr ""
@@ -6527,7 +6527,7 @@ msgid "Your Donation"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:374
-#: includes/user-management/class-charitable-password-form.php:288
+#: includes/user-management/class-charitable-password-form.php:287
 #: includes/user-management/class-charitable-profile-form.php:283
 msgid "Your Details"
 msgstr ""
@@ -6580,27 +6580,27 @@ msgstr ""
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:277
+#: includes/donations/class-charitable-donation-processor.php:279
 msgid "Campaign ID was not found. Unable to create donation."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:293
+#: includes/donations/class-charitable-donation-processor.php:295
 msgid "Unable to process donation."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:396
+#: includes/donations/class-charitable-donation-processor.php:398
 msgid "We were unable to save the donation. Please try again."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:405
+#: includes/donations/class-charitable-donation-processor.php:407
 msgid "Payment attempted."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:407
+#: includes/donations/class-charitable-donation-processor.php:409
 msgid "Donation created."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:658
+#: includes/donations/class-charitable-donation-processor.php:660
 msgid "Payment failed with errors: %s"
 msgstr ""
 
@@ -7295,19 +7295,19 @@ msgstr ""
 msgid "The credit card expiry date is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:186
+#: includes/public/class-charitable-public.php:193
 msgid "You can only upload %d file"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:187
+#: includes/public/class-charitable-public.php:194
 msgid "You can only upload a maximum of %d files"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:188
+#: includes/public/class-charitable-public.php:195
 msgid "%1$s exceeds the max upload size of %2$s"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:189
+#: includes/public/class-charitable-public.php:196
 msgid "%s failed to upload. Please try again."
 msgstr ""
 
@@ -7375,45 +7375,45 @@ msgid ""
 "a link to reset your password."
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:150
+#: includes/user-management/class-charitable-password-form.php:149
 #: includes/user-management/class-charitable-profile-form.php:150
 msgid "Organization"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:157
+#: includes/user-management/class-charitable-password-form.php:156
 #: includes/user-management/class-charitable-profile-form.php:157
 msgid "Bio"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:166
+#: includes/user-management/class-charitable-password-form.php:165
 msgid "<a href=\"%s\">Change your password</a>"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:251
+#: includes/user-management/class-charitable-password-form.php:250
 #: includes/user-management/class-charitable-profile-form.php:246
 msgid "Your Website"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:258
+#: includes/user-management/class-charitable-password-form.php:257
 #: includes/user-management/class-charitable-profile-form.php:253
 msgid "Twitter"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:265
+#: includes/user-management/class-charitable-password-form.php:264
 #: includes/user-management/class-charitable-profile-form.php:260
 msgid "Facebook"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:294
+#: includes/user-management/class-charitable-password-form.php:293
 #: includes/user-management/class-charitable-profile-form.php:295
 msgid "Your Address"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:300
+#: includes/user-management/class-charitable-password-form.php:299
 msgid "Your Social Passwords"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:387
+#: includes/user-management/class-charitable-password-form.php:386
 msgid ""
 "charitable_user_Password_after_fields hook has been removed. Use "
 "charitable_form_after_fields instead."
@@ -7888,7 +7888,7 @@ msgctxt "go to campaign"
 msgid "Go to"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:185
+#: includes/public/class-charitable-public.php:192
 msgctxt "remove image button text"
 msgid "Remove"
 msgstr ""
