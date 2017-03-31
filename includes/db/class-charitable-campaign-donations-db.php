@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
@@ -23,6 +24,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * The version of our database table
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -31,6 +33,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * The name of the primary column
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -123,8 +126,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Add a new campaign donation.
 		 *
-		 * @param   array       $data
-		 * @return  int         The ID of the inserted campaign donation
+		 * @param   array  $data Data we are inserting.
+		 * @param 	string $type Type of record we are inserting.
+		 * @return  int The ID of the inserted campaign donation
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -141,9 +145,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Update campaign donation record.
 		 *
-		 * @param   int         $row_id
-		 * @param   array       $data
-		 * @param   string      $where          Column used in where argument.
+		 * @param   int    $row_id The primary key ID for the row we are retrieving.
+		 * @param   array  $data   The updated date.
+		 * @param   string $where  Column used in where argument.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.0.0
@@ -159,10 +163,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Delete a row identified by the primary key.
 		 *
-		 * @param   int $row_id
+		 * @param   int $row_id The primary key ID.
+		 * @return  boolean
 		 * @access  public
 		 * @since   1.0.0
-		 * @return  bool
 		 */
 		public function delete( $row_id = 0 ) {
 			Charitable_Campaign::flush_donations_cache( $row_id );
@@ -173,11 +177,11 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Delete all campaign donation records for a given donation.
 		 *
-		 * @param   int $donation_id
+		 * @param   int $donation_id The donation ID.
+		 * @return  boolean
 		 * @access  public
 		 * @static
 		 * @since   1.2.0
-		 * @return  bool
 		 */
 		public static function delete_donation_records( $donation_id ) {
 			$table = charitable_get_table( 'campaign_donations' );
@@ -258,8 +262,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Return a list of all distinct IDs based on a particular field.
 		 *
 		 * @global 	WPDB      $wpdb
-		 * @param 	string    $field The distinct field we are retrieving.
-		 * @param 	int|int[] $donation_id A single donation ID or an array of IDs.
+		 *
+		 * @param 	string    $field       The distinct field we are retrieving.
+		 * @param 	int|int[] $id          An ID or an array of IDs.
+		 * @param 	string    $where_field Column used for the where argument.
 		 * @return  Object
 		 * @access  public
 		 * @since   1.4.0
@@ -413,7 +419,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Get an array of all donation ids for a campaign.
 		 *
 		 * @uses 	Charitable_Campaign_Donations_DB::get_distinct_ids()
-		 * @param   int $campaign_id
+		 *
+		 * @param   int $campaign_id Campaign ID.
 		 * @return  object
 		 * @since   1.0.0
 		 */
@@ -425,7 +432,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * The donor IDs of all who have donated to the given campaign.
 		 *
 		 * @uses 	Charitable_Campaign_Donations_DB::get_distinct_ids()
-		 * @param   int     $campaign_id
+		 *
+		 * @param   int $campaign_id The campaign ID to get donors for.
 		 * @return  object
 		 * @since   1.0.0
 		 */
@@ -437,8 +445,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		  * Return the number of users who have donated to the given campaign.
 		  *
 		  * @global wpdb      $wpdb
-		  * @param  int|int[] $campaign
-		  * @param  boolean   $include_all If false, only include approved donations.
+		  *
+		  * @param  int|int[] $campaign    The campaign ID, or list of campaign IDs.
+		  * @param  boolean   $include_all Whether to include all donations (true), or only include approved donations (false).
 		  * @return int
 		  * @since  1.0.0
 		  */
@@ -465,8 +474,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Return all donations made by a donor.
 		 *
 		 * @global  wpdb $wpdb
-		 * @param   int $donor_id
-		 * @param   boolean $distinct_donations
+		 *
+		 * @param   int     $donor_id           The donor ID.
+		 * @param   boolean $distinct_donations Whether to get distinct donations.
 		 * @return  object[]
 		 * @access  public
 		 * @since   1.0.0
@@ -496,8 +506,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Return total amount donated by a donor.
 		 *
-		 * @global  wpdb    $wpdb
-		 * @param   int     $donor_id
+		 * @global  wpdb $wpdb
+		 *
+		 * @param   int $donor_id The donor ID.
 		 * @return  int
 		 * @access  public
 		 * @since   1.0.0
@@ -522,8 +533,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Count the number of donations made by the donor.
 		 *
 		 * @global  wpdb    $wpdb
-		 * @param   int     $donor_id
-		 * @param   boolean $distinct_donations     If true, will only count unique donations.
+		 *
+		 * @param   int     $donor_id           The donor ID.
+		 * @param   boolean $distinct_donations If true, will only count unique donations.
 		 * @return  int
 		 * @access  public
 		 * @since   1.0.0

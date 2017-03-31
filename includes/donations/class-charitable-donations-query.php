@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
@@ -24,19 +24,28 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		/**
 		 * Create class object.
 		 *
+		 * @param 	array $args Arguments used in query.
 		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function __construct( $args = array() ) {
 
 			$defaults = array(
-				'output'   => 'donations', // Use 'posts' to get standard post objects.
-				'status'   => false, // Set to an array with statuses to only show certain statuses.
-				'orderby'  => 'date', // Currently only supports 'date'.
+				// Use 'posts' to get standard post objects.
+				'output'   => 'donations',
+				// Set to an array with statuses to only show certain statuses.
+				'status'   => false,
+				// Currently only supports 'date'.
+				'orderby'  => 'date',
+				// May be 'DESC' or 'ASC'.
 				'order'    => 'DESC',
+				// Number of donations to retrieve.
 				'number'   => 20,
+				// For paged results.
 				'paged'    => 1,
+				// Only get donations for a specific campaign.
 				'campaign' => 0,
+				// Only get donations by a specific donor.
 				'donor_id' => 0,
 			);
 

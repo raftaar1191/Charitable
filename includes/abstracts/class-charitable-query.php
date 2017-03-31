@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Query' ) ) :
@@ -64,7 +64,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the query argument value for the given key.
 		 *
-		 * @param   string $key
+		 * @param   string $key      The key of the argument.
+		 * @param 	mixed  $fallback Default value to fall back to.
 		 * @return  mixed|false Returns fallback if the argument is not found.
 		 * @access  public
 		 * @since   1.0.0
@@ -76,8 +77,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Set the query argument for the given key.
 		 *
-		 * @param   string $key
-		 * @param   mixed $value
+		 * @param   string $key   Key of argument to set.
+		 * @param   mixed  $value Value to be set.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -89,7 +90,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Remove the given query argument.
 		 *
-		 * @param   string $key
+		 * @param   string $key Key of argument to remove.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -102,6 +103,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the results of the query.
 		 *
 		 * @global  WPDB $wpdb
+		 *
 		 * @return  object[]
 		 * @access  public
 		 * @since   1.0.0

@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
@@ -21,39 +22,51 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 	class Charitable_Campaign {
 
 		/**
-		 * @var WP_Post The WP_Post object associated with this campaign.
+		 * The WP_Post object associated with this campaign.
+		 *
+		 * @var WP_Post
 		 */
 		private $post;
 
 		/**
-		 * @var int The timestamp for the expiry for this campaign.
+		 * The timestamp for the expiry for this campaign.
+		 *
+		 * @var int
 		 */
 		private $end_time;
 
 		/**
-		 * @var decimal The fundraising goal for the campaign.
+		 * The fundraising goal for the campaign.
+		 *
+		 * @var decimal
 		 */
 		private $goal;
 
 		/**
-		 * @var WP_Query The donations made to this campaign.
+		 * The donations made to this campaign.
+		 *
+		 * @var WP_Query
 		 */
 		private $donations;
 
 		/**
-		 * @var int The amount donated to the campaign.
+		 * The amount donated to the campaign.
+		 *
+		 * @var int
 		 */
 		private $donated_amount;
 
 		/**
-		 * @var Charitable_Donation_Form The form object for this campaign.
+		 * The form object for this campaign.
+		 *
+		 * @var Charitable_Donation_Form
 		 */
 		private $donation_form;
 
 		/**
 		 * Class constructor.
 		 *
-		 * @param   mixed   $post       The post ID or WP_Post object for this this campaign.
+		 * @param   mixed $post The post ID or WP_Post object for this this campaign.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -68,6 +81,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Magic getter.
 		 *
+		 * @param 	string $key The key of the field to get.
 		 * @return  mixed
 		 * @access  public
 		 * @since   1.0.0
@@ -84,10 +98,11 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * Returns the campaign's post_meta values. _campaign_ is automatically prepended to the meta key.
 		 *
 		 * @see     get_post_meta
-		 * @param   string  $meta_name      The meta name to search for.
-		 * @param   bool    $single         Whether to return a single value or an array.
-		 * @return  mixed                   This will return an array if single is false. If it's true,
-		 *                                  the value of the meta_value field will be returned.
+		 *
+		 * @param   string  $meta_name The meta name to search for.
+		 * @param   boolean $single    Whether to return a single value or an array.
+		 * @return  mixed              This will return an array if single is false. If it's true,
+		 *                             the value of the meta_value field will be returned.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -129,7 +144,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * If a format is not provided, the user-defined date_format in WordPress settings is used.
 		 *
-		 * @param   string  $date_format    A date format accepted by PHP's date() function.
+		 * @param   string $date_format A date format accepted by PHP's date() function.
 		 * @return  string|false        String if an end date is set. False if campaign has no end date.
 		 * @access  public
 		 * @since   1.0.0
@@ -216,13 +231,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
 			$seconds_left = $this->get_seconds_left();
 
-			/* Condition 1: The campaign has finished. */
 			if ( 0 === $seconds_left ) {
+
+				/* Condition 1: The campaign has finished. */
 
 				$time_left = apply_filters( 'charitable_campaign_ended', __( 'Campaign has ended', 'charitable' ), $this );
 
-			} /* Condition 2: There is less than an hour left. */
-			elseif ( $seconds_left <= $hour ) {
+			} elseif ( $seconds_left <= $hour ) {
+
+				/* Condition 2: There is less than an hour left. */
 
 				$minutes_remaining = ceil( $seconds_left / 60 );
 				$time_left = apply_filters( 'charitabile_campaign_minutes_left',
@@ -230,8 +247,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 					$this
 				);
 
-			} /* Condition 3: There is less than a day left. */
-			elseif ( $seconds_left <= $day ) {
+			} elseif ( $seconds_left <= $day ) {
+
+				/* Condition 3: There is less than a day left. */
 
 				$hours_remaining = floor( $seconds_left / 3600 );
 				$time_left = apply_filters( 'charitabile_campaign_hours_left',
@@ -239,8 +257,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 					$this
 				);
 
-			} /* Condition 4: There is more than a day left. */
-			else {
+			} else {
+
+				/* Condition 4: There is more than a day left. */
 
 				$days_remaining = floor( $seconds_left / 86400 );
 				$time_left = apply_filters( 'charitabile_campaign_days_left',
@@ -248,7 +267,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 					$this
 				);
 
-			}
+			}//end if
 
 			return apply_filters( 'charitable_campaign_time_left', $time_left, $this );
 		}
@@ -455,7 +474,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				default :
 					$tag = '';
 
-			}
+			}//end switch
 
 			return apply_filters( 'charitable_campaign_status_tag', $tag, $key, $this );
 		}
@@ -677,7 +696,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign goal.
 		 *
-		 * @param   string  $value
+		 * @param   string $value Current value of goal.
 		 * @return  string|int
 		 * @access  public
 		 * @static
@@ -697,7 +716,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * We use WP_Locale to parse the month that the user has set.
 		 *
 		 * @global 	WP_Locale $wp_locale
-		 * @param   string    $value
+		 *
+		 * @param   string $value Current end date value.
 		 * @return  string|int
 		 * @access  public
 		 * @static
@@ -716,7 +736,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign suggested donations.
 		 *
-		 * @param   array $value
+		 * @param   array $value Current suggested donations value.
 		 * @return  array
 		 * @access  public
 		 * @static
@@ -743,7 +763,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Filter out any suggested donations that do not have an amount set.
 		 *
-		 * @param   array|string $donation
+		 * @param   array|string $donation Suggested donation or an array of suggested donations.
 		 * @return  boolean
 		 * @access  public
 		 * @static
@@ -760,7 +780,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize any checkbox value.
 		 *
-		 * @param   mixed $value
+		 * @param   mixed $value Current checkbox value.
 		 * @return  boolean
 		 * @access  public
 		 * @static
@@ -773,7 +793,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign description.
 		 *
-		 * @param   string $value
+		 * @param   string $value Current description value.
 		 * @return  string
 		 * @access  public
 		 * @static
@@ -786,8 +806,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the value provided for custom donations.
 		 *
-		 * @param   mixed $value
-		 * @param   array $submitted
+		 * @param   mixed $value     Current custom donations value.
+		 * @param   array $submitted All posted values.
 		 * @return  boolean
 		 * @access  public
 		 * @static
@@ -817,7 +837,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Flush donations cache.
 		 *
-		 * @param   int     $campaign_id
+		 * @param   int $campaign_id Campaign ID.
 		 * @return  void
 		 * @access  public
 		 * @static
@@ -855,6 +875,12 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
+		 * Deprecated method used to sanitize meta.
+		 *
+		 * @param 	mixed  $value     Value of meta field.
+		 * @param 	string $key       Key of meta field.
+		 * @param 	array  $submitted Posted values.
+		 *
 		 * @deprecated Since 1.4.12
 		 */
 		public static function sanitize_meta( $value, $key, $submitted ) {
@@ -863,4 +889,4 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;
