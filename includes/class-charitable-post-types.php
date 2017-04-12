@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 						'map_meta_cap'          => true,
 						'publicly_queryable'    => true,
 						'exclude_from_search'   => false,
-						'hierarchical'          => false, // Hierarchical causes memory issues - WP loads all records!
+						'hierarchical'          => false,
 						'rewrite'               => array( 'slug' => 'campaigns', 'with_front' => true ),
 						'query_var'             => true,
 						'supports'              => array( 'title', 'thumbnail', 'comments' ),

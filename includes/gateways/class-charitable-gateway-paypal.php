@@ -181,7 +181,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Handle a call to our IPN listener.
 		 *
-		 * @return  string
+		 * @return  void
 		 * @access  public
 		 * @static
 		 * @since   1.0.0
@@ -223,7 +223,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			if ( ! $donation_id ) {
 				die( __( 'Missing Donation ID', 'charitable' ) );
 			}
-			
+
 			/**
 			 * By default, all transactions are handled by the web_accept handler.
 			 * To handle other transaction types in a different way, use the
@@ -249,6 +249,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Receives verified IPN data from PayPal and processes the donation.
 		 *
+		 * @param 	array $data        The data received in the IPN from PayPal.
+		 * @param 	int   $donation_id The donation ID received from PayPal.
 		 * @return  void
 		 * @access  public
 		 * @static
@@ -262,9 +264,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			if ( 'paypal' != $donation->get_gateway() ) {
 				die( __( 'Incorrect Gateway', 'charitable' ) );
 			}
-			
+
 			$custom         = json_decode( $data['custom'], true );
-			
+
 			if ( array_key_exists( 'invoice', $data ) ) {
 				$donation_key = $data['invoice'];
 			} elseif( is_array( $custom ) && array_key_exists( 'donation_key', $custom ) ) {

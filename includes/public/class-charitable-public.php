@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Public' ) ) :
 
@@ -241,6 +242,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @since   1.4.6
 		 */
 		public function enqueue_donation_form_scripts() {
+
 			wp_enqueue_script( 'charitable-script' );
 
 			if ( Charitable_Gateways::get_instance()->any_gateway_supports( 'credit-card' ) ) {
@@ -251,6 +253,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Adds custom post classes when viewing campaign.
 		 *
+		 * @param 	string[] $classes Post classes.
 		 * @return  string[]
 		 * @access  public
 		 * @since   1.0.0
@@ -270,12 +273,12 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Disable comments on application pages like the donation page.
 		 *
-		 * @param   boolean $open
-		 * @param   int     $post_id
+		 * @param   boolean $open    Whether comments are open.
+		 * @param   int     $post_id The ID of the current post.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.3.0
-	 	*/
+	 	 */
 		public function disable_comments_on_application_pages( $open, $post_id ) {
 
 			/* If open is already false, just hit return. */

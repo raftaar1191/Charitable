@@ -230,7 +230,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 				strlen( $notice_key ) ? 'data-notice="' . esc_attr( $notice_key ) . '"' : '',
 				$notice
 			);
-			
+
 			if ( strlen( $notice_key ) ) {
 				unset( $this->notices[ $type ][ $notice_key ] );
 			}
