@@ -132,23 +132,30 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 		on_change = function() {
 			var $trigger = $( this ), 
-				trigger_id = $trigger.data( 'trigger_idx' ),
-				settings = triggers[trigger_id]['settings'];
+				trigger_idx = $trigger.data( 'trigger_idx' );
 
-			for ( setting_key in settings ) {
-				if ( ! settings.hasOwnProperty( setting_key ) ) {
+			for ( idx in trigger_idx ) {
+				if ( ! trigger_idx.hasOwnProperty( idx ) ) {
 					continue;
 				}
 
-				var $setting = settings[setting_key],
-					change = get_change_type( $setting );
+				settings = triggers[idx]['settings'];
 
-				if ( 'visibility' === change ) {
-					toggle_setting( $setting, $trigger );
-				} else if ( 'options' === change ) {
-					toggle_options( $setting, $trigger );
-				}
-			};
+				for ( setting_key in settings ) {
+					if ( ! settings.hasOwnProperty( setting_key ) ) {
+						continue;
+					}
+
+					var $setting = settings[setting_key],
+						change = get_change_type( $setting );
+
+					if ( 'visibility' === change ) {
+						toggle_setting( $setting, $trigger );
+					} else if ( 'options' === change ) {
+						toggle_options( $setting, $trigger );
+					}
+				};
+			}			
 		};
 
 		this.$el = $el;
@@ -178,8 +185,15 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			}
 
 			var $trigger = get_trigger( triggers[i]['trigger_id'] );
+			var trigger_idx = $trigger.data( 'trigger_idx' );
 
-			$trigger.data( 'trigger_idx', i );
+			if ( 'undefined' === typeof( trigger_idx ) ) {
+				trigger_idx = [];
+			}
+
+			trigger_idx.push( i );
+
+			$trigger.data( 'trigger_idx', trigger_idx );
 
 			$trigger.on( 'change', on_change );
 
