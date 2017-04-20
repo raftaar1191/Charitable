@@ -134,6 +134,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 			}
 
 			$redirect_url = charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign_id ) );
+
+			if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
+				$redirect_url .= '#charitable-donation-form';
+			}
+
 			$redirect_url = apply_filters( 'charitable_donation_amount_form_redirect', $redirect_url, $campaign_id, $amount );
 
 			wp_redirect( esc_url_raw( $redirect_url ) );
