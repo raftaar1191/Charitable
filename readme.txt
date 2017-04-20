@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.7.2
-Stable tag: 1.4.13
+Tested up to: 4.7.3
+Stable tag: 1.4.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area. 
 
 == Changelog ==
+
+= 1.4.14 =
+* After submitting the donate widget, redirect to the actual donation form on the page. [#328](https://github.com/Charitable/Charitable/issues/328)
+* Improved compatibility for the donate widget with Recurring Donations.
 
 = 1.4.13 =
 * Added `tag` parameter to the [campaigns] shortcode. [#313](https://github.com/Charitable/Charitable/issues/313)
