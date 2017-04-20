@@ -772,6 +772,13 @@ select.charitable-settings-field {
   margin: 0;
   padding: 0; }
 
+.charitable-notice {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #fff; }
+  .charitable-notice.charitable-notice-error {
+    border-left: 4px solid #dc3232; }
+
 .edit-php.post-type-charitable .tablenav .actions {
   padding-right: 0; }
 .edit-php.post-type-charitable .tablenav #start_date,

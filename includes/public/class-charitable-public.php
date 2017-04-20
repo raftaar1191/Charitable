@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Public' ) ) :
 
@@ -248,6 +249,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @since   1.4.6
 		 */
 		public function enqueue_donation_form_scripts() {
+
 			wp_enqueue_script( 'charitable-script' );
 
 			if ( Charitable_Gateways::get_instance()->any_gateway_supports( 'credit-card' ) ) {
@@ -278,7 +280,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Disable comments on application pages like the donation page.
 		 *
-		 * @param   boolean $open Whether comments are open by default.
+		 * @param   boolean $open Whether comments are open.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.3.0

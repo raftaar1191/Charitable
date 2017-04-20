@@ -44,8 +44,8 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 			$this->name = apply_filters( 'charitable_gateway_offline_name', __( 'Offline', 'charitable' ) );
 
 			$this->defaults = array(
-			'label' => __( 'Offline Donation', 'charitable' ),
-			'instructions' => __( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' ),
+				'label' => __( 'Offline Donation', 'charitable' ),
+				'instructions' => __( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' ),
 			);
 
 			$this->supports = array(
@@ -56,18 +56,18 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
-		 * @param   array   $settings
+		 * @param   array $settings
 		 * @return  array
 		 * @access  public
 		 * @since   1.0.0
 	 	*/
 		public function gateway_settings( $settings ) {
 			$settings['instructions'] = array(
-			'type'      => 'textarea',
-			'title'     => __( 'Instructions', 'charitable' ),
-			'help'      => __( 'These are the instructions you provide to donors after they make a donation.', 'charitable' ),
-			'priority'  => 6,
-			'default'   => $this->defaults['instructions'],
+				'type'      => 'textarea',
+				'title'     => __( 'Instructions', 'charitable' ),
+				'help'      => __( 'These are the instructions you provide to donors after they make a donation.', 'charitable' ),
+				'priority'  => 6,
+				'default'   => $this->defaults['instructions'],
 			);
 
 			return $settings;

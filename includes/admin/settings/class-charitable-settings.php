@@ -173,6 +173,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @since   1.0.0
 		 */
 		public function sanitize_settings( $values ) {
+
 			$old_values = get_option( 'charitable_settings', array() );
 			$new_values = array();
 
@@ -187,7 +188,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			$values = wp_parse_args( $new_values, $old_values );
 			$values = apply_filters( 'charitable_save_settings', $values, $new_values, $old_values );
-			
+
 			$this->add_update_message( __( 'Settings saved', 'charitable' ), 'success' );
 
 			return $values;
