@@ -3,12 +3,14 @@
     margin-bottom: 1em;
     border: 1px solid;
 
-    > ul {
+    > ul.errors {
         padding: 0;
         margin: 0;
         list-style: none;
 
         li {
+            padding: 0;
+            border: none;
             list-style: none;
         }        
     }

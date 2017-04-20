@@ -3,11 +3,12 @@
  * The template used to display the donation amount inputs.
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Donation Form
  * @since   1.0.0
  * @version 1.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! isset( $view_args['form'] ) ) {
 	return;
@@ -30,19 +31,8 @@ if ( empty( $suggested ) && ! $campaign->get( 'allow_custom_donations' ) ) {
  */
 do_action( 'charitable_donation_form_before_donation_amount', $view_args['form'] );
 
-if ( $amount ) : ?>
-	
-	<p class="set-donation-amount"><?php
-		printf( '%s: <strong>%s</strong>',
-			__( 'Your Donation Amount', 'charitable' ),
-			charitable_format_money( $amount )
-		) ?>
-		<a href="#" class="change-donation" data-charitable-toggle="charitable-donation-options-<?php echo $view_args['form']->get_form_identifier() ?>"><?php _e( 'Change', 'charitable' ) ?></a>
-	</p><!-- .set-donation-amount -->
-
-<?php endif; ?>
-
-<div id="charitable-donation-options-<?php echo esc_attr( $view_args['form']->get_form_identifier() ) ?>" class="charitable-donation-options">
+?>
+<div class="charitable-donation-options">
 
 	<?php
 

@@ -9,8 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
-
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Create a donation form object.
 		 *
-		 * @param   Charitable_Campaign $campaign
+		 * @param   Charitable_Campaign $campaign Campaign receiving the donation.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -103,6 +103,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			parent::attach_hooks_and_filters();
 
 			add_filter( 'charitable_form_field_template', array( $this, 'use_custom_templates' ), 10, 2 );
+			add_filter( 'charitable_donation_form_donation_fields', array( $this, 'maybe_show_current_donation_amount' ), 1 );
 			add_filter( 'charitable_donation_form_gateway_fields', array( $this, 'add_credit_card_fields' ), 10, 2 );
 			add_filter( 'charitable_donation_form_user_fields', array( $this, 'hide_non_required_user_fields' ) );
 			add_action( 'charitable_donation_form_after_user_fields', array( $this, 'add_password_field' ) );
@@ -343,10 +344,20 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function get_donation_fields() {
 			$donation_fields = apply_filters( 'charitable_donation_form_donation_fields', array(
+				'donation_amount_wrapper_start' => array(
+					'type'		=> 'content',
+					'content'   => '<div id="charitable-donation-options-' . esc_attr( $this->get_form_identifier() ) . '">',
+					'priority' 	=> 1,
+				),
 				'donation_amount' => array(
 					'type'      => 'donation-amount',
 					'priority'  => 4,
 					'required'  => false,
+				),
+				'donation_amount_wrapper_end' => array(
+					'type'		=> 'content',
+					'content'   => '</div>',
+					'priority' 	=> 100,
 				),
 			), $this );
 
@@ -447,6 +458,40 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return $custom_template;
+		}
+
+		/**
+		 * Include a paragraph showing the currently set donation
+		 * amount before the amount form, if one is set.
+		 *
+		 * @param 	array[] $fields The array of fields.
+		 * @return  array[]
+		 * @access  public
+		 * @since   1.4.14
+		 */
+		public function maybe_show_current_donation_amount( $fields ) {
+
+			if ( ! $this->get_campaign() ) {
+				return $fields;
+			}
+
+			$amount = $this->get_campaign()->get_donation_amount_in_session();
+
+			if ( ! $amount ) {
+				return $fields;
+			}
+
+			$amount_formatted = apply_filters( 'charitable_session_donation_amount_formatted', charitable_format_money( $amount ), $amount, $this );
+			$content          = sprintf( __( 'Your Donation Amount: <strong>%s</strong>.', 'charitable' ), $amount_formatted );
+			$content         .= '&nbsp;<a href="#" class="change-donation" data-charitable-toggle="charitable-donation-options-' . esc_attr( $this->get_form_identifier() ) . '">' . __( 'Change', 'charitable' ) . '</a>';
+
+			$fields['current_donation_amount'] = array(
+				'type' 	   => 'paragraph',
+				'content'  => $content,
+				'priority' => 0.9,
+			);
+
+			return $fields;
 		}
 
 		/**
@@ -988,4 +1033,4 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;
