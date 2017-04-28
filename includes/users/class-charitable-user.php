@@ -58,9 +58,9 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   int|string|stdClass|WP_User $id     User's ID, a WP_User object, or a user object from the DB.
-		 * @param   string  $name                       Optional. User's username
-		 * @param   int     $blog_id                    Optional Blog ID, defaults to current blog.
+		 * @param   int|string|stdClass|WP_User $id      User's ID, a WP_User object, or a user object from the DB.
+		 * @param   string                      $name    Optional. User's username.
+		 * @param   int                         $blog_id Optional Blog ID, defaults to current blog.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Create object using a donor ID.
 		 *
-		 * @param   int $donor_id
+		 * @param   int $donor_id The donor ID.
 		 * @return  Charitable_user
 		 * @access  public
 		 * @static
@@ -88,6 +88,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Magic getter method. Looks for the specified key in the mapped keys before using WP_User's __get method.
 		 *
+		 * @param 	string $key The key to retrieve.
 		 * @return  mixed
 		 * @access  public
 		 * @since   1.0.0
