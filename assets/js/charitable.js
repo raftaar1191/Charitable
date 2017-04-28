@@ -299,7 +299,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  string
      */
     Donation_Form.prototype.get_amount = function() {        
-        var amount = suggested = parseFloat( this.form.find( '[name=donation_amount]:checked' ).val() );
+        var amount = suggested = parseFloat( this.form.find( '[name=donation_amount]:checked, input[type=hidden][name=donation_amount]' ).val() );
 
         if ( isNaN( suggested ) ) {
             var custom = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
