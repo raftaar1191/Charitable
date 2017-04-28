@@ -49,7 +49,8 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 			);
 
 			$this->supports = array(
-			'1.3.0'
+				'recurring',
+				'1.3.0',				
 			);
 		}
 
