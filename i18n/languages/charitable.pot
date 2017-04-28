@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.4.14\n"
+"Project-Id-Version: Charitable 1.4.15\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-04-20 06:56:37+00:00\n"
+"POT-Creation-Date: 2017-04-28 12:16:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -6950,11 +6950,11 @@ msgstr ""
 msgid "Thank you for your donation. We will contact you shortly for payment."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-offline.php:67
+#: includes/gateways/class-charitable-gateway-offline.php:68
 msgid "Instructions"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateway-offline.php:68
+#: includes/gateways/class-charitable-gateway-offline.php:69
 msgid "These are the instructions you provide to donors after they make a donation."
 msgstr ""
 
@@ -7489,7 +7489,7 @@ msgstr ""
 msgid "Campaign Manager"
 msgstr ""
 
-#: includes/users/class-charitable-user.php:599
+#: includes/users/class-charitable-user.php:600
 msgid "Unable to add donor. Email not set for logged out user."
 msgstr ""
 
