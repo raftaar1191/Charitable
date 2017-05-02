@@ -10,7 +10,9 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since 		1.0.0
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Session' ) ) :
 
@@ -54,6 +56,14 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 				require_once( charitable()->get_path( 'includes' ) . 'libraries/wp-session/class-recursive-arrayaccess.php' );
 			}
 
+			if ( ! class_exists( 'WP_Session_Utils' ) ) {
+				require_once( charitable()->get_path( 'includes' ) . 'libraries/wp-session/class-wp-session-utils.php' );
+			}
+
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				require_once( charitable()->get_path( 'includes' ) . 'libraries/wp-session/wp-cli.php' );
+			}
+
 			if ( ! class_exists( 'WP_Session' ) ) {
 				require_once( charitable()->get_path( 'includes' ) . 'libraries/wp-session/class-wp-session.php' );
 				require_once( charitable()->get_path( 'includes' ) . 'libraries/wp-session/wp-session.php' );
@@ -84,7 +94,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return a session variable.
 		 *
-		 * @param 	string $key
+		 * @param 	string $key Session variable key.
 		 * @return 	mixed Session variable
 		 * @access  public
 		 * @since 	1.0.0
@@ -97,8 +107,8 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set a session variable.
 		 *
-		 * @param 	string $key
-		 * @param 	mixed $value
+		 * @param 	string $key   Session variable key.
+		 * @param 	mixed  $value The value of the session variable.
 		 * @return 	mixed The session variable value.
 		 * @access  public
 		 * @since 	1.0.0
@@ -118,7 +128,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the length of the cookie session to 24 hours.
 		 *
-		 * @return 	void
+		 * @return 	int
 		 * @access  public
 		 * @since 	1.0.0
 		 */
@@ -185,7 +195,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return the donation in session for a campaign.
 		 *
-		 * @param 	int 	$campaign_id
+		 * @param 	int $campaign_id The campaign ID.
 		 * @return  false|array
 		 * @access  public
 		 * @since   1.0.0
@@ -198,7 +208,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Store the donation key in the session, to ensure the user can access their receipt.
 		 *
-		 * @param 	string $donation_key
+		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  void
 		 * @access  public
 		 * @since   1.1.2
@@ -218,7 +228,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Checks whether the donation key is stored in the session.
 		 *
-		 * @param 	string $donation_key
+		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.0.0
@@ -269,14 +279,12 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Returns the session ID.
 		 *
-		 * @deprecated 1.3.5
-		 *
 		 * @return 	string Session ID
 		 * @access 	public
 		 * @since 	1.3.5
 		 */
 		public function get_session_id() {
-			return '';
+			return $this->session->session_id;
 		}
 	}
 

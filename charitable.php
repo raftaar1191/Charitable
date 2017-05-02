@@ -3,7 +3,7 @@
  * Plugin Name:         Charitable
  * Plugin URI:          https://www.wpcharitable.com
  * Description:         The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:             1.4.15
+ * Version:             1.4.16
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
@@ -31,51 +31,69 @@ if ( ! class_exists( 'Charitable' ) ) :
 	class Charitable {
 
 		/**
+		 * Current plugin version.
+		 *
 		 * @var     string
 		 */
-		const VERSION = '1.4.15';
+		const VERSION = '1.4.16';
 
 		/**
+		 * Database version.
+		 *
 		 * @var     string A date in the format: YYYYMMDD
 		 */
 		const DB_VERSION = '20150615';
 
 		/**
-		 * @var     string The Campaign post type.
+		 * The Campaign post type.
+		 *
+		 * @var     string
 		 */
 		const CAMPAIGN_POST_TYPE = 'campaign';
 
 		/**
-		 * @var     string The Donation post type.
+		 * The Donation post type.
+		 *
+		 * @var     string
 		 */
 		const DONATION_POST_TYPE = 'donation';
 
 		/**
+		 * Single class object.
+		 *
 		 * @var     Charitable
 		 * @access  private
 		 */
 		private static $instance = null;
 
 		/**
-		 * @var     string      Directory path for the plugin.
+		 * Directory path for the plugin.
+		 *
+		 * @var     string
 		 * @access  private
 		 */
 		private $directory_path;
 
 		/**
-		 * @var     string      Directory url for the plugin.
+		 * Directory url for the plugin.
+		 *
+		 * @var     string
 		 * @access  private
 		 */
 		private $directory_url;
 
 		/**
-		 * @var     string      Directory path for the includes folder of the plugin.
+		 * Directory path for the includes folder of the plugin.
+		 *
+		 * @var     string
 		 * @access  private
 		 */
 		private $includes_path;
 
 		/**
-		 * @var     array       Store of registered objects.
+		 * Store of registered objects.
+		 *
+		 * @var     array
 		 * @access  private
 		 */
 		private $registry;
@@ -130,10 +148,10 @@ if ( ! class_exists( 'Charitable' ) ) :
 				return;
 			}
 
-			// Set static instance
+			// Set static instance.
 			self::$instance = $this;
 
-			// Factory to create new donation instances
+			// Factory to create new donation instances.
 			$this->donation_factory = new Charitable_Donation_Factory();
 
 			$this->maybe_start_ajax();
@@ -768,4 +786,4 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 	$charitable = new Charitable();
 
-endif; // End if class_exists check
+endif;
