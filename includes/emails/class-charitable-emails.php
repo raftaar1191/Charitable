@@ -174,7 +174,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 				}
 
 				$email = new $class;
-				$emails[] = $email->get_name();
+				$emails[$email::ID] = $email->get_name();
 			}
 
 			return $emails;
