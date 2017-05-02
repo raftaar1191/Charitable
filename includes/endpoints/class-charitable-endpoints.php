@@ -216,7 +216,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 
 			$current_endpoint = $this->get_current_endpoint();
 
-			echo '<pre>'; echo 'current endpoint: ' . $current_endpoint; echo '</pre>';
+			// echo '<pre>'; echo 'current endpoint: ' . $current_endpoint; echo '</pre>';
 
 			if ( ! $current_endpoint ) {
 				return $template;
