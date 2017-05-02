@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.4.15\n"
+"Project-Id-Version: Charitable 1.4.16\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-04-28 12:16:31+00:00\n"
+"POT-Creation-Date: 2017-05-02 06:44:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:734 charitable.php:745
+#: charitable.php:752 charitable.php:763
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
