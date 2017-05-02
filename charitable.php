@@ -3,7 +3,7 @@
  * Plugin Name:         Charitable
  * Plugin URI:          https://www.wpcharitable.com
  * Description:         The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:             1.4.15
+ * Version:             1.4.16
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
@@ -18,7 +18,8 @@
  * @license             http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable' ) ) :
 
@@ -35,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.4.15';
+		const VERSION = '1.4.16';
 
 		/**
 		 * Version of database schema.
@@ -45,16 +46,16 @@ if ( ! class_exists( 'Charitable' ) ) :
 		const DB_VERSION = '20150615';
 
 		/**
-		 * Campaign post type. 
+		 * Campaign post type.
 		 *
-		 * @var     string The Campaign post type.
+		 * @var     string
 		 */
 		const CAMPAIGN_POST_TYPE = 'campaign';
 
 		/**
-		 * Donation post type. 
+		 * Donation post type.
 		 *
-		 * @var     string The Donation post type.
+		 * @var     string
 		 */
 		const DONATION_POST_TYPE = 'donation';
 
@@ -75,7 +76,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		private $directory_path;
 
 		/**
-		 * The URL of this plugin's directory. 
+		 * The URL of this plugin's directory.
 		 *
 		 * @var     string
 		 * @access  private
@@ -765,14 +766,14 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 				global $wpdb;
 
-		        foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {
+				foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $blog_id ) {
 
-		            switch_to_blog( $blog_id );
+					switch_to_blog( $blog_id );
 
-		            new Charitable_Install();
+					new Charitable_Install();
 
-		            restore_current_blog();
-		        }
+					restore_current_blog();
+				}
 			} else {
 
 				new Charitable_Install();
@@ -857,4 +858,4 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 	$charitable = new Charitable();
 
-endif; // End if class_exists check.
+endif;
