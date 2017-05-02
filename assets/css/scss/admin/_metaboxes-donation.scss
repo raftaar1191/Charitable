@@ -110,6 +110,14 @@ body.post-type-donation {
     }
 }
 
+#donation-actions {
+    #charitable_donation_actions { width: 85%; }
+    .button.charitable-reload {
+        padding: 0;
+        height: 28px;
+        width: 28px!important;
+    }
+}
 #donation-details, 
 #donation-log {
     padding: 12px 8px;
