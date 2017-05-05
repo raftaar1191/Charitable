@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.4.15\n"
+"Project-Id-Version: Charitable 1.4.16\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-04-28 12:21:06+00:00\n"
+"POT-Creation-Date: 2017-05-05 20:57:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:823 charitable.php:834
+#: charitable.php:824 charitable.php:835
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -6458,30 +6458,30 @@ msgid ""
 "context. Use $donation->get_donation_log() instead."
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:32
+#: includes/donations/charitable-donation-functions.php:30
 msgid ""
 "charitable_get_donation should not be called before the charitable_start "
 "action."
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:214
+#: includes/donations/charitable-donation-functions.php:212
 #: includes/emails/abstract-class-charitable-email.php:702
 msgid "Paid"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:215
+#: includes/donations/charitable-donation-functions.php:213
 msgid "Pending"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:216
+#: includes/donations/charitable-donation-functions.php:214
 msgid "Failed"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:217
+#: includes/donations/charitable-donation-functions.php:215
 msgid "Cancelled"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:218
+#: includes/donations/charitable-donation-functions.php:216
 msgid "Refunded"
 msgstr ""
 

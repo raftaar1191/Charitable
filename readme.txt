@@ -117,8 +117,14 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
-= 1.5.0 = 
+= 1.5.0 ~ Unreleased = 
 * Improved Divi compatibility. [#316](https://github.com/Charitable/Charitable/issues/316)
+
+= 1.4.17 ~ Unreleased  =
+* Improved i18n for dates.
+
+= 1.4.16 = 
+* Updated bundled version of WP Session Manager library to latest version (1.2.2).
 
 = 1.4.15 =
 * Add recurring donations support to Offline gateway. [#329](https://github.com/Charitable/Charitable/issues/329)
