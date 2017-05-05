@@ -482,7 +482,11 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 				return;
 			}
 
-			charitable_get_deprecated()->doing_it_wrong( __METHOD__, __( 'charitable_user_profile_after_fields hook has been removed. Use charitable_form_after_fields instead.', 'charitable' ), '1.4.0' );
+			charitable_get_deprecated()->doing_it_wrong(
+				__METHOD__,
+				__( 'charitable_user_profile_after_fields hook has been removed. Use charitable_form_after_fields instead.', 'charitable' ),
+				'1.4.0'
+			);
 
 			if ( 'Charitable_Profile_Form' == get_class( $form ) ) {
 				do_action( 'charitable_user_profile_after_fields', $form );
@@ -490,4 +494,4 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;
