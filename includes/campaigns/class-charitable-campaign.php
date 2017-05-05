@@ -152,7 +152,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return $this->end_date;
 			}
 
-			return date( $date_format, $this->get_end_time() );
+			return date_i18n( $date_format, $this->get_end_time() );
 		}
 
 		/**
@@ -300,7 +300,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return 0;
 			}
 
-			return current_time( 'timestamp' ) - $this->get_end_time();
+			return current_time( 'U' ) - $this->get_end_time();
 		}
 
 		/**
