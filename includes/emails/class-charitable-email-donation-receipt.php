@@ -61,12 +61,14 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Static method that is fired right after a donation is completed, sending the donation receipt.
 		 *
 		 * @param   int     $donation_id
+		 * @param   Charitable_Donation    $donation
+		 * @param   bool     $manual manually triggered, overrides is_already_sent()
 		 * @return  boolean
 		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
-		public static function send_with_donation_id( $donation_id ) {
+		public static function send_with_donation_id( $donation_id, $donation = null, $manual = false ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
 				return false;
 			}
@@ -75,7 +77,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return false;
 			}
 
-			$donation = new Charitable_Donation( $donation_id );
+			if( $donation_id && ! is_a( $donation, 'Charitable_Donation' ) ) {
+				$donation = charitable_get_donation( $donation_id );
+			}
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
 				return false;
@@ -85,14 +89,14 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return false;
 			}
 
-			$email = new Charitable_Email_Donation_Receipt( array(
+			$email = new self( array(
 				'donation' => $donation,
 			) );
 
 			/**
 			 * Don't resend the email.
 			 */
-			if ( $email->is_sent_already( $donation_id ) ) {
+			if ( ! $manual && $email->is_sent_already( $donation_id ) ) {
 				return false;
 			}
 
@@ -105,7 +109,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				$email->log( $donation_id, $sent );
 			}
 
-			return true;
+			return $sent;
 		}
 
 		/**
