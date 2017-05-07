@@ -73,23 +73,27 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		}
 
 		/**
-		 * Static method that is fired right after a donation is completed, sending the donation receipt.
+		 * Static method that triggers the sending of this email. Sends the receipt with the donation is marked complete.
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  int $donation_id The ID of the donation that we're sending an email about.
+		 * @param  int                 $donation_id The ID of the donation that we're sending an email about.
+		 * @param  Charitable_Donation $donation    
+		 * @param  boolean             $force_send  If true, the email will be sent again even if it was sent previously.
 		 * @return boolean
 		 */
-		public static function send_with_donation_id( $donation_id ) {
+		public static function send_with_donation_id( $donation_id, $donation = null, $force_send = false ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
 				return false;
 			}
 
-			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) {
+			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) { 
 				return false;
 			}
 
-			$donation = new Charitable_Donation( $donation_id );
+			if( $donation_id && ! is_a( $donation, 'Charitable_Donation' ) ) {
+				$donation = charitable_get_donation( $donation_id );
+			}
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
 				return false;
@@ -99,14 +103,14 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			$email = new Charitable_Email_New_Donation( array(
+			$email = new self( array(
 				'donation' => $donation,
 			) );
 
 			/**
 			 * Don't resend the email.
 			 */
-			if ( $email->is_sent_already( $donation_id ) ) {
+			if ( ! $manual && $email->is_sent_already( $donation_id ) ) {
 				return false;
 			}
 
@@ -119,7 +123,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				$email->log( $donation_id, $sent );
 			}
 
-			return true;
+			return $sent;
 		}
 
 		/**

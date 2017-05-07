@@ -55,6 +55,8 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 			add_action( 'add_meta_boxes', array( $this, 'remove_meta_boxes' ), 20 );
+			add_action( 'save_post_' . Charitable::DONATION_POST_TYPE,  array( $this, 'save_donation' ), 10, 2 );
+			add_action( 'charitable_donation_save',  array( $this, 'process_donation_actions' ), 10, 2 );
 
 			// Donations columns
 			add_filter( 'manage_edit-donation_columns', array( $this, 'dashboard_columns' ), 11, 1 );
@@ -191,6 +193,104 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 			);
 
 			return apply_filters( 'charitable_donation_meta_boxes', $meta_boxes );
+		}
+
+
+		/**
+		 * Save meta for the donation.
+		 *
+		 * @param   int $donation_id
+		 * @param   WP_Post $post
+		 * @return  void
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function save_donation( $donation_id, WP_Post $post ) {
+			if ( ! $this->meta_box_helper->user_can_save( $donation_id ) ) {
+				return;
+			}
+
+			/* Hook for plugins to do something else with the posted data */
+			do_action( 'charitable_donation_save', $donation_id, $post );
+		}
+
+		/**
+		 * Fire any donation actions.
+		 *
+		 * @param   int $donation_id
+		 * @param   WP_Post $post
+		 * @return  void
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function process_donation_actions( $donation_id, WP_Post $post ) {
+			global $wpdb;
+
+			// Handle button actions
+			if ( ! empty( $_POST['charitable_donation_action'] ) ) {
+
+				$action = sanitize_text_field( $_POST['charitable_donation_action'] );
+
+				if ( strstr( $action, 'send_email_' ) ) {
+
+					$email_to_send = str_replace( 'send_email_', '', $action );
+
+					// Switch back to the site locale.
+					if ( function_exists( 'switch_to_locale' ) ) {
+						switch_to_locale( get_locale() );
+					}
+
+					// data saved, now get it so we can manipulate status
+					$donation = charitable_get_donation( $donation_id );
+
+					do_action( 'charitable_before_resend_donation_emails', $donation, $email_to_send );
+
+					// Ensure gateways are loaded in case they need to insert data into the emails.
+					Charitable_Gateways::get_instance();
+
+					// Load mailer.
+					$mailer = Charitable_Emails::get_instance();
+
+					$emails = $mailer->get_available_emails();
+
+					if( isset( $emails[$email_to_send] ) && class_exists( $emails[$email_to_send] ) ) {
+						
+						$email_class = $emails[$email_to_send];
+
+						if( method_exists( $email_class, 'send_with_donation_id' ) ) {
+
+							$email = new $email_class;
+
+							$sent = $email_class::send_with_donation_id( $donation_id, $donation, true );
+
+							if( $sent ) {
+								/* translators: %s: email title */
+								$donation->update_donation_log( sprintf( __( '%s email notification manually sent.', 'charitable' ), $email->get_name() ), false, true );
+
+								// Change the post saved message.
+								add_filter( 'redirect_post_location', array( __CLASS__, 'set_email_sent_message' ) );
+							} else {
+								add_filter( 'redirect_post_location', array( __CLASS__, 'set_email_fail_message' ) );
+							}
+
+						}
+				
+					}
+
+					do_action( 'charitable_after_resend_donation_email', $donation, $email_to_send );
+
+					// Restore user locale.
+					if ( function_exists( 'restore_current_locale' ) ) {
+						restore_current_locale();
+					}
+
+				} else {
+
+					if ( ! did_action( 'charitable_donation_action_' . sanitize_title( $action ) ) ) {
+						do_action( 'charitable_donation_action_' . sanitize_title( $action ), $donation );
+					}
+				}
+			}
 		}
 
 		/**
@@ -630,6 +730,8 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 					__( 'Donation draft updated. <a target="_blank" href="%s">Preview Donation</a>', 'charitable' ),
 					esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) )
 				),
+				11 => __( 'Donation updated and email sent.', 'charitable' ),
+				12 => __( 'Email could not be sent.', 'charitable' ),
 			);
 
 			return $messages;
@@ -933,6 +1035,37 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 				'day'   => date( 'd', $time ),
 			);
 		}
+
+		/**
+		 * Set the correct message ID.
+		 *
+		 * @param string $location
+		 *
+		 * @since  1.5.0
+		 *
+		 * @static
+		 *
+		 * @return string
+		 */
+		public static function set_email_sent_message( $location ) {
+			return add_query_arg( 'message', 11, $location );
+		}
+
+		/**
+		 * Set the correct message ID.
+		 *
+		 * @param string $location
+		 *
+		 * @since  1.5.0
+		 *
+		 * @static
+		 *
+		 * @return string
+		 */
+		public static function set_email_fail_message( $location ) {
+			return add_query_arg( 'message', 12, $location );
+		}
+
 
 		/**
 		 * Respond to changes in donation status.
