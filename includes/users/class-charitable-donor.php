@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donor' ) ) :
 
@@ -80,8 +81,8 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   int $donor_id
-		 * @param   int $donation_id
+		 * @param   int $donor_id    Donor ID.
+		 * @param   int $donation_id Donation ID. Passed if this object is created through a donation.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -94,6 +95,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Magic getter method. Looks for the specified key in as a property before using Charitable_User's __get method.
 		 *
+		 * @param 	string $key Key to search for.
 		 * @return  mixed
 		 * @access  public
 		 * @since   1.0.0
