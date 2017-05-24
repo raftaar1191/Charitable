@@ -207,7 +207,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			list( $status_clause, $parameters ) = $this->get_donation_status_clause( $statuses );
 
-			$sql = "SELECT SUM(cd.amount) 
+			$sql = "SELECT COALESCE( SUM(cd.amount), 0 )
                     FROM $this->table_name cd
                     INNER JOIN $wpdb->posts p
                     ON p.ID = cd.donation_id
@@ -498,8 +498,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Return total amount donated by a donor.
 		 *
-		 * @global  wpdb    $wpdb
-		 * @param   int     $donor_id
+		 * @global  wpdb $wpdb
+		 * @param   int $donor_id The donor ID.
 		 * @return  int
 		 * @access  public
 		 * @since   1.0.0
@@ -507,7 +507,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		public function get_total_donated_by_donor( $donor_id ) {
 			global $wpdb;
 
-			$sql = "SELECT SUM(cd.amount)
+			$sql = "SELECT COALESCE( SUM(cd.amount), 0 )
                     FROM $this->table_name cd
                     WHERE cd.donor_id = %d;";
 

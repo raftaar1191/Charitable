@@ -7,7 +7,7 @@
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
- * Tested up to:        4.7.4
+ * Tested up to:        4.7.5
  *
  * Text Domain:         charitable
  * Domain Path:         /i18n/languages/
