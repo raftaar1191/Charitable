@@ -173,7 +173,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Delete all campaign donation records for a given donation.
 		 *
-		 * @param   int $donation_id
+		 * @param   int $donation_id The donation ID.
 		 * @access  public
 		 * @static
 		 * @since   1.2.0
@@ -353,6 +353,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 */
 		public function get_campaigns_for_donation( $donation_id ) {
 			global $wpdb;
+
+			debug_print_backtrace();
 
 			$sql = "SELECT DISTINCT campaign_id 
                     FROM $this->table_name 

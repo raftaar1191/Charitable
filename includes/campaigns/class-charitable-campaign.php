@@ -130,7 +130,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * If a format is not provided, the user-defined date_format in Wordpress settings is used.
 		 *
-		 * @param   string  $date_format    A date format accepted by PHP's date() function.
+		 * @param   string $date_format A date format accepted by PHP's date() function.
 		 * @return  string|false        String if an end date is set. False if campaign has no end date.
 		 * @access  public
 		 * @since   1.0.0
@@ -818,7 +818,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Flush donations cache.
 		 *
-		 * @param   int     $campaign_id
+		 * @param   int $campaign_id The campaign ID.
 		 * @return  void
 		 * @access  public
 		 * @static
