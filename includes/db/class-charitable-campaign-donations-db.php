@@ -379,9 +379,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Get total amount donated to a campaign.
 		 *
 		 * @global  wpdb    $wpdb
-		 * @param   int|int[] $campaigns A campaign ID. Optionally, you can pass an array of campaign IDs to get the total of all put together.
-		 * @param   boolean $include_all
-		 * @return  int
+		 * @param   int|int[] $campaigns   A campaign ID. Optionally, you can pass an array of campaign IDs to get the total of all put together.
+		 * @param   boolean   $include_all Whether donations with non-approved statuses should be included.
+		 * @return  string
 		 * @since   1.0.0
 		 */
 		public function get_campaign_donated_amount( $campaigns, $include_all = false ) {
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			$parameters = array_merge( $campaigns_parameters, $status_parameters );
 
-			$sql = "SELECT SUM(amount) cd
+			$sql = "SELECT COALESCE( SUM(amount), 0 )
                     FROM $this->table_name cd
                     INNER JOIN $wpdb->posts p
                     ON p.ID = cd.donation_id

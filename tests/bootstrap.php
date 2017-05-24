@@ -42,6 +42,9 @@ add_action( 'deleted_post', array( 'Charitable_Campaign_Donations_DB', 'delete_d
 
 update_option( 'WPLANG', 'en' );
 
+// Don't test against UTC+0
+update_option( 'timezone_string', 'Australia/Darwin' );
+
 global $current_user;
 $current_user = new WP_User(1);
 $current_user->set_role('administrator');

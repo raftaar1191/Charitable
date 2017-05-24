@@ -10,6 +10,7 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	 */
 	private $post_1;
 	private $campaign_1;
+	private $end_date_1;
 	private $end_time_1;
 
 	private $post_2;
@@ -19,10 +20,11 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 		parent::setUp();
 
 		/* Campaign 1: Goal of $40,000. Expiry 300 days from now. */
-		$this->end_time_1 	= strtotime( '+7201 hours');
+		$this->end_date_1   = date( 'Y-m-d 00:00:00', strtotime( '+7201 hours') );
+		$this->end_time_1 	= strtotime( $this->end_date_1 );
 		$campaign_1_id 		= Charitable_Campaign_Helper::create_campaign( array( 
 			'_campaign_goal' 					=> 40000.00,
-			'_campaign_end_date' 				=> date( 'Y-m-d H:i:s', $this->end_time_1 ), 
+			'_campaign_end_date' 				=> $this->end_date_1, 
 			'_campaign_suggested_donations' 	=> array( 
 				array( 'amount' => 5 ), 
 				array( 'amount' => 20 ), 
@@ -102,7 +104,7 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 
 		foreach ( $donations as $donation ) {
 			Charitable_Donation_Helper::create_donation( $donation );		
-		}
+		}		
 	}	
 
 	/**
@@ -116,7 +118,7 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_end_date_using_get() {
-		$this->assertEquals( date( 'Y-m-d H:i:s', $this->end_time_1 ), $this->campaign_1->get('end_date') );
+		$this->assertEquals( date( 'Y-m-d 00:00:00', $this->end_time_1 ), $this->campaign_1->get('end_date') );
 	}
 
 	/**
@@ -131,7 +133,21 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	 */
 	function test_get_no_end_date_using_get() {
 		$this->assertEquals( 0, $this->campaign_2->get('end_date') );
-	}	
+	}
+
+	/**
+	 * @covers Charitable_Campaign::is_endless
+	 */
+	function test_is_endless_for_finite_campaign() {
+		$this->assertFalse( $this->campaign_1->is_endless() );		
+	}
+
+	/**
+	 * @covers Charitable_Campaign::is_endless
+	 */
+	function test_is_endless_for_endless_campaign() {
+		$this->assertTrue( $this->campaign_2->is_endless() );		
+	}
 
 	/**
 	 * @covers Charitable_Campaign::get_end_time
@@ -141,7 +157,9 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	}
 
 	/**
+	 * @depends test_is_endless_for_endless_campaign
 	 * @covers Charitable_Campaign::get_end_time
+	 * @covers Charitable_Campaign::is_endless
 	 */
 	function test_get_end_time_for_endless_campaign() {
 		$this->assertFalse( $this->campaign_2->get_end_time() );
@@ -155,7 +173,9 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	}
 
 	/**
+	 * @depends test_is_endless_for_endless_campaign
 	 * @covers Charitable_Campaign::get_end_date
+	 * @covers Charitable_Campaign::is_endless
 	 */
 	function test_get_end_date_for_endless_campaign() {
 		$this->assertFalse( $this->campaign_2->get_end_date() );
@@ -171,17 +191,29 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	}
 
 	/**
+	 * @depends test_is_endless_for_endless_campaign
 	 * @covers Charitable_Campaign::get_seconds_left
+	 * @covers Charitable_Campaign::is_endless
 	 */
 	function test_get_seconds_left_for_endless_campaign() {
 		$this->assertFalse( $this->campaign_2->get_seconds_left() );
 	}
 
 	/**
+	 * @depends test_get_seconds_left_for_finite_campaign
 	 * @covers Charitable_Campaign::get_time_left
+	 * @covers Charitable_Campaign::get_seconds_left
 	 */
-	function test_get_time_left() {
-		$this->assertEquals( '<span class="amount time-left days-left">300</span> Days Left', $this->campaign_1->get_time_left() );
+	function test_get_time_left_with_end_date() {
+		$this->assertEquals( '<span class="amount time-left days-left">299</span> Days Left', $this->campaign_1->get_time_left() );		
+	}
+
+	/**
+	 * @depends test_is_endless_for_endless_campaign
+	 * @covers Charitable_Campaign::get_time_left
+	 * @covers Charitable_Campaign::is_endless
+	 */
+	function test_get_time_left_with_no_end_date() {
 		$this->assertEquals( '', $this->campaign_2->get_time_left() );
 	}
 
