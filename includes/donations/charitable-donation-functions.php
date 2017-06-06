@@ -145,15 +145,20 @@ function charitable_ipn_listener() {
  *
  * This method is called on the init hook.
  *
- * @return  boolean
+ * @return  boolean Whether this is after a donation.
  * @access  public
  * @since   1.4.0
  */
 function charitable_is_after_donation() {
+
+	if ( is_admin() ) {
+		return false;
+	}
+
 	$processor = get_transient( 'charitable_donation_' . charitable_get_session()->get_session_id() );
 
 	if ( ! $processor ) {
-		return;
+		return false;
 	}
 
 	do_action( 'charitable_after_donation', $processor );
@@ -165,6 +170,9 @@ function charitable_is_after_donation() {
 	}
 
 	delete_transient( 'charitable_donation_' . charitable_get_session()->get_session_id() );
+
+	return true;
+
 }
 
 /**

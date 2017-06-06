@@ -11,7 +11,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /***********************************************/
 /* HEAD OUTPUT
@@ -74,15 +75,113 @@ html { margin-top: 0 !important; }
 endif;
 
 /**********************************************/
+/* BODY CLASSES
+/**********************************************/
+
+if ( ! function_exists( 'charitable_add_body_classes' ) ) :
+
+	/**
+	 * Adds custom body classes to certain templates.
+	 *
+	 * @param   string[] $classes Body classes.
+	 * @return  string[]
+	 * @since   1.3.0
+	 */
+	function charitable_add_body_classes( $classes ) {
+		if ( charitable_is_page( 'donation_receipt_page' ) ) {
+			$classes[] = 'campaign-donation-receipt';
+		}
+
+		if ( charitable_is_page( 'donation_processing_page' ) ) {
+			$classes[] = 'campaign-donation-processing';
+		}
+
+		if ( charitable_is_page( 'campaign_donation_page' ) ) {
+			$classes[] = 'campaign-donation-page';
+		}
+
+		if ( charitable_is_page( 'campaign_widget_page' ) ) {
+			$classes[] = 'campaign-widget';
+		}
+
+		if ( charitable_is_page( 'email_preview' ) ) {
+			$classes[] = 'email-preview';
+		}
+
+		return $classes;
+	}
+
+endif;
+
+/**********************************************/
 /* SINGLE CAMPAIGN CONTENT
 /**********************************************/
+
+if ( ! function_exists( 'charitable_template_campaign_content' ) ) :
+
+	/**
+	 * Display the campaign content.
+	 *
+	 * This is used on the_content filter.
+	 *
+	 * @param   string $content Page content.
+	 * @return  string
+	 * @since   1.0.0
+	 */
+	function charitable_template_campaign_content( $content ) {
+
+		if ( ! charitable_is_main_loop() || Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
+			return $content;
+		}
+
+		/**
+		 * If this is the donation form, and it's showing on a separate page, return the content.
+		 */
+		if ( charitable_is_page( 'campaign_donation_page' ) ) {
+
+			if ( 'separate_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
+				return $content;
+			}
+
+			if ( false !== get_query_var( 'donate', false ) ) {
+				return $content;
+			}
+		}
+
+		/**
+		 * If you do not want to use the default campaign template, use this filter and return false.
+		 *
+		 * @uses    charitable_use_campaign_template
+		 */
+		if ( ! apply_filters( 'charitable_use_campaign_template', true ) ) {
+			return $content;
+		}
+
+		/**
+		 * Remove ourselves as a filter to prevent eternal recursion if apply_filters('the_content')
+		 * is called by one of the templates.
+		 */
+		remove_filter( 'the_content', 'charitable_template_campaign_content' );
+
+		ob_start();
+
+		charitable_template( 'content-campaign.php', array( 'content' => $content, 'campaign' => charitable_get_current_campaign() ) );
+
+		$content = ob_get_clean();
+
+		add_filter( 'the_content', 'charitable_template_campaign_content' );
+
+		return $content;
+	}
+
+endif;
 
 if ( ! function_exists( 'charitable_template_campaign_description' ) ) :
 
 	/**
 	 * Display the campaign description before the summary and rest of content.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -97,7 +196,7 @@ if ( ! function_exists( 'charitable_template_campaign_finished_notice' ) ) :
 	/**
 	 * Display the campaign finished notice.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -116,7 +215,7 @@ if ( ! function_exists( 'charitable_template_campaign_percentage_raised' ) ) :
 	/**
 	 * Display the percentage that the campaign has raised in summary block.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  boolean     True if the template was displayed. False otherwise.
 	 * @since   1.0.0
 	 */
@@ -137,7 +236,7 @@ if ( ! function_exists( 'charitable_template_campaign_donation_summary' ) ) :
 	/**
 	 * Display campaign goal in summary block.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  true
 	 * @since   1.0.0
 	 */
@@ -153,7 +252,7 @@ if ( ! function_exists( 'charitable_template_campaign_donor_count' ) ) :
 	/**
 	 * Display number of campaign donors in summary block.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  true
 	 * @since   1.0.0
 	 */
@@ -169,7 +268,7 @@ if ( ! function_exists( 'charitable_template_campaign_time_left' ) ) :
 	/**
 	 * Display the amount of time left in the campaign in the summary block.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  boolean     True if the template was displayed. False otherwise.
 	 * @since   1.0.0
 	 */
@@ -189,7 +288,7 @@ if ( ! function_exists( 'charitable_template_donate_button' ) ) :
 	/**
 	 * Display donate button or link in the campaign summary.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  boolean     True if the template was displayed. False otherwise.
 	 * @since   1.0.0
 	 */
@@ -210,7 +309,7 @@ if ( ! function_exists( 'charitable_template_campaign_summary' ) ) :
 	/**
 	 * Display campaign summary before rest of campaign content.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -225,7 +324,7 @@ if ( ! function_exists( 'charitable_template_campaign_progress_bar' ) ) :
 	/**
 	 * Output the campaign progress bar.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -240,7 +339,7 @@ if ( ! function_exists( 'charitable_template_campaign_donate_button' ) ) :
 	/**
 	 * Output the campaign donate button.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -255,7 +354,7 @@ if ( ! function_exists( 'charitable_template_campaign_donate_link' ) ) :
 	/**
 	 * Output the campaign donate link.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -270,7 +369,7 @@ if ( ! function_exists( 'charitable_template_campaign_status_tag' ) ) :
 	/**
 	 * Output the campaign status tag.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -285,7 +384,7 @@ if ( ! function_exists( 'charitable_template_campaign_donation_form_in_page' ) )
 	/**
 	 * Add the donation form straight into the campaign page.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -306,7 +405,6 @@ if ( ! function_exists( 'charitable_template_campaign_modal_donation_window' ) )
 	/**
 	 * Adds the modal donation window to a campaign page.
 	 *
-	 * @param   Charitable_Campaign $campaign
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -347,8 +445,8 @@ if ( ! function_exists( 'charitable_template_campaign_loop' ) ) :
 	 *
 	 * This is used instead of the_content filter.
 	 *
-	 * @param   WP_Query $campaigns
-	 * @param   int      $columns
+	 * @param   WP_Query $campaigns Query with campaigns.
+	 * @param   int      $columns   Number of columns to use for loop.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -399,7 +497,7 @@ if ( ! function_exists( 'charitable_template_campaign_loop_thumbnail' ) ) :
 	/**
 	 * Output the campaign thumbnail on campaigns displayed within the loop.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -414,7 +512,7 @@ if ( ! function_exists( 'charitable_template_campaign_loop_donation_stats' ) ) :
 	/**
 	 * Output the campaign donation status on campaigns displayed within the loop.
 	 *
-	 * @param   Charitable_Campaign $campaign
+	 * @param   Charitable_Campaign $campaign The campaign object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -429,8 +527,8 @@ if ( ! function_exists( 'charitable_template_campaign_loop_donate_link' ) ) :
 	/**
 	 * Output the campaign donation status on campaigns displayed within the loop.
 	 *
-	 * @param   Charitable_Campaign $campaign
-	 * @param   mixed[] $args
+	 * @param   Charitable_Campaign $campaign The campaign object.
+	 * @param   mixed[]             $args     Optional arguments.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -449,8 +547,8 @@ if ( ! function_exists( 'charitable_template_campaign_loop_more_link' ) ) :
 	/**
 	 * Output the read more link on campaigns displayed within the loop.
 	 *
-	 * @param   Charitable_Campaign $campaign
-	 * @param   mixed[] $args
+	 * @param   Charitable_Campaign $campaign The campaign object.
+	 * @param   mixed[]             $args     Optional arguments.
 	 * @return  void
 	 * @since   1.2.3
 	 */
@@ -498,12 +596,38 @@ endif;
 /* DONATION RECEIPT
 /**********************************************/
 
+if ( ! function_exists( 'charitable_template_donation_receipt_content' ) ) :
+
+	/**
+	 * Display the donation form. This is used with the_content filter.
+	 *
+	 * @param   string $content Page content.
+	 * @return  string
+	 * @since   1.0.0
+	 */
+	function charitable_template_donation_receipt_content( $content ) {
+
+		if ( ! in_the_loop() || ! charitable_is_page( 'donation_receipt_page' ) ) {
+			return $content;
+		}
+
+		/* If we are NOT using the automatic option, this is a static page with the shortcode, so don't filter again. */
+		if ( 'auto' != charitable_get_option( 'donation_receipt_page', 'auto' ) ) {
+			return $content;
+		}
+
+		return charitable_template_donation_receipt_output( $content );
+
+	}
+
+endif;
+
 if ( ! function_exists( 'charitable_template_donation_receipt_output' ) ) :
 
 	/**
 	 * Render the donation receipt. This can be used by the [donation_receipt] shortcode or through `the_content` filter.
 	 *
-	 * @param   string  $content
+	 * @param   string $content Page content.
 	 * @return  string
 	 * @since   1.0.0
 	 */
@@ -540,7 +664,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_summary' ) ) :
 	/**
 	 * Display the donation receipt summary.
 	 *
-	 * @param   Charitable_Donation $donation
+	 * @param   Charitable_Donation $donation The Donation object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -555,7 +679,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_offline_payment_in
 	/**
 	 * Display the offline payment instructions, if applicable.
 	 *
-	 * @param   Charitable_Donation $donation
+	 * @param   Charitable_Donation $donation The Donation object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -574,7 +698,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_details' ) ) :
 	/**
 	 * Display the donation details.
 	 *
-	 * @param   Charitable_Donation $donation
+	 * @param   Charitable_Donation $donation The Donation object.
 	 * @return  void
 	 * @since   1.0.0
 	 */
@@ -588,6 +712,35 @@ endif;
 /**********************************************/
 /* DONATION FORM
 /**********************************************/
+
+if ( ! function_exists( 'charitable_template_donation_form_content' ) ) :
+
+	/**
+	 * Display the donation form. This is used with the_content filter.
+	 *
+	 * @param   string $content Page content.
+	 * @return  string
+	 * @since   1.0.0
+	 */
+	function charitable_template_donation_form_content( $content ) {
+
+		if ( ! charitable_is_main_loop() || ! charitable_is_page( 'campaign_donation_page' ) ) {
+			return $content;
+		}
+
+		if ( 'separate_page' != charitable_get_option( 'donation_form_display', 'separate_page' )
+		 	&& false === get_query_var( 'donate', false ) ) {
+			return $content;
+		}
+
+		ob_start();
+
+		charitable_template( 'content-donation-form.php' );
+
+		return ob_get_clean();
+	}
+
+endif;
 
 if ( ! function_exists( 'charitable_template_donation_form_login' ) ) :
 

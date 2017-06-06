@@ -373,4 +373,4 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

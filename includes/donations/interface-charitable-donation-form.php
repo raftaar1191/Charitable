@@ -1,6 +1,6 @@
 <?php
 /**
- * Donation form interface. 
+ * Donation form interface.
  *
  * This defines a strict interface that donation forms must implement.
  *
@@ -8,22 +8,23 @@
  * @package		Charitable/Interfaces/Charitable_Donation_Form_Interface
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! interface_exists( 'Charitable_Donation_Form_Interface' ) ) : 
+if ( ! interface_exists( 'Charitable_Donation_Form_Interface' ) ) :
 
 /**
- * Charitable_Donation_Form_Interface interface. 
+ * Charitable_Donation_Form_Interface interface.
  *
  * @since		1.0.0
  */
 interface Charitable_Donation_Form_Interface {
 
 	/**
-	 * Render the donation form. 
+	 * Render the donation form.
 	 *
 	 * @return 	void
 	 * @access 	public
@@ -32,7 +33,7 @@ interface Charitable_Donation_Form_Interface {
 	public function render();
 
 	/**
-	 * Validate the submitted values. 
+	 * Validate the submitted values.
 	 *
 	 * @return  boolean
 	 * @access  public

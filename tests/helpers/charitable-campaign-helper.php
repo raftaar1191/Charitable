@@ -18,7 +18,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a campaign. 
+	 * Create a campaign.
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
@@ -28,13 +28,14 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 */
 	public static function create_campaign( $args = array() ) {
 		$defaults = array(
-			'post_title'					=> 'Test Campaign', 
-			'post_name'						=> 'test-campaign', 
-			'post_type'						=> 'campaign', 
-			'post_status'					=> 'publish', 
-			'_campaign_goal' 				=> 0, 
-			'_campaign_end_date'			=> 0, 
-			'_campaign_suggested_donations'	=> ''
+			'post_title'					   => 'Test Campaign', 
+			'post_name'						   => 'test-campaign', 
+			'post_type'						   => 'campaign', 
+			'post_status'					   => 'publish', 
+			'_campaign_goal' 				   => 0, 
+			'_campaign_end_date'			   => 0, 
+			'_campaign_suggested_donations'	   => '',
+			'_campaign_allow_custom_donations' => 1,
 		);
 
 		$args = array_merge( $defaults, $args );
@@ -49,7 +50,8 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 		$meta_keys = array(
 			'_campaign_goal', 
 			'_campaign_end_date',
-			'_campaign_suggested_donations'
+			'_campaign_suggested_donations',
+			'_campaign_allow_custom_donations',
 		);
 
 		foreach ( $meta_keys as $key ) {
@@ -60,7 +62,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a campaign with a goal. 
+	 * Create a campaign with a goal.
 	 *
 	 * @param 	string 		$goal
 	 * @param 	array 		$args 				Optional arguments.
@@ -75,7 +77,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a campaign with an end date. 
+	 * Create a campaign with an end date.
 	 *
 	 * @param 	string 		$end_date
 	 * @param 	array 		$args 				Optional arguments.

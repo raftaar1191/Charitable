@@ -205,6 +205,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			$time_left = $this->get_end_time() - current_time( 'timestamp' );
+
 			return $time_left < 0 ? 0 : $time_left;
 		}
 
@@ -215,7 +216,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @uses charitabile_campaign_minutes_left  Change the text displayed when there is less than an hour left.
 		 * @uses charitabile_campaign_hours_left    Change the text displayed when there is less than a day left.
 		 * @uses charitabile_campaign_days_left     Change the text displayed when there is more than a day left.
-		 * @uses charitable_campaign_time_left      Change the text displayed when there is time left. This will
+		 * @uses charitable_campaign_time_left      Change the text displayed when there is time left.
 		 *
 		 * @return  string
 		 * @access  public
@@ -502,8 +503,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the current amount of donations.
 		 *
-		 * @param 	boolean $sanitize Whether to sanitize the amount. False by default.
-		 * @return  string
+		 * @param 	boolean $sanitize 	  Whether to sanitize the amount. False by default.
+		 * @return  string|float|WP_Error String if $sanitize is false. If $sanitize is true, return a float or WP_Error if the amount is not a string.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -516,7 +517,11 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				set_transient( self::get_donation_amount_cache_key( $this->ID ), $this->donated_amount, 0 );
 			}
 
-			$amount = $sanitize ? charitable_sanitize_amount( $this->donated_amount ) : $this->donated_amount;
+			$amount = $this->donated_amount;
+
+			if ( $sanitize ) {
+				$amount = charitable_sanitize_amount( $this->donated_amount );
+			}
 
 			return apply_filters( 'charitable_campaign_donated_amount', $amount, $this, $sanitize );
 		}
@@ -837,7 +842,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Flush donations cache.
 		 *
-		 * @param   int $campaign_id Campaign ID.
+		 * @param   int $campaign_id The campaign ID.
 		 * @return  void
 		 * @access  public
 		 * @static

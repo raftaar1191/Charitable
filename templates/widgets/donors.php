@@ -9,7 +9,8 @@
  * @version 1.2.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! charitable_is_campaign_page() && 'current' == $view_args['campaign_id'] ) {
 	return;

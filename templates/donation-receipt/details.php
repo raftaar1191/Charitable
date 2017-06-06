@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Displays the donation details.
  *
@@ -10,7 +10,8 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * @var     Charitable_Donation

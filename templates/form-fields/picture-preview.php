@@ -24,7 +24,7 @@ if ( is_numeric( $size ) ) {
 ?>
 <li <?php if ( ! $is_src ) : ?>data-attachment-id="<?php echo $image ?>"<?php endif ?>>
     <a href="#" class="remove-image button"><?php _e( 'Remove', 'charitable' ) ?></a>
-    <?php if ( $is_src ) : 
+    <?php if ( $is_src ) :
         echo $image;
     else : ?>
         <input type="hidden" name="<?php echo $field[ 'key' ] . $multiple ?>" value="<?php echo $image ?>" />

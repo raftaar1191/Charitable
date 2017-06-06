@@ -8,18 +8,18 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
 
-	// Mechi
+	/* Mechi */
 	'ILL' => __( 'Illam', 'charitable' ),
 	'JHA' => __( 'Jhapa', 'charitable' ),
 	'PAN' => __( 'Panchthar', 'charitable' ),
 	'TAP' => __( 'Taplejung', 'charitable' ),
 
-	// Koshi
+	/* Koshi */
 	'BHO' => __( 'Bhojpur', 'charitable' ),
 	'DKA' => __( 'Dhankuta', 'charitable' ),
 	'MOR' => __( 'Morang', 'charitable' ),
@@ -27,7 +27,7 @@ return array(
 	'SAN' => __( 'Sankhuwa', 'charitable' ),
 	'TER' => __( 'Terhathum', 'charitable' ),
 
-	// Sagarmatha
+	/* Sagarmatha */
 	'KHO' => __( 'Khotang', 'charitable' ),
 	'OKH' => __( 'Okhaldhunga', 'charitable' ),
 	'SAP' => __( 'Saptari', 'charitable' ),
@@ -35,7 +35,7 @@ return array(
 	'SOL' => __( 'Solukhumbu', 'charitable' ),
 	'UDA' => __( 'Udayapur', 'charitable' ),
 
-	// Janakpur
+	/* Janakpur */
 	'DHA' => __( 'Dhanusa', 'charitable' ),
 	'DLK' => __( 'Dolakha', 'charitable' ),
 	'MOH' => __( 'Mohottari', 'charitable' ),
@@ -43,7 +43,7 @@ return array(
 	'SAR' => __( 'Sarlahi', 'charitable' ),
 	'SIN' => __( 'Sindhuli', 'charitable' ),
 
-	// Bagmati
+	/* Bagmati */
 	'BHA' => __( 'Bhaktapur', 'charitable' ),
 	'DHD' => __( 'Dhading', 'charitable' ),
 	'KTM' => __( 'Kathmandu', 'charitable' ),
@@ -53,14 +53,14 @@ return array(
 	'RAS' => __( 'Rasuwa', 'charitable' ),
 	'SPC' => __( 'Sindhupalchowk', 'charitable' ),
 
-	// Narayani
+	/* Narayani */
 	'BAR' => __( 'Bara', 'charitable' ),
 	'CHI' => __( 'Chitwan', 'charitable' ),
 	'MAK' => __( 'Makwanpur', 'charitable' ),
 	'PAR' => __( 'Parsa', 'charitable' ),
 	'RAU' => __( 'Rautahat', 'charitable' ),
 
-	// Gandaki
+	/* Gandaki */
 	'GOR' => __( 'Gorkha', 'charitable' ),
 	'KAS' => __( 'Kaski', 'charitable' ),
 	'LAM' => __( 'Lamjung', 'charitable' ),
@@ -68,13 +68,13 @@ return array(
 	'SYN' => __( 'Syangja', 'charitable' ),
 	'TAN' => __( 'Tanahun', 'charitable' ),
 
-	// Dhawalagiri
+	/* Dhawalagiri */
 	'BAG' => __( 'Baglung', 'charitable' ),
 	'PBT' => __( 'Parbat', 'charitable' ),
 	'MUS' => __( 'Mustang', 'charitable' ),
 	'MYG' => __( 'Myagdi', 'charitable' ),
 
-	// Lumbini
+	/* Lumbini */
 	'AGR' => __( 'Agrghakanchi', 'charitable' ),
 	'GUL' => __( 'Gulmi', 'charitable' ),
 	'KAP' => __( 'Kapilbastu', 'charitable' ),
@@ -82,37 +82,37 @@ return array(
 	'PAL' => __( 'Palpa', 'charitable' ),
 	'RUP' => __( 'Rupandehi', 'charitable' ),
 
-	// Rapti
+	/* Rapti */
 	'DAN' => __( 'Dang', 'charitable' ),
 	'PYU' => __( 'Pyuthan', 'charitable' ),
 	'ROL' => __( 'Rolpa', 'charitable' ),
 	'RUK' => __( 'Rukum', 'charitable' ),
 	'SAL' => __( 'Salyan', 'charitable' ),
 
-	// Bheri
+	/* Bheri */
 	'BAN' => __( 'Banke', 'charitable' ),
 	'BDA' => __( 'Bardiya', 'charitable' ),
 	'DAI' => __( 'Dailekh', 'charitable' ),
 	'JAJ' => __( 'Jajarkot', 'charitable' ),
 	'SUR' => __( 'Surkhet', 'charitable' ),
 
-	// Karnali
+	/* Karnali */
 	'DOL' => __( 'Dolpa', 'charitable' ),
 	'HUM' => __( 'Humla', 'charitable' ),
 	'JUM' => __( 'Jumla', 'charitable' ),
 	'KAL' => __( 'Kalikot', 'charitable' ),
 	'MUG' => __( 'Mugu', 'charitable' ),
 
-	// Seti
+	/* Seti */
 	'ACH' => __( 'Achham', 'charitable' ),
 	'BJH' => __( 'Bajhang', 'charitable' ),
 	'BJU' => __( 'Bajura', 'charitable' ),
 	'DOT' => __( 'Doti', 'charitable' ),
 	'KAI' => __( 'Kailali', 'charitable' ),
 
-	// Mahakali
+	/* Mahakali */
 	'BAI' => __( 'Baitadi', 'charitable' ),
 	'DAD' => __( 'Dadeldhura', 'charitable' ),
 	'DAR' => __( 'Darchula', 'charitable' ),
-	'KAN' => __( 'Kanchanpur', 'charitable' )
+	'KAN' => __( 'Kanchanpur', 'charitable' ),
 );

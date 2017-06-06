@@ -45,7 +45,7 @@ endif;
 		<?php if ( ! $campaign->is_endless() ) : ?>
 			
 			<div class="campaign-time-left"><?php echo $campaign->get_time_left() ?>
-		
+
 		<?php endif ?>
 	</li>
 

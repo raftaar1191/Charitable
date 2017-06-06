@@ -9,7 +9,8 @@
  * @version 1.3.2
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * @var 	Charitable_Campaign

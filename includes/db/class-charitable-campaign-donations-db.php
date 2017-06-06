@@ -211,7 +211,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			list( $status_clause, $parameters ) = $this->get_donation_status_clause( $statuses );
 
-			$sql = "SELECT SUM(cd.amount) 
+			$sql = "SELECT COALESCE( SUM(cd.amount), 0 )
                     FROM $this->table_name cd
                     INNER JOIN $wpdb->posts p
                     ON p.ID = cd.donation_id
@@ -245,7 +245,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			list( $in, $parameters ) = $this->get_in_clause_params( $donation_id );
 
-			$sql = "SELECT * 
+			$sql = "SELECT *
                     FROM $this->table_name 
                     WHERE $field IN ( $in );";
 
@@ -360,6 +360,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		public function get_campaigns_for_donation( $donation_id ) {
 			global $wpdb;
 
+			debug_print_backtrace();
+
 			$sql = "SELECT DISTINCT campaign_id 
                     FROM $this->table_name 
                     WHERE donation_id = %d;";
@@ -383,9 +385,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Get total amount donated to a campaign.
 		 *
 		 * @global  wpdb    $wpdb
-		 * @param   int|int[] $campaigns A campaign ID. Optionally, you can pass an array of campaign IDs to get the total of all put together.
-		 * @param   boolean $include_all
-		 * @return  int
+		 * @param   int|int[] $campaigns   A campaign ID. Optionally, you can pass an array of campaign IDs to get the total of all put together.
+		 * @param   boolean   $include_all Whether donations with non-approved statuses should be included.
+		 * @return  string
 		 * @since   1.0.0
 		 */
 		public function get_campaign_donated_amount( $campaigns, $include_all = false ) {
@@ -399,7 +401,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			$parameters = array_merge( $campaigns_parameters, $status_parameters );
 
-			$sql = "SELECT SUM(amount) cd
+			$sql = "SELECT COALESCE( SUM(amount), 0 )
                     FROM $this->table_name cd
                     INNER JOIN $wpdb->posts p
                     ON p.ID = cd.donation_id
@@ -516,7 +518,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		public function get_total_donated_by_donor( $donor_id ) {
 			global $wpdb;
 
-			$sql = "SELECT SUM(cd.amount)
+			$sql = "SELECT COALESCE( SUM(cd.amount), 0 )
                     FROM $this->table_name cd
                     WHERE cd.donor_id = %d;";
 
@@ -842,21 +844,21 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 			switch ( $field ) {
 
 				case 'campaign' :
-				case 'campaign_id' : 
+				case 'campaign_id' :
 					$column = 'campaign_id';
 					break;
 
-				case 'donation' : 
-				case 'donation_id' : 
+				case 'donation' :
+				case 'donation_id' :
 					$column = 'donation_id';
 					break;
 
-				case 'donor' : 
-				case 'donor_id' : 
+				case 'donor' :
+				case 'donor_id' :
 					$column = 'donor_id';
 					break;
 
-				default : 
+				default :
 					charitable_get_deprecated()->doing_it_wrong(
 						__METHOD__,
 						__( 'Field expected to be `campaign`, `campaign_id`, `donation`, `donation_id`, `donor` or `donor_id`.', 'charitable' ),

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the campaign title field for the Campaign post type.
  *

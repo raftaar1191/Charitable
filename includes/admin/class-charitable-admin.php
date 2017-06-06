@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Admin' ) ) :
 
@@ -179,7 +180,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				) );
 
 				wp_localize_script( 'charitable-admin', 'CHARITABLE', $localized_vars );
-			}
+
+			}//end if
 
 			wp_register_script(
 				'charitable-admin-notice',
@@ -315,7 +317,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add custom links to the plugin actions.
 		 *
-		 * @param   string[] $links
+		 * @param   string[] $links Plugin action links.
 		 * @return  string[]
 		 * @access  public
 		 * @since   1.0.0
@@ -328,7 +330,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add Extensions link to the plugin row meta.
 		 *
-		 * @param   string[] $links
+		 * @param   string[] $links Plugin action links.
 		 * @param   string $file        The plugin file
 		 * @return  string[] $links
 		 * @access  public

@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
@@ -21,7 +22,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	class Charitable_Gateway_Paypal extends Charitable_Gateway {
 
 		/**
-		 * @var     string
+		 * Gateway ID.
 		 */
 		const ID = 'paypal';
 
@@ -104,10 +105,13 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			}
 
 			$settings = charitable_get_option( 'gateways_paypal', array() );
-			$email = trim( $settings['paypal_email'] );
 
-			/* Make sure that the keys are set. */
-			if ( empty( $email ) ) {
+			if ( array_key_exists( 'paypal_email', $settings ) ) {
+				$email = trim( $settings['paypal_email'] );
+			}
+
+			/* Make sure that the email is set. */
+			if ( ! isset( $email ) || empty( $email ) ) {
 
 				charitable_get_notices()->add_error( __( 'Missing PayPal email address. Unable to proceed with payment.', 'charitable' ) );
 				return false;
@@ -122,7 +126,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @param   boolean|array $return
 		 * @param   int $donation_id
-		 * @param   Charitable_Donation_Processor $processor
+		 * @param   Charitable_Donation_Processor $processor The Donation Processor object.
 		 * @return  array
 		 * @access  public
 		 * @static
@@ -674,4 +678,4 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

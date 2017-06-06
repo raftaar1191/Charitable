@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Displays the credit card expiration select boxes.
  *
@@ -10,7 +10,8 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! isset( $view_args[ 'form' ] ) || ! isset( $view_args[ 'field' ] ) ) {
     return;
@@ -33,7 +34,7 @@ $current_year   = date( 'Y' );
         </label>
     <?php endif ?>    
     <select name="<?php echo $field['key'] ?>[month]" class="month">
-        <?php foreach ( range( 1, 12 ) as $month ) : 
+        <?php foreach ( range( 1, 12 ) as $month ) :
             $padded_month = sprintf( '%02d', $month );
             ?>
             <option value="<?php echo $padded_month ?>"><?php echo $padded_month ?></option>

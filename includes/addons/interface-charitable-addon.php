@@ -8,39 +8,40 @@
  * @package		Charitable/Interfaces/Charitable_Addon_Interface
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! interface_exists( 'Charitable_Addon_Interface' ) ) : 
-
-/**
- * Charitable_Addon_Interface interface. 
- *
- * @since		1.0.0
- */
-interface Charitable_Addon_Interface {
+if ( ! interface_exists( 'Charitable_Addon_Interface' ) ) :
 
 	/**
-	 * Activate the addon. 
+	 * Charitable_Addon_Interface interface.
 	 *
-	 * @return 	void
-	 * @access  public
-	 * @static
-	 * @since 	1.0.0
+	 * @since		1.0.0
 	 */
-	public static function activate();
+	interface Charitable_Addon_Interface {
 
-	/**
-	 * Load the addon. 
-	 *
-	 * @return 	void
-	 * @access  public
-	 * @static
-	 * @since 	1.0.0
-	 */
-	public static function load();
-}
+		/**
+		 * Activate the addon.
+		 *
+		 * @return 	void
+		 * @access  public
+		 * @static
+		 * @since 	1.0.0
+		 */
+		public static function activate();
 
-endif; // End interface_exists check.
+		/**
+		 * Load the addon.
+		 *
+		 * @return 	void
+		 * @access  public
+		 * @static
+		 * @since 	1.0.0
+		 */
+		public static function load();
+	}
+
+endif;

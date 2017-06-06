@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Display the donation form fields options.
  *

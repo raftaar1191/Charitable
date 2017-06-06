@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the campaign benefactors form.
  *
@@ -48,7 +48,7 @@ $name_base = '_campaign_benefactor[' . $args[ 'index' ] . ']';
             <option value="0" <?php selected( 0, $args['contribution_amount_is_per_item'] ) ?>><?php _e( 'Apply only once per purchase', 'charitable' ) ?></option>
         </select>
     </fieldset>
-    <?php 
+    <?php
         do_action( 'charitable_campaign_benefactor_form_extension_fields', $benefactor, $extension, $args[ 'index' ] );
     ?>
     <div class="charitable-benefactor-date-wrap cf">

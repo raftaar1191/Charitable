@@ -6,7 +6,7 @@
 /**
  * Allows plugins to use their own update API.
  *
- * This is part of the EDD Software Licensing suite. Just renamed here for Charitable. 
+ * This is part of the EDD Software Licensing suite. Just renamed here for Charitable.
  *
  * @author Pippin Williamson
  * @version 1.6
@@ -55,7 +55,7 @@ class Charitable_Plugin_Updater {
 	}
 
 	/**
-	 * Return the update information for the plugin. 
+	 * Return the update information for the plugin.
 	 *
 	 * @return  false|object
 	 * @access  public

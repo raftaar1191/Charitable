@@ -1,6 +1,6 @@
 <?php
 /**
- * Display the donations widget on the dashboard. 
+ * Display the donations widget on the dashboard.
  *
  * @author  Studio 164a
  * @package Charitable/Admin View/Dashboard Widgets
@@ -46,7 +46,7 @@ $this_year = $table->get_donations_summary_by_period( date( 'Y-%' ) );
     <div class="recent-donations">
         <table>
             <caption><h3><?php _e( 'Recent Donations', 'charitable' ) ?></h3></caption>
-            <?php 
+            <?php
             foreach ( $donations as $donation_id ) :
                 $donation = charitable_get_donation( $donation_id );
             ?>
@@ -56,7 +56,7 @@ $this_year = $table->get_donations_summary_by_period( date( 'Y-%' ) );
                 <td class="donation-status"><?php echo $donation->get_status( true ) ?></td>
                 <td class="donation-total"><?php echo charitable_format_money( $donation->get_total_donation_amount() ) ?></td>
             </tr>
-            <?php 
+            <?php
             endforeach;
             ?>
         </table>

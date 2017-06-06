@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the custom styles added by Charitable.
  *
@@ -10,7 +10,8 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'charitable_default_highlight_colour', '#f89d35' ) );
 

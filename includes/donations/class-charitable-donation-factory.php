@@ -11,7 +11,8 @@
  * @author 		Eric Daams
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 
@@ -93,4 +94,4 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

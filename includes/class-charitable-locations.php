@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Locations' ) ) :
 
@@ -148,7 +149,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the states in this country.
 		 *
-		 * @param 	string 		$country_code
+		 * @param 	string $country_code The three-character country code.
 		 * @return 	string[]
 		 * @access  public
 		 * @since 	1.0.0
@@ -190,10 +191,10 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 
 			if ( ! isset( $this->address_formats ) ) {
 
-				// Common formats
+				// Common formats.
 				$postcode_before_city = "{company}\n{name}\n{address_1}\n{address_2}\n{postcode} {city}\n{country}";
 
-				// Define address formats
+				// Define address formats.
 				$this->address_formats = apply_filters('charitable_localisation_address_formats', array(
 					'default' => "{name}\n{company}\n{address_1}\n{address_2}\n{city}\n{state}\n{postcode}\n{country}",
 					'AU' => "{name}\n{company}\n{address_1}\n{address_2}\n{city} {state} {postcode}\n{country}",
@@ -228,7 +229,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 					'VN' => "{name}\n{company}\n{address_1}\n{city}\n{country}",
 				));
 
-			}
+			}//end if
 
 			return $this->address_formats;
 		}
@@ -236,7 +237,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the address format to use for the given address.
 		 *
-		 * @param 	array 		$address_fields
+		 * @param 	array $address_fields Address fields.
 		 * @return 	string
 		 * @access  private
 		 * @since 	1.0.0
@@ -267,7 +268,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Process an array of address fields, trimming whitespace and adding full country and full state names.
 		 *
-		 * @param 	string[]	$address_fields
+		 * @param 	array $address_fields Address fields.
 		 * @return 	string[]
 		 * @access  private
 		 * @since 	1.0.0
@@ -332,13 +333,13 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		}
 
 		/**
-		* Get formatted address based on country of address.
-		*
-		* @param 	string[] $address_fields
-		* @return 	string
-		* @access 	public
-		* @since 	1.0.0
-		*/
+		 * Get formatted address based on country of address.
+		 *
+		 * @param 	array $address_fields Address fields.
+		 * @return 	string
+		 * @access 	public
+		 * @since 	1.0.0
+		 */
 		public function get_formatted_address( $address_fields = array() ) {
 
 			$address_fields    = $this->sanitize_address_fields( $address_fields );
@@ -394,9 +395,9 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		}
 
 		/**
-		 * trim white space and commas off a line.
+		 * Trim white space and commas off a line.
 		 *
-		 * @param  	string 		$line
+		 * @param  	string $line The line to be trimmed.
 		 * @return 	string
 		 * @access 	private
 		 * @since 	1.0.0
@@ -406,4 +407,4 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

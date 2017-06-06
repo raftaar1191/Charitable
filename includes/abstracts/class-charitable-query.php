@@ -243,7 +243,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select donor-specific fields.
 		 *
-		 * @return  string $select_statement
+		 * @param  	string $select_statement The default select statement.
+		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -255,7 +256,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Retrieve the donation ID and campaigns.
 		 *
-		 * @return  string $select_statement
+		 * @param   string $select_statement The default select statement.
+		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -267,7 +269,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select donation-specific fields.
 		 *
-		 * @return  string $select_statement
+		 * @param   string $select_statement The default select statement.
+		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -279,7 +282,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select total amount field.
 		 *
-		 * @return  string $select_statement
+		 * @param   string $select_statement The default select statement.
+		 * @return  string
 		 * @access  public
 		 * @since   1.2.0
 		 */
@@ -291,7 +295,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Filter query by campaign receiving the donation.
 		 *
-		 * @param   string $where_statement
+		 * @param   string $where_statement The default where statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -321,7 +325,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Filter query by status of the post.
 		 *
 		 * @global  WPBD $wpdb
-		 * @param   string $where_statement
+		 * @param   string $where_statement The default where statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -353,7 +357,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Filter query by donor ID.
 		 *
 		 * @global  WPBD $wpdb
-		 * @param   string $where_statement
+		 * @param   string $where_statement The default where statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -386,7 +390,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @param   string $join_statement
+		 * @param   string $join_statement The default join statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -401,7 +405,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @param   string $join_statement
+		 * @param   string $join_statement The default join statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -416,7 +420,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the donors table on the query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @param   string $join_statement
+		 * @param   string $join_statement The default join statement.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -546,7 +550,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Advance to next item.
 		 *
-		 * @return  int
+		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -568,7 +572,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Add parameters to pass to the prepared query.
 		 *
-		 * @param   mixed $parameters
+		 * @param   mixed $parameters Parameters to be set for the query.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -591,8 +595,8 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the correct number of placeholders given a symbol and count.
 		 *
-		 * @param   int $count
-		 * @param   string $placeholder
+		 * @param   int    $count       Number of placeholders.
+		 * @param   string $placeholder Placeholder symbol.
 		 * @return  string
 		 * @access  protected
 		 * @since   1.0.0
@@ -603,4 +607,4 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

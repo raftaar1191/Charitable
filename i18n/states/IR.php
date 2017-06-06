@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -42,5 +42,5 @@ return array(
 	'MZN' => __( 'Mazandaran (مازندران)', 'charitable' ),
 	'MKZ' => __( 'Markazi (مرکزی)', 'charitable' ),
 	'HRZ' => __( 'Hormozgan (هرمزگان)', 'charitable' ),
-	'SBN' => __( 'Sistan and Baluchestan (سیستان و بلوچستان)', 'charitable' )
+	'SBN' => __( 'Sistan and Baluchestan (سیستان و بلوچستان)', 'charitable' ),
 );

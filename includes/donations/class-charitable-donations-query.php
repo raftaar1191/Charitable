@@ -185,4 +185,4 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

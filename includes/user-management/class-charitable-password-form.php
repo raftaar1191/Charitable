@@ -6,12 +6,13 @@
  * @version     1.0.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Password_Form' ) ) : 
+if ( ! class_exists( 'Charitable_Password_Form' ) ) :
 
 /**
  * Charitable_Password_Form
@@ -21,7 +22,8 @@ if ( ! class_exists( 'Charitable_Password_Form' ) ) :
 class Charitable_Password_Form extends Charitable_Form {
 
     /**
-     * Shortcode parameters. 
+     * Shortcode parameters.
+
      *
      * @var     array
      * @access  protected
@@ -39,7 +41,8 @@ class Charitable_Password_Form extends Charitable_Form {
     protected $nonce_name = '_charitable_user_password_nonce';
 
     /**
-     * Action to be executed upon form submission. 
+     * Action to be executed upon form submission.
+
      *
      * @var     string
      * @access  protected
@@ -47,7 +50,8 @@ class Charitable_Password_Form extends Charitable_Form {
     protected $form_action = 'update_password';
 
     /**
-     * The current user. 
+     * The current user.
+
      *
      * @var     Charitable_User
      * @access  protected
@@ -56,7 +60,7 @@ class Charitable_Password_Form extends Charitable_Form {
 
     /**
      * Create class object.
-     * 
+     *
      * @param   array       $args       User-defined shortcode attributes.
      * @access  public
      * @since   1.0.0
@@ -101,11 +105,11 @@ class Charitable_Password_Form extends Charitable_Form {
 
         if ( $user ) {      
             switch ( $key ) {
-                case 'user_description' : 
+                case 'user_description' :
                     $value = $user->description;
                     break;
                 
-                default : 
+                default :
                     if ( $user->has_prop( $key ) ) {
                         $value = $user->get( $key );
                     }                    
@@ -172,7 +176,8 @@ class Charitable_Password_Form extends Charitable_Form {
     }
 
     /**
-     * Return the user's address fields. 
+     * Return the user's address fields.
+
      *
      * @return  array
      * @access  public
@@ -238,7 +243,8 @@ class Charitable_Password_Form extends Charitable_Form {
     }
 
     /**
-     * Return the social fields. 
+     * Return the social fields.
+
      *
      * @return  array
      * @access  public
@@ -309,7 +315,8 @@ class Charitable_Password_Form extends Charitable_Form {
     }
 
     /**
-     * Returns all fields as a merged array. 
+     * Returns all fields as a merged array.
+
      *
      * @return  array[]
      * @access  public
@@ -333,7 +340,8 @@ class Charitable_Password_Form extends Charitable_Form {
     }
 
     /**
-     * Update Password after form submission. 
+     * Update Password after form submission.
+
      *
      * @return  void
      * @access  public
@@ -391,4 +399,4 @@ class Charitable_Password_Form extends Charitable_Form {
     }
 }
 
-endif; // End class_exists check
+endif;

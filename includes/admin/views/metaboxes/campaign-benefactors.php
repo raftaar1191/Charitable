@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders a benefactors addon metabox. Used by any plugin that utilizes the Benefactors Addon.
  *
@@ -20,8 +20,8 @@ $ended = charitable_get_campaign( $post->ID )->has_ended();
 
 ?>
 <div class="charitable-metabox charitable-metabox-wrap">
-    <?php 
-    if ( empty( $benefactors ) ) : 
+    <?php
+    if ( empty( $benefactors ) ) :
 
         if ( $ended ) : ?>
 
@@ -31,7 +31,7 @@ $ended = charitable_get_campaign( $post->ID )->has_ended();
 
             <p><?php _e( 'You have not added any contribution rules yet.', 'charitable' ) ?></p>
 
-        <?php 
+        <?php
         endif;
     else :
         foreach ( $benefactors as $benefactor ) :
@@ -60,7 +60,7 @@ $ended = charitable_get_campaign( $post->ID )->has_ended();
     if ( ! $ended ) :
     ?>
         <p><a href="#" class="button" data-charitable-toggle="campaign_benefactor__0"><?php _e( '+ Add New Contribution Rule', 'charitable' ) ?></a></p> 
-    <?php 
+    <?php
     endif;
     ?>    
 </div>

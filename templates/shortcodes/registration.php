@@ -8,7 +8,8 @@
  * @version 1.3.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $form = $view_args['form'];
 

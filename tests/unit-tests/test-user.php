@@ -4,10 +4,10 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 
 	/**
 	 * We have three different users to test several different 
-	 * ways a donor may be created. 
+	 * ways a donor may be created.
 	 *
 	 * 1. James Gordon: Totally new user when he makes his first donation.
-	 * 2. Fish Mooney: An existing user who makes a donation. 
+	 * 2. Fish Mooney: An existing user who makes a donation.
 	 * 3. Carmine Falcone: An existing user who has never made a donation and is therefore not a donor.
 	 */
 	private $james_gordon;
@@ -66,7 +66,7 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 		$this->assertTrue( $this->james_gordon->is_donor() );
 	}
 
-	/** 
+	/**
 	 * @depends test_is_donor
 	 */
 	public function test_is_donor_with_non_donor() {
@@ -80,7 +80,7 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 		$this->assertFalse( $user->is_donor() );
 	}	
 
-	/** 
+	/**
 	 * @depends test_is_donor
 	 */
 	public function test_is_donor_with_non_wpuser() {
@@ -94,77 +94,77 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 		$this->assertTrue( $user->is_donor() );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_donor
 	 */
 	public function test_get_name() {
 		$this->assertEquals( 'James Gordon', $this->james_gordon->get_name() );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_donor
 	 */
 	public function test_get_user_email() {
 		$this->assertEquals( 'james@gotham.com', $this->james_gordon->get('user_email') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_first_name() {
 		$this->assertEquals( 'James', $this->james_gordon->get('first_name') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_last_name() {		
 		$this->assertEquals( 'Gordon',  $this->james_gordon->get('last_name') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_address() {
 		$this->assertEquals( '22 Batman Avenue', $this->james_gordon->get('donor_address') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_address_2() {
 		$this->assertEquals( '', $this->james_gordon->get('donor_address_2') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_city() {
 		$this->assertEquals( 'Gotham', $this->james_gordon->get('donor_city') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_state() {
 		$this->assertEquals( 'Gotham State', $this->james_gordon->get('donor_state') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_postcode() {
 		$this->assertEquals( '29292', $this->james_gordon->get('donor_postcode') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_user_email
 	 */
 	public function test_get_donor_country() {
 		$this->assertEquals( 'US', $this->james_gordon->get('donor_country') );
 	}
 
-	/** 
+	/**
 	 * @depends test_get_donor
 	 */
 	public function test_get_address_fields() {
@@ -179,7 +179,7 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 		$this->assertEquals( $expected, $this->james_gordon->get_address() );
 	}	
 
-	/** 
+	/**
 	 * @depends test_get_donor
 	 */
 	public function test_get_donations() {

@@ -1,17 +1,18 @@
-<?php 
+<?php
 /**
- * Charitable Dashboard Widgets Hooks. 
+ * Charitable Dashboard Widgets Hooks.
  *
- * Action/filter hooks used for Charitable Dashboard Widgets. 
- * 
+ * Action/filter hooks used for Charitable Dashboard Widgets.
+ *
  * @package     Charitable/Functions/Admin
  * @version     1.2.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Register dashboard widgets.
@@ -21,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 add_action( 'wp_dashboard_setup', array( 'Charitable_Donations_Dashboard_Widget', 'register' ) );
 
 /**
- * Get the content for the donations widget. 
+ * Get the content for the donations widget.
  *
  * @see Charitable_Donations_Dashboard_Widget::get_content()
  */

@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Displays the campaign donation form.
  *
@@ -10,7 +10,8 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * The donation form object used for donations to this campaign. By

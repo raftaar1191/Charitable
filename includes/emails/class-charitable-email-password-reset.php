@@ -229,4 +229,4 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

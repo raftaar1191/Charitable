@@ -15,7 +15,7 @@ class Test_Charitable_Campaigns extends Charitable_UnitTestCase {
 		$user_id = $this->factory->user->create( array( 'display_name' => 'John Henry' ) );
 
 		/**
-		 * Campaign 1: 
+		 * Campaign 1:
 		 *
 		 * End date: 			300 days from now
 		 * Donations received: 	$1000
@@ -27,7 +27,7 @@ class Test_Charitable_Campaigns extends Charitable_UnitTestCase {
 		Charitable_Donation_Helper::create_campaign_donation_for_user( $user_id, $campaign_1_id, 1000 );
 
 		/**
-		 * Campaign 2: 
+		 * Campaign 2:
 		 *
 		 * End date: 			100 days from now
 		 * Donations received: 	$50
@@ -39,7 +39,7 @@ class Test_Charitable_Campaigns extends Charitable_UnitTestCase {
 		Charitable_Donation_Helper::create_campaign_donation_for_user( $user_id, $campaign_2_id, 50 );
 
 		/**
-		 * Campaign 3: 
+		 * Campaign 3:
 		 *
 		 * End date: 			2 days from now
 		 * Donations received: 	$200
@@ -51,7 +51,7 @@ class Test_Charitable_Campaigns extends Charitable_UnitTestCase {
 		Charitable_Donation_Helper::create_campaign_donation_for_user( $user_id, $campaign_3_id, 200 );
 
 		/**
-		 * Campaign 4: 
+		 * Campaign 4:
 		 *
 		 * End date: 			2 days ago
 		 * Donations received: 	$40
