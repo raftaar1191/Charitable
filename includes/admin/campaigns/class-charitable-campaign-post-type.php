@@ -31,7 +31,9 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		private static $instance = null;
 
 		/**
-		 * @var     Charitable_Meta_Box_Helper $meta_box_helper
+		 * Meta Box Helper class instance.
+		 *
+		 * @var     Charitable_Meta_Box_Helper
 		 * @access  private
 		 */
 		private $meta_box_helper;
@@ -45,14 +47,14 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
 
-			// Campaign columns
+			// Campaign columns.
 			add_filter( 'manage_edit-campaign_columns',                 array( $this, 'dashboard_columns' ), 11, 1 );
 
 			add_action( 'add_meta_boxes',                               array( $this, 'add_meta_boxes' ), 10 );
 			add_action( 'add_meta_boxes_campaign',                      array( $this, 'wrap_editor' ) );
 			add_action( 'edit_form_after_title',                        array( $this, 'campaign_form_top' ) );
 			add_action( 'save_post_' . Charitable::CAMPAIGN_POST_TYPE,  array( $this, 'save_campaign' ), 10, 2 );
-			add_filter( 'wp_insert_post_data',                          array( $this, 'set_default_post_content' ), 10, 2 );
+			add_filter( 'wp_insert_post_data',                          array( $this, 'set_default_post_content' ) );
 			add_action( 'charitable_campaign_donation_options_metabox', array( $this, 'campaign_donation_options_metabox' ) );
 			add_filter( 'enter_title_here',                             array( $this, 'campaign_enter_title' ), 10, 2 );
 			add_filter( 'get_user_option_meta-box-order_campaign',      '__return_false' );
@@ -75,31 +77,30 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 			return self::$instance;
 		}
 
-
 		/**
 		 * Customize campaigns columns.
 		 *
 		 * @see     get_column_headers
 		 *
+		 * @param   array $column_names The columns to show for campaigns.
 		 * @return  array
 		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function dashboard_columns( $column_names ) {
 
-			// the creator as an array for subsequent array manip
+			/* The creator as an array for subsequent array manipulation. */
 			$creator = array( 'author' => __( 'Creator', 'charitable' ) );
 
-			// insert after title column
+			/* Insert after title column. */
 			if ( isset( $column_names['title'] ) ) {
 
-				// find the "title" column
+				/* Find the "title" column. */
 				$index = array_search( 'title', array_keys( $column_names ) );
 
-				// reform the array
+				/* Reform the array. */
 				$column_names = array_merge( array_slice( $column_names, 0, $index + 1, true ), $creator, array_slice( $column_names, $index, count( $column_names ) - $index, true ) );
 
-				// or add to end
 			} else {
 				$column_names = array_merge( $column_names, $creator );
 			}
@@ -183,7 +184,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display fields at the very top of the page.
 		 *
-		 * @param   WP_Post     $post
+		 * @param   WP_Post $post Current post.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -208,7 +209,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Wrap editor (and other advanced settings).
 		 *
-		 * @return  string
+		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -230,7 +231,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display advanced campaign fields.
 		 *
-		 * @param   WP_Post         $post
+		 * @param   WP_Post $post Current post object.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -305,8 +306,8 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Save meta for the campaign.
 		 *
-		 * @param   int $campaign_id
-		 * @param   WP_Post $post
+		 * @param   int     $campaign_id The campaign ID.
+		 * @param   WP_Post $post        Current Post object.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -340,7 +341,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 				/**
 				 * Filter this meta value.
 				 *
-				 * The filter hook is charitable_sanitize_campaign_meta{$key}.
+				 * The filter hook is charitable_sanitize_campaign_meta{$key}
 				 *
 				 * For example, for _campaign_end_date the filter hook will be:
 				 *
@@ -350,7 +351,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 				update_post_meta( $campaign_id, $key, $value );
 
-			}
+			}//end foreach
 
 			/* Hook for plugins to do something else with the posted data */
 			do_action( 'charitable_campaign_save', $post );
@@ -359,13 +360,12 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Set default post content when the extended description is left empty.
 		 *
-		 * @param   array $data
-		 * @param   array $postarr
+		 * @param   array $data    Submitted data.
 		 * @return  array
 		 * @access  public
 		 * @since   1.4.0
 		 */
-		public function set_default_post_content( $data, $postarr ) {
+		public function set_default_post_content( $data ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE != $data['post_type'] ) {
 				return $data;
 			}
@@ -380,8 +380,8 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Sets the placeholder text of the campaign title field.
 		 *
-		 * @param   string      $placeholder
-		 * @param   WP_Post     $post
+		 * @param   string  $placeholder Placeholder text.
+		 * @param   WP_Post $post        Current Post object.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -396,14 +396,19 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 		/**
 		 * Change messages when a post type is updated.
-		 * @param  array $messages
-		 * @return array
+		 *
+		 * @global  WP_Post $post
+		 * @global  int     $post_ID
+		 * @param   array $messages Messages to display.
+		 * @return  array
+		 * @access 	public
 		 */
 		public function post_messages( $messages ) {
 			global $post, $post_ID;
 
 			$messages[ Charitable::CAMPAIGN_POST_TYPE ] = array(
-				0 => '', // Unused. Messages start at index 1.
+				// Unused. Messages start at index 1.
+				0 => '',
 				1 => sprintf(
 					__( 'Campaign updated. <a href="%s">View Campaign</a>', 'charitable' ),
 					esc_url( get_permalink( $post_ID ) )
@@ -439,6 +444,11 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 		/**
 		 * Modify bulk messages
+		 *
+		 * @param 	array $bulk_messages Messages to show after bulk actions.
+		 * @param 	array $bulk_counts   Array showing how many items were affected by the action.
+		 * @return 	array
+		 * @access 	public
 		 */
 		public function bulk_messages( $bulk_messages, $bulk_counts ) {
 
@@ -456,4 +466,4 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

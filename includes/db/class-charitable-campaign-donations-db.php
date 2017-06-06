@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
@@ -23,6 +24,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * The version of our database table
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -31,6 +33,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * The name of the primary column
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -241,7 +244,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			list( $in, $parameters ) = $this->get_in_clause_params( $donation_id );
 
-			$sql = "SELECT * 
+			$sql = "SELECT *
                     FROM $this->table_name 
                     WHERE $field IN ( $in );";
 
@@ -832,21 +835,21 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 			switch ( $field ) {
 
 				case 'campaign' :
-				case 'campaign_id' : 
+				case 'campaign_id' :
 					$column = 'campaign_id';
 					break;
 
-				case 'donation' : 
-				case 'donation_id' : 
+				case 'donation' :
+				case 'donation_id' :
 					$column = 'donation_id';
 					break;
 
-				case 'donor' : 
-				case 'donor_id' : 
+				case 'donor' :
+				case 'donor_id' :
 					$column = 'donor_id';
 					break;
 
-				default : 
+				default :
 					charitable_get_deprecated()->doing_it_wrong(
 						__METHOD__,
 						__( 'Field expected to be `campaign`, `campaign_id`, `donation`, `donation_id`, `donor` or `donor_id`.', 'charitable' ),

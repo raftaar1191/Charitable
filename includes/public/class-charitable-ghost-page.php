@@ -1,23 +1,24 @@
 <?php
 /**
- * This file contains the class in charge of our ghost posts. 
+ * This file contains the class in charge of our ghost posts.
  *
- * This is based on the IT_Exchange_Casper class in iThemes Exchange. 
+ * This is based on the IT_Exchange_Casper class in iThemes Exchange.
  *
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Ghost_Page
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Ghost_Page' ) ) : 
+if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
 
     /**
      * Charitable_Ghost_Page class.
-     * 
+     *
      * It is used when viewing a frontend Charitable view other than a campaign.
      *
      * @since 1.0.0
@@ -154,4 +155,4 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         }
     }
 
-endif; // End class_exists check
+endif;

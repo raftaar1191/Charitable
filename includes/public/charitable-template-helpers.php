@@ -1,26 +1,27 @@
-<?php 
+<?php
 /**
- * Charitable Template Helpers. 
+ * Charitable Template Helpers.
  *
  * Functions used to assist with rendering templates.
- * 
+ *
  * @package     Charitable/Functions/Templates
  * @version     1.2.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Simple CSS compression. 
+ * Simple CSS compression.
  *
- * Removes all comments, removes spaces after colons and strips out all the whitespace. 
+ * Removes all comments, removes spaces after colons and strips out all the whitespace.
  *
  * Based on http://manas.tungare.name/software/css-compression-in-php/
  *
- * @param   string $css The block of CSS to be compressed. 
+ * @param   string $css The block of CSS to be compressed.
  * @return  string The compressed CSS
  * @since   1.2.0
  */

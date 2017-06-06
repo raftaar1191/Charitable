@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Currency' ) ) :
 
@@ -31,17 +32,23 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		private static $instance = null;
 
 		/**
-		 * @var 	string 		$currency_format 	The format that the current currency will take.
+		 * The format that the current currency will take.
+		 *
+		 * @var 	string
 		 */
 		private $currency_format = array();
 
 		/**
-		 * @var 	string[]	$currencies 		Every currency available.
+		 * Every currency available.
+		 *
+		 * @var 	string[]
 		 */
 		private $currencies = array();
 
 		/**
-		 * @var 	string 		$currency 			The currency in use on the site.
+		 * The currency in use on the site.
+		 *
+		 * @var 	string
 		 */
 		private $currency;
 
@@ -74,7 +81,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * 50.00 -> $50.00
 		 *
-		 * @param 	string    $amount
+		 * @param 	string    $amount        The amount to convert.
 		 * @param 	int|false $decimal_count Optional. If not set, default decimal count will be used.
 		 * @return 	string|WP_Error
 		 * @access 	public
@@ -102,7 +109,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * $50.00 -> 50.00
 		 *
-		 * @param 	string $amount
+		 * @param 	string $amount The amount to sanitize.
 		 * @return 	float|WP_Error
 		 * @access  public
 		 * @since 	1.0.0
@@ -120,9 +127,12 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				return new WP_Error( 'invalid_parameter_type', 'Amount must be passed as a string.' );
 			}
 
-			/** If we're using commas for decimals, we need to turn any commas into points,
-				and we need to replace existing points with blank spaces. Example:
-				12.500,50 -> 12500.50 */
+			/**
+			 * If we're using commas for decimals, we need to turn any commas into points, and
+			 * we need to replace existing points with blank spaces. Example:
+			 *
+			 * 12.500,50 -> 12500.50
+			 */
 			if ( $this->is_comma_decimal() ) {
 				$amount = str_replace( ',', '_', $amount );
 				$amount = str_replace( '.', '', $amount );
@@ -137,7 +147,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
-		 * @param 	string $amount
+		 * @param 	string $amount The amount to be sanitized.
 		 * @return  string
 		 * @access  public
 		 * @since   1.3.0
@@ -165,12 +175,11 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the number of decimals to use.
 		 *
 		 * @uses 	charitable_currency_decimal_count
-		 * @param 	float       $amount
 		 * @return 	int
 		 * @access 	public
 		 * @since 	1.0.0
 		 */
-		public function get_decimals( $amount = '' ) {
+		public function get_decimals() {
 			return charitable_get_option( 'decimal_count', 2 );
 		}
 
@@ -208,7 +217,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Get the currency format for accounting.js
 		 *
-		 * @return  void
+		 * @return  string
 		 * @access  public
 		 * @since   1.3.0
 		 */
@@ -291,7 +300,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 					'VND'	=> sprintf( __( 'Vietnamese Dong (%s)', 'charitable' ), $this->get_currency_symbol( 'VND' ) ),
 					'ZAR'	=> sprintf( __( 'South African Rand (%s)', 'charitable' ), $this->get_currency_symbol( 'ZAR' ) ),
 				) );
-			}
+			}//end if
 
 			return $this->currencies;
 		}
@@ -382,10 +391,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				case 'NGN' : $currency_symbol = '&#8358;'; break;
 				case 'HRK' : $currency_symbol = 'Kn'; break;
 				default    : $currency_symbol = ''; break;
-			}
+			}//end switch
 
 			return apply_filters( 'charitable_currency_symbol', $currency_symbol, $currency );
 		}
 	}
 
-endif; // End class_exists check
+endif;

@@ -10,7 +10,8 @@
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $message = isset( $view_args['logged_in_message'] )
 	? $view_args['logged_in_message']

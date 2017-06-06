@@ -9,13 +9,14 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Displays a template.
  *
  * @param 	string|string[] $template_name A single template name or an ordered array of template.
- * @param 	mixed[] $args 				   Optional array of arguments to pass to the view.
+ * @param 	mixed[]         $args 	       Optional array of arguments to pass to the view.
  * @return 	Charitable_Template
  * @since 	1.0.0
  */
@@ -741,7 +742,7 @@ function charitable_get_current_url() {
 /**
  * Verifies whether the current user can access the donation receipt.
  *
- * @param   Charitable_Donation $donation
+ * @param   Charitable_Donation $donation The Donation object.
  * @return  boolean
  * @since   1.1.2
  */

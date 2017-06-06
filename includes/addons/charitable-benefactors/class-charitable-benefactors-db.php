@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 
@@ -222,7 +223,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 
 			return $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT * 
+					"SELECT *
 					FROM $this->table_name 
 					WHERE campaign_id = %d
 					AND date_created < UTC_TIMESTAMP()

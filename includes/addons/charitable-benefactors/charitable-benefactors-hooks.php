@@ -1,20 +1,21 @@
-<?php 
+<?php
 /**
- * Charitable Benefactors Hooks. 
+ * Charitable Benefactors Hooks.
  *
- * Action/filter hooks used for Charitable Benefactors addon. 
- * 
+ * Action/filter hooks used for Charitable Benefactors addon.
+ *
  * @package     Charitable/Functions/Benefactors
  * @version     1.2.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * Register the custom script. 
+ * Register the custom script.
  *
  * @see     Charitable_Benefactors::register_script() 
  */

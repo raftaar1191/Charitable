@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Charitable Core Admin Functions
  *
@@ -12,7 +11,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Load a view from the admin/views folder.
@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
  *
  * Example usage: charitable_admin_view('metaboxes/cause-metabox');
  *
- * @param 	string      $view           The view to display.
- * @param 	array 		$view_args 		Optional. Arguments to pass through to the view itself
+ * @param 	string $view      The view to display.
+ * @param 	array  $view_args Optional. Arguments to pass through to the view itself.
  * @return 	void
  * @since 	1.0.0
  */
@@ -30,7 +30,11 @@ function charitable_admin_view( $view, $view_args = array() ) {
 	$filename = apply_filters( 'charitable_admin_view_path', charitable()->get_path( 'admin' ) . 'views/' . $view . '.php', $view, $view_args );
 
 	if ( ! is_readable( $filename ) ) {
-		_doing_it_wrong( __FUNCTION__, __( 'Passed view (' . $filename . ') not found or is not readable.', 'charitable' ), '1.0.0' );
+		charitable_get_deprecated()->doing_it_wrong(
+			__FUNCTION__,
+			__( 'Passed view (' . $filename . ') not found or is not readable.', 'charitable' ),
+			'1.0.0'
+		);
 	}
 
 	ob_start();

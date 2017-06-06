@@ -190,4 +190,4 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

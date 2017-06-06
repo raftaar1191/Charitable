@@ -112,7 +112,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		}
 
 		/**
-		 * Check if a failed user login attempt originated from Charitable login form. 
+		 * Check if a failed user login attempt originated from Charitable login form.
 		 *
 		 * If so redirect user to Charitable login page.
 		 *
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 			if ( ! isset( $_POST['charitable'] ) || ! $_POST['charitable'] ) {
 				return $user_or_error;
 			}
-		
+
 			foreach ( $user_or_error->errors as $code => $error ) {
 
 				/* Make sure the error messages link to our forgot password page, not WordPress' */
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 						
 						break;
 
-					case 'incorrect_password' : 
+					case 'incorrect_password' :
 						
 						$error = sprintf(
 							/* translators: %s: email address */
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 						
 						break;
 
-					default : 
+					default :
 						$error = $error[0];
 
 				}

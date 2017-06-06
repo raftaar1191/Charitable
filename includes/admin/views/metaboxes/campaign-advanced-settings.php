@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Loops over the meta boxes inside the advanced settings area of the Campaign post type.
  *

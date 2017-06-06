@@ -8,7 +8,7 @@ class Test_Charitable_Roles extends Charitable_UnitTestCase {
 		parent::setUp();
 
 		$this->charitable = charitable();
-		
+
 		$this->roles = new Charitable_Roles( $this->charitable );
 		$this->roles->add_roles();
 		$this->roles->add_caps();
@@ -16,7 +16,7 @@ class Test_Charitable_Roles extends Charitable_UnitTestCase {
 
 	function test_add_roles() {
 		global $wp_roles;
-		
+
 		if ( class_exists( 'WP_Roles' ) ) {
 			if ( ! isset( $wp_roles ) ) {
 				$wp_roles = new WP_Roles();
@@ -43,7 +43,7 @@ class Test_Charitable_Roles extends Charitable_UnitTestCase {
 		$this->assertArrayHasKey( 'publish_posts', (array) $wp_roles->roles['campaign_manager']['capabilities'] );
 		$this->assertArrayHasKey( 'upload_files', (array) $wp_roles->roles['campaign_manager']['capabilities'] );
 		$this->assertArrayHasKey( 'edit_published_posts', (array) $wp_roles->roles['campaign_manager']['capabilities'] );
-		
+
 		$this->assertArrayHasKey( 'read_private_pages', (array) $wp_roles->roles['campaign_manager']['capabilities'] );
 		$this->assertArrayHasKey( 'edit_private_pages', (array) $wp_roles->roles['campaign_manager']['capabilities'] );
 		$this->assertArrayHasKey( 'delete_private_pages', (array) $wp_roles->roles['campaign_manager']['capabilities'] );

@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 
@@ -23,6 +24,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * The version of our database table
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -31,6 +33,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * The name of the primary column
 		 *
+		 * @var 	string
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -42,7 +45,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
-	 	*/
+	 	 */
 		public function __construct() {
 			global $wpdb;
 
@@ -115,8 +118,9 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Add a new campaign donation.
 		 *
-		 * @param   array       $data
-		 * @return  int         The ID of the inserted donor.
+		 * @param   array  $data Donor data to insert.
+		 * @param 	string $type Should always be 'donors'.
+		 * @return  int The ID of the inserted donor.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -127,7 +131,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a user's ID, based on their donor ID.
 		 *
-		 * @param   int     $donor_id
+		 * @param   int $donor_id The Donor ID.
 		 * @return  int
 		 * @access  public
 		 * @since   1.0.0

@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
@@ -31,8 +31,8 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		public function __construct() {
 
 			parent::__construct(
-				'charitable_donate_widget', // Base ID
-				__( 'Campaign Donation', 'charitable' ), // Name
+				'charitable_donate_widget',
+				__( 'Campaign Donation', 'charitable' ),
 				array(
 					'description' => __( 'Display a donation widget.', 'charitable' ),
 					'customize_selective_refresh' => true,
@@ -44,8 +44,8 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Displays the widget on the frontend.
 		 *
-		 * @param   array       $args
-		 * @param   array       $instance
+		 * @param   array $args 	Widget args.
+		 * @param   array $instance Widget instance.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Displays the widget form.
 		 *
-		 * @param   array       $instance
+		 * @param   array $instance Widget instance. 
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -102,8 +102,8 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Update the widget settings.
 		 *
-		 * @param   array $new_instance
-		 * @param   array $old_instance
+		 * @param   array $new_instance New widget instance arguments.
+		 * @param   array $old_instance Old widget instance arguments.
 		 * @return  array
 		 * @access  public
 		 * @since   1.0.0

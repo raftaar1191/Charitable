@@ -2,11 +2,11 @@
 
 class Test_Charitable_Campaign extends Charitable_UnitTestCase {	
 
-	/** 
-	 * There are two campaigns. 
+	/**
+	 * There are two campaigns.
 	 *
-	 * Campaign 1: Goal of $40,000. Expiry 300 days from now. 
-	 * Campaign 2: No goal. No end date. 
+	 * Campaign 1: Goal of $40,000. Expiry 300 days from now.
+	 * Campaign 2: No goal. No end date.
 	 */
 	private $post_1;
 	private $campaign_1;

@@ -10,7 +10,8 @@
  * @version 1.2.3
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $campaigns = $view_args['campaigns'];
 $columns   = $view_args['columns'];

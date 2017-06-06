@@ -3,7 +3,7 @@
 class Test_Charitable_Locations extends Charitable_UnitTestCase {
 
 	/**
-	 * For this collection of test, we set up our default country as Australia. 
+	 * For this collection of test, we set up our default country as Australia.
 	 */
 	function setUp() {
 		parent::setUp();		
@@ -317,7 +317,8 @@ class Test_Charitable_Locations extends Charitable_UnitTestCase {
 
 		$this->assertEquals( $expected, charitable_get_location_helper()->get_formatted_address( $address_fields ) );
 
-		// Second address. Within country, with state code. 
+		// Second address. Within country, with state code.
+
 		$address_fields = array(
 			'first_name'	=> 'Jack',
 			'last_name'		=> 'Daniels',

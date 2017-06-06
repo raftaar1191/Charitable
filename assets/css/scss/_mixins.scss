@@ -1,4 +1,5 @@
-// Simple clearfix. 
+// Simple clearfix.
+
 @mixin clearfix {
 	*zoom: 1;
 	&:before, 
@@ -8,7 +9,7 @@
 	}
 	&:after {
 		clear: both;
-	}	
+	}
 }
 
 // Visually hides an element.

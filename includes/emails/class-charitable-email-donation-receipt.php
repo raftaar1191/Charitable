@@ -167,4 +167,4 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

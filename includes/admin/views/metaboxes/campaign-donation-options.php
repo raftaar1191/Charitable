@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the donation options metabox for the Campaign post type.
  *
@@ -11,7 +11,7 @@ $tooltip     = isset( $view_args['tooltip'] ) ? '<span class="tooltip"> '. $view
 $description = isset( $view_args['description'] ) ? '<span class="charitable-helper">' . $view_args['description'] . '</span>' 	: '';
 ?>
 <div class="charitable-metabox">
-	<?php 
+	<?php
 	do_action( 'charitable_campaign_donation_options_metabox' );
 	?>
 </div>

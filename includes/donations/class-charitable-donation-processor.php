@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
@@ -148,10 +149,12 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			$nonce = $_POST['charitable-donate-now'];
 
-			if ( ! wp_verify_nonce( $nonce, 'charitable-donate' )
-				&& ! wp_verify_nonce( $nonce, 'charitable-donate-' ) // Kept for backwards compatibility
-			) {
-				return;
+			if ( ! wp_verify_nonce( $nonce, 'charitable-donate' ) ) {
+
+				/* For backwards compatibility, we also check this nonce. */
+				if ( ! wp_verify_nonce( $nonce, 'charitable-donate-' ) ) {
+					return;
+				}
 			}
 
 			/* Save the donation in the session */
@@ -244,7 +247,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				wp_safe_redirect( charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $this->donation_id ) ) );
 
 				die();
-			}
+			}//end if
 		}
 
 		/**
@@ -267,7 +270,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a donation with AJAX.
 		 *
-		 * @return  json
+		 * @return  void
 		 * @access  public
 		 * @static
 		 * @since   1.3.0
@@ -363,8 +366,8 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * We use this when integrating third-party systems like Easy Digital Downloads and
 		 * WooCommerce.
 		 *
-		 * @param   mixed[] $values
-		 * @return  int $donation_id    Returns 0 in case of failure. Positive donation ID otherwise.
+		 * @param   mixed[] $values Submitted donation values.
+		 * @return  int $donation_id Returns 0 in case of failure. Positive donation ID otherwise.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -444,7 +447,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Inserts the campaign donations into the campaign_donations table.
 		 *
-		 * @param   int $donation_id
+		 * @param   int $donation_id The donation ID.
 		 * @return  int The number of donations inserted.
 		 * @access  public
 		 * @since   1.0.0
@@ -488,7 +491,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				if ( 0 == $campaign_donation_id ) {
 					return 0;
 				}
-			}
+			}//end foreach
 
 			return count( $campaigns );
 		}
@@ -496,7 +499,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save the meta for the donation.
 		 *
-		 * @param   int $donation_id
+		 * @param   int $donation_id The donation ID.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -524,7 +527,8 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a message to the donation log.
 		 *
-		 * @param   string $message
+		 * @param 	int    $donation_id The donation ID.
+		 * @param   string $message     The message to add to the log.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -551,7 +555,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * Return the submitted value for a particular key.
 		 *
 		 * @param   string $key     The key to search for.
-		 * @param   mixed $default  Fallback value to return if the data is not set.
+		 * @param   mixed  $default Fallback value to return if the data is not set.
 		 * @return  mixed
 		 * @access  public
 		 * @since   1.0.0
@@ -603,7 +607,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 					$this->campaign_donations_data[] = $campaign;
 				}
-			}
+			}//end if
 
 			return $this->campaign_donations_data;
 		}
@@ -637,7 +641,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					$user = new Charitable_User( $user_id );
 					$this->donor_id = $user->add_donor( $user_data );
 				}
-			}
+			}//end if
 
 			return $this->donor_id;
 		}
@@ -647,7 +651,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @uses    Charitable_Donation_Processor::get_redirection_after_gateway_processing()
 		 *
-		 * @param   mixed $gateway_processing
+		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  void
 		 * @access  private
 		 * @since   1.3.0
@@ -689,8 +693,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the URL that the donor should be redirected to.
 		 *
-		 * @param   mixed $gateway_processing
-		 * @param   int $donation_id
+		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  string
 		 * @access  private
 		 * @since   1.3.0
@@ -814,7 +817,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Checks whether the given gateway has been updated for compatibility with 1.3.
 		 *
-		 * @param   string $gateway
+		 * @param   string $gateway The gateway for the donation.
 		 * @return  boolean
 		 * @access  private
 		 * @since   1.3.0
@@ -830,7 +833,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @deprecated
 		 *
-		 * @param   string $gateway
+		 * @param   string $gateway The gateway for the donation.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -842,4 +845,4 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		}
 	}
 
-endif; // End class_exists check.
+endif;

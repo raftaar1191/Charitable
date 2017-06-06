@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
@@ -233,4 +233,4 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

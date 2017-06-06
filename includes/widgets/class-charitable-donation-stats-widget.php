@@ -1,20 +1,21 @@
 <?php
 /**
- * Donation stats widget class. 
+ * Donation stats widget class.
  *
  * @package     Charitable/Classes/Charitable_Donation_Stats_Widget
  * @version     1.0.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Donation_Stats_Widget' ) ) : 
+if ( ! class_exists( 'Charitable_Donation_Stats_Widget' ) ) :
 
 /**
- * Charitable_Donation_Stats_Widget class. 
+ * Charitable_Donation_Stats_Widget class.
  *
  * @since       1.0.0
  */
@@ -22,7 +23,7 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
 
     /**
      * Instantiate the widget and set up basic configuration.
-     * 
+     *
      * @access  public
      * @since   1.0.0
      */
@@ -38,7 +39,8 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
     }
 
     /**
-     * Display the widget contents on the front-end. 
+     * Display the widget contents on the front-end.
+
      *
      * @param   array $args
      * @param   array $instance
@@ -58,7 +60,8 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
     /**
      * Display the widget form in the admin.
      *
-     * @param   array $instance         The current settings for the widget options. 
+     * @param   array $instance         The current settings for the widget options.
+
      * @return  void
      * @access  public
      * @since   1.0.0
@@ -74,10 +77,13 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
     }
 
     /**
-     * Update the widget settings in the admin. 
+     * Update the widget settings in the admin.
+
      *
-     * @param   array $new_instance         The updated settings. 
-     * @param   array $new_instance         The old settings. 
+     * @param   array $new_instance         The updated settings.
+
+     * @param   array $new_instance         The old settings.
+
      * @return  void
      * @access  public
      * @since   1.0.0
@@ -89,4 +95,4 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
     }
 }
 
-endif; // End class_exists check
+endif;

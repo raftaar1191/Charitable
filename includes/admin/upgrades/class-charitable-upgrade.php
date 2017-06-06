@@ -11,7 +11,8 @@
  * @since 		1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
@@ -757,4 +758,4 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

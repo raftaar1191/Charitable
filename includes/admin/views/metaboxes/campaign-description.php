@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the campaign description field for the Campaign post type.
  *

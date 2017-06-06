@@ -47,9 +47,9 @@ $form = $view_args['form'];
 			?>
 			<p class="description"><?php echo wp_get_password_hint() ?></p>
 		</div>
-		
+
 		<?php do_action( 'charitable_form_after_fields', $form ); ?>
-		
+
 		<div class="charitable-form-field charitable-submit-field resetpass-submit">
 			<button id="resetpass-button" class="button button-primary lostpassword-button" type="submit"><?php _e( 'Reset Password', 'charitable' ) ?></button>
 		</div>

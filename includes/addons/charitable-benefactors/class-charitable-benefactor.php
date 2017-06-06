@@ -6,13 +6,13 @@
  * @version 	1.0.0
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Benefactor' ) ) : 
+if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 
 /**
  * Charitable_Benefactor
@@ -22,7 +22,7 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 abstract class Charitable_Benefactor {
 
 	/**
-	 * Core benefactor record. 
+	 * Core benefactor record.
 	 *
 	 * @var 	Object
 	 * @access  protected
@@ -31,7 +31,7 @@ abstract class Charitable_Benefactor {
 
 	/**
 	 * Create class object.
-	 * 
+	 *
 	 * @param 	mixed 	$benefactor
 	 * @access 	public
 	 * @since	1.0.0
@@ -74,7 +74,7 @@ abstract class Charitable_Benefactor {
 	}
 
 	/**
-	 * Magic getter method. 
+	 * Magic getter method.
 	 *
 	 * @param 	$key
 	 * @return 	string
@@ -86,7 +86,7 @@ abstract class Charitable_Benefactor {
 	}
 
 	/**
-	 * Return the details of the benefactor (i.e. the 3rd party extension). 
+	 * Return the details of the benefactor (i.e. the 3rd party extension).
 	 *
 	 * @return 	Object
 	 * @access  public
@@ -107,7 +107,7 @@ abstract class Charitable_Benefactor {
     abstract public function get_contribution_description();
 
 	/**
-	 * Return the contribution as a nicely formatted amount. 
+	 * Return the contribution as a nicely formatted amount.
 	 *
 	 * @return 	string
 	 * @access  public
@@ -125,7 +125,8 @@ abstract class Charitable_Benefactor {
 	}
 
     /**
-     * Returns whether the benefit rule is active. 
+     * Returns whether the benefit rule is active.
+
      *
      * @return  boolean
      * @access  public
@@ -136,7 +137,8 @@ abstract class Charitable_Benefactor {
     }
 
     /**
-     * Returns whether the benefit rule is active. 
+     * Returns whether the benefit rule is active.
+
      *
      * @return  boolean
      * @access  public
@@ -147,7 +149,8 @@ abstract class Charitable_Benefactor {
     }
 
     /**
-     * Return the benefit amount of a product based on the price, quantity and percent going to benefit. 
+     * Return the benefit amount of a product based on the price, quantity and percent going to benefit.
+
      *
      * @param   float 	$price
      * @param   int   	$quantity
@@ -182,7 +185,7 @@ abstract class Charitable_Benefactor {
      */
     protected function benefit_is_per_cart() {
     	return false === ( $this->benefactor->contribution_amount_is_per_item || $this->benefactor->contribution_amount_is_percentage );
-    }	
+    }
 }
 
-endif; // End class_exists check
+endif;

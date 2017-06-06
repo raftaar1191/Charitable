@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
@@ -24,7 +24,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Create new query object.
 		 *
-		 * @param   array $args
+		 * @param   array $args Query arguments.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -192,4 +192,4 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

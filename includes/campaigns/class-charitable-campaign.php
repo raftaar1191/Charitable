@@ -869,4 +869,4 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

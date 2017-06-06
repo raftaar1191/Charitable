@@ -184,5 +184,5 @@ class Test_Charitable_Currency_Helper extends Charitable_UnitTestCase {
 
 	private function set_thousands_separator( $separator ) {
 		$this->set_option( 'thousands_separator', $separator );
-	}	
+	}
 }

@@ -18,7 +18,8 @@
  * @license             http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable' ) ) :
 
@@ -265,7 +266,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'shortcodes/class-charitable-donation-receipt-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/class-charitable-login-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/class-charitable-registration-shortcode.php' );
-			require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );			
+			require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );
 			require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
 
 			/* Widgets */
@@ -483,7 +484,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Stores an object in the plugin's registry.
 		 *
-		 * @param   mixed $object
+		 * @param   mixed $object The object we are registering.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -513,8 +514,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns plugin paths.
 		 *
-		 * @param   string $type        If empty, returns the path to the plugin.
-		 * @param   bool $absolute_path If true, returns the file system path. If false, returns it as a URL.
+		 * @param   string  $type          If empty, returns the path to the plugin.
+		 * @param   boolean $absolute_path If true, returns the file system path. If false, returns it as a URL.
 		 * @return  string
 		 * @since   1.0.0
 		 */
@@ -548,7 +549,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 				default :
 					$path = __FILE__;
-			}
+
+			}//end switch
 
 			return $path;
 		}
@@ -614,7 +616,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns the model for one of Charitable's database tables.
 		 *
-		 * @param   string $table
+		 * @param   string $table The database table to retrieve.
 		 * @return  Charitable_DB
 		 * @access  public
 		 * @since   1.0.0

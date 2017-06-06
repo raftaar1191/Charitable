@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 
@@ -57,7 +58,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Optionally add the licenses tab.
 		 *
-		 * @param   string[] $tabs
+		 * @param   string[] $tabs Settings tabs.
 		 * @return  string[]
 		 * @access  public
 		 * @since   1.4.7
@@ -124,7 +125,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Add the licenses group.
 		 *
-		 * @param   string[] $groups
+		 * @param   string[] $groups Settings groups.
 		 * @return  string[]
 		 * @access  public
 		 * @since   1.0.0
@@ -137,13 +138,12 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Render the licenses table.
 		 *
-		 * @param   mixed[] $args
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
 		 */
-		public function render_licenses_table( $args ) {
-			charitable_admin_view( 'settings/licenses', $args );
+		public function render_licenses_table() {
+			charitable_admin_view( 'settings/licenses' );
 		}
 
 		/**
@@ -184,4 +184,4 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

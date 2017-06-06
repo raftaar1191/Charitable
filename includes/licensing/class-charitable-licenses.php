@@ -148,9 +148,9 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 						$_transient_data->last_checked = time();
 						$_transient_data->checked[ $plugin_file ] = $product['version'];
 
-					}
-				}
-			}
+					}//end foreach
+				}//end if
+			}//end if
 
 			return $_transient_data;
 		}
@@ -341,7 +341,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		}
 
 		/**
-		 * Return the URL to deactivate a specific license. 
+		 * Return the URL to deactivate a specific license.
 		 *
 		 * @param   string $item The item to deactivate.
 		 * @return  string
@@ -413,7 +413,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return a key for the item, based on the item name.
 		 *
-		 * @param   string $item_name
+		 * @param   string $item_name Name of the item.
 		 * @return  string
 		 * @access  protected
 		 * @since   1.0.0
@@ -460,10 +460,10 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 				$versions = json_decode( $versions, true );
 
 				wp_cache_set( 'plugin_versions', $versions, 'charitable' );
-			}
+			}//end if
 
 			return $versions;
 		}
 	}
 
-endif; // End class_exists check.
+endif;

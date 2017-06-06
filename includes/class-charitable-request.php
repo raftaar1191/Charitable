@@ -31,25 +31,32 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		private static $instance = null;
 
 		/**
+		 * Campaign object.
+		 *
 		 * @var 	Charitable_Campaign|false
 		 * @access 	private
 		 */
 		private $campaign;
 
 		/**
+		 * Campaign ID.
+		 *
 		 * @var 	int
 		 * @access 	private
 		 */
 		private $campaign_id;
 
-
 		/**
+		 * Donor object.
+		 *
 		 * @var 	Charitable_Donor
 		 * @access 	private
 		 */
 		private $donor;
 
 		/**
+		 * Donation object.
+		 *
 		 * @var 	Charitable_Donation
 		 * @access 	private
 		 */
@@ -87,7 +94,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * When the_post is set, sets the current campaign to the current post if it is a campaign.
 		 *
-		 * @param 	array 		$args
+		 * @param 	WP_Post $post The Post object.
 		 * @return 	void
 		 * @access  public
 		 * @since 	1.0.0
@@ -158,7 +165,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 
 					}
 				}
-			}
+			}//end if
 
 			if ( ! $this->campaign_id ) {
 
@@ -226,4 +233,4 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

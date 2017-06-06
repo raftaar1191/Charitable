@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Deprecated' ) ) :
@@ -22,6 +22,8 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 	class Charitable_Deprecated {
 
 		/**
+		 * One true class object.
+		 *
 		 * @var     Charitable_Deprecated
 		 * @access  private
 		 * @static
@@ -30,6 +32,8 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		private static $instance = null;
 
 		/**
+		 * Whether logging is enabled.
+		 *
 		 * @var     $logging
 		 * @access  private
 		 * @static
@@ -64,9 +68,9 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated argument.
 		 *
-		 * @param   string $function
-		 * @param   string $version
-		 * @param   string|null $extra_message
+		 * @param   string      $function      The deprecated function.
+		 * @param   string      $version       The version when this argument became deprecated.
+		 * @param   string|null $extra_message An extra message to include for the notice.
 		 * @return  boolean Whether the notice was logged.
 		 * @access  public
 		 * @since   1.4.0
@@ -90,8 +94,8 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated function.
 		 *
-		 * @param   string      $function The function that has been deprecated
-		 * @param   string      $version The version of Charitable where the function was deprecated.
+		 * @param   string      $function    The function that has been deprecated.
+		 * @param   string      $version     The version of Charitable where the function was deprecated.
 		 * @param   string|null $replacement Optional. The function to use instead.
 		 * @return  boolean Whether the notice was logged.
 		 * @access  public
@@ -153,4 +157,4 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

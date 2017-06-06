@@ -250,4 +250,4 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

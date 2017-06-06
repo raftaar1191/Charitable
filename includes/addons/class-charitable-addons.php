@@ -6,13 +6,13 @@
  * @version 	1.0.0
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Addons' ) ) : 
+if ( ! class_exists( 'Charitable_Addons' ) ) :
 
 /**
  * Charitable_Addons
@@ -41,7 +41,7 @@ class Charitable_Addons {
 
 	/**
 	 * Create class object.
-	 * 
+	 *
 	 * @access 	private
 	 * @since	1.0.0
 	 */
@@ -53,10 +53,10 @@ class Charitable_Addons {
 	}
 
 	/**
-	 * Activate an addon. 
+	 * Activate an addon.
 	 *
 	 * This is programatically called on the charitable_activate_addon hook, 
-	 * triggered by a plugin. 
+	 * triggered by a plugin.
 	 *
 	 * @return 	void
 	 * @access  public
@@ -81,13 +81,13 @@ class Charitable_Addons {
 		require_once( $filepath );
 
 		$class = $this->get_addon_class( $addon );
-		
+
 		/* Call the Addon's activate method */
 		call_user_func( array( $class, 'activate' ) );
 	}
 
 	/**
-	 * Load activated addons. 
+	 * Load activated addons.
 	 *
 	 * @return 	void
 	 * @access  public
@@ -121,7 +121,7 @@ class Charitable_Addons {
 	}
 
 	/**
-	 * Load interface and abstract classes that addons use. 
+	 * Load interface and abstract classes that addons use.
 	 *
 	 * @return 	void
 	 * @access  private
@@ -132,7 +132,7 @@ class Charitable_Addons {
 	}
 
 	/**
-	 * Return the filepath to the given addon. 
+	 * Return the filepath to the given addon.
 	 *
 	 * @param 	string 		$addon
 	 * @return 	string
@@ -144,7 +144,7 @@ class Charitable_Addons {
 	}
 
 	/**
-	 * Get class name of addon. 
+	 * Get class name of addon.
 	 *
 	 * @param 	string 		$addon
 	 * @return 	string
@@ -159,4 +159,4 @@ class Charitable_Addons {
 	}
 }
 
-endif; // End class_exists check
+endif;

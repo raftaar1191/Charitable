@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -24,5 +24,5 @@ return array(
 	'PE' => __( 'Prince Edward Island', 'charitable' ),
 	'QC' => __( 'Quebec', 'charitable' ),
 	'SK' => __( 'Saskatchewan', 'charitable' ),
-	'YT' => __( 'Yukon Territory', 'charitable' )
+	'YT' => __( 'Yukon Territory', 'charitable' ),
 );

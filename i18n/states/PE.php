@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -37,5 +37,5 @@ return array(
 	'SAM' => __( 'San Mart&iacute;n', 'charitable' ),
 	'TAC' => __( 'Tacna', 'charitable' ),
 	'TUM' => __( 'Tumbes', 'charitable' ),
-	'UCA' => __( 'Ucayali', 'charitable' )
+	'UCA' => __( 'Ucayali', 'charitable' ),
 );

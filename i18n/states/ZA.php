@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License   
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
  */
 
 return array(
@@ -20,5 +20,5 @@ return array(
 	'MP'  => __( 'Mpumalanga', 'charitable' ),
 	'NC'  => __( 'Northern Cape', 'charitable' ),
 	'NW'  => __( 'North West', 'charitable' ),
-	'WC'  => __( 'Western Cape', 'charitable' )
+	'WC'  => __( 'Western Cape', 'charitable' ),
 );

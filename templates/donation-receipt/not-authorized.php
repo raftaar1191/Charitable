@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Displays the notice to say that the user cannot access the donation receipt.
  *
@@ -10,7 +10,8 @@
  * @version 1.1.2
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $content = $view_args[ 'content' ];
 

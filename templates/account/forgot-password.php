@@ -10,7 +10,8 @@
  * @version 1.4.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * @var 	Charitable_Forgot_Password_Form
@@ -44,9 +45,9 @@ $form = $view_args['form'];
 
 			?>
 		</div>
-		
+
 		<?php do_action( 'charitable_form_after_fields', $form ); ?>
-		
+
 		<div class="charitable-form-field charitable-submit-field">
 			<button class="button button-primary lostpassword-button" type="submit"><?php esc_attr_e( 'Reset Password', 'charitable' ) ?></button>
 		</div>

@@ -151,7 +151,7 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 					'map_meta_cap'          => true,
 					'publicly_queryable'    => false,
 					'exclude_from_search'   => false,
-					'hierarchical'          => false, // Hierarchical causes memory issues - WP loads all records!
+					'hierarchical'          => false,
 					'rewrite'               => false,
 					'query_var'             => false,
 					'supports'              => array( '' ),
@@ -305,7 +305,8 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Add custom query vars.
 		 *
-		 * @return  void
+		 * @param 	string[] $vars Query vars.
+		 * @return  string[]
 		 * @access  public
 		 * @since   1.4.0
 		 */
@@ -362,4 +363,4 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		}
 	}
 
-endif; // End class_exists check.
+endif;

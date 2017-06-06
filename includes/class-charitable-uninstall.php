@@ -1,7 +1,7 @@
 <?php
 /**
  * Charitable Uninstall class.
- * 
+ *
  * The responsibility of this class is to manage the events that need to happen 
  * when the plugin is deactivated.
  *
@@ -11,13 +11,14 @@
  * @copyright 	Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Uninstall' ) ) : 
+if ( ! class_exists( 'Charitable_Uninstall' ) ) :
 
 /**
  * Charitable_Uninstall
- * 
+ *
  * @since 		1.0.0
  */
 class Charitable_Uninstall {
@@ -40,7 +41,7 @@ class Charitable_Uninstall {
 	}
 
 	/**
-	 * Remove plugin-specific roles. 
+	 * Remove plugin-specific roles.
 	 *
 	 * @return 	void
 	 * @access 	private
@@ -52,7 +53,7 @@ class Charitable_Uninstall {
 	}
 
 	/**
-	 * Remove post objects created by Charitable. 
+	 * Remove post objects created by Charitable.
 	 *
 	 * @return 	void
 	 * @access  private
