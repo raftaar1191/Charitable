@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 	class Charitable_Gateway_Offline extends Charitable_Gateway {
 
 		/**
-		 * @var     string
+		 * Gateway ID.
 		 */
 		const ID = 'offline';
 
@@ -87,4 +87,4 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

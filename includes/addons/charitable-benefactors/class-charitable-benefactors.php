@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Benefactors' ) ) :
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Register table.
 		 *
-		 * @param   array       $tables
+		 * @param   array $tables Registered tables.
 		 * @return  array
 		 * @access  public
 		 * @since   1.0.0
@@ -103,8 +103,8 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display a benefactor relationship block inside of a meta box on campaign pages.
 		 *
-		 * @param   Charitable_Benefactor   $benefactor
-		 * @param   string                  $extension
+		 * @param   Charitable_Benefactor $benefactor Benefactor object.
+		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -119,8 +119,8 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display benefactor relationship form.
 		 *
-		 * @param   Charitable_Benefactor   $benefactor
-		 * @param   string                  $extension
+		 * @param   Charitable_Benefactor $benefactor Benefactor object.
+		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Save benefactors when saving campaign.
 		 *
-		 * @param   WP_Post     $post       Post object.
+		 * @param   WP_Post $post Post object.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -168,8 +168,11 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 					$data['date_created'] = charitable_sanitize_date( $data['date_created'], 'Y-m-d 00:00:00' );
 				}
 
-				/** Sanitize end date of benefactor relationship. If the campaign has an end date, then the benefactor
-					relationship should end then or before then (not after) **/
+				/**
+				 * Sanitize end date of benefactor relationship. If the campaign has
+				 * an end date, then the benefactor relationship should end then or
+				 * before then (not after).
+				 */
 				$campaign_end_date = get_post_meta( $post->ID, '_campaign_end_date', true );
 
 				if ( isset( $data['date_deactivated'] ) && strlen( $data['date_deactivated'] ) ) {
@@ -185,7 +188,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 				} else {
 					charitable_get_table( 'benefactors' )->update( $campaign_benefactor_id, $data );
 				}
-			}
+			}//end foreach
 		}
 
 		/**
@@ -218,7 +221,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Deactivate a benefactor.
 		 *
-		 * @return  boolean
+		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -262,7 +265,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @return  void
+		 * @return  boolean Whether the addon is activated.
 		 * @access  public
 		 * @static
 		 * @since   1.0.0
@@ -278,7 +281,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 			/* Create table */
 			$table = new Charitable_Benefactors_DB();
 			$table->create_table();
+
+			return true;
 		}
 	}
 
-endif; // End class_exists check
+endif;

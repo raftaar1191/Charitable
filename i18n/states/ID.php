@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -45,5 +45,5 @@ return array(
 	'MA' => __( 'Maluku', 'charitable' ),
 	'MU' => __( 'Maluku Utara', 'charitable' ),
 	'PA' => __( 'Papua', 'charitable' ),
-	'PB' => __( 'Papua Barat', 'charitable' )
+	'PB' => __( 'Papua Barat', 'charitable' ),
 );

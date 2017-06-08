@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the campaign goal block in the settings metabox for the Campaign post type.
  *

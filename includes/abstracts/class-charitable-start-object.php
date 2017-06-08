@@ -1,17 +1,18 @@
 <?php
 /**
- * A base start object. 
+ * A base start object.
  *
  * @package		Charitable/Classes/Charitable_Start_Object
  * @version 	1.0.0
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Start_Object' ) ) : 
+if ( ! class_exists( 'Charitable_Start_Object' ) ) :
 
 /**
  * Charitable_Start_Object
@@ -41,11 +42,11 @@ abstract class Charitable_Start_Object {
 	}
 
 	/**
-	 * Set up the class. 
-	 * 
+	 * Set up the class.
+	 *
 	 * Note that the only way to instantiate an object is with the charitable_start method, 
 	 * which can only be called during the start phase. In other words, don't try 
-	 * to instantiate this object. 
+	 * to instantiate this object.
 	 *
 	 * @access 	protected
 	 * @since 	1.0.0
@@ -53,4 +54,4 @@ abstract class Charitable_Start_Object {
 	abstract protected function __construct();
 }
 
-endif; // End class_exists check
+endif;

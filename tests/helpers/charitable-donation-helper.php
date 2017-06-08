@@ -18,7 +18,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a donation. 
+	 * Create a donation.
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donation_id
@@ -49,7 +49,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a donation for a user. 
+	 * Create a donation for a user.
 	 *
 	 * @param 	int 		$user_id
 	 * @param 	int 		$campaign_id

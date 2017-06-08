@@ -1,19 +1,20 @@
 <?php
 /**
  * Profile shortcode class.
- * 
+ *
  * @version     1.0.0
  * @package     Charitable/Shortcodes/Profile
  * @category    Class
  * @author      Eric Daams
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) : 
+if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 
 /**
- * Charitable_Profile_Shortcode class. 
+ * Charitable_Profile_Shortcode class.
  *
  * @since       1.0.0
  */
@@ -22,7 +23,8 @@ class Charitable_Profile_Shortcode {
     /**
      * The callback method for the campaigns shortcode.
      *
-     * This receives the user-defined attributes and passes the logic off to the class. 
+     * This receives the user-defined attributes and passes the logic off to the class.
+
      *
      * @param   array $atts User-defined shortcode attributes.
      * @return  string

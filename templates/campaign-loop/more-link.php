@@ -1,6 +1,6 @@
-<?php 
+<?php
 /**
- * Displays the donate button to be displayed within campaign loops. 
+ * Displays the donate button to be displayed within campaign loops.
  *
  * Override this template by copying it to yourtheme/charitable/campaign-loop/more-link.php
  *
@@ -8,7 +8,8 @@
  * @since   1.2.3
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * @var Charitable_Campaign

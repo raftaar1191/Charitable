@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Customizer' ) ) :
 
@@ -78,7 +79,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Theme customization.
 		 *
-		 * @param   WP_Customize_Manager $wp_customize
+		 * @param   WP_Customize_Manager $wp_customize The customize manager object.
 		 * @return  void
 		 */
 		public function register_customizer_fields( $wp_customize ) {
@@ -312,4 +313,4 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

@@ -2,12 +2,15 @@
 /**
  * Email Header
  *
+ * Override this template by copying it to yourtheme/charitable/emails/header.php
+ *
  * @author  Studio 164a
  * @package Charitable/Templates/Emails
  * @version 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $email = $view_args['email'];
 

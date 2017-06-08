@@ -7,7 +7,7 @@
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
- * Tested up to:        4.7.4
+ * Tested up to:        4.7.5
  *
  * Text Domain:         charitable
  * Domain Path:         /i18n/languages/
@@ -584,9 +584,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns plugin paths.
 		 *
-		 * @param   string $type          If empty, returns the path to the plugin.
-		 * @param   bool   $absolute_path If true, returns the file system path. If false, 
-		 * 								  returns it as a URL.
+		 * @param   string  $type          If empty, returns the path to the plugin.
+		 * @param   boolean $absolute_path If true, returns the file system path. If false, returns it as a URL.
 		 * @return  string
 		 * @since   1.0.0
 		 */
@@ -620,7 +619,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 				default :
 					$path = __FILE__;
-			}
+
+			}//end switch
 
 			return $path;
 		}
@@ -686,7 +686,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns the model for one of Charitable's database tables.
 		 *
-		 * @param   string $table
+		 * @param   string $table The database table to retrieve.
 		 * @return  Charitable_DB
 		 * @access  public
 		 * @since   1.0.0

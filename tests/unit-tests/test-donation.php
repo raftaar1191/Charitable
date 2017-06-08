@@ -36,7 +36,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 		$this->donor_id = $user->add_donor();
 	}
 
-	/** 
+	/**
 	 * Test insert method first. If this fails, we can skip most of the other tests.
 	 */
 	public function test_add_donation() {
@@ -49,7 +49,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 				)
 			)
 		) );
-		
+
 		$this->assertGreaterThan( 0, $donation_id );
 	}
 
@@ -66,9 +66,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 				)
 			)
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertEquals( $donation_id, $donation->ID );
 	}	
 
@@ -86,9 +86,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 			), 
 			'gateway' => 'stripe'
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertEquals( 'stripe', $donation->get_gateway() );
 	}
 
@@ -105,9 +105,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 				)
 			)
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertEquals( 10, $donation->get_total_donation_amount() );
 	}
 
@@ -130,9 +130,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 				)
 			)
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertEquals( 125, $donation->get_total_donation_amount() );
 	}
 
@@ -152,7 +152,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 		) );
 
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertCount( 1, $donation->get_campaign_donations() );
 	}
 
@@ -176,9 +176,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 				)
 			)
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertCount( 2, $donation->get_campaign_donations() );
 	}	
 
@@ -196,9 +196,9 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 			), 
 			'note' => 'This is a note'
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertEquals( 'This is a note', $donation->get_notes() );
 	}
 
@@ -236,7 +236,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 			), 
 			'status' => 'charitable-completed'
 		) );
-		
+
 		$donation = charitable_get_donation( $donation_id );
 
 		$this->assertInstanceOf( 'Charitable_Donor', $donation->get_donor() );
@@ -258,7 +258,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 		) );
 
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$this->assertCount( 1, $donation->get_donation_log() );
 	}	
 
@@ -279,7 +279,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 		) );
 
 		$donation = charitable_get_donation( $donation_id );
-		
+
 		$donation->update_donation_log( 'New message' );
 
 		$this->assertCount( 2, $donation->get_donation_log() );

@@ -27,12 +27,14 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 	class Charitable_Export_Donations extends Charitable_Export {
 
 		/**
-		 * @var     string  The type of export.
+		 * The type of export.
 		 */
 		const EXPORT_TYPE = 'donations';
 
 		/**
-		 * @var     mixed[] Array of default arguments.
+		 * Default arguments.
+		 *
+		 * @var     mixed[]
 		 * @access  protected
 		 */
 		protected $defaults = array(
@@ -43,7 +45,9 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		);
 
 		/**
-		 * @var     string[] List of donation statuses.
+		 * List of donation statuses.
+		 *
+		 * @var     string[]
 		 * @access  protected
 		 */
 		protected $statuses;
@@ -51,7 +55,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   mixed[] $args
+		 * @param   mixed[] $args Arguments for the report.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -66,9 +70,9 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		/**
 		 * Filter the date and time fields.
 		 *
-		 * @param   mixed   $value
-		 * @param   string  $key
-		 * @param   array   $data
+		 * @param   mixed  $value The value to set.
+		 * @param   string $key   The key to set.
+		 * @param   array  $data  The set of data.
 		 * @return  mixed
 		 * @access  public
 		 * @since   1.0.0
@@ -129,7 +133,8 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 					$gateway = charitable_get_donation( $data['donation_id'] )->get_gateway_object();
 					$value   = is_a( $gateway, 'Charitable_Gateway' ) ? $gateway->get_name() : '';
 					break;
-			}
+
+			}//end switch
 
 			return $value;
 		}
@@ -195,7 +200,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 				$query_args['status'] = $this->args['status'];
 			}
 
-			/** @deprecated filter name with misspelling */
+			/**@deprecated filter name with misspelling */
 			$query_args = apply_filters( 'chairtable_export_donations_query_args', $query_args, $this->args );
 			$query_args = apply_filters( 'charitable_export_donations_query_args', $query_args, $this->args );
 
@@ -203,4 +208,4 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Gateways' ) ) :
 
@@ -38,7 +39,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		private $gateways;
 
 		/**
-		* Set up the class.
+		 * Set up the class.
 		 *
 		 * Note that the only way to instantiate an object is with the charitable_start method,
 		 * which can only be called during the start phase. In other words, don't try
@@ -78,7 +79,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * To register a new gateway, you need to hook into the `charitable_payment_gateways`
 		 * hook and give Charitable the name of your gateway class.
 		 *
-		 * @return  string[]
+		 * @return  void
 		 * @access  public
 		 * @since   1.2.0
 		 */
@@ -92,8 +93,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Receives a request to enable or disable a payment gateway and validates it before passing it off.
 		 *
-		 * @param 	array
-		 * @return 	array
+		 * @return 	void
 		 * @access 	public
 		 * @since 	1.0.0
 		 */
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Return the gateway class name for a given gateway.
 		 *
-		 * @param 	string 	$gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  string|false
 		 * @access  public
 		 * @since   1.0.0
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Return the gateway object for a given gateway.
 		 *
-		 * @param 	string $gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  Charitable_Gateway|null
 		 * @access  public
 		 * @since   1.0.0
@@ -227,7 +227,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Returns whether the passed gateway is active.
 		 *
-		 * @param 	string $gateway_id
+		 * @param 	string $gateway_id Gateway ID.
 		 * @return 	boolean
 		 * @access  public
 		 * @since 	1.0.0
@@ -239,7 +239,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Checks whether the submitted gateway is valid.
 		 *
-		 * @param 	string $gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.4.3
@@ -262,8 +262,8 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Provide default gateway settings fields.
 		 *
-		 * @param 	array $settings
-		 * @param 	Charitable_Gateway $gateway 	The gateway's helper object.
+		 * @param 	array 			   $settings Gateway settings.
+		 * @param 	Charitable_Gateway $gateway  The gateway's helper object.
 		 * @return  array
 		 * @access  public
 		 * @since   1.0.0
@@ -291,7 +291,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * If ANY gateway doesn't support the feature, this returns false.
 		 *
-		 * @param 	string $feature
+		 * @param 	string $feature Feature to search for.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.4.0
@@ -314,7 +314,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * If any gateway supports the feature, this returns true. Otherwise false.
 		 *
-		 * @param 	string $feature
+		 * @param 	string $feature Feature to check for.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.4.0
@@ -348,7 +348,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Sets the default gateway.
 		 *
-		 * @param 	string 	$gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  void
 		 * @access  protected
 		 * @since   1.0.0
@@ -367,7 +367,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Enable a payment gateway.
 		 *
-		 * @param 	string 	$gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  void
 		 * @access  protected
 		 * @since   1.0.0
@@ -394,7 +394,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Disable a payment gateway.
 		 *
-		 * @param 	string 	$gateway
+		 * @param 	string $gateway Gateway ID.
 		 * @return  void
 		 * @access  protected
 		 * @since   1.0.0
@@ -425,7 +425,8 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Sort the active gateways, placing the default gateway first.
 		 *
-		 * @param 	
+		 * @param 	string $a Gateway to compare.
+		 * @param 	string $b Gateway to compare against.
 		 * @return  int
 		 * @access  protected
 		 * @since   1.4.0
@@ -435,7 +436,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 
 			if ( $a == $default ) {
 				return -1;
-			} 
+			}
 
 			if ( $b == $default ) {
 				return 1;
@@ -445,4 +446,4 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

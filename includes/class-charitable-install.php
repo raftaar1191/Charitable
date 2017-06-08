@@ -1,19 +1,20 @@
 <?php
 /**
  * Charitable Install class.
- * 
- * The responsibility of this class is to manage the events that need to happen 
+ *
+ * The responsibility of this class is to manage the events that need to happen
  * when the plugin is activated.
  *
  * @package		Charitable
  * @subpackage	Charitable/Charitable Install
- * @copyright 	Copyright (c) 2017, Eric Daams	
+ * @copyright 	Copyright (c) 2017, Eric Daams
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since 		1.0.0
  */
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-if ( ! class_exists( 'Charitable_Install' ) ) : 
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+if ( ! class_exists( 'Charitable_Install' ) ) :
 
 	/**
 	 * Charitable_Install
@@ -23,28 +24,28 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 	class Charitable_Install {
 
 		/**
-		 * Install the plugin. 
+		 * Install the plugin.
 		 *
 		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function __construct() {
 			$this->setup_roles();
-			$this->create_tables();		
-			$this->setup_upgrade_log();		
+			$this->create_tables();
+			$this->setup_upgrade_log();
 
 			set_transient( 'charitable_install', 1, 0 );
-		}	
+		}
 
 		/**
-		 * Finish the plugin installation. 
+		 * Finish the plugin installation.
 		 *
 		 * @return  void
 		 * @access  public
 		 * @static
 		 * @since   1.3.4
 		 */
-		public static function finish_installing() {		
+		public static function finish_installing() {
 			Charitable_Cron::schedule_events();
 
 			add_action( 'init', 'flush_rewrite_rules' );
@@ -65,7 +66,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		}
 
 		/**
-		 * Create database tables. 
+		 * Create database tables.
 		 *
 		 * @return 	void
 		 * @access 	protected
@@ -84,7 +85,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		}
 
 		/**
-		 * Set up the upgrade log. 
+		 * Set up the upgrade log.
 		 *
 		 * @return  void
 		 * @access  protected

@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -43,5 +43,5 @@ return array(
 	'CN29' => __( 'Ningxia Hui / &#23425;&#22799;', 'charitable' ),
 	'CN30' => __( 'Macau / &#28595;&#38376;', 'charitable' ),
 	'CN31' => __( 'Tibet / &#35199;&#34255;', 'charitable' ),
-	'CN32' => __( 'Xinjiang / &#26032;&#30086;', 'charitable' )
+	'CN32' => __( 'Xinjiang / &#26032;&#30086;', 'charitable' ),
 );

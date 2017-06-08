@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Holds our session data
 		 *
-		 * @var 	array
+		 * @var 	WP_Session
 		 * @access 	private
 		 * @since 	1.0.0
 		 */
@@ -48,6 +48,11 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @since 	1.0.0
 		 */
 		private function __construct() {
+
+			if ( ! $this->should_start_session() ) {
+				return;
+			}
+
 			if ( ! defined( 'WP_SESSION_COOKIE' ) ) {
 				define( 'WP_SESSION_COOKIE', 'charitable_session' );
 			}
@@ -73,7 +78,21 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 			add_filter( 'wp_session_expiration', array( $this, 'set_session_length' ), 99999 );
 			add_filter( 'wp_session_expiration_variant', array( $this, 'set_session_expiration_variant_length' ), 99999 );
 
+			add_action( 'init', array( $this, 'init' ), -1 );
+
+		}
+
+		/**
+		 * Create the session.
+		 *
+		 * @return  WP_Session
+		 * @access  public
+		 * @since   1.4.17
+		 */
+		public function init() {
 			$this->session = WP_Session::get_instance();
+
+			return $this->session;
 		}
 
 		/**
@@ -143,7 +162,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the cookie expiration variant time to 23 hours.
 		 *
-		 * @return 	void
+		 * @return 	int
 		 * @access  public
 		 * @since 	1.0.0
 		 */
@@ -158,8 +177,8 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Add a donation to a campaign to the session.
 		 *
-		 * @param 	int 	$campaign_id
-		 * @param 	int 	$amount
+		 * @param 	int $campaign_id Campaign ID.
+		 * @param 	int $amount 	 Donation amount.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -178,6 +197,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Remove a donation from the session.
 		 *
+		 * @param 	int $campaign_id Campaign ID.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -285,6 +305,68 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 */
 		public function get_session_id() {
 			return $this->session->session_id;
+		}
+
+		/**
+		 * Determines if we should start sessions
+		 *
+		 * @return  boolean
+		 * @access 	public
+		 * @since   1.4.17
+		 */
+		public function should_start_session() {
+
+			$start_session = true;
+
+			if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
+
+				$blacklist = $this->get_blacklist();
+				$uri       = ltrim( $_SERVER['REQUEST_URI'], '/' );
+				$uri       = untrailingslashit( $uri );
+
+				if ( in_array( $uri, $blacklist ) ) {
+					$start_session = false;
+				}
+
+				if ( false !== strpos( $uri, 'feed=' ) ) {
+					$start_session = false;
+				}
+			}
+
+			return apply_filters( 'charitable_start_session', $start_session );
+
+		}
+
+		/**
+		 * Retrieve the URI blacklist
+		 *
+		 * These are the URIs where we never start sessions
+		 *
+		 * @return  array
+		 * @access 	public
+		 * @since   1.4.17
+		 */
+		public function get_blacklist() {
+
+			$blacklist = apply_filters( 'charitable_session_start_uri_blacklist', array(
+				'feed',
+				'feed/rss',
+				'feed/rss2',
+				'feed/rdf',
+				'feed/atom',
+				'comments/feed',
+			) );
+
+			/* Look to see if WordPress is in a sub folder or this is a network site that uses sub folders */
+			$folder = str_replace( network_home_url(), '', get_site_url() );
+
+			if ( ! empty( $folder ) ) {
+				foreach ( $blacklist as $path ) {
+					$blacklist[] = $folder . '/' . $path;
+				}
+			}
+
+			return $blacklist;
 		}
 	}
 

@@ -972,4 +972,4 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 
 	}
 
-endif; // End class_exists check
+endif;

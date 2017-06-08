@@ -15,7 +15,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_User' ) ) :
 
@@ -128,7 +129,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Set the donor ID of this user.
 		 *
-		 * @param   int     $donor_id
+		 * @param   int $donor_id The Donor ID.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -184,7 +185,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 				$this->donor_id = $donor->donor_id;
 
-			}
+			}//end if
 
 			wp_cache_add( $this->donor_id, $donor, 'donors' );
 
@@ -322,7 +323,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Returns printable address of donor.
 		 *
-		 * @param   $donation_id Optional. If set, will return the address provided for the specific donation. Otherwise, returns the current address for the user.
+		 * @param   int $donation_id Optional. If set, will return the address provided for the specific donation. Otherwise, returns the current address for the user.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -373,7 +374,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Return the number of donations made by the donor.
 		 *
-		 * @param   boolean     $distinct_donations     If true, will only count unique donations.
+		 * @param   boolean $distinct_donations If true, will only count unique donations.
 		 * @return  int
 		 * @access  public
 		 * @since   1.0.0
@@ -430,13 +431,13 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 * By default, this will return the gravatar, but it can
 		 * be extended to add support for locally hosted avatars.
 		 *
-		 * @param   int $size
+		 * @param   int $size The length and width of the avatar.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_avatar( $size = 100 ) {
-			/** If you use this filter, return an attachment ID. */
+			/**If you use this filter, return an attachment ID. */
 			$avatar_attachment_id = apply_filters( 'charitable_user_avatar', false, $this );
 
 			/* If we don't have an attachment ID, display the gravatar. */
@@ -464,7 +465,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Return the src of the avatar.
 		 *
-		 * @param   int         $size
+		 * @param   int $size The length and the width of the avatar.
 		 * @return  string
 		 * @access  public
 		 * @since   1.0.0
@@ -507,6 +508,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Checks whether the user has any current campaigns (i.e. non-expired).
 		 *
+		 * @param 	array $args Query arguments.
 		 * @return  WP_Query
 		 * @access  public
 		 * @since   1.0.0
@@ -573,8 +575,8 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Add a new donor. This may also create a user account for them.
 		 *
-		 * @param   array   $submitted
-		 * @return  int     $donor_id
+		 * @param   array $submitted Values submitted by the user.
+		 * @return  int   $donor_id  Donor ID.
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -668,7 +670,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 * Save core fields of the user (i.e. the wp_users data)
 		 *
 		 * @uses    wp_insert_user
-		 * @param   array $submitted
+		 * @param   array $submitted Values submitted by the user.
 		 * @return  int User ID
 		 * @access  public
 		 * @since   1.0.0
@@ -738,7 +740,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 				$user_id = wp_update_user( $values );
 
-			}
+			}//end if
 
 			/* If there was an error when inserting or updating the user, lodge the error. */
 			if ( is_wp_error( $user_id ) ) {
@@ -789,8 +791,8 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Log a user is with their username and password.
 		 *
-		 * @param   string $username
-		 * @param   string $password
+		 * @param   string $username The user's username.
+		 * @param   string $password User password.
 		 * @return  WP_User|WP_Error|false WP_User on login, WP_Error on failure. False if feature is disabled.
 		 * @access  public
 		 * @static
@@ -845,4 +847,4 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

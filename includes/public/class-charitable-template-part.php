@@ -6,12 +6,13 @@
  * @package		Charitable/Classes/Charitable_Template_Part
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Template_Part' ) ) : 
+if ( ! class_exists( 'Charitable_Template_Part' ) ) :
 
 /**
  * Charitable_Template_Part
@@ -31,7 +32,7 @@ class Charitable_Template_Part {
 	private $name;
 
 	/**
-	 * Class constructor. 
+	 * Class constructor.
 	 *
 	 * @param 	string $slug
 	 * @param 	string $name 	Optional name.
@@ -47,8 +48,8 @@ class Charitable_Template_Part {
 	}
 
 	/**
-	 * Returns the array of template names. 
-	 * 
+	 * Returns the array of template names.
+	 *
 	 * @return 	array
 	 * @access 	private
 	 * @since 	1.0.0
@@ -69,4 +70,4 @@ class Charitable_Template_Part {
 	}
 }
 
-endif; // End class_exists check
+endif;

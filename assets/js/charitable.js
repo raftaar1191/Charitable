@@ -43,7 +43,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         /**
          * Focus event handler on custom donation amount input field.
-         * 
+         *
          * @access  private
          */
         var on_focus_custom_amount = function() {
@@ -60,7 +60,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         /**
          * Focus event handler for changes to custom donation amount input field.
-         * 
+         *
          * @access  private
          */
         var on_change_custom_donation_amount = function() {
@@ -111,7 +111,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         /**
          * Submit event handler for donation form.
-         * 
+         *
          * @access  private
          */
         var on_submit = function( event ) {
@@ -158,10 +158,12 @@ CHARITABLE = window.CHARITABLE || {};
         };
 
         /**
-         * Process the donation. 
+         * Process the donation.
+
          *
          * This is a callback for the 'charitable:form:process' event. It's called
-         * after validation has taken place. 
+         * after validation has taken place.
+
          *
          * @param   object Event
          * @param   object Donation_Form
@@ -364,7 +366,8 @@ CHARITABLE = window.CHARITABLE || {};
     };
 
     /**
-     * Clear credit card fields. 
+     * Clear credit card fields.
+
      *
      * This is used by gateways that create tokens through Javascript (such as Stripe), to 
      * avoid credit card details hitting the server.
@@ -467,7 +470,7 @@ CHARITABLE = window.CHARITABLE || {};
 
     /**
      * Prints out a nice string describing the errors.
-     * 
+     *
      * @return  string
      */
     Donation_Form.prototype.get_error_message = function() {
@@ -752,7 +755,7 @@ CHARITABLE = window.CHARITABLE || {};
 })( CHARITABLE, jQuery );
 
 /**
- * URL sanitization. 
+ * URL sanitization.
  *
  * This is provided for backwards compatibility.
  */

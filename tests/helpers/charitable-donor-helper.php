@@ -18,7 +18,7 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Create a donor. 
+	 * Create a donor.
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donor_id

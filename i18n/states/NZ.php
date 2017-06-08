@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 return array(
@@ -26,6 +26,6 @@ return array(
 	'WC' => __( 'West Coast', 'charitable' ),
 	'CT' => __( 'Canterbury', 'charitable' ),
 	'OT' => __( 'Otago', 'charitable' ),
-	'SL' => __( 'Southland', 'charitable')
+	'SL' => __( 'Southland', 'charitable'),
 );
 

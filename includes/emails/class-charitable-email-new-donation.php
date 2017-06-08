@@ -168,4 +168,4 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

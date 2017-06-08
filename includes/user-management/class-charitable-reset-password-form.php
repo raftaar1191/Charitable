@@ -76,7 +76,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @param 	Charitable_Form $form
+		 * @param 	Charitable_Form $form The form object.
 		 * @return 	void
 		 * @access  public
 		 * @since 	1.0.0

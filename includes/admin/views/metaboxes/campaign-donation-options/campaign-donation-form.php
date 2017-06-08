@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Renders the campaign's donation form settings in the metabox for the Campaign post type.
  *
@@ -8,7 +8,7 @@
 
 global $post;
 
-$form_fields = charitable()->get_registered_object('Charitable_Campaign_Post_Type')->get_donation_form_fields();
+$form_fields = charitable()->get_registered_object( 'Charitable_Campaign_Post_Type' )->get_donation_form_fields();
 
 $selected_fields = (array) get_post_meta( $post->ID, '_campaign_donation_form_fields', true );
 ?>
@@ -33,7 +33,7 @@ $selected_fields = (array) get_post_meta( $post->ID, '_campaign_donation_form_fi
 					id="campaign_donation_form_fields_<?php echo $field_key ?>" 
 					name="_campaign_donation_form_fields[]" 
 					value="<?php echo $field_key ?>" 
-					<?php checked( in_array($field_key, $selected_fields) ) ?> 
+					<?php checked( in_array( $field_key, $selected_fields ) ) ?> 
 				/>
 			<?php endif ?>
 			<label for="campaign_donation_form_fields_<?php echo $field_key ?>">

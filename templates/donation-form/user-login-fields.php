@@ -28,7 +28,7 @@ if ( empty( $account_fields ) ) {
 	 */
 	do_action( 'charitable_donation_form_before_login_fields' );
 
-	foreach ( $account_fields as $key => $field ) : 
+	foreach ( $account_fields as $key => $field ) :
 
 		do_action( 'charitable_donation_form_user_field', $field, $key, $form );
 

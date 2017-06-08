@@ -11,7 +11,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! interface_exists( 'Charitable_Gateway_Interface' ) ) :
 
@@ -24,4 +25,4 @@ if ( ! interface_exists( 'Charitable_Gateway_Interface' ) ) :
 		public static function get_gateway_id();
 	}
 
-endif; // End interface_exists check.
+endif;

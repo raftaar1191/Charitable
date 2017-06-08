@@ -1,18 +1,18 @@
-<?php 
-
+<?php
 /**
- * Charitable Campaign Functions. 
+ * Charitable Campaign Functions.
  *
  * Campaign related functions.
- * 
+ *
  * @package     Charitable/Functions/Campaign
  * @version     1.0.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Returns the given campaign.

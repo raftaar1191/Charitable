@@ -1,6 +1,6 @@
 <?php
 /**
- * Display select field. 
+ * Display select field.
  *
  * @author 	Studio 164a
  * @package Charitable/Admin View/Settings
@@ -13,22 +13,22 @@ if ( empty( $value ) ) {
 	$value = isset( $view_args['default'] ) ? $view_args['default'] : '';
 }
 ?>
-<select id="<?php printf( 'charitable_settings_%s', implode( '_', $view_args[ 'key' ] ) ) ?>" 
-	name="<?php printf( 'charitable_settings[%s]', $view_args[ 'name' ] ) ?>"
-	class="<?php echo esc_attr( $view_args[ 'classes' ] ) ?>"
+<select id="<?php printf( 'charitable_settings_%s', implode( '_', $view_args['key'] ) ) ?>" 
+	name="<?php printf( 'charitable_settings[%s]', $view_args['name'] ) ?>"
+	class="<?php echo esc_attr( $view_args['classes'] ) ?>"
 	<?php echo charitable_get_arbitrary_attributes( $view_args ) ?>
 	>	
-	<?php 
+	<?php
 
-	foreach( $view_args['options'] as $key => $option ) : 
+	foreach ( $view_args['options'] as $key => $option ) :
 
-		if ( is_array( $option ) ) : 
+		if ( is_array( $option ) ) :
 
-			$label = isset( $option[ 'label' ] ) ? $option[ 'label' ] : '' ?>
+			$label = isset( $option['label'] ) ? $option['label'] : '' ?>
 
 			<optgroup label="<?php echo $label ?>">
 
-			<?php foreach ( $option[ 'options' ] as $k => $opt ) : ?>
+			<?php foreach ( $option['options'] as $k => $opt ) : ?>
 
 				<option value="<?php echo $k ?>" <?php selected( $k, $value ) ?>><?php echo $opt ?></option>
 
@@ -40,10 +40,10 @@ if ( empty( $value ) ) {
 			
 			<option value="<?php echo $key ?>" <?php selected( $key, $value ) ?>><?php echo $option ?></option>
 
-		<?php 
+		<?php
 
 		endif;
-	endforeach 
+	endforeach
 
 	?>
 </select>

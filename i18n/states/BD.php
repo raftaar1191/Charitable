@@ -8,7 +8,7 @@
  * @package		Charitable/i18n
  * @author 		Eric Daams
  * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  */
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License*/
 
 return array(
 	'BAG'  => __( 'Bagerhat', 'charitable' ),
@@ -74,5 +74,5 @@ return array(
 	'SUN'  => __( 'Sunamganj', 'charitable' ),
 	'SYL'  => __( 'Sylhet', 'charitable' ),
 	'TAN'  => __( 'Tangail', 'charitable' ),
-	'THA'  => __( 'Thakurgaon', 'charitable' )
+	'THA'  => __( 'Thakurgaon', 'charitable' ),
 );

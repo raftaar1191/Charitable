@@ -151,5 +151,4 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		}
 	}
 
-endif; // End class_exists check.
-
+endif;

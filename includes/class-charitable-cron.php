@@ -5,13 +5,14 @@
  * @package     Charitable/Classes/Charitable_Cron
  * @version     1.1.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2014, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @copyright   Copyright (c) 2017, Studio 164a
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly.
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Cron' ) ) : 
+if ( ! class_exists( 'Charitable_Cron' ) ) :
 
 /**
  * Charitable_Cron
@@ -46,7 +47,7 @@ class Charitable_Cron {
 
     /**
      * Create class object.
-     * 
+     *
      * @access  private
      * @since   1.1.0
      */
@@ -55,7 +56,8 @@ class Charitable_Cron {
     }
 
     /**
-     * Schedule Charitable event hooks. 
+     * Schedule Charitable event hooks.
+
      *
      * @return  void
      * @access  public
@@ -69,7 +71,8 @@ class Charitable_Cron {
     }
 
     /**
-     * Check for expired campaigns. 
+     * Check for expired campaigns.
+
      *
      * @return  void
      * @access  public
@@ -105,4 +108,4 @@ class Charitable_Cron {
     }
 }
 
-endif; // End class_exists check
+endif;

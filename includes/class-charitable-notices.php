@@ -9,7 +9,7 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Notices' ) ) :
@@ -77,8 +77,8 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a notice message.
 		 *
-		 * @param 	string $message
-		 * @param 	string $type
+		 * @param 	string $message The message to display.
+		 * @param 	string $type    The type of message.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
 		 * @access  public
@@ -95,8 +95,8 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Add multiple notices at once.
 		 *
-		 * @param 	array $messages
-		 * @param 	string $type
+		 * @param 	array  $messages Array of messages.
+		 * @param 	string $type     Type of message we're adding.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -112,7 +112,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an error message.
 		 *
-		 * @param 	string $message
+		 * @param 	string $message The error message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
 		 * @access  public
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a warning message.
 		 *
-		 * @param 	string $message
+		 * @param 	string $message The warning message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
 		 * @access  public
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a success message.
 		 *
-		 * @param 	string $message
+		 * @param 	string $message The success message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
 		 * @access  public
@@ -151,7 +151,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an info message.
 		 *
-		 * @param 	string $message
+		 * @param 	string $message The info message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
 		 * @access  public
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Receives a WP_Error object and adds the error messages to our array.
 		 *
-		 * @param 	WP_Error 	$error
+		 * @param 	WP_Error $error The WP_Error object to add to the messages queue.
 		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
@@ -249,4 +249,4 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

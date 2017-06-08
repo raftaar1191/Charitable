@@ -36,7 +36,7 @@ class Test_Donation_Processor extends Charitable_UnitTestCase {
         $this->donor_id = $user->add_donor();
     }
 
-    /** 
+    /**
      * Test insert method first. If this fails, we can skip most of the other tests.
      */
     public function test_add_donation() {
@@ -83,7 +83,7 @@ class Test_Donation_Processor extends Charitable_UnitTestCase {
         Charitable_Donation_Processor::destroy();
     }
 
-    /** 
+    /**
      * Test retrieving the campaign donation data.
      */
      public function test_get_campaign_donation_data() {

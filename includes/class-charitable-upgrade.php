@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 /**
  * This provides backwards compatibility for any extensions that 
- * attempt to load the Charitable_Upgrade class from here. 
+ * attempt to load the Charitable_Upgrade class from here.
  *
  * @deprecated
  */

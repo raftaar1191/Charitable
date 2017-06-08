@@ -11,7 +11,8 @@
  * @version 1.4.2
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 $login_form_args = array_key_exists( 'login_form_args', $view_args ) ? $view_args['login_form_args'] : array();
 

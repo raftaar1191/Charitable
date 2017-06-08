@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
@@ -146,7 +147,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * The amount donated on this donation.
 		 *
-		 * @param   boolean $sanitize
+		 * @param   boolean $sanitize Whether the value should be sanitized as a monetary amount.
 		 * @return  decimal|float|WP_Error
 		 * @access  public
 		 * @since   1.0.0
@@ -761,7 +762,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			return $this->gateway_transaction_id;
 		}
 
-		
+
 	}
 
-endif; // End class_exists check
+endif;

@@ -8,7 +8,8 @@
  * @author      Eric Daams
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 
@@ -195,4 +196,4 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

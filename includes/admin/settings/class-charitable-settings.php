@@ -9,7 +9,8 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Settings' ) ) :
 
@@ -497,7 +498,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		private function is_dynamic_group( $composite_key ) {
 			return array_key_exists( $composite_key, $this->get_dynamic_groups() );
 		}
-		
+
 		/**
 		 * @deprecated 1.4.13
 		 */
@@ -513,4 +514,4 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		}
 	}
 
-endif; // End class_exists check
+endif;

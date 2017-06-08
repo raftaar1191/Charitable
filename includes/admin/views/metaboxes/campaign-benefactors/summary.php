@@ -1,20 +1,20 @@
-<?php 
+<?php
 /**
  * Renders the campaign benefactors form.
  *
  * @since 		1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2017, Studio 164a 
+ * @copyright 	Copyright (c) 2017, Studio 164a
  */
 
-$benefactor = $view_args['benefactor']; 
+$benefactor = $view_args['benefactor'];
 
 if ( $benefactor->is_active() ) {
-    $summary = $benefactor; 
+	$summary = $benefactor;
 } elseif ( $benefactor->is_expired() ) {
-    $summary = sprintf( '<span>%s</span>%s', __( 'Expired', 'charitable' ), $benefactor );
+	$summary = sprintf( '<span>%s</span>%s', __( 'Expired', 'charitable' ), $benefactor );
 } else {
-    $summary = sprintf( '<span>%s</span>%s', __( 'Inactive', 'charitable' ), $benefactor );
+	$summary = sprintf( '<span>%s</span>%s', __( 'Inactive', 'charitable' ), $benefactor );
 }
 
 ?>

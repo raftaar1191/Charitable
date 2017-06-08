@@ -1,17 +1,18 @@
-<?php 
+<?php
 /**
- * Charitable AJAX Hooks. 
+ * Charitable AJAX Hooks.
  *
  * Action/filter hooks used for Charitable AJAX setup.
- * 
+ *
  * @package     Charitable/Functions/AJAX
  * @version     1.2.3
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License  
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
  * Retrieve a campaign's donation form via AJAX.
