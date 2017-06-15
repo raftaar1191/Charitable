@@ -350,6 +350,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'setup_endpoints' ), 100 );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
 
 			/**
 			 * We do this on priority 20 so that any functionality that is loaded on init (such
@@ -404,6 +405,33 @@ if ( ! class_exists( 'Charitable' ) ) :
 			 * @deprecated
 			 */
 			$this->register_object( Charitable_Public::get_instance() );
+		}
+
+		/**
+		 * Load the QUnit tests if ?qunit is appended to the request.
+		 *
+		 * @return  boolean
+		 * @access  public
+		 * @since   1.4.17
+		 */
+		public function maybe_start_qunit() {
+			/* Skip out early if ?qunit isn't included in the request. */
+			if ( ! array_key_exists( 'qunit', $_GET ) ) {
+				return false;
+			}
+
+			/* The unit tests have to exist. */
+			if ( ! file_exists( $this->get_path( 'directory' ) . 'tests/qunit/tests.js' ) ) {
+				return false;
+			}
+
+			wp_register_script( 'qunit', 'https://code.jquery.com/qunit/qunit-2.3.3.js', array(), '2.3.3', true );
+			/* Version: '20170615-15:44' */
+			wp_register_script( 'qunit-tests', $this->get_path( 'directory', false ) . 'tests/qunit/tests.js', array( 'jquery-core', 'qunit' ), time(), true );
+			wp_enqueue_script( 'qunit-tests' );
+
+			wp_register_style( 'qunit', 'https://code.jquery.com/qunit/qunit-2.3.3.css', array(), '2.3.3', 'all' );
+			wp_enqueue_style( 'qunit' );
 		}
 
 		/**
@@ -695,7 +723,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 			$tables = $this->get_tables();
 
 			if ( ! isset( $tables[ $table ] ) ) {
-				_doing_it_wrong( __METHOD__, sprintf( 'Invalid table %s passed', $table ), '1.0.0' );
+				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
+					sprintf( 'Invalid table %s passed', $table ),
+					'1.0.0'
+				);
 				return null;
 			}
 

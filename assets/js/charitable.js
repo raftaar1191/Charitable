@@ -48,7 +48,7 @@ CHARITABLE = window.CHARITABLE || {};
          */
         var on_focus_custom_amount = function() {
             
-            $( this ).closest( 'li' ).find( 'input[name=donation_amount]' ).prop( 'checked', true ).trigger( 'change' );
+            $( this ).closest( 'li' ).trigger( 'click' ).find( 'input[name=donation_amount]' ).prop( 'checked', true ).trigger( 'change' );
 
             $body.off( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
 
@@ -159,11 +159,9 @@ CHARITABLE = window.CHARITABLE || {};
 
         /**
          * Process the donation.
-
          *
          * This is a callback for the 'charitable:form:process' event. It's called
          * after validation has taken place.
-
          *
          * @param   object Event
          * @param   object Donation_Form
@@ -298,10 +296,10 @@ CHARITABLE = window.CHARITABLE || {};
     /**
      * Get the submitted amount, taking into account both the custom & suggested donation fields.
      *
-     * @return  string
+     * @return  float
      */
     Donation_Form.prototype.get_amount = function() {        
-        var amount = suggested = parseFloat( this.form.find( '[name=donation_amount]:checked, input[type=hidden][name=donation_amount]' ).val() );
+        var amount = suggested = this.form.find( '[name=donation_amount]:checked, input[type=hidden][name=donation_amount]' ).val();
 
         if ( isNaN( suggested ) ) {
             var custom = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
@@ -310,10 +308,12 @@ CHARITABLE = window.CHARITABLE || {};
                 custom = this.form.find( '.custom-donation-input' );
             }
 
-            amount = parseFloat( custom.val() );
-        }
+            amount = custom.val();            
+        } 
 
-        if ( isNaN( amount ) || amount <= 0 ) {
+        amount = accounting.unformat( amount );
+
+        if ( amount <= 0 ) {
             amount = 0;
         }
 
@@ -624,23 +624,23 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Donation_Form.prototype.validate_required_fields = function() {
         
-        var has_missing_vals = false;
+        var has_all_required_fields = true;
 
         var required = this.get_required_fields();
 
         this.get_required_fields().each( function() {
 
             if ( '' === $( this ).find( 'input, select, textarea' ).val() ) {
-                has_missing_vals = true;
+                has_all_required_fields = false;
             }
 
         });
 
-        if ( has_missing_vals ) {
+        if ( has_all_required_fields ) {
             this.add_error( CHARITABLE_VARS.error_required_fields );
         }        
 
-        return has_missing_vals;
+        return has_all_required_fields;
 
     };
 
