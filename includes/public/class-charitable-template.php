@@ -129,7 +129,11 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 			$template = $this->locate_template();
 
 			if ( ! $this->template_file_exists( $template ) ) {
-				_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template ), '1.0.0' );
+				charitable_get_deprecated()->doing_it_wrong(
+					__FUNCTION__,
+					sprintf( '<code>%s</code> does not exist.', $template ),
+					'1.0.0'
+				);
 				return false;
 			}
 
@@ -170,7 +174,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Checks whether the template file exists.
 		 *
-		 * @param 	string 		$template
+		 * @param 	string $template The template file to check for.
 		 * @return  boolean
 		 * @access  public
 		 * @since   1.0.0

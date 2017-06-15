@@ -158,6 +158,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 
 			/* Load the script if it hasn't been loaded yet. */
 			if ( ! wp_script_is( 'charitable-script', 'enqueued' ) ) {
+
+				if ( ! class_exists( 'Charitable_Public' ) ) {
+					require_once( charitable()->get_path( 'public' ) . 'class-charitable-public.php' );
+				}
+
 				Charitable_Public::get_instance()->enqueue_donation_form_scripts();
 			}
 
