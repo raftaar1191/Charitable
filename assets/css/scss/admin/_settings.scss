@@ -139,7 +139,7 @@ select.charitable-settings-field {
 .charitable_page_charitable-settings {
     .form-table {
         th {    
-            @include bp( 48em ) {
+            @include bp( 768 ) {
                 min-width: 200px;
             }           
 

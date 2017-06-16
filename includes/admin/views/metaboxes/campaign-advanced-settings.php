@@ -3,10 +3,11 @@
  * Loops over the meta boxes inside the advanced settings area of the Campaign post type.
  *
  * @author 		Studio 164a
- * @package 	Charitable/Admin Views/Metaboxes
- * @copyright 	Copyright (c) 2017, Studio 164a 
+ * @package     Charitable/Admin Views/Metaboxes
+ * @copyright 	Copyright (c) 2017, Studio 164a
  * @since 		1.0.0
  */
+
 global $post;
 
 if ( ! isset( $view_args['meta_boxes'] ) || empty( $view_args['meta_boxes'] ) ) {
