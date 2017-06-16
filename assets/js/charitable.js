@@ -636,7 +636,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         });
 
-        if ( has_all_required_fields ) {
+        if ( ! has_all_required_fields ) {
             this.add_error( CHARITABLE_VARS.error_required_fields );
         }        
 

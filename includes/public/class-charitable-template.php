@@ -22,22 +22,34 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 	class Charitable_Template {
 
 		/**
-		 * @var 	string Theme template path.
+		 * Theme template path.
+		 *
+		 * @var 	string
+		 * @access 	protected
 		 */
 		protected $theme_template_path;
 
 		/**
-		 * @var 	string[] Template names to be loaded.
+		 * Template names to be loaded.
+		 *
+		 * @var 	string[]
+		 * @access 	protected
 		 */
 		protected $template_names;
 
 		/**
-		 * @var 	bool Whether to load template file if it is found.
+		 * Whether to load template file if it is found.
+		 *
+		 * @var 	boolean
+		 * @access 	protected
 		 */
 		protected $load;
 
 		/**
-		 * @var 	bool Whether to use require_once or require.
+		 * Whether to use require_once or require.
+		 *
+		 * @var 	boolean
+		 * @access 	protected
 		 */
 		protected $require_once;
 
@@ -52,10 +64,9 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Class constructor.
 		 *
-		 * @param 	string|array $template_name A single template name or an ordered array of template
-		 * @param 	bool 		 $load If true the template file will be loaded if it is found.
-	 	 * @param 	bool 		 $require_once Whether to require_once or require. Default true. Has no effect if $load is false.
-		 * @return 	void
+		 * @param 	string|array $template_name A single template name or an ordered array of template.
+		 * @param 	bool 		 $load          If true the template file will be loaded if it is found.
+	 	 * @param 	bool 		 $require_once  Whether to require_once or require. Default true. Has no effect if $load is false.
 		 * @access 	public
 		 * @since 	1.0.0
 		 */
@@ -96,7 +107,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Adds an array of view arguments.
 		 *
-		 * @param 	array 		$args
+		 * @param 	array $args Arguments to include in the view.
 		 * @return 	void
 		 * @access  public
 		 * @since 	1.0.0
@@ -108,6 +119,8 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Adds an argument to be accessed within the view.
 		 *
+		 * @param 	string $key   The key of the argument.
+		 * @param 	mixed  $value The vaalue of the argument.
 		 * @return 	void
 		 * @access  public
 		 * @since 	1.0.0
@@ -119,8 +132,8 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Renders the template.
 		 *
-		 * @param 	boolean 		$require_once
-		 * @return 	void
+		 * @param 	boolean $require_once Whether the template should be loaded with include_once instead of include.
+		 * @return 	false|string False if the template does not exist. Template file otherwise.
 		 * @access 	public
 		 * @since 	1.0.0
 		 */

@@ -103,6 +103,67 @@
             assert.notOk( helper.validate_required_fields(), 'CHARITABLE.Donation_Form.validate_required_fields() returns false.' );
 
         });
+
+        // Validate donation form without errors
+        QUnit.test( "Validate donation form without errors", function( assert ) {
+
+            // Empty out all required fields.        
+            helper.get_required_fields().each( function() {
+                var $el = $( this ).find( 'input, select, textarea' ),
+                    val = ( function() {
+                        switch ( $el.prop( 'name' ) ) {
+                            case 'email' : 
+                                return 'info@example.com';
+                                break;
+
+                            case 'country' : 
+                                return 'AU';
+                                break;
+
+                            case 'cc_name' : 
+                                return 'Bruce Wayne';
+                                break;
+
+                            case 'cc_number' : 
+                                return '4242424242424242';
+                                break;
+
+                            case 'cc_cvc' : 
+                                return '321';
+                                break;
+
+                            case 'cc_expiration[year]' : 
+                                return '2033';
+                                break;
+
+                            case 'cc_expiration[month]' : 
+                                return '12';
+                                break;
+
+                            default : 
+                                return 'Test';
+                                break;
+                        }                        
+                    })();
+
+                $el.val( val );
+            });
+
+            // Set a donation amount.
+            if ( $form.find( '[name=donation_amount]' ).length ) {
+                $form.find( '[name=donation_amount]' ).each( function( i ) {
+                    $( this ).prop( 'checked', i === 0 );
+                });
+            } else {
+                $form.find( 'input.custom-donation-input' ).val( 20 );
+            }
+
+            // Run validate() on the form.
+            assert.ok( helper.validate(), 'CHARITABLE.Donation_Form.validate() returns true.' );
+            assert.ok( helper.validate_amount(), 'CHARITABLE.Donation_Form.validate_amount() returns true.' );
+            assert.ok( helper.validate_required_fields(), 'CHARITABLE.Donation_Form.validate_required_fields() returns true.' );
+
+        });
     } 
 
     $( document ).ready( function() {

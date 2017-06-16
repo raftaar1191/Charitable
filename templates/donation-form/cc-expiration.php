@@ -33,7 +33,8 @@ $current_year   = date( 'Y' );
             <?php endif ?>
         </label>
     <?php endif ?>    
-    <select name="<?php echo $field['key'] ?>[month]" class="month">
+    <select name="<?php echo $field['key'] ?>[
+    ]" class="month">
         <?php foreach ( range( 1, 12 ) as $month ) :
             $padded_month = sprintf( '%02d', $month );
             ?>
