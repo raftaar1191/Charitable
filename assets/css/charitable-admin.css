@@ -529,7 +529,7 @@ body.post-type-campaign .postbox-container .empty-container {
   .charitable-benefactor-contribution-amount .contribution-amount {
     margin-bottom: 10px;
     font-size: 16px; }
-  @media (min-width: 2.65625emem) {
+  @media (min-width: 42.5em) {
     .charitable-benefactor-contribution-amount {
       border: 1px solid #ddd;
       background-color: #fff; }
@@ -584,23 +584,6 @@ body.post-type-campaign .postbox-container .empty-container {
   padding-top: 24px;
   margin-top: 12px;
   border-top: 1px solid #e1e1e1; }
-
-/* --- Top campaign meta boxes --- */
-#campaign-top-sortables {
-  padding-top: 20px; }
-  #campaign-top-sortables #campaign-goal,
-  #campaign-top-sortables #campaign-end-date {
-    float: left;
-    width: 48%; }
-  #campaign-top-sortables #campaign-goal {
-    padding-right: 4%; }
-  #campaign-top-sortables #campaign-description {
-    clear: both; }
-  @media (max-width: 2.34375emem) {
-    #campaign-top-sortables #campaign-goal,
-    #campaign-top-sortables #campaign-end-date {
-      width: 100%;
-      padding: 0 0 24px; } }
 
 body.post-type-donation #post-body-content,
 body.post-type-donation #titlediv,
@@ -785,7 +768,7 @@ select.charitable-settings-field {
 .charitable-shortcode-options li {
   margin-bottom: 2px; }
 
-@media (min-width: 3emem) {
+@media (min-width: 48em) {
   .charitable_page_charitable-settings .form-table th {
     min-width: 200px; } }
 .charitable_page_charitable-settings .form-table th label {

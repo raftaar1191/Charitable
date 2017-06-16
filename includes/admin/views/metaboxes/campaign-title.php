@@ -3,7 +3,8 @@
  * Renders the campaign title field for the Campaign post type.
  *
  * @author 	Studio 164a
- * @since 	1.0.0
+ * @since   1.0.0
+ * @package Charitable/Admin Views/Metaboxes
  */
 
 global $post;
