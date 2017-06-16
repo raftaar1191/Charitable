@@ -23,55 +23,73 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 	abstract class Charitable_Email implements Charitable_Email_Interface {
 
 		/**
-		 * @var     string  The email's unique identifier.
+		 * The email's unique identifier.
 		 */
 		const ID = '';
 
 		/**
-		 * @var     string  Descriptive name of the email.
+		 * Descriptive name of the email.
+		 *
+		 * @var     string
 		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $name;
 
 		/**
-		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
+		 * Array of supported object types (campaigns, donations, donors, etc).
+		 *
+		 * @var     string[]
 		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $object_types = array();
 
 		/**
-		 * @var     boolean Whether the email allows you to define the email recipients.
+		 * Whether the email allows you to define the email recipients.
+		 *
+		 * @var     boolean
 		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $has_recipient_field = false;
 
 		/**
-		 * @var     boolean Whether the email is required.
+		 * Whether the email is required.
+		 *
+		 * @var     boolean
 		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected $required = false;
 
 		/**
+		 * The Donation object.
+		 *
 		 * @var     Charitable_Donation
+		 * @access  protected
 		 */
 		protected $donation;
 
 		/**
+		 * The Campaign object.
+		 *
 		 * @var     Charitable_Campaign
+		 * @access  protected
 		 */
 		protected $campaign;
 
 		/**
+		 * Email recipient.
+		 *
 		 * @var     string
 		 * @access  protected
 		 */
 		protected $recipients;
 
 		/**
+		 * Email headers.
+		 *
 		 * @var     string
 		 * @access  protected
 		 */
@@ -80,7 +98,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Create a class instance.
 		 *
-		 * @param   mixed[]  $objects
+		 * @param   mixed[] $objects Objects passed to generate email.
 		 * @access  public
 		 * @since   1.0.0
 		 */

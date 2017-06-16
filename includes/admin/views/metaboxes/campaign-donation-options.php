@@ -4,6 +4,7 @@
  *
  * @author 	Studio 164a
  * @since 	1.0.0
+ * @package Charitable/Admin Views/Metaboxes
  */
 
 $title 	     = isset( $view_args['title'] ) ? $view_args['title'] 	: '';

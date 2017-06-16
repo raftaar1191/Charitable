@@ -4,7 +4,9 @@
  *
  * @author  Studio 164a
  * @since   1.0.0
+ * @package Charitable/Admin Views/Metaboxes
  */
+
 global $post;
 
 $donation = charitable_get_donation( $post->ID );
