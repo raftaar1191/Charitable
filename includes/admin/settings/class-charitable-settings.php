@@ -425,8 +425,8 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return the submitted values for the given section.
 		 *
-		 * @param   string $section
-		 * @param   array  $submitted
+		 * @param   string $section   The section being edited.
+		 * @param   array  $submitted The submitted values.
 		 * @return  array
 		 * @access  private
 		 * @since   1.0.0

@@ -311,7 +311,7 @@ CHARITABLE = window.CHARITABLE || {};
             amount = custom.val();            
         } 
 
-        amount = accounting.unformat( amount );
+        amount = accounting.unformat( amount, CHARITABLE_VARS.currency_format_decimal_sep );
 
         if ( amount <= 0 ) {
             amount = 0;
