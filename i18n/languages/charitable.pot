@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.4.17\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-06-19 01:49:24+00:00\n"
+"POT-Creation-Date: 2017-06-19 07:30:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -6464,7 +6464,7 @@ msgid ""
 msgstr ""
 
 #: includes/donations/charitable-donation-functions.php:220
-#: includes/emails/abstract-class-charitable-email.php:703
+#: includes/emails/abstract-class-charitable-email.php:728
 msgid "Paid"
 msgstr ""
 
@@ -6611,174 +6611,174 @@ msgstr ""
 msgid "Payment failed with errors: %s"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:274
+#: includes/emails/abstract-class-charitable-email.php:290
 #: includes/emails/class-charitable-email-password-reset.php:101
 msgid "Your website title"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:278
+#: includes/emails/abstract-class-charitable-email.php:294
 #: includes/emails/class-charitable-email-password-reset.php:105
 msgid "Your website URL"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:312
+#: includes/emails/abstract-class-charitable-email.php:328
 msgid "Email Subject Line"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:313
+#: includes/emails/abstract-class-charitable-email.php:329
 msgid "The email subject line when it is delivered to recipients."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:320
+#: includes/emails/abstract-class-charitable-email.php:336
 msgid "Email Headline"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:321
+#: includes/emails/abstract-class-charitable-email.php:337
 msgid "The headline displayed at the top of the email."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:328
+#: includes/emails/abstract-class-charitable-email.php:344
 msgid "Email Body"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:330
+#: includes/emails/abstract-class-charitable-email.php:346
 msgid ""
 "The content of the email that will be delivered to recipients. HTML is "
 "accepted."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:338
+#: includes/emails/abstract-class-charitable-email.php:354
 msgid "Preview"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:346
+#: includes/emails/abstract-class-charitable-email.php:362
 msgid "Preview email"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:371
+#: includes/emails/abstract-class-charitable-email.php:387
 msgid "Recipients"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:372
+#: includes/emails/abstract-class-charitable-email.php:388
 msgid "A comma-separated list of email address that will receive this email."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:398
+#: includes/emails/abstract-class-charitable-email.php:416
 msgid "The full name of the donor"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:403
+#: includes/emails/abstract-class-charitable-email.php:421
 msgid "The first name of the donor"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:408
+#: includes/emails/abstract-class-charitable-email.php:426
 msgid "The email address of the donor"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:413
+#: includes/emails/abstract-class-charitable-email.php:431
 msgid "The donor's address"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:418
+#: includes/emails/abstract-class-charitable-email.php:436
 msgid "The donor's phone number"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:423
+#: includes/emails/abstract-class-charitable-email.php:441
 msgid "The donation ID"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:428
+#: includes/emails/abstract-class-charitable-email.php:446
 msgid "A summary of the donation"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:433
+#: includes/emails/abstract-class-charitable-email.php:451
 msgid "The total amount donated"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:438
+#: includes/emails/abstract-class-charitable-email.php:456
 msgid "The date the donation was made"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:443
+#: includes/emails/abstract-class-charitable-email.php:461
 msgid "The status of the donation (pending, paid, etc.)"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:448
+#: includes/emails/abstract-class-charitable-email.php:466
 msgid "The campaigns that were donated to"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:453
+#: includes/emails/abstract-class-charitable-email.php:471
 msgid "The categories of the campaigns that were donated to"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:700
+#: includes/emails/abstract-class-charitable-email.php:725
 msgid "Fake Campaign: $50.00"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:729
+#: includes/emails/abstract-class-charitable-email.php:754
 msgid "The title of the campaign"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:734
+#: includes/emails/abstract-class-charitable-email.php:759
 msgid "The name of the campaign creator"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:739
+#: includes/emails/abstract-class-charitable-email.php:764
 msgid "The email address of the campaign creator"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:744
+#: includes/emails/abstract-class-charitable-email.php:769
 msgid "The end date of the campaign"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:749
+#: includes/emails/abstract-class-charitable-email.php:774
 msgid ""
 "Display whether the campaign reached its goal. Add a `success` parameter as "
 "the message when the campaign was successful, and a `failure` parameter as "
 "the message when the campaign is not successful"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:754
+#: includes/emails/abstract-class-charitable-email.php:779
 msgid "Display the total amount donated to the campaign"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:759
+#: includes/emails/abstract-class-charitable-email.php:784
 msgid "Display the number of campaign donors"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:764
+#: includes/emails/abstract-class-charitable-email.php:789
 msgid "Display the campaign's fundraising goal"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:769
+#: includes/emails/abstract-class-charitable-email.php:794
 msgid "Display the campaign's URL"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:865
+#: includes/emails/abstract-class-charitable-email.php:890
 #: includes/emails/class-charitable-email-campaign-end.php:169
 msgid "The campaign achieved its fundraising goal."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:866
+#: includes/emails/abstract-class-charitable-email.php:891
 #: includes/emails/class-charitable-email-campaign-end.php:169
 msgid "The campaign did not reach its fundraising goal."
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:1101
+#: includes/emails/abstract-class-charitable-email.php:1126
 msgid "You cannot send this email without a donation!"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:1117
+#: includes/emails/abstract-class-charitable-email.php:1142
 msgid "You cannot send this email without a campaign!"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:1264
+#: includes/emails/abstract-class-charitable-email.php:1292
 msgid ""
 "The following options are available with the "
 "<code>[charitable_email]</code> shortcode:"
 msgstr ""
 
-#: includes/emails/abstract-class-charitable-email.php:1305
+#: includes/emails/abstract-class-charitable-email.php:1336
 msgid "This function was buggy and has been deprecated."
 msgstr ""
 

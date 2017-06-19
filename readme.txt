@@ -121,6 +121,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * **THANK YOU**: Thanks to first-time contributor [@qriouslad](https://github.com/qriouslad) for his contribution to this release!
 * When using Stripe Checkout, amounts over $999 were sometimes incorrectly sent to the Stripe modal. [#339](https://github.com/Charitable/Charitable/issues/339)
 * Avoid fatal error in rare instances (only encountered in the Layers theme by Obox) when the donation form scripts are loaded through an admin AJAX request. [#340](https://github.com/Charitable/Charitable/issues/340)
+* Added support for linking to campaign donated to from donation-related emails. [#341](https://github.com/Charitable/Charitable/issues/341)
 * Improved i18n for dates.
 * Introduced unit testing for Javascript, using QUnit. Developers, this is only available with the full package download from [GitHub](github.com/Charitable/Charitable/).
 * Sanitize result of queries for campaign totals and total number of site donations.

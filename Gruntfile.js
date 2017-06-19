@@ -185,6 +185,7 @@ module.exports = function(grunt) {
                     '!composer.lock', 
                     '!phpunit.xml',
                     '!phpcs.ruleset.xml',
+                    '!phpunit.xml.dist',
                     '!node_modules/**',
                     '!build/**',
                     '!.git/**',
