@@ -568,8 +568,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns a summary of the donation, including all the campaigns that were donated to.
 		 *
-		 * @param   string           $value The content to .
- in place of the shortcode.
+		 * @param   string           $value The content to show in place of the shortcode.
 		 * @param   mixed[]          $args  Array of optional arguments.
 		 * @param   Charitable_Email $email The email object.
 		 * @return  string

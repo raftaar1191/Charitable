@@ -360,8 +360,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		public function get_campaigns_for_donation( $donation_id ) {
 			global $wpdb;
 
-			debug_print_backtrace();
-
 			$sql = "SELECT DISTINCT campaign_id 
                     FROM $this->table_name 
                     WHERE donation_id = %d;";

@@ -125,6 +125,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * Improved i18n for dates.
 * Introduced unit testing for Javascript, using QUnit. Developers, this is only available with the full package download from [GitHub](github.com/Charitable/Charitable/).
 * Sanitize result of queries for campaign totals and total number of site donations.
+* Avoid error that happens in situations where Divi and Yoast SEO are both installed alongside Charitable. [#316](https://github.com/Charitable/Charitable/issues/316)
 * Better formatting of code commenting to improve compatibility with WordPress coding standards.
 
 = 1.4.16 = 
