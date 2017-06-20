@@ -1257,7 +1257,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of a field for the preview.
 		 *
-		 * @param 	array $field Field arguments.
+		 * @param 	string $field Field key.
 		 * @return  string
 		 * @access  protected
 		 * @since   1.0.0
