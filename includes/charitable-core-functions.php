@@ -30,9 +30,9 @@ function charitable() {
 /**
  * This returns the value for a particular Charitable setting.
  *
- * @param 	mixed		$key 			Accepts an array of strings or a single string.
- * @param 	mixed 		$default 		The value to return if key is not set.
- * @param 	array 		$settings 		Optional. Used when $key is an array.
+ * @param 	mixed $key 		Accepts an array of strings or a single string.
+ * @param 	mixed $default  The value to return if key is not set.
+ * @param 	array $settings Optional. Used when $key is an array.
  * @return 	mixed
  * @since 	1.0.0
  */

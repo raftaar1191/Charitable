@@ -64,26 +64,16 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		protected $required = false;
 
 		/**
-<<<<<<< HEAD
 		 * The Donation object, if relevant.
-=======
-		 * The Donation object.
->>>>>>> a8c7872... Show end time for campaigns in admin. See #335
 		 *
 		 * @var     Charitable_Donation
-		 * @access  protected
 		 */
 		protected $donation;
 
 		/**
-<<<<<<< HEAD
 		 * The Campaign object, if relevant.
-=======
-		 * The Campaign object.
->>>>>>> a8c7872... Show end time for campaigns in admin. See #335
 		 *
 		 * @var     Charitable_Campaign
-		 * @access  protected
 		 */
 		protected $campaign;
 
@@ -106,11 +96,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Create a class instance.
 		 *
-<<<<<<< HEAD
 		 * @param   mixed[] $objects Objects for the email.
-=======
-		 * @param   mixed[] $objects Objects passed to generate email.
->>>>>>> a8c7872... Show end time for campaigns in admin. See #335
 		 * @access  public
 		 * @since   1.0.0
 		 */
@@ -1271,7 +1257,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of a field for the preview.
 		 *
-		 * @param 	array $field Field arguments.
+		 * @param 	string $field Field key.
 		 * @return  string
 		 * @access  protected
 		 * @since   1.0.0
