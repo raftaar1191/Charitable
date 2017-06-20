@@ -39,7 +39,9 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		private $emails;
 
 		/**
-		 * @var     Charitable_Email The email currently being rendered.
+		 * The email currently being rendered.
+		 *
+		 * @var     Charitable_Email
 		 * @access  private
 		 */
 		private $current_email;
@@ -100,8 +102,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Receives a request to enable or disable an email and validates it before passing it off.
 		 *
-		 * @param   array
-		 * @return  array
+		 * @return  void
 		 * @access  public
 		 * @since   1.0.0
 		 */

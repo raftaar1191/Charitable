@@ -2,9 +2,12 @@
 /**
  * Renders the donation details meta box for the Donation post type.
  *
- * @author  Studio 164a
- * @since   1.0.0
+ * @author      Studio 164a
+ * @package     Charitable/Admin Views/Metaboxes
+ * @copyright   Copyright (c) 2017, Studio 164a
+ * @since       1.0.0
  */
+
 global $post;
 
 $meta = charitable_get_donation( $post->ID )->get_donation_meta();

@@ -31,18 +31,16 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		private static $instance = null;
 
 		/**
-		 * @var     Charitable $charitable
-		 * @access  private
-		 */
-		private $charitable;
-
-		/**
-		 * @var     Charitable_Meta_Box_Helper $meta_box_helper
+		 * Meta box helper object.
+		 *
+		 * @var     Charitable_Meta_Box_Helper
 		 * @access  private
 		 */
 		private $meta_box_helper;
 
 		/**
+		 * Array of counts per status.
+		 *
 		 * @var     array
 		 * @access  private
 		 */
@@ -62,17 +60,17 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
 			add_action( 'add_meta_boxes', array( $this, 'remove_meta_boxes' ), 20 );
 
-			// Donations columns
+			// Donations columns.
 			add_filter( 'manage_edit-donation_columns', array( $this, 'dashboard_columns' ), 11, 1 );
 			add_filter( 'manage_donation_posts_custom_column', array( $this, 'dashboard_column_item' ), 11, 2 );
 			add_filter( 'manage_edit-donation_sortable_columns', array( $this, 'sortable_columns' ) );
 			add_filter( 'list_table_primary_column', array( $this, 'primary_column' ), 10, 2 );
 			add_filter( 'post_row_actions', array( $this, 'row_actions' ), 2, 100 );
 
-			// Post status counts
+			// Post status counts.
 			add_filter( 'views_edit-donation', array( $this, 'set_status_views' ) );
 
-			// Bulk actions
+			// Bulk actions.
 			if ( version_compare( $wp_version, '4.7', '>=' ) ) {
 				add_filter( 'bulk_actions-edit-donation', array( $this, 'custom_bulk_actions' ) );
 				add_filter( 'handle_bulk_actions-edit-donation', array( $this, 'bulk_action_handler' ), 10, 3 );
@@ -86,16 +84,16 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 			add_filter( 'post_updated_messages', array( $this, 'post_messages' ) );
 			add_filter( 'bulk_post_updated_messages', array( $this, 'bulk_messages' ), 10, 2 );
 
-			// Customization filters
+			// Customization filters.
 			add_filter( 'disable_months_dropdown', array( $this, 'disable_months_dropdown' ), 10, 2 );
 			add_action( 'restrict_manage_posts', array( $this, 'restrict_manage_posts' ), 99 );
 			add_action( 'manage_posts_extra_tablenav', array( $this, 'extra_tablenav' ) );
 
-			// Modal Forms: Export and Filter
+			// Modal Forms: Export and Filter.
 			add_action( 'admin_footer', array( $this, 'modal_forms' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_scripts' ) );
 
-			// Sorting query
+			// Sorting query.
 			add_filter( 'request', array( $this, 'request_query' ) );
 			add_filter( 'posts_clauses', array( $this, 'posts_clauses' ) );
 
@@ -187,6 +185,12 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 					'context'       => 'normal',
 					'priority'      => 'low',
 					'view'          => 'metaboxes/donation/donation-log',
+				),
+				'email-log'      => array(
+					'title'         => __( 'Email Log', 'charitable' ),
+					'context'       => 'normal',
+					'priority'      => 'low',
+					'view'          => 'metaboxes/donation/email-log',
 				),
 			);
 

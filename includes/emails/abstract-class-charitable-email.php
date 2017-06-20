@@ -1059,6 +1059,24 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Return the email log.
+		 *
+		 * @param   int $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
+		 * @return  array
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_log( $post_id ) {
+			$log = get_post_meta( $post_id, $this->get_log_key(), true );
+
+			if ( ! $log || ! is_array( $log ) ) {
+				return array();
+			}
+
+			return $log;
+		}
+
+		/**
 		 * Preview the email. This will display a sample email within the browser.
 		 *
 		 * @return  string
