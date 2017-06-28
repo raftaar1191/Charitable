@@ -3,7 +3,7 @@
  * Functions to improve compatibility with Divi.
  *
  * @package     Charitable/Functions/Compatibility
- * @version     1.5.0
+ * @version     1.4.17
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
