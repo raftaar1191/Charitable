@@ -851,6 +851,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public static function flush_donations_cache( $campaign_id ) {
 			delete_transient( self::get_donations_cache_key( $campaign_id ) );
 			delete_transient( self::get_donation_amount_cache_key( $campaign_id ) );
+
+			do_action( 'charitable_flush_campaign_cache', $campaign_id );
 		}
 
 		/**

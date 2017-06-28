@@ -291,11 +291,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 			/* Deprecated */
 			require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
 
-			/* Compatibility */
-			if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
-				require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
-			}
-
 			/**
 			 * We are registering this object only for backwards compatibility. It
 			 * will be removed in or after Charitable 1.3.
@@ -324,6 +319,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'wpmu_new_blog', array( $this, 'maybe_activate_charitable_on_new_site' ) );
 			add_action( 'plugins_loaded', array( $this, 'charitable_install' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
+			add_action( 'plugins_loaded', array( $this, 'load_plugin_compat_files' ) );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
 
@@ -444,6 +440,27 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 */
 		public function charitable_start() {
 			do_action( 'charitable_start', $this );
+		}
+
+		/**
+		 * Load plugin compatibility files on plugins_loaded hook.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.4.18
+		 */
+		public function load_plugin_compat_files() {
+			$includes_path = $this->get_path( 'includes' );
+
+			/* Divi */
+			if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
+				require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
+			}
+
+			/* WP Super Cache */
+			if ( function_exists( 'wp_super_cache_text_domain' ) ) {
+				require_once( $includes_path . 'compat/charitable-wp-super-cache-compat-functions.php' );
+			}
 		}
 
 		/**
