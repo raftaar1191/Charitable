@@ -207,6 +207,23 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 ( function($){
 
+	var setup_campaign_end_date_field = function() {
+		$( '#campaign_end_date' ).on( 'change', function() {
+			var $field = $( this ),
+				date   = $field.val(), 
+				$span  = $field.siblings( '.charitable-end-time' ),
+				$input = $field.siblings( '#campaign_end_time' );
+
+			if ( '' === date || ! date ) {
+				$span.hide();
+				$input.val( 0 );
+			} else {
+				$span.text( '@ 23:59 PM' ).show();
+				$input.val( '23:59:59' );
+			}
+		});
+	};
+
 	var setup_charitable_ajax = function() {
 		$('[data-charitable-action]').on( 'click', function( e ){
 			var data 	= $(this).data( 'charitable-args' ) || {}, 
@@ -346,6 +363,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		setup_charitable_ajax();	
 		setup_charitable_toggle();	
 		setup_dashboard_widgets();
+		setup_campaign_end_date_field();
 
 		$('[data-charitable-add-row]').on( 'click', function() {
 			var type = $( this ).data( 'charitable-add-row' );
