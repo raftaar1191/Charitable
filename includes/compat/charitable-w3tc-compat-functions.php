@@ -24,3 +24,21 @@ function charitable_compat_w3tc_clear_campaign_cache( $campaign_id ) {
 }
 
 add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_campaign_cache' );
+
+/**
+ * When W3TC database caching is turned on, notices can be
+ * triggered during donation processing.
+ *
+ * DONOTCACHEDB is a constant which will, by default, prevent
+ * database caching.
+ *
+ * @see 	https://github.com/Charitable/Charitable/issues/347
+ *
+ * @return 	void
+ * @since 	1.4.18
+ */
+function charitable_compat_w3tc_turn_off_donation_cache() {
+	define( 'DONOTCACHEDB', true );
+}
+
+add_action( 'charitable_before_save_donation', 'charitable_compat_w3tc_turn_off_donation_cache' );
