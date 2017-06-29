@@ -471,6 +471,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 			if ( defined( 'WP_ROCKET_VERSION' )  ) {
 				require_once( $includes_path . 'compat/charitable-wp-rocket-compat-functions.php' );
 			}
+
+			/* WP Fastest Cache */
+			if ( class_exists( 'WpFastestCache' ) ) {
+				require_once( $includes_path . 'compat/charitable-wp-fastest-cache-compat-functions.php' );
+			}
 		}
 
 		/**
