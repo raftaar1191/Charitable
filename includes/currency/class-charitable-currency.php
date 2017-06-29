@@ -226,27 +226,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @since   1.3.0
 		 */
 		public function get_accounting_js_format() {
-
-			$option = charitable_get_option( 'currency_format', 'left' );
-
-			switch ( $option ) {
-				case 'right':
-					$format = '%v%s';
-				break;
-				case 'left-with-space':
-					$format = '%s %v';
-				break;
-				case 'right-with-space':
-					$format = '%v %s';
-				break;
-				default:
-					$format = '%s%v';
-				break;
-			}
-			$format = '%s%v';
-
-			return $format;
-
+			return apply_filters( 'charitable_accounting_js_currency_format', '%s%v' );
 		}
 
 		/**
