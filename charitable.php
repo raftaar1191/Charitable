@@ -466,6 +466,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 			if ( defined( 'W3TC' ) && W3TC ) {
 				require_once( $includes_path . 'compat/charitable-w3tc-compat-functions.php' );
 			}
+
+			/* WP Rocket */
+			if ( defined( 'WP_ROCKET_VERSION' )  ) {
+				require_once( $includes_path . 'compat/charitable-wp-rocket-compat-functions.php' );
+			}
 		}
 
 		/**
