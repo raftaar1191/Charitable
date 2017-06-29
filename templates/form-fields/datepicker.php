@@ -3,6 +3,7 @@
  * The template used to display datepicker form fields.
  *
  * @author 	Studio 164a
+ * @package Charitable/Templates/Form Fields
  * @since 	1.0.0
  * @version 1.0.0
  */
@@ -49,12 +50,12 @@ wp_enqueue_style( 'charitable-datepicker' );
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">
 	<?php if ( isset( $field['label'] ) ) : ?>
-		<label for="charitable_field_<?php echo $field['key'] ?>">
+		<label for="charitable_field_<?php echo $field['key'] ?>_element">
 			<?php echo $field['label'] ?>
 			<?php if ( $is_required ) : ?>
 				<abbr class="required" title="required">*</abbr>
 			<?php endif ?>
 		</label>
 	<?php endif ?>
-	<input type="text" class="datepicker" name="<?php echo $field['key'] ?>" value="<?php echo $value ?>" <?php echo charitable_get_arbitrary_attributes( $field ) ?>/>
+	<input type="text" class="datepicker" name="<?php echo $field['key'] ?>" value="<?php echo $value ?>" id="charitable_field_<?php echo $field['key'] ?>_element" <?php echo charitable_get_arbitrary_attributes( $field ) ?>/>
 </div>

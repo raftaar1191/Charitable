@@ -67,7 +67,8 @@
 /* Forms */
 .charitable-form-field {
   margin-bottom: 1em; }
-  .charitable-form-field label {
+  .charitable-form-field label,
+  .charitable-form-field .charitable-fieldset-field-header {
     display: block;
     margin-bottom: 4px; }
   .charitable-form-field input,
@@ -128,7 +129,7 @@
     float: left;
     width: 63%;
     margin-left: 4%; } }
-#charitable_field_cc_expiration > *:not(label) {
+#charitable_field_cc_expiration fieldset > *:not(.charitable-fieldset-field-header) {
   float: left;
   width: 49%;
   max-width: 140px; }
@@ -139,6 +140,12 @@
   margin: 0 0 1em;
   padding: 2em;
   border: 1px solid #ebebeb; }
+.charitable-form-fields .charitable-fieldset-field-wrapper {
+  margin: 0;
+  padding: 0;
+  border: none; }
+  .charitable-form-fields .charitable-fieldset-field-wrapper .charitable-fieldset-field-header {
+    font-weight: bold; }
 
 .charitable-form-header {
   margin: 0 0 1em;

@@ -1,7 +1,8 @@
 .charitable-form-field {
     margin-bottom: 1em;
 
-    label {
+    label, 
+    .charitable-fieldset-field-header {
         display: block;
         margin-bottom: 4px;
     }
@@ -95,7 +96,7 @@
         margin-left: 4%;
     }
 
-    > *:not(label) {
+    fieldset > *:not(.charitable-fieldset-field-header) {
         float: left;
         width: 49%;
         max-width: 140px;
@@ -111,6 +112,16 @@
         margin: 0 0 1em;
         padding: 2em;
         border: 1px solid #ebebeb;  
+    }
+
+    .charitable-fieldset-field-wrapper {
+        margin: 0;
+        padding: 0;
+        border: none;
+
+        .charitable-fieldset-field-header {
+            font-weight: bold;
+        }
     }
 }
 

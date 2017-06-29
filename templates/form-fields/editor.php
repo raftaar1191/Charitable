@@ -3,20 +3,21 @@
  * The template used to display the WP Editor in a form.
  *
  * @author 	Studio 164a
+ * @package Charitable/Templates/Form Fields
  * @since 	1.0.0
  * @version 1.0.0
  */
 
-if ( ! isset( $view_args[ 'form' ] ) || ! isset( $view_args[ 'field' ] ) ) {
+if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form 			= $view_args[ 'form' ];
-$field 			= $view_args[ 'field' ];
-$classes 		= $view_args[ 'classes' ];
-$is_required 	= isset( $field[ 'required' ] ) ? $field[ 'required' ] : false;
-$value			= isset( $field[ 'value' ] ) ? $field[ 'value' ] : '';
-$editor_args 	= isset( $field[ 'editor' ] ) ? $field[ 'editor' ] : array();
+$form 			= $view_args['form'];
+$field 			= $view_args['field'];
+$classes 		= $view_args['classes'];
+$is_required 	= isset( $field['required'] ) ? $field['required'] : false;
+$value			= isset( $field['value'] ) ? $field['value'] : '';
+$editor_args 	= isset( $field['editor'] ) ? $field['editor'] : array();
 $default_editor_args = array(
 	'media_buttons' => true,
 	'teeny'         => true,
@@ -41,6 +42,6 @@ $editor_args = wp_parse_args( $editor_args, $default_editor_args );
 		</label>
 	<?php endif ?>
 	<?php
-		wp_editor( $value, esc_attr( $field[ 'key' ] ), $editor_args );
+		wp_editor( $value, esc_attr( $field['key'] ), $editor_args );
 	?>
 </div>

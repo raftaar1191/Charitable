@@ -3,6 +3,7 @@
  * The template used to display file form fields.
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Form Fields
  * @since   1.0.0
  * @version 1.4.0
  */
@@ -66,7 +67,7 @@ $params = array(
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">    
 	<?php if ( isset( $field['label'] ) ) : ?>
-		<label for="charitable_field_<?php echo $field['key'] ?>">
+		<label for="charitable_field_<?php echo $field['key'] ?>_element">
 			<?php echo $field['label'] ?>         
 			<?php if ( $is_required ) : ?>
 				<abbr class="required" title="required">*</abbr>
