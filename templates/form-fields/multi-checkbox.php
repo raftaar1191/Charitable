@@ -33,16 +33,17 @@ if ( empty( $options ) ) {
 				<?php endif ?>
 			</div>
 		<?php endif ?>
-		<ul class="options">
+		<ul class="charitable-checkbox-list options">
 		<?php foreach ( $options as $val => $label ) : ?>
 			<li>
 				<input type="checkbox" 
+					id="<?php echo esc_attr( $field['key'] . '-' . $val ) ?>"
 					name="<?php echo $field['key'] ?>[]" 
 					value="<?php echo $val ?>"
 					aria-describedby="charitable_field_<?php echo esc_attr( $field['key'] ) ?>_label"
 					<?php checked( in_array( $val, $value ) ) ?>
 					<?php echo charitable_get_arbitrary_attributes( $field ) ?> />
-				<label for="<?php echo esc_attr( $field['key'] . '-' . $option ) ?>"><?php echo $label ?></label>
+				<label for="<?php echo esc_attr( $field['key'] . '-' . $val ) ?>"><?php echo $label ?></label>
 			</li>
 		<?php endforeach ?>
 		</ul>

@@ -67,8 +67,7 @@
 /* Forms */
 .charitable-form-field {
   margin-bottom: 1em; }
-  .charitable-form-field label,
-  .charitable-form-field .charitable-fieldset-field-header {
+  .charitable-form-field label {
     display: block;
     margin-bottom: 4px; }
   .charitable-form-field input,
@@ -106,6 +105,10 @@
     margin-bottom: 0.5em; }
   .charitable-form-field .wp-editor-container {
     border: 1px solid #dedede; }
+
+.charitable-radio-list label,
+.charitable-checkbox-list label {
+  display: inline; }
 
 .charitable-submit-field .button {
   font-size: 1em;
@@ -145,6 +148,7 @@
   padding: 0;
   border: none; }
   .charitable-form-fields .charitable-fieldset-field-wrapper .charitable-fieldset-field-header {
+    margin-bottom: 4px;
     font-weight: bold; }
 
 .charitable-form-header {

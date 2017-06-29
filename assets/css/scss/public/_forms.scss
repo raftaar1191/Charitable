@@ -1,11 +1,10 @@
 .charitable-form-field {
     margin-bottom: 1em;
 
-    label, 
-    .charitable-fieldset-field-header {
+    label {
         display: block;
         margin-bottom: 4px;
-    }
+    }    
 
     input, 
     select, 
@@ -40,7 +39,7 @@
             display: inline-block;
             line-height: 1em;
         }
-    }
+    }    
 
     &.charitable-form-field-multi-checkbox {
         ul {
@@ -62,6 +61,13 @@
 
     .wp-editor-container {
         border: 1px solid #dedede;
+    }
+}
+
+.charitable-radio-list,
+.charitable-checkbox-list {
+    label {
+        display: inline;
     }
 }
 
@@ -120,6 +126,7 @@
         border: none;
 
         .charitable-fieldset-field-header {
+            margin-bottom: 4px;
             font-weight: bold;
         }
     }
