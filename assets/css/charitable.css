@@ -174,8 +174,10 @@
       border: 1px solid #ddd;
       background-color: transparent;
       list-style: none; }
-      #charitable-donation-form .donation-amounts .donation-amount label,
-      #charitable-donation-amount-form .donation-amounts .donation-amount label {
+      #charitable-donation-form .donation-amounts .donation-amount .custom-donation-amount-wrapper,
+      #charitable-donation-form .donation-amounts .donation-amount > label,
+      #charitable-donation-amount-form .donation-amounts .donation-amount .custom-donation-amount-wrapper,
+      #charitable-donation-amount-form .donation-amounts .donation-amount > label {
         display: block;
         width: 100%;
         padding: 0.5em 1em;

@@ -142,8 +142,9 @@
             border: 1px solid #ddd;
             background-color: transparent;      
             list-style: none;
-
-            label { 
+    
+            .custom-donation-amount-wrapper,            
+            > label { 
                 display: block;
                 width: 100%;
                 padding: 0.5em 1em;

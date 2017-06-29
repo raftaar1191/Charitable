@@ -84,21 +84,23 @@ do_action( 'charitable_donation_form_before_donation_amount', $view_args['form']
 
 			$has_custom_donation_amount = ! $amount_is_suggestion && $amount; ?>
 
-			<li class="donation-amount custom-donation-amount">  
-				<label for="form-<?php echo esc_attr( $view_args['form']->get_form_identifier() ) ?>-field-custom-amount">
-					<input
-						id="form-<?php echo esc_attr( $view_args['form']->get_form_identifier() ) ?>-field-custom-amount"
-						type="radio"
-						name="donation_amount"
-						value="custom" <?php checked( $has_custom_donation_amount ) ?>
-					/><span class="description"><?php echo apply_filters( 'charitable_donation_amount_form_custom_amount_text', __( 'Custom amount', 'charitable' ) ) ?></span>
+			<li class="donation-amount custom-donation-amount">
+				<span class="custom-donation-amount-wrapper">
+					<label for="form-<?php echo esc_attr( $view_args['form']->get_form_identifier() ) ?>-field-custom-amount">
+						<input
+							id="form-<?php echo esc_attr( $view_args['form']->get_form_identifier() ) ?>-field-custom-amount"
+							type="radio"
+							name="donation_amount"
+							value="custom" <?php checked( $has_custom_donation_amount ) ?>
+						/><span class="description"><?php echo apply_filters( 'charitable_donation_amount_form_custom_amount_text', __( 'Custom amount', 'charitable' ) ) ?></span>
+					</label>
 					<input
 						type="text"
 						class="custom-donation-input"
 						name="custom_donation_amount"
 						value="<?php if ( $has_custom_donation_amount ) { echo $amount; } ?>" 
 					/>
-				</label>
+				</span>
 			</li>
 
 		<?php endif ?>
