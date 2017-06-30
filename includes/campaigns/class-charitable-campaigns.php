@@ -34,7 +34,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * Return WP_Query object with predefined defaults to query only campaigns.
 		 *
-		 * @param 	array 		$args
+		 * @param 	array $args
 		 * @return 	WP_Query
 		 * @static
 		 * @access  public

@@ -4,8 +4,10 @@
  *
  * Override this template by copying it to yourtheme/charitable/widgets/campaigns.php
  *
+ * @package Charitable/Templates/Widgets
  * @author  Studio 164a
  * @since   1.0.0
+ * @version 1.4.18
  */
 
 $campaigns = $view_args['campaigns'];
@@ -24,15 +26,14 @@ if ( ! empty( $view_args['title'] ) ) :
 
 endif;
 ?>
-
 <ol class="campaigns">
+<?php
+while ( $campaigns->have_posts() ) :
 
-<?php while ( $campaigns->have_posts() ) :
 	$campaigns->the_post();
 
 	$campaign = new Charitable_Campaign( get_the_ID() );
 	?>
-
 	<li class="campaign">
 		<?php
 		if ( $show_thumbnail && has_post_thumbnail() ) :
@@ -42,17 +43,14 @@ endif;
 		endif;
 		?>
 		<h6 class="campaign-title"><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h6>
-		<?php if ( ! $campaign->is_endless() ) : ?>
-			
-			<div class="campaign-time-left"><?php echo $campaign->get_time_left() ?>
-
+		<?php if ( ! $campaign->is_endless() ) : ?>		
+			<div class="campaign-time-left"><?php echo $campaign->get_time_left() ?></div>
 		<?php endif ?>
 	</li>
-
-<?php endwhile ?>
-
+<?php
+endwhile;
+?>
 </ol>
-
 <?php
 
 echo $view_args['after_widget'];
