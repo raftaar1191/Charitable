@@ -512,15 +512,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$this->donated_amount = get_transient( self::get_donation_amount_cache_key( $this->ID ) );
 
 			if ( false === $this->donated_amount ) {
-				$this->donated_amount = charitable_get_table( 'campaign_donations' )->get_campaign_donated_amount( $this->ID );
+				$this->donated_amount = charitable_get_table( 'campaign_donations' )->get_campaign_donated_amount( $this->ID, false, false );
 
 				set_transient( self::get_donation_amount_cache_key( $this->ID ), $this->donated_amount, 0 );
 			}
 
 			$amount = $this->donated_amount;
 
-			if ( $sanitize ) {
-				$amount = charitable_sanitize_amount( $this->donated_amount );
+			if ( ! $sanitize ) {
+				$amount = Charitable_Currency::get_instance()->sanitize_database_amount( $amount );
 			}
 
 			return apply_filters( 'charitable_campaign_donated_amount', $amount, $this, $sanitize );

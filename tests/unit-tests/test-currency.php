@@ -52,7 +52,7 @@ class Test_Charitable_Currency_Helper extends Charitable_UnitTestCase {
 	/**
 	 * @covers Charitable_Currency::sanitize_monetary_amount()
 	 */
-	function test_sanitize_monetary_amount_switched() {
+	function test_sanitize_monetary_amount_with_switched_separators() {
 		$this->set_decimal_separator( ',' );
 		$this->set_thousands_separator( '.' );
 
@@ -62,7 +62,7 @@ class Test_Charitable_Currency_Helper extends Charitable_UnitTestCase {
 	/**
 	 * @covers Charitable_Currency::sanitize_monetary_amount()
 	 */
-	function test_sanitize_monetary_amount_switched_with_decimals() {
+	function test_sanitize_monetary_amount_with_switched_separators_with_decimals() {
 		$this->set_decimal_separator( ',' );
 		$this->set_thousands_separator( '.' );
 
@@ -72,11 +72,61 @@ class Test_Charitable_Currency_Helper extends Charitable_UnitTestCase {
 	/**
 	 * @covers Charitable_Currency::sanitize_monetary_amount()
 	 */
-	function test_sanitize_monetary_amount_switched_with_thousands() {
+	function test_sanitize_monetary_amount_with_switched_separators_with_thousands() {
 		$this->set_decimal_separator( ',' );
 		$this->set_thousands_separator( '.' );
 
 		$this->assertEquals( 6000.00, $this->currency_helper->sanitize_monetary_amount( '6.000' ) );
+	}
+
+	/**
+	 * @covers Charitable_Currency::get_monetary_amount()
+	 */
+	function test_get_monetary_amount_with_switched_separators() {
+		$this->set_decimal_separator( ',' );
+		$this->set_thousands_separator( '.' );
+
+		$this->assertEquals( '&#36;12.500,50', $this->currency_helper->get_monetary_amount( '12.500,50' ) );
+	}
+
+	/**
+	 * @covers Charitable_Currency::sanitize_monetary_amount()
+	 */
+	function test_sanitize_monetary_amount_with_space_for_thousands() {
+		$this->set_decimal_separator( ',' );
+		$this->set_thousands_separator( ' ' );
+
+		$this->assertEquals( 600.00, $this->currency_helper->sanitize_monetary_amount( '600,00' ) );
+	}
+
+	/**
+	 * @covers Charitable_Currency::sanitize_monetary_amount()
+	 */
+	function test_sanitize_monetary_amount_with_space_for_thousands_with_decimals() {
+		$this->set_decimal_separator( ',' );
+		$this->set_thousands_separator( ' ' );
+
+		$this->assertEquals( 12500.50, $this->currency_helper->sanitize_monetary_amount( '12 500,50' ) );
+	}
+
+	/**
+	 * @covers Charitable_Currency::sanitize_monetary_amount()
+	 */
+	function test_sanitize_monetary_amount_with_space_for_thousands_with_thousands() {
+		$this->set_decimal_separator( ',' );
+		$this->set_thousands_separator( ' ' );
+
+		$this->assertEquals( 6000.00, $this->currency_helper->sanitize_monetary_amount( '6 000' ) );
+	}
+
+	/**
+	 * @covers Charitable_Currency::get_monetary_amount()
+	 */
+	function test_get_monetary_amount_with_space_for_thousands() {
+		$this->set_decimal_separator( ',' );
+		$this->set_thousands_separator( ' ' );
+
+		$this->assertEquals( '&#36;12 500,50', $this->currency_helper->get_monetary_amount( '12 500,50' ) );
 	}
 
 	/**
@@ -159,30 +209,23 @@ class Test_Charitable_Currency_Helper extends Charitable_UnitTestCase {
 	}
 
 	/* --- Series of helper functions --- */
-
-	private function set_option( $option, $value ) {
-		$settings = get_option( 'charitable_settings' );
-		$settings[$option] = $value;
-		update_option( 'charitable_settings', $settings );
-	}
-
 	private function set_currency_format( $format ) {
-		$this->set_option( 'currency_format', $format );
+		$this->set_charitable_option( 'currency_format', $format );
 	}
 
 	private function set_currency( $currency ) {
-		$this->set_option( 'currency', $currency );
+		$this->set_charitable_option( 'currency', $currency );
 	}
 
 	private function set_decimal_count( $count ) {
-		$this->set_option( 'decimal_count', $count );
+		$this->set_charitable_option( 'decimal_count', $count );
 	}
 
 	private function set_decimal_separator( $separator ) {
-		$this->set_option( 'decimal_separator', $separator );
+		$this->set_charitable_option( 'decimal_separator', $separator );
 	}
 
 	private function set_thousands_separator( $separator ) {
-		$this->set_option( 'thousands_separator', $separator );
+		$this->set_charitable_option( 'thousands_separator', $separator );
 	}
 }

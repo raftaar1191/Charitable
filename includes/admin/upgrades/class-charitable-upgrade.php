@@ -163,9 +163,14 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						'prompt'   => false,
 						'callback' => array( $this, 'fix_empty_campaign_end_date_meta' ),
 					),
+					'clear_campaign_amount_donated_transient' => array(
+						'version'  => '1.4.18',
+						'message'  => '',
+						'prompt'   => false,
+						'callback' => array( $this, 'clear_campaign_amount_donated_transient' ),
+					),
 				);
-
-			}
+			}//end if
 		}
 
 		/**
@@ -549,10 +554,26 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		}
 
 		/**
+		 * Clear the campaign amount donated transients.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.4.18
+		 */
+		public function clear_campaign_amount_donated_transient() {
+			global $wpdb;
+
+			$sql = "DELETE FROM $wpdb->options
+					WHERE option_name LIKE '_transient_charitable_campaign_%_donation_amount'";
+
+			$wpdb->query( $sql );
+		}
+
+		/**
 		 * Set a transient to display an update notice.
 		 *
-		 * @param 	array  $upgrade
-		 * @param 	string $action
+		 * @param 	array  $upgrade The upgrade details.
+		 * @param 	string $action  The action key for the upgrade.
 		 * @return  void
 		 * @access  public
 		 * @since   1.4.0

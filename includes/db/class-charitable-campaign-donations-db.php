@@ -385,10 +385,11 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @global  wpdb    $wpdb
 		 * @param   int|int[] $campaigns   A campaign ID. Optionally, you can pass an array of campaign IDs to get the total of all put together.
 		 * @param   boolean   $include_all Whether donations with non-approved statuses should be included.
+		 * @param 	boolean   $sanitize    Whether to sanitize the amount if we're using commas for decimals.
 		 * @return  string
 		 * @since   1.0.0
 		 */
-		public function get_campaign_donated_amount( $campaigns, $include_all = false ) {
+		public function get_campaign_donated_amount( $campaigns, $include_all = false, $sanitize = true ) {
 			global $wpdb;
 
 			$statuses = $include_all ? array() : charitable_get_approval_statuses();
@@ -408,7 +409,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			$total = $wpdb->get_var( $wpdb->prepare( $sql, $parameters ) );
 
-			if ( $this->is_comma_decimal() ) {
+			if ( $this->is_comma_decimal() && $sanitize ) {
 				$total = Charitable_Currency::get_instance()->sanitize_database_amount( $total );
 			}
 

@@ -124,6 +124,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 					'options'           => array(
 						',' => __( 'Comma (10,000)', 'charitable' ),
 						'.' => __( 'Period (10.000)', 'charitable' ),
+						' ' => __( 'Space (10 000)', 'charitable' ),
 						''  => __( 'None', 'charitable' ),
 					),
 				),
