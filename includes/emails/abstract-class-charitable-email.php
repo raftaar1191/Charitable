@@ -792,8 +792,13 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 			);
 
 			$fields['campaign_url'] = array(
-			  'description'     => __( 'Display the campaign\'s URL', 'charitable' ),
-			  'callback'        => array( $this, 'get_campaign_url' ),
+				'description'     => __( 'Display the campaign\'s URL', 'charitable' ),
+				'callback'        => array( $this, 'get_campaign_url' ),
+			);
+
+			$fields['campaign_dashboard_url'] = array(
+				'description'     => __( 'Display a link to the campaign in the dashboard', 'charitable' ),
+				'callback'        => array( $this, 'get_campaign_dashboard_url' ),
 			);
 
 			return $fields;
@@ -963,6 +968,29 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Display the link to where the campaign can be edited in the dashboard.
+		 *
+		 * @return  string
+		 * @access  public
+		 * @since   1.4.18
+		 */
+		public function get_campaign_dashboard_url() {
+			if ( ! $this->has_valid_campaign() ) {
+				return '';
+			}
+
+			$post_type_object = get_post_type_object( Charitable::CAMPAIGN_POST_TYPE );
+
+			if ( $post_type_object->_edit_link ) {
+				$link = admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=edit', $this->campaign->ID ) );
+			} else {
+				$link = '';
+			}
+
+			return $link;
+		}
+
+		/**
 		 * Add campaign content fields' fake data for previews.
 		 *
 		 * @param 	array 			 $fields Shortcode fields.
@@ -990,6 +1018,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 			$fields['campaign_donor_count']   = 23;
 			$fields['campaign_goal']          = '$15,000';
 			$fields['campaign_url']           = 'http://www.example.com/campaigns/fake-campaign';
+			$fields['campaign_dashboard_url'] = get_edit_post_link( 1 );
 
 			return $fields;
 
