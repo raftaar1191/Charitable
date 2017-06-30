@@ -67,7 +67,7 @@ $params = array(
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">    
 	<?php if ( isset( $field['label'] ) ) : ?>
-		<label for="charitable_field_<?php echo $field['key'] ?>_element">
+		<label>
 			<?php echo $field['label'] ?>         
 			<?php if ( $is_required ) : ?>
 				<abbr class="required" title="required">*</abbr>

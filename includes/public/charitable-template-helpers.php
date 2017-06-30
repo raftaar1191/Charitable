@@ -58,7 +58,7 @@ function charitable_campaign_loop_args( $view_args = array() ) {
 /**
  * Processes arbitrary form attributes into HTML-safe key/value pairs
  *
- * @param   array $field Array defining the form field attributes
+ * @param   array $field Array defining the form field attributes.
  * @return  string       The formatted HTML-safe attributes
  * @since   1.3.0
  * @see     Charitable_Form::render_field()

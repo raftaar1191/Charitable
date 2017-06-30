@@ -12,11 +12,11 @@ if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form 			= $view_args['form'];
-$field 			= $view_args['field'];
-$classes 		= $view_args['classes'];
-$is_required    = isset( $field['required'] ) ? $field['required'] : false;
-$value			= isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
+$form 		 = $view_args['form'];
+$field 		 = $view_args['field'];
+$classes 	 = $view_args['classes'];
+$is_required = isset( $field['required'] ) ? $field['required'] : false;
+$value		 = isset( $field['value'] ) ? $field['value'] : '';
 
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">	
@@ -28,5 +28,5 @@ $value			= isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
 			<?php endif ?>
 		</label>
 	<?php endif ?>
-	<input type="number" name="<?php echo $field['key'] ?>" id="charitable_field_<?php echo $field['key'] ?>_element" value="<?php echo $value ?>" <?php echo charitable_get_arbitrary_attributes( $field ) ?>/>
+	<input type="number" name="<?php echo esc_attr( $field['key'] ) ?>" id="charitable_field_<?php echo $field['key'] ?>_element" value="<?php echo esc_attr( $value ) ?>" <?php echo charitable_get_arbitrary_attributes( $field ) ?>/>
 </div>

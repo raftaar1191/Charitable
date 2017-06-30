@@ -21,10 +21,6 @@ if ( ! $form ) {
 	return;
 }
 
-if ( ! did_action( 'charitable_donation_form_before' ) ) {
-	do_action( 'charitable_donation_form_before', $form );
-}
-
 ?>
 <form method="post" id="<?php echo esc_attr( $form_id ) ?>" class="charitable-donation-form charitable-form" data-use-ajax="<?php echo esc_attr( $use_ajax ) ?>">
 	<?php
@@ -65,7 +61,3 @@ if ( ! did_action( 'charitable_donation_form_before' ) ) {
 	</div>
 </form>
 <?php
-
-if ( ! did_action( 'charitable_donation_form_after' ) ) {
-	do_action( 'charitable_donation_form_after', $form );
-}

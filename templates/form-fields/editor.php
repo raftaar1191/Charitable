@@ -26,15 +26,15 @@ $default_editor_args = array(
 		'theme_advanced_path'     => false,
 		'theme_advanced_buttons1' => 'bold,italic,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink',
 		'plugins'                 => 'paste',
-		'paste_remove_styles'     => true
-	)
+		'paste_remove_styles'     => true,
+	),
 );
 
 $editor_args = wp_parse_args( $editor_args, $default_editor_args );
 ?>
 <div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">
 	<?php if ( isset( $field['label'] ) ) : ?>
-		<label for="charitable_field_<?php echo $field['key'] ?>">
+		<label for="<?php echo esc_attr( $field['key'] ) ?>">
 			<?php echo $field['label'] ?>
 			<?php if ( $is_required ) : ?>
 				<abbr class="required" title="required">*</abbr>
@@ -42,6 +42,6 @@ $editor_args = wp_parse_args( $editor_args, $default_editor_args );
 		</label>
 	<?php endif ?>
 	<?php
-		wp_editor( $value, esc_attr( $field['key'] ), $editor_args );
+		wp_editor( $value, $field['key'], $editor_args );
 	?>
 </div>
