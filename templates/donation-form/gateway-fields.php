@@ -33,18 +33,21 @@ $default  = isset( $field['default'] ) && isset( $gateways[ $field['default'] ] 
 
 	if ( count( $gateways ) > 1 ) :
 	?>
-		<label for="charitable-gateway-selector"><?php _e( 'Choose Your Payment Method', 'charitable' ) ?></label>
-		<ul id="charitable-gateway-selector" class="charitable-radio-list charitable-form-field">
-			<?php foreach ( $gateways as $gateway_id => $details ) : ?>
-				<li><input type="radio" 
-						id="gateway-<?php echo $gateway_id ?>"
-						name="gateway"
-						value="<?php echo esc_attr( $gateway_id ) ?>"
-						<?php checked( $default, $gateway_id ) ?> />
-					<?php echo $details['label'] ?>
-				</li>
-			<?php endforeach ?>
-		</ul>
+		<fieldset class="charitable-fieldset-field-wrapper">
+			<div class="charitable-fieldset-field-header" id="charitable-gateway-selector-header"><?php _e( 'Choose Your Payment Method', 'charitable' ) ?></div>
+			<ul id="charitable-gateway-selector" class="charitable-radio-list charitable-form-field">
+				<?php foreach ( $gateways as $gateway_id => $details ) : ?>
+					<li><input type="radio" 
+							id="gateway-<?php echo esc_attr( $gateway_id ) ?>"
+							name="gateway"
+							value="<?php echo esc_attr( $gateway_id ) ?>"
+							aria-describedby="charitable-gateway-selector-header"
+							<?php checked( $default, $gateway_id ) ?> />
+						<label for="gateway-<?php echo esc_attr( $gateway_id ) ?>"><?php echo $details['label'] ?></label>
+					</li>
+				<?php endforeach ?>
+			</ul>
+		</fieldset>
 	<?php
 	endif;
 

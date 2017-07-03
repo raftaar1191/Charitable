@@ -211,8 +211,8 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		$( '#campaign_end_date' ).on( 'change', function() {
 			var $field = $( this ),
 				date   = $field.val(), 
-				$span  = $field.next( '.charitable-end-time' ),
-				$input = $field.next( '#campaign_end_time' );
+				$span  = $field.siblings( '.charitable-end-time' ),
+				$input = $field.siblings( '#campaign_end_time' );
 
 			if ( '' === date || ! date ) {
 				$span.hide();

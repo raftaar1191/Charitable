@@ -17,12 +17,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Orders an array by the priority key.
  *
- * @param 	array 	$a
- * @param 	array 	$b
+ * @param 	array $a First element.
+ * @param 	array $b Element to compare against.
  * @return 	int
  * @since 	1.0.0
  */
 function charitable_priority_sort( $a, $b ) {
+	foreach ( array( $a, $b ) as $item ) {
+		if ( ! array_key_exists( 'priority', $item ) ) {
+			error_log( 'Priority missing from field: ' . json_encode( $item ) );
+		}
+	}
+
 	if ( $a['priority'] == $b['priority'] ) {
 		return 0;
 	}

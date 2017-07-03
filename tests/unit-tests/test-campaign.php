@@ -279,7 +279,38 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	 * @covers Charitable_Campaign::get_donated_amount
 	 */
 	function test_get_donated_amount() {
-		$this->assertEquals( 60.00, $this->campaign_1->get_donated_amount() );
+		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount() );
+	}
+
+	/**
+	 * @covers Charitable_Campaign::get_donated_amount
+	 */
+	function test_get_donated_amount_sanitized() {
+		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount( true ) );
+	}
+
+	/**
+	 * @covers Charitable_Campaign::get_donated_amount
+	 */
+	function test_get_donated_amount_with_comma_decimal() {
+		Charitable_Campaign::flush_donations_cache( $this->campaign_1_id );
+
+		$this->set_charitable_option( 'decimal_separator', ',' );
+		$this->set_charitable_option( 'thousands_separator', '.' );
+
+		$this->assertEquals( '60,0000', $this->campaign_1->get_donated_amount() );
+	}
+
+	/**
+	 * @covers Charitable_Campaign::get_donated_amount
+	 */
+	function test_get_donated_amount_with_comma_decimal_sanitized() {
+		Charitable_Campaign::flush_donations_cache( $this->campaign_1_id );
+
+		$this->set_charitable_option( 'decimal_separator', ',' );
+		$this->set_charitable_option( 'thousands_separator', '.' );
+
+		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount( true ) );
 	}
 
 	/**

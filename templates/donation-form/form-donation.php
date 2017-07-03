@@ -60,3 +60,4 @@ if ( ! $form ) {
 		</div>
 	</div>
 </form>
+<?php

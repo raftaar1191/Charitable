@@ -228,7 +228,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			$hour = 3600;
-			$day = 86400;
+			$day  = 86400;
 
 			$seconds_left = $this->get_seconds_left();
 
@@ -512,15 +512,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$this->donated_amount = get_transient( self::get_donation_amount_cache_key( $this->ID ) );
 
 			if ( false === $this->donated_amount ) {
-				$this->donated_amount = charitable_get_table( 'campaign_donations' )->get_campaign_donated_amount( $this->ID );
+				$this->donated_amount = charitable_get_table( 'campaign_donations' )->get_campaign_donated_amount( $this->ID, false, false );
 
 				set_transient( self::get_donation_amount_cache_key( $this->ID ), $this->donated_amount, 0 );
 			}
 
 			$amount = $this->donated_amount;
 
-			if ( $sanitize ) {
-				$amount = charitable_sanitize_amount( $this->donated_amount );
+			if ( ! $sanitize ) {
+				$amount = Charitable_Currency::get_instance()->sanitize_database_amount( $amount );
 			}
 
 			return apply_filters( 'charitable_campaign_donated_amount', $amount, $this, $sanitize );
@@ -722,14 +722,16 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @global 	WP_Locale $wp_locale
 		 *
-		 * @param   string $value Current end date value.
+		 * @param   string $value     Current end date value.
+		 * @param 	array  $submitted The submitted data.
 		 * @return  string|int
 		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
-		public static function sanitize_campaign_end_date( $value ) {
-			$end_date = charitable_sanitize_date( $value, 'Y-m-d 00:00:00' );
+		public static function sanitize_campaign_end_date( $value, $submitted = array() ) {
+			$end_time = array_key_exists( '_campaign_end_time', $submitted ) ? $submitted['_campaign_end_time'] : '23:59:59';
+			$end_date = charitable_sanitize_date( $value, 'Y-m-d ' . $end_time );
 
 			if ( ! $end_date ) {
 				$end_date = 0;
@@ -851,6 +853,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public static function flush_donations_cache( $campaign_id ) {
 			delete_transient( self::get_donations_cache_key( $campaign_id ) );
 			delete_transient( self::get_donation_amount_cache_key( $campaign_id ) );
+
+			do_action( 'charitable_flush_campaign_cache', $campaign_id );
 		}
 
 		/**

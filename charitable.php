@@ -3,7 +3,7 @@
  * Plugin Name:         Charitable
  * Plugin URI:          https://www.wpcharitable.com
  * Description:         The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:             1.4.17
+ * Version:             1.4.18
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.4.17';
+		const VERSION = '1.4.18';
 
 		/**
 		 * Version of database schema.
@@ -315,11 +315,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
 			require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
 
-			/* Compatibility */
-			if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
-				require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
-			}
-
 			/**
 			 * We are registering this object only for backwards compatibility. It
 			 * will be removed in or after Charitable 1.3.
@@ -349,6 +344,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'charitable_install' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'setup_endpoints' ), 100 );
+			add_action( 'plugins_loaded', array( $this, 'load_plugin_compat_files' ) );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
 
@@ -509,6 +505,42 @@ if ( ! class_exists( 'Charitable' ) ) :
 			}
 
 			return $this->endpoints;
+		}
+
+		/*
+		 * Load plugin compatibility files on plugins_loaded hook.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.4.18
+		 */
+		public function load_plugin_compat_files() {
+			$includes_path = $this->get_path( 'includes' );
+
+			/* Divi */
+			if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
+				require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
+			}
+
+			/* WP Super Cache */
+			if ( function_exists( 'wp_super_cache_text_domain' ) ) {
+				require_once( $includes_path . 'compat/charitable-wp-super-cache-compat-functions.php' );
+			}
+
+			/* W3TC */
+			if ( defined( 'W3TC' ) && W3TC ) {
+				require_once( $includes_path . 'compat/charitable-w3tc-compat-functions.php' );
+			}
+
+			/* WP Rocket */
+			if ( defined( 'WP_ROCKET_VERSION' )  ) {
+				require_once( $includes_path . 'compat/charitable-wp-rocket-compat-functions.php' );
+			}
+
+			/* WP Fastest Cache */
+			if ( class_exists( 'WpFastestCache' ) ) {
+				require_once( $includes_path . 'compat/charitable-wp-fastest-cache-compat-functions.php' );
+			}
 		}
 
 		/**

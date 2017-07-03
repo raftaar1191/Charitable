@@ -327,7 +327,7 @@ function charitable_sanitize_donation_meta( $value, $key ) {
 /**
  * Flush the donations cache for every campaign receiving a donation.
  *
- * @param   int $donation_id
+ * @param   int $donation_id The donation ID.
  * @return  void
  * @since   1.0.0
  */
@@ -339,4 +339,6 @@ function charitable_flush_campaigns_donation_cache( $donation_id ) {
 	}
 
 	wp_cache_delete( $donation_id, 'charitable_donation' );
+
+	do_action( 'charitable_flush_donation_cache', $donation_id );
 }

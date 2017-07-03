@@ -138,8 +138,11 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			 * 12.500,50 -> 12500.50
 			 */
 			if ( $this->is_comma_decimal() ) {
+				/* Convert to 12.500_50 */
 				$amount = str_replace( ',', '_', $amount );
+				/* Convert to 12500_50 */
 				$amount = str_replace( '.', '', $amount );
+				/* Convert to 12500.50 */
 				$amount = str_replace( '_', '.', $amount );
 			}
 

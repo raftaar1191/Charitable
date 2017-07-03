@@ -4,8 +4,10 @@
  *
  * Override this template by copying it to yourtheme/charitable/widgets/donate.php
  *
+ * @package Charitable/Templates/Widgets
  * @author  Studio 164a
  * @since   1.0.0
+ * @version 1.0.0
  */
 
 // Exit if accessed directly.
