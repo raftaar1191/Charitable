@@ -258,7 +258,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					 * If the upgrade does not need a prompt, just do it straight away.
 					 */
 					if ( $this->do_upgrade_immediately( $upgrade ) ) {
-						call_user_func( $upgrade['callback'] );
+						call_user_func( $upgrade['callback'], $action );
 						continue;
 					}
 		?>
@@ -551,6 +551,8 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					AND $wpdb->posts.post_type = 'campaign';";
 
 			$wpdb->query( $sql );
+
+			$this->update_upgrade_log( 'fix_empty_campaign_end_date_meta' );
 		}
 
 		/**
