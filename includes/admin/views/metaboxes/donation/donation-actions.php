@@ -8,9 +8,7 @@
 global $post;
 
 ?>
-<div id="charitable-donation-actions-metabox" class="submit-box charitable-metabox">
-
-
+<div id="charitable-donation-actions-metabox-wrapper" class="charitable-metabox">
 <?php		
 	global $donation;
 
@@ -21,36 +19,38 @@ global $post;
 
 	$donation_type_object = get_post_type_object( $post->post_type );
 	?>
+	<div id="charitable-donation-actions-form">
+		<?php do_action( 'charitable_donation_actions_start', $post->ID, $donation ); ?>
 
-	<?php do_action( 'charitable_donation_actions_start', $post->ID, $donation ); ?>
+		<select id="charitable_donation_actions" name="charitable_donation_action">
+			<option value=""><?php _e( 'Select an action', 'charitable' ) ?></option>
+			<optgroup label="<?php esc_attr_e( 'Resend Donation Emails', 'charitable' ) ?>">
+				<?php
+				$mailer           = Charitable_Emails::get_instance();
+				$resend_emails = apply_filters( 'charitable_resend_donation_emails_available', array( 'donation_receipt', 'new_donation' ) );
 
-	<select id="charitable_donation_actions" name="charitable_donation_action">
-		<option value=""><?php _e( 'Actions', 'charitable' ); ?></option>
-		<optgroup label="<?php esc_attr_e( 'Resend donation emails', 'charitable' ); ?>">
-			<?php
-			$mailer           = Charitable_Emails::get_instance();
-			$resend_emails = apply_filters( 'charitable_resend_donation_emails_available', array( 'donation_receipt', 'new_donation' ) );
+				$enabled_emails   = $mailer->get_available_emails();
+				$available_emails = array_intersect_key( $enabled_emails, array_flip( $resend_emails ) );
 
-			$enabled_emails   = $mailer->get_available_emails();
-			$available_emails = array_intersect_key( $enabled_emails, array_flip( $resend_emails ) );
+				$mail_names = $mailer->get_enabled_emails_names();
 
-			$mail_names = $mailer->get_enabled_emails_names();
-
-			if ( ! empty( $available_emails ) ) {
-				foreach ( $available_emails as $id => $label ) {
-					echo '<option value="send_email_'. esc_attr( $id ) .'">' . esc_html( $mail_names[$id] ) . '</option>';
+				if ( ! empty( $available_emails ) ) {
+					foreach ( $available_emails as $id => $label ) {
+						echo '<option value="send_email_'. esc_attr( $id ) .'">' . esc_html( $mail_names[$id] ) . '</option>';
+					}
 				}
-			}
-			?>
-		</optgroup>
-
-		<?php foreach( apply_filters( 'charitable_donation_actions', array() ) as $action => $title ) { ?>
-			<option value="<?php echo $action; ?>"><?php echo $title; ?></option>
-		<?php } ?>
-	</select>
-
-	<button type="submit" class="charitable-reload button dashicons dashicons-arrow-right-alt2" title="<?php esc_attr_e( 'Apply', 'charitable' ); ?>"><span class="screen-reader-text"><?php _e( 'Apply', 'charitable' ); ?></span></button>
-
-	<?php do_action( 'charitable_donation_actions_end', $post->ID, $donation ); ?>
-
-</div>
+				?>
+			</optgroup>
+			<?php foreach( apply_filters( 'charitable_donation_actions', array() ) as $action => $title ) : ?>
+				<option value="<?php echo $action; ?>"><?php echo $title; ?></option>
+			<?php endforeach ?>
+		</select>
+		<?php do_action( 'charitable_donation_actions_end', $post->ID, $donation ); ?>
+	</div><!-- #charitable-donation-actions-form -->
+	<div id="charitable-donation-actions-submit">
+		<?php do_action( 'charitable_donation_actions_submit_start', $post->ID, $donation ); ?>
+		<button type="submit" class="button-primary" title="<?php esc_attr_e( 'Submit', 'charitable' ) ?>"><?php _e( 'Submit', 'charitable' ) ?></button>
+		<?php do_action( 'charitable_donation_actions_submit_end', $post->ID, $donation ); ?>
+		<div class="clear"></div>
+	</div><!-- #charitble-donation-actions-submit -->
+</div><!-- #charitable-donation-actions-metabox-wrapper -->
