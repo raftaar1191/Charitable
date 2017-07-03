@@ -615,16 +615,27 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		public function trim_upgrade_log() {
 			$log     = get_option( $this->upgrade_log_key );
 			$new_log = array();
+			$keys    = array( 'time', 'version', 'install' );
 
 			foreach ( $log as $action => $details ) {
 
-				$action_log = array(
-					'time' 	  => array_key_exists( 'time', $details ) ? $details['time'] : '',
-					'version' => array_key_exists( 'version', $details ) ? $details['version'] : '',
-				);
+				$action_log = array();
 
-				if ( array_key_exists( 'install', $details ) ) {
+				if ( array_key_exists( 'time', $details ) ) {
+					$action_log['time'] = $details['time'];
+				}
+
+				if ( array_key_exists( 'version', $details ) ) {
+					$action_log['version'] = $details['version'];
+				}
+
+				if ( array_key_exists( 'install', $details ) && $details['install'] ) {
 					$action_log['install'] = $details['install'];
+
+					/* Use the version when the plugin was installed. */
+					if ( array_key_exists( 'install', $log ) ) {
+						$action_log['version'] = $log['install']['version'];
+					}
 				}
 
 				$new_log[ $action ] = $action_log;
