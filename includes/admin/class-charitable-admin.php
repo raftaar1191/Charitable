@@ -81,7 +81,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
 
 			/* Donations */
-			require_once( $admin_dir . 'donations/class-charitable-donation-post-type.php' );
+			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
+			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
+			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
 
 			/* Settings */
 			require_once( $admin_dir . 'settings/class-charitable-settings.php' );
@@ -100,17 +102,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade.php' );
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade-page.php' );
 			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );
-
-			/**
-			 * We are registering this object only for backwards compatibility. It
-			 * will be removed in or after Charitable 1.3.
-			 *
-			 * @deprecated
-			 */
-			charitable()->register_object( Charitable_Settings::get_instance() );
-			charitable()->register_object( Charitable_Campaign_Post_Type::get_instance() );
-			charitable()->register_object( Charitable_Donation_Post_Type::get_instance() );
-			charitable()->register_object( Charitable_Admin_Pages::get_instance() );
 		}
 
 		/**
