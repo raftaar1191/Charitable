@@ -125,6 +125,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * Prevent a bug where the donated amount on a campaign is completely wrong after a site changes its decimal/thousands separators. [#279](https://github.com/Charitable/Charitable/issues/279)
 * Flush the campaign donation cache in popular caching plugins (WP Super Cache, W3 Total Cache, WP Rocket and WP Fastest Cache). [#186](https://github.com/Charitable/Charitable/issues/186)
 * Fixed an error during donation processing that prevented donations when database caching is enabled in W3 Total Cache. [#347](https://github.com/Charitable/Charitable/issues/347)
+* Improved the way upgrades are run to ensure they are not re-run unneccesarily and store the minimum required information about each upgrade.
  
 = 1.4.17 =
 * **THANK YOU**: Thanks to first-time contributor [@qriouslad](https://github.com/qriouslad) for his contribution to this release!
