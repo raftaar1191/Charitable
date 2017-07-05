@@ -174,7 +174,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @since   1.0.0
 		 */
 		public function sanitize_settings( $values ) {
-
 			$old_values = get_option( 'charitable_settings', array() );
 			$new_values = array();
 
@@ -188,6 +187,16 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			}
 
 			$values = wp_parse_args( $new_values, $old_values );
+
+			/**
+			 * Filter sanitized settings.
+			 *
+			 * @hook 	charitable_save_settings
+			 * @param 	array $values     All values, merged.
+			 * @param 	array $new_values Newly submitted values.
+			 * @param 	array $old_values Old settings.
+			 * @since 	1.0.0
+			 */
 			$values = apply_filters( 'charitable_save_settings', $values, $new_values, $old_values );
 
 			$this->add_update_message( __( 'Settings saved', 'charitable' ), 'success' );
@@ -225,7 +234,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			charitable_admin_view( 'settings/' . $field_type, $args );
 		}
-
 
 		/**
 		 * Returns an array of all pages in the id=>title format.
@@ -388,11 +396,12 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   string $key       The key of the setting being saved.
 		 * @param   array  $field     The setting field.
 		 * @param   array  $submitted The submitted values.
+		 * @param 	string $section   The section being saved.
 		 * @return  mixed|null        Returns null if the value was not submitted or is not applicable.
 		 * @access  private
 		 * @since   1.0.0
 		 */
-		private function get_setting_submitted_value( $key, $field, $submitted ) {
+		private function get_setting_submitted_value( $key, $field, $submitted, $section ) {
 			$value = null;
 
 			if ( isset( $field['save'] ) && ! $field['save'] ) {
@@ -408,7 +417,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 					break;
 
 				case 'checkbox' :
-					$value = isset( $submitted[ $key ] );
+					$value = intval( array_key_exists( $key, $submitted ) && 'on' == $submitted[ $key ] );
 					break;
 
 				case 'multi-checkbox' :
@@ -419,7 +428,30 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 					$value = $submitted[ $key ];
 			}
 
-			return apply_filters( 'charitable_sanitize_value', $value, $field, $submitted, $key );
+			/**
+			 * General way to sanitize values. If you only need to sanitize a
+			 * specific setting, used the filter below instead.
+			 *
+			 * @hook 	charitable_sanitize_value
+			 * @param 	mixed  $value     The current setting value.
+			 * @param 	array  $field     The field configuration.
+			 * @param   array  $submitted All submitted data.
+			 * @param 	string $key       The setting key.
+			 * @param 	string $section   The section being saved.
+			 * @since 	1.0.0
+			 */
+			$value = apply_filters( 'charitable_sanitize_value', $value, $field, $submitted, $key, $section );
+
+			/**
+			 * Sanitize the setting value.
+			 *
+			 * @hook 	charitable_sanitize_value_{$section}_{$key}
+			 * @param 	mixed  $value     The current setting value.
+			 * @param 	array  $field     The field configuration.
+			 * @param   array  $submitted All submitted data.
+			 * @since 	1.5.0
+			 */
+			return apply_filters( 'charitable_sanitize_value_' . $section . '_' . $key, $value, $field, $submitted );
 		}
 
 		/**
@@ -441,7 +473,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			foreach ( $form_fields[ $section ] as $key => $field ) {
 
-				$value = $this->get_setting_submitted_value( $key, $field, $submitted );
+				$value = $this->get_setting_submitted_value( $key, $field, $submitted, $section );
 
 				if ( is_null( $value ) ) {
 					continue;
@@ -467,24 +499,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 */
 		private function get_dynamic_groups() {
 			return apply_filters( 'charitable_dynamic_groups', array() );
-		}
-
-		/**
-		 * Returns a composite key, given a section and submitted values.
-		 *
-		 * @param   string  $section
-		 * @param   array   $submitted
-		 * @return  string
-		 * @access  private
-		 * @since   1.0.0
-		 */
-		private function get_composite_key( $section, $submitted ) {
-			if ( ! is_array( current( $submitted ) ) ) {
-				return false;
-			}
-
-			return sprintf( '%s_%s', $section, key( $submitted ) );
-		}
+		}		
 
 		/**
 		 * Returns whether the given key indicates the start of a new section of the settings.
@@ -497,6 +512,34 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 */
 		private function is_dynamic_group( $composite_key ) {
 			return array_key_exists( $composite_key, $this->get_dynamic_groups() );
+		}
+
+		/* DEPRECATED FUNCTIONS */
+
+		/**
+		 * Returns a composite key, given a section and submitted values.
+		 *
+		 * @param   string $section
+		 * @param   array  $submitted
+		 * @return  string
+		 * @access  private
+		 * @since   1.0.0
+		 *
+		 * @deprecated 1.5.0
+		 */
+		private function get_composite_key( $section, $submitted ) {
+
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0'
+			);
+
+			if ( ! is_array( current( $submitted ) ) ) {
+				return false;
+			}
+
+			return sprintf( '%s_%s', $section, key( $submitted ) );
+
 		}
 
 		/**

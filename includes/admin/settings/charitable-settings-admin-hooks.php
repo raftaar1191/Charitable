@@ -36,13 +36,6 @@ add_action( 'charitable_settings_tabs', array( Charitable_Licenses_Settings::get
 add_action( 'charitable_settings_tabs', array( Charitable_Settings::get_instance(), 'maybe_add_extensions_tab' ), 2 );
 
 /**
- * Sanitize checkbox values when settings are submitted.
- *
- * @see     Charitable_Settings::sanitize_checkbox_value()
- */
-add_filter( 'charitable_sanitize_value', array( Charitable_Settings::get_instance(), 'sanitize_checkbox_value' ), 10, 2 );
-
-/**
  * Save the license when saving settings.
  *
  * @see     Charitable_Licenses_Settings::save_license()
