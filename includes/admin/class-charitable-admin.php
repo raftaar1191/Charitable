@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			/* The following styles are only loaded on Charitable screens. */
 			$screen = get_current_screen();
 
-			if ( in_array( $screen->id, $this->get_charitable_screens() ) ) {
+			if ( ! is_null( $screen ) && in_array( $screen->id, $this->get_charitable_screens() ) ) {
 
 				wp_register_style(
 					'charitable-admin',
