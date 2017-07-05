@@ -107,6 +107,13 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public $donation_factory = null;
 
 		/**
+		 * Endpoints registry object.
+		 *
+		 * @var Charitable_Endpoints|null
+		 */
+		public $endpoints = null;
+
+		/**
 		 * Create class instance.
 		 *
 		 * @since   1.0.0
@@ -251,12 +258,10 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'licensing/class-charitable-plugin-updater.php' );
 
 			/* Public */
-			require_once( $includes_path . 'public/charitable-page-functions.php' );
 			require_once( $includes_path . 'public/charitable-template-helpers.php' );
 			require_once( $includes_path . 'public/class-charitable-session.php' );
 			require_once( $includes_path . 'public/class-charitable-template.php' );
 			require_once( $includes_path . 'public/class-charitable-template-part.php' );
-			require_once( $includes_path . 'public/class-charitable-templates.php' );
 			require_once( $includes_path . 'public/class-charitable-ghost-page.php' );
 			require_once( $includes_path . 'public/class-charitable-user-dashboard.php' );
 
@@ -288,8 +293,27 @@ if ( ! class_exists( 'Charitable' ) ) :
 			/* Customizer */
 			require_once( $includes_path . 'admin/customizer/class-charitable-customizer.php' );
 
+			/* Endpoints */
+			require_once( $includes_path . 'endpoints/interface-charitable-endpoint.php' );
+			require_once( $includes_path . 'endpoints/abstract-class-charitable-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-campaign-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-campaign-donation-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-campaign-widget-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-donation-cancellation-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-email-preview-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-forgot-password-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-login-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-profile-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-registration-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-reset-password-endpoint.php' );
+			require_once( $includes_path . 'endpoints/class-charitable-endpoints.php' );
+			require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
+
 			/* Deprecated */
 			require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
+			require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
 
 			/**
 			 * We are registering this object only for backwards compatibility. It
@@ -319,6 +343,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'wpmu_new_blog', array( $this, 'maybe_activate_charitable_on_new_site' ) );
 			add_action( 'plugins_loaded', array( $this, 'charitable_install' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
+			add_action( 'plugins_loaded', array( $this, 'setup_endpoints' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'load_plugin_compat_files' ) );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
@@ -443,6 +468,46 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Setup the Endpoints API.
+		 *
+		 * @return  void
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function setup_endpoints() {
+			$api = $this->get_endpoints();
+
+			$api->register( new Charitable_Campaign_Endpoint );
+			$api->register( new Charitable_Campaign_Donation_Endpoint );
+			$api->register( new Charitable_Campaign_Widget_Endpoint );
+			$api->register( new Charitable_Donation_Cancellation_Endpoint );
+			$api->register( new Charitable_Donation_Processing_Endpoint );
+			$api->register( new Charitable_Donation_Receipt_Endpoint );
+			$api->register( new Charitable_Email_Preview_Endpoint );
+			$api->register( new Charitable_Login_Endpoint );
+			$api->register( new Charitable_Forgot_Password_Endpoint );
+			$api->register( new Charitable_Profile_Endpoint );
+			$api->register( new Charitable_Reset_Password_Endpoint );
+			$api->register( new Charitable_Registration_Endpoint );
+
+		}
+
+		/**
+		 * Return the Endpoints API object.
+		 *
+		 * @return  Charitable_Endpoints
+		 * @access  public
+		 * @since   1.5.0
+		 */
+		public function get_endpoints() {
+			if ( is_null( $this->endpoints ) ) {
+				$this->endpoints = new Charitable_Endpoints();
+			}
+
+			return $this->endpoints;
+		}
+
+		/*
 		 * Load plugin compatibility files on plugins_loaded hook.
 		 *
 		 * @return  void
