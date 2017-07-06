@@ -410,11 +410,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			$field_type = isset( $field['type'] ) ? $field['type'] : '';
 
-			switch ( $field_type ) {
-				case '' :
-				case 'heading' :
-					return $value;
-					break;
+			switch ( $field_type ) {				
 
 				case 'checkbox' :
 					$value = intval( array_key_exists( $key, $submitted ) && 'on' == $submitted[ $key ] );
@@ -424,7 +420,15 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 					$value = isset( $submitted[ $key ] ) ? $submitted[ $key ] : array();
 					break;
 
+				case '' :
+				case 'heading' :
+					return $value;
+
 				default :
+					if ( ! array_key_exists( $key, $submitted ) ) {
+						return $value;
+					}
+
 					$value = $submitted[ $key ];
 			}
 
