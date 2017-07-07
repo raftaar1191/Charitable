@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_i18n|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -41,7 +40,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The path to the languages directory.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $languages_directory;
 
@@ -49,7 +47,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The site locale.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $locale;
 
@@ -57,14 +54,12 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The MO filename.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $mofile;
 
 		/**
 		 * Set up the class.
 		 *
-		 * @access  private
 		 * @since   1.1.2
 		 */
 		private function __construct() {
@@ -79,7 +74,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_i18n
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -94,7 +88,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * Create class object.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.1.2
 		 */
 		public function load_textdomain() {
@@ -117,7 +110,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 *
 		 * @param   string $source Either 'local' or 'global'.
 		 * @return  string
-		 * @access  private
 		 * @since   1.1.2
 		 */
 		private function get_mofile_path( $source = 'local' ) {

@@ -104,7 +104,6 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		 *
 		 * @global 	WP_Roles
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function remove_caps() {
@@ -140,7 +139,6 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		 * Returns the caps for the post types that Charitable adds.
 		 *
 		 * @return 	array
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private function get_core_caps() {

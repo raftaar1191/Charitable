@@ -26,7 +26,6 @@ class Charitable_Uninstall {
 	/**
 	 * Uninstall the plugin.
 	 *
-	 * @access 	public
 	 * @since 	1.0.0
 	 */
 	public function __construct() {
@@ -44,7 +43,6 @@ class Charitable_Uninstall {
 	 * Remove plugin-specific roles.
 	 *
 	 * @return 	void
-	 * @access 	private
 	 * @since 	1.0.0
 	 */
 	private function remove_caps() {
@@ -56,7 +54,6 @@ class Charitable_Uninstall {
 	 * Remove post objects created by Charitable.
 	 *
 	 * @return 	void
-	 * @access  private
 	 * @since 	1.0.0
 	 */
 	private function remove_post_data() {
@@ -76,7 +73,6 @@ class Charitable_Uninstall {
 	 * Remove the custom tables added by Charitable.  
 	 *
 	 * @return 	void
-	 * @access  private
 	 * @since 	1.0.0
 	 */
 	private function remove_tables() {

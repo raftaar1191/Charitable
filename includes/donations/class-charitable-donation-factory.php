@@ -28,7 +28,6 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		 *
 		 * @param 	bool $donation (default: false)
 		 * @return 	Charitable_Donation|bool
-		 * @access 	public
 		 * @since 	1.4.0
 		 */
 		public function get_donation( $donation = false ) {
@@ -68,7 +67,6 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		 *
 		 * @param  	string $donation_type
 		 * @return 	string|false
-		 * @access 	private
 		 * @since 	1.4.0
 		 */
 		private function get_classname_from_donation_type( $donation_type ) {
@@ -80,7 +78,6 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		 *
 		 * @param  	WP_Post $the_donation
 		 * @return 	string
-		 * @access 	private
 		 * @since 	1.4.0
 		 */
 		private function get_donation_class( $the_donation ) {

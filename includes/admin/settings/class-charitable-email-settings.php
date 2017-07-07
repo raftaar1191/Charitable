@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Email_Settings|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -35,7 +34,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Email_Settings
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -49,7 +47,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Returns all the payment email settings fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_email_fields() {
@@ -111,7 +107,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Add settings for each individual payment email.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_individual_email_fields( $fields ) {
@@ -128,7 +123,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 *
 		 * @param   string[] $groups
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_email_settings_dynamic_groups( $groups ) {
@@ -147,7 +141,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Display table with emails.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_emails_table( $args ) {
@@ -158,7 +151,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Checks whether we're looking at an individual email's settings page.
 		 *
 		 * @return  boolean
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function is_individual_email_settings_page() {
@@ -169,7 +161,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * Returns the helper class of the email we're editing.
 		 *
 		 * @return  Charitable_Email|false
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_current_email_class() {

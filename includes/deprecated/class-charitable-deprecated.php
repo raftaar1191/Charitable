@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * One true class object.
 		 *
 		 * @var     Charitable_Deprecated
-		 * @access  private
 		 * @static
 		 * @since   1.4.0
 		 */
@@ -35,7 +34,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * Whether logging is enabled.
 		 *
 		 * @var     $logging
-		 * @access  private
 		 * @static
 		 * @since   1.4.0
 		 */
@@ -44,7 +42,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Create class object. Private constructor.
 		 *
-		 * @access  private
 		 * @since   1.4.0
 		 */
 		private function __construct() {
@@ -53,7 +50,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @access  public
 		 * @static
 		 * @since   1.4.0
 		 */
@@ -72,7 +68,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * @param   string      $version       The version when this argument became deprecated.
 		 * @param   string|null $extra_message An extra message to include for the notice.
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function deprecated_argument( $function, $version, $extra_message = null ) {
@@ -98,7 +93,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * @param   string      $version     The version of Charitable where the function was deprecated.
 		 * @param   string|null $replacement Optional. The function to use instead.
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function deprecated_function( $function, $version, $replacement = null ) {
@@ -124,7 +118,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * @param   string $message
 		 * @param   string $version
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function doing_it_wrong( $function, $message, $version ) {
@@ -145,7 +138,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * Returns whether logging is enabled.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		private function is_logging_enabled() {

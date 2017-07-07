@@ -35,7 +35,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * Default arguments.
 		 *
 		 * @var     mixed[]
-		 * @access  protected
 		 */
 		protected $defaults = array(
 			'start_date'    => '',
@@ -48,7 +47,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * List of donation statuses.
 		 *
 		 * @var     string[]
-		 * @access  protected
 		 */
 		protected $statuses;
 
@@ -56,7 +54,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * Create class object.
 		 *
 		 * @param   mixed[] $args Arguments for the report.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $args ) {
@@ -74,7 +71,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * @param   string $key   The key to set.
 		 * @param   array  $data  The set of data.
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function set_custom_field_data( $value, $key, $data ) {
@@ -145,7 +141,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
 		 * @return  string[]
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_csv_columns() {
@@ -178,7 +173,6 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * Get the data to be exported.
 		 *
 		 * @return  array
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_data() {

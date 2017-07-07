@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var 	Charitable_Notices|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * The array of notices.
 		 *
 		 * @var 	array
-		 * @access  protected
 		 */
 		protected $notices;
 
@@ -42,7 +40,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return 	Charitable_Notices
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public static function get_instance() {
@@ -57,7 +54,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
 		 * @return 	void
-		 * @access 	private
 		 * @since	1.0.0
 		 */
 		private function __construct() {
@@ -81,7 +77,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	string $type    The type of message.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_notice( $message, $type, $key = false ) {
@@ -98,7 +93,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	array  $messages Array of messages.
 		 * @param 	string $type     Type of message we're adding.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_notices( $messages, $type ) {
@@ -115,7 +109,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	string $message The error message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_error( $message, $key = false ) {
@@ -128,7 +121,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	string $message The warning message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_warning( $message, $key = false ) {
@@ -141,7 +133,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	string $message The success message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_success( $message, $key = false ) {
@@ -154,7 +145,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * @param 	string $message The info message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_info( $message, $key = false ) {
@@ -166,7 +156,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 *
 		 * @param 	WP_Error $error The WP_Error object to add to the messages queue.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_errors_from_wp_error( WP_Error $error ) {
@@ -177,7 +166,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Return all errors as an array.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_errors() {
@@ -188,7 +176,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Return all warnings as an array.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_warnings() {
@@ -199,7 +186,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Return all successs as an array.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_success_notices() {
@@ -210,7 +196,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Return all infos as an array.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_info_notices() {
@@ -221,7 +206,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Return all notices as an array.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_notices() {
@@ -232,7 +216,6 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 * Clear out all existing notices.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function clear() {

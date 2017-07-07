@@ -24,7 +24,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * The version of our database table
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $version = '1.0.0';
@@ -32,7 +31,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * The name of the primary column
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $primary_key = 'campaign_benefactor_id';
@@ -40,7 +38,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Set up the database table name.
 		 *
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function __construct() {
@@ -53,7 +50,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Create the table.
 		 *
 		 * @global 	$wpdb
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function create_table() {
@@ -81,7 +77,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Whitelist of columns.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_columns() {
@@ -100,7 +95,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Default column values.
 		 *
 		 * @return 	array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_column_defaults() {
@@ -117,7 +111,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 *
 		 * @param 	array 	$data
 		 * @return 	int 				Positive ID if successful. 0 if failed.
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function insert( $data, $type = 'campaign_benefactor' ) {
@@ -172,7 +165,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * @param 	array 		$data
 		 * @param 	string 		$where 			Column used in where argument.
 		 * @return 	boolean
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function update( $row_id, $data = array(), $where = '' ) {
@@ -197,7 +189,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Delete a row identified by the primary key.
 		 *
 		 * @param 	int 		$row_id
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  bool
 		 */
@@ -215,7 +206,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * @global 	WPDB 		$wpdb
 		 * @param 	int 		$campaign_id
 		 * @return 	Object[]
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_campaign_benefactors( $campaign_id ) {
@@ -240,7 +230,6 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * @param 	int 			$campaign_id
 		 * @param 	string 			$extension
 		 * @return 	Object[]|false 	False if extensions return nothing. Object otherwise.
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_campaign_benefactors_by_extension( $campaign_id, $extension ) {

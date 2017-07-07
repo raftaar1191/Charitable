@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 	     * The single instance of this class.
 	     *
 	     * @var     Charitable_Session|null
-	     * @access  private
 	     * @static
 	     */
 	    private static $instance = null;
@@ -36,7 +35,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Holds our session data
 		 *
 		 * @var 	WP_Session
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private $session;
@@ -44,7 +42,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Instantiate session object. Private constructor.
 		 *
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private function __construct() {
@@ -86,7 +83,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Create the session.
 		 *
 		 * @return  WP_Session
-		 * @access  public
 		 * @since   1.4.17
 		 */
 		public function init() {
@@ -99,7 +95,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 	     * Returns and/or create the single instance of this class.
 	     *
 	     * @return  Charitable_Session
-	     * @access  public
 	     * @since   1.2.0
 	     */
 	    public static function get_instance() {
@@ -115,7 +110,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * @param 	string $key Session variable key.
 		 * @return 	mixed Session variable
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get( $key ) {
@@ -129,7 +123,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @param 	string $key   Session variable key.
 		 * @param 	mixed  $value The value of the session variable.
 		 * @return 	mixed The session variable value.
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function set( $key, $value ) {
@@ -148,7 +141,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Set the length of the cookie session to 24 hours.
 		 *
 		 * @return 	int
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function set_session_length() {
@@ -163,7 +155,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Set the cookie expiration variant time to 23 hours.
 		 *
 		 * @return 	int
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function set_session_expiration_variant_length() {
@@ -180,7 +171,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @param 	int $campaign_id Campaign ID.
 		 * @param 	int $amount 	 Donation amount.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_donation( $campaign_id, $amount ) {
@@ -199,7 +189,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * @param 	int $campaign_id Campaign ID.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function remove_donation( $campaign_id ) {
@@ -217,7 +206,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * @param 	int $campaign_id The campaign ID.
 		 * @return  false|array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_by_campaign( $campaign_id ) {
@@ -230,7 +218,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  void
-		 * @access  public
 		 * @since   1.1.2
 		 */
 		public function add_donation_key( $donation_key ) {
@@ -250,7 +237,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function has_donation_key( $donation_key ) {
@@ -267,7 +253,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Add the all notices to the session.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_notices() {
@@ -278,7 +263,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Return any notices set in the session.
 		 *
 		 * @return 	array Session variable
-		 * @access  public
 		 * @since 	1.4.0
 		 */
 		public function get_notices() {
@@ -300,7 +284,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Returns the session ID.
 		 *
 		 * @return 	string Session ID
-		 * @access 	public
 		 * @since 	1.3.5
 		 */
 		public function get_session_id() {
@@ -311,7 +294,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Determines if we should start sessions
 		 *
 		 * @return  boolean
-		 * @access 	public
 		 * @since   1.4.17
 		 */
 		public function should_start_session() {
@@ -343,7 +325,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * These are the URIs where we never start sessions
 		 *
 		 * @return  array
-		 * @access 	public
 		 * @since   1.4.17
 		 */
 		public function get_blacklist() {

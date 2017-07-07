@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Admin|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -38,7 +37,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function __construct() {
@@ -51,7 +49,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Admin
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -66,7 +63,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Include admin-only files.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function load_dependencies() {
@@ -117,7 +113,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Loads admin-only scripts and stylesheets.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function admin_enqueue_scripts() {
@@ -204,7 +199,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Add notices to the dashboard.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function add_notices() {
@@ -224,7 +218,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Add version update notices to the dashboard.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function add_version_update_notices() {
@@ -280,7 +273,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Dismiss a notice.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function dismiss_notice() {
@@ -319,7 +311,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 *
 		 * @param   string[] $links Plugin action links.
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_plugin_action_links( $links ) {
@@ -333,7 +324,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * @param   string[] $links Plugin action links.
 		 * @param   string $file        The plugin file
 		 * @return  string[] $links
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function add_plugin_row_meta( $links, $file ) {
@@ -358,7 +348,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Remove the jQuery UI styles added by Ninja Forms.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function remove_jquery_ui_styles_nf( $context ) {
@@ -370,7 +359,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * Export donations.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function export_donations() {
@@ -402,7 +390,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 *
 		 * @uses    charitable_admin_screens
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_charitable_screens() {

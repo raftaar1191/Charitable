@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * The donor ID.
 		 *
 		 * @var     int
-		 * @access  protected
 		 */
 		protected $donor_id;
 
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * The donor data from charitable_donors table.
 		 *
 		 * @var     Object
-		 * @access  protected
 		 */
 		protected $data;
 
@@ -41,7 +39,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * The donation ID.
 		 *
 		 * @var     int
-		 * @access  protected
 		 */
 		protected $donation_id;
 
@@ -49,7 +46,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * User object.
 		 *
 		 * @var     Charitable_User
-		 * @access  protected
 		 */
 		protected $user;
 
@@ -57,7 +53,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Donation object.
 		 *
 		 * @var     Charitable_Donation|null
-		 * @access  protected
 		 */
 		protected $donation = null;
 
@@ -65,7 +60,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Donor meta.
 		 *
 		 * @var     mixed[]
-		 * @access  protected
 		 */
 		protected $donor_meta;
 
@@ -73,7 +67,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * A mapping of user keys.
 		 *
 		 * @var 	string[]
-		 * @access 	protected
 		 * @since 	1.4.0
 		 */
 		protected $mapped_keys;
@@ -83,7 +76,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   int $donor_id    Donor ID.
 		 * @param   int $donation_id Donation ID. Passed if this object is created through a donation.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $donor_id, $donation_id = false ) {
@@ -97,7 +89,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param 	string $key Key to search for.
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __get( $key ) {
@@ -116,7 +107,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Display the donor name when echoing object.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function __toString() {
@@ -128,7 +118,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   string $key
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.2.4
 		 */
 		public function get( $key ) {
@@ -139,7 +128,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the Charitable_User object for this donor.
 		 *
 		 * @return  Charitable_User
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user() {
@@ -154,7 +142,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the Charitable_Donation object associated with this object.
 		 *
 		 * @return  Charitable_Donation|false
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation() {
@@ -169,7 +156,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the Charitable_Donation object associated with this object.
 		 *
 		 * @return  object[]
-		 * @access  public
 		 * @since   1.3.5
 		 */
 		public function get_donations() {
@@ -181,7 +167,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   string $key Optional key passed to return a particular meta field.
 		 * @return  array|false
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donor_meta( $key = '' ) {
@@ -218,7 +203,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the donor's name stored for the particular donation.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_name() {
@@ -245,7 +229,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the donor's email address.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.2.4
 		 */
 		public function get_email() {
@@ -258,7 +241,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the donor's address.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.2.4
 		 */
 		public function get_address() {
@@ -270,7 +252,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   int $size
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_avatar( $size = 100 ) {
@@ -281,7 +262,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the donor location.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_location() {
@@ -319,7 +299,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   int $campaign_id Optional. If set, returns total donated to this particular campaign.
 		 * @return  decimal
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_amount( $campaign_id = false ) {
@@ -335,7 +314,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   int $campaign_id Optional. If set, returns the amount donated to the campaign.
 		 * @return  decimal
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function get_donation_amount( $campaign_id = '' ) {
@@ -346,7 +324,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * Return the array of mapped keys, where the key is mapped to a meta_key in the user meta table.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_mapped_keys() {
@@ -364,7 +341,6 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @param   string $key
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.2.4
 		 */
 		public function get_value( $key ) {

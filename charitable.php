@@ -63,7 +63,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Single instance of this class.
 		 *
 		 * @var     Charitable
-		 * @access  private
 		 */
 		private static $instance = null;
 
@@ -71,7 +70,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * The absolute path to this plugin's directory.
 		 * 
 		 * @var     string
-		 * @access  private
 		 */
 		private $directory_path;
 
@@ -79,7 +77,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * The URL of this plugin's directory.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $directory_url;
 
@@ -87,7 +84,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Directory path for the includes folder of the plugin.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $includes_path;
 
@@ -95,7 +91,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Store of registered objects.
 		 *
 		 * @var     array
-		 * @access  private
 		 */
 		private $registry;
 
@@ -147,7 +142,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * This is only ever executed once.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function start() {
@@ -177,7 +171,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Include necessary files.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function load_dependencies() {
@@ -336,7 +329,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Set up hook and filter callback functions.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function attach_hooks_and_filters() {
@@ -360,7 +352,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Checks whether we're in the admin area and if so, loads the admin-only functionality.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function maybe_start_admin() {
@@ -384,7 +375,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Checks whether we're on the public-facing side and if so, loads the public-facing functionality.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function maybe_start_public() {
@@ -407,7 +397,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Load the QUnit tests if ?qunit is appended to the request.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.17
 		 */
 		public function maybe_start_qunit() {
@@ -434,7 +423,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Checks whether we're executing an AJAX hook and if so, loads some AJAX functionality.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function maybe_start_ajax() {
@@ -460,7 +448,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Extensions can use the charitable_start event to load their own functionality.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function charitable_start() {
@@ -471,7 +458,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Setup the Endpoints API.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function setup_endpoints() {
@@ -496,7 +482,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Return the Endpoints API object.
 		 *
 		 * @return  Charitable_Endpoints
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_endpoints() {
@@ -511,7 +496,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Load plugin compatibility files on plugins_loaded hook.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.18
 		 */
 		public function load_plugin_compat_files() {
@@ -548,7 +532,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * plugins/themes to do something at this point.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.1
 		 */
 		public function charitable_install() {
@@ -571,7 +554,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns whether we are currently in the start phase of the plugin.
 		 *
 		 * @return  bool
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function is_start() {
@@ -582,7 +564,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns whether the plugin has already started.
 		 *
 		 * @return  bool
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function started() {
@@ -593,7 +574,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns whether the plugin is being activated.
 		 *
 		 * @return  bool
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function is_activation() {
@@ -604,7 +584,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns whether the plugin is being deactivated.
 		 *
 		 * @return  bool
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function is_deactivation() {
@@ -616,7 +595,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @param   mixed $object Object to be registered.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_object( $object ) {
@@ -634,7 +612,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @param   string $class The type of class you want to retrieve.
 		 * @return  mixed         The object if its registered. Otherwise false.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_registered_object( $class ) {
@@ -689,7 +666,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns the plugin's version number.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_version() {
@@ -707,7 +683,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns the public class.
 		 *
 		 * @return  Charitable_Public
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_public() {
@@ -718,7 +693,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Returns the admin class.
 		 *
 		 * @return  Charitable_Admin
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_admin() {
@@ -729,7 +703,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Return the current request object.
 		 *
 		 * @return  Charitable_Request
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_request() {
@@ -748,7 +721,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @param   string $table The database table to retrieve.
 		 * @return  Charitable_DB
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_db_table( $table ) {
@@ -779,7 +751,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Return the filtered list of registered tables.
 		 *
 		 * @return  string[]
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_tables() {
@@ -796,7 +767,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @param 	int $blog_id
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function maybe_activate_charitable_on_new_site( $blog_id ) {
@@ -819,7 +789,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @param 	boolean $network_wide Whether to enable the plugin for all sites in the network
 		 *                           	  or just the current site. Multisite only. Default is false.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function activate( $network_wide = false ) {
@@ -851,7 +820,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @see     register_deactivation_hook
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function deactivate() {
@@ -863,7 +831,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * If a charitable_action event is triggered, delegate the event using do_action.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function do_charitable_actions() {
@@ -881,7 +848,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * This class is specifically designed to be instantiated once. You can retrieve the instance using charitable()
 		 *
 		 * @since   1.0.0
-		 * @access  public
 		 * @return  void
 		 */
 		public function __clone() {
@@ -892,7 +858,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * Disable unserializing of the class.
 		 *
 		 * @since   1.0.0
-		 * @access  public
 		 * @return  void
 		 */
 		public function __wakeup() {

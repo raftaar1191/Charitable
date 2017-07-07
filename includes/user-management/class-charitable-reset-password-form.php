@@ -21,14 +21,12 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 
 		/**
 		 * @var 	string
-		 * @access 	protected
 		 * @since 	1.4.0
 		 */
 		protected $nonce_action = 'charitable_reset_password';
 
 		/**
 		 * @var 	string
-		 * @access 	protected
 		 * @since 	1.4.0
 		 */
 		protected $nonce_name = '_charitable_reset_password_nonce';
@@ -37,7 +35,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Form action.
 		 *
 		 * @var 	string
-		 * @access  protected
 		 * @since 	1.4.0
 		 */
 		protected $form_action = 'reset_password';
@@ -46,7 +43,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Reset key.
 		 *
 		 * @var 	string|null
-		 * @access  protected
 		 * @since 	1.4.0
 		 */
 		protected $key;
@@ -55,7 +51,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Form action.
 		 *
 		 * @var 	string|null
-		 * @access  protected
 		 * @since 	1.4.0
 		 */
 		protected $login;
@@ -64,7 +59,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Create class object.
 		 *
 		 * @param   array $args User-defined shortcode attributes.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function __construct( $args = array() ) {
@@ -78,7 +72,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 *
 		 * @param 	Charitable_Form $form The form object.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
@@ -98,7 +91,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Reset password fields to be displayed.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_fields() {
@@ -134,7 +126,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Reset the password.
 		 *
 		 * @return  bool|WP_Error True: when finish. WP_Error on error
-		 * @access  public
 		 * @static
 		 * @since   1.4.0
 		 */
@@ -189,7 +180,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Get the reset key and login from the cookie.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected function parse_reset_key() {

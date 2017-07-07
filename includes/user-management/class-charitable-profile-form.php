@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Shortcode parameters.
 		 *
 		 * @var     array
-		 * @access  protected
 		 */
 		protected $shortcode_args;
 
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'update_profile';
 
@@ -51,7 +49,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * The current user.
 		 *
 		 * @var     Charitable_User
-		 * @access  protected
 		 */
 		protected $user;
 
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Create class object.
 		 *
 		 * @param   array       $args       User-defined shortcode attributes.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
@@ -72,7 +68,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Return the current user's Charitable_User object.
 		 *
 		 * @return  Charitable_User
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user() {
@@ -89,7 +84,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * @param   string $key
 		 * @param   string $default     Optional. The value that will be used if none is set.
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_value( $key, $default = '' ) {
@@ -120,7 +114,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Return the core user fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_fields() {
@@ -171,7 +164,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Return the user's address fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_address_fields() {
@@ -237,7 +229,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Return the social fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_social_fields() {
@@ -274,7 +265,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Profile fields to be displayed.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_fields() {
@@ -314,7 +304,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * The fields displayed on the password form.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_password_fields() {
@@ -349,7 +338,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Returns all fields as a merged array.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_merged_fields() {
@@ -371,7 +359,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Update profile after form submission.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -423,7 +410,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Check whether the password is being changed.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function is_changing_password() {
@@ -442,7 +428,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Changes a password if the current password is correct and the repeat matches the new password.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function validate_password_change() {
@@ -473,7 +458,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 *
 		 * @deprecated 1.4.0
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.4.0
 		 */

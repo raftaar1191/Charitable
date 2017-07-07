@@ -23,7 +23,6 @@ if ( ! class_exists( 'Charitable_Donation' ) ) :
 
 		/**
 		 * @var     string
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public $donation_type = 'simple';
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Donation' ) ) :
 		 * @param   float $refund_amount
 		 * @param   string $message
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function process_refund( $refund_amount, $message = '' ) {

@@ -27,7 +27,6 @@ interface Charitable_Donation_Form_Interface {
 	 * Render the donation form.
 	 *
 	 * @return 	void
-	 * @access 	public
 	 * @since 	1.0.0
 	 */
 	public function render();
@@ -36,7 +35,6 @@ interface Charitable_Donation_Form_Interface {
 	 * Validate the submitted values.
 	 *
 	 * @return  boolean
-	 * @access  public
 	 * @since   1.0.0
 	 */
 	public function validate_submission();
@@ -45,7 +43,6 @@ interface Charitable_Donation_Form_Interface {
 	 * Return the donation values.
 	 *
 	 * @return  array
-	 * @access  public
 	 * @since   1.0.0
 	 */
 	public function get_donation_values();	

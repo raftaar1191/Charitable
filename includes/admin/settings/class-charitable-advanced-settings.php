@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Advanced_Settings|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -44,7 +42,6 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Advanced_Settings
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		 * Add the advanced tab settings fields.
 		 *
 		 * @return  array<string,array>
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_advanced_fields() {

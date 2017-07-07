@@ -23,19 +23,16 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 
 		/**
 		 * @var 	string 		Nonce action.
-		 * @access 	protected
 		 */
 		protected $nonce_action;
 
 		/**
 		 * @var 	string 		Nonce name.
-		 * @access 	protected
 		 */
 		protected $nonce_name = '_charitable_nonce';
 
 		/**
 		 * @var 	boolean		Whether nonce has been added.
-		 * @access 	protected
 		 */
 		protected $nonce_added = false;
 
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @param 	WP_Post $post 		The post object.
 		 * @param 	array $args 		The arguments passed to the meta box, including the view to render.
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function metabox_display( WP_Post $post, array $args ) {	
@@ -78,7 +74,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 *
 		 * @param 	string $view 		The view to render.
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function display( $view, $view_args ) {		
@@ -108,7 +103,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 *
 		 * @param 	array $fields
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function display_fields( array $fields ) {
@@ -133,7 +127,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 *
 		 * @param 	integer $post_id 	The current post being saved.
 		 * @return 	boolean 			True if the user can save the information
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function user_can_save( $post_id ) {

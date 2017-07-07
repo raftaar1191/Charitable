@@ -37,7 +37,6 @@ class Charitable_Template_Part {
 	 * @param 	string $slug
 	 * @param 	string $name 	Optional name.
 	 * @return 	void
-	 * @access 	public
 	 * @since 	1.0.0
 	 */
 	public function __construct($slug, $name = "" ) {
@@ -51,7 +50,6 @@ class Charitable_Template_Part {
 	 * Returns the array of template names.
 	 *
 	 * @return 	array
-	 * @access 	private
 	 * @since 	1.0.0
 	 */
 	private function get_template_names() {

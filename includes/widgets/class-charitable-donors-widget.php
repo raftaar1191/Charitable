@@ -23,7 +23,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Instantiate the widget and set up basic configuration.
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @param   array $args
 		 * @param   array $instance
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function widget( $args, $instance ) {
@@ -59,7 +57,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 *
 		 * @param   array $instance The current settings for the widget options.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function form( $instance ) {
@@ -123,7 +120,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @param   array $new_instance         The updated settings.
 		 * @param   array $new_instance         The old settings.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function update( $new_instance, $old_instance ) {
@@ -145,7 +141,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 *
 		 * @param   mixed[] $instance
 		 * @return  mixed[]
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_parsed_args( $instance ) {
@@ -169,7 +164,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 *
 		 * @param   mixed[] $instance
 		 * @return  array
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_widget_donors( $instance ) {

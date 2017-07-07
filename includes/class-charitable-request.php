@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Request|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Campaign object.
 		 *
 		 * @var 	Charitable_Campaign|false
-		 * @access 	private
 		 */
 		private $campaign;
 
@@ -42,7 +40,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Campaign ID.
 		 *
 		 * @var 	int
-		 * @access 	private
 		 */
 		private $campaign_id;
 
@@ -50,7 +47,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Donor object.
 		 *
 		 * @var 	Charitable_Donor
-		 * @access 	private
 		 */
 		private $donor;
 
@@ -58,7 +54,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Donation object.
 		 *
 		 * @var 	Charitable_Donation
-		 * @access 	private
 		 */
 		private $donation;
 
@@ -69,7 +64,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private function __construct() {
@@ -80,7 +74,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Request
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -96,7 +89,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 *
 		 * @param 	WP_Post $post The Post object.
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function set_current_campaign( $post ) {
@@ -115,7 +107,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns the current campaign. If there is no current campaign, return false.
 		 *
 		 * @return 	Charitable_Campaign|false Campaign object if we're viewing a campaign within a loop. False otherwise.
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_current_campaign() {
@@ -139,7 +130,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns the current campaign ID. If there is no current campaign, return 0.
 		 *
 		 * @return 	int
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_current_campaign_id() {
@@ -180,7 +170,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns the campaign ID from a form submission.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_campaign_id_from_submission() {
@@ -201,7 +190,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns the current donation object. If there is no current donation, return false.
 		 *
 		 * @return  Charitable_Donation|false
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_current_donation() {
@@ -219,7 +207,6 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * Returns the current donation ID. If there is no current donation, return 0.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_current_donation_id() {

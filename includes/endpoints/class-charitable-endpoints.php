@@ -23,20 +23,17 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 
 		/**
 		 * @var 	Charitable_Endpoint[]
-		 * @access 	protected
 		 */
 		protected $endpoints;
 
 		/**
 		 * @var 	string
-		 * @access 	protected
 		 */
 		protected $current_endpoint;
 
 		/**
 		 * Create class object.
 		 *
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function __construct() {
@@ -54,7 +51,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 *
 		 * @param 	Charitable_Endpoint $endpoint
 		 * @return  void
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function register( Charitable_Endpoint $endpoint ) {
@@ -83,7 +79,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
 		 * @return  string|false
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_page_url( $endpoint, $args = array() ) {
@@ -114,7 +109,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function is_page( $endpoint, $args = array() ) {
@@ -145,7 +139,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @param 	string $endpoint
 		 * @param 	string $default_template The default template to be used if the endpoint doesn't return its own.
 		 * @return  string $template
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_endpoint_template( $endpoint, $default_template ) {
@@ -172,7 +165,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * Set up the rewrite rules for the site.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function setup_rewrite_rules() {
@@ -191,7 +183,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 *
 		 * @param 	string[] $vars
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function add_query_vars( $vars ) {
@@ -209,7 +200,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 *
 		 * @param 	string $template The default template.
 		 * @return  void
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function template_loader( $template ) {
@@ -240,7 +230,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @param 	string       $content
 		 * @param 	false|string $endpoint Fetch the content for a specific endpoint.
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_content( $content, $endpoint = false ) {
@@ -262,7 +251,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 *
 		 * @param 	string[] $classes
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function add_body_classes( $classes ) {
@@ -283,7 +271,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * Return the current endpoint.
 		 *
 		 * @return  string|false String if we're on one of our endpoints. False otherwise.
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_current_endpoint() {
@@ -314,7 +301,6 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 *
 		 * @param 	string $endpoint
 		 * @return  string
-		 * @access  protected
 		 * @since   1.5.0
 		 */
 		protected function sanitize_endpoint( $endpoint ) {

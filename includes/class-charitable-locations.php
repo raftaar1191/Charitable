@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var 	Charitable_Locations|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * List of countries in country_code=>name format.
 		 *
 		 * @var 	string[]	$countries
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private $countries = array();
@@ -43,7 +41,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * List of states as a multidimensional array, grouped by country.
 		 *
 		 * @var 	array[] 	$states
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private $states = array();
@@ -52,7 +49,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * List of different countries' address formats.
 		 *
 		 * @var 	string[]
-		 * @access  private
 		 */
 		private $address_formats;
 
@@ -60,7 +56,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Locations
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -74,7 +69,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function __construct() {}
@@ -83,7 +77,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Return an array with all the countries supported by Charitable.
 		 *
 		 * @return 	string[]
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_countries() {
@@ -98,7 +91,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Return the country codes of countries with states.
 		 *
 		 * @return 	string[]
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_countries_with_states() {
@@ -134,7 +126,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Return an array with all the states supported by Charitable.
 		 *
 		 * @return 	string[]
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_all_states() {
@@ -151,7 +142,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 *
 		 * @param 	string $country_code The three-character country code.
 		 * @return 	string[]
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_states_for_country( $country_code ) {
@@ -171,7 +161,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Get the base country for the website.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_base_country() {
@@ -184,7 +173,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * Get country address formats.
 		 *
 		 * @return 	string[]
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_address_formats() {
@@ -239,7 +227,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string
-		 * @access  private
 		 * @since 	1.0.0
 		 */
 		private function get_address_format( $address_fields ) {
@@ -270,7 +257,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string[]
-		 * @access  private
 		 * @since 	1.0.0
 		 */
 		private function sanitize_address_fields( $address_fields ) {
@@ -337,7 +323,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_formatted_address( $address_fields = array() ) {
@@ -399,7 +384,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 *
 		 * @param  	string $line The line to be trimmed.
 		 * @return 	string
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private function trim_formatted_address_line( $line ) {

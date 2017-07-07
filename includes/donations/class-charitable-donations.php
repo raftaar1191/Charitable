@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		 * @param 	array $args Query arguments.
 		 * @return 	WP_Query
 		 * @static
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public static function query( $args = array() ) {
@@ -47,7 +46,6 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		 * @global 	WPDB   $wpdb
 		 * @param 	string $post_type Type of post to count.
 		 * @return 	int
-		 * @access  public
 		 * @static
 		 * @since 	1.0.0
 		 */
@@ -67,7 +65,6 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		 * @global 	WPDB  $wpdb
 		 * @param 	array $args Additional query arguments.
 		 * @return 	array
-		 * @access  public
 		 * @static
 		 * @since 	1.0.0
 		 */

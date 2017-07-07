@@ -146,7 +146,6 @@ function charitable_ipn_listener() {
  * This method is called on the init hook.
  *
  * @return  boolean Whether this is after a donation.
- * @access  public
  * @since   1.4.0
  */
 function charitable_is_after_donation() {

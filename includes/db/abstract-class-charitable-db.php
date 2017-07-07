@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * The name of our database table
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $table_name;
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * The version of our database table
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $version;
@@ -41,7 +39,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * The name of the primary column
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $primary_key;
@@ -49,7 +46,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Get things started
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {}
@@ -59,7 +55,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 *
 		 * @return  array
 		 * @abstract
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		abstract public function get_columns();
@@ -69,7 +64,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 *
 		 * @return 	array
 		 * @abstract
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		abstract public function get_column_defaults();
@@ -79,7 +73,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 *
 		 * @param 	string $column
 		 * @return 	%s, %d or %f
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_column_format( $column ) {
@@ -102,7 +95,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Retrieve a row by the primary key
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  object
 		 */
@@ -114,7 +106,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Retrieve a row by a specific column / value
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  object
 		 */
@@ -126,7 +117,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Retrieve a specific column's value by the primary key
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  string
 		 */
@@ -138,7 +128,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Retrieve a specific column's value by the the specified column / value
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  string
 		 */
@@ -151,7 +140,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * Count all rows.
 		 *
 		 * @return 	int
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function count_all() {
@@ -163,7 +151,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * Count all rows that certain criteria.
 		 *
 		 * @return 	int
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function count_by( $column, $column_value ) {
@@ -174,7 +161,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Insert a new row
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  int
 		 */
@@ -218,7 +204,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * @param 	int 	$row_id
 		 * @param 	array 	$data
 		 * @param 	string 	$where 	Column used in where argument.
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  bool
 		 */
@@ -260,7 +245,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * Delete a row identified by the primary key
 		 *
 		 * @param 	int 	$row_id
-		 * @access  public
 		 * @since   1.0.0
 		 * @return  bool
 		 */
@@ -281,7 +265,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * @global 	WPDB $wpdb
 		 * @param 	string $column
 		 * @param 	mixed $row_id
-		 * @access  public
 		 * @since   1.2.0
 		 * @return  bool
 		 */
@@ -298,7 +281,6 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 	     *
 	     * @global  $wpdb
 	     * @param 	string 	$sql
-	     * @access  protected
 	     * @since   1.0.0
 	     */
 	    protected function _create_table( $sql ) {

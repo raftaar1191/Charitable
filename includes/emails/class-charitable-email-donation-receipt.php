@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 
 		/**
 		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $object_types = array( 'donation' );
@@ -36,7 +35,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Instantiate the email class, defining its key values.
 		 *
 		 * @param   array   $objects
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $objects = array() ) {
@@ -49,7 +47,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Returns the current email's ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.3
 		 */
@@ -62,7 +59,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -112,7 +108,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Return the recipient for the email.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_recipient() {
@@ -127,7 +122,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Return the default subject line for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_subject() {
@@ -138,7 +132,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Return the default headline for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_headline() {
@@ -149,7 +142,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Return the default body for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_body() {

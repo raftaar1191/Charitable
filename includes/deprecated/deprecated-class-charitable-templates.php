@@ -24,7 +24,6 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Templates|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Templates
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -52,7 +50,6 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {

@@ -29,7 +29,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Instantiate the gateway class, defining its key values.
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {
@@ -50,7 +49,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @param   array   $settings
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function gateway_settings( $settings ) {
@@ -95,7 +93,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param   string $gateway
 		 * @param   mixed[] $values
 		 * @return  boolean
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -128,7 +125,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param   int $donation_id
 		 * @param   Charitable_Donation_Processor $processor The Donation Processor object.
 		 * @return  array
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -186,7 +182,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Handle a call to our IPN listener.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -256,7 +251,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param 	array $data        The data received in the IPN from PayPal.
 		 * @param 	int   $donation_id The donation ID received from PayPal.
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -404,7 +398,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Return the posted IPN data.
 		 *
 		 * @return  mixed[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_encoded_ipn_data() {
@@ -445,7 +438,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @param   mixed[] $data
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function paypal_ipn_verification( $data ) {
@@ -480,7 +472,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @param   string $reason_code
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_pending_reason_note( $reason_code ) {
@@ -530,7 +521,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @param   bool $ssl_check
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_redirect_url( $ssl_check = false ) {
@@ -553,7 +543,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Returns the current gateway's ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.3
 		 */
@@ -565,7 +554,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Receives the IPN from PayPal after the sandbox test and attempts to verify the result.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.4.3
 		 */

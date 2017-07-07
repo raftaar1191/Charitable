@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * User-defined arguments.
 		 *
 		 * @var     array
-		 * @access  protected
 		 */
 		protected $args;
 
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Internal iterator position.
 		 *
 		 * @var     int
-		 * @access  protected
 		 */
 		protected $position = 0;
 
@@ -41,7 +39,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * The WP_Query object that is actually querying the data.
 		 *
 		 * @var     WP_Query
-		 * @access  protected
 		 */
 		protected $query;
 
@@ -49,7 +46,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Result set.
 		 *
 		 * @var     object[]
-		 * @access  protected
 		 */
 		protected $results;
 
@@ -57,7 +53,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Parameters to pass to the query.
 		 *
 		 * @var     mixed[]
-		 * @access  protected
 		 */
 		protected $parameters = array();
 
@@ -67,7 +62,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @param   string $key      The key of the argument.
 		 * @param 	mixed  $fallback Default value to fall back to.
 		 * @return  mixed|false Returns fallback if the argument is not found.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get( $key, $fallback = false ) {
@@ -80,7 +74,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @param   string $key   Key of argument to set.
 		 * @param   mixed  $value Value to be set.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function set( $key, $value ) {
@@ -92,7 +85,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   string $key Key of argument to remove.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function remove( $key ) {
@@ -105,7 +97,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPDB $wpdb
 		 *
 		 * @return  object[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function query() {
@@ -131,7 +122,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPBD $wpdb
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function fields() {
@@ -144,7 +134,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPBD $wpdb
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function from() {
@@ -156,7 +145,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the JOIN part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function join() {
@@ -167,7 +155,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the WHERE part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function where() {
@@ -178,7 +165,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the GROUPBY part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function groupby() {
@@ -190,7 +176,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPBD $wpdb
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function orderby() {
@@ -202,7 +187,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the ORDER part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function order() {
@@ -213,7 +197,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the LIMIT part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function limit() {
@@ -228,7 +211,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the OFFSET part of the query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function offset() {
@@ -245,7 +227,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param  	string $select_statement The default select statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function donor_fields( $select_statement ) {
@@ -258,7 +239,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function donation_fields( $select_statement ) {
@@ -271,7 +251,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function donation_calc_fields( $select_statement ) {
@@ -284,7 +263,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function donation_amount_sum_field( $select_statement ) {
@@ -297,7 +275,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function where_campaign_is_in( $where_statement ) {
@@ -327,7 +304,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPBD $wpdb
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function where_status_is_in( $where_statement ) {
@@ -359,7 +335,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPBD $wpdb
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function where_donor_id_is_in( $where_statement ) {
@@ -392,7 +367,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPBD $wpdb
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function join_campaign_donations_table_on_campaign( $join_statement ) {
@@ -407,7 +381,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPBD $wpdb
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function join_campaign_donations_table_on_donation( $join_statement ) {
@@ -422,7 +395,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @global  WPBD $wpdb
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function join_donors_table( $join_statement ) {
@@ -436,7 +408,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPBD $wpdb
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function groupby_ID() {
@@ -448,7 +419,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Group a query by the donor ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function groupby_donor_id() {
@@ -459,7 +429,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Group a query by the donation ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function groupby_donation_id() {
@@ -471,7 +440,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPBD $wpdb
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function orderby_date() {
@@ -485,7 +453,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * This is useful when used in combination with a group statement.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function orderby_count() {
@@ -496,7 +463,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to change the ordering of the campaigns query, to order by the amount donated.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function orderby_donation_amount() {
@@ -507,7 +473,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return number of results.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function count() {
@@ -518,7 +483,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Rewind to first result.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function rewind() {
@@ -529,7 +493,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return current element.
 		 *
 		 * @return  object
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function current() {
@@ -540,7 +503,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return current key.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function key() {
@@ -551,7 +513,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Advance to next item.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function next() {
@@ -562,7 +523,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Ensure that current position is valid.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function valid() {
@@ -574,7 +534,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @param   mixed $parameters Parameters to be set for the query.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_parameters( $parameters ) {
@@ -585,7 +544,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Whether to show all results.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.1.0
 		 */
 		public function show_all() {
@@ -598,7 +556,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @param   int    $count       Number of placeholders.
 		 * @param   string $placeholder Placeholder symbol.
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_placeholders( $count = 1, $placeholder = '%s' ) {

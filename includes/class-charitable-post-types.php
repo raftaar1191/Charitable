@@ -24,7 +24,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Post_Types|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Post_Types
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -51,7 +49,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -65,7 +62,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 *
 		 * @hook    init
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_post_types() {
@@ -162,7 +158,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * Register custom post statuses.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_post_statuses() {
@@ -225,7 +220,6 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * Register the campaign category taxonomy.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_taxonomies() {

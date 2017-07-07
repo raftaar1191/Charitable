@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Customizer|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -33,7 +32,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function __construct() {
@@ -47,7 +45,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 *
 		 * @global  WP_Customize_Manager $wp_customize
 		 * @return  Charitable_Customizer
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function start() {
@@ -69,7 +66,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 *
 		 * @see     customize_save_after hook
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function customize_save_after() {
@@ -161,7 +157,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * Make sure the donation form display option is valid.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function sanitize_donation_form_display_option( $option ) {
@@ -178,7 +173,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @param   string  $panel_id
 		 * @param   array   $panel
 		 * @return  void
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function add_panel( $panel_id, $panel ) {
@@ -202,7 +196,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @param   string  $panel_id
 		 * @param   array   $sections
 		 * @return  void
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function add_panel_sections( $panel_id, $sections ) {
@@ -224,7 +217,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @param   array $section
 		 * @param   string $panel
 		 * @return  void
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function add_section( $section_id, $section, $panel ) {
@@ -252,7 +244,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @param   string $section_id
 		 * @param   array $settings
 		 * @return  void
-		 * @access  private
 		 * @since   1.2.0
 		 */
 		private function add_section_settings( $section_id, $settings ) {
@@ -294,7 +285,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * Load the theme-customizer.js file.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function load_customizer_script() {

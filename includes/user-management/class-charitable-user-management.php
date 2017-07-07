@@ -24,7 +24,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * The class instance.
 		 *
 		 * @var 	Charitable_User_Management
-		 * @access 	private
 		 * @static
 		 * @since 	1.4.0
 		 */
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_User_Management
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public static function get_instance() {
@@ -48,7 +46,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @access  private
 		 * @since   1.4.0
 		 */
 		private function __construct() {
@@ -60,7 +57,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * If so, redirect to the password reset page without the query string.
 		 *
 		 * @return  false|void False if no redirect takes place.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_redirect_to_password_reset() {
@@ -89,7 +85,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * If so, and charitable_disable_wp_login is set, redirect them to the custom reset password page
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_redirect_to_custom_password_reset_page() {
@@ -119,7 +114,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * @param 	WP_User|WP_Error $user_or_error
 		 * @param 	string 			 $username
 		 * @return  WP_User|void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_redirect_at_authenticate( $user_or_error, $username ) {
@@ -191,7 +185,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * If so, and charitable_disable_wp_login is set, redirect them to the custom forgot password page
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_redirect_to_custom_lostpassword() {
@@ -222,7 +215,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 *
 		 * @param 	string $value
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function set_reset_cookie( $value = '' ) {
@@ -245,7 +237,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 *
 		 * @see 	show_admin_bar()
 		 *
-		 * @access 	public
 		 * @static
 		 * @since 	1.4.0
 		 */
@@ -270,7 +261,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		/**
 		 * Redirects the user away from /wp-admin if they are not authorized to access it.
 		 *
-		 * @access 	public
 		 * @since 	1.4.0
 		 */
 		public function maybe_redirect_away_from_admin() {
@@ -320,7 +310,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * Redirect the user to the Charitable login page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_redirect_to_charitable_login() {
@@ -347,7 +336,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * Check whether the user has admin access.
 		 *
 		 * @return  boolean
-		 * @access  private
 		 * @since   1.4.0
 		 */
 		private function user_has_admin_access() {

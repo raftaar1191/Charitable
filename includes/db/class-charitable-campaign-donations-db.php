@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * The version of our database table
 		 *
 		 * @var 	string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $version = '1.0.0';
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * The name of the primary column
 		 *
 		 * @var 	string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $primary_key = 'campaign_donation_id';
@@ -43,7 +41,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Stores whether the site is using commas for decimals in amounts.
 		 *
 		 * @var     boolean
-		 * @access  private
 		 * @since   1.3.0
 		 */
 		private $comma_decimal;
@@ -51,7 +48,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		/**
 		 * Set up the database table name.
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {
@@ -64,7 +60,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Create the table.
 		 *
 		 * @global  $wpdb
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function create_table() {
@@ -91,7 +86,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Whitelist of columns.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_columns() {
@@ -109,7 +103,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Default column values.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_column_defaults() {
@@ -129,7 +122,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   array  $data Data we are inserting.
 		 * @param 	string $type Type of record we are inserting.
 		 * @return  int The ID of the inserted campaign donation
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function insert( $data, $type = 'campaign_donation' ) {
@@ -149,7 +141,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   array  $data   The updated date.
 		 * @param   string $where  Column used in where argument.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function update( $row_id, $data = array(), $where = '' ) {
@@ -165,7 +156,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int $row_id The primary key ID.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function delete( $row_id = 0 ) {
@@ -179,7 +169,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  boolean
-		 * @access  public
 		 * @static
 		 * @since   1.2.0
 		 */
@@ -199,7 +188,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @global  $wpdb
 		 * @param   string[] $statuses
 		 * @return  float
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_total( $statuses = array() ) {
@@ -235,7 +223,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param 	string    $field The field we are retrieving donations by. Either 'campaign' or 'donation'.
 		 * @param 	int|int[] $donation_id A single donation ID or an array of IDs.
 		 * @return  Object
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_campaign_donations_by( $field, $donation_id ) {
@@ -267,7 +254,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param 	int|int[] $id          An ID or an array of IDs.
 		 * @param 	string    $where_field Column used for the where argument.
 		 * @return  Object
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_distinct_ids( $field, $id, $where_field = 'campaign_id' ) {
@@ -291,7 +277,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @uses 	Charitable_Campaign_Donations_DB::get_campaign_donations_by()
 		 * @param 	int|int[] $donation_id A single donation ID or an array of IDs.
 		 * @return  Object
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_records( $donation_id ) {
@@ -305,7 +290,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param 	int|int[] $donation_id A single donation ID or an array of IDs.
 		 * @param   int|int[] $campaign Optional. If set, this will only return the total donated to that campaign, or array of campaigns.
 		 * @return  decimal
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_donation_amount( $donation_id, $campaign = '' ) {
@@ -342,7 +326,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int $donation_id
 		 * @return  decimal
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_total_amount( $donation_id ) {
@@ -354,7 +337,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @global  WPDB $wpdb
 		 * @return  object
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function get_campaigns_for_donation( $donation_id ) {
@@ -479,7 +461,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   int     $donor_id           The donor ID.
 		 * @param   boolean $distinct_donations Whether to get distinct donations.
 		 * @return  object[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donations_by_donor( $donor_id, $distinct_donations = false ) {
@@ -511,7 +492,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int $donor_id The donor ID.
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_total_donated_by_donor( $donor_id ) {
@@ -538,7 +518,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   int     $donor_id           The donor ID.
 		 * @param   boolean $distinct_donations If true, will only count unique donations.
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function count_donations_by_donor( $donor_id, $distinct_donations = false ) {
@@ -558,7 +537,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @global  wpdb    $wpdb
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function count_campaigns_supported_by_donor( $donor_id ) {
@@ -576,7 +554,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   array $args
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donations_report( $args ) {
@@ -655,7 +632,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   string $period
 		 * @param   string[] $statuses
 		 * @return  array
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function get_donations_summary_by_period( $period = '', $statuses = array() ) {
@@ -692,7 +668,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   array $args
 		 * @param   string $default
 		 * @return  string
-		 * @access  public
 		 * @since   1.3.4
 		 */
 		public function get_orderby_clause( $args, $default = '' ) {
@@ -722,7 +697,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   string|string[] $statuses
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function count_donations_by_status( $statuses ) {
@@ -748,7 +722,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   string[] $statuses
 		 * @return  string
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_donation_status_clause( $statuses = array() ) {
@@ -770,7 +743,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int|int[] $list
 		 * @return  array
-		 * @access  private
 		 * @since   1.4.0
 		 */
 		private function get_in_clause_params( $list ) {
@@ -793,7 +765,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @param   array $list
 		 * @param   string $placeholder
 		 * @return  string
-		 * @access  private
 		 * @since   1.3.4
 		 */
 		private function get_in_clause( $list, $placeholder = '%s' ) {
@@ -806,7 +777,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * Checks whether we are using commas for decimals.
 		 *
 		 * @return  boolean
-		 * @access  private
 		 * @since   1.3.0
 		 */
 		private function is_comma_decimal() {
@@ -822,7 +792,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   Object $campaign_donation
 		 * @return  Object
-		 * @access  private
 		 * @since   1.3.0
 		 */
 		private function sanitize_amounts( $campaign_donation ) {
@@ -835,7 +804,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param 	string $field
 		 * @return  string
-		 * @access  private
 		 * @since   1.4.0
 		 */
 		private function get_sanitized_column( $field ) {
@@ -875,7 +843,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int|int[] $campaigns
 		 * @return  array
-		 * @access  private
 		 * @since   1.0.0
 		 *
 		 * @deprecated 1.4.0

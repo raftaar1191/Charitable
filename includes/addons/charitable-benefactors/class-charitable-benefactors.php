@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Benefactors|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -47,7 +45,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Benefactors
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public static function get_instance() {
@@ -62,7 +59,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Responsible for creating class instances.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -74,7 +70,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Enqueue script.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function register_script() {
@@ -92,7 +87,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 *
 		 * @param   array $tables Registered tables.
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_table( $tables ) {
@@ -106,7 +100,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function benefactor_meta_box( $benefactor, $extension ) {
@@ -122,7 +115,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function benefactor_form( $benefactor, $extension ) {
@@ -137,7 +129,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 *
 		 * @param   WP_Post $post Post object.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function save_benefactors( WP_Post $post ) {
@@ -195,7 +186,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Add a new benefactor block with AJAX.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function add_benefactor_form() {
@@ -222,7 +212,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Deactivate a benefactor.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function delete_benefactor() {
@@ -247,7 +236,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Called when Charitable is uninstalled and data removal is set to true.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function uninstall() {
@@ -266,7 +254,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Activate the addon.
 		 *
 		 * @return  boolean Whether the addon is activated.
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */

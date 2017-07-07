@@ -50,7 +50,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'make_donation';
 
@@ -58,7 +57,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Value to indicate whether the user has all required fields filled out.
 		 *
 		 * @var     bool
-		 * @access  protected
 		 */
 		protected $user_has_required_fields;
 
@@ -66,7 +64,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Flag thrown when the form submission has been validated.
 		 *
 		 * @var     bool
-		 * @access  protected
 		 */
 		protected $validated = false;
 
@@ -74,7 +71,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Whether the form submission is valid.
 		 *
 		 * @var     bool
-		 * @access  protected
 		 */
 		protected $valid;
 
@@ -82,7 +78,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Create a donation form object.
 		 *
 		 * @param   Charitable_Campaign $campaign Campaign receiving the donation.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( Charitable_Campaign $campaign ) {
@@ -96,7 +91,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Set up callbacks for actions and filters.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function attach_hooks_and_filters() {
@@ -116,7 +110,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Returns the campaign associated with this donation form object.
 		 *
 		 * @return  Charitable_Campaign
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_campaign() {
@@ -127,7 +120,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the current user.
 		 *
 		 * @return  Charitable_User|false   Object if the user is logged in. False otherwise.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user() {
@@ -145,7 +137,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @param   string $key
 		 * @param   string $default Optional. The value that will be used if none is set.
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_value( $key, $default = '' ) {
@@ -173,7 +164,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Returns the fields related to the person making the donation.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_fields() {
@@ -280,7 +270,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Only show the required user fields if that option was enabled by the site admin.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function hide_non_required_user_fields( $fields ) {
@@ -306,7 +295,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * field with ...
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_account_fields() {
@@ -339,7 +327,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Returns the donation fields.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_fields() {
@@ -370,7 +357,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the donation form fields.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_fields() {
@@ -400,7 +386,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @param   array[] $fields
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_payment_fields( $fields ) {
@@ -444,7 +429,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @param   string|false $custom_template
 		 * @param   array   $field
 		 * @return  string|false|Charitable_Template
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function use_custom_templates( $custom_template, $field ) {
@@ -466,7 +450,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @param 	array[] $fields The array of fields.
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.4.14
 		 */
 		public function maybe_show_current_donation_amount( $fields ) {
@@ -500,7 +483,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @param   array[] $fields
 		 * @param   Charitable_Gateway $gateway
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_credit_card_fields( $fields, Charitable_Gateway $gateway ) {
@@ -515,7 +497,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Render the donation form.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render() {
@@ -530,7 +511,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @param   Charitable_Donation_Form $form
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
@@ -558,7 +538,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Set the gateway as a hidden field when there is only one gateway.
 		 *
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_hidden_gateway_field( $fields ) {
@@ -580,7 +559,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @param   Charitable_Donation_Form $form
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_password_field( $form ) {
@@ -600,7 +578,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Validate the form submission.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function validate_submission() {
@@ -628,7 +605,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the security checks (nonce and honeypot) pass.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function validate_security_check() {
@@ -651,7 +627,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the submitted email is valid.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function validate_email() {
@@ -678,7 +653,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the submitted gateway is valid.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function validate_gateway() {
@@ -702,7 +676,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the set amount is valid.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function validate_amount() {
@@ -729,7 +702,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the donation values.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_values() {
@@ -796,7 +768,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Returns all fields as a merged array.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_merged_fields() {
@@ -833,7 +804,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the user has all required fields.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function user_has_required_fields() {
@@ -861,7 +831,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the donation amount.
 		 *
 		 * @return  float
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -882,7 +851,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Set up payment fields based on the gateways that are installed and which one is default.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function setup_payment_fields() {
@@ -910,7 +878,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * A formatted notice to advise that there are no gateways active.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_no_active_gateways_notice() {
@@ -931,7 +898,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Determine the status of Test Mode and display an alert if it is active
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.4.7
 		 */
 		protected function check_test_mode() {
@@ -948,7 +914,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * A formatted notice to advise that Test Mode is active.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.4.7
 		 */
 		protected function get_test_mode_active_notice() {
@@ -969,7 +934,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the donor value fields.
 		 *
 		 * @return  string[]
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_donor_value_fields( $submitted ) {
@@ -994,7 +958,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Checks whether the form submission contains profile fields.
 		 *
 		 * @return  boolean
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function has_profile_fields( $submitted, $user_fields ) {
@@ -1012,7 +975,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @param   array   $required_fields
 		 * @return  boolean
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function is_missing_required_fields( $required_fields ) {

@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_User_Dashboard|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_User_Dashboard
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -48,7 +46,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -65,7 +62,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Register navigation menu for frontend dashboard.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_menu() {
@@ -78,7 +74,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * @uses    wp_nav_menu
 		 * @param   array       $args
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function nav( $args ) {
@@ -96,7 +91,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Return the menu ID based on the theme location.
 		 *
 		 * @return  int         0 if no menu found. Menu ID otherwise.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_nav_id() {
@@ -114,7 +108,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @uses    wp_get_nav_menu_items
 		 * @return  WP_Post[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function nav_objects() {
@@ -157,7 +150,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Flushes the menu object cache after updating a menu or menu item.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function flush_menu_object_cache( $menu_id ) {
@@ -175,7 +167,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @param   Object $object Optional. If not set, will base it on the current queried object.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function in_nav() {
@@ -205,7 +196,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @param   string $template
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function load_user_dashboard_template( $template ) {
@@ -236,7 +226,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @param   array       $classes
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_body_class( $classes ) {

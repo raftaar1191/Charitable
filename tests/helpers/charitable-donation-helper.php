@@ -10,7 +10,6 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	 * Delete a donation 
 	 *
 	 * @return 	void
-	 * @access  public
 	 * @since 	1.0.0
 	 */
 	public function delete_donation( $donation_id ) {
@@ -22,7 +21,6 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donation_id
-	 * @access  public
 	 * @static
 	 * @since 	1.0.0	 
 	 */
@@ -55,7 +53,6 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	 * @param 	int 		$campaign_id
 	 * @param 	float 		$amount
 	 * @return 	int 		$donation_id
-	 * @access  public
 	 * @static
 	 * @since 	1.0.0
 	 */

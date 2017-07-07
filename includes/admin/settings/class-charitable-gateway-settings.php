@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Gateway_Settings|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -44,7 +42,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Gateway_Settings
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Returns all the payment gateway settings fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_gateway_fields() {
@@ -97,7 +93,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Add settings for each individual payment gateway.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_individual_gateway_fields( $fields ) {
@@ -118,7 +113,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 *
 		 * @param   string[] $groups
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_gateway_settings_dynamic_groups( $groups ) {
@@ -137,7 +131,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Display table with available payment gateways.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_gateways_table( $args ) {
@@ -149,7 +142,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 *
 		 * @param   string $group
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.3
 		 */
 		public function render_paypal_sandbox_test( $group ) {
@@ -166,7 +158,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Redirect the user to PayPal after they initiate the sandbox test.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.3
 		 */
 		public function redirect_paypal_sandbox_test() {
@@ -197,7 +188,6 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * Redirect the user to PayPal after they initiate the sandbox test.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.3
 		 */
 		public function redirect_paypal_sandbox_test_return() {

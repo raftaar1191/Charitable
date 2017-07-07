@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Settings|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -35,14 +34,12 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Current field. Used to access field args from the views.
 		 *
 		 * @var     array
-		 * @access  private
 		 */
 		private $current_field;
 
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -53,7 +50,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Settings
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -68,7 +64,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Return the array of tabs used on the settings page.
 		 *
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_sections() {
@@ -87,7 +82,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @param   string[] $tabs
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function maybe_add_extensions_tab( $tabs ) {
@@ -119,7 +113,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Register setting.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_settings() {
@@ -170,7 +163,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @param   array $values
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function sanitize_settings( $values ) {
@@ -210,7 +202,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   mixed       $value
 		 * @param   array       $field
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function sanitize_checkbox_value( $value, $field ) {
@@ -226,7 +217,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @param   array       $args
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_field( $args ) {
@@ -239,7 +229,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Returns an array of all pages in the id=>title format.
 		 *
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_pages() {
@@ -274,7 +263,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param 	string  $type
 		 * @param 	boolean $dismissible
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function add_update_message( $message, $type = 'error', $dismissible = true ) {
@@ -291,7 +279,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   array   $fields
 		 * @param   string  $section_key
 		 * @return  void
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function register_field( $field, $keys ) {
@@ -329,7 +316,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   array   $field
 		 * @param   string  $key
 		 * @return  string
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_field_label( $field, $key ) {
@@ -351,7 +337,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @param   array   $field
 		 * @return  string
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_field_classes( $field ) {
@@ -372,7 +357,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @uses    charitable_settings_fields
 		 * @see     Charitable_Settings::register_setting()
 		 * @return  array
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_fields() {
@@ -398,7 +382,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   array  $submitted The submitted values.
 		 * @param 	string $section   The section being saved.
 		 * @return  mixed|null        Returns null if the value was not submitted or is not applicable.
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_setting_submitted_value( $key, $field, $submitted, $section ) {
@@ -464,7 +447,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   string $section   The section being edited.
 		 * @param   array  $submitted The submitted values.
 		 * @return  array
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_section_submitted_values( $section, $submitted ) {
@@ -498,7 +480,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * Return list of dynamic groups.
 		 *
 		 * @return  string[]
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_dynamic_groups() {
@@ -511,7 +492,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   string  $section
 		 * @param   array   $submitted
 		 * @return  boolean
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function is_dynamic_group( $composite_key ) {
@@ -526,7 +506,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @param   string $section
 		 * @param   array  $submitted
 		 * @return  string
-		 * @access  private
 		 * @since   1.0.0
 		 *
 		 * @deprecated 1.5.0

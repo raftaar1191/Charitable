@@ -29,7 +29,6 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		 * Whether the gateway supports Charitable 1.3.0.
 		 *
 		 * @var     boolean
-		 * @access  protected
 		 * @since   1.3.0
 		 */
 		protected $supports_130 = false;
@@ -37,7 +36,6 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Instantiate the gateway class, defining its key values.
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {
@@ -59,7 +57,6 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		 *
 		 * @param   array $settings
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 	 	*/
 		public function gateway_settings( $settings ) {
@@ -78,7 +75,6 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		 * Returns the current gateway's ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.3
 		 */

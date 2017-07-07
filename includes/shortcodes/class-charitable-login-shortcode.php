@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   array $atts User-defined shortcode attributes.
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -90,7 +89,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   string $content
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.4.0
 		 */
@@ -108,7 +106,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   array   $args
 		 * @return  mixed[] $args
-		 * @access  protected
 		 * @static
 		 * @since   1.0.0
 		 */

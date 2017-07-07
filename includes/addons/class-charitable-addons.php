@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 *
 		 * @param 	Charitable 		$charitable
 		 * @return 	void
-		 * @access 	public
 		 * @static
 		 * @since 	1.0.0
 		 */
@@ -42,7 +41,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @access 	private
 		 * @since	1.0.0
 		 */
 		private function __construct() {		
@@ -59,7 +57,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * triggered by a plugin.
 		 *
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function activate_addon( $addon ) {
@@ -90,7 +87,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * Load activated addons.
 		 *
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function load_addons() {
@@ -124,7 +120,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * Load interface and abstract classes that addons use.
 		 *
 		 * @return 	void
-		 * @access  private
 		 * @since 	1.0.0
 		 */
 		private function load_addon_dependencies() {
@@ -136,7 +131,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 *
 		 * @param 	string 		$addon
 		 * @return 	string
-		 * @access  private
 		 * @since 	1.0.0
 		 */
 		private function get_addon_filepath( $addon ) {
@@ -148,7 +142,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 *
 		 * @param 	string 		$addon
 		 * @return 	string
-		 * @access  private
 		 * @since 	1.0.0
 		 */
 		private function get_addon_class( $addon ) {

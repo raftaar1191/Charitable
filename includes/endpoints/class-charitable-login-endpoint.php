@@ -30,7 +30,6 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		 * Return the endpoint ID.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @static
 		 * @since 	1.5.0
 		 */
@@ -41,7 +40,6 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @access 	public
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
@@ -53,7 +51,6 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		 * @global 	WP_Rewrite $wp_rewrite
 		 * @param 	array      $args
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
@@ -70,7 +67,6 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		 * @global  WP_Post $post
 		 * @param 	array   $args
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {

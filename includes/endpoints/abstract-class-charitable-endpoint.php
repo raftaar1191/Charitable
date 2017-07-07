@@ -31,7 +31,6 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * Unless the child class defines this, this won't do anything for an endpoint.
 		 *
-		 * @access 	public
 		 * @since 	1.5.0
 		 */
 		public function setup_rewrite_rules() {
@@ -44,7 +43,6 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 * Unless the child class defines this, this won't do anything for an endpoint.
 		 *
 		 * @param 	array $vars
-		 * @access 	public
 		 * @since 	1.5.0
 		 */
 		public function add_query_vars( array $vars ) {
@@ -61,7 +59,6 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * @param 	string $template The default template.
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_template( $template ) {
@@ -75,7 +72,6 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * @param 	string $content
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_content( $content ) {
@@ -88,7 +84,6 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 * By default, this will be the endpoint ID with underscores replaced by hyphens.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.5.0
 		 */
 		public function get_body_class() {

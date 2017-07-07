@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * The one and only class instance.
 		 *
 		 * @var     Charitable_Upgrade_Page
-		 * @access  private
 		 * @static
 		 * @since   1.3.0
 		 */
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Create class object. Private constructor.
 		 *
-		 * @access  private
 		 * @since   1.3.0
 		 */
 		private function __construct() {
@@ -43,7 +41,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @access  public
 		 * @static
 		 * @since   1.3.0
 		 */
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Register the page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function register_page() {
@@ -76,7 +72,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Remove the page from the dashboard menu.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function remove_page_from_menu() {
@@ -87,7 +82,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Render the page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function render_page() {
@@ -98,7 +92,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Return the current upgrade action.
 		 *
 		 * @return  false|string False if no action was specified.
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_action() {
@@ -113,7 +106,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Return the current upgrade step.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_step() {
@@ -128,7 +120,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Return the total number of records to be updated.
 		 *
 		 * @return  false|int
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_total() {
@@ -143,7 +134,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * Return the
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_number() {
@@ -160,7 +150,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * @param   int $total
 		 * @param   int $number
 		 * @return  int
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_steps( $total, $number ) {

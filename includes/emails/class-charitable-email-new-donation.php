@@ -27,14 +27,12 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 
 		/**
 		 * @var     boolean Whether the email allows you to define the email recipients.
-		 * @access  protected
 		 * @since   1.1.0
 		 */
 		protected $has_recipient_field = true;
 
 		/**
 		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $object_types = array( 'donation' );
@@ -43,7 +41,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Instantiate the email class, defining its key values.
 		 *
 		 * @param   mixed[]  $objects
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $objects = array() ) {
@@ -56,7 +53,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Returns the current email's ID.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.3
 		 */
@@ -69,7 +65,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -119,7 +114,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Return the default recipient for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_recipient() {
@@ -130,7 +124,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Return the default subject line for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_subject() {
@@ -141,7 +134,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Return the default headline for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_headline() {
@@ -152,7 +144,6 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * Return the default body for the email.
 		 *
 		 * @return  string
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function get_default_body() {

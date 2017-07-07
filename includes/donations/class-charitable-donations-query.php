@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Create class object.
 		 *
 		 * @param 	array $args Arguments used in query.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function __construct( $args = array() ) {
@@ -61,7 +60,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Return list of donation IDs together with the number of donations they have made.
 		 *
 		 * @return  object[]
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_donations() {
@@ -100,7 +98,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Set up fields query argument.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function setup_fields() {
@@ -119,7 +116,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Set up orderby query argument.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function setup_orderby() {
@@ -146,7 +142,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Remove any hooks that have been attached by the class to prevent contaminating other queries.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function unhook_callbacks() {
@@ -168,7 +163,6 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * Set up callbacks for WP_Query filters.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected function prepare_query() {

@@ -10,7 +10,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 * Delete a campaign 
 	 *
 	 * @return 	void
-	 * @access  public
 	 * @since 	1.0.0
 	 */
 	public function delete_campaign( $campaign_id ) {
@@ -22,7 +21,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @access  public
 	 * @static
 	 * @since 	1.0.0	 
 	 */
@@ -67,7 +65,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 * @param 	string 		$goal
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @access  public
 	 * @static
 	 * @since 	1.0.0
 	 */
@@ -82,7 +79,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 * @param 	string 		$end_date
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @access  public
 	 * @static
 	 * @since 	1.0.0
 	 */

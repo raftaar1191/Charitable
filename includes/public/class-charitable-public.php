@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Public|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -35,7 +34,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Public
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -49,7 +47,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @access 	private
 		 * @since 	1.0.0
 		 */
 		private function __construct() {
@@ -78,7 +75,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * This gives themes time to override the functions.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.3
 		 */
 		public function load_template_files() {
@@ -90,7 +86,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * Loads public facing scripts and stylesheets.
 		 *
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function setup_scripts() {
@@ -223,7 +218,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * Conditionally load the donation form scripts if we're viewing the donation form.
 		 *
 		 * @return  boolean True if scripts were loaded. False otherwise.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function maybe_enqueue_donation_form_scripts() {
@@ -245,7 +239,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * Enqueues the donation form scripts.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.6
 		 */
 		public function enqueue_donation_form_scripts() {
@@ -262,7 +255,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 *
 		 * @param 	string[] $classes List of classes to be added with post_class().
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function campaign_post_class( $classes ) {
@@ -282,7 +274,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 *
 		 * @param   boolean $open Whether comments are open.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.3.0
 	 	 */
 		public function disable_comments_on_application_pages( $open ) {

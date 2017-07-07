@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Licenses_Settings|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -44,7 +42,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Licenses_Settings
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -60,7 +57,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 *
 		 * @param   string[] $tabs Settings tabs.
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.4.7
 		 */
 		public function maybe_add_licenses_tab( $tabs ) {
@@ -88,7 +84,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 * Add the licenses tab settings fields.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_licenses_fields() {
@@ -127,7 +122,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 *
 		 * @param   string[] $groups Settings groups.
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_licenses_group( $groups ) {
@@ -139,7 +133,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 * Render the licenses table.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_licenses_table() {
@@ -152,7 +145,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		 * @param   mixed[] $values The parsed values combining old values & new values.
 		 * @param   mixed[] $new_values The newly submitted values.
 		 * @return  mixed[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function save_license( $values, $new_values ) {

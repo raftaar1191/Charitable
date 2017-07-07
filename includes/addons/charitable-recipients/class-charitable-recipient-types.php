@@ -23,21 +23,18 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 
 		/**
 		 * @var     Charitable_Recipient_Types
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * @var     array
-		 * @access  private
 		 */
 		private $types = array();
 
 		/**
 		 * Create class object.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {}
@@ -46,7 +43,6 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		 * Returns the single instance of this class.
 		 *
 		 * @return  Charitable_Recipient_Types
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -62,7 +58,6 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		 * Registers a new recipient type.
 		 *
 		 * @return  Charitable_Recipient_Types
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register( $recipient_type, $args = array() ) {
@@ -85,7 +80,6 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		 * Returns all registered recipient types.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_types() {

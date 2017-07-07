@@ -48,7 +48,6 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
          *
          * @param   string  $current_view
          * @param   array   $args
-         * @access  public
          * @since   1.0.0
          */
         public function __construct( $current_view, $args = array() ) {
@@ -74,7 +73,6 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
          * Modifies the WP Query.
          *
          * @return  void
-         * @access  private
          * @since   1.0.0
          */
         private function modify_wp_query() {

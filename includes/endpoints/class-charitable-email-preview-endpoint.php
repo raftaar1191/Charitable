@@ -30,7 +30,6 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		 * Return the endpoint ID.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @static
 		 * @since 	1.5.0
 		 */
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		 *
 		 * @param 	array $args
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
@@ -72,7 +70,6 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		 *
 		 * @param 	array $args
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {
@@ -86,7 +83,6 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		 *
 		 * @param 	string $template The default template.
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_template( $template ) {

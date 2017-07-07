@@ -45,7 +45,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'make_donation_streamlined';
 
@@ -53,7 +52,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Set up callbacks for actions and filters.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function attach_hooks_and_filters() {
@@ -69,7 +67,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Return the donation form fields.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_fields() {
@@ -80,7 +77,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Validate the form submission.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.4
 		 */
 		public function validate_submission() {
@@ -106,7 +102,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Return the donation values.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donation_values() {
@@ -126,7 +121,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * @param   int     $campaign_id
 		 * @param   int     $amount
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function redirect_after_submission( $campaign_id, $amount ) {
@@ -151,7 +145,6 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Render the donation form.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render() {

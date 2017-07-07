@@ -29,14 +29,12 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 
 		/**
 		 * @var     string Name of the payment gateway.
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $name;
 
 		/**
 		 * @var     array The default values for all settings added by the gateway.
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected $defaults;
@@ -45,7 +43,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Supported features such as 'credit-card', and 'recurring' donations
 		 *
 		 * @var     string[]
-		 * @access  protected
 		 * @since   1.3.0
 		 */
 		protected $supports = array();
@@ -54,7 +51,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Return the gateway name.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_name() {
@@ -65,7 +61,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Returns the default gateway label to be displayed to donors.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_default_label() {
@@ -77,7 +72,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 *
 		 * @param   array   $settings
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function default_gateway_settings( $settings ) {
@@ -101,7 +95,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Return the settings for this gateway.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_settings() {
@@ -112,7 +105,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Retrieve the gateway label.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_label() {
@@ -124,7 +116,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 *
 		 * @param   string $setting
 		 * @return  mixed
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_value( $setting ) {
@@ -159,7 +150,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * in the child class.
 		 *
 		 * @return  array[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_credit_card_fields() {
@@ -201,7 +191,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * @param   mixed $result
 		 * @param   int $donation_id
 		 * @return  array
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -219,7 +208,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Returns whether a credit card form is required for this gateway.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 *
 		 * @deprecated
@@ -234,7 +222,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 *
 		 * @param   array   $settings
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		abstract public function gateway_settings( $settings );

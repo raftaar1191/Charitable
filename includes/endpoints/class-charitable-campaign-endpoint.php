@@ -30,7 +30,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 * Return the endpoint ID.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @static
 		 * @since 	1.5.0
 		 */
@@ -44,7 +43,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 * @global 	WP_Rewrite $wp_rewrite
 		 * @param 	array      $args
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
@@ -61,7 +59,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 * @global  WP_Query $wp_query
 		 * @param 	array    $args
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {
@@ -81,7 +78,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 *
 		 * @param 	string $content
 		 * @return  string
-		 * @access  public
 		 * @since   1.5.0
 		 */
 		public function get_content( $content ) {
@@ -135,7 +131,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 * Return the body class to add for the endpoint.
 		 *
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.5.0
 		 */
 		public function get_body_class() {

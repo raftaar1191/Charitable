@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Install the plugin.
 		 *
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function __construct() {
@@ -41,7 +40,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * Finish the plugin installation.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.3.4
 		 */
@@ -55,7 +53,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * Create wp roles and assign capabilities
 		 *
 		 * @return 	void
-		 * @access 	protected
 		 * @since 	1.0.0
 		 */
 		protected function setup_roles() {
@@ -69,7 +66,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * Create database tables.
 		 *
 		 * @return 	void
-		 * @access 	protected
 		 * @since 	1.0.0
 		 */
 		protected function create_tables() {
@@ -88,7 +84,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * Set up the upgrade log.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.3.0
 		 */
 		protected function setup_upgrade_log() {

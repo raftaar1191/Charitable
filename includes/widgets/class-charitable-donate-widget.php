@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Register the widget.
 		 *
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct() {
@@ -47,7 +46,6 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		 * @param   array $args 	Widget args.
 		 * @param   array $instance Widget instance.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function widget( $args, $instance ) {
@@ -64,7 +62,6 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		 *
 		 * @param   array $instance Widget instance. 
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function form( $instance ) {
@@ -105,7 +102,6 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		 * @param   array $new_instance New widget instance arguments.
 		 * @param   array $old_instance Old widget instance arguments.
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function update( $new_instance, $old_instance ) {

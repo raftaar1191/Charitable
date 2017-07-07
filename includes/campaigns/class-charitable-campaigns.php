@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * The arguments to be passed to WP_Query.
 		 *
 		 * @var 	array
-		 * @access  private
 		 * @since 	1.4.0
 		 */
 		private $args = array();
@@ -37,7 +36,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * @param 	array $args
 		 * @return 	WP_Query
 		 * @static
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public static function query( $args = array() ) {
@@ -118,7 +116,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 *
 		 * @param 	string $join_statement
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -142,7 +139,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * A method used to change the group by parameter of the campaigns query.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -157,7 +153,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * @param 	string   $orderby The current orderby value.
 		 * @param 	WP_Query $wp_query The WP_Query object.
 		 * @return  string
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */

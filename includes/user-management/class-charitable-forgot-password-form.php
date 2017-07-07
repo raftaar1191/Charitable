@@ -22,14 +22,12 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 
 		/**
 		 * @var 	string
-		 * @access 	protected
 		 * @since 	1.4.0
 		 */
 		protected $nonce_action = 'charitable_forgot_password';
 
 		/**
 		 * @var 	string
-		 * @access 	protected
 		 * @since 	1.4.0
 		 */
 		protected $nonce_name = '_charitable_forgot_password_nonce';
@@ -38,7 +36,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 * Form action.
 		 *
 		 * @var 	string
-		 * @access  protected
 		 * @since 	1.4.0
 		 */
 		protected $form_action = 'retrieve_password';
@@ -47,7 +44,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 * Create class object.
 		 *
 		 * @param   array $args User-defined shortcode attributes.
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function __construct() {
@@ -59,7 +55,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 * Forgot password fields to be displayed.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_fields() {
@@ -81,7 +76,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 * Send the password reset email.
 		 *
 		 * @return  bool|WP_Error True: when finish. WP_Error on error
-		 * @access  public
 		 * @static
 		 * @since   1.4.0
 		 */

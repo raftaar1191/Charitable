@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Admin_Pages|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The page to use when registering sections and fields.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $admin_menu_parent_page;
 
@@ -42,14 +40,12 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The capability required to view the admin menu.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $admin_menu_capability;
 
 		/**
 		 * Create class object.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -61,7 +57,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Admin_Pages
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -76,7 +71,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Add Settings menu item under the Campaign menu tab.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_menu() {
@@ -116,7 +110,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Returns an array with all the submenu pages.
 		 *
 		 * @return  array
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_submenu_pages() {
@@ -163,7 +156,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Set up the redirect to the welcome page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function setup_welcome_redirect() {
@@ -174,7 +166,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Redirect to the welcome page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function redirect_to_welcome() {
@@ -186,7 +177,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Display the Charitable settings page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_settings_page() {
@@ -197,7 +187,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Display the Charitable donations page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
          *
 		 * @deprecated 1.4.0
@@ -216,7 +205,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * Display the Charitable welcome page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function render_welcome_page() {

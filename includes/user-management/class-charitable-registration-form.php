@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Shortcode parameters.
 		 *
 		 * @var     array
-		 * @access  protected
 		 */
 		protected $shortcode_args;
 
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'save_registration';
 
@@ -51,7 +49,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * The current donor.
 		 *
 		 * @var     Charitable_Donor
-		 * @access  protected
 		 */
 		protected $donor;
 
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Create class object.
 		 *
 		 * @param   array       $args       User-defined shortcode attributes.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
@@ -72,7 +68,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Return the arguments passed to the shortcode.
 		 *
 		 * @return  mixed[]
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function get_shortcode_args() {
@@ -83,7 +78,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Profile fields to be displayed.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_fields() {
@@ -121,7 +115,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 *
 		 * @param 	Charitable_Form 	$form
 		 * @return 	void
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
@@ -156,7 +149,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Update registration after form submission.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.0.0
 		 */
@@ -207,7 +199,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Return the link to the login page, or false if we are not going to display it.
 		 *
 		 * @return  false|string
-		 * @access  public
 		 * @since   1.4.2
 		 */
 		public function get_login_link() {

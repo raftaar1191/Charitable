@@ -29,7 +29,6 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function register() {
@@ -44,7 +43,6 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		 * Print the widget contents.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.2.0
 		 */
@@ -60,7 +58,6 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		 * Return the content to display inside the widget.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @static
 		 * @since   1.2.0
 		 */

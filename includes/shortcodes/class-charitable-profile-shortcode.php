@@ -28,7 +28,6 @@ class Charitable_Profile_Shortcode {
      *
      * @param   array $atts User-defined shortcode attributes.
      * @return  string
-     * @access  public
      * @static
      * @since   1.0.0
      */

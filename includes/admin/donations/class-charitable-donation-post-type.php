@@ -25,33 +25,28 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Donation_Post_Type|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * @var     Charitable $charitable
-		 * @access  private
 		 */
 		private $charitable;
 
 		/**
 		 * @var     Charitable_Meta_Box_Helper $meta_box_helper
-		 * @access  private
 		 */
 		private $meta_box_helper;
 
 		/**
 		 * @var     array
-		 * @access  private
 		 */
 		private $status_counts;
 
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function __construct() {
@@ -106,7 +101,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Donation_Post_Type
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -121,7 +115,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Sets up the meta boxes to display on the donation admin page.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function add_meta_boxes() {
@@ -142,7 +135,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Remove default meta boxes.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function remove_meta_boxes() {
@@ -165,7 +157,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Returns an array of all meta boxes added to the donation post type screen.
 		 *
 		 * @return  array
-		 * @access  private
 		 * @since   1.0.0
 		 */
 		private function get_meta_boxes() {
@@ -199,7 +190,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * @see     get_column_headers
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function dashboard_columns( $column_names ) {
@@ -223,7 +213,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * @param   string  $column_name    The name of the column to display.
 		 * @param   int     $post_id        The current post ID.
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function dashboard_column_item( $column_name, $post_id ) {
@@ -311,7 +300,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   array $columns  .
 		 * @return  array
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function sortable_columns( $columns ) {
@@ -380,7 +368,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   string[] $views
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function set_status_views( $views ) {
@@ -491,7 +478,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Retrieve the bulk actions
 		 *
 		 * @return  array $actions Array of the bulk actions
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_bulk_actions() {
@@ -511,7 +497,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @global  string $post_type
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function bulk_admin_footer() {
@@ -539,7 +524,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Process the new bulk actions for changing order status.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function process_bulk_action() {
@@ -636,7 +620,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * @param 	array $bulk_messages
 		 * @param 	array $bulk_counts
 		 * @return 	array
-		 * @access 	public
 		 * @since 	1.4.7
 		 */
 		public function bulk_messages( $bulk_messages, $bulk_counts ) {
@@ -692,7 +675,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   string $which
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function extra_tablenav( $which ) {
@@ -711,7 +693,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   string $which
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function modal_forms() {
@@ -731,7 +712,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Set up the scripts & styles used for the modal.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function load_scripts( $hook ) {
@@ -791,7 +771,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   array $vars
 		 * @return  array
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function request_query( $vars ) {
@@ -846,7 +825,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @param   array $vars
 		 * @return  array
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function posts_clauses( $clauses ) {
@@ -879,7 +857,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Return the status counts, taking into account any current filters.
 		 *
 		 * @return  array
-		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected function get_status_counts() {
@@ -917,7 +894,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Given a date, returns an array containing the date, month and year.
 		 *
 		 * @return  string[]
-		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected function get_parsed_date( $date ) {
@@ -937,7 +913,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * @param   string $old_status
 		 * @param   WP_Post $post
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 *
 		 * @deprecated   1.4.0

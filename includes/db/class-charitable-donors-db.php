@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * The version of our database table
 		 *
 		 * @var 	string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $version = '1.0.0';
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * The name of the primary column
 		 *
 		 * @var 	string
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public $primary_key = 'donor_id';
@@ -43,7 +41,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Set up the database table name.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
 	 	 */
 		public function __construct() {
@@ -56,7 +53,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Create the table.
 		 *
 		 * @global  $wpdb
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function create_table() {
@@ -83,7 +79,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Whitelist of columns.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_columns() {
@@ -101,7 +96,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Default column values.
 		 *
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_column_defaults() {
@@ -121,7 +115,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @param   array  $data Donor data to insert.
 		 * @param 	string $type Should always be 'donors'.
 		 * @return  int The ID of the inserted donor.
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function insert( $data, $type = 'donors' ) {
@@ -133,7 +126,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 *
 		 * @param   int $donor_id The Donor ID.
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_user_id( $donor_id ) {
@@ -147,7 +139,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 *
 		 * @param   int     $user_id
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donor_id( $user_id ) {
@@ -161,7 +152,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 *
 		 * @param   string  $email
 		 * @return  int
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_donor_id_by_email( $email ) {
@@ -174,7 +164,6 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Count the number of donors with donations.
 		 *
 		 * @return  int
-		 * @access  public
 		 * @since   1.3.4
 	 	*/
 		public function count_donors_with_donations( $statuses = array( 'charitable-completed' ) ) {

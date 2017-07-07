@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Currency|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -55,7 +54,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @access  private
 		 * @since   1.2.3
 		 */
 		private function __construct() {
@@ -65,7 +63,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Currency
-		 * @access  public
 		 * @since   1.2.3
 		 */
 		public static function get_instance() {
@@ -84,7 +81,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @param 	string    $amount        The amount to convert.
 		 * @param 	int|false $decimal_count Optional. If not set, default decimal count will be used.
 		 * @return 	string|WP_Error
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_monetary_amount( $amount, $decimal_count = false ) {
@@ -115,7 +111,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * @param 	string $amount The amount to sanitize.
 		 * @return 	float|WP_Error
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function sanitize_monetary_amount( $amount ) {
@@ -156,7 +151,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * @param 	string $amount The amount to be sanitized.
 		 * @return  string
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function sanitize_database_amount( $amount ) {
@@ -171,7 +165,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Checks whether the comma is being used as the separator.
 		 *
 		 * @return 	boolean
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function is_comma_decimal() {
@@ -183,7 +176,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * @uses 	charitable_currency_decimal_count
 		 * @return 	int
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_decimals() {
@@ -195,7 +187,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * @uses 	charitable_currency_format
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_currency_format() {
@@ -225,7 +216,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Get the currency format for accounting.js
 		 *
 		 * @return  string
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_accounting_js_format() {
@@ -237,7 +227,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * @uses 	charitable_currencies		Hook to add custom currencies.
 		 * @return 	string[]
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_all_currencies() {
@@ -302,7 +291,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @uses 	charitable_currency_symbol
 		 * @param 	string $currency Optional. If not set, currency is based on currently selected currency.
 		 * @return 	string
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function get_currency_symbol( $currency = '' ) {

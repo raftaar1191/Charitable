@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Cron|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Cron
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -48,7 +46,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @access  private
 		 * @since   1.1.0
 		 */
 		private function __construct() {
@@ -59,7 +56,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * Schedule Charitable event hooks.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @static
 		 * @since   1.1.0
 		 */
@@ -75,7 +71,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * Check for expired campaigns.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.1.0
 		 */
 		public function check_expired_campaigns() {

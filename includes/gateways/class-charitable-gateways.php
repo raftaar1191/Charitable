@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Gateways|null
-		 * @access  private
 		 * @static
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * All available payment gateways.
 		 *
 		 * @var 	array
-		 * @access  private
 		 */
 		private $gateways;
 
@@ -45,7 +43,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access 	protected
 		 * @since 	1.0.0
 		 */
 		protected function __construct() {
@@ -62,7 +59,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @return  Charitable_Gateways
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public static function get_instance() {
@@ -80,7 +76,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * hook and give Charitable the name of your gateway class.
 		 *
 		 * @return  void
-		 * @access  public
 		 * @since   1.2.0
 		 */
 		public function register_gateways() {
@@ -94,7 +89,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Receives a request to enable or disable a payment gateway and validates it before passing it off.
 		 *
 		 * @return 	void
-		 * @access 	public
 		 * @since 	1.0.0
 		 */
 		public function handle_gateway_settings_request() {
@@ -133,7 +127,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns all available payment gateways.
 		 *
 		 * @return 	string
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_available_gateways() {
@@ -144,7 +137,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns the current active gateways.
 		 *
 		 * @return 	string[]
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_active_gateways() {
@@ -167,7 +159,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * This is useful for select/radio input fields.
 		 *
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_gateway_choices() {
@@ -185,7 +176,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns a text description of the active gateways.
 		 *
 		 * @return  string[]
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function get_active_gateways_names() {
@@ -204,7 +194,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  string|false
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_gateway( $gateway ) {
@@ -216,7 +205,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  Charitable_Gateway|null
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function get_gateway_object( $gateway ) {
@@ -229,7 +217,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway_id Gateway ID.
 		 * @return 	boolean
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function is_active_gateway( $gateway_id ) {
@@ -241,7 +228,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.3
 		 */
 		public function is_valid_gateway( $gateway ) {
@@ -252,7 +238,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns the default gateway.
 		 *
 		 * @return 	string
-		 * @access  public
 		 * @since 	1.0.0
 		 */
 		public function get_default_gateway() {
@@ -265,7 +250,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * @param 	array 			   $settings Gateway settings.
 		 * @param 	Charitable_Gateway $gateway  The gateway's helper object.
 		 * @return  array
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function register_gateway_settings( $settings, Charitable_Gateway $gateway ) {
@@ -278,7 +262,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * Returns true if test mode is enabled.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function in_test_mode() {
@@ -293,7 +276,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $feature Feature to search for.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function all_gateways_support( $feature ) {
@@ -316,7 +298,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $feature Feature to check for.
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.4.0
 		 */
 		public function any_gateway_supports( $feature ) {
@@ -338,7 +319,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * If ANY gateway doesn't support AJAX, this returns false.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.3.0
 		 */
 		public function gateways_support_ajax() {
@@ -350,7 +330,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function set_default_gateway( $gateway ) {
@@ -369,7 +348,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function enable_gateway( $gateway ) {
@@ -396,7 +374,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @param 	string $gateway Gateway ID.
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function disable_gateway( $gateway ) {
@@ -428,7 +405,6 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * @param 	string $a Gateway to compare.
 		 * @param 	string $b Gateway to compare against.
 		 * @return  int
-		 * @access  protected
 		 * @since   1.4.0
 		 */
 		protected function sort_by_default( $a, $b ) {

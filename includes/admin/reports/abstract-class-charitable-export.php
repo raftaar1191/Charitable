@@ -29,19 +29,16 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 
 		/**
 		 * @var     string[] The CSV's columns.
-		 * @access  protected
 		 */
 		protected $columns;
 
 		/**
 		 * @var     mixed[] Optional array of arguments.
-		 * @access  protected
 		 */
 		protected $args;
 
 		/**
 		 * @var     mixed[] Array of default arguments.
-		 * @access  protected
 		 */
 		protected $defaults = array();
 
@@ -49,7 +46,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * Create class object.
 		 *
 		 * @param   mixed[] $args
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
@@ -63,7 +59,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * Returns whether the current user can export data.
 		 *
 		 * @return  boolean
-		 * @access  public
 		 * @since   1.0.0
 		 */
 		public function can_export() {
@@ -74,7 +69,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * Export the CSV file.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function export() {
@@ -104,7 +98,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 *
 		 * @param   object|array $data
 		 * @return  mixed
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function map_data( $data ) {
@@ -128,7 +121,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * Print the CSV document headers.
 		 *
 		 * @return  void
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		protected function print_headers() {
@@ -158,7 +150,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
 		 * @return  string[]
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		abstract protected function get_csv_columns();
@@ -167,7 +158,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * Get the data to be exported.
 		 *
 		 * @return  array
-		 * @access  protected
 		 * @since   1.0.0
 		 */
 		abstract protected function get_data();
