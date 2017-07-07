@@ -47,7 +47,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * Returns the current email's ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.0.3
 		 */
 		public static function get_email_id() {
@@ -59,7 +58,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function send_with_donation_id( $donation_id ) {

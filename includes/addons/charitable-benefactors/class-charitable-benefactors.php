@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Benefactors|null
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -59,7 +58,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Responsible for creating class instances.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function load() {
@@ -254,7 +252,6 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		 * Activate the addon.
 		 *
 		 * @return  boolean Whether the addon is activated.
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function activate() {

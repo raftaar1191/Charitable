@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * The one and only class instance.
 		 *
 		 * @var     Charitable_Upgrade_Page
-		 * @static
 		 * @since   1.3.0
 		 */
 		private static $instance = null;
@@ -41,7 +40,6 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @static
 		 * @since   1.3.0
 		 */
 		public static function get_instance() {

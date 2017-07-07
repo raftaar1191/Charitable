@@ -43,7 +43,6 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		 * Print the widget contents.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.2.0
 		 */
 		public static function display() {
@@ -58,7 +57,6 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		 * Return the content to display inside the widget.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.2.0
 		 */
 		public static function get_content() {

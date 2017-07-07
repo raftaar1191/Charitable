@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 		 *
 		 * @param   array   $atts   User-defined shortcode attributes.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function display( $atts = array() ) {

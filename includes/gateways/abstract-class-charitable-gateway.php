@@ -191,7 +191,6 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * @param   mixed $result
 		 * @param   int $donation_id
 		 * @return  array
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function redirect_to_processing( $result, $donation_id ) {

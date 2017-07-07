@@ -831,7 +831,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Return the donation amount.
 		 *
 		 * @return  float
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function get_donation_amount() {

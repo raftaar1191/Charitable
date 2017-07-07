@@ -75,7 +75,6 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		 * Returns the current gateway's ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.0.3
 		 */
 		public static function get_gateway_id() {

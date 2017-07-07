@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 	    /**
 	     * @var     Charitable_Upgrade
-	     * @static
 	     * @since   1.3.0
 	     */
 	    private static $instance = null;
@@ -63,7 +62,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 	    /**
 	     * Create and return the class object.
 	     *
-	     * @static
 	     * @since   1.3.0
 	     */
 	    public static function get_instance() {
@@ -284,7 +282,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @param 	false|string $version_a Current stored version.
 		 * @param 	string 	     $version_b Version we are upgrading to.
 		 * @return 	bool
-		 * @static
 		 * @since 	1.0.0
 		 */
 		public static function requires_upgrade( $version_a, $version_b ) {
@@ -738,7 +735,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @param 	false|string $db_version   The version stored in the database.
 		 * @param 	string 		 $edge_version The new version to upgrade to.
 	 	 * @return 	void
-		 * @static
 		 * @since 	1.0.0
 		 */
 		public static function upgrade_from( $db_version, $edge_version ) {

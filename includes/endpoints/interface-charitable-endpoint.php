@@ -26,7 +26,6 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		 * Return the endpoint ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.5.0
 		 */
 		public static function get_endpoint_id();

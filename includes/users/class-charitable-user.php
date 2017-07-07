@@ -71,7 +71,6 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 *
 		 * @param   int $donor_id The donor ID.
 		 * @return  Charitable_user
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function init_with_donor( $donor_id ) {
@@ -760,7 +759,6 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 * @param   string $username The user's username.
 		 * @param   string $password User password.
 		 * @return  WP_User|WP_Error|false WP_User on login, WP_Error on failure. False if feature is disabled.
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function signon( $username, $password ) {

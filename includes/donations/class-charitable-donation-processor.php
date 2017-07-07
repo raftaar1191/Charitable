@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Donation_Processor|null
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -94,7 +93,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * create multiple donations in a single request.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.3.0
 		 */
 		public static function destroy() {
@@ -125,7 +123,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * Executed when a user first clicks the Donate button on a campaign.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function add_donation_to_session() {
@@ -243,7 +240,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * Save a donation submitted through a page reload (i.e. not AJAX).
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function process_donation_form_submission() {
@@ -259,7 +255,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * Add a donation with AJAX.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.3.0
 		 */
 		public static function ajax_process_donation_form_submission() {
@@ -298,7 +293,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * Save a donation.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function make_donation_streamlined() {

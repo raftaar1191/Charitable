@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * One true class object.
 		 *
 		 * @var     Charitable_Deprecated
-		 * @static
 		 * @since   1.4.0
 		 */
 		private static $instance = null;
@@ -34,7 +33,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * Whether logging is enabled.
 		 *
 		 * @var     $logging
-		 * @static
 		 * @since   1.4.0
 		 */
 		private static $logging;
@@ -50,7 +48,6 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @static
 		 * @since   1.4.0
 		 */
 		public static function get_instance() {

@@ -674,7 +674,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   string $value Current value of goal.
 		 * @return  string|int
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_goal( $value ) {
@@ -695,7 +694,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @param   string $value     Current end date value.
 		 * @param 	array  $submitted The submitted data.
 		 * @return  string|int
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_end_date( $value, $submitted = array() ) {
@@ -714,7 +712,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   array $value Current suggested donations value.
 		 * @return  array
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_suggested_donations( $value ) {
@@ -740,7 +737,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   array|string $donation Suggested donation or an array of suggested donations.
 		 * @return  boolean
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function filter_suggested_donation( $donation ) {
@@ -756,7 +752,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   mixed $value Current checkbox value.
 		 * @return  boolean
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function sanitize_checkbox( $value ) {
@@ -768,7 +763,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   string $value Current description value.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function sanitize_campaign_description( $value ) {
@@ -781,7 +775,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @param   mixed $value     Current custom donations value.
 		 * @param   array $submitted All posted values.
 		 * @return  boolean
-		 * @static
 		 * @since   1.3.6
 		 */
 		public static function sanitize_custom_donations( $value, $submitted ) {
@@ -810,7 +803,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   int $campaign_id The campaign ID.
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function flush_donations_cache( $campaign_id ) {
@@ -825,7 +817,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   int $campaign_id The ID of the campaign.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		private static function get_donations_cache_key( $campaign_id ) {
@@ -837,7 +828,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @param   int $campaign_id The ID of the campaign.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		private static function get_donation_amount_cache_key( $campaign_id ) {

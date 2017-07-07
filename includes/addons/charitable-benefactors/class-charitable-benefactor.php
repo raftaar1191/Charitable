@@ -46,7 +46,6 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		 * @param 	Object $benefactor Benefactor object.
 		 * @param 	string $extension  Extension generating the benefactor object.
 		 * @return  Charitable_Benefactor
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function get_object( $benefactor, $extension ) {

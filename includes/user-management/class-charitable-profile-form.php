@@ -359,7 +359,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Update profile after form submission.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function update_profile() {
@@ -458,7 +457,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 *
 		 * @deprecated 1.4.0
 		 * @return  void
-		 * @static
 		 * @since   1.4.0
 		 */
 		public static function add_deprecated_charitable_user_profile_after_fields_hook( $form ) {

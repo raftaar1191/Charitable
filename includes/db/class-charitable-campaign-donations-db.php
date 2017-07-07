@@ -169,7 +169,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  boolean
-		 * @static
 		 * @since   1.2.0
 		 */
 		public static function delete_donation_records( $donation_id ) {

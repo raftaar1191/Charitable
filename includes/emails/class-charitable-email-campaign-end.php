@@ -53,7 +53,6 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		 * Returns the current email's ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.1.0
 		 */
 		public static function get_email_id() {
@@ -65,7 +64,6 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		 *
 		 * @param   int $campaign_id
 		 * @return  boolean
-		 * @static
 		 * @since   1.1.0
 		 */
 		public static function send_with_campaign_id( $campaign_id ) {

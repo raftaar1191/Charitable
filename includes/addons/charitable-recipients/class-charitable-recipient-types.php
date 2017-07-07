@@ -23,7 +23,6 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 
 		/**
 		 * @var     Charitable_Recipient_Types
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		 * Returns the single instance of this class.
 		 *
 		 * @return  Charitable_Recipient_Types
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function get_instance() {

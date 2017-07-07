@@ -40,7 +40,6 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * Finish the plugin installation.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.3.4
 		 */
 		public static function finish_installing() {

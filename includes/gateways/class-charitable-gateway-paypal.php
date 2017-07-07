@@ -93,7 +93,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param   string $gateway
 		 * @param   mixed[] $values
 		 * @return  boolean
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function validate_donation( $valid, $gateway, $values ) {
@@ -125,7 +124,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param   int $donation_id
 		 * @param   Charitable_Donation_Processor $processor The Donation Processor object.
 		 * @return  array
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function process_donation( $return, $donation_id, $processor ) {
@@ -182,7 +180,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Handle a call to our IPN listener.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function process_ipn() {
@@ -251,7 +248,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param 	array $data        The data received in the IPN from PayPal.
 		 * @param 	int   $donation_id The donation ID received from PayPal.
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function process_web_accept( $data, $donation_id ) {
@@ -543,7 +539,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Returns the current gateway's ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.0.3
 		 */
 		public static function get_gateway_id() {
@@ -554,7 +549,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * Receives the IPN from PayPal after the sandbox test and attempts to verify the result.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.4.3
 		 */
 		public static function process_sandbox_test_ipn() {

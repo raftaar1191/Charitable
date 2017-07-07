@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		 * Responsible for creating class instances.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function load() {
@@ -68,7 +67,6 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		 * Activate the addon.
 		 *
 		 * @return  boolean Whether the add-on was activated.
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function activate() {

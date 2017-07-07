@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Cron|null
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -56,7 +55,6 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * Schedule Charitable event hooks.
 		 *
 		 * @return  boolean
-		 * @static
 		 * @since   1.1.0
 		 */
 		public static function schedule_events() {

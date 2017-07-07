@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Donation_Post_Type|null
-		 * @static
 		 */
 		private static $instance = null;
 

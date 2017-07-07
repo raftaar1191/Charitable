@@ -75,7 +75,6 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * Returns the current email's ID.
 		 *
 		 * @return  string
-		 * @static
 		 * @since 	1.4.0
 		 */
 		public static function get_email_id() {

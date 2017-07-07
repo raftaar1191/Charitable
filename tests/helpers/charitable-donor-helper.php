@@ -21,7 +21,6 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donor_id
-	 * @static
 	 * @since 	1.0.0	 
 	 */
 	public static function create_donor( $args = array() ) {
@@ -54,7 +53,6 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	 * @param 	string 		$last_name
 	 * @param 	array 		$args
 	 * @return 	int
-	 * @static
 	 * @since 	1.0.0
 	 */
 	public static function create_named_donor( $first_name, $last_name, $args = array() ) {

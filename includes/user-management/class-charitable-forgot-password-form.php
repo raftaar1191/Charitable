@@ -76,7 +76,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 * Send the password reset email.
 		 *
 		 * @return  bool|WP_Error True: when finish. WP_Error on error
-		 * @static
 		 * @since   1.4.0
 		 */
 		public static function retrieve_password() {

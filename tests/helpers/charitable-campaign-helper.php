@@ -21,7 +21,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @static
 	 * @since 	1.0.0	 
 	 */
 	public static function create_campaign( $args = array() ) {
@@ -65,7 +64,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 * @param 	string 		$goal
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @static
 	 * @since 	1.0.0
 	 */
 	public static function create_campaign_with_goal( $amount, $args = array()  ) {
@@ -79,7 +77,6 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	 * @param 	string 		$end_date
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @static
 	 * @since 	1.0.0
 	 */
 	public static function create_campaign_with_end_date( $end_date, $args = array() ) {

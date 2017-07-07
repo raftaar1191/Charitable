@@ -35,7 +35,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 *
 		 * @param 	array $args
 		 * @return 	WP_Query
-		 * @static
 		 * @since 	1.0.0
 		 */
 		public static function query( $args = array() ) {
@@ -54,7 +53,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 *
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return	WP_Query
-		 * @static
 		 * @since 	1.0.0
 		 */
 		public static function ordered_by_ending_soon( $args = array() ) {
@@ -83,7 +81,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * @global 	$wpdb
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return 	WP_Query
-		 * @static
 		 * @since 	1.0.0
 		 * @todo
 		 */
@@ -116,7 +113,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 *
 		 * @param 	string $join_statement
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function join_campaign_donations_table( $join_statement ) {
@@ -139,7 +135,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * A method used to change the group by parameter of the campaigns query.
 		 *
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function groupby_campaign_id() {
@@ -153,7 +148,6 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * @param 	string   $orderby The current orderby value.
 		 * @param 	WP_Query $wp_query The WP_Query object.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function orderby_campaign_donation_amount( $orderby, WP_Query $wp_query ) {

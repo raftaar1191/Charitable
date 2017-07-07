@@ -149,7 +149,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Update registration after form submission.
 		 *
 		 * @return  void
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function save_registration() {

@@ -28,7 +28,6 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Widgets|null
-		 * @static
 		 */
 		private static $instance = null;
 

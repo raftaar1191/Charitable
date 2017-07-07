@@ -333,7 +333,6 @@ class Charitable_Password_Form extends Charitable_Form {
 
      *
      * @return  void
-     * @static
      * @since   1.0.0
      */
     public static function update_Password() {
@@ -370,7 +369,6 @@ class Charitable_Password_Form extends Charitable_Form {
      *
      * @deprecated 1.4.0
      * @return  void
-     * @static
      * @since   1.4.0   
      */
     public static function add_deprecated_charitable_user_Password_after_fields_hook( $form ) {

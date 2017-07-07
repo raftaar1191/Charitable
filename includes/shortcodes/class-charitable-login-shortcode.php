@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   array $atts User-defined shortcode attributes.
 		 * @return  string
-		 * @static
 		 * @since   1.0.0
 		 */
 		public static function display( $atts = array() ) {
@@ -89,7 +88,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   string $content
 		 * @return  string
-		 * @static
 		 * @since   1.4.0
 		 */
 		public static function add_hidden_field_to_login_form( $content, $args ) {
@@ -106,7 +104,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * @param   array   $args
 		 * @return  mixed[] $args
-		 * @static
 		 * @since   1.0.0
 		 */
 		protected static function get_login_form_args( $args ) {

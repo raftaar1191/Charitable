@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 		 *
 		 * @param  array $atts The user-defined shortcode attributes.
 		 * @return string
-		 * @static
 		 * @since  1.0.0
 		 */
 		public static function display( $atts ) {
@@ -81,7 +80,6 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 		 *
 		 * @param  array $args The query arguments to be used to retrieve campaigns.
 		 * @return WP_Query
-		 * @static
 		 * @since  1.0.0
 		 */
 		public static function get_campaigns( $args ) {

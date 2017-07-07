@@ -27,7 +27,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 *
 		 * @param 	Charitable 		$charitable
 		 * @return 	void
-		 * @static
 		 * @since 	1.0.0
 		 */
 		public static function load( Charitable $charitable ) {

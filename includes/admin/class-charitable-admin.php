@@ -26,7 +26,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Admin|null
-		 * @static
 		 */
 		private static $instance = null;
 

@@ -24,7 +24,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * The class instance.
 		 *
 		 * @var 	Charitable_User_Management
-		 * @static
 		 * @since 	1.4.0
 		 */
 		private static $instance;
@@ -237,7 +236,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 *
 		 * @see 	show_admin_bar()
 		 *
-		 * @static
 		 * @since 	1.4.0
 		 */
 		public function maybe_remove_admin_bar() {

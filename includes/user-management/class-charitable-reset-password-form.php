@@ -126,7 +126,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Reset the password.
 		 *
 		 * @return  bool|WP_Error True: when finish. WP_Error on error
-		 * @static
 		 * @since   1.4.0
 		 */
 		public static function reset_password() {

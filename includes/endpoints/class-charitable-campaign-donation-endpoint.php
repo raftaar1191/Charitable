@@ -30,7 +30,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * Return the endpoint ID.
 		 *
 		 * @return 	string
-		 * @static
 		 * @since 	1.5.0
 		 */
 		public static function get_endpoint_id() {
