@@ -43,8 +43,9 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   array $args User-defined shortcode attributes.
 		 * @since   1.4.0
+		 *
+		 * @param   array $args User-defined shortcode attributes.
 		 */
 		public function __construct() {
 			$this->id = uniqid();
@@ -54,8 +55,9 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		/**
 		 * Forgot password fields to be displayed.
 		 *
-		 * @return  array
 		 * @since   1.4.0
+		 *
+		 * @return  array
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_forgot_password_fields', array(
@@ -75,8 +77,9 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		/**
 		 * Send the password reset email.
 		 *
-		 * @return  bool|WP_Error True: when finish. WP_Error on error
 		 * @since   1.4.0
+		 *
+		 * @return  bool|WP_Error True: when finish. WP_Error on error
 		 */
 		public static function retrieve_password() {
 

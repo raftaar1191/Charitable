@@ -30,10 +30,11 @@ if ( ! class_exists( 'Charitable_Donation' ) ) :
 		/**
 		 * Process a refund.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   float $refund_amount
 		 * @param   string $message
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function process_refund( $refund_amount, $message = '' ) {
 			$campaign_donations = $this->get_campaign_donations();

@@ -61,8 +61,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Currency
 		 * @since   1.2.3
+		 *
+		 * @return  Charitable_Currency
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -77,10 +78,11 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * 50.00 -> $50.00
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string    $amount        The amount to convert.
 		 * @param 	int|false $decimal_count Optional. If not set, default decimal count will be used.
 		 * @return 	string|WP_Error
-		 * @since 	1.0.0
 		 */
 		public function get_monetary_amount( $amount, $decimal_count = false ) {
 
@@ -108,9 +110,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * $50.00 -> 50.00
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $amount The amount to sanitize.
 		 * @return 	float|WP_Error
-		 * @since 	1.0.0
 		 */
 		public function sanitize_monetary_amount( $amount ) {
 			/* Sending anything other than a string can cause unexpected returns, so we require strings. */
@@ -148,9 +151,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
+		 * @since   1.3.0
+		 *
 		 * @param 	string $amount The amount to be sanitized.
 		 * @return  string
-		 * @since   1.3.0
 		 */
 		public function sanitize_database_amount( $amount ) {
 			if ( $this->is_comma_decimal() ) {
@@ -163,8 +167,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Checks whether the comma is being used as the separator.
 		 *
-		 * @return 	boolean
 		 * @since 	1.0.0
+		 *
+		 * @return 	boolean
 		 */
 		public function is_comma_decimal() {
 			return ( ',' == charitable_get_option( 'decimal_separator', '.' ) );
@@ -174,8 +179,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the number of decimals to use.
 		 *
 		 * @uses 	charitable_currency_decimal_count
-		 * @return 	int
 		 * @since 	1.0.0
+		 *
+		 * @return 	int
 		 */
 		public function get_decimals() {
 			return charitable_get_option( 'decimal_count', 2 );
@@ -185,8 +191,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the currency format based on the position of the currency symbol.
 		 *
 		 * @uses 	charitable_currency_format
-		 * @return 	string
 		 * @since 	1.0.0
+		 *
+		 * @return 	string
 		 */
 		public function get_currency_format() {
 			$symbol_position = charitable_get_option( 'currency_format', 'left' );
@@ -214,8 +221,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Get the currency format for accounting.js
 		 *
-		 * @return  string
 		 * @since   1.3.0
+		 *
+		 * @return  string
 		 */
 		public function get_accounting_js_format() {
 			return apply_filters( 'charitable_accounting_js_currency_format', '%s%v' );
@@ -225,8 +233,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return every currency symbol used with the
 		 *
 		 * @uses 	charitable_currencies		Hook to add custom currencies.
-		 * @return 	string[]
 		 * @since 	1.0.0
+		 *
+		 * @return 	string[]
 		 */
 		public function get_all_currencies() {
 			if ( empty( $this->currencies ) ) {
@@ -288,9 +297,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Credit: This is based on the WooCommerce implemenation.
 		 *
 		 * @uses 	charitable_currency_symbol
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $currency Optional. If not set, currency is based on currently selected currency.
 		 * @return 	string
-		 * @since 	1.0.0
 		 */
 		public function get_currency_symbol( $currency = '' ) {
 			if ( ! strlen( $currency ) ) {

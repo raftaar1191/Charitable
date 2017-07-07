@@ -30,8 +30,9 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Templates
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Templates
 		 */
 		public static function get_instance() {
 

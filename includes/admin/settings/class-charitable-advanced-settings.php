@@ -40,8 +40,9 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Advanced_Settings
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Advanced_Settings
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -54,8 +55,9 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 		/**
 		 * Add the advanced tab settings fields.
 		 *
-		 * @return  array<string,array>
 		 * @since   1.0.0
+		 *
+		 * @return  array<string,array>
 		 */
 		public function add_advanced_fields() {
 			if ( ! charitable_is_settings_view( 'advanced' ) ) {

@@ -40,8 +40,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @param   mixed[]  $objects
 		 * @since   1.1.0
+		 *
+		 * @param   mixed[]  $objects
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -52,8 +53,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		public static function get_email_id() {
 			return self::ID;
@@ -62,9 +64,10 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Static method that is fired within 24 hours after a campaign is finished.
 		 *
+		 * @since   1.1.0
+		 *
 		 * @param   int $campaign_id
 		 * @return  boolean
-		 * @since   1.1.0
 		 */
 		public static function send_with_campaign_id( $campaign_id ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
@@ -106,8 +109,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		 *
 		 * This returns true if the campaign has expired in the last 24 hours.
 		 *
-		 * @return  boolean
 		 * @since   1.3.2
+		 *
+		 * @return  boolean
 		 */
 		public function is_time_to_send() {
 			$time_since_ended = $this->get_campaign()->get_time_since_ended();
@@ -117,8 +121,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_recipient() {
 			return get_option( 'admin_email' );
@@ -127,8 +132,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_subject() {
 			return __( 'A campaign has finished', 'charitable' );
@@ -137,8 +143,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_headline() {
 			return apply_filters( 'charitable_email_campaign_end_default_headline', __( 'Campaign has ended', 'charitable' ), $this );
@@ -147,8 +154,9 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_body() {
 			ob_start();

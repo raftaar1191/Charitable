@@ -31,8 +31,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Cron
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Cron
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -54,8 +55,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Schedule Charitable event hooks.
 		 *
-		 * @return  boolean
 		 * @since   1.1.0
+		 *
+		 * @return  boolean
 		 */
 		public static function schedule_events() {
 			if ( ! wp_next_scheduled( 'charitable_daily_scheduled_events' ) ) {
@@ -68,8 +70,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Check for expired campaigns.
 		 *
-		 * @return  void
 		 * @since   1.1.0
+		 *
+		 * @return  void
 		 */
 		public function check_expired_campaigns() {
 			$yesterday = date( 'Y-m-d H:i:s', strtotime( '-24 hours' ) );

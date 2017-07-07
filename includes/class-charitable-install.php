@@ -39,8 +39,9 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Finish the plugin installation.
 		 *
-		 * @return  void
 		 * @since   1.3.4
+		 *
+		 * @return  void
 		 */
 		public static function finish_installing() {
 			Charitable_Cron::schedule_events();
@@ -51,8 +52,9 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Create wp roles and assign capabilities
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		protected function setup_roles() {
 			require_once( 'users/class-charitable-roles.php' );
@@ -64,8 +66,9 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Create database tables.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		protected function create_tables() {
 			require_once( 'db/abstract-class-charitable-db.php' );
@@ -82,8 +85,9 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Set up the upgrade log.
 		 *
-		 * @return  void
 		 * @since   1.3.0
+		 *
+		 * @return  void
 		 */
 		protected function setup_upgrade_log() {
 			require_once( 'admin/upgrades/class-charitable-upgrade.php' );

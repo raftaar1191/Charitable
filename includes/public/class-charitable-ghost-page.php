@@ -46,9 +46,10 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         /**
          * Constructor. Sets $current_view and $wp_query properties.
          *
+         * @since   1.0.0
+         *
          * @param   string  $current_view
          * @param   array   $args
-         * @since   1.0.0
          */
         public function __construct( $current_view, $args = array() ) {
             if ( 'campaign' == $current_view ) {
@@ -72,8 +73,9 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         /**
          * Modifies the WP Query.
          *
-         * @return  void
          * @since   1.0.0
+         *
+         * @return  void
          */
         private function modify_wp_query() {
             $wp_query = $GLOBALS['wp_query'];
@@ -146,8 +148,9 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         /**
          * Creates a guid based on the current view.
          *
-         * @return  string
          * @since   1.0.0
+         *
+         * @return  string
          */
         private function get_guid() {
         }

@@ -24,8 +24,9 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Responsible for creating class instances.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public static function load() {
 			$object = new Charitable_Recipients();
@@ -46,8 +47,9 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Include required files.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		private function load_dependencies() {
 			require_once( 'charitable-recipients-functions.php' );
@@ -57,8 +59,9 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Set up hooks and filter.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		private function attach_hooks_and_filters() {
 		}
@@ -66,8 +69,9 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @return  boolean Whether the add-on was activated.
 		 * @since   1.0.0
+		 *
+		 * @return  boolean Whether the add-on was activated.
 		 */
 		public static function activate() {
 			if ( 'charitable_activate_addon' !== current_filter() ) {

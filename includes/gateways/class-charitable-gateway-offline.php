@@ -55,10 +55,11 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
+		 * @since   1.0.0
+	 	*
 		 * @param   array $settings
 		 * @return  array
-		 * @since   1.0.0
-	 	*/
+		 */
 		public function gateway_settings( $settings ) {
 			$settings['instructions'] = array(
 				'type'      => 'textarea',
@@ -74,8 +75,9 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Returns the current gateway's ID.
 		 *
-		 * @return  string
 		 * @since   1.0.3
+		 *
+		 * @return  string
 		 */
 		public static function get_gateway_id() {
 			return self::ID;

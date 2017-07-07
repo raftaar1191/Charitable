@@ -53,8 +53,9 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   mixed[] $args Arguments for the report.
 		 * @since   1.0.0
+		 *
+		 * @param   mixed[] $args Arguments for the report.
 		 */
 		public function __construct( $args ) {
 			$this->statuses = charitable_get_valid_donation_statuses();
@@ -67,11 +68,12 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		/**
 		 * Filter the date and time fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed  $value The value to set.
 		 * @param   string $key   The key to set.
 		 * @param   array  $data  The set of data.
 		 * @return  mixed
-		 * @since   1.0.0
 		 */
 		public function set_custom_field_data( $value, $key, $data ) {
 			switch ( $key ) {
@@ -140,8 +142,9 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 *
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		protected function get_csv_columns() {
 			$columns = array(
@@ -172,8 +175,9 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		/**
 		 * Get the data to be exported.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		protected function get_data() {
 			$query_args = array();

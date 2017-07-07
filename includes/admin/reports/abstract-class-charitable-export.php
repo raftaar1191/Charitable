@@ -45,8 +45,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   mixed[] $args
 		 * @since   1.0.0
+		 *
+		 * @param   mixed[] $args
 		 */
 		public function __construct( $args = array() ) {
 			$this->columns = $this->get_csv_columns();
@@ -58,8 +59,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Returns whether the current user can export data.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		public function can_export() {
 			return (bool) apply_filters( 'charitable_export_capability', current_user_can( 'export_charitable_reports' ), $this );
@@ -68,8 +70,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Export the CSV file.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		protected function export() {
 
@@ -96,9 +99,10 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Receives a row of data and maps it to the keys defined in the columns.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   object|array $data
 		 * @return  mixed
-		 * @since   1.0.0
 		 */
 		protected function map_data( $data ) {
 			/* Cast the data to array */
@@ -120,8 +124,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Print the CSV document headers.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		protected function print_headers() {
 			ignore_user_abort( true );
@@ -149,16 +154,18 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 *
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		abstract protected function get_csv_columns();
 
 		/**
 		 * Get the data to be exported.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		abstract protected function get_data();
 	}

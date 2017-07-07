@@ -26,24 +26,27 @@ interface Charitable_Donation_Form_Interface {
 	/**
 	 * Render the donation form.
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	public function render();
 
 	/**
 	 * Validate the submitted values.
 	 *
-	 * @return  boolean
 	 * @since   1.0.0
+	 *
+	 * @return  boolean
 	 */
 	public function validate_submission();
 
 	/**
 	 * Return the donation values.
 	 *
-	 * @return  array
 	 * @since   1.0.0
+	 *
+	 * @return  array
 	 */
 	public function get_donation_values();	
 }

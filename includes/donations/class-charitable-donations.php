@@ -24,9 +24,10 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		/**
 		 * Return WP_Query object with predefined defaults to query only donations.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args Query arguments.
 		 * @return 	WP_Query
-		 * @since 	1.0.0
 		 */
 		public static function query( $args = array() ) {
 			$defaults = array(
@@ -43,9 +44,10 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		 * Return the number of all donations.
 		 *
 		 * @global 	WPDB   $wpdb
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $post_type Type of post to count.
 		 * @return 	int
-		 * @since 	1.0.0
 		 */
 		public static function count_all( $post_type = 'donation' ) {
 			global $wpdb;
@@ -61,9 +63,10 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 		 * Return count of donations grouped by status.
 		 *
 		 * @global 	WPDB  $wpdb
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args Additional query arguments.
 		 * @return 	array
-		 * @since 	1.0.0
 		 */
 		public static function count_by_status( $args = array() ) {
 			global $wpdb;

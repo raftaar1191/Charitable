@@ -26,16 +26,18 @@ if ( ! interface_exists( 'Charitable_Addon_Interface' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		public static function activate();
 
 		/**
 		 * Load the addon.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		public static function load();
 	}

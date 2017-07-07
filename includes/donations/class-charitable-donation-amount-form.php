@@ -51,8 +51,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		protected function attach_hooks_and_filters() {
 			parent::attach_hooks_and_filters();
@@ -66,8 +67,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation form fields.
 		 *
-		 * @return  array[]
 		 * @since   1.0.0
+		 *
+		 * @return  array[]
 		 */
 		public function get_fields() {
 			return $this->get_donation_fields();
@@ -76,8 +78,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
-		 * @return  boolean
 		 * @since   1.4.4
+		 *
+		 * @return  boolean
 		 */
 		public function validate_submission() {
 
@@ -101,8 +104,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation values.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
@@ -118,10 +122,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Redirect to payment form after submission.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int     $campaign_id
 		 * @param   int     $amount
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function redirect_after_submission( $campaign_id, $amount ) {
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -144,8 +149,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function render() {
 

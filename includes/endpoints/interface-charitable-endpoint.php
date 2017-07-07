@@ -25,24 +25,27 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @return  string
 		 * @since   1.5.0
+		 *
+		 * @return  string
 		 */
 		public static function get_endpoint_id();
 
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @return  string
 		 * @since   1.5.0
+		 *
+		 * @return  string
 		 */
 		public function get_page_url();
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @return  boolean
 		 * @since   1.5.0
+		 *
+		 * @return  boolean
 		 */
 		public function is_page();
 	}

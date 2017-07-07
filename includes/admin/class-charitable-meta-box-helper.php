@@ -39,9 +39,10 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		/**
 		 * Create a helper instance.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $nonce_action 
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function __construct( $nonce_action = 'charitable' ) {
 			$this->nonce_action = $nonce_action;
@@ -53,10 +54,11 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * Every meta box is registered with this method as its callback, 
 		 * and then delegates to the appropriate view.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	WP_Post $post 		The post object.
 		 * @param 	array $args 		The arguments passed to the meta box, including the view to render.
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function metabox_display( WP_Post $post, array $args ) {	
 			if ( ! isset( $args['args']['view'] ) ) {
@@ -72,9 +74,10 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		/**
 		 * Display a metabox with the given view.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $view 		The view to render.
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function display( $view, $view_args ) {		
 			/**
@@ -101,9 +104,10 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * all of which are arrays with a 'priority' key and a 'view' 
 		 * key.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $fields
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function display_fields( array $fields ) {
 			/**
@@ -125,9 +129,10 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 *
 		 * Hat tip Tom McFarlin: http://tommcfarlin.com/wordpress-meta-boxes-each-component/
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	integer $post_id 	The current post being saved.
 		 * @return 	boolean 			True if the user can save the information
-		 * @since 	1.0.0
 		 */
 		public function user_can_save( $post_id ) {
 		    $is_autosave = wp_is_post_autosave( $post_id );

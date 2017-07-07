@@ -24,9 +24,10 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 		/**
 		 * Display the shortcode output. This is the callback method for the campaigns shortcode.
 		 *
+		 * @since  1.0.0
+		 *
 		 * @param  array $atts The user-defined shortcode attributes.
 		 * @return string
-		 * @since  1.0.0
 		 */
 		public static function display( $atts ) {
 			$default = array(
@@ -78,9 +79,10 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 		/**
 		 * Return campaigns to display in the campaigns shortcode.
 		 *
+		 * @since  1.0.0
+		 *
 		 * @param  array $args The query arguments to be used to retrieve campaigns.
 		 * @return WP_Query
-		 * @since  1.0.0
 		 */
 		public static function get_campaigns( $args ) {
 			$query_args = array(

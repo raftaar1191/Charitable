@@ -15,9 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Clear the campaign page cache after a donation is received.
  *
+ * @since   1.4.18
+ *
  * @param   int $campaign_id The campaign ID.
  * @return  void
- * @since   1.4.18
  */
 function charitable_compat_w3tc_clear_campaign_cache( $campaign_id ) {
 	w3tc_flush_post( $campaign_id );
@@ -34,8 +35,9 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_cam
  *
  * @see 	https://github.com/Charitable/Charitable/issues/347
  *
- * @return 	void
  * @since 	1.4.18
+ *
+ * @return 	void
  */
 function charitable_compat_w3tc_turn_off_donation_cache() {
 	define( 'DONOTCACHEDB', true );

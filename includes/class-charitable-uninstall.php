@@ -42,8 +42,9 @@ class Charitable_Uninstall {
 	/**
 	 * Remove plugin-specific roles.
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	private function remove_caps() {
 		$roles = new Charitable_Roles();
@@ -53,8 +54,9 @@ class Charitable_Uninstall {
 	/**
 	 * Remove post objects created by Charitable.
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	private function remove_post_data() {
 		foreach ( array( 'campaign', 'donation' ) as $post_type ) {
@@ -72,8 +74,9 @@ class Charitable_Uninstall {
 	/**
 	 * Remove the custom tables added by Charitable.  
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	private function remove_tables() {
 		global $wpdb;		

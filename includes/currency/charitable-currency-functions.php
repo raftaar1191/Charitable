@@ -15,8 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Return currency helper class.
  *
- * @return  Charitable_Currency
  * @since   1.0.0
+ *
+ * @return  Charitable_Currency
  */
 function charitable_get_currency_helper() {
 	return Charitable_Currency::get_instance();
@@ -25,8 +26,9 @@ function charitable_get_currency_helper() {
 /**
  * Return the site currency.
  *
- * @return  string
  * @since   1.0.0
+ *
+ * @return  string
  */
 function charitable_get_currency() {
 	return charitable_get_option( 'currency', 'AUD' );
@@ -35,9 +37,10 @@ function charitable_get_currency() {
 /**
  * Formats the monetary amount.
  *
+ * @since   1.1.5
+ *
  * @param   string $amount The amount to be formatted.
  * @return  string
- * @since   1.1.5
  */
 function charitable_format_money( $amount ) {
 	return charitable_get_currency_helper()->get_monetary_amount( $amount );
@@ -46,9 +49,10 @@ function charitable_format_money( $amount ) {
 /**
  * Sanitize an amount, converting it into a float.
  *
+ * @since   1.4.0
+ *
  * @param   string $amount The amount to be sanitized.
  * @return  float|WP_Error
- * @since   1.4.0
  */
 function charitable_sanitize_amount( $amount ) {
 	return charitable_get_currency_helper()->sanitize_monetary_amount( $amount );

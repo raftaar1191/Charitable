@@ -17,9 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Returns the given campaign.
  *
+ * @since   1.0.0
+ *
  * @param   int     $campaign_id
  * @return  Charitable_Campaign
- * @since   1.0.0
  */
 function charitable_get_campaign( $campaign_id ) {
 	return new Charitable_Campaign( $campaign_id ); // @todo FILTER this
@@ -28,8 +29,9 @@ function charitable_get_campaign( $campaign_id ) {
 /**
  * Returns the current campaign.
  *
- * @return  Charitable_Campaign
  * @since   1.0.0
+ *
+ * @return  Charitable_Campaign
  */
 function charitable_get_current_campaign() {
 	return charitable_get_request()->get_current_campaign();
@@ -38,8 +40,9 @@ function charitable_get_current_campaign() {
 /**
  * Returns the current campaign ID.
  *
- * @return  int
  * @since   1.0.0
+ *
+ * @return  int
  */
 function charitable_get_current_campaign_id() {
 	return charitable_get_request()->get_current_campaign_id();
@@ -48,9 +51,10 @@ function charitable_get_current_campaign_id() {
 /**
  * Returns whether the current user is the creator of the given campaign.
  *
+ * @since   1.0.0
+ *
  * @param   int     $campaign_id
  * @return  boolean
- * @since   1.0.0
  */
 function charitable_is_current_campaign_creator( $campaign_id = null ) {
 	if ( is_null( $campaign_id ) ) {

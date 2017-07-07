@@ -34,10 +34,11 @@ class Charitable_Template_Part {
 	/**
 	 * Class constructor.
 	 *
+	 * @since 	1.0.0
+	 *
 	 * @param 	string $slug
 	 * @param 	string $name 	Optional name.
 	 * @return 	void
-	 * @since 	1.0.0
 	 */
 	public function __construct($slug, $name = "" ) {
 		$this->slug = $slug;
@@ -49,8 +50,9 @@ class Charitable_Template_Part {
 	/**
 	 * Returns the array of template names.
 	 *
-	 * @return 	array
 	 * @since 	1.0.0
+	 *
+	 * @return 	array
 	 */
 	private function get_template_names() {
 		$names = array(

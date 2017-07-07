@@ -34,8 +34,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @param   array   $objects
 		 * @since   1.0.0
+		 *
+		 * @param   array   $objects
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -46,8 +47,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @return  string
 		 * @since   1.0.3
+		 *
+		 * @return  string
 		 */
 		public static function get_email_id() {
 			return self::ID;
@@ -56,9 +58,10 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Static method that is fired right after a donation is completed, sending the donation receipt.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
-		 * @since   1.0.0
 		 */
 		public static function send_with_donation_id( $donation_id ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
@@ -105,8 +108,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the recipient for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_recipient() {
 			if ( ! $this->has_valid_donation() ) {
@@ -119,8 +123,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_subject() {
 			return apply_filters( 'charitable_email_donation_receipt_default_subject', __( 'Thank you for your donation', 'charitable' ), $this );
@@ -129,8 +134,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_headline() {
 			return apply_filters( 'charitable_email_donation_receipt_default_headline', __( 'Your Donation Receipt', 'charitable' ), $this );
@@ -139,8 +145,9 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_body() {
 			ob_start();

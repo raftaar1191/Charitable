@@ -71,9 +71,10 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Return the format for the given column.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $column
 		 * @return 	%s, %d or %f
-		 * @since 	1.0.0
 		 */
 		public function get_column_format( $column ) {
 			$columns = $this->get_columns();
@@ -139,8 +140,9 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Count all rows.
 		 *
-		 * @return 	int
 		 * @since 	1.0.0
+		 *
+		 * @return 	int
 		 */
 		public function count_all() {
 			global $wpdb;
@@ -150,8 +152,9 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Count all rows that certain criteria.
 		 *
-		 * @return 	int
 		 * @since 	1.0.0
+		 *
+		 * @return 	int
 		 */
 		public function count_by( $column, $column_value ) {
 			global $wpdb;
@@ -201,10 +204,11 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * Update a row
 		 *
 		 * @global 	WPDB $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param 	int 	$row_id
 		 * @param 	array 	$data
 		 * @param 	string 	$where 	Column used in where argument.
-		 * @since   1.0.0
 		 * @return  bool
 		 */
 		public function update( $row_id, $data = array(), $where = '' ) {
@@ -244,8 +248,9 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		/**
 		 * Delete a row identified by the primary key
 		 *
-		 * @param 	int 	$row_id
 		 * @since   1.0.0
+		 *
+		 * @param 	int 	$row_id
 		 * @return  bool
 		 */
 		public function delete( $row_id = 0 ) {
@@ -263,9 +268,10 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 * Delete a row identified by a specific column.
 		 *
 		 * @global 	WPDB $wpdb
+		 * @since   1.2.0
+		 *
 		 * @param 	string $column
 		 * @param 	mixed $row_id
-		 * @since   1.2.0
 		 * @return  bool
 		 */
 		public function delete_by( $column, $row_id = 0 ) {
@@ -280,8 +286,9 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 	     * Create the table.
 	     *
 	     * @global  $wpdb
-	     * @param 	string 	$sql
 	     * @since   1.0.0
+	     *
+	     * @param 	string 	$sql
 	     */
 	    protected function _create_table( $sql ) {
 	        global $wpdb;

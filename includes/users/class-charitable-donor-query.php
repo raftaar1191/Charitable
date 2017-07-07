@@ -24,8 +24,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Create new query object.
 		 *
-		 * @param   array $args Query arguments.
 		 * @since   1.0.0
+		 *
+		 * @param   array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
 			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
@@ -51,8 +52,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Return list of donor IDs together with the number of donations they have made.
 		 *
-		 * @return  object[]
 		 * @since   1.0.0
+		 *
+		 * @return  object[]
 		 */
 		public function get_donors() {
 			$records = $this->query();
@@ -76,8 +78,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up fields query argument.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function setup_fields() {
 			if ( ! $this->get( 'distinct_donors', true ) ) {
@@ -99,8 +102,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up orderby query argument.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function setup_orderby() {
 			$orderby = $this->get( 'orderby', false );
@@ -127,8 +131,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up query grouping.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function setup_grouping() {
 			if ( ! $this->get( 'distinct_donors', false ) ) {
@@ -143,8 +148,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Remove any hooks that have been attached by the class to prevent contaminating other queries.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function unhook_callbacks() {
 			remove_action( 'charitable_pre_query',     array( $this, 'setup_fields' ) );
@@ -169,8 +175,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up callbacks for WP_Query filters.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		protected function prepare_query() {
 			add_action( 'charitable_pre_query',   array( $this, 'setup_fields' ) );

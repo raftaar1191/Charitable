@@ -81,8 +81,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Create the session.
 		 *
-		 * @return  WP_Session
 		 * @since   1.4.17
+		 *
+		 * @return  WP_Session
 		 */
 		public function init() {
 			$this->session = WP_Session::get_instance();
@@ -93,8 +94,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 	     * Returns and/or create the single instance of this class.
 	     *
-	     * @return  Charitable_Session
 	     * @since   1.2.0
+	     *
+	     * @return  Charitable_Session
 	     */
 	    public static function get_instance() {
 	        if ( is_null( self::$instance ) ) {
@@ -107,9 +109,10 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return a session variable.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $key Session variable key.
 		 * @return 	mixed Session variable
-		 * @since 	1.0.0
 		 */
 		public function get( $key ) {
 			$key = sanitize_key( $key );
@@ -119,10 +122,11 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set a session variable.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string $key   Session variable key.
 		 * @param 	mixed  $value The value of the session variable.
 		 * @return 	mixed The session variable value.
-		 * @since 	1.0.0
 		 */
 		public function set( $key, $value ) {
 			$key = sanitize_key( $key );
@@ -139,8 +143,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the length of the cookie session to 24 hours.
 		 *
-		 * @return 	int
 		 * @since 	1.0.0
+		 *
+		 * @return 	int
 		 */
 		public function set_session_length() {
 			if ( ! defined( 'DAY_IN_SECONDS' ) ) {
@@ -153,8 +158,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the cookie expiration variant time to 23 hours.
 		 *
-		 * @return 	int
 		 * @since 	1.0.0
+		 *
+		 * @return 	int
 		 */
 		public function set_session_expiration_variant_length() {
 			if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
@@ -167,10 +173,11 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Add a donation to a campaign to the session.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	int $campaign_id Campaign ID.
 		 * @param 	int $amount 	 Donation amount.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function add_donation( $campaign_id, $amount ) {
 			$donations = $this->get( 'donations' );
@@ -186,9 +193,10 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Remove a donation from the session.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	int $campaign_id Campaign ID.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function remove_donation( $campaign_id ) {
 			$donations = $this->get( 'donations' );
@@ -203,9 +211,10 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return the donation in session for a campaign.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	int $campaign_id The campaign ID.
 		 * @return  false|array
-		 * @since   1.0.0
 		 */
 		public function get_donation_by_campaign( $campaign_id ) {
 			$donations = $this->get( 'donations' );
@@ -215,9 +224,10 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Store the donation key in the session, to ensure the user can access their receipt.
 		 *
+		 * @since   1.1.2
+		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  void
-		 * @since   1.1.2
 		 */
 		public function add_donation_key( $donation_key ) {
 			$keys = $this->get( 'donation-keys' );
@@ -234,9 +244,10 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Checks whether the donation key is stored in the session.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  boolean
-		 * @since   1.0.0
 		 */
 		public function has_donation_key( $donation_key ) {
 			$keys = $this->get( 'donation-keys' );
@@ -251,8 +262,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Add the all notices to the session.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function add_notices() {
 			$this->set( 'notices', charitable_get_notices()->get_notices() );
@@ -261,8 +273,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return any notices set in the session.
 		 *
-		 * @return 	array Session variable
 		 * @since 	1.4.0
+		 *
+		 * @return 	array Session variable
 		 */
 		public function get_notices() {
 			$notices = $this->get( 'notices' );
@@ -282,8 +295,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Returns the session ID.
 		 *
-		 * @return 	string Session ID
 		 * @since 	1.3.5
+		 *
+		 * @return 	string Session ID
 		 */
 		public function get_session_id() {
 			return $this->session->session_id;
@@ -292,8 +306,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Determines if we should start sessions
 		 *
-		 * @return  boolean
 		 * @since   1.4.17
+		 *
+		 * @return  boolean
 		 */
 		public function should_start_session() {
 
@@ -323,8 +338,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * These are the URIs where we never start sessions
 		 *
-		 * @return  array
 		 * @since   1.4.17
+		 *
+		 * @return  array
 		 */
 		public function get_blacklist() {
 

@@ -42,8 +42,9 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Print the widget contents.
 		 *
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public static function display() {
 	?>        
@@ -56,8 +57,9 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Return the content to display inside the widget.
 		 *
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public static function get_content() {
 			charitable_admin_view( 'dashboard-widgets/donations-widget' );

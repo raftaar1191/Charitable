@@ -60,8 +60,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @param   mixed[] $objects
 		 * @since 	1.4.0
+		 *
+		 * @param   mixed[] $objects
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -74,8 +75,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @return  string
 		 * @since 	1.4.0
+		 *
+		 * @return  string
 		 */
 		public static function get_email_id() {
 			return self::ID;
@@ -84,8 +86,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
 		 *
-		 * @return  array
 		 * @since   1.4.0
+		 *
+		 * @return  array
 		 */
 		public function get_fields() {
 			return apply_filters( 'charitable_email_content_fields', array(
@@ -111,8 +114,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
-		 * @return  string|WP_Error|false If the reset key could not be generated, an error is returned.
 		 * @since   1.4.0
+		 *
+		 * @return  string|WP_Error|false If the reset key could not be generated, an error is returned.
 		 */
 		public function get_reset_link() {
 			if ( ! isset( $this->reset_link ) ) {
@@ -149,8 +153,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
-		 * @return  string
 		 * @since   1.4.0
+		 *
+		 * @return  string
 		 */
 		public function get_user_login() {
 			if ( ! isset( $this->user ) || ! is_a( $this->user, 'WP_User' ) ) {
@@ -163,8 +168,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		* Return the recipient for the email.
 		*
-		* @return  string
 		* @since   1.0.0
+		*
+		* @return  string
 		*/
 		public function get_recipient() {
 			if ( ! isset( $this->user ) || ! is_a( $this->user, 'WP_User' ) ) {
@@ -177,8 +183,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @return  string
 		 * @since 	1.4.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_subject() {
 			return __( 'Password Reset for [charitable_email show=site_name]', 'charitable' );
@@ -187,8 +194,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @return  string
 		 * @since 	1.4.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_headline() {
 			return apply_filters( 'charitable_email_password_reset_default_headline', __( 'Reset your password', 'charitable' ), $this );
@@ -197,8 +205,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
 		 * @since 	1.4.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_body() {
 			ob_start();

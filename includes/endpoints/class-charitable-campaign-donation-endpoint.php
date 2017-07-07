@@ -29,8 +29,9 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @return 	string
 		 * @since 	1.5.0
+		 *
+		 * @return 	string
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -49,9 +50,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * Return the endpoint URL.
 		 *
 		 * @global 	WP_Rewrite $wp_rewrite
+		 * @since   1.5.0
+		 *
 		 * @param 	array      $args
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
 
@@ -78,9 +80,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @global  WP_Query $wp_query
+		 * @since   1.5.0
+		 *
 		 * @param 	array    $args
 		 * @return  boolean
-		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {
 
@@ -106,9 +109,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Return the template to display for this endpoint.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $template The default template.
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		public function get_template( $template ) {
 
@@ -146,9 +150,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Get the content to display for the endpoint.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $content
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		public function get_content( $content ) {
 

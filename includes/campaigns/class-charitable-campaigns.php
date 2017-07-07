@@ -33,9 +33,10 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * Return WP_Query object with predefined defaults to query only campaigns.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args
 		 * @return 	WP_Query
-		 * @since 	1.0.0
 		 */
 		public static function query( $args = array() ) {
 			$defaults = array(
@@ -51,9 +52,10 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * Returns a WP_Query that will return active campaigns, ordered by the date they're ending.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return	WP_Query
-		 * @since 	1.0.0
 		 */
 		public static function ordered_by_ending_soon( $args = array() ) {
 			$defaults = array(
@@ -79,9 +81,10 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * Returns a WP_Query that will return campaigns, ordered by the amount they raised.
 		 *
 		 * @global 	$wpdb
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return 	WP_Query
-		 * @since 	1.0.0
 		 * @todo
 		 */
 		public static function ordered_by_amount( $args = array() ) {
@@ -111,9 +114,10 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string $join_statement
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public static function join_campaign_donations_table( $join_statement ) {
 			global $wpdb;
@@ -134,8 +138,9 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to change the group by parameter of the campaigns query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public static function groupby_campaign_id() {
 			global $wpdb;
@@ -145,10 +150,11 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to change the ordering of the campaigns query, to order by the amount donated.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string   $orderby The current orderby value.
 		 * @param 	WP_Query $wp_query The WP_Query object.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public static function orderby_campaign_donation_amount( $orderby, WP_Query $wp_query ) {
 			return 'COALESCE(SUM(cd.amount), 0) ' . $wp_query->get( 'order' );

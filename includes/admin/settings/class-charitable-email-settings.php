@@ -32,8 +32,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Email_Settings
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Email_Settings
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -54,8 +55,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns all the payment email settings fields.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function add_email_fields() {
 			if ( ! charitable_is_settings_view( 'emails' ) ) {
@@ -105,8 +107,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add settings for each individual payment email.
 		 *
-		 * @return  array[]
 		 * @since   1.0.0
+		 *
+		 * @return  array[]
 		 */
 		public function add_individual_email_fields( $fields ) {
 			foreach ( charitable_get_helper( 'emails' )->get_available_emails() as $email ) {
@@ -120,9 +123,10 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add email keys to the settings groups.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string[] $groups
 		 * @return  string[]
-		 * @since   1.0.0
 		 */
 		public function add_email_settings_dynamic_groups( $groups ) {
 			foreach ( charitable_get_helper( 'emails' )->get_available_emails() as $email_key => $email_class ) {
@@ -139,8 +143,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Display table with emails.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function render_emails_table( $args ) {
 			charitable_admin_view( 'settings/emails', $args );
@@ -149,8 +154,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Checks whether we're looking at an individual email's settings page.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		private function is_individual_email_settings_page() {
 			return isset( $_GET['edit_email'] );
@@ -159,8 +165,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns the helper class of the email we're editing.
 		 *
-		 * @return  Charitable_Email|false
 		 * @since   1.0.0
+		 *
+		 * @return  Charitable_Email|false
 		 */
 		private function get_current_email_class() {
 			$email = charitable_get_helper( 'emails' )->get_email( $_GET['edit_email'] );

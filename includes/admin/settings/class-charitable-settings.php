@@ -48,8 +48,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Settings
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Settings
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -62,8 +63,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return the array of tabs used on the settings page.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		public function get_sections() {
 
@@ -79,9 +81,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Optionally add the extensions tab.
 		 *
+		 * @since   1.3.0
+		 *
 		 * @param   string[] $tabs
 		 * @return  string[]
-		 * @since   1.3.0
 		 */
 		public function maybe_add_extensions_tab( $tabs ) {
 			$actual_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general';
@@ -111,8 +114,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Register setting.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function register_settings() {
 			if ( ! charitable_is_settings_view() ) {
@@ -160,9 +164,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Sanitize submitted settings before saving to the database.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $values
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function sanitize_settings( $values ) {
 			$old_values = get_option( 'charitable_settings', array() );
@@ -183,10 +188,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			 * Filter sanitized settings.
 			 *
 			 * @hook 	charitable_save_settings
+			 * @since 	1.0.0
+			 *
 			 * @param 	array $values     All values, merged.
 			 * @param 	array $new_values Newly submitted values.
 			 * @param 	array $old_values Old settings.
-			 * @since 	1.0.0
 			 */
 			$values = apply_filters( 'charitable_save_settings', $values, $new_values, $old_values );
 
@@ -198,10 +204,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Checkbox settings should always be either 1 or 0.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed       $value
 		 * @param   array       $field
 		 * @return  boolean
-		 * @since   1.0.0
 		 */
 		public function sanitize_checkbox_value( $value, $field ) {
 			if ( isset( $field['type'] ) && 'checkbox' == $field['type'] ) {
@@ -214,9 +221,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Render field. This is the default callback used for all fields, unless an alternative callback has been specified.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array       $args
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function render_field( $args ) {
 			$field_type = isset( $args['type'] ) ? $args['type'] : 'text';
@@ -227,8 +235,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Returns an array of all pages in the id=>title format.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		public function get_pages() {
 			$pages = wp_cache_get( 'filtered_static_pages', 'charitable' );
@@ -258,11 +267,12 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Add an update message.
 		 *
+		 * @since   1.4.6
+		 *
 		 * @param 	string  $message
 		 * @param 	string  $type
 		 * @param 	boolean $dismissible
 		 * @return  string[]
-		 * @since   1.4.6
 		 */
 		public function add_update_message( $message, $type = 'error', $dismissible = true ) {
 			if ( ! in_array( $type, array( 'error', 'success', 'warning', 'info' ) ) ) {
@@ -275,10 +285,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Recursively add settings fields, given an array.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array   $fields
 		 * @param   string  $section_key
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		private function register_field( $field, $keys ) {
 			$section_id = 'charitable_settings_' . $keys[0];
@@ -312,10 +323,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return the label for the given field.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array   $field
 		 * @param   string  $key
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		private function get_field_label( $field, $key ) {
 			$label = '';
@@ -334,9 +346,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return a space separated string of classes for the given field.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array   $field
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		private function get_field_classes( $field ) {
 			$classes = array( 'charitable-settings-field' );
@@ -355,8 +368,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @uses    charitable_settings_fields
 		 * @see     Charitable_Settings::register_setting()
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		private function get_fields() {
 			/**
@@ -376,12 +390,13 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Get the submitted value for a particular setting.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $key       The key of the setting being saved.
 		 * @param   array  $field     The setting field.
 		 * @param   array  $submitted The submitted values.
 		 * @param 	string $section   The section being saved.
 		 * @return  mixed|null        Returns null if the value was not submitted or is not applicable.
-		 * @since   1.0.0
 		 */
 		private function get_setting_submitted_value( $key, $field, $submitted, $section ) {
 			$value = null;
@@ -419,12 +434,13 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			 * specific setting, used the filter below instead.
 			 *
 			 * @hook 	charitable_sanitize_value
+			 * @since 	1.0.0
+			 *
 			 * @param 	mixed  $value     The current setting value.
 			 * @param 	array  $field     The field configuration.
 			 * @param   array  $submitted All submitted data.
 			 * @param 	string $key       The setting key.
 			 * @param 	string $section   The section being saved.
-			 * @since 	1.0.0
 			 */
 			$value = apply_filters( 'charitable_sanitize_value', $value, $field, $submitted, $key, $section );
 
@@ -432,10 +448,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			 * Sanitize the setting value.
 			 *
 			 * @hook 	charitable_sanitize_value_{$section}_{$key}
+			 * @since 	1.5.0
+			 *
 			 * @param 	mixed  $value     The current setting value.
 			 * @param 	array  $field     The field configuration.
 			 * @param   array  $submitted All submitted data.
-			 * @since 	1.5.0
 			 */
 			return apply_filters( 'charitable_sanitize_value_' . $section . '_' . $key, $value, $field, $submitted );
 		}
@@ -443,10 +460,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return the submitted values for the given section.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $section   The section being edited.
 		 * @param   array  $submitted The submitted values.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		private function get_section_submitted_values( $section, $submitted ) {
 			$values = array();
@@ -478,8 +496,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Return list of dynamic groups.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		private function get_dynamic_groups() {
 			return apply_filters( 'charitable_dynamic_groups', array() );
@@ -488,10 +507,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Returns whether the given key indicates the start of a new section of the settings.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string  $section
 		 * @param   array   $submitted
 		 * @return  boolean
-		 * @since   1.0.0
 		 */
 		private function is_dynamic_group( $composite_key ) {
 			return array_key_exists( $composite_key, $this->get_dynamic_groups() );
@@ -502,10 +522,11 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Returns a composite key, given a section and submitted values.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $section
 		 * @param   array  $submitted
 		 * @return  string
-		 * @since   1.0.0
 		 *
 		 * @deprecated 1.5.0
 		 */

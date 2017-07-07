@@ -40,8 +40,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @param   mixed[]  $objects
 		 * @since   1.0.0
+		 *
+		 * @param   mixed[]  $objects
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -52,8 +53,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @return  string
 		 * @since   1.0.3
+		 *
+		 * @return  string
 		 */
 		public static function get_email_id() {
 			return self::ID;
@@ -62,9 +64,10 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Static method that is fired right after a donation is completed, sending the donation receipt.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
-		 * @since   1.0.0
 		 */
 		public static function send_with_donation_id( $donation_id ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
@@ -111,8 +114,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_recipient() {
 			return get_option( 'admin_email' );
@@ -121,8 +125,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_subject() {
 			return __( 'You have received a new donation', 'charitable' );
@@ -131,8 +136,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_headline() {
 			return apply_filters( 'charitable_email_donation_receipt_default_headline', __( 'New Donation', 'charitable' ), $this );
@@ -141,8 +147,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_body() {
 			ob_start();

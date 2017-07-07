@@ -55,8 +55,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   array       $args       User-defined shortcode attributes.
 		 * @since   1.0.0
+		 *
+		 * @param   array       $args       User-defined shortcode attributes.
 		 */
 		public function __construct( $args = array() ) {
 			$this->id = uniqid();
@@ -67,8 +68,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the arguments passed to the shortcode.
 		 *
-		 * @return  mixed[]
 		 * @since   1.4.0
+		 *
+		 * @return  mixed[]
 		 */
 		public function get_shortcode_args() {
 			return $this->shortcode_args;
@@ -77,8 +79,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Profile fields to be displayed.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_user_registration_fields', array(
@@ -113,9 +116,10 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the registration
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	Charitable_Form 	$form
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
 			$ret = parent::add_hidden_fields( $form );
@@ -148,8 +152,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Update registration after form submission.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public static function save_registration() {
 			$form = new Charitable_Registration_Form();
@@ -197,8 +202,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the link to the login page, or false if we are not going to display it.
 		 *
-		 * @return  false|string
 		 * @since   1.4.2
+		 *
+		 * @return  false|string
 		 */
 		public function get_login_link() {
 

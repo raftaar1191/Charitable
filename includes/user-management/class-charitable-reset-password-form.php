@@ -58,8 +58,9 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @param   array $args User-defined shortcode attributes.
 		 * @since   1.4.0
+		 *
+		 * @param   array $args User-defined shortcode attributes.
 		 */
 		public function __construct( $args = array() ) {
 			$this->id = uniqid();
@@ -70,9 +71,10 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	Charitable_Form $form The form object.
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
 			$ret = parent::add_hidden_fields( $form );
@@ -90,8 +92,9 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset password fields to be displayed.
 		 *
-		 * @return  array
 		 * @since   1.4.0
+		 *
+		 * @return  array
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_reset_password_fields', array(
@@ -125,8 +128,9 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset the password.
 		 *
-		 * @return  bool|WP_Error True: when finish. WP_Error on error
 		 * @since   1.4.0
+		 *
+		 * @return  bool|WP_Error True: when finish. WP_Error on error
 		 */
 		public static function reset_password() {
 
@@ -178,8 +182,9 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Get the reset key and login from the cookie.
 		 *
-		 * @return  void
 		 * @since   1.4.0
+		 *
+		 * @return  void
 		 */
 		protected function parse_reset_key() {
 

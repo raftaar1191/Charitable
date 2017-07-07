@@ -29,8 +29,9 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @return 	string
 		 * @since 	1.5.0
+		 *
+		 * @return 	string
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -40,9 +41,10 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		 * Return the endpoint URL.
 		 *
 		 * @global 	WP_Rewrite $wp_rewrite
+		 * @since   1.5.0
+		 *
 		 * @param 	array      $args
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
 
@@ -60,9 +62,10 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @global  WP_Post $post
+		 * @since   1.5.0
+		 *
 		 * @param 	array   $args
 		 * @return  boolean
-		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {
 

@@ -53,8 +53,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Register the page.
 		 *
-		 * @return  void
 		 * @since   1.3.0
+		 *
+		 * @return  void
 		 */
 		public function register_page() {
 			add_dashboard_page(
@@ -69,8 +70,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Remove the page from the dashboard menu.
 		 *
-		 * @return  void
 		 * @since   1.3.0
+		 *
+		 * @return  void
 		 */
 		public function remove_page_from_menu() {
 			remove_submenu_page( 'index.php', 'charitable-upgrades' );
@@ -79,8 +81,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Render the page.
 		 *
-		 * @return  void
 		 * @since   1.3.0
+		 *
+		 * @return  void
 		 */
 		public function render_page() {
 			charitable_admin_view( 'upgrades-page/page', array( 'page' => $this ) );
@@ -89,8 +92,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the current upgrade action.
 		 *
-		 * @return  false|string False if no action was specified.
 		 * @since   1.3.0
+		 *
+		 * @return  false|string False if no action was specified.
 		 */
 		public function get_action() {
 			if ( ! isset( $_GET['charitable-upgrade'] ) ) {
@@ -103,8 +107,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the current upgrade step.
 		 *
-		 * @return  int
 		 * @since   1.3.0
+		 *
+		 * @return  int
 		 */
 		public function get_step() {
 			if ( ! isset( $_GET['step'] ) ) {
@@ -117,8 +122,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the total number of records to be updated.
 		 *
-		 * @return  false|int
 		 * @since   1.3.0
+		 *
+		 * @return  false|int
 		 */
 		public function get_total() {
 			if ( ! isset( $_GET['total'] ) ) {
@@ -131,8 +137,9 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the
 		 *
-		 * @return  int
 		 * @since   1.3.0
+		 *
+		 * @return  int
 		 */
 		public function get_number() {
 			if ( ! isset( $_GET['number'] ) ) {
@@ -145,10 +152,11 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the total number of steps.
 		 *
+		 * @since   1.3.0
+		 *
 		 * @param   int $total
 		 * @param   int $number
 		 * @return  int
-		 * @since   1.3.0
 		 */
 		public function get_steps( $total, $number ) {
 			return round( ( $total / $number ), 0 );

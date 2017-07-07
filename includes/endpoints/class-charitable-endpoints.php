@@ -49,9 +49,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Register an endpoint.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	Charitable_Endpoint $endpoint
 		 * @return  void
-		 * @since   1.5.0
 		 */
 		public function register( Charitable_Endpoint $endpoint ) {
 
@@ -76,10 +77,11 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Get the permalink/URL of a particular endpoint.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
 		 * @return  string|false
-		 * @since   1.5.0
 		 */
 		public function get_page_url( $endpoint, $args = array() ) {
 
@@ -106,10 +108,11 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Checks if we're currently viewing a particular endpoint/page.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
 		 * @return  boolean
-		 * @since   1.5.0
 		 */
 		public function is_page( $endpoint, $args = array() ) {
 
@@ -136,10 +139,11 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Set up the template for an endpoint.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $endpoint
 		 * @param 	string $default_template The default template to be used if the endpoint doesn't return its own.
 		 * @return  string $template
-		 * @since   1.5.0
 		 */
 		public function get_endpoint_template( $endpoint, $default_template ) {
 
@@ -164,8 +168,9 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Set up the rewrite rules for the site.
 		 *
-		 * @return  void
 		 * @since   1.5.0
+		 *
+		 * @return  void
 		 */
 		public function setup_rewrite_rules() {
 
@@ -181,9 +186,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Add custom query vars.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string[] $vars
 		 * @return  string[]
-		 * @since   1.5.0
 		 */
 		public function add_query_vars( $vars ) {
 
@@ -198,9 +204,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Load templates for our endpoints.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $template The default template.
 		 * @return  void
-		 * @since   1.5.0
 		 */
 		public function template_loader( $template ) {
 
@@ -227,10 +234,11 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Get the content to display for the endpoint we're viewing.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string       $content
 		 * @param 	false|string $endpoint Fetch the content for a specific endpoint.
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		public function get_content( $content, $endpoint = false ) {
 
@@ -249,9 +257,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Add any custom body classes defined for the endpoint we're viewing.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string[] $classes
 		 * @return  string[]
-		 * @since   1.5.0
 		 */
 		public function add_body_classes( $classes ) {
 
@@ -270,8 +279,9 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Return the current endpoint.
 		 *
-		 * @return  string|false String if we're on one of our endpoints. False otherwise.
 		 * @since   1.5.0
+		 *
+		 * @return  string|false String if we're on one of our endpoints. False otherwise.
 		 */
 		public function get_current_endpoint() {
 
@@ -299,9 +309,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * Remove _page from the endpoint (required for backwards compatibility)
 		 * and make sure donation_cancel is changed to donation_cancellation.
 		 *
+		 * @since   1.5.0
+		 *
 		 * @param 	string $endpoint
 		 * @return  string
-		 * @since   1.5.0
 		 */
 		protected function sanitize_endpoint( $endpoint ) {
 

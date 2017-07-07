@@ -76,8 +76,9 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_columns() {
 			return array(
@@ -94,8 +95,9 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Default column values.
 		 *
-		 * @return 	array
 		 * @since   1.0.0
+		 *
+		 * @return 	array
 		 */
 		public function get_column_defaults() {
 			return array(
@@ -109,9 +111,10 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Add a new benefactor object.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array 	$data
 		 * @return 	int 				Positive ID if successful. 0 if failed.
-		 * @since 	1.0.0
 		 */
 		public function insert( $data, $type = 'campaign_benefactor' ) {
 
@@ -161,11 +164,12 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Update a benefactor object.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	int 		$row_id
 		 * @param 	array 		$data
 		 * @param 	string 		$where 			Column used in where argument.
 		 * @return 	boolean
-		 * @since 	1.0.0
 		 */
 		public function update( $row_id, $data = array(), $where = '' ) {
 
@@ -188,8 +192,9 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Delete a row identified by the primary key.
 		 *
-		 * @param 	int 		$row_id
 		 * @since   1.0.0
+		 *
+		 * @param 	int 		$row_id
 		 * @return  bool
 		 */
 		public function delete( $row_id = 0 ) {
@@ -204,9 +209,10 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Get all active benefactors for a campaign.
 		 *
 		 * @global 	WPDB 		$wpdb
+		 * @since 	1.0.0
+		 *
 		 * @param 	int 		$campaign_id
 		 * @return 	Object[]
-		 * @since 	1.0.0
 		 */
 		public function get_campaign_benefactors( $campaign_id ) {
 			global $wpdb;
@@ -227,10 +233,11 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Get active benefactors for a campaign created through a specific extension.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	int 			$campaign_id
 		 * @param 	string 			$extension
 		 * @return 	Object[]|false 	False if extensions return nothing. Object otherwise.
-		 * @since 	1.0.0
 		 */
 		public function get_campaign_benefactors_by_extension( $campaign_id, $extension ) {
 			return apply_filters( 'charitable_get_campaign_benefactors', false, $campaign_id, $extension );

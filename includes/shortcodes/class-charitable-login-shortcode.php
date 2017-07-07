@@ -25,9 +25,10 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * This receives the user-defined attributes and passes the logic off to the class.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $atts User-defined shortcode attributes.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public static function display( $atts = array() ) {
 
@@ -86,9 +87,10 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		/**
 		 * Fingerprint the login form with our charitable=true hidden field.
 		 *
+		 * @since   1.4.0
+		 *
 		 * @param   string $content
 		 * @return  string
-		 * @since   1.4.0
 		 */
 		public static function add_hidden_field_to_login_form( $content, $args ) {
 
@@ -102,9 +104,10 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		/**
 		 * Return donations to display with the shortcode.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array   $args
 		 * @return  mixed[] $args
-		 * @since   1.0.0
 		 */
 		protected static function get_login_form_args( $args ) {
 			$default = array(

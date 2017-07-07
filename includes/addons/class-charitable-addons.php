@@ -25,9 +25,10 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * Load addons. This is executed before the charitable_start hook 
 		 * to allow addons to hook into that.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	Charitable 		$charitable
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public static function load( Charitable $charitable ) {
 			if ( $charitable->started() ) {
@@ -55,8 +56,9 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * This is programatically called on the charitable_activate_addon hook, 
 		 * triggered by a plugin.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		public function activate_addon( $addon ) {
 			/* This method should only be called on the charitable_activate_addon hook */
@@ -85,8 +87,9 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Load activated addons.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		public function load_addons() {
 			$active_addons = apply_filters( 'charitable_active_addons', array() );
@@ -118,8 +121,9 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Load interface and abstract classes that addons use.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		private function load_addon_dependencies() {
 			require_once( charitable()->get_path( 'includes' ) . 'addons/interface-charitable-addon.php' );
@@ -128,9 +132,10 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Return the filepath to the given addon.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string 		$addon
 		 * @return 	string
-		 * @since 	1.0.0
 		 */
 		private function get_addon_filepath( $addon ) {
 			return charitable()->get_path( 'includes' ) . "addons/{$addon}/class-{$addon}.php";
@@ -139,9 +144,10 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Get class name of addon.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	string 		$addon
 		 * @return 	string
-		 * @since 	1.0.0
 		 */
 		private function get_addon_class( $addon ) {
 			$class = str_replace( '-', ' ', $addon );

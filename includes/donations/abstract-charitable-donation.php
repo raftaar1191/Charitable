@@ -80,8 +80,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Instantiate a new donation object based off the ID.
 		 *
-		 * @param   mixed       $donation       The donation ID or WP_Post object.
 		 * @since   1.0.0
+		 *
+		 * @param   mixed       $donation       The donation ID or WP_Post object.
 		 */
 		public function __construct( $donation ) {
 			if ( is_a( $donation, 'WP_Post' ) ) {
@@ -96,9 +97,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Magic getter.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string      $key
 		 * @return  mixed
-		 * @since   1.0.0
 		 */
 		public function __get( $key ) {
 			if ( method_exists( $this, 'get_' . $key ) ) {
@@ -112,8 +114,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return the donation number. By default, this is the ID, but it can be filtered.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_number() {
 			return apply_filters( 'charitable_donation_number', $this->donation_id );
@@ -122,8 +125,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Get the donation data.
 		 *
-		 * @return  Charitable_Campaign_Donations_DB
 		 * @since   1.0.0
+		 *
+		 * @return  Charitable_Campaign_Donations_DB
 		 */
 		public function get_campaign_donations_db() {
 			if ( ! isset( $this->campaign_donations_db ) ) {
@@ -136,9 +140,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * The amount donated on this donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   boolean $sanitize Whether the value should be sanitized as a monetary amount.
 		 * @return  decimal|float|WP_Error
-		 * @since   1.0.0
 		 */
 		public function get_total_donation_amount( $sanitize = false ) {
 			$amount = $this->get_campaign_donations_db()->get_donation_total_amount( $this->donation_id );
@@ -153,8 +158,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return the campaigns donated to in this donation.
 		 *
-		 * @return  object[]
 		 * @since   1.0.0
+		 *
+		 * @return  object[]
 		 */
 		public function get_campaign_donations() {
 			if ( ! isset( $this->campaign_donations ) ) {
@@ -167,8 +173,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns an array of the campaigns that were donated to.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		public function get_campaigns() {
 			return array_map( array( $this, 'get_campaign_name' ), $this->get_campaign_donations() );
@@ -177,8 +184,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the campaign name from a campaign donation record.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_name( $campaign_donation ) {
 			return $campaign_donation->campaign_name;
@@ -187,9 +195,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return a comma separated list of the campaigns that were donated to.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   boolean $linked Whether to return the campaigns with links to the campaign pages.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function get_campaigns_donated_to( $linked = false ) {
 			$campaigns = $linked ? $this->get_campaigns_links() : $this->get_campaigns();
@@ -200,8 +209,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return a comma separated list of the campaigns that were donated to, with links to the campaigns.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 */
 		public function get_campaigns_links() {
 			$links = array();
@@ -229,10 +239,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @uses 	wp_list_pluck
 		 * @uses 	Charitable_Donation::get_campaign_donations
 		 *
+		 * @since   1.4.2
+		 *
 		 * @param 	string $taxonomy The taxonomy. Defaults to 'campaign_category'.
 		 * @param 	array  $args Optional arguments to pass to `wp_get_object_terms`
 		 * @return  string
-		 * @since   1.4.2
 		 */
 		public function get_campaign_categories_donated_to( $taxonomy = 'campaign_category', $args = array() ) {
 			$campaigns = wp_list_pluck( $this->get_campaign_donations(), 'campaign_id' );
@@ -243,9 +254,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return the date of the donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $format
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function get_date( $format = '' ) {
 			if ( empty( $format ) ) {
@@ -257,8 +269,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * The name of the gateway used to process the donation.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_gateway() {
 			return get_post_meta( $this->donation_id, 'donation_gateway', true );
@@ -267,8 +280,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return the unique donation key.
 		 *
-		 * @return  string The key identifier of the donation.
 		 * @since   1.0.0
+		 *
+		 * @return  string The key identifier of the donation.
 		 */
 		public function get_donation_key() {
 			return get_post_meta( $this->donation_id, 'donation_key', true );
@@ -277,8 +291,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return the donor data.
 		 *
-		 * @return  array The donor data.
 		 * @since   1.2.0
+		 *
+		 * @return  array The donor data.
 		 */
 		public function get_donor_data() {
 			return get_post_meta( $this->donation_id, 'donor', true );
@@ -287,8 +302,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * The public label of the gateway used to process the donation.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_gateway_label() {
 			$gateway = $this->get_gateway_object();
@@ -301,8 +317,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the gateway's object helper.
 		 *
-		 * @return  false|Charitable_Gateway
 		 * @since   1.0.0
+		 *
+		 * @return  false|Charitable_Gateway
 		 */
 		public function get_gateway_object() {
 			$class = charitable_get_helper( 'gateways' )->get_gateway( $this->get_gateway() );
@@ -317,9 +334,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * The status of this donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   boolean $label Whether to return the label. If not, returns the key.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function get_status( $label = false ) {
 			$status = $this->donation_data->post_status;
@@ -344,8 +362,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the donation ID.
 		 *
-		 * @return  int
 		 * @since   1.0.0
+		 *
+		 * @return  int
 		 */
 		public function get_donation_id() {
 			return $this->donation_id;
@@ -354,8 +373,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the donation type.
 		 *
-		 * @return  int
 		 * @since   1.4.5
+		 *
+		 * @return  int
 		 */
 		public function get_donation_type() {
 			return $this->donation_type;
@@ -364,8 +384,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the customer note attached to the donation.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_notes() {
 			return $this->donation_data->post_content;
@@ -374,8 +395,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the donor ID of the donor.
 		 *
-		 * @return  int|false
 		 * @since   1.0.0
+		 *
+		 * @return  int|false
 		 */
 		public function get_donor_id() {
 			return current( $this->get_campaign_donations() )->donor_id;
@@ -384,8 +406,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the donor who made this donation.
 		 *
-		 * @return  Charitable_Donor
 		 * @since   1.0.0
+		 *
+		 * @return  Charitable_Donor
 		 */
 		public function get_donor() {
 			if ( ! isset( $this->donor ) ) {
@@ -398,8 +421,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns the donor address.
 		 *
-		 * @return  string
 		 * @since   1.2.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_address() {
 			return $this->get_donor()->get_address();
@@ -408,8 +432,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return an array of meta relating to the donation.
 		 *
-		 * @return  mixed[]
 		 * @since   1.2.0
+		 *
+		 * @return  mixed[]
 		 */
 		public function get_donation_meta() {
 			$donor            = $this->get_donor_data();
@@ -458,8 +483,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Checks whether the donation is from the current user.
 		 *
-		 * @return  boolean
 		 * @since   1.4.0
+		 *
+		 * @return  boolean
 		 */
 		public function is_from_current_user() {
 
@@ -487,9 +513,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Add a message to the donation log.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $message
 		 * @return  void
-		 * @since   1.0.0
 		 * @deprecated 1.3.0
 		 */
 		public function update_donation_log( $message, $deprecated_message = null ) {
@@ -513,8 +540,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Get a donation's log.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_donation_log( $donation_id = null ) {
 			if ( $donation_id ) {
@@ -533,9 +561,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @uses    wp_update_post()
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $new_status
 		 * @return  int|WP_Error The value 0 or WP_Error on failure. The donation ID on success.
-		 * @since   1.0.0
 		 */
 		public function update_status( $new_status ) {
 
@@ -576,8 +605,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 	     * Return the parent donation, if exists
 	     *
-	     * @return  int
 	     * @since   1.4.5
+	     *
+	     * @return  int
 	     */
 	    public function get_donation_plan_id() {
 	        return $this->donation_data->post_parent;
@@ -587,8 +617,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 	    /**
 	     * Return the parent donation, if exists
 	     *
-	     * @return  false|Charitable_Donation
 	     * @since   1.4.5
+	     *
+	     * @return  false|Charitable_Donation
 	     */
 	    public function get_donation_plan() {
 	    	if ( ! isset( $this->parent_donation ) ) {
@@ -614,8 +645,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return array of valid donations statuses.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 *
 		 * @deprecated 1.4.0
 		 */
@@ -627,8 +659,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns whether the donation status is valid.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 * @deprecated 1.4.0
 		 */
 		public function is_valid_donation_status( $status ) {
@@ -642,8 +675,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * By default, this is just 'charitable-completed'. However, 'charitable-preapproval'
 		 * is also counted.
 		 *
-		 * @return  string[]
 		 * @since   1.0.0
+		 *
+		 * @return  string[]
 		 * @deprecated 1.4.0
 		 */
 		public function get_approval_statuses() {
@@ -654,8 +688,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Returns whether the passed status is an confirmed status.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 * @deprecated 1.4.0
 		 */
 		public function is_approved_status( $status ) {
@@ -666,10 +701,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Sanitize meta values before they are persisted to the database.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed   $value
 		 * @param   string  $key
 		 * @return  mixed
-		 * @since   1.0.0
 		 * @deprecated 1.4.0
 		 */
 		public function sanitize_meta( $value, $key ) {
@@ -680,9 +716,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Flush the donations cache for every campaign receiving a donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int $donation_id
 		 * @return  void
-		 * @since   1.0.0
 		 * @deprecated 1.4.0
 		 */
 		public function flush_campaigns_donation_cache( $donation_id ) {
@@ -693,9 +730,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Save the gateway's transaction ID
 		 *
+		 * @since   1.4.6
+		 *
 		 * @param   string   $value
 		 * @return  bool
-		 * @since   1.4.6
 		 */
 		public function set_gateway_transaction_id( $value ) {
 			$key = '_gateway_transaction_id';
@@ -706,8 +744,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Get the gateway's transaction ID
 		 *
-		 * @return  string
 		 * @since   1.4.6
+		 *
+		 * @return  string
 		 */
 		public function get_gateway_transaction_id() {
 			if ( ! isset( $this->gateway_transaction_id ) ){

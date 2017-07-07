@@ -40,8 +40,9 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_General_Settings
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_General_Settings
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -54,9 +55,10 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		/**
 		 * Add the general tab settings fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array[] $fields
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function add_general_fields( $fields = array() ) {
 			if ( ! charitable_is_settings_view( 'general' ) ) {

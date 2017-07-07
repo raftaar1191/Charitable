@@ -19,10 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * This will first attempt to retrieve it from the object cache to prevent duplicate objects.
  *
+ * @since   1.0.0
+ *
  * @param   int     $user_id The ID of the user to retrieve.
  * @param   boolean $force Optional. Whether to force an update of the local cache from the persistent.
  * @return  Charitable_User
- * @since   1.0.0
  */
 function charitable_get_user( $user_id, $force = false ) {
 	if ( is_a( $user_id, 'WP_User' ) ) {
@@ -44,8 +45,9 @@ function charitable_get_user( $user_id, $force = false ) {
  * This is needed because the key used in forms is not always the
  * same as they key used for storing the database value.
  *
- * @return 	string[]
  * @since 	1.4.0
+ *
+ * @return 	string[]
  */
 function charitable_get_user_mapped_keys() {
 	return apply_filters( 'charitable_donor_mapped_keys', array(
@@ -71,8 +73,9 @@ function charitable_get_user_mapped_keys() {
  * @see 	wp_update_user
  * @see 	wp_insert_user
  *
- * @return 	string[]
  * @since 	1.4.0
+ *
+ * @return 	string[]
  */
 function charitable_get_user_core_keys() {
 	return array(

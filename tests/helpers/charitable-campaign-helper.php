@@ -9,8 +9,9 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Delete a campaign 
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	public function delete_campaign( $campaign_id ) {
 		wp_delete_post( $campaign_id, true );
@@ -19,9 +20,10 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign.
 	 *
+	 * @since 	1.0.0	 
+	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @since 	1.0.0	 
 	 */
 	public static function create_campaign( $args = array() ) {
 		$defaults = array(
@@ -61,10 +63,11 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign with a goal.
 	 *
+	 * @since 	1.0.0
+	 *
 	 * @param 	string 		$goal
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @since 	1.0.0
 	 */
 	public static function create_campaign_with_goal( $amount, $args = array()  ) {
 		$args['_campaign_goal'] = $amount;
@@ -74,10 +77,11 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign with an end date.
 	 *
+	 * @since 	1.0.0
+	 *
 	 * @param 	string 		$end_date
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
-	 * @since 	1.0.0
 	 */
 	public static function create_campaign_with_end_date( $end_date, $args = array() ) {
 		$args['_campaign_end_date'] = $amount;

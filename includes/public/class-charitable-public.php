@@ -32,8 +32,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Public
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Public
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -73,8 +74,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 *
 		 * This gives themes time to override the functions.
 		 *
-		 * @return  void
 		 * @since   1.2.3
+		 *
+		 * @return  void
 		 */
 		public function load_template_files() {
 			require_once( 'charitable-template-functions.php' );
@@ -84,8 +86,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Loads public facing scripts and stylesheets.
 		 *
-		 * @return 	void
 		 * @since 	1.0.0
+		 *
+		 * @return 	void
 		 */
 		public function setup_scripts() {
 
@@ -216,8 +219,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Conditionally load the donation form scripts if we're viewing the donation form.
 		 *
-		 * @return  boolean True if scripts were loaded. False otherwise.
 		 * @since   1.4.0
+		 *
+		 * @return  boolean True if scripts were loaded. False otherwise.
 		 */
 		public function maybe_enqueue_donation_form_scripts() {
 
@@ -237,8 +241,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Enqueues the donation form scripts.
 		 *
-		 * @return  void
 		 * @since   1.4.6
+		 *
+		 * @return  void
 		 */
 		public function enqueue_donation_form_scripts() {
 
@@ -252,9 +257,10 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Adds custom post classes when viewing campaign.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string[] $classes List of classes to be added with post_class().
 		 * @return  string[]
-		 * @since   1.0.0
 		 */
 		public function campaign_post_class( $classes ) {
 			$campaign = charitable_get_current_campaign();
@@ -271,10 +277,11 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Disable comments on application pages like the donation page.
 		 *
+		 * @since   1.3.0
+	 	 *
 		 * @param   boolean $open Whether comments are open.
 		 * @return  boolean
-		 * @since   1.3.0
-	 	 */
+		 */
 		public function disable_comments_on_application_pages( $open ) {
 
 			/* If open is already false, just hit return. */

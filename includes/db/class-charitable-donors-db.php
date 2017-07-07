@@ -40,9 +40,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Set up the database table name.
 		 *
-		 * @return  void
 		 * @since   1.0.0
-	 	 */
+	 	 *
+		 * @return  void
+		 */
 		public function __construct() {
 			global $wpdb;
 
@@ -78,8 +79,9 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_columns() {
 			return array(
@@ -95,8 +97,9 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Default column values.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_column_defaults() {
 			return array(
@@ -112,10 +115,11 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Add a new campaign donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array  $data Donor data to insert.
 		 * @param 	string $type Should always be 'donors'.
 		 * @return  int The ID of the inserted donor.
-		 * @since   1.0.0
 		 */
 		public function insert( $data, $type = 'donors' ) {
 			return parent::insert( $data, $type );
@@ -124,9 +128,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a user's ID, based on their donor ID.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int $donor_id The Donor ID.
 		 * @return  int
-		 * @since   1.0.0
 		 */
 		public function get_user_id( $donor_id ) {
 			$user_id = $this->get_column_by( 'user_id', 'donor_id', $donor_id );
@@ -137,9 +142,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their user ID.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int     $user_id
 		 * @return  int
-		 * @since   1.0.0
 		 */
 		public function get_donor_id( $user_id ) {
 			$donor_id = $this->get_column_by( 'donor_id', 'user_id', $user_id );
@@ -150,9 +156,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their email address.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string  $email
 		 * @return  int
-		 * @since   1.0.0
 		 */
 		public function get_donor_id_by_email( $email ) {
 			$donor_id = $this->get_column_by( 'donor_id', 'email', $email );
@@ -163,9 +170,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Count the number of donors with donations.
 		 *
-		 * @return  int
 		 * @since   1.3.4
-	 	*/
+	 	*
+		 * @return  int
+		 */
 		public function count_donors_with_donations( $statuses = array( 'charitable-completed' ) ) {
 			global $wpdb;
 

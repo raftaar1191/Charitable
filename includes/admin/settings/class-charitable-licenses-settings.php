@@ -40,8 +40,9 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Licenses_Settings
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Licenses_Settings
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -54,9 +55,10 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Optionally add the licenses tab.
 		 *
+		 * @since   1.4.7
+		 *
 		 * @param   string[] $tabs Settings tabs.
 		 * @return  string[]
-		 * @since   1.4.7
 		 */
 		public function maybe_add_licenses_tab( $tabs ) {
 
@@ -82,8 +84,9 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Add the licenses tab settings fields.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function add_licenses_fields() {
 			if ( ! charitable_is_settings_view( 'licenses' ) ) {
@@ -119,9 +122,10 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Add the licenses group.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string[] $groups Settings groups.
 		 * @return  string[]
-		 * @since   1.0.0
 		 */
 		public function add_licenses_group( $groups ) {
 			$groups['licenses'] = array();
@@ -131,8 +135,9 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Render the licenses table.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function render_licenses_table() {
 			charitable_admin_view( 'settings/licenses' );
@@ -141,10 +146,11 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Checks for updated license and invalidates status field if not set.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed[] $values The parsed values combining old values & new values.
 		 * @param   mixed[] $new_values The newly submitted values.
 		 * @return  mixed[]
-		 * @since   1.0.0
 		 */
 		public function save_license( $values, $new_values ) {
 			/* If we didn't just submit licenses, stop here. */

@@ -43,8 +43,9 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * Returns and/or create the single instance of this class.
 		 *
 		 * @global  WP_Customize_Manager $wp_customize
-		 * @return  Charitable_Customizer
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Customizer
 		 */
 		public static function start() {
 			global $wp_customize;
@@ -64,8 +65,9 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * After the customizer has finished saving each of the fields, delete the transient.
 		 *
 		 * @see     customize_save_after hook
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public function customize_save_after() {
 			delete_transient( 'charitable_custom_styles' );
@@ -155,8 +157,9 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Make sure the donation form display option is valid.
 		 *
-		 * @return  boolean
 		 * @since   1.2.0
+		 *
+		 * @return  boolean
 		 */
 		public function sanitize_donation_form_display_option( $option ) {
 			if ( ! in_array( $option, array( 'separate_page', 'same_page', 'modal' ) ) ) {
@@ -169,10 +172,11 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Adds a panel.
 		 *
+		 * @since   1.2.0
+		 *
 		 * @param   string  $panel_id
 		 * @param   array   $panel
 		 * @return  void
-		 * @since   1.2.0
 		 */
 		private function add_panel( $panel_id, $panel ) {
 			global $wp_customize;
@@ -192,10 +196,11 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Adds sections to a panel.
 		 *
+		 * @since   1.2.0
+		 *
 		 * @param   string  $panel_id
 		 * @param   array   $sections
 		 * @return  void
-		 * @since   1.2.0
 		 */
 		private function add_panel_sections( $panel_id, $sections ) {
 			global $wp_customize;
@@ -212,11 +217,12 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Adds section & settings
 		 *
+		 * @since   1.2.0
+		 *
 		 * @param   string $section_id
 		 * @param   array $section
 		 * @param   string $panel
 		 * @return  void
-		 * @since   1.2.0
 		 */
 		private function add_section( $section_id, $section, $panel ) {
 			global $wp_customize;
@@ -240,10 +246,11 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Adds settings to a given section.
 		 *
+		 * @since   1.2.0
+		 *
 		 * @param   string $section_id
 		 * @param   array $settings
 		 * @return  void
-		 * @since   1.2.0
 		 */
 		private function add_section_settings( $section_id, $settings ) {
 			global $wp_customize;
@@ -283,8 +290,9 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		/**
 		 * Load the theme-customizer.js file.
 		 *
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public function load_customizer_script() {
 			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';

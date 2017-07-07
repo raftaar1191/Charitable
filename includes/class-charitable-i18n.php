@@ -72,8 +72,9 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_i18n
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_i18n
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -86,8 +87,9 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @return  void
 		 * @since   1.1.2
+		 *
+		 * @return  void
 		 */
 		public function load_textdomain() {
 			foreach ( array( 'global', 'local' ) as $source ) {
@@ -107,9 +109,10 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Get the path to the MO file.
 		 *
+		 * @since   1.1.2
+		 *
 		 * @param   string $source Either 'local' or 'global'.
 		 * @return  string
-		 * @since   1.1.2
 		 */
 		private function get_mofile_path( $source = 'local' ) {
 			if ( 'global' == $source ) {

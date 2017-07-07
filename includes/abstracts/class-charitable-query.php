@@ -59,10 +59,11 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the query argument value for the given key.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $key      The key of the argument.
 		 * @param 	mixed  $fallback Default value to fall back to.
 		 * @return  mixed|false Returns fallback if the argument is not found.
-		 * @since   1.0.0
 		 */
 		public function get( $key, $fallback = false ) {
 			return isset( $this->args[ $key ] ) ? $this->args[ $key ] : $fallback;
@@ -71,10 +72,11 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Set the query argument for the given key.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $key   Key of argument to set.
 		 * @param   mixed  $value Value to be set.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function set( $key, $value ) {
 			$this->args[ $key ] = apply_filters( 'charitable_query_sanitize_argument_' . $key, $value, $this );
@@ -83,9 +85,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Remove the given query argument.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $key Key of argument to remove.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function remove( $key ) {
 			unset( $this->args[ $key ] );
@@ -96,8 +99,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global  WPDB $wpdb
 		 *
-		 * @return  object[]
 		 * @since   1.0.0
+		 *
+		 * @return  object[]
 		 */
 		public function query() {
 			if ( ! isset( $this->query ) ) {
@@ -121,8 +125,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the fields right after the SELECT part of the query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function fields() {
 			global $wpdb;
@@ -133,8 +138,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the FROM part of the query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function from() {
 			global $wpdb;
@@ -144,8 +150,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the JOIN part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function join() {
 			return apply_filters( 'charitable_query_join', '', $this );
@@ -154,8 +161,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the WHERE part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function where() {
 			return apply_filters( 'charitable_query_where', 'WHERE 1=1 ', $this );
@@ -164,8 +172,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the GROUPBY part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function groupby() {
 			return apply_filters( 'charitable_query_groupby', '', $this );
@@ -175,8 +184,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Return the ORDERBY part of the query.
 		 *
 		 * @global  WPBD $wpdb
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function orderby() {
 			global $wpdb;
@@ -186,8 +196,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the ORDER part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function order() {
 			return apply_filters( 'charitable_query_order', $this->get( 'order', 'DESC' ), $this );
@@ -196,8 +207,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the LIMIT part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function limit() {
 			if ( $this->show_all() ) {
@@ -210,8 +222,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the OFFSET part of the query.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function offset() {
 			if ( $this->show_all() ) {
@@ -225,9 +238,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select donor-specific fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param  	string $select_statement The default select statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function donor_fields( $select_statement ) {
 			$select_statement .= ', d.donor_id, d.user_id, d.first_name, d.last_name, d.email, d.date_joined';
@@ -237,9 +251,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Retrieve the donation ID and campaigns.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function donation_fields( $select_statement ) {
 			$select_statement .= ", cd.donation_id, GROUP_CONCAT(cd.campaign_name SEPARATOR ', ') AS campaigns, GROUP_CONCAT(cd.campaign_id SEPARATOR ',') AS campaign_ids";
@@ -249,9 +264,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select donation-specific fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function donation_calc_fields( $select_statement ) {
 			$select_statement .= ', COUNT(cd.campaign_donation_id) AS donations, SUM(cd.amount) AS amount';
@@ -261,9 +277,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Select total amount field.
 		 *
+		 * @since   1.2.0
+		 *
 		 * @param   string $select_statement The default select statement.
 		 * @return  string
-		 * @since   1.2.0
 		 */
 		public function donation_amount_sum_field( $select_statement ) {
 			$select_statement .= ', SUM(cd.amount) AS amount';
@@ -273,9 +290,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Filter query by campaign receiving the donation.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function where_campaign_is_in( $where_statement ) {
 			$campaign = $this->get( 'campaign', 0 );
@@ -302,9 +320,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Filter query by status of the post.
 		 *
 		 * @global  WPBD $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function where_status_is_in( $where_statement ) {
 			global $wpdb;
@@ -333,9 +352,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Filter query by donor ID.
 		 *
 		 * @global  WPBD $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param   string $where_statement The default where statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function where_donor_id_is_in( $where_statement ) {
 			global $wpdb;
@@ -365,9 +385,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global  WPBD $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function join_campaign_donations_table_on_campaign( $join_statement ) {
 			global $wpdb;
@@ -379,9 +400,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global  WPBD $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function join_campaign_donations_table_on_donation( $join_statement ) {
 			global $wpdb;
@@ -393,9 +415,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * A method used to join the donors table on the query.
 		 *
 		 * @global  WPBD $wpdb
+		 * @since   1.0.0
+		 *
 		 * @param   string $join_statement The default join statement.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function join_donors_table( $join_statement ) {
 			global $wpdb;
@@ -407,8 +430,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Group results by the ID.
 		 *
 		 * @global  WPBD $wpdb
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function groupby_ID() {
 			global $wpdb;
@@ -418,8 +442,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Group a query by the donor ID.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function groupby_donor_id() {
 			return 'GROUP BY cd.donor_id';
@@ -428,8 +453,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Group a query by the donation ID.
 		 *
-		 * @return  string
 		 * @since   1.4.0
+		 *
+		 * @return  string
 		 */
 		public function groupby_donation_id() {
 			return 'GROUP BY cd.donation_id';
@@ -439,8 +465,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * Order by the date of the post.
 		 *
 		 * @global  WPBD $wpdb
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function orderby_date() {
 			global $wpdb;
@@ -452,8 +479,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * This is useful when used in combination with a group statement.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function orderby_count() {
 			return 'ORDER BY COUNT(*)';
@@ -462,8 +490,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * A method used to change the ordering of the campaigns query, to order by the amount donated.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function orderby_donation_amount() {
 			return 'ORDER BY COALESCE(SUM(cd.amount), 0)';
@@ -472,8 +501,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return number of results.
 		 *
-		 * @return  int
 		 * @since   1.0.0
+		 *
+		 * @return  int
 		 */
 		public function count() {
 			return count( $this->results );
@@ -482,8 +512,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Rewind to first result.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function rewind() {
 			$this->position = 0;
@@ -492,8 +523,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return current element.
 		 *
-		 * @return  object
 		 * @since   1.0.0
+		 *
+		 * @return  object
 		 */
 		public function current() {
 			return $this->results[ $this->position ];
@@ -502,8 +534,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return current key.
 		 *
-		 * @return  int
 		 * @since   1.0.0
+		 *
+		 * @return  int
 		 */
 		public function key() {
 			return $this->position;
@@ -512,8 +545,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Advance to next item.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function next() {
 			++$this->position;
@@ -522,8 +556,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Ensure that current position is valid.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		public function valid() {
 			return isset( $this->results[ $this->position ] );
@@ -532,9 +567,10 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Add parameters to pass to the prepared query.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed $parameters Parameters to be set for the query.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function add_parameters( $parameters ) {
 			$this->parameters = array_merge( $this->parameters, $parameters );
@@ -543,8 +579,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Whether to show all results.
 		 *
-		 * @return  boolean
 		 * @since   1.1.0
+		 *
+		 * @return  boolean
 		 */
 		public function show_all() {
 			return -1 == $this->get( 'number' );
@@ -553,10 +590,11 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the correct number of placeholders given a symbol and count.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   int    $count       Number of placeholders.
 		 * @param   string $placeholder Placeholder symbol.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		protected function get_placeholders( $count = 1, $placeholder = '%s' ) {
 			$placeholders = array_fill( 0, $count, $placeholder );

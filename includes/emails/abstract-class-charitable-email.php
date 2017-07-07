@@ -90,8 +90,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Create a class instance.
 		 *
-		 * @param   mixed[] $objects Objects for the email.
 		 * @since   1.0.0
+		 *
+		 * @param   mixed[] $objects Objects for the email.
 		 */
 		public function __construct( $objects = array() ) {
 			$this->donation = isset( $objects['donation'] ) ? $objects['donation'] : null;
@@ -106,8 +107,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email name.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_name() {
 			return $this->name;
@@ -118,8 +120,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 *
 		 * If an email is required, it cannot be disabled/enabled, but it can still be edited.
 		 *
-		 * @return  boolean
 		 * @since   1.4.0
+		 *
+		 * @return  boolean
 		 */
 		public function is_required() {
 			return $this->required;
@@ -128,8 +131,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the types of objects.
 		 *
-		 * @return  string[]
 		 * @since   1.3.0
+		 *
+		 * @return  string[]
 		 */
 		public function get_object_types() {
 			return $this->object_types;
@@ -138,8 +142,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the donation object.
 		 *
-		 * @return  null|Charitable_Donation
 		 * @since   1.3.0
+		 *
+		 * @return  null|Charitable_Donation
 		 */
 		public function get_donation() {
 			return $this->donation;
@@ -148,8 +153,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign object.
 		 *
-		 * @return  null|Charitable_Campaign
 		 * @since   1.3.0
+		 *
+		 * @return  null|Charitable_Campaign
 		 */
 		public function get_campaign() {
 			return $this->campaign;
@@ -158,8 +164,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get from name for email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_from_name() {
 			return wp_specialchars_decode( charitable_get_option( 'email_from_name', get_option( 'blogname' ) ) );
@@ -168,8 +175,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get from address for email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_from_address() {
 			return charitable_get_option( 'email_from_email', get_option( 'admin_email' ) );
@@ -178,8 +186,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email recipients.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_recipient() {
 			return $this->get_option( 'recipient', $this->get_default_recipient() );
@@ -188,8 +197,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email subject line.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_subject() {
 			return $this->get_option( 'subject', $this->get_default_subject() );
@@ -198,8 +208,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get the email content type
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_content_type() {
 			return apply_filters( 'charitable_email_content_type', 'text/html', $this );
@@ -208,8 +219,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get the email headers.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_headers() {
 			if ( ! isset( $this->headers ) ) {
@@ -224,8 +236,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether we are currently previewing the email.
 		 *
-		 * @return  boolean
 		 * @since   1.3.5
+		 *
+		 * @return  boolean
 		 */
 		public function is_preview() {
 			return isset( $_GET['charitable_action'] ) && 'preview_email' == $_GET['charitable_action'];
@@ -238,10 +251,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * particular field that was referenced in the shortcode. The second argument is
 		 * an optional array of arguments.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $field Value to return for a shortcode.
 		 * @param   array  $args  Optional. May contain additional arguments.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function get_value( $field, $args = array() ) {
 			$fields = $this->get_fields();
@@ -260,8 +274,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
 		 *
-		 * @return  array
 		 * @since   1.0.0
+		 *
+		 * @return  array
 		 */
 		public function get_fields() {
 			return apply_filters( 'charitable_email_content_fields', array(
@@ -279,8 +294,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the site/blog name.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_site_name() {
 			return get_option( 'blogname' );
@@ -289,9 +305,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Register email settings.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $settings Default email settings.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function email_settings( $settings ) {
 			$email_settings = apply_filters( 'charitable_settings_fields_emails_email_' . $this->get_email_id(), array(
@@ -349,9 +366,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add recipient field
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $settings Email settings as an array.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function add_recipients_field( $settings ) {
 			if ( ! $this->has_recipient_field ) {
@@ -373,10 +391,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add donation content fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  array[]
-		 * @since   1.0.0
 		 */
 		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
 			if ( ! $this->is_current_email( $email ) ) {
@@ -453,8 +472,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the first name of the donor.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_first_name() {
 			if ( ! $this->has_valid_donation() ) {
@@ -467,8 +487,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the full name of the donor.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_full_name() {
 			if ( ! $this->has_valid_donation() ) {
@@ -481,8 +502,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email of the donor.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_email() {
 			if ( ! $this->has_valid_donation() ) {
@@ -495,8 +517,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the address of the donor.
 		 *
-		 * @return  string
 		 * @since   1.4.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_address() {
 			if ( ! $this->has_valid_donation() ) {
@@ -509,8 +532,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the donor's phone number.
 		 *
-		 * @return  string
 		 * @since   1.4.0
+		 *
+		 * @return  string
 		 */
 		public function get_donor_phone() {
 			if ( ! $this->has_valid_donation() ) {
@@ -523,8 +547,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the donation ID.
 		 *
-		 * @return  int
 		 * @since   1.0.0
+		 *
+		 * @return  int
 		 */
 		public function get_donation_id() {
 			if ( ! $this->has_valid_donation() ) {
@@ -537,11 +562,12 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns a summary of the donation, including all the campaigns that were donated to.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string           $value The content to show in place of the shortcode.
 		 * @param   mixed[]          $args  Array of optional arguments.
 		 * @param   Charitable_Email $email The email object.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		public function get_donation_summary( $value, $args, $email ) {
 			if ( ! $this->has_valid_donation() ) {
@@ -568,9 +594,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the total amount donated.
 		 *
+		 * @since   1.4.2
+		 *
 		 * @param 	string $value Content to show in place of shortcode.
 		 * @return  string
-		 * @since   1.4.2
 		 */
 		public function get_donation_total( $value ) {
 			if ( ! $this->has_valid_donation() ) {
@@ -583,10 +610,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the date the donation was made.
 		 *
+		 * @since   1.3.0
+		 *
 		 * @param   string  $value Content to show in place of shortcode.
 		 * @param   mixed[] $args  Optional arguments.
 		 * @return  string
-		 * @since   1.3.0
 		 */
 		public function get_donation_date( $value, $args ) {
 			if ( ! $this->has_valid_donation() ) {
@@ -601,8 +629,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the status of the donation.
 		 *
-		 * @return  string
 		 * @since   1.3.0
+		 *
+		 * @return  string
 		 */
 		public function get_donation_status() {
 			if ( ! $this->has_valid_donation() ) {
@@ -615,10 +644,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaigns donated to.
 		 *
+		 * @since   1.4.2
+		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @param 	array  $args  Optional set of arguments.
 		 * @return  string
-		 * @since   1.4.2
 		 */
 		public function get_campaigns_for_donation( $value, $args ) {
 			if ( ! $this->has_valid_donation() ) {
@@ -633,9 +663,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the categories of the campaigns that were donated to.
 		 *
+		 * @since   1.4.2
+		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @return  string
-		 * @since   1.4.2
 		 */
 		public function get_campaign_categories_for_donation( $value ) {
 			if ( ! $this->has_valid_donation() ) {
@@ -652,10 +683,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add donation content fields' fake data for previews.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function add_preview_donation_content_fields( $fields, Charitable_Email $email ) {
 
@@ -695,10 +727,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add campaign content fields.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function add_campaign_content_fields( $fields, Charitable_Email $email ) {
 
@@ -767,8 +800,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's name.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_title() {
 
@@ -783,8 +817,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's name.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_creator() {
 
@@ -799,8 +834,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's email address.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_creator_email() {
 
@@ -815,8 +851,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign end date.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_end_date() {
 
@@ -831,10 +868,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display whether the campaign achieved its goal.
 		 *
+		 * @since   1.1.0
+		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @param 	array  $args  Optional set of arguments.
 		 * @return  string
-		 * @since   1.1.0
 		 */
 		public function get_campaign_achieved_goal( $value, $args ) {
 
@@ -864,8 +902,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the total amount donated to the campaign.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_donated_amount() {
 			if ( ! $this->has_valid_campaign() ) {
@@ -878,8 +917,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the number of donors to the campaign.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_donor_count() {
 			if ( ! $this->has_valid_campaign() ) {
@@ -892,8 +932,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the campaign's goal amount.
 		 *
-		 * @return  string
 		 * @since   1.1.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_goal() {
 			if ( ! $this->has_valid_campaign() ) {
@@ -906,8 +947,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the campaign's URL
 		 *
-		 * @return  string
 		 * @since   1.3.0
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_url() {
 			if ( ! $this->has_valid_campaign() ) {
@@ -920,8 +962,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the link to where the campaign can be edited in the dashboard.
 		 *
-		 * @return  string
 		 * @since   1.4.18
+		 *
+		 * @return  string
 		 */
 		public function get_campaign_dashboard_url() {
 			if ( ! $this->has_valid_campaign() ) {
@@ -942,10 +985,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add campaign content fields' fake data for previews.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function add_preview_campaign_content_fields( $fields, Charitable_Email $email ) {
 
@@ -975,8 +1019,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Sends the email.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		public function send() {
 			do_action( 'charitable_before_send_email', $this );
@@ -996,9 +1041,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has already been sent.
 		 *
+		 * @since   1.3.2
+		 *
 		 * @param   int $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
 		 * @return  boolean
-		 * @since   1.3.2
 		 */
 		public function is_sent_already( $post_id ) {
 			$log = get_post_meta( $post_id, $this->get_log_key(), true );
@@ -1017,10 +1063,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Log that the email was sent.
 		 *
+		 * @since   1.3.2
+		 *
 		 * @param   int     $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
 		 * @param   boolean $sent    Whether the email was sent.
 		 * @return  void
-		 * @since   1.3.2
 		 */
 		public function log( $post_id, $sent ) {
 			$log = get_post_meta( $post_id, $this->get_log_key(), true );
@@ -1037,8 +1084,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Preview the email. This will display a sample email within the browser.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function preview() {
 			add_filter( 'charitable_email_shortcode_args', array( $this, 'set_preview_mode' ) );
@@ -1051,9 +1099,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Set preview mode in the shortcode attributes.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $atts Shortcode attributes.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function set_preview_mode( $atts ) {
 			$atts['preview'] = true;
@@ -1063,8 +1112,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the body content of the email, formatted as HTML.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_body() {
 			$body = $this->get_option( 'body', $this->get_default_body() );
@@ -1076,8 +1126,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the email headline.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		public function get_headline() {
 			$headline = $this->get_option( 'headline', $this->get_default_headline() );
@@ -1088,8 +1139,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has a valid donation object set.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		public function has_valid_donation() {
 			if ( is_null( $this->donation ) || ! is_a( $this->donation, 'Charitable_Donation' ) ) {
@@ -1103,8 +1155,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has a valid donation object set.
 		 *
-		 * @return  boolean
 		 * @since   1.0.0
+		 *
+		 * @return  boolean
 		 */
 		public function has_valid_campaign() {
 			if ( is_null( $this->campaign ) || ! is_a( $this->campaign, 'Charitable_Campaign' ) ) {
@@ -1118,8 +1171,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Build the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function build_email() {
 			ob_start();
@@ -1138,8 +1192,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the meta key used for the log.
 		 *
-		 * @return  string
 		 * @since   1.3.2
+		 *
+		 * @return  string
 		 */
 		protected function get_log_key() {
 			return '_email_' . $this->get_email_id() . '_log';
@@ -1148,10 +1203,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of an option specific to this email.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   string $key     Settings option key.
 		 * @param 	mixed  $default Default value to return in case setting is not set.
 		 * @return  mixed
-		 * @since   1.0.0
 		 */
 		protected function get_option( $key, $default ) {
 			return charitable_get_option( array( 'emails_' . $this->get_email_id(), $key ), $default );
@@ -1160,8 +1216,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_recipient() {
 			return '';
@@ -1170,8 +1227,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_subject() {
 			return '';
@@ -1180,8 +1238,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_headline() {
 			return '';
@@ -1190,8 +1249,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
 		 * @since   1.0.0
+		 *
+		 * @return  string
 		 */
 		protected function get_default_body() {
 			return '';
@@ -1200,9 +1260,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the value of a particular field (generally called through the [charitable_email] shortcode).
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string $field Field key.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		protected function get_field_content( $field ) {
 
@@ -1219,9 +1280,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of a field for the preview.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string $field Field key.
 		 * @return  string
-		 * @since   1.0.0
 		 */
 		protected function get_preview_field_content( $field ) {
 
@@ -1241,8 +1303,9 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return HTML formatted list of shortcode options that can be used within the body, headline and subject line.
 		 *
-		 * @return  string
 		 * @since   version
+		 *
+		 * @return  string
 		 */
 		protected function get_shortcode_options() {
 
@@ -1265,9 +1328,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the passed email is the same as the current email object.
 		 *
+		 * @since   1.3.2
+		 *
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  boolean
-		 * @since   1.3.2
 		 */
 		protected function is_current_email( Charitable_Email $email ) {
 
@@ -1280,10 +1344,11 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 *
 		 * @deprecated 1.3.6
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   mixed $return   Value to return.
 		 * @param   mixed $fallback Default value to return.
 		 * @return  mixed $return
-		 * @since   1.0.0
 		 */
 		protected function return_value_if_has_valid_donation( $return, $fallback = '' ) {
 

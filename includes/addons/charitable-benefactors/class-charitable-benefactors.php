@@ -31,8 +31,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		private function __construct() {
 			require_once( 'class-charitable-benefactor.php' );
@@ -43,8 +44,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Benefactors
 		 * @since   1.0.0
+		 *
+		 * @return  Charitable_Benefactors
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -57,8 +59,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Responsible for creating class instances.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public static function load() {
 			do_action( 'charitable_benefactors_addon_loaded', Charitable_Benefactors::get_instance() );
@@ -67,8 +70,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Enqueue script.
 		 *
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public function register_script() {
 			$screen = get_current_screen();
@@ -83,9 +87,10 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Register table.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   array $tables Registered tables.
 		 * @return  array
-		 * @since   1.0.0
 		 */
 		public function register_table( $tables ) {
 			$tables['benefactors'] = 'Charitable_Benefactors_DB';
@@ -95,10 +100,11 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display a benefactor relationship block inside of a meta box on campaign pages.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function benefactor_meta_box( $benefactor, $extension ) {
 			charitable_admin_view( 'metaboxes/campaign-benefactors/summary', array(
@@ -110,10 +116,11 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display benefactor relationship form.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function benefactor_form( $benefactor, $extension ) {
 			charitable_admin_view( 'metaboxes/campaign-benefactors/form', array(
@@ -125,9 +132,10 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Save benefactors when saving campaign.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param   WP_Post $post Post object.
 		 * @return  void
-		 * @since   1.0.0
 		 */
 		public function save_benefactors( WP_Post $post ) {
 			if ( ! isset( $_POST['_campaign_benefactor'] ) ) {
@@ -183,8 +191,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Add a new benefactor block with AJAX.
 		 *
-		 * @return  void
 		 * @since   1.2.0
+		 *
+		 * @return  void
 		 */
 		public function add_benefactor_form() {
 			$idx = isset( $_POST['idx'] ) ? $_POST['idx'] : 0;
@@ -209,8 +218,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Deactivate a benefactor.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function delete_benefactor() {
 			/* Run a security check first to ensure we initiated this action. */
@@ -233,8 +243,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Called when Charitable is uninstalled and data removal is set to true.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function uninstall() {
 			if ( 'charitable_uninstall' != current_filter() ) {
@@ -251,8 +262,9 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @return  boolean Whether the addon is activated.
 		 * @since   1.0.0
+		 *
+		 * @return  boolean Whether the addon is activated.
 		 */
 		public static function activate() {
 			if ( 'charitable_activate_addon' !== current_filter() ) {

@@ -40,9 +40,10 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 		/**
 		 * Display the widget contents on the front-end.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $args
 		 * @param 	array $instance
-		 * @since 	1.0.0
 		 */
 		public function widget( $args, $instance ) {
 
@@ -55,9 +56,10 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 		/**
 		 * Display the widget form in the admin.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array $instance         The current settings for the widget options.
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function form( $instance ) {
 			$defaults = array(
@@ -94,10 +96,11 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 		/**
 		 * Update the widget settings in the admin.
 		 *
+		 * @since 	1.0.0
+		 *
 		 * @param 	array   $new_instance   The updated settings.
 		 * @param 	array   $new_instance   The old settings.
 		 * @return 	void
-		 * @since 	1.0.0
 		 */
 		public function update( $new_instance, $old_instance ) {
 
@@ -112,9 +115,10 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 		/**
 		 * Return campaigns to display in the widget.
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	array 	$instance
 		 * @return  WP_Query
-		 * @since   1.0.0
 		 */
 		protected function get_widget_campaigns( $instance ) {
 

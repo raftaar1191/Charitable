@@ -30,8 +30,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @return  Charitable_Post_Types
 		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Post_Types
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -60,8 +61,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * Register plugin post types.
 		 *
 		 * @hook    init
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function register_post_types() {
 			/**
@@ -156,8 +158,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Register custom post statuses.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function register_post_statuses() {
 			register_post_status( 'charitable-pending', array(
@@ -218,8 +221,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Register the campaign category taxonomy.
 		 *
-		 * @return  void
 		 * @since   1.0.0
+		 *
+		 * @return  void
 		 */
 		public function register_taxonomies() {
 			$labels = array(

@@ -9,8 +9,9 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Delete a donation 
 	 *
-	 * @return 	void
 	 * @since 	1.0.0
+	 *
+	 * @return 	void
 	 */
 	public function delete_donation( $donation_id ) {
 		wp_delete_post( $donation_id, true );
@@ -19,9 +20,10 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donation.
 	 *
+	 * @since 	1.0.0	 
+	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donation_id
-	 * @since 	1.0.0	 
 	 */
 	public static function create_donation( $args = array() ) {
 		$defaults = array(
@@ -48,11 +50,12 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donation for a user.
 	 *
+	 * @since 	1.0.0
+	 *
 	 * @param 	int 		$user_id
 	 * @param 	int 		$campaign_id
 	 * @param 	float 		$amount
 	 * @return 	int 		$donation_id
-	 * @since 	1.0.0
 	 */
 	public static function create_campaign_donation_for_user( $user_id, $campaign_id, $amount ) {
 	 	$args = array(
