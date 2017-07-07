@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 	 * Charitable_Email_Preview_Endpoint
 	 *
 	 * @abstract
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Email_Preview_Endpoint extends Charitable_Endpoint {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return 	string
 		 */
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array $args
 		 * @return  string
@@ -69,7 +69,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array $args
 		 * @return  boolean
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 		/**
 		 * Return the template to display for this endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	string $template The default template.
 		 * @return  string

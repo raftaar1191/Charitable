@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 	/**
 	 * Charitable_Donation_Form
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donation_Form extends Charitable_Form implements Charitable_Donation_Form_Interface {
 
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Create a donation form object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   Charitable_Campaign $campaign Campaign receiving the donation.
 		 */
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the campaign associated with this donation form object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  Charitable_Campaign
 		 */
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the current user.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  Charitable_User|false   Object if the user is logged in. False otherwise.
 		 */
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the set value for a particular user field.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string $key
 		 * @param   string $default Optional. The value that will be used if none is set.
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the fields related to the person making the donation.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Only show the required user fields if that option was enabled by the site admin.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  array[]
 		 */
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * By default, this just returns the password field. You can include a username
 		 * field with ...
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -334,7 +334,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the donation fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -365,7 +365,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donation form fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -394,7 +394,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add payment fields to the donation form if necessary.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array[] $fields
 		 * @return  array[]
@@ -437,7 +437,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Use custom template for some form fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string|false $custom_template
 		 * @param   array   $field
@@ -460,7 +460,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Include a paragraph showing the currently set donation
 		 * amount before the amount form, if one is set.
 		 *
-		 * @since   1.4.14
+		 * @since 1.4.14
 		 *
 		 * @param 	array[] $fields The array of fields.
 		 * @return  array[]
@@ -493,7 +493,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add credit card fields to the donation form if this gateway requires it.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array[] $fields
 		 * @param   Charitable_Gateway $gateway
@@ -510,7 +510,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -524,7 +524,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   Charitable_Donation_Form $form
 		 * @return  void
@@ -553,7 +553,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Set the gateway as a hidden field when there is only one gateway.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  string[]
 		 */
@@ -574,7 +574,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add a password field to the end of the form.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   Charitable_Donation_Form $form
 		 * @return  void
@@ -595,7 +595,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -623,7 +623,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the security checks (nonce and honeypot) pass.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  boolean
 		 */
@@ -646,7 +646,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the submitted email is valid.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  boolean
 		 */
@@ -673,7 +673,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the submitted gateway is valid.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  boolean
 		 */
@@ -697,7 +697,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the set amount is valid.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  boolean
 		 */
@@ -724,7 +724,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donation values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -791,7 +791,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns all fields as a merged array.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -828,7 +828,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the user has all required fields.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  boolean
 		 */
@@ -856,7 +856,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donation amount.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  float
 		 */
@@ -876,7 +876,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Set up payment fields based on the gateways that are installed and which one is default.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -904,7 +904,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * A formatted notice to advise that there are no gateways active.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  string
 		 */
@@ -925,7 +925,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Determine the status of Test Mode and display an alert if it is active
 		 *
-		 * @since   1.4.7
+		 * @since 1.4.7
 		 *
 		 * @return  void
 		 */
@@ -942,7 +942,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * A formatted notice to advise that Test Mode is active.
 		 *
-		 * @since   1.4.7
+		 * @since 1.4.7
 		 *
 		 * @return  string
 		 */
@@ -963,7 +963,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donor value fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  string[]
 		 */
@@ -988,7 +988,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the form submission contains profile fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -1005,7 +1005,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns true if required fields are missing.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array   $required_fields
 		 * @return  boolean

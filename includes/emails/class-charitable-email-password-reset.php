@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 	/**
 	 * Password Reset Email
 	 *
-	 * @since 	1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Email_Password_Reset extends Charitable_Email {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * Whether the email allows you to define the email recipients.
 		 *
 		 * @var     boolean
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $has_recipient_field = false;
 
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The Password Reset email is required.
 		 *
 		 * @var     boolean
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $required = true;
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The user data.
 		 *
 		 * @var     WP_User
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $user;
 
@@ -53,14 +53,14 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The reset link.
 		 *
 		 * @var 	string|WP_Error
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $reset_link;
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   mixed[] $objects
 		 */
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string
 		 */
@@ -86,7 +86,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  array
 		 */
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string|WP_Error|false If the reset key could not be generated, an error is returned.
 		 */
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string
 		 */
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		* Return the recipient for the email.
 		*
-		* @since   1.0.0
+		* @since 1.0.0
 		*
 		* @return  string
 		*/
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string
 		 */
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string
 		 */
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string
 		 */

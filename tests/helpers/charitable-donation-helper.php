@@ -9,7 +9,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Delete a donation 
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return 	void
 	 */
@@ -20,7 +20,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donation.
 	 *
-	 * @since 	1.0.0	 
+	 * @since 1.0.0	 
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donation_id
@@ -50,7 +50,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donation for a user.
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param 	int 		$user_id
 	 * @param 	int 		$campaign_id

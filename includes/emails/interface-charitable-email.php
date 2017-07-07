@@ -19,7 +19,7 @@ if ( ! interface_exists( 'Charitable_Email_Interface' ) ) :
 /**
  * Charitable_Email_Interface interface.
  *
- * @since       1.2.0
+ * @since 1.2.0
  */
 interface Charitable_Email_Interface {
     public static function get_email_id();

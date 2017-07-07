@@ -18,14 +18,14 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 	/**
 	 * Charitable_Endpoint_Interface interface.
 	 *
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	interface Charitable_Endpoint_Interface {
 
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return  string
 		 */
@@ -34,7 +34,7 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return  string
 		 */
@@ -43,7 +43,7 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return  boolean
 		 */

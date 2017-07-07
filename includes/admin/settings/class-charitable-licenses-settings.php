@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 	 * Charitable_Licenses_Settings
 	 *
 	 * @final
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Licenses_Settings {
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 		}
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Licenses_Settings
 		 */
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Optionally add the licenses tab.
 		 *
-		 * @since   1.4.7
+		 * @since 1.4.7
 		 *
 		 * @param   string[] $tabs Settings tabs.
 		 * @return  string[]
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Add the licenses tab settings fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Add the licenses group.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string[] $groups Settings groups.
 		 * @return  string[]
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Render the licenses table.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		/**
 		 * Checks for updated license and invalidates status field if not set.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   mixed[] $values The parsed values combining old values & new values.
 		 * @param   mixed[] $new_values The newly submitted values.

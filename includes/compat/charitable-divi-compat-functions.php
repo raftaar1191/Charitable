@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
  * If Divi and Yoast SEO are active, we end up with all sorts of problems related to Divi
  * trying to display the shortcodes in the admin. Exclude all our shortcodes.
  *
- * @since   1.5.0
+ * @since 1.5.0
  *
  * @param   string[] $shortcodes
  * @return  string[]

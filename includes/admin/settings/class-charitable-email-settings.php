@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 	 * Charitable_Email_Settings
 	 *
 	 * @final
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Email_Settings {
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Email_Settings
 		 */
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 		}
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns all the payment email settings fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add settings for each individual payment email.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add email keys to the settings groups.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string[] $groups
 		 * @return  string[]
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Display table with emails.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Checks whether we're looking at an individual email's settings page.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -165,7 +165,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns the helper class of the email we're editing.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  Charitable_Email|false
 		 */

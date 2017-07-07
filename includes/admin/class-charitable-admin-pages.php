@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 	/**
 	 * Charitable_Admin_Pages
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Admin_Pages {
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			$this->admin_menu_capability  = apply_filters( 'charitable_admin_menu_capability', 'view_charitable_sensitive_data' );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Admin_Pages
 		 */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Add Settings menu item under the Campaign menu tab.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Returns an array with all the submenu pages.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -157,7 +157,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Set up the redirect to the welcome page.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Redirect to the welcome page.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */
@@ -180,7 +180,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable settings page.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable donations page.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
          *
 		 * @return  void
 		 *
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable welcome page.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */

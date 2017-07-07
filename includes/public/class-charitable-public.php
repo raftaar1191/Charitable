@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 	 * Charitable Public class.
 	 *
 	 * @final
-	 * @since 	    1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Public {
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Public
 		 */
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'load_template_files' ) );
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 *
 		 * This gives themes time to override the functions.
 		 *
-		 * @since   1.2.3
+		 * @since 1.2.3
 		 *
 		 * @return  void
 		 */
@@ -86,7 +86,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Loads public facing scripts and stylesheets.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Conditionally load the donation form scripts if we're viewing the donation form.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  boolean True if scripts were loaded. False otherwise.
 		 */
@@ -241,7 +241,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Enqueues the donation form scripts.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  void
 		 */
@@ -257,7 +257,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Adds custom post classes when viewing campaign.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string[] $classes List of classes to be added with post_class().
 		 * @return  string[]
@@ -277,7 +277,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Disable comments on application pages like the donation page.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 	 	 *
 		 * @param   boolean $open Whether comments are open.
 		 * @return  boolean

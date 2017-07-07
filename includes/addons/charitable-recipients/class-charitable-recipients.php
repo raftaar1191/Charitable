@@ -17,14 +17,14 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 	/**
 	 * Charitable_Recipients
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Recipients implements Charitable_Addon_Interface {
 
 		/**
 		 * Responsible for creating class instances.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -37,7 +37,7 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			$this->load_dependencies();
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Include required files.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Set up hooks and filter.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -69,7 +69,7 @@ if ( ! class_exists( 'Charitable_Recipients' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  boolean Whether the add-on was activated.
 		 */

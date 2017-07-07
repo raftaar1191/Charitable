@@ -9,7 +9,7 @@
  * @subpackage	Charitable/Charitable Install
  * @copyright 	Copyright (c) 2017, Eric Daams
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 		1.0.0
+ * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -19,14 +19,14 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 	/**
 	 * Charitable_Install
 	 *
-	 * @since 		1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Install {
 
 		/**
 		 * Install the plugin.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 			$this->setup_roles();
@@ -39,7 +39,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Finish the plugin installation.
 		 *
-		 * @since   1.3.4
+		 * @since 1.3.4
 		 *
 		 * @return  void
 		 */
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Create wp roles and assign capabilities
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Create database tables.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		/**
 		 * Set up the upgrade log.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */

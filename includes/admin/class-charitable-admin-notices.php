@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 	/**
 	 * Charitable_Admin_Notices
 	 *
-	 * @since       1.4.6
+	 * @since 1.4.6
 	 */
 	class Charitable_Admin_Notices extends Charitable_Notices {
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  Charitable_Admin_Notices
 		 */
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  void
 		 */
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds a notice message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string $message
 		 * @param   string $type
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds an error message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string $message
 		 * @param   string $key     Optional. If not set, next numeric key is used.
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds a warning message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string $message
 		 * @param   string $key     Optional. If not set, next numeric key is used.
@@ -118,7 +118,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds a success message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string $message
 		 * @param   string $key     Optional. If not set, next numeric key is used.
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds an info message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string $message
 		 * @param   string $key     Optional. If not set, next numeric key is used.
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Adds a version update message.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param   string  $message
 		 * @param   string  $key         Optional. If not set, next numeric key is used.
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Render notices.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  void
 		 */
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Render a notice.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @param 	string 	$notice
 		 * @param 	string  $type
@@ -237,7 +237,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * When PHP finishes executing, stash any notices that haven't been rendered yet.
 		 *
-		 * @since	1.4.13
+		 * @since 1.4.13
 		 *
 		 * @return	void
 		 */
@@ -250,7 +250,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		 *
 		 * If there are any stuffed in a transient, pull those out. Otherwise, reset a clear array.
 		 *
-		 * @since	1.4.13
+		 * @since 1.4.13
 		 *
 		 * @return	void
 		 */
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		/**
 		 * Clear out all existing notices.
 		 *
-		 * @since   1.4.6
+		 * @since 1.4.6
 		 *
 		 * @return  void
 		 */

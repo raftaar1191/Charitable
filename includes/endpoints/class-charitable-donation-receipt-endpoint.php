@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 	 * Charitable_Donation_Receipt_Endpoint
 	 *
 	 * @abstract
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Donation_Receipt_Endpoint extends Charitable_Endpoint {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return 	string
 		 */
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 */
 		public function setup_rewrite_rules() {
 
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		 * Return the endpoint URL.
 		 *
 		 * @global 	WP_Rewrite $wp_rewrite
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array      $args
 		 * @return  string
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @global  WP_Query $wp_query
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array    $args
 		 * @return  boolean
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Return the template to display for this endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	string $template The default template.
 		 * @return  string
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Get the content to display for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	string $content
 		 * @return  string
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Return the body class to add for the endpoint.
 		 *
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return 	string
 		 */

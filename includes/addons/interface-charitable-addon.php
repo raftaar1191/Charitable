@@ -19,14 +19,14 @@ if ( ! interface_exists( 'Charitable_Addon_Interface' ) ) :
 	/**
 	 * Charitable_Addon_Interface interface.
 	 *
-	 * @since		1.0.0
+	 * @since 1.0.0
 	 */
 	interface Charitable_Addon_Interface {
 
 		/**
 		 * Activate the addon.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -35,7 +35,7 @@ if ( ! interface_exists( 'Charitable_Addon_Interface' ) ) :
 		/**
 		 * Load the addon.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */

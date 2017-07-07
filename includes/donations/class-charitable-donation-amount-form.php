@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 	/**
 	 * Charitable_Donation_Amount_Form
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donation_Amount_Form extends Charitable_Donation_Form implements Charitable_Donation_Form_Interface {
 
@@ -51,7 +51,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation form fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
-		 * @since   1.4.4
+		 * @since 1.4.4
 		 *
 		 * @return  boolean
 		 */
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Redirect to payment form after submission.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   int     $campaign_id
 		 * @param   int     $amount
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */

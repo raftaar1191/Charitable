@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 	/**
 	 * Charitable_Login_Shortcode class.
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Login_Shortcode {
 
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 *
 		 * This receives the user-defined attributes and passes the logic off to the class.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array $atts User-defined shortcode attributes.
 		 * @return  string
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		/**
 		 * Fingerprint the login form with our charitable=true hidden field.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string $content
 		 * @return  string
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		/**
 		 * Return donations to display with the shortcode.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array   $args
 		 * @return  mixed[] $args

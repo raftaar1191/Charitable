@@ -9,7 +9,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Delete a campaign 
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 *
 	 * @return 	void
 	 */
@@ -20,7 +20,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign.
 	 *
-	 * @since 	1.0.0	 
+	 * @since 1.0.0	 
 	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$campaign_id
@@ -63,7 +63,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign with a goal.
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param 	string 		$goal
 	 * @param 	array 		$args 				Optional arguments.
@@ -77,7 +77,7 @@ class Charitable_Campaign_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a campaign with an end date.
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param 	string 		$end_date
 	 * @param 	array 		$args 				Optional arguments.

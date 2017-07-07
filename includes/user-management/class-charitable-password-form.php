@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Password_Form' ) ) :
 /**
  * Charitable_Password_Form
  *
- * @since       1.0.0
+ * @since 1.0.0
  */
 class Charitable_Password_Form extends Charitable_Form {
 
@@ -58,7 +58,7 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Create class object.
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @param   array       $args       User-defined shortcode attributes.
      */
@@ -71,7 +71,7 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Return the current user's Charitable_User object.  
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  Charitable_User
      */
@@ -86,7 +86,7 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Returns the value of a particular key.   
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @param   string $key
      * @param   string $default     Optional. The value that will be used if none is set.
@@ -119,7 +119,7 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Return the core user fields.     
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  array
      */
@@ -176,7 +176,7 @@ class Charitable_Password_Form extends Charitable_Form {
      * Return the user's address fields.
 
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  array
      */
@@ -243,7 +243,7 @@ class Charitable_Password_Form extends Charitable_Form {
      * Return the social fields.
 
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  array
      */
@@ -280,7 +280,7 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Password fields to be displayed.      
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  array[]
      */
@@ -315,7 +315,7 @@ class Charitable_Password_Form extends Charitable_Form {
      * Returns all fields as a merged array.
 
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  array[]
      */
@@ -340,7 +340,7 @@ class Charitable_Password_Form extends Charitable_Form {
      * Update Password after form submission.
 
      *
-     * @since   1.0.0
+     * @since 1.0.0
      *
      * @return  void
      */
@@ -377,7 +377,7 @@ class Charitable_Password_Form extends Charitable_Form {
      * Add the charitable_user_Password_after_fields hook but fire off a deprecated notice.  
      *
      * @deprecated 1.4.0
-     * @since   1.4.0   
+     * @since 1.4.0   
      *
      * @return  void
      */

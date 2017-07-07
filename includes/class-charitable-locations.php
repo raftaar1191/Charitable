@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 	/**
 	 * Charitable_Locations
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Locations {
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * List of countries in country_code=>name format.
 		 *
 		 * @var 	string[]	$countries
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 */
 		private $countries = array();
 
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * List of states as a multidimensional array, grouped by country.
 		 *
 		 * @var 	array[] 	$states
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 */
 		private $states = array();
 
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Locations
 		 */
@@ -69,14 +69,14 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 */
 		private function __construct() {}
 
 		/**
 		 * Return an array with all the countries supported by Charitable.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	string[]
 		 */
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the country codes of countries with states.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	string[]
 		 */
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return an array with all the states supported by Charitable.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	string[]
 		 */
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the states in this country.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $country_code The three-character country code.
 		 * @return 	string[]
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Get the base country for the website.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	string
 		 */
@@ -177,7 +177,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Get country address formats.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	string[]
 		 */
@@ -231,7 +231,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the address format to use for the given address.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Process an array of address fields, trimming whitespace and adding full country and full state names.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string[]
@@ -329,7 +329,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Get formatted address based on country of address.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	array $address_fields Address fields.
 		 * @return 	string
@@ -391,7 +391,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Trim white space and commas off a line.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param  	string $line The line to be trimmed.
 		 * @return 	string

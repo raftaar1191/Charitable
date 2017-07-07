@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 	/**
 	 * Charitable_Notices
 	 *
-	 * @since 		1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Notices {
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	Charitable_Notices
 		 */
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -74,7 +74,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a notice message.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $message The message to display.
 		 * @param 	string $type    The type of message.
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Add multiple notices at once.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	array  $messages Array of messages.
 		 * @param 	string $type     Type of message we're adding.
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an error message.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $message The error message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a warning message.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $message The warning message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a success message.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $message The success message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
@@ -148,7 +148,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an info message.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	string $message The info message to add.
 		 * @param 	string $key 	Optional. If not set, next numeric key is used.
@@ -161,7 +161,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Receives a WP_Error object and adds the error messages to our array.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	WP_Error $error The WP_Error object to add to the messages queue.
 		 * @return  void
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all errors as an array.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -184,7 +184,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all warnings as an array.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all successs as an array.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -206,7 +206,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all infos as an array.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all notices as an array.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -228,7 +228,7 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Clear out all existing notices.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  void
 		 */

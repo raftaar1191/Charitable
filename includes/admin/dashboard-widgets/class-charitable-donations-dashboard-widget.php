@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 	/**
 	 * Charitable_Donations_Dashboard_Widget
 	 *
-	 * @since       1.2.0
+	 * @since 1.2.0
 	 */
 	class Charitable_Donations_Dashboard_Widget {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 */
 		public static function register() {
 			if ( ! current_user_can( 'view_charitable_sensitive_data' ) ) {
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Print the widget contents.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  void
 		 */
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Charitable_Donations_Dashboard_Widget' ) ) :
 		/**
 		 * Return the content to display inside the widget.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  void
 		 */

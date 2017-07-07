@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 	/**
 	 * Charitable_Upgrade_Page
 	 *
-	 * @since       1.3.0
+	 * @since 1.3.0
 	 */
 	class Charitable_Upgrade_Page {
 
@@ -25,14 +25,14 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		 * The one and only class instance.
 		 *
 		 * @var     Charitable_Upgrade_Page
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 */
 		private static $instance = null;
 
 		/**
 		 * Create class object. Private constructor.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 */
 		private function __construct() {
 		}
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Register the page.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Remove the page from the dashboard menu.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Render the page.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  void
 		 */
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the current upgrade action.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  false|string False if no action was specified.
 		 */
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the current upgrade step.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  int
 		 */
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the total number of records to be updated.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  false|int
 		 */
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @return  int
 		 */
@@ -152,7 +152,7 @@ if ( ! class_exists( 'Charitable_Upgrade_Page' ) ) :
 		/**
 		 * Return the total number of steps.
 		 *
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 *
 		 * @param   int $total
 		 * @param   int $number

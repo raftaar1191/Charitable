@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 	 * Charitable_Donation_Post_Type class.
 	 *
 	 * @final
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Donation_Post_Type {
 
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			$wp_version = get_bloginfo( 'version' );
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Donation_Post_Type
 		 */
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Sets up the meta boxes to display on the donation admin page.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Remove default meta boxes.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Returns an array of all meta boxes added to the donation post type screen.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -192,7 +192,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @see     get_column_headers
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @see     WP_Posts_List_Table::single_row()
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string  $column_name    The name of the column to display.
 		 * @param   int     $post_id        The current post ID.
@@ -303,7 +303,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Make columns sortable.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   array $columns  .
 		 * @return  array
@@ -323,7 +323,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * Support for WordPress 4.3.
 		 *
-		 * @since  1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param  string $default
 		 * @param  string $screen_id
@@ -340,7 +340,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Set row actions for donations.
 		 *
-		 * @since  1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param  array   $actions
 		 * @param  WP_Post $post
@@ -374,7 +374,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Customize the output of the status views.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string[] $views
 		 * @return  string[]
@@ -413,7 +413,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Add Custom bulk actions
 		 *
-		 * @since   1.4.7
+		 * @since 1.4.7
 		 *
 		 * @param   array $actions
 		 * @return  array
@@ -429,7 +429,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Process bulk actions
 		 *
-		 * @since   1.4.7
+		 * @since 1.4.7
 		 *
 		 * @param   int    $redirect_to
 		 * @param   string $action
@@ -473,7 +473,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Remove edit from the bulk actions.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   array $actions
 		 * @return  array
@@ -489,7 +489,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Retrieve the bulk actions
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array $actions Array of the bulk actions
 		 */
@@ -509,7 +509,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * Using Javascript until WordPress core fixes: https://core.trac.wordpress.org/ticket/16031
 		 *
 		 * @global  string $post_type
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  void
 		 */
@@ -537,7 +537,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Process the new bulk actions for changing order status.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  void
 		 */
@@ -632,7 +632,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Modify bulk messages
 		 *
-		 * @since 	1.4.7
+		 * @since 1.4.7
 		 *
 		 * @param 	array $bulk_messages
 		 * @param 	array $bulk_counts
@@ -656,7 +656,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Disable the month's dropdown (will replace with custom range search).
 		 *
-		 * @since  1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param mixed $public_query_vars
 		 * @param  str $post_type
@@ -673,7 +673,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Add date-based filters above the donations table.
 		 *
-		 * @since  1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param  string $post_type
 		 */
@@ -691,7 +691,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Add extra buttons after filters
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string $which
 		 * @return  void
@@ -710,7 +710,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Add modal template to footer
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string $which
 		 * @return  void
@@ -731,7 +731,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * Set up the scripts & styles used for the modal.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  void
 		 */
@@ -790,7 +790,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Add custom filters to the query that returns the donations to be displayed.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   array $vars
 		 * @return  array
@@ -845,7 +845,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Column sorting handler.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   array $vars
 		 * @return  array
@@ -879,7 +879,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Return the status counts, taking into account any current filters.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  array
 		 */
@@ -917,7 +917,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Given a date, returns an array containing the date, month and year.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  string[]
 		 */
@@ -934,7 +934,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		/**
 		 * Respond to changes in donation status.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @param   string $new_status
 		 * @param   string $old_status

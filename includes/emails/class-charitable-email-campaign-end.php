@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 	/**
 	 * Campaign End Email
 	 *
-	 * @since       1.1.0
+	 * @since 1.1.0
 	 */
 	class Charitable_Email_Campaign_End extends Charitable_Email {
 
@@ -27,20 +27,20 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 
 		/**
 		 * @var     boolean Whether the email allows you to define the email recipients.
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 */
 		protected $has_recipient_field = true;
 
 		/**
 		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 */
 		protected $object_types = array( 'campaign' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @param   mixed[]  $objects
 		 */
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  string
 		 */
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Static method that is fired within 24 hours after a campaign is finished.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @param   int $campaign_id
 		 * @return  boolean
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		 *
 		 * This returns true if the campaign has expired in the last 24 hours.
 		 *
-		 * @since   1.3.2
+		 * @since 1.3.2
 		 *
 		 * @return  boolean
 		 */
@@ -121,7 +121,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  string
 		 */
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  string
 		 */
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  string
 		 */
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  string
 		 */

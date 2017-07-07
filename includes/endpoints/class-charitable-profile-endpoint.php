@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 	 * Charitable_Profile_Endpoint
 	 *
 	 * @abstract
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Profile_Endpoint extends Charitable_Endpoint {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 *
 		 * @return 	string
 		 */
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		 * Return the endpoint URL.
 		 *
 		 * @global 	WP_Rewrite $wp_rewrite
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array      $args
 		 * @return  string
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @global  WP_Post $post
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
 		 * @param 	array   $args
 		 * @return  boolean

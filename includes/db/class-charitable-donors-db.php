@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 	/**
 	 * Charitable_Donors_DB
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donors_DB extends Charitable_DB {
 
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * The version of our database table
 		 *
 		 * @var 	string
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public $version = '1.0.0';
 
@@ -33,14 +33,14 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * The name of the primary column
 		 *
 		 * @var 	string
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public $primary_key = 'donor_id';
 
 		/**
 		 * Set up the database table name.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 	 	 *
 		 * @return  void
 		 */
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * Create the table.
 		 *
 		 * @global  $wpdb
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public function create_table() {
 			global $wpdb;
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Default column values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  array
 		 */
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Add a new campaign donation.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array  $data Donor data to insert.
 		 * @param 	string $type Should always be 'donors'.
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a user's ID, based on their donor ID.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   int $donor_id The Donor ID.
 		 * @return  int
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their user ID.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   int     $user_id
 		 * @return  int
@@ -156,7 +156,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their email address.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   string  $email
 		 * @return  int
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Count the number of donors with donations.
 		 *
-		 * @since   1.3.4
+		 * @since 1.3.4
 	 	*
 		 * @return  int
 		 */

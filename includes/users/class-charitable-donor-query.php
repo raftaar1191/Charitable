@@ -17,14 +17,14 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 	/**
 	 * Charitable_Donor_Query
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donor_Query extends Charitable_Query {
 
 		/**
 		 * Create new query object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array $args Query arguments.
 		 */
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Return list of donor IDs together with the number of donations they have made.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  object[]
 		 */
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up fields query argument.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up orderby query argument.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up query grouping.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -148,7 +148,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Remove any hooks that have been attached by the class to prevent contaminating other queries.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up callbacks for WP_Query filters.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */

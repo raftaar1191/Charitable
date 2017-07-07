@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Clear the campaign page cache after a donation is received.
  *
- * @since   1.4.18
+ * @since 1.4.18
  *
  * @param   int $campaign_id The campaign ID.
  * @return  void

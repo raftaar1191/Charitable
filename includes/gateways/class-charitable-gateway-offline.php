@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 	/**
 	 * Offline Payment Gateway
 	 *
-	 * @since		1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Gateway_Offline extends Charitable_Gateway {
 
@@ -29,14 +29,14 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		 * Whether the gateway supports Charitable 1.3.0.
 		 *
 		 * @var     boolean
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 */
 		protected $supports_130 = false;
 
 		/**
 		 * Instantiate the gateway class, defining its key values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 			$this->name = apply_filters( 'charitable_gateway_offline_name', __( 'Offline', 'charitable' ) );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 	 	*
 		 * @param   array $settings
 		 * @return  array
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 		/**
 		 * Returns the current gateway's ID.
 		 *
-		 * @since   1.0.3
+		 * @since 1.0.3
 		 *
 		 * @return  string
 		 */

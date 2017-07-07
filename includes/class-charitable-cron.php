@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 	/**
 	 * Charitable_Cron
 	 *
-	 * @since       1.1.0
+	 * @since 1.1.0
 	 */
 	class Charitable_Cron {
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_Cron
 		 */
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 */
 		private function __construct() {
 			add_action( 'charitable_daily_scheduled_events', array( $this, 'check_expired_campaigns' ) );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Schedule Charitable event hooks.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  boolean
 		 */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Check for expired campaigns.
 		 *
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 *
 		 * @return  void
 		 */

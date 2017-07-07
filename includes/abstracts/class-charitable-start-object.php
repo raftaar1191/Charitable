@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Start_Object' ) ) :
 /**
  * Charitable_Start_Object
  *
- * @since 		1.0.0
+ * @since 1.0.0
  * @abstract
  */
 abstract class Charitable_Start_Object {
@@ -29,7 +29,7 @@ abstract class Charitable_Start_Object {
 	 * @param 	Charitable 	$charitable 
 	 * @return 	void
 	 * @static 
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 */
 	public static function charitable_start( Charitable $charitable ) {
 		if ( ! $charitable->is_start() ) {
@@ -47,7 +47,7 @@ abstract class Charitable_Start_Object {
 	 * which can only be called during the start phase. In other words, don't try 
 	 * to instantiate this object.
 	 *
-	 * @since 	1.0.0
+	 * @since 1.0.0
 	 */
 	abstract protected function __construct();
 }

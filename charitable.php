@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 			$this->directory_path = plugin_dir_path( __FILE__ );
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Returns the original instance of this class.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  Charitable
 		 */

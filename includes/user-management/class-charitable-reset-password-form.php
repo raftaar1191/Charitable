@@ -15,19 +15,19 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 	/**
 	 * Charitable_Reset_Password_Form
 	 *
-	 * @since       1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Reset_Password_Form extends Charitable_Form {
 
 		/**
 		 * @var 	string
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $nonce_action = 'charitable_reset_password';
 
 		/**
 		 * @var 	string
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $nonce_name = '_charitable_reset_password_nonce';
 
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Form action.
 		 *
 		 * @var 	string
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $form_action = 'reset_password';
 
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Reset key.
 		 *
 		 * @var 	string|null
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $key;
 
@@ -51,14 +51,14 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		 * Form action.
 		 *
 		 * @var 	string|null
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $login;
 
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   array $args User-defined shortcode attributes.
 		 */
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param 	Charitable_Form $form The form object.
 		 * @return 	void
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset password fields to be displayed.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  array
 		 */
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset the password.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  bool|WP_Error True: when finish. WP_Error on error
 		 */
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Get the reset key and login from the cookie.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  void
 		 */

@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 	/**
 	 * Charitable_Benefactors
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Benefactors implements Charitable_Addon_Interface {
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  Charitable_Benefactors
 		 */
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Responsible for creating class instances.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Enqueue script.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  void
 		 */
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Register table.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array $tables Registered tables.
 		 * @return  array
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display a benefactor relationship block inside of a meta box on campaign pages.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Display benefactor relationship form.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   Charitable_Benefactor $benefactor Benefactor object.
 		 * @param   string                $extension  Extension this benefactor object is created by.
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Save benefactors when saving campaign.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   WP_Post $post Post object.
 		 * @return  void
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Add a new benefactor block with AJAX.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  void
 		 */
@@ -218,7 +218,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Deactivate a benefactor.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Called when Charitable is uninstalled and data removal is set to true.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  void
 		 */
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Charitable_Benefactors' ) ) :
 		/**
 		 * Activate the addon.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @return  boolean Whether the addon is activated.
 		 */

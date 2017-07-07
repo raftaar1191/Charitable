@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 	/**
 	 * Charitable_Deprecated
 	 *
-	 * @since       1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Deprecated {
 
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * One true class object.
 		 *
 		 * @var     Charitable_Deprecated
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private static $instance = null;
 
@@ -33,14 +33,14 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * Whether logging is enabled.
 		 *
 		 * @var     $logging
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private static $logging;
 
 		/**
 		 * Create class object. Private constructor.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private function __construct() {
 		}
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated argument.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string      $function      The deprecated function.
 		 * @param   string      $version       The version when this argument became deprecated.
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated function.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string      $function    The function that has been deprecated.
 		 * @param   string      $version     The version of Charitable where the function was deprecated.
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a general "doing it wrong" notice.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @param   string $function
 		 * @param   string $message
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Returns whether logging is enabled.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
 		 * @return  boolean
 		 */

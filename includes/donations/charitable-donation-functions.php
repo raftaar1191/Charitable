@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * This will first attempt to retrieve it from the object cache to prevent duplicate objects.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param   int     $donation_id
  * @param   boolean $force
@@ -49,7 +49,7 @@ function charitable_get_donation( $donation_id, $force = false ) {
 /**
  * Returns the donation for the current request.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @return  Charitable_Donation
  */
@@ -60,7 +60,7 @@ function charitable_get_current_donation() {
 /**
  * Create a donation.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @param   array $args Values for the donation.
  * @return  int
@@ -76,7 +76,7 @@ function charitable_create_donation( array $args ) {
 /**
  * Find and return a donation based on the given donation key.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @param   string $donation_key
  * @return  int|null
@@ -95,7 +95,7 @@ function charitable_get_donation_by_key( $donation_key ) {
 /**
  * Find and return a donation using a gateway transaction ID.
  *
- * @since   1.4.7
+ * @since 1.4.7
  *
  * @param   string $transaction_id
  * @return  int|null
@@ -116,7 +116,7 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * IPNs in Charitable are structured in this way: charitable-listener=gateway
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @param 	strign $gateway
  * @return  string
@@ -132,7 +132,7 @@ function charitable_get_ipn_url( $gateway ) {
  *
  * IPNs in Charitable are structured in this way: charitable-listener=gateway
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  boolean True if this is a call to our IPN. False otherwise.
  */
@@ -152,7 +152,7 @@ function charitable_ipn_listener() {
  *
  * This method is called on the init hook.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  boolean Whether this is after a donation.
  */
@@ -185,7 +185,7 @@ function charitable_is_after_donation() {
 /**
  * Returns whether the donation status is valid.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  boolean
  */
@@ -199,7 +199,7 @@ function charitable_is_valid_donation_status( $status ) {
  * By default, this is just 'charitable-completed'. However, 'charitable-preapproval'
  * is also counted.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  string[]
  */
@@ -210,7 +210,7 @@ function charitable_get_approval_statuses() {
 /**
  * Returns whether the passed status is an confirmed status.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @param   string $key
  * @return  boolean
@@ -222,7 +222,7 @@ function charitable_is_approved_status( $status ) {
 /**
  * Return array of valid donations statuses.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  array
  */
@@ -241,7 +241,7 @@ function charitable_get_valid_donation_statuses() {
  *
  * @global 	WP_Query $wp_query
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  boolean True if the donation was cancelled. False otherwise.
  */
@@ -279,7 +279,7 @@ function charitable_cancel_donation() {
 /**
  * Load the donation form script.
  *
- * @since   1.4.0
+ * @since 1.4.0
  *
  * @return  void
  */
@@ -290,7 +290,7 @@ function charitable_load_donation_form_script() {
 /**
  * Add a message to a donation's log.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param   string $message
  * @return  void
@@ -302,7 +302,7 @@ function charitable_update_donation_log( $donation_id, $message ) {
 /**
  * Get a donation's log.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @return  array
  */
@@ -313,7 +313,7 @@ function charitable_get_donation_log( $donation_id ) {
 /**
  * Get the gateway used for the donation.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param   int $donation_id
  * @return  string
@@ -325,7 +325,7 @@ function charitable_get_donation_gateway( $donation_id ) {
 /**
  * Sanitize meta values before they are persisted to the database.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param   mixed   $value
  * @param   string  $key
@@ -344,7 +344,7 @@ function charitable_sanitize_donation_meta( $value, $key ) {
 /**
  * Flush the donations cache for every campaign receiving a donation.
  *
- * @since   1.0.0
+ * @since 1.0.0
  *
  * @param   int $donation_id The donation ID.
  * @return  void

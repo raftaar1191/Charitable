@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 	 * Charitable_General_Settings
 	 *
 	 * @final
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_General_Settings {
 
@@ -32,7 +32,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 		}
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since 1.2.0
 		 *
 		 * @return  Charitable_General_Settings
 		 */
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		/**
 		 * Add the general tab settings fields.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
 		 * @param   array[] $fields
 		 * @return  array
