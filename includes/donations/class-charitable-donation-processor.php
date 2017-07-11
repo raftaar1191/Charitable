@@ -188,9 +188,12 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$form = $campaign->get_donation_form();
 
 			/**
-			 * Hook in before processing donation form.
+			 * Do something before any donation form processing takes place.
 			 *
-			 * @hook charitable_before_process_donation_form
+			 * @since 	1.0.0
+			 *
+			 * @param 	Charitable_Donation_Processor $processor The Donation Processor object.
+			 * @param 	Charitable_Donation_Form      $form 	 The Donation Form object.
 			 */
 			do_action( 'charitable_before_process_donation_form', $processor, $form );
 
@@ -198,13 +201,19 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				return false;
 			}
 
-			$values = $form->get_donation_values();
-
+			$values  = $form->get_donation_values();
 			$gateway = $values['gateway'];
 
-			/* Validate the gateway values */
+			/**
+			 * Validate the gateway values.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	boolean $valid   Whether the submission passes validation.
+			 * @param 	string  $gateway The gateway ID.
+			 * @param 	array   $values  The values submitted by the user.
+			 */
 			if ( ! apply_filters( 'charitable_validate_donation_form_submission_gateway', true, $gateway, $values ) ) {
-
 				return false;
 			}
 
@@ -222,7 +231,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			if ( $this->gateway_is_130_compatible( $gateway ) ) {
 
 				/**
-				 * Fire a hook for payment gateways to process the donation.
+				 * Pass donation processing to the payment gateway and return the results.
+				 *
+				 * Clients should return one of three results:
 				 *
 				 * - TRUE :  If the donation was processed successfully and the user should
 				 *           be redirected to the donation receipt.
@@ -233,13 +244,25 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *           `redirect` : The url to be redirected to.
 				 *           `safe` : Whether to use wp_safe_redirect. If unset, will default to true.
 				 *
-				 * @hook charitable_process_donation_$gateway
+				 * @since 	1.3.0
+				 *
+				 * @param 	mixed						  $result      The result of gateway processing.
+				 * @param 	int 						  $donation_id The donation ID.
+				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
+				 * @return  mixed
 				 */
 				return apply_filters( 'charitable_process_donation_' . $gateway, true, $this->donation_id, $processor );
 
 			} else {
 				/**
-				 * A fallback for payment gateways that have not been updated.
+				 * Send donation processing to the payment gateway.
+				 *
+				 * This is a fallback for payment gateways that have not been updated to the filter method above.
+				 *
+				 * @since 	1.0.0
+				 *
+				 * @param 	int 						  $donation_id The donation ID.
+				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
 				 */
 				do_action( 'charitable_process_donation_' . $gateway, $this->donation_id, $processor );
 
@@ -249,6 +272,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				wp_safe_redirect( charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $this->donation_id ) ) );
 
 				die();
+
 			}//end if
 		}
 
@@ -375,22 +399,38 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 */
 		public function save_donation( array $values ) {
 			/**
-			 * @hook charitable_donation_values
+			 * Filter the donation values to be saved.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	array $values The donation values to be saved.
 			 */
 			$this->donation_data = apply_filters( 'charitable_donation_values', $values );
 
 			if ( ! $this->get_campaign_donations_data() ) {
-				charitable_get_deprecated()->doing_it_wrong( __METHOD__, 'A donation cannot be inserted without an array of campaigns being donated to.', '1.0.0' );
+				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
+					__( 'A donation cannot be inserted without an array of campaigns being donated to.', 'charitable' ),
+					'1.0.0'
+				);
 				return 0;
 			}
 
 			if ( ! $this->is_valid_user_data() ) {
-				charitable_get_deprecated()->doing_it_wrong( __METHOD__, 'A donation cannot be inserted without valid user data.', '1.0.0' );
+				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
+					__( 'A donation cannot be inserted without valid user data.', 'charitable' ),
+					'1.0.0'
+				);
 				return 0;
 			}
 
 			/**
-			 * @hook charitable_before_save_donation
+			 * Do something right before the donation is inserted into the database.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	Charitable_Donation_Processor $this The Processor instance.
 			 */
 			do_action( 'charitable_before_save_donation', $this );
 
@@ -439,7 +479,12 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			}
 
 			/**
-			 * @hook charitable_after_save_donation
+			 * Do something after the donation has been saved in the database.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	int 						  $donation_id The donation ID.
+			 * @param 	Charitable_Donation_Processor $this        The Processor instance.
 			 */
 			do_action( 'charitable_after_save_donation', $donation_id, $this );
 
