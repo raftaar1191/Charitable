@@ -201,7 +201,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data    = $gateway->get_encoded_ipn_data();
 
 			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
-			    error_log( json_encode( $data ) );
+			    error_log( var_export( $data, true ) );
 			}
 
 			if ( empty( $data ) ) {
