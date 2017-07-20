@@ -12,15 +12,11 @@ if ( ! isset( $view_args['fields'] ) || empty( $view_args['fields'] ) ) {
 	return;
 }
 
-$fields                 = $view_args['fields'];
-$title                  = isset( $view_args['label'] )      ? $view_args['label']   : '';
-$tooltip                = isset( $view_args['tooltip'] )    ? '<span class="tooltip"> '. $view_args['tooltip'] . '</span>'  : '';
-$description            = isset( $view_args['description'] )? '<span class="charitable-helper">' . $view_args['description'] . '</span>'    : '';
-$suggested_donations    = get_post_meta( $post->ID, '_campaign_suggested_donations', true );
-
-if ( ! $suggested_donations ) {
-	$suggested_donations = array();
-}
+$fields              = $view_args['fields'];
+$title               = isset( $view_args['label'] )       ? $view_args['label']   : '';
+$tooltip             = isset( $view_args['tooltip'] )     ? '<span class="tooltip"> '. $view_args['tooltip'] . '</span>'  : '';
+$description         = isset( $view_args['description'] ) ? '<span class="charitable-helper">' . $view_args['description'] . '</span>'    : '';
+$suggested_donations = charitable_get_campaign( $post->ID )->get_suggested_donations();
 
 /* Add a default empty row to the end. We will use this as our clone model. */
 $default = array_fill_keys( array_keys( $fields ), '' );
@@ -51,9 +47,7 @@ array_push( $suggested_donations, $default );
 		foreach ( $suggested_donations as $i => $donation ) :
 			?>
 			<tr data-index="<?php echo $i ?>" class="<?php echo ($donation === end( $suggested_donations )) ? 'to-copy hidden' : 'default'; ?>">
-
-					<td class="reorder-col"><span class="icon-donations-grab handle"></span></td>
-
+				<td class="reorder-col"><span class="icon-donations-grab handle"></span></td>
 				<?php foreach ( $fields as $key => $field ) :
 
 					if ( is_array( $donation ) && isset( $donation[ $key ] ) ) {
@@ -65,26 +59,20 @@ array_push( $suggested_donations, $default );
 					}
 
 					if ( 'amount' == $key && strlen( $value ) ) {
-						$value = charitable_format_money( $value );
+						$value = charitable_format_money( $value, false, true );
 					}
-
-							?>
-							<td class="<?php echo $key ?>-col"><input 
-								type="text" 
-								class="campaign_suggested_donations" 
-								name="_campaign_suggested_donations[<?php echo $i ?>][<?php echo $key ?>]" 
-								value="<?php echo esc_attr( $value ) ?>" 
-								placeholder="<?php echo esc_attr( $field['placeholder'] ) ?>" />
-							</td>
-						<?php endforeach ?> 
-
-						<td class="remove-col"><span class="dashicons-before dashicons-dismiss charitable-delete-row"></span></td>
-
-					</tr>
-				<?php
-				endforeach;
-
-		?>
+				?>
+					<td class="<?php echo $key ?>-col"><input 
+						type="text" 
+						class="campaign_suggested_donations" 
+						name="_campaign_suggested_donations[<?php echo $i ?>][<?php echo $key ?>]" 
+						value="<?php echo esc_attr( $value ) ?>" 
+						placeholder="<?php echo esc_attr( $field['placeholder'] ) ?>" />
+					</td>
+				<?php endforeach ?> 
+				<td class="remove-col"><span class="dashicons-before dashicons-dismiss charitable-delete-row"></span></td>
+			</tr>
+			<?php endforeach ?>
 		</tbody>
 		<tfoot>
 			<tr>                
