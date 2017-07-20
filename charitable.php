@@ -36,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @var     string
 		 */
-		const VERSION = '1.4.18';
+		const VERSION = '1.4.19';
 
 		/**
 		 * Version of database schema.
