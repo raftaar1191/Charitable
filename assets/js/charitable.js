@@ -338,9 +338,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  float
      */
     Donation_Form.prototype.get_amount = function() {
-        var amount = this.get_suggested_amount();
-
-        return amount > 0 ? amount : this.get_custom_amount();
+        return this.get_suggested_amount() || this.get_custom_amount();
     };
 
     /**
