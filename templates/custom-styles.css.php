@@ -5,7 +5,7 @@
  * Override this template by copying it to yourtheme/charitable/custom-styles.css.php
  *
  * @author  Studio 164a
- * @package Charitable/Templates/Donation Receipt
+ * @package Charitable/Templates/CSS
  * @since   1.0.0
  * @version 1.0.0
  */
