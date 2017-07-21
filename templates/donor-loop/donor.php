@@ -24,36 +24,40 @@ $donor = $view_args['donor'];
 <li class="donor">
 	<?php
 	/**
-	 * Display details about the donor.
+	 * Add output before the donor's avatar, name, etc.
+	 *
+	 * @since 	1.5.0
 	 *
 	 * @param 	Charitable_Donor $donor     The Donor object.
 	 * @param 	array 			 $view_args View arguments.
-	 * @since 	1.5.0
 	 */
-	do_action( 'charitable_donor_loop_donor', $donor, $view_args );
+	do_action( 'charitable_donor_loop_before_donor', $donor, $view_args );
 
-	echo $donor->get_avatar();
+	if ( $view_args['show_avatar'] ) :
+		echo $donor->get_avatar();
+	endif;
 
 	if ( $view_args['show_name'] ) : ?>
-
 		<p class="donor-name"><?php echo $donor->get_name() ?></p>
-
-	<?php
-
-	endif;
+	<?php endif;
 
 	if ( $view_args['show_location'] && strlen( $donor->get_location() ) ) : ?>
-
 		<div class="donor-location"><?php echo $donor->get_location() ?></div>
-
-	<?php
-
-	endif;
+	<?php endif;
 
 	if ( $view_args['show_amount'] ) : ?>
-
 		<div class="donor-donation-amount"><?php echo charitable_format_money( $donor->get_amount( $campaign_id ) ) ?></div>
+	<?php endif;
 
-	<?php endif ?>
+	/**
+	 * Add output after the donor's avatar, name, etc.
+	 *
+	 * @since 	1.5.0
+	 *
+	 * @param 	Charitable_Donor $donor     The Donor object.
+	 * @param 	array 			 $view_args View arguments.
+	 */
+	do_action( 'charitable_donor_loop_after_donor', $donor, $view_args );
+	?>
 </li><!-- .donor-<?php echo $donor->donor_id ?> -->
 

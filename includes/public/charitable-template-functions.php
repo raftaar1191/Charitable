@@ -957,27 +957,6 @@ if ( ! function_exists( 'charitable_template_form_login_link' ) ) :
 endif ;
 
 /**********************************************/
-/* DONOR LOOP
-/**********************************************/
-
-if ( ! function_exists( 'charitable_template_donor_loop' ) ) :
-
-	/**
-	 * Display a list of donors.
-	 *
-	 * @since 	1.5.0
-	 *
-	 * @param   WP_Query $campaigns Query with campaigns.
-	 * @param   int      $columns   Number of columns to use for loop.
-	 * @return 	void
-	 */
-    function charitable_template_donor_loop() {
-    	
-    }
-
-endif;
-
-/**********************************************/
 /* NOTICES
 /**********************************************/
 

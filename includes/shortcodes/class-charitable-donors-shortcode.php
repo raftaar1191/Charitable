@@ -34,6 +34,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 				'order'			    => 'DESC',
 				'campaign'			=> 0,
 				'distinct_donors'   => 1,
+				'orientation'      	=> 'horizontal',
 				'show_name'			=> 1,
 				'show_location'		=> 0,
 				'show_amount'		=> 0,
@@ -77,6 +78,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 	         */
 			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
 				'donors',
+				'orientation',
 				'show_name',
 				'show_location',
 				'show_amount',

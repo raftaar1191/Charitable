@@ -128,9 +128,3 @@ add_action( 'charitable_donation_form_donor_fields_after', 'charitable_template_
  * @see     charitable_template_form_login_link()
  */
 add_action( 'charitable_user_registration_after', 'charitable_template_form_login_link' );
-
-/**
- * 
- *
- */
-// add_action( 'charitable_donor_loop_donor', 'charitable_template_donor_loop_'
