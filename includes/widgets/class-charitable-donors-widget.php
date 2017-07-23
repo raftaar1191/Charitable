@@ -62,6 +62,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 */
 		public function form( $instance ) {
 			$args = $this->get_parsed_args( $instance );
+
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ) ?>"><?php _e( 'Title', 'charitable' ) ?>:</label>
@@ -95,6 +96,10 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 				<label for="<?php echo esc_attr( $this->get_field_id( 'show_distinct' ) ) ?>"><?php _e( 'Group donations by the same person', 'charitable' ) ?></label>        
 			</p>
 			<p>
+				<input id="<?php echo esc_attr( $this->get_field_id( 'show_avatar' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_avatar' ) ); ?>" <?php checked( $args['show_avatar'] ) ?>>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'show_avatar' ) ) ?>"><?php _e( 'Show donor\'s avatar', 'charitable' ) ?></label>
+			</p>
+			<p>
 				<input id="<?php echo esc_attr( $this->get_field_id( 'show_name' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_name' ) ); ?>" <?php checked( $args['show_name'] ) ?>>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'show_name' ) ) ?>"><?php _e( 'Show donor\'s name', 'charitable' ) ?></label>            
 			</p>
@@ -125,16 +130,14 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  array
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance = array();
-			$instance['title']             = isset( $new_instance['title'] ) ? $new_instance['title'] : $old_instance['title'];
-			$instance['number']            = isset( $new_instance['number'] ) ? intval( $new_instance['number'] ) : $old_instance['number'];
-			$instance['order']             = isset( $new_instance['order'] ) ? $new_instance['order'] : $old_instance['order'];
-			$instance['campaign_id']       = isset( $new_instance['campaign_id'] ) ? $new_instance['campaign_id'] : $old_instance['campaign_id'];
-			$instance['show_distinct']     = isset( $new_instance['show_distinct'] ) && 'on' == $new_instance['show_distinct'];
-			$instance['show_location']     = isset( $new_instance['show_location'] ) && 'on' == $new_instance['show_location'];
-			$instance['show_amount']       = isset( $new_instance['show_amount'] ) && 'on' == $new_instance['show_amount'];
-			$instance['show_name']         = isset( $new_instance['show_name'] ) && 'on' == $new_instance['show_name'];
-			$instance['hide_if_no_donors'] = isset( $new_instance['hide_if_no_donors'] ) && 'on' == $new_instance['hide_if_no_donors'];
+
+			$instance = $new_instance;
+
+			foreach ( array( 'show_distinct', 'show_avatar', 'show_location', 'show_amount', 'show_name', 'hide_if_no_donors' ) as $key ) {
+					$instance[ $key ] = array_key_exists( $key, $instance )
+						? charitable_sanitize_checkbox( $instance[ $key ] )
+						: 0;
+			}
 
 			/**
 			 * Filter the instance arguments.
@@ -158,6 +161,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  mixed[]
 		 */
 		protected function get_parsed_args( $instance ) {
+
 			/**
 			 * Filter the default widget arguments.
 			 *
@@ -172,11 +176,12 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 				'number'        	=> 10,
 				'order'         	=> 'recent',
 				'campaign_id'   	=> 'all',
-				'show_distinct' 	=> true,
-				'show_location' 	=> false,
-				'show_amount'   	=> false,
-				'show_name'     	=> false,
-				'hide_if_no_donors' => false,
+				'show_distinct' 	=> 1,
+				'show_avatar' 		=> 1,
+				'show_location' 	=> 0,
+				'show_amount'   	=> 0,
+				'show_name'     	=> 0,
+				'hide_if_no_donors' => 0,
 			), $instance );
 
 			return wp_parse_args( $instance, $defaults );
@@ -203,7 +208,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
-			 * @since 	?
+			 * @since 	1.0.0
 			 *
 			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param 	array $args       All the parsed arguments.

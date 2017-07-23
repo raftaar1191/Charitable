@@ -54,9 +54,9 @@ function charitable_is_func_disabled( $function ) {
 /**
  * Verify a nonce. This also just ensures that the nonce is set.
  *
- * @param   string $nonce
- * @param   string $action
- * @param   array  $request_args
+ * @param   string $nonce        Nonce name.
+ * @param   string $action 		 Nonce action.
+ * @param   array  $request_args $_GET or $_POST vars.
  * @return  boolean
  * @since   1.0.0
  */
@@ -135,6 +135,18 @@ function charitable_array_subset( array $original_array, $subset_keys ) {
  */
 function charitable_validate_absint( $i ) {
 	return filter_var( $i, FILTER_VALIDATE_INT, array( 'min_range' => 1 ) );
+}
+
+/**
+ * Sanitize any checkbox value.
+ *
+ * @since   1.5.0
+ *
+ * @param 	mixed $value Value set for checkbox, or false.
+ * @return  boolean
+ */
+function charitable_sanitize_checkbox( $value = false ) {
+	return intval( true == $value || 'on' == $value );
 }
 
 /**

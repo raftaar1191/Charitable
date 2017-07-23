@@ -18,11 +18,24 @@ if ( ! array_key_exists( 'donors', $view_args ) ) {
 	return;
 }
 
-$donors = $view_args['donors'];
-$args   = $view_args;
+$donors      = $view_args['donors'];
+$args        = $view_args;
+$campaign_id = $view_args['campaign_id'];
+
+if ( ! charitable_is_campaign_page() && 'current' == $campaign_id ) {
+	return;
+}
+
+if ( 'all' == $campaign_id ) {
+	$args['campaign_id'] = false;
+} elseif ( 'currenty' == $campaign_id ) {
+	$args['campaign_id'] = get_the_ID();
+}
+
+$orientation = array_key_exists( 'orientation', $view_args ) ? $view_args['orientation'] : 'vertical';
 
 if ( $donors->count() ) : ?>	
-	<ol class="donors-list donors-list-<?php echo $view_args['orientation'] ?>">
+	<ol class="donors-list donors-list-<?php echo $orientation ?>">
 		<?php
 		foreach ( $donors as $donor ) :
 

@@ -18,7 +18,8 @@ if ( ! array_key_exists( 'donor', $view_args ) ) {
 	return;
 }
 
-$donor = $view_args['donor'];
+$donor  	 = $view_args['donor'];
+$campaign_id = $view_args['campaign_id'];
 
 ?>
 <li class="donor">
