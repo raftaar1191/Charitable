@@ -49,11 +49,3 @@ if ( $donors->count() ) : ?>
 <?php else : ?>
 	<p><?php _e( 'No donors yet. Be the first!', 'charitable' ) ?></p>
 <?php endif;
-
-
-// .donors-list { list-style: none; padding-left: 0; margin-left: 0; }
-// .donors-list .donor { padding-bottom: 1em; }
-// .donors-list .donor-name { margin-bottom: 0; }
-// .donors-list .donor-location { font-style: italic; }
-// .donors-list.donors-list-horizontal .donor {float: left;padding: 0 20px 1em 0;}
-// .donors-list.donors-list-vertical .donor { border-bottom: 1px solid #e6e6e6; }

@@ -364,6 +364,36 @@
 .campaign-grid-4 .campaign.hentry:nth-child(4n+4) {
   margin-right: 0; }
 
+/* Donors */
+.donors-list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0; }
+  .donors-list .donor {
+    *zoom: 1;
+    list-style: none;
+    padding: 1em 0; }
+    .donors-list .donor:before, .donors-list .donor:after {
+      content: " ";
+      display: table; }
+    .donors-list .donor:after {
+      clear: both; }
+    .donors-list .donor .avatar {
+      margin: 0; }
+    .donors-list .donor .donor-name {
+      font-weight: bold; }
+    .donors-list .donor .donor-name,
+    .donors-list .donor .donor-location,
+    .donors-list .donor .donor-donation-amount {
+      margin: 0.5em 0 0 0; }
+    .donors-list .donor > *:first-child {
+      margin-top: 0; }
+  .donors-list.donors-list-horizontal .donor {
+    float: left;
+    padding: 0 20px 1em 0; }
+  .donors-list.donors-list-vertical .donor {
+    border-bottom: 1px solid #e6e6e6; }
+
 /* Widgets */
 .widget.widget_charitable_campaigns_widget .campaigns {
   margin: 0 0 1em 0;
@@ -385,33 +415,6 @@
     font-weight: bolder; }
   .widget.widget_charitable_campaigns_widget .campaign .campaign-time-left {
     font-weight: normal; }
-
-.widget.widget_charitable_donors_widget .donors-list {
-  margin: 0 0 1em 0;
-  padding: 0;
-  list-style: none; }
-.widget.widget_charitable_donors_widget .donor {
-  *zoom: 1;
-  list-style: none;
-  padding: 1em 0;
-  border-bottom-color: #e6e6e6;
-  border-bottom-style: solid;
-  border-bottom-width: 1px; }
-  .widget.widget_charitable_donors_widget .donor:before, .widget.widget_charitable_donors_widget .donor:after {
-    content: " ";
-    display: table; }
-  .widget.widget_charitable_donors_widget .donor:after {
-    clear: both; }
-  .widget.widget_charitable_donors_widget .donor .avatar {
-    margin: 0; }
-  .widget.widget_charitable_donors_widget .donor .donor-name {
-    font-weight: bold; }
-  .widget.widget_charitable_donors_widget .donor .donor-name,
-  .widget.widget_charitable_donors_widget .donor .donor-location,
-  .widget.widget_charitable_donors_widget .donor .donor-donation-amount {
-    margin: 0.5em 0 0 0; }
-  .widget.widget_charitable_donors_widget .donor > *:first-child {
-    margin-top: 0; }
 
 /* Notices */
 .charitable-notice {
