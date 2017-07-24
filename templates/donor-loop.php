@@ -20,7 +20,7 @@ if ( ! array_key_exists( 'donors', $view_args ) ) {
 
 $donors      = $view_args['donors'];
 $args        = $view_args;
-$campaign_id = $view_args['campaign_id'];
+$campaign_id = $view_args['campaign'];
 
 if ( ! charitable_is_campaign_page() && 'current' == $campaign_id ) {
 	return;

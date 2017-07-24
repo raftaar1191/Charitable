@@ -42,8 +42,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 				'hide_if_no_donors'	=> 0,
 			);
 
-			$args           = shortcode_atts( $default, $atts, 'donors' );
-			$args['donors'] = self::get_donors( $args );
+			$args                = shortcode_atts( $default, $atts, 'donors' );
+			$args['donors']      = self::get_donors( $args );
 
 			/**
 			 * Replace the default template with your own.
@@ -77,12 +77,18 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 	         * @return 	array
 	         */
 			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
-				'donors',
-				'orientation',
-				'show_name',
-				'show_location',
-				'show_amount',
-				'show_avatar',
+					'donors',
+					'number',
+					'orderby',
+					'order',
+					'campaign_id',
+					'orientation',
+					'show_distinct',
+					'show_name',
+					'show_location',
+					'show_amount',
+					'show_avatar',
+					'hide_if_no_donors',
 			) ), $args );
 
 			$template->set_view_args( $view_args );

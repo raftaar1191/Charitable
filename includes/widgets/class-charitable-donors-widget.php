@@ -45,9 +45,12 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  void
 		 */
 		public function widget( $args, $instance ) {
-			$instance 			 = $this->get_parsed_args( $instance );
-			$view_args 			 = array_merge( $args, $instance );
-			$view_args['donors'] = $this->get_widget_donors( $instance );
+			$instance 			   = $this->get_parsed_args( $instance );
+			$view_args 			   = array_merge( $args, $instance );
+			$view_args['donors']   = $this->get_widget_donors( $instance );
+			$view_args['orderby']  = $view_args['order'];
+			$view_args['order']    = 'DESC';
+			$view_args['campaign'] = $args['campaign_id'];
 
 			charitable_template( 'widgets/donors.php', $view_args );
 		}
