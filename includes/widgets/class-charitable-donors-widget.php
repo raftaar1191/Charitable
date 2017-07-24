@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			$view_args['donors']   = $this->get_widget_donors( $instance );
 			$view_args['orderby']  = $view_args['order'];
 			$view_args['order']    = 'DESC';
-			$view_args['campaign'] = $args['campaign_id'];
+			$view_args['campaign'] = $view_args['campaign_id'];
 
 			charitable_template( 'widgets/donors.php', $view_args );
 		}

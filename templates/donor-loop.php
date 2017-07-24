@@ -27,9 +27,9 @@ if ( ! charitable_is_campaign_page() && 'current' == $campaign_id ) {
 }
 
 if ( 'all' == $campaign_id ) {
-	$args['campaign_id'] = false;
-} elseif ( 'currenty' == $campaign_id ) {
-	$args['campaign_id'] = get_the_ID();
+	$args['campaign'] = false;
+} elseif ( 'current' == $campaign_id ) {
+	$args['campaign'] = get_the_ID();
 }
 
 $orientation = array_key_exists( 'orientation', $view_args ) ? $view_args['orientation'] : 'vertical';
