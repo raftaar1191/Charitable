@@ -99,7 +99,7 @@ function charitable_get_timezone_id() {
 	$timezone = timezone_name_from_abbr( '', $utc_offset );
 
 	/* Last try, guess timezone string manually */
-	if ( $timezone === false ) {
+	if ( false === $timezone ) {
 
 		$is_dst = date( 'I' );
 
@@ -117,14 +117,41 @@ function charitable_get_timezone_id() {
 }
 
 /**
+ * Given an array and a separate array of keys, returns a new array that only contains the
+ * elements in the original array with the specified keys.
+ *
+ * @since   1.5.0
+ *
+ * @param   array $original_array The original array we need to pull a subset from.
+ * @param 	array $subset_keys    The keys to use for our subset.
+ * @return  array
+ */
+function charitable_array_subset( array $original_array, $subset_keys ) {
+	return array_intersect_key( $original_array, array_flip( $subset_keys ) );
+}
+
+/**
  * Ensure a number is a positive integer.
  *
  * @since 1.0.0
  *
+ * @param 	mixed $i Number received.
  * @return  int|false
  */
 function charitable_validate_absint( $i ) {
 	return filter_var( $i, FILTER_VALIDATE_INT, array( 'min_range' => 1 ) );
+}
+
+/**
+ * Sanitize any checkbox value.
+ *
+ * @since   1.5.0
+ *
+ * @param 	mixed $value Value set for checkbox, or false.
+ * @return  boolean
+ */
+function charitable_sanitize_checkbox( $value = false ) {
+	return intval( true == $value || 'on' == $value );
 }
 
 /**

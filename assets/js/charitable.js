@@ -294,30 +294,51 @@ CHARITABLE = window.CHARITABLE || {};
     };
 
     /**
+     * Get the chosen suggested amount.
+     *
+     * Note that when no option has been selected, or a custom donation amount has been added,
+     * this will return 0.
+     *
+     * @since   1.4.19
+     *
+     * @return  float
+     */
+    Donation_Form.prototype.get_suggested_amount = function() {
+        return accounting.unformat(
+            this.form.find( '[name=donation_amount]:checked, input[type=hidden][name=donation_amount]' ).val(),
+            CHARITABLE_VARS.currency_format_decimal_sep
+        );
+    }
+
+    /**
+     * Get the custom amount.
+     *
+     * Note that this will return 0 when no custom amount has been entered or a 0 has been entered.
+     *
+     * @since   1.4.19
+     *
+     * @return  float
+     */
+    Donation_Form.prototype.get_custom_amount = function() {
+        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
+
+        if ( 0 === input.length ) {
+            input = this.form.find( '.custom-donation-input' );
+        }
+
+        return accounting.unformat(
+            input.val(),
+            CHARITABLE_VARS.currency_format_decimal_sep
+        );
+    }
+
+    /**
      * Get the submitted amount, taking into account both the custom & suggested donation fields.
      *
      * @return  float
      */
-    Donation_Form.prototype.get_amount = function() {        
-        var amount = suggested = this.form.find( '[name=donation_amount]:checked, input[type=hidden][name=donation_amount]' ).val();
-
-        if ( isNaN( suggested ) ) {
-            var custom = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
-
-            if ( 0 === custom.length ) {
-                custom = this.form.find( '.custom-donation-input' );
-            }
-
-            amount = custom.val();            
-        } 
-
-        amount = accounting.unformat( amount, CHARITABLE_VARS.currency_format_decimal_sep );
-
-        if ( amount <= 0 ) {
-            amount = 0;
-        }
-
-        return amount;
+    Donation_Form.prototype.get_amount = function() {
+        return this.get_suggested_amount() || this.get_custom_amount();
     };
 
     /**

@@ -23,7 +23,12 @@ $donor = $donation->get_donor();
 			<span class="donor-email"><?php echo $donor->get_email() ?></span>
 			<?php
 			/**
-			 * @hook charitable_donation_details_donor_facts
+			 * Display additional details about the donor.
+			 *
+			 * @since 	1.0.0
+	 		 *
+			 * @param 	Charitable_Donor    $donor    The donor object.
+			 * @param 	Charitable_Donation $donation The donation object.
 			 */
 			do_action( 'charitable_donation_details_donor_facts', $donor, $donation );
 			?>
@@ -38,6 +43,17 @@ $donor = $donation->get_donor();
 			__( 'Status', 'charitable' ),
 		$donation->get_status( true ) ) ?></span>
 	</div>
+	<?php
+	/**
+	 * Add additional output before the table of donations.
+	 *
+	 * @since 	1.5.0
+	 *
+	 * @param 	Charitable_Donor    $donor    The donor object.
+	 * @param 	Charitable_Donation $donation The donation object.
+	 */
+	do_action( 'charitable_donation_details_before_campaign_donations', $donor, $donation );
+	?>
 	<table id="overview">
 		<thead>
 			<tr>

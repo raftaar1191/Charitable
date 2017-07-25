@@ -3,8 +3,7 @@
  * Campaign donors widget class.
  *
  * @version     1.0.0
- * @package     Charitable/Widgets/Donors Widget
- * @category    Class
+ * @package     Charitable/Widgets/Donors
  * @author      Eric Daams
  */
 
@@ -23,7 +22,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Instantiate the widget and set up basic configuration.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function __construct() {
 			parent::__construct(
@@ -39,16 +38,19 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Display the widget contents on the front-end.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
-		 * @param   array $args
-		 * @param   array $instance
+		 * @param   array $args     Display arguments including 'before_title', 'after_title', 'before_widget' and 'after_widget'.
+		 * @param   array $instance The settings for the particular instance of the widget.
 		 * @return  void
 		 */
 		public function widget( $args, $instance ) {
-			$instance 			 = $this->get_parsed_args( $instance );
-			$view_args 			 = array_merge( $args, $instance );
-			$view_args['donors'] = $this->get_widget_donors( $instance );
+			$instance 			       = $this->get_parsed_args( $instance );
+			$view_args 			       = array_merge( $args, $instance );
+			$view_args['donors']   = $this->get_widget_donors( $instance );
+			$view_args['orderby']  = $view_args['order'];
+			$view_args['order']    = 'DESC';
+			$view_args['campaign'] = $view_args['campaign_id'];
 
 			charitable_template( 'widgets/donors.php', $view_args );
 		}
@@ -56,13 +58,14 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Display the widget form in the admin.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $instance The current settings for the widget options.
 		 * @return  void
 		 */
 		public function form( $instance ) {
 			$args = $this->get_parsed_args( $instance );
+
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ) ?>"><?php _e( 'Title', 'charitable' ) ?>:</label>
@@ -96,6 +99,10 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 				<label for="<?php echo esc_attr( $this->get_field_id( 'show_distinct' ) ) ?>"><?php _e( 'Group donations by the same person', 'charitable' ) ?></label>        
 			</p>
 			<p>
+				<input id="<?php echo esc_attr( $this->get_field_id( 'show_avatar' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_avatar' ) ); ?>" <?php checked( $args['show_avatar'] ) ?>>
+				<label for="<?php echo esc_attr( $this->get_field_id( 'show_avatar' ) ) ?>"><?php _e( 'Show donor\'s avatar', 'charitable' ) ?></label>
+			</p>
+			<p>
 				<input id="<?php echo esc_attr( $this->get_field_id( 'show_name' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_name' ) ); ?>" <?php checked( $args['show_name'] ) ?>>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'show_name' ) ) ?>"><?php _e( 'Show donor\'s name', 'charitable' ) ?></label>            
 			</p>
@@ -119,45 +126,65 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Update the widget settings in the admin.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
-		 * @param   array $new_instance         The updated settings.
-		 * @param   array $new_instance         The old settings.
-		 * @return  void
+		 * @param   array $new_instance The updated settings.
+		 * @param   array $old_instance The old settings.
+		 * @return  array
 		 */
 		public function update( $new_instance, $old_instance ) {
-			$instance = array();
-			$instance['title']             = isset( $new_instance['title'] ) ? $new_instance['title'] : $old_instance['title'];
-			$instance['number']            = isset( $new_instance['number'] ) ? intval( $new_instance['number'] ) : $old_instance['number'];
-			$instance['order']             = isset( $new_instance['order'] ) ? $new_instance['order'] : $old_instance['order'];
-			$instance['campaign_id']       = isset( $new_instance['campaign_id'] ) ? $new_instance['campaign_id'] : $old_instance['campaign_id'];
-			$instance['show_distinct']     = isset( $new_instance['show_distinct'] ) && 'on' == $new_instance['show_distinct'];
-			$instance['show_location']     = isset( $new_instance['show_location'] ) && 'on' == $new_instance['show_location'];
-			$instance['show_amount']       = isset( $new_instance['show_amount'] ) && 'on' == $new_instance['show_amount'];
-			$instance['show_name']         = isset( $new_instance['show_name'] ) && 'on' == $new_instance['show_name'];
-			$instance['hide_if_no_donors'] = isset( $new_instance['hide_if_no_donors'] ) && 'on' == $new_instance['hide_if_no_donors'];
+
+			$instance = $new_instance;
+
+			foreach ( array( 'show_distinct', 'show_avatar', 'show_location', 'show_amount', 'show_name', 'hide_if_no_donors' ) as $key ) {
+					$instance[ $key ] = array_key_exists( $key, $instance )
+						? charitable_sanitize_checkbox( $instance[ $key ] )
+						: 0;
+			}
+
+			/**
+			 * Filter the instance arguments.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param   array $instance     The parsed instance settings.
+			 * @param   array $new_instance The updated settings.
+		 	 * @param   array $old_instance The old settings.
+		 	 * @return  array
+		 	 */
 			return apply_filters( 'charitable_donors_widget_update_instance', $instance, $new_instance, $old_instance );
 		}
 
 		/**
 		 * Return parsed array of arguments.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
-		 * @param   mixed[] $instance
+		 * @param   array $instance The settings for the particular instance of the widget.
 		 * @return  mixed[]
 		 */
 		protected function get_parsed_args( $instance ) {
+
+			/**
+			 * Filter the default widget arguments.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param   array $args     The default arguments.
+			 * @param   array $instance The widget instance settings.
+		 	 * @return  array
+		 	 */
 			$defaults = apply_filters( 'charitable_donors_widget_default_args', array(
 				'title'         	=> '',
 				'number'        	=> 10,
 				'order'         	=> 'recent',
 				'campaign_id'   	=> 'all',
-				'show_distinct' 	=> true,
-				'show_location' 	=> false,
-				'show_amount'   	=> false,
-				'show_name'     	=> false,
-				'hide_if_no_donors' => false,
+				'show_distinct' 	=> 1,
+				'show_avatar' 		=> 1,
+				'show_location' 	=> 0,
+				'show_amount'   	=> 0,
+				'show_name'     	=> 0,
+				'hide_if_no_donors' => 0,
 			), $instance );
 
 			return wp_parse_args( $instance, $defaults );
@@ -166,29 +193,30 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Return the donors to display in the widget.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
-		 * @param   mixed[] $instance
-		 * @return  array
+		 * @param   mixed[] $instance The widget instance.
+		 * @return  Charitable_Donor_Query
 		 */
 		protected function get_widget_donors( $instance ) {
-			$query_args = array(
-				'number' => $instance['number'],
-				'output' => 'donors',
-			);
+
+			$query_args = charitable_array_subset( $instance, array( 'number', 'campaign' ) );
 
 			if ( 'amount' == $instance['order'] ) {
 				$query_args['orderby'] = 'amount';
 			}
 
-			if ( 'current' == $instance['campaign_id'] ) {
-				$query_args['campaign'] = charitable_get_current_campaign_id();
-			} elseif ( 'all' != $instance['campaign_id'] ) {
-				$query_args['campaign'] = intval( $instance['campaign_id'] );
-			}
-
 			$query_args['distinct_donors'] = $instance['show_distinct'];
 
+			/**
+			 * Filter the arguments passed to Charitable_Donor_Query.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
+			 * @param 	array $args       All the parsed arguments.
+	         * @return 	array
+	         */
 			$query_args = apply_filters( 'charitable_donors_widget_donor_query_args', $query_args, $instance );
 
 			return new Charitable_Donor_Query( $query_args );

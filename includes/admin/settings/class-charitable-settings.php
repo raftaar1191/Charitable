@@ -187,7 +187,6 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			/**
 			 * Filter sanitized settings.
 			 *
-			 * @hook 	charitable_save_settings
 			 * @since 1.0.0
 			 *
 			 * @param 	array $values     All values, merged.
@@ -407,7 +406,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			$field_type = isset( $field['type'] ) ? $field['type'] : '';
 
-			switch ( $field_type ) {				
+			switch ( $field_type ) {
 
 				case 'checkbox' :
 					$value = intval( array_key_exists( $key, $submitted ) && 'on' == $submitted[ $key ] );
@@ -427,7 +426,8 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 					}
 
 					$value = $submitted[ $key ];
-			}
+
+			}//end switch
 
 			/**
 			 * General way to sanitize values. If you only need to sanitize a

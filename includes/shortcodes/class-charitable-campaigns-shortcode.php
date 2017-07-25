@@ -4,13 +4,11 @@
  *
  * @version  1.0.0
  * @package  Charitable/Shortcodes/Campaigns
- * @category Class
  * @author   Eric Daams
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 
@@ -48,7 +46,17 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			$args              = shortcode_atts( $default, $atts, 'campaigns' );
 			$args['campaigns'] = self::get_campaigns( $args );
 
-			/* Allows extensions/themes to plug in their own template objects here. */
+			/**
+			 * Replace the default template with your own.
+			 *
+			 * If you replace the template with your own, it needs to be an instance of Charitable_Template.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
+			 * @param 	array $args               All the parsed arguments.
+	         * @return 	false|Charitable_Template
+	         */
 			$template = apply_filters( 'charitable_campaigns_shortcode_template', false, $args );
 
 			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
@@ -58,14 +66,18 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 
 			if ( ! $template->template_file_exists() ) {
 				return false;
-			}			
+			}
 
-			$view_args = apply_filters( 'charitable_campaigns_shortcode_view_args', array(
-				'campaigns'  => $args['campaigns'],
-				'columns'    => $args['columns'],
-				'button'     => $args['button'],
-				'responsive' => $args['responsive'],
-			), $args );
+			/**
+			 * Modify the view arguments that are passed to the campaigns shortcode template.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	array $view_args The arguments to pass.
+			 * @param 	array $args      All the parsed arguments.
+	         * @return 	array
+	         */
+			$view_args = apply_filters( 'charitable_campaigns_shortcode_view_args', charitable_array_subset( $args, array( 'campaigns', 'columns', 'button', 'responsive' ) ), $args );
 
 			$template->set_view_args( $view_args );
 
@@ -73,6 +85,15 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 
 			$template->render();
 
+			/**
+			 * Customize the output of the shortcode.
+			 *
+			 * @since 	1.0.0
+			 *
+			 * @param 	string $content The content to be displayed.
+			 * @param 	array  $args    All the parsed arguments.
+	         * @return 	string
+	         */
 			return apply_filters( 'charitable_campaigns_shortcode', ob_get_clean(), $args );
 		}
 

@@ -29,6 +29,14 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @param   array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
+			/**
+			 * Filter the default arguments for Charitable_Donor_Query.
+			 *
+			 * @since 	?
+			 *
+			 * @param 	array $args The default arguments.
+	         * @return 	array
+	         */
 			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
 				'output'          => 'donors',
 				'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
@@ -42,11 +50,13 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				'donor_id'        => 0,
 			) );
 
-			$this->args = wp_parse_args( $args, $defaults );
+			$this->args             = wp_parse_args( $args, $defaults );
+			$this->args['campaign'] = $this->sanitize_campaign();
+			$this->position         = 0;
 
-			$this->position = 0;
 			$this->prepare_query();
-			$this->results = $this->get_donors();
+
+			$this->results 			= $this->get_donors();
 		}
 
 		/**
@@ -63,16 +73,20 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				return $records;
 			}
 
-			$objects = array();
+			return array_map( array( $this, 'get_donor_object' ), $records );
+		}
 
-			foreach ( $records as $row ) {
-
-				$donation_id = isset( $row->donation_id ) ? $row->donation_id : false;
-				$objects[] = new Charitable_Donor( $row->donor_id, $donation_id );
-
-			}
-
-			return $objects;
+		/**
+		 * Returns a Charitable_Donor object for a database record.
+		 *
+		 * @since   1.5.0
+		 *
+		 * @param 	object $record Database record for the donor.
+		 * @return  Charitable_Donor
+		 */
+		public function get_donor_object( $record ) {
+			$donation_id = isset( $record->donation_id ) ? $record->donation_id : false;
+			return new Charitable_Donor( $record->donor_id, $donation_id );
 		}
 
 		/**
@@ -189,6 +203,27 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			add_action( 'charitable_post_query',  array( $this, 'unhook_callbacks' ) );
+		}
+
+		/**
+		 * Sanitize the campaign argument.
+		 *
+		 * @since   1.5.0
+		 *
+		 * @return  int
+		 */
+		protected function sanitize_campaign() {
+			switch ( $this->args['campaign'] ) {
+				case '':
+				case 'all':
+					return 0;
+
+				case 'current':
+					return charitable_get_current_campaign_id();
+
+				default:
+					return $this->args['campaign'];
+			}
 		}
 	}
 

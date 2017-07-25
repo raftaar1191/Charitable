@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.4.18
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -17,10 +17,11 @@ if ( ! isset( $view_args['form'] ) ) {
 /**
  * @var Charitable_Donation_Form
  */
-$form      = $view_args['form'];
-$campaign  = $form->get_campaign();
-$suggested = $campaign->get_suggested_donations();
-$amount    = $campaign->get_donation_amount_in_session();
+$form            = $view_args['form'];
+$campaign        = $form->get_campaign();
+$suggested       = $campaign->get_suggested_donations();
+$amount          = $campaign->get_donation_amount_in_session();
+$currency_helper = charitable_get_currency_helper();
 
 if ( empty( $suggested ) && ! $campaign->get( 'allow_custom_donations' ) ) {
 	return;
@@ -69,10 +70,10 @@ do_action( 'charitable_donation_form_before_donation_amount', $view_args['form']
 						id="<?php echo $field_id ?>"
 						type="radio"
 						name="donation_amount"
-						value="<?php echo $suggestion['amount'] ?>" <?php echo $checked ?>
+						value="<?php echo esc_attr( $currency_helper->sanitize_database_amount( $suggestion['amount'] ) ) ?>" <?php echo $checked ?>
 					/><?php printf(
 						'<span class="amount">%s</span> <span class="description">%s</span>',
-						charitable_format_money( $suggestion['amount'] ),
+						charitable_format_money( $suggestion['amount'], false, true ),
 						isset( $suggestion['description'] ) ? $suggestion['description'] : ''
 					) ?>
 				</label>

@@ -78,19 +78,20 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * 50.00 -> $50.00
 		 *
-		 * @since 1.0.0
+		 * @since 	1.0.0
 		 *
 		 * @param 	string    $amount        The amount to convert.
 		 * @param 	int|false $decimal_count Optional. If not set, default decimal count will be used.
+		 * @param 	boolean   $db_format     Optional. Whether the amount is in db format (i.e. using decimals for cents, regardless of site settings).
 		 * @return 	string|WP_Error
 		 */
-		public function get_monetary_amount( $amount, $decimal_count = false ) {
+		public function get_monetary_amount( $amount, $decimal_count = false, $db_format = false ) {
 
 			if ( false === $decimal_count ) {
 				$decimal_count = charitable_get_option( 'decimal_count', 2 );
 			}
 
-			$amount = $this->sanitize_monetary_amount( strval( $amount ) );
+			$amount = $this->sanitize_monetary_amount( strval( $amount ), $db_format );
 
 			$amount = number_format(
 				$amount,
@@ -110,12 +111,14 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * $50.00 -> 50.00
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
-		 * @param 	string $amount The amount to sanitize.
+		 * @param 	string  $amount    The amount to sanitize.
+		 * @param 	boolean $db_format Optional. Whether the amount is in db format (i.e. using decimals for cents, regardless of site settings).
 		 * @return 	float|WP_Error
 		 */
-		public function sanitize_monetary_amount( $amount ) {
+		public function sanitize_monetary_amount( $amount, $db_format = false ) {
+
 			/* Sending anything other than a string can cause unexpected returns, so we require strings. */
 			if ( ! is_string( $amount ) ) {
 
@@ -134,7 +137,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			 *
 			 * 12.500,50 -> 12500.50
 			 */
-			if ( $this->is_comma_decimal() ) {
+			if ( ! $db_format && $this->is_comma_decimal() ) {
 				/* Convert to 12.500_50 */
 				$amount = str_replace( ',', '_', $amount );
 				/* Convert to 12500_50 */
