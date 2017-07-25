@@ -19,34 +19,34 @@ if ( ! interface_exists( 'Charitable_Donation_Form_Interface' ) ) :
 /**
  * Charitable_Donation_Form_Interface interface.
  *
- * @since		1.0.0
+ * @since 1.0.0
  */
 interface Charitable_Donation_Form_Interface {
 
 	/**
 	 * Render the donation form.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return 	void
-	 * @access 	public
-	 * @since 	1.0.0
 	 */
 	public function render();
 
 	/**
 	 * Validate the submitted values.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return  boolean
-	 * @access  public
-	 * @since   1.0.0
 	 */
 	public function validate_submission();
 
 	/**
 	 * Return the donation values.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return  array
-	 * @access  public
-	 * @since   1.0.0
 	 */
 	public function get_donation_values();	
 }

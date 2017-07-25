@@ -17,10 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Displays a template.
  *
+ * @since 1.0.0
+ *
  * @param 	string|string[] $template_name A single template name or an ordered array of template.
  * @param 	mixed[] $args 				   Optional array of arguments to pass to the view.
  * @return 	Charitable_Template
- * @since 	1.0.0
  */
 function charitable_template( $template_name, array $args = array() ) {
 	if ( empty( $args ) ) {
@@ -37,9 +38,10 @@ function charitable_template( $template_name, array $args = array() ) {
 /**
  * Return the template path if the template exists. Otherwise, return default.
  *
+ * @since 1.0.0
+ *
  * @param 	string|string[] $template
  * @return  string The template path if the template exists. Otherwise, return default.
- * @since   1.0.0
  */
 function charitable_get_template_path( $template, $default = '' ) {
 	$t = new Charitable_Template( $template, false );
@@ -59,9 +61,10 @@ function charitable_get_template_path( $template, $default = '' ) {
  *
  * Based on http://manas.tungare.name/software/css-compression-in-php/
  *
+ * @since 1.2.0
+ *
  * @param   string $css The block of CSS to be compressed.
  * @return  string The compressed CSS
- * @since   1.2.0
  */
 function charitable_compress_css( $css ) {
 	/* 1. Remove comments */
@@ -79,9 +82,10 @@ function charitable_compress_css( $css ) {
 /**
  * Provides arguments passed to campaigns within the loop.
  *
+ * @since 1.2.3
+ *
  * @param   mixed[] $view_args Optional. If called by the shortcode, this will contain the arguments passed to the shortcode.
  * @return  mixed[]
- * @since   1.2.3
  */
 function charitable_campaign_loop_args( $view_args = array() ) {
 	$defaults = array(
@@ -96,9 +100,10 @@ function charitable_campaign_loop_args( $view_args = array() ) {
 /**
  * Processes arbitrary form attributes into HTML-safe key/value pairs
  *
+ * @since 1.3.0
+ *
  * @param   array $field Array defining the form field attributes.
  * @return  string       The formatted HTML-safe attributes
- * @since   1.3.0
  * @see     Charitable_Form::render_field()
  */
 function charitable_get_arbitrary_attributes( $field ) {
@@ -130,8 +135,9 @@ function charitable_get_arbitrary_attributes( $field ) {
  * Charitable's filters touching other the_content instances outside the main
  * loop.
  *
+ * @since 1.4.11
+ *
  * @return 	boolean
- * @since 	1.4.11
  */
 function charitable_is_main_loop() {
 	return is_single() && in_the_loop() && is_main_query();
@@ -142,8 +148,9 @@ function charitable_is_main_loop() {
  *
  * @see 	https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
  * @global 	WP 		$wp
+ * @since 1.0.0
+ *
  * @return  string
- * @since   1.0.0
  */
 function charitable_get_current_url() {
 	return home_url( add_query_arg( null, null ) );
@@ -152,8 +159,9 @@ function charitable_get_current_url() {
 /**
  * Returns the URL to which the user should be redirected after signing on or registering an account.
  *
+ * @since 1.0.0
+ *
  * @return  string
- * @since   1.0.0
  */
 function charitable_get_login_redirect_url() {
 	if ( isset( $_REQUEST['redirect_to'] ) ) {

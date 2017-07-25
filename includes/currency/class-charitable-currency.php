@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 	 * Charitable_Currency
 	 *
 	 * @final
-	 * @since		1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Currency {
 
@@ -26,8 +26,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Currency|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -55,8 +53,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @access  private
-		 * @since   1.2.3
+		 * @since 1.2.3
 		 */
 		private function __construct() {
 		}
@@ -64,9 +61,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.3
+		 *
 		 * @return  Charitable_Currency
-		 * @access  public
-		 * @since   1.2.3
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -114,11 +111,11 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * $50.00 -> 50.00
 		 *
+		 * @since   1.0.0
+		 *
 		 * @param 	string  $amount    The amount to sanitize.
 		 * @param 	boolean $db_format Optional. Whether the amount is in db format (i.e. using decimals for cents, regardless of site settings).
 		 * @return 	float|WP_Error
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function sanitize_monetary_amount( $amount, $db_format = false ) {
 
@@ -157,10 +154,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @param 	string $amount The amount to be sanitized.
 		 * @return  string
-		 * @access  public
-		 * @since   1.3.0
 		 */
 		public function sanitize_database_amount( $amount ) {
 			if ( $this->is_comma_decimal() ) {
@@ -173,9 +170,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Checks whether the comma is being used as the separator.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return 	boolean
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function is_comma_decimal() {
 			return ( ',' == charitable_get_option( 'decimal_separator', '.' ) );
@@ -185,9 +182,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the number of decimals to use.
 		 *
 		 * @uses 	charitable_currency_decimal_count
+		 * @since 1.0.0
+		 *
 		 * @return 	int
-		 * @access 	public
-		 * @since 	1.0.0
 		 */
 		public function get_decimals() {
 			return charitable_get_option( 'decimal_count', 2 );
@@ -197,9 +194,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the currency format based on the position of the currency symbol.
 		 *
 		 * @uses 	charitable_currency_format
+		 * @since 1.0.0
+		 *
 		 * @return 	string
-		 * @access 	public
-		 * @since 	1.0.0
 		 */
 		public function get_currency_format() {
 			$symbol_position = charitable_get_option( 'currency_format', 'left' );
@@ -227,9 +224,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Get the currency format for accounting.js
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @since   1.3.0
 		 */
 		public function get_accounting_js_format() {
 			return apply_filters( 'charitable_accounting_js_currency_format', '%s%v' );
@@ -239,9 +236,9 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return every currency symbol used with the
 		 *
 		 * @uses 	charitable_currencies		Hook to add custom currencies.
+		 * @since 1.0.0
+		 *
 		 * @return 	string[]
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function get_all_currencies() {
 			if ( empty( $this->currencies ) ) {
@@ -303,10 +300,10 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Credit: This is based on the WooCommerce implemenation.
 		 *
 		 * @uses 	charitable_currency_symbol
+		 * @since 1.0.0
+		 *
 		 * @param 	string $currency Optional. If not set, currency is based on currently selected currency.
 		 * @return 	string
-		 * @access 	public
-		 * @since 	1.0.0
 		 */
 		public function get_currency_symbol( $currency = '' ) {
 			if ( ! strlen( $currency ) ) {

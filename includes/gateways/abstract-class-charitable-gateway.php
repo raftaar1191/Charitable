@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 	 * Charitable_Gateway
 	 *
 	 * @abstract
-	 * @since		1.0.0
+	 * @since 1.0.0
 	 */
 	abstract class Charitable_Gateway implements Charitable_Gateway_Interface {
 
@@ -29,15 +29,13 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 
 		/**
 		 * @var     string Name of the payment gateway.
-		 * @access  protected
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		protected $name;
 
 		/**
 		 * @var     array The default values for all settings added by the gateway.
-		 * @access  protected
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		protected $defaults;
 
@@ -45,17 +43,16 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Supported features such as 'credit-card', and 'recurring' donations
 		 *
 		 * @var     string[]
-		 * @access  protected
-		 * @since   1.3.0
+		 * @since 1.3.0
 		 */
 		protected $supports = array();
 
 		/**
 		 * Return the gateway name.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_name() {
 			return $this->name;
@@ -64,9 +61,9 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Returns the default gateway label to be displayed to donors.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_default_label() {
 			return isset( $this->defaults['label'] ) ? $this->defaults['label'] : $this->get_name();
@@ -75,10 +72,10 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Provide default gateway settings fields.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   array   $settings
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function default_gateway_settings( $settings ) {
 			return array(
@@ -100,9 +97,9 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Return the settings for this gateway.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_settings() {
 			return charitable_get_option( 'gateways_' . $this->get_gateway_id(), array() );
@@ -111,9 +108,9 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Retrieve the gateway label.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_label() {
 			return charitable_get_option( 'label', $this->get_default_label(), $this->get_settings() );
@@ -122,10 +119,10 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Return the value for a particular gateway setting.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   string $setting
 		 * @return  mixed
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_value( $setting ) {
 			$default = isset( $this->defaults[ $setting ] ) ? $this->defaults[ $setting ] : '';
@@ -137,9 +134,10 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 *
 		 * Gateways should override this to declare support (or lack of support) for a feature.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @param   string $feature string The name of a feature to test support for.
 		 * @return  bool True if the gateway supports the feature, false otherwise.
-		 * @since   1.3.0
 		 */
 		public function supports( $feature ) {
 			$supported = in_array( $feature, $this->supports ) ? true : false;
@@ -158,9 +156,9 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * If the gateway requires different fields, this can simply be redefined
 		 * in the child class.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_credit_card_fields() {
 			return apply_filters( 'charitable_credit_card_fields', array(
@@ -198,12 +196,11 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Redirect the donation to the processing page.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   mixed $result
 		 * @param   int $donation_id
 		 * @return  array
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function redirect_to_processing( $result, $donation_id ) {
 			return array(
@@ -218,9 +215,9 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Returns whether a credit card form is required for this gateway.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.0.0
 		 *
 		 * @deprecated
 		 */
@@ -232,10 +229,10 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   array   $settings
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		abstract public function gateway_settings( $settings );
 	}

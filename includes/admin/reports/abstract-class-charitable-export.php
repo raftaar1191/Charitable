@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 	 * Charitable_Export
 	 *
 	 * @abstract
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	abstract class Charitable_Export {
 
@@ -29,28 +29,25 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 
 		/**
 		 * @var     string[] The CSV's columns.
-		 * @access  protected
 		 */
 		protected $columns;
 
 		/**
 		 * @var     mixed[] Optional array of arguments.
-		 * @access  protected
 		 */
 		protected $args;
 
 		/**
 		 * @var     mixed[] Array of default arguments.
-		 * @access  protected
 		 */
 		protected $defaults = array();
 
 		/**
 		 * Create class object.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   mixed[] $args
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
 			$this->columns = $this->get_csv_columns();
@@ -62,9 +59,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Returns whether the current user can export data.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function can_export() {
 			return (bool) apply_filters( 'charitable_export_capability', current_user_can( 'export_charitable_reports' ), $this );
@@ -73,9 +70,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Export the CSV file.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function export() {
 
@@ -102,10 +99,10 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Receives a row of data and maps it to the keys defined in the columns.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   object|array $data
 		 * @return  mixed
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function map_data( $data ) {
 			/* Cast the data to array */
@@ -127,9 +124,9 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Print the CSV document headers.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function print_headers() {
 			ignore_user_abort( true );
@@ -157,18 +154,18 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 *
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string[]
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		abstract protected function get_csv_columns();
 
 		/**
 		 * Get the data to be exported.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		abstract protected function get_data();
 	}

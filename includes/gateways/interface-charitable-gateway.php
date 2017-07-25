@@ -19,7 +19,7 @@ if ( ! interface_exists( 'Charitable_Gateway_Interface' ) ) :
 	/**
 	 * Charitable_Gateway_Interface interface.
 	 *
-	 * @since       1.2.0
+	 * @since 1.2.0
 	 */
 	interface Charitable_Gateway_Interface {
 		public static function get_gateway_id();

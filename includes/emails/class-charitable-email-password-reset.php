@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 	/**
 	 * Password Reset Email
 	 *
-	 * @since 	1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Email_Password_Reset extends Charitable_Email {
 
@@ -29,8 +29,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * Whether the email allows you to define the email recipients.
 		 *
 		 * @var     boolean
-		 * @access  protected
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $has_recipient_field = false;
 
@@ -38,8 +37,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The Password Reset email is required.
 		 *
 		 * @var     boolean
-		 * @access  protected
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $required = true;
 
@@ -47,8 +45,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The user data.
 		 *
 		 * @var     WP_User
-		 * @access  protected
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $user;
 
@@ -56,17 +53,16 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * The reset link.
 		 *
 		 * @var 	string|WP_Error
-		 * @access 	protected
-		 * @since 	1.4.0
+		 * @since 1.4.0
 		 */
 		protected $reset_link;
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @param   mixed[] $objects
-		 * @access  public
-		 * @since 	1.4.0
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -79,10 +75,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @static
-		 * @since 	1.4.0
 		 */
 		public static function get_email_id() {
 			return self::ID;
@@ -91,9 +86,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function get_fields() {
 			return apply_filters( 'charitable_email_content_fields', array(
@@ -119,9 +114,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string|WP_Error|false If the reset key could not be generated, an error is returned.
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function get_reset_link() {
 			if ( ! isset( $this->reset_link ) ) {
@@ -158,9 +153,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the reset link.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function get_user_login() {
 			if ( ! isset( $this->user ) || ! is_a( $this->user, 'WP_User' ) ) {
@@ -173,9 +168,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		* Return the recipient for the email.
 		*
+		* @since 1.0.0
+		*
 		* @return  string
-		* @access  public
-		* @since   1.0.0
 		*/
 		public function get_recipient() {
 			if ( ! isset( $this->user ) || ! is_a( $this->user, 'WP_User' ) ) {
@@ -188,9 +183,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since 	1.4.0
 		 */
 		protected function get_default_subject() {
 			return __( 'Password Reset for [charitable_email show=site_name]', 'charitable' );
@@ -199,9 +194,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since 	1.4.0
 		 */
 		protected function get_default_headline() {
 			return apply_filters( 'charitable_email_password_reset_default_headline', __( 'Reset your password', 'charitable' ), $this );
@@ -210,9 +205,9 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since 	1.4.0
 		 */
 		protected function get_default_body() {
 			ob_start();

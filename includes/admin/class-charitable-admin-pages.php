@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 	/**
 	 * Charitable_Admin_Pages
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Admin_Pages {
 
@@ -25,8 +25,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Admin_Pages|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -34,7 +32,6 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The page to use when registering sections and fields.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $admin_menu_parent_page;
 
@@ -42,15 +39,13 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		 * The capability required to view the admin menu.
 		 *
 		 * @var     string
-		 * @access  private
 		 */
 		private $admin_menu_capability;
 
 		/**
 		 * Create class object.
 		 *
-		 * @access  private
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			$this->admin_menu_capability  = apply_filters( 'charitable_admin_menu_capability', 'view_charitable_sensitive_data' );
@@ -60,9 +55,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Admin_Pages
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -75,9 +70,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Add Settings menu item under the Campaign menu tab.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_menu() {
 			add_menu_page(
@@ -115,9 +110,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Returns an array with all the submenu pages.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  private
-		 * @since   1.0.0
 		 */
 		private function get_submenu_pages() {
 			$campaign_post_type = get_post_type_object( 'campaign' );
@@ -162,9 +157,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Set up the redirect to the welcome page.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.3.0
 		 */
 		public function setup_welcome_redirect() {
 			add_action( 'admin_init', array( self::get_instance(), 'redirect_to_welcome' ) );
@@ -173,9 +168,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Redirect to the welcome page.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.3.0
 		 */
 		public function redirect_to_welcome() {
 			wp_safe_redirect( admin_url( 'admin.php?page=charitable&install=true' ) );
@@ -185,9 +180,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable settings page.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function render_settings_page() {
 			charitable_admin_view( 'settings/settings' );
@@ -196,10 +191,10 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable donations page.
 		 *
-		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
+		 * @since 1.0.0
          *
+		 * @return  void
+		 *
 		 * @deprecated 1.4.0
 		 */
 		public function render_donations_page() {
@@ -215,9 +210,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 		/**
 		 * Display the Charitable welcome page.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function render_welcome_page() {
 			charitable_admin_view( 'welcome-page/page' );

@@ -15,7 +15,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 	/**
 	 * Charitable_Donors_Widget class.
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donors_Widget extends WP_Widget {
 
@@ -45,8 +45,8 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  void
 		 */
 		public function widget( $args, $instance ) {
-			$instance 			   = $this->get_parsed_args( $instance );
-			$view_args 			   = array_merge( $args, $instance );
+			$instance 			       = $this->get_parsed_args( $instance );
+			$view_args 			       = array_merge( $args, $instance );
 			$view_args['donors']   = $this->get_widget_donors( $instance );
 			$view_args['orderby']  = $view_args['order'];
 			$view_args['order']    = 'DESC';
@@ -58,10 +58,10 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		/**
 		 * Display the widget form in the admin.
 		 *
-		 * @param   array $instance The settings for the particular instance of the widget.
-		 * @return  void
-		 * @access  public
 		 * @since   1.0.0
+		 *
+		 * @param   array $instance The current settings for the widget options.
+		 * @return  void
 		 */
 		public function form( $instance ) {
 			$args = $this->get_parsed_args( $instance );

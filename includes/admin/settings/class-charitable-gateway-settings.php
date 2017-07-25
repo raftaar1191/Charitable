@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 	 * Charitable_Gateway_Settings
 	 *
 	 * @final
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Gateway_Settings {
 
@@ -26,16 +26,13 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Gateway_Settings|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 		}
@@ -43,9 +40,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Gateway_Settings
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -58,9 +55,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Returns all the payment gateway settings fields.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_gateway_fields() {
 			if ( ! charitable_is_settings_view( 'gateways' ) ) {
@@ -96,9 +93,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Add settings for each individual payment gateway.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_individual_gateway_fields( $fields ) {
 			foreach ( charitable_get_helper( 'gateways' )->get_active_gateways() as $gateway ) {
@@ -116,10 +113,10 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Add gateway keys to the settings groups.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   string[] $groups
 		 * @return  string[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_gateway_settings_dynamic_groups( $groups ) {
 			foreach ( charitable_get_helper( 'gateways' )->get_active_gateways() as $gateway_key => $gateway ) {
@@ -136,9 +133,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Display table with available payment gateways.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function render_gateways_table( $args ) {
 			charitable_admin_view( 'settings/gateways', $args );
@@ -147,10 +144,10 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Display the PayPal sandbox testing tool at the end of the PayPal gateway settings page.
 		 *
+		 * @since 1.4.3
+		 *
 		 * @param   string $group
 		 * @return  void
-		 * @access  public
-		 * @since   1.4.3
 		 */
 		public function render_paypal_sandbox_test( $group ) {
 
@@ -165,9 +162,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Redirect the user to PayPal after they initiate the sandbox test.
 		 *
+		 * @since 1.4.3
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.4.3
 		 */
 		public function redirect_paypal_sandbox_test() {
 
@@ -196,9 +193,9 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Redirect the user to PayPal after they initiate the sandbox test.
 		 *
+		 * @since 1.4.3
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.4.3
 		 */
 		public function redirect_paypal_sandbox_test_return() {
 

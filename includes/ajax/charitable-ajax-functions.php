@@ -19,8 +19,9 @@ if ( ! function_exists( 'charitable_ajax_get_donation_form' ) ) :
 	/**
 	 * Returns the donation form content for a particular campaign, through AJAX.
 	 *
+	 * @since 1.2.3
+	 *
 	 * @return  void
-	 * @since   1.2.3
 	 */
 	function charitable_ajax_get_donation_form() {
 		if ( ! isset( $_POST['campaign_id'] ) ) {

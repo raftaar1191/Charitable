@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 	/**
 	 * Charitable_i18n
 	 *
-	 * @since       1.1.2
+	 * @since 1.1.2
 	 */
 	class Charitable_i18n {
 
@@ -25,8 +25,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_i18n|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -41,7 +39,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The path to the languages directory.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $languages_directory;
 
@@ -49,7 +46,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The site locale.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $locale;
 
@@ -57,15 +53,13 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 * The MO filename.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $mofile;
 
 		/**
 		 * Set up the class.
 		 *
-		 * @access  private
-		 * @since   1.1.2
+		 * @since 1.1.2
 		 */
 		private function __construct() {
 			$this->languages_directory = apply_filters( 'charitable_languages_directory', 'charitable/i18n/languages' );
@@ -78,9 +72,9 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_i18n
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -93,9 +87,9 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Create class object.
 		 *
+		 * @since 1.1.2
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.1.2
 		 */
 		public function load_textdomain() {
 			foreach ( array( 'global', 'local' ) as $source ) {
@@ -115,10 +109,10 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Get the path to the MO file.
 		 *
+		 * @since 1.1.2
+		 *
 		 * @param   string $source Either 'local' or 'global'.
 		 * @return  string
-		 * @access  private
-		 * @since   1.1.2
 		 */
 		private function get_mofile_path( $source = 'local' ) {
 			if ( 'global' == $source ) {

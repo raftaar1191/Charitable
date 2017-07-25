@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 	/**
 	 * Charitable_Post_Types
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Post_Types {
 
@@ -24,17 +24,15 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Post_Types|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Post_Types
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -51,8 +49,7 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @access  private
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'init', array( $this, 'register_post_types' ), 5 );
@@ -64,9 +61,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		 * Register plugin post types.
 		 *
 		 * @hook    init
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function register_post_types() {
 			/**
@@ -161,9 +158,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Register custom post statuses.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function register_post_statuses() {
 			register_post_status( 'charitable-pending', array(
@@ -224,9 +221,9 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 		/**
 		 * Register the campaign category taxonomy.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function register_taxonomies() {
 			$labels = array(

@@ -5,9 +5,10 @@ class Charitable_UnitTestCase extends WP_UnitTestCase {
 	/**
 	 * Set a Charitable setting.
 	 *
+	 * @since 1.4.0
+	 *
 	 * @param 	string $setting
 	 * @param 	mixed  $value
-	 * @since 	1.4.0
 	 */
 	public function set_charitable_option( $setting, $value ) {
 		$settings = get_option( 'charitable_settings' );
@@ -25,8 +26,9 @@ class Charitable_UnitTestCase extends WP_UnitTestCase {
 	 *
 	 * @global  WP_Rewrite $wp_rewrite
 	 *
+	 * @since 1.4.0
+	 *
 	 * @param   string $structure Optional. Permalink structure to set. Default empty.
-	 * @since   1.4.0
 	 */
 	public function set_permalink_structure( $structure = '' ) {
 		global $wp_rewrite;

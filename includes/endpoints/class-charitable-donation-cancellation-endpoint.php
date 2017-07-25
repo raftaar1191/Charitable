@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 	 * Charitable_Donation_Cancellation_Endpoint
 	 *
 	 * @abstract
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Donation_Cancellation_Endpoint extends Charitable_Endpoint {
 
@@ -29,10 +29,9 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 		/**
 		 * Return the endpoint ID.
 		 *
+		 * @since 1.5.0
+		 *
 		 * @return 	string
-		 * @access 	public
-		 * @static
-		 * @since 	1.5.0
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -41,8 +40,7 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @access 	public
-		 * @since 	1.5.0
+		 * @since 1.5.0
 		 */
 		public function setup_rewrite_rules() {
 		}
@@ -51,10 +49,10 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 		 * Return the endpoint URL.
 		 *
 		 * @global 	WP_Rewrite $wp_rewrite
+		 * @since 1.5.0
+		 *
 		 * @param 	array      $args
 		 * @return  string
-		 * @access  public
-		 * @since   1.5.0
 		 */
 		public function get_page_url( $args = array() ) {
 
@@ -83,10 +81,10 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @global  WP_Query $wp_query
+		 * @since 1.5.0
+		 *
 		 * @param 	array    $args
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.5.0
 		 */
 		public function is_page( $args = array() ) {
 

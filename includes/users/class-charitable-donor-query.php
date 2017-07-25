@@ -17,16 +17,16 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 	/**
 	 * Charitable_Donor_Query
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donor_Query extends Charitable_Query {
 
 		/**
 		 * Create new query object.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   array $args Query arguments.
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
 			/**
@@ -62,9 +62,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Return list of donor IDs together with the number of donations they have made.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  object[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_donors() {
 			$records = $this->query();
@@ -92,9 +92,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up fields query argument.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function setup_fields() {
 			if ( ! $this->get( 'distinct_donors', true ) ) {
@@ -116,9 +116,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up orderby query argument.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function setup_orderby() {
 			$orderby = $this->get( 'orderby', false );
@@ -145,9 +145,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up query grouping.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function setup_grouping() {
 			if ( ! $this->get( 'distinct_donors', false ) ) {
@@ -162,9 +162,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Remove any hooks that have been attached by the class to prevent contaminating other queries.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function unhook_callbacks() {
 			remove_action( 'charitable_pre_query',     array( $this, 'setup_fields' ) );
@@ -189,9 +189,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up callbacks for WP_Query filters.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function prepare_query() {
 			add_action( 'charitable_pre_query',   array( $this, 'setup_fields' ) );

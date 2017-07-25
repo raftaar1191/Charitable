@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 	 * Charitable_Email_Settings
 	 *
 	 * @final
-	 * @since      1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Email_Settings {
 
@@ -26,17 +26,15 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Email_Settings|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Email_Settings
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -49,8 +47,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @access  private
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 		}
@@ -58,9 +55,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns all the payment email settings fields.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_email_fields() {
 			if ( ! charitable_is_settings_view( 'emails' ) ) {
@@ -110,9 +107,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add settings for each individual payment email.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_individual_email_fields( $fields ) {
 			foreach ( charitable_get_helper( 'emails' )->get_available_emails() as $email ) {
@@ -126,10 +123,10 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Add email keys to the settings groups.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   string[] $groups
 		 * @return  string[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function add_email_settings_dynamic_groups( $groups ) {
 			foreach ( charitable_get_helper( 'emails' )->get_available_emails() as $email_key => $email_class ) {
@@ -146,9 +143,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Display table with emails.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function render_emails_table( $args ) {
 			charitable_admin_view( 'settings/emails', $args );
@@ -157,9 +154,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Checks whether we're looking at an individual email's settings page.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  boolean
-		 * @access  private
-		 * @since   1.0.0
 		 */
 		private function is_individual_email_settings_page() {
 			return isset( $_GET['edit_email'] );
@@ -168,9 +165,9 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		/**
 		 * Returns the helper class of the email we're editing.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  Charitable_Email|false
-		 * @access  private
-		 * @since   1.0.0
 		 */
 		private function get_current_email_class() {
 			$email = charitable_get_helper( 'emails' )->get_email( $_GET['edit_email'] );

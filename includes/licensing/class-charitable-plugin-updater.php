@@ -44,9 +44,9 @@ class Charitable_Plugin_Updater {
 	 *
 	 * @uses    add_filter()
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return  void
-	 * @access  public
-	 * @since   1.0.0
 	 */
 	public function init() {
 		add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
@@ -57,9 +57,9 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Return the update information for the plugin.
 	 *
+	 * @since 1.4.0
+	 *
 	 * @return  false|object
-	 * @access  public
-	 * @since   1.4.0
 	 */
 	public function get_version_info() {
 
@@ -179,12 +179,12 @@ class Charitable_Plugin_Updater {
 	 *
 	 * @uses    api_request()
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param   mixed $data
 	 * @param   string $action
 	 * @param   object $args
 	 * @return  object $data
-	 * @access  public
-	 * @since   1.0.0
 	 */
 	public function plugins_api_filter( $data, $action = '', $args = null ) {
 
@@ -218,11 +218,11 @@ class Charitable_Plugin_Updater {
 	 * @uses    wp_remote_post()
 	 * @uses    is_wp_error()
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param   string $action The requested action.
 	 * @param   array $data Parameters for the API action.
 	 * @return  false||object
-	 * @access  private
-	 * @since   1.0.0
 	 */
 	private function api_request( $action, $data ) {
 
@@ -268,9 +268,9 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Display the changelog.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return  void
-	 * @access  public
-	 * @since   1.0.0
 	 */
 	public function show_changelog() {
 

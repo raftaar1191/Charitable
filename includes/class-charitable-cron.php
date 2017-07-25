@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 	/**
 	 * Charitable_Cron
 	 *
-	 * @since       1.1.0
+	 * @since 1.1.0
 	 */
 	class Charitable_Cron {
 
@@ -25,17 +25,15 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Cron|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Cron
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -48,8 +46,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @access  private
-		 * @since   1.1.0
+		 * @since 1.1.0
 		 */
 		private function __construct() {
 			add_action( 'charitable_daily_scheduled_events', array( $this, 'check_expired_campaigns' ) );
@@ -58,10 +55,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Schedule Charitable event hooks.
 		 *
+		 * @since 1.1.0
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @static
-		 * @since   1.1.0
 		 */
 		public static function schedule_events() {
 			if ( ! wp_next_scheduled( 'charitable_daily_scheduled_events' ) ) {
@@ -74,9 +70,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Check for expired campaigns.
 		 *
+		 * @since 1.1.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.1.0
 		 */
 		public function check_expired_campaigns() {
 			$yesterday = date( 'Y-m-d H:i:s', strtotime( '-24 hours' ) );

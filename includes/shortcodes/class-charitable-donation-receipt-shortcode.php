@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Shortcode' ) ) :
 	/**
 	 * Charitable_Donation_Receipt_Shortcode class.
 	 *
-	 * @since       1.2.0
+	 * @since 1.2.0
 	 */
 	class Charitable_Donation_Receipt_Shortcode {
 
@@ -25,11 +25,10 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Shortcode' ) ) :
 		 *
 		 * This receives the user-defined attributes and passes the logic off to the class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @param   array   $atts   User-defined shortcode attributes.
 		 * @return  string
-		 * @access  public
-		 * @static
-		 * @since   1.2.0
 		 */
 		public static function display( $atts ) {
 			return apply_filters( 'charitable_donation_receipt_shortcode', charitable_template_donation_receipt_output( '' ) );

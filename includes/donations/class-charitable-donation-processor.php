@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 	/**
 	 * Charitable Donation Processor.
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donation_Processor {
 
@@ -25,8 +25,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Donation_Processor|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
@@ -34,7 +32,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The campaign receiving a donation.
 		 *
 		 * @var     Charitable_Campaign|false
-		 * @access  protected
 		 */
 		protected $campaign;
 
@@ -42,7 +39,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The donation data.
 		 *
 		 * @var     mixed[]
-		 * @access  protected
 		 */
 		protected $donation_data;
 
@@ -50,7 +46,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The campaign donations array.
 		 *
 		 * @var     array
-		 * @access  protected
 		 */
 		protected $campaign_donations_data;
 
@@ -58,7 +53,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The donor ID for the current donation.
 		 *
 		 * @var     int
-		 * @access  protected
 		 */
 		protected $donor_id;
 
@@ -66,15 +60,13 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * The donoration ID for the current donation.
 		 *
 		 * @var     int
-		 * @access  protected
 		 */
 		protected $donation_id;
 
 		/**
 		 * Create class object. A protected constructor, so this is used in a singleton context.
 		 *
-		 * @access  protected
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		protected function __construct() {
 			$this->campaign = charitable_get_current_campaign();
@@ -83,9 +75,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  Charitable_Donation_Processor
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -101,10 +93,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * This is primarily useful for testing purposes, as it allows you to
 		 * create multiple donations in a single request.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.3.0
 		 */
 		public static function destroy() {
 			self::$instance = null;
@@ -113,9 +104,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the current campaign.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  Charitable_Campaign|false False if no campaign is set. Campaign object otherwise.
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_campaign() {
 			return $this->campaign;
@@ -124,9 +115,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the donation ID.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  int
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function get_donation_id() {
 			return $this->donation_id;
@@ -135,10 +126,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Executed when a user first clicks the Donate button on a campaign.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function add_donation_to_session() {
 			$processor = self::get_instance();
@@ -172,9 +162,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * This is used by all donation form submissions, AJAX or not.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  mixed
-		 * @access  public
-		 * @since   1.3.0
 		 */
 		public function process_donation() {
 			$processor = self::get_instance();
@@ -279,10 +269,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save a donation submitted through a page reload (i.e. not AJAX).
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function process_donation_form_submission() {
 
@@ -296,10 +285,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a donation with AJAX.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.3.0
 		 */
 		public static function ajax_process_donation_form_submission() {
 			if ( ! isset( $_POST['campaign_id'] ) ) {
@@ -336,10 +324,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save a donation.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function make_donation_streamlined() {
 
@@ -392,10 +379,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * We use this when integrating third-party systems like Easy Digital Downloads and
 		 * WooCommerce.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   mixed[] $values Submitted donation values.
 		 * @return  int $donation_id Returns 0 in case of failure. Positive donation ID otherwise.
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function save_donation( array $values ) {
 			/**
@@ -494,10 +481,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Inserts the campaign donations into the campaign_donations table.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  int The number of donations inserted.
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function save_campaign_donations( $donation_id ) {
 			$campaigns = $this->get_campaign_donations_data();
@@ -546,10 +533,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save the meta for the donation.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function save_donation_meta( $donation_id ) {
 			$meta = array(
@@ -574,11 +561,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a message to the donation log.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param 	int    $donation_id The donation ID.
 		 * @param   string $message     The message to add to the log.
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function update_donation_log( $donation_id, $message ) {
 			$donation = charitable_get_donation( $donation_id );
@@ -590,9 +577,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the submitted donation data.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  mixed[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_donation_data() {
 			return $this->donation_data;
@@ -601,11 +588,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the submitted value for a particular key.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   string $key     The key to search for.
 		 * @param   mixed  $default Fallback value to return if the data is not set.
 		 * @return  mixed
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_donation_data_value( $key, $default = false ) {
 			$data = $this->get_donation_data();
@@ -615,11 +602,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Set a value for a particular key.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @param   string $key The key to set.
 		 * @param   mixed  $value The value to be set.
 		 * @return  void
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function set_donation_data_value( $key, $value ) {
 			$this->donation_data[ $key ] = $value;
@@ -628,9 +615,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the campaign donations array, or false if the data is invalid.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string[]|false
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_campaign_donations_data() {
 			if ( ! isset( $this->campaign_donations_data ) ) {
@@ -662,9 +649,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the donor_id for the current donation.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  int
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_donor_id() {
 			if ( ! isset( $this->donor_id ) ) {
@@ -698,10 +685,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @uses    Charitable_Donation_Processor::get_redirection_after_gateway_processing()
 		 *
+		 * @since 1.3.0
+		 *
 		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  void
-		 * @access  private
-		 * @since   1.3.0
 		 */
 		private function redirect_after_gateway_processing( $gateway_processing ) {
 			$redirect_url = $this->get_redirection_after_gateway_processing( $gateway_processing );
@@ -740,10 +727,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the URL that the donor should be redirected to.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  string
-		 * @access  private
-		 * @since   1.3.0
 		 */
 		private function get_redirection_after_gateway_processing( $gateway_processing ) {
 			if ( false == $gateway_processing ) {
@@ -767,9 +754,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Validate user data passed to insert.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  boolean
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function is_valid_user_data() {
 			$ret = $this->get_donation_data_value( 'user_id' ) || $this->get_donation_data_value( 'donor_id' );
@@ -785,9 +772,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Parse the donation data, based on the passed $values array.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function parse_donation_data() {
 			$core_values = array(
@@ -809,9 +796,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the donation status. Defaults to charitable-pending.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function get_donation_status() {
 			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
@@ -826,9 +813,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the name of the donor.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function get_donor_name() {
 			$user = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
@@ -841,9 +828,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns a comma separated list of the campaigns that are being donated to.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  string
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function get_campaign_names() {
 			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
@@ -853,9 +840,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Set a unique key for the donation.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function set_donation_key() {
 			$this->donation_data['donation_key'] = strtolower( md5( uniqid() ) );
@@ -864,10 +851,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Checks whether the given gateway has been updated for compatibility with 1.3.
 		 *
+		 * @since 1.3.0
+		 *
 		 * @param   string $gateway The gateway for the donation.
 		 * @return  boolean
-		 * @access  private
-		 * @since   1.3.0
 		 */
 		private function gateway_is_130_compatible( $gateway ) {
 			return Charitable_Gateways::get_instance()->get_gateway_object( $gateway )->supports( '1.3.0' );
@@ -880,10 +867,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @deprecated
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   string $gateway The gateway for the donation.
 		 * @return  string
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_ipn_url( $gateway ) {
 			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_get_ipn_url()' );

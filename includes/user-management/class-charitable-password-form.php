@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Password_Form' ) ) :
 /**
  * Charitable_Password_Form
  *
- * @since       1.0.0
+ * @since 1.0.0
  */
 class Charitable_Password_Form extends Charitable_Form {
 
@@ -26,7 +26,6 @@ class Charitable_Password_Form extends Charitable_Form {
 
      *
      * @var     array
-     * @access  protected
      */
     protected $shortcode_args;
 
@@ -45,7 +44,6 @@ class Charitable_Password_Form extends Charitable_Form {
 
      *
      * @var     string
-     * @access  protected
      */
     protected $form_action = 'update_password';
 
@@ -54,16 +52,15 @@ class Charitable_Password_Form extends Charitable_Form {
 
      *
      * @var     Charitable_User
-     * @access  protected
      */
     protected $user;
 
     /**
      * Create class object.
      *
+     * @since 1.0.0
+     *
      * @param   array       $args       User-defined shortcode attributes.
-     * @access  public
-     * @since   1.0.0
      */
     public function __construct( $args = array() ) {    
         $this->id = uniqid();   
@@ -74,9 +71,9 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Return the current user's Charitable_User object.  
      *
+     * @since 1.0.0
+     *
      * @return  Charitable_User
-     * @access  public
-     * @since   1.0.0
      */
     public function get_user() {
         if ( ! isset( $this->user ) ) {
@@ -89,11 +86,11 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Returns the value of a particular key.   
      *
+     * @since 1.0.0
+     *
      * @param   string $key
      * @param   string $default     Optional. The value that will be used if none is set.
      * @return  mixed
-     * @access  public
-     * @since   1.0.0
      */
     public function get_user_value( $key, $default = "" ) {
         if ( isset( $_POST[ $key ] ) ) {
@@ -122,9 +119,9 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Return the core user fields.     
      *
+     * @since 1.0.0
+     *
      * @return  array
-     * @access  public
-     * @since   1.0.0
      */
     public function get_user_fields() {
         $user_fields = apply_filters( 'charitable_user_fields', array(          
@@ -179,9 +176,9 @@ class Charitable_Password_Form extends Charitable_Form {
      * Return the user's address fields.
 
      *
+     * @since 1.0.0
+     *
      * @return  array
-     * @access  public
-     * @since   1.0.0
      */
     public function get_address_fields() {
         $address_fields = apply_filters( 'charitable_user_address_fields', array(
@@ -246,9 +243,9 @@ class Charitable_Password_Form extends Charitable_Form {
      * Return the social fields.
 
      *
+     * @since 1.0.0
+     *
      * @return  array
-     * @access  public
-     * @since   1.0.0
      */
     public function get_social_fields() {
         $social_fields = apply_filters( 'charitable_user_social_fields', array(
@@ -283,9 +280,9 @@ class Charitable_Password_Form extends Charitable_Form {
     /**
      * Password fields to be displayed.      
      *
+     * @since 1.0.0
+     *
      * @return  array[]
-     * @access  public
-     * @since   1.0.0
      */
     public function get_fields() {          
         $fields = apply_filters( 'charitable_user_Password_fields', array(
@@ -318,9 +315,9 @@ class Charitable_Password_Form extends Charitable_Form {
      * Returns all fields as a merged array.
 
      *
+     * @since 1.0.0
+     *
      * @return  array[]
-     * @access  public
-     * @since   1.0.0
      */
     public function get_merged_fields() {
         $fields = array();
@@ -343,10 +340,9 @@ class Charitable_Password_Form extends Charitable_Form {
      * Update Password after form submission.
 
      *
+     * @since 1.0.0
+     *
      * @return  void
-     * @access  public
-     * @static
-     * @since   1.0.0
      */
     public static function update_Password() {
         $form = new Charitable_Password_Form();
@@ -381,10 +377,9 @@ class Charitable_Password_Form extends Charitable_Form {
      * Add the charitable_user_Password_after_fields hook but fire off a deprecated notice.  
      *
      * @deprecated 1.4.0
+     * @since 1.4.0   
+     *
      * @return  void
-     * @access  public
-     * @static
-     * @since   1.4.0   
      */
     public static function add_deprecated_charitable_user_Password_after_fields_hook( $form ) {
         if ( ! has_action( 'charitable_user_Password_after_fields' ) ) {

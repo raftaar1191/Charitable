@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 	/**
 	 * Charitable_Donation_Amount_Form
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donation_Amount_Form extends Charitable_Donation_Form implements Charitable_Donation_Form_Interface {
 
@@ -45,16 +45,15 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'make_donation_streamlined';
 
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function attach_hooks_and_filters() {
 			parent::attach_hooks_and_filters();
@@ -68,9 +67,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation form fields.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array[]
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_fields() {
 			return $this->get_donation_fields();
@@ -79,9 +78,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
+		 * @since 1.4.4
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.4.4
 		 */
 		public function validate_submission() {
 
@@ -105,9 +104,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Return the donation values.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
@@ -123,11 +122,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Redirect to payment form after submission.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   int     $campaign_id
 		 * @param   int     $amount
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function redirect_after_submission( $campaign_id, $amount ) {
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -150,9 +149,9 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function render() {
 

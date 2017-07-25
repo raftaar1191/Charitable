@@ -9,9 +9,9 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	/**
 	 * Delete a donor 
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return 	void
-	 * @access  public
-	 * @since 	1.0.0
 	 */
 	public function delete_donor( $donor_id ) {
 		wp_delete_user( $donor_id );
@@ -20,11 +20,10 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donor.
 	 *
+	 * @since 1.0.0	 
+	 *
 	 * @param 	array 		$args 				Optional arguments.
 	 * @return 	int 		$donor_id
-	 * @access  public
-	 * @static
-	 * @since 	1.0.0	 
 	 */
 	public static function create_donor( $args = array() ) {
 
@@ -52,13 +51,12 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	/**
 	 * Create a donor with a name.  
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param 	string 		$first_name
 	 * @param 	string 		$last_name
 	 * @param 	array 		$args
 	 * @return 	int
-	 * @access  public
-	 * @static
-	 * @since 	1.0.0
 	 */
 	public static function create_named_donor( $first_name, $last_name, $args = array() ) {
 		$args['first_name'] = $first_name;

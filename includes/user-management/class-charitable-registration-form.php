@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 	/**
 	 * Charitable_Registration_Form
 	 *
-	 * @since       1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Registration_Form extends Charitable_Form {
 
@@ -25,7 +25,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Shortcode parameters.
 		 *
 		 * @var     array
-		 * @access  protected
 		 */
 		protected $shortcode_args;
 
@@ -43,7 +42,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * Action to be executed upon form submission.
 		 *
 		 * @var     string
-		 * @access  protected
 		 */
 		protected $form_action = 'save_registration';
 
@@ -51,16 +49,15 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * The current donor.
 		 *
 		 * @var     Charitable_Donor
-		 * @access  protected
 		 */
 		protected $donor;
 
 		/**
 		 * Create class object.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   array       $args       User-defined shortcode attributes.
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function __construct( $args = array() ) {
 			$this->id = uniqid();
@@ -71,9 +68,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the arguments passed to the shortcode.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  mixed[]
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function get_shortcode_args() {
 			return $this->shortcode_args;
@@ -82,9 +79,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Profile fields to be displayed.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  array
-		 * @access  public
-		 * @since   1.0.0
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_user_registration_fields', array(
@@ -119,10 +116,10 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the registration
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param 	Charitable_Form 	$form
 		 * @return 	void
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function add_hidden_fields( $form ) {
 			$ret = parent::add_hidden_fields( $form );
@@ -155,10 +152,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Update registration after form submission.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  void
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function save_registration() {
 			$form = new Charitable_Registration_Form();
@@ -206,9 +202,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the link to the login page, or false if we are not going to display it.
 		 *
+		 * @since 1.4.2
+		 *
 		 * @return  false|string
-		 * @access  public
-		 * @since   1.4.2
 		 */
 		public function get_login_link() {
 

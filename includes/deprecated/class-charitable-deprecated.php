@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 	/**
 	 * Charitable_Deprecated
 	 *
-	 * @since       1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Deprecated {
 
@@ -25,9 +25,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * One true class object.
 		 *
 		 * @var     Charitable_Deprecated
-		 * @access  private
-		 * @static
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private static $instance = null;
 
@@ -35,17 +33,14 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 * Whether logging is enabled.
 		 *
 		 * @var     $logging
-		 * @access  private
-		 * @static
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private static $logging;
 
 		/**
 		 * Create class object. Private constructor.
 		 *
-		 * @access  private
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		private function __construct() {
 		}
@@ -53,9 +48,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Create and return the class object.
 		 *
-		 * @access  public
-		 * @static
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -68,12 +61,12 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated argument.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @param   string      $function      The deprecated function.
 		 * @param   string      $version       The version when this argument became deprecated.
 		 * @param   string|null $extra_message An extra message to include for the notice.
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function deprecated_argument( $function, $version, $extra_message = null ) {
 			if ( ! $this->is_logging_enabled() ) {
@@ -94,12 +87,12 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a deprecated function.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @param   string      $function    The function that has been deprecated.
 		 * @param   string      $version     The version of Charitable where the function was deprecated.
 		 * @param   string|null $replacement Optional. The function to use instead.
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function deprecated_function( $function, $version, $replacement = null ) {
 			if ( ! $this->is_logging_enabled() ) {
@@ -120,12 +113,12 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Log a general "doing it wrong" notice.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @param   string $function
 		 * @param   string $message
 		 * @param   string $version
 		 * @return  boolean Whether the notice was logged.
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		public function doing_it_wrong( $function, $message, $version ) {
 			if ( ! $this->is_logging_enabled() ) {
@@ -144,9 +137,9 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		/**
 		 * Returns whether logging is enabled.
 		 *
+		 * @since 1.4.0
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.4.0
 		 */
 		private function is_logging_enabled() {
 			if ( ! isset( self::$logging ) ) {

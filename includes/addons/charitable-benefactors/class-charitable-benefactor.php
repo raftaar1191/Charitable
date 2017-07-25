@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 	/**
 	 * Charitable_Benefactor
 	 *
-	 * @since 		1.0.0
+	 * @since 1.0.0
 	 */
 	abstract class Charitable_Benefactor {
 
@@ -25,16 +25,15 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		 * Core benefactor record.
 		 *
 		 * @var 	Object
-		 * @access  protected
 		 */
 		protected $benefactor;
 
 		/**
 		 * Create class object.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param 	mixed $benefactor Benefactor ID.
-		 * @access 	public
-		 * @since	1.0.0
 		 */
 		public function __construct( $benefactor ) {
 			if ( ! is_object( $benefactor ) ) {
@@ -45,12 +44,11 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Return an object of type Charitable_Benefactor, given a benefactor record and an extension.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param 	Object $benefactor Benefactor object.
 		 * @param 	string $extension  Extension generating the benefactor object.
 		 * @return  Charitable_Benefactor
-		 * @access  public
-		 * @static
-		 * @since   1.0.0
 		 */
 		public static function get_object( $benefactor, $extension ) {
 			$class = apply_filters( 'charitable_benefactor_class_' . $extension, false );
@@ -69,9 +67,9 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Display a short one-line summary of a benefactor (how much is contributed and from where).
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return 	string
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function __toString() {
 			return apply_filters( 'charitable_benefactor_summary', $this->get_contribution_description(), $this );
@@ -80,10 +78,10 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Magic getter method.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param 	string $key Key of the field to get.
 		 * @return 	string
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function __get( $key ) {
 			return isset( $this->benefactor->$key ) ? $this->benefactor->$key : null;
@@ -92,9 +90,9 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Return the details of the benefactor (i.e. the 3rd party extension).
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return 	Object
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function get_benefactor() {
 			return $this->benefactor;
@@ -104,18 +102,17 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		 * Return a one-line description of the contribution.
 		 *
 		 * @return  string
-		 * @access  public
 		 * @abstract
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		abstract public function get_contribution_description();
 
 		/**
 		 * Return the contribution as a nicely formatted amount.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return 	string
-		 * @access  public
-		 * @since 	1.0.0
 		 */
 		public function get_contribution_amount() {
 			if ( $this->benefactor->contribution_amount_is_percentage ) {
@@ -130,9 +127,9 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Returns whether the benefit rule is active.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public function is_active() {
 			return ! $this->is_expired;
@@ -141,9 +138,9 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Returns whether the benefit rule is active.
 		 *
+		 * @since 1.4.6
+		 *
 		 * @return  boolean
-		 * @access  public
-		 * @since   1.4.6
 		 */
 		public function is_expired() {
 			return '0000-00-00 00:00:00' != $this->benefactor->date_deactivated && strtotime( $this->benefactor->date_deactivated ) < time();
@@ -152,11 +149,11 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Return the benefit amount of a product based on the price, quantity and percent going to benefit.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   float $price    Price of the item.
 		 * @param   int   $quantity Number of items.
 		 * @return  float
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function calculate_line_item_percent_contribution( $price, $quantity ) {
 			return $price * $quantity * ( $this->benefactor->contribution_amount / 100 );
@@ -165,10 +162,10 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		/**
 		 * Return the benefit amount of a product based on the quantity and fixed amount going per item.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param   int $quantity The number of items.
 		 * @return  float
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function calculate_line_item_fixed_contribution( $quantity = 1 ) {
 			return $quantity * $this->benefactor->contribution_amount;
@@ -179,9 +176,9 @@ if ( ! class_exists( 'Charitable_Benefactor' ) ) :
 		 *
 		 * False means that more benefit is added for every applicable item in the cart.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return  boolean
-		 * @access  protected
-		 * @since   1.0.0
 		 */
 		protected function benefit_is_per_cart() {
 			return false === ( $this->benefactor->contribution_amount_is_per_item || $this->benefactor->contribution_amount_is_percentage );

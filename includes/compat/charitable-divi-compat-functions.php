@@ -15,9 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
  * If Divi and Yoast SEO are active, we end up with all sorts of problems related to Divi
  * trying to display the shortcodes in the admin. Exclude all our shortcodes.
  *
+ * @since 1.5.0
+ *
  * @param   string[] $shortcodes
  * @return  string[]
- * @since   1.5.0
  */
 function charitable_divi_compat_admin_excluded_shortcodes( $shortcodes ) {
 	if ( class_exists( 'WPSEO_Options' ) ) {

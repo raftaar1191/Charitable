@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 	 * Charitable_Widgets
 	 *
 	 * @final
-	 * @since 		1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Widgets {
 
@@ -28,17 +28,15 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 		 * The single instance of this class.
 		 *
 		 * @var     Charitable_Widgets|null
-		 * @access  private
-		 * @static
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
+		 * @since 1.2.0
+		 *
 		 * @return  Charitable_Widgets
-		 * @access  public
-		 * @since   1.2.0
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -51,8 +49,7 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 		/**
 		 * Set up the class. This can only be loaded with the get_instance() method.
 		 *
-		 * @access 	private
-		 * @since 	1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'widgets_init', array( $this, 'register_widgets' ) );
@@ -63,9 +60,9 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 		 *
 		 * @see 	widgets_init hook
 		 *
+		 * @since 1.0.0
+		 *
 		 * @return 	void
-		 * @access 	public
-		 * @since 	1.0.0
 		 */
 		public function register_widgets() {
 			register_widget( 'Charitable_Campaign_Terms_Widget' );

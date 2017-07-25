@@ -27,29 +27,29 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
 
         /**
          * @var     string  $current_view   The current Charitable frontend view. Should never be campaign.
-         * @since   1.0.0
+         * @since 1.0.0
          */
         private $current_view;
 
         /**
          * @var     array   $args
-         * @since   1.0.0
+         * @since 1.0.0
          */
         private $args;
 
         /**
          * @var     WP_Query $wp_query
-         * @since   1.0.0
+         * @since 1.0.0
          */
         private $wp_query;
 
         /**
          * Constructor. Sets $current_view and $wp_query properties.
          *
+         * @since 1.0.0
+         *
          * @param   string  $current_view
          * @param   array   $args
-         * @access  public
-         * @since   1.0.0
          */
         public function __construct( $current_view, $args = array() ) {
             if ( 'campaign' == $current_view ) {
@@ -73,9 +73,9 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         /**
          * Modifies the WP Query.
          *
+         * @since 1.0.0
+         *
          * @return  void
-         * @access  private
-         * @since   1.0.0
          */
         private function modify_wp_query() {
             $wp_query = $GLOBALS['wp_query'];
@@ -148,8 +148,9 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
         /**
          * Creates a guid based on the current view.
          *
+         * @since 1.0.0
+         *
          * @return  string
-         * @since   1.0.0
          */
         private function get_guid() {
         }

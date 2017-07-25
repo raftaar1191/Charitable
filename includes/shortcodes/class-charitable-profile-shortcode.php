@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 /**
  * Charitable_Profile_Shortcode class.
  *
- * @since       1.0.0
+ * @since 1.0.0
  */
 class Charitable_Profile_Shortcode {
 
@@ -26,11 +26,10 @@ class Charitable_Profile_Shortcode {
      * This receives the user-defined attributes and passes the logic off to the class.
 
      *
+     * @since 1.0.0
+     *
      * @param   array $atts User-defined shortcode attributes.
      * @return  string
-     * @access  public
-     * @static
-     * @since   1.0.0
      */
     public static function display( $atts ) {                
         if ( ! is_user_logged_in() ) {
