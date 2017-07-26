@@ -15,7 +15,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 	/**
 	 * Charitable_Donors_Shortcode class.
 	 *
-	 * @since 1.5.0
+	 * @since   1.5.0
 	 */
 	class Charitable_Donors_Shortcode {
 
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * If you replace the template with your own, it needs to be an instance of Charitable_Template.
 			 *
-			 * @since 	1.5.0
+			 * @since   1.5.0
 			 *
 			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
 			 * @param 	array $args               All the parsed arguments.
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Modify the view arguments that are passed to the donors template.
 			 *
-			 * @since 	1.5.0
+			 * @since   1.5.0
 			 *
 			 * @param 	array $view_args The arguments to pass.
 			 * @param 	array $args      All the parsed arguments.
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Customize the output of the shortcode.
 			 *
-			 * @since 	1.5.0
+			 * @since   1.5.0
 			 *
 			 * @param 	string $content The content to be displayed.
 			 * @param 	array  $args    All the parsed arguments.
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
-			 * @since 	1.5.0
+			 * @since   1.5.0
 			 *
 			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param 	array $args       All the parsed arguments.

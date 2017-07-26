@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 	/**
 	 * Charitable_Request.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 * @final
 	 */
 	final class Charitable_Request {
@@ -63,7 +63,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 			add_action( 'the_post', array( $this, 'set_current_campaign' ) );
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_Request
 		 */
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * When the_post is set, sets the current campaign to the current post if it is a campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	WP_Post $post The Post object.
 		 * @return 	void
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current campaign. If there is no current campaign, return false.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	Charitable_Campaign|false Campaign object if we're viewing a campaign within a loop. False otherwise.
 		 */
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current campaign ID. If there is no current campaign, return 0.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	int
 		 */
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the campaign ID from a form submission.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current donation object. If there is no current donation, return false.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Donation|false
 		 */
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current donation ID. If there is no current donation, return 0.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */

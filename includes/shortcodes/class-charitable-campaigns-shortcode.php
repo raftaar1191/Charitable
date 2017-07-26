@@ -15,14 +15,14 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 	/**
 	 * Charitable_Campaigns_Shortcode class.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Campaigns_Shortcode {
 
 		/**
 		 * Display the shortcode output. This is the callback method for the campaigns shortcode.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param  array $atts The user-defined shortcode attributes.
 		 * @return string
@@ -51,7 +51,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			 *
 			 * If you replace the template with your own, it needs to be an instance of Charitable_Template.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
 			 * @param 	array $args               All the parsed arguments.
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			/**
 			 * Modify the view arguments that are passed to the campaigns shortcode template.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	array $view_args The arguments to pass.
 			 * @param 	array $args      All the parsed arguments.
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			/**
 			 * Customize the output of the shortcode.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	string $content The content to be displayed.
 			 * @param 	array  $args    All the parsed arguments.
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 		/**
 		 * Return campaigns to display in the campaigns shortcode.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param  array $args The query arguments to be used to retrieve campaigns.
 		 * @return WP_Query

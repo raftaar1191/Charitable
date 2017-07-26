@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 	/**
 	 * Charitable_Profile_Form
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Profile_Form extends Charitable_Form {
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array       $args       User-defined shortcode attributes.
 		 */
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Return the current user's Charitable_User object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_User
 		 */
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Returns the value of a particular key.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $key
 		 * @param   string $default     Optional. The value that will be used if none is set.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Return the core user fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Return the user's address fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Return the social fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -270,7 +270,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Profile fields to be displayed.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -310,7 +310,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * The fields displayed on the password form.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  array[]
 		 */
@@ -345,7 +345,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Returns all fields as a merged array.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -367,7 +367,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Update profile after form submission.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -418,7 +418,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Check whether the password is being changed.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  boolean
 		 */
@@ -437,7 +437,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		/**
 		 * Changes a password if the current password is correct and the repeat matches the new password.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  boolean
 		 */
@@ -468,7 +468,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * Add the charitable_user_profile_after_fields hook but fire off a deprecated notice.
 		 *
 		 * @deprecated 1.4.0
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  void
 		 */

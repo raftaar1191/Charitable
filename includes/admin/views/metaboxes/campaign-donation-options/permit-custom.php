@@ -3,7 +3,7 @@
  * Renders the checkbox to permit custom donation amounts inside the donation options metabox for the Campaign post type.
  *
  * @author 	Studio 164a
- * @since 	1.0.0
+ * @since   1.0.0
  */
 
 global $post;

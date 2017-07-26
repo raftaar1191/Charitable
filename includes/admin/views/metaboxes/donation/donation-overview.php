@@ -25,7 +25,7 @@ $donor = $donation->get_donor();
 			/**
 			 * Display additional details about the donor.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 	 		 *
 			 * @param 	Charitable_Donor    $donor    The donor object.
 			 * @param 	Charitable_Donation $donation The donation object.
@@ -47,7 +47,7 @@ $donor = $donation->get_donor();
 	/**
 	 * Add additional output before the table of donations.
 	 *
-	 * @since 	1.5.0
+	 * @since   1.5.0
 	 *
 	 * @param 	Charitable_Donor    $donor    The donor object.
 	 * @param 	Charitable_Donation $donation The donation object.

@@ -44,7 +44,7 @@ class Charitable_Plugin_Updater {
 	 *
 	 * @uses    add_filter()
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return  void
 	 */
@@ -57,7 +57,7 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Return the update information for the plugin.
 	 *
-	 * @since 1.4.0
+	 * @since   1.4.0
 	 *
 	 * @return  false|object
 	 */
@@ -179,7 +179,7 @@ class Charitable_Plugin_Updater {
 	 *
 	 * @uses    api_request()
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @param   mixed $data
 	 * @param   string $action
@@ -218,7 +218,7 @@ class Charitable_Plugin_Updater {
 	 * @uses    wp_remote_post()
 	 * @uses    is_wp_error()
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @param   string $action The requested action.
 	 * @param   array $data Parameters for the API action.
@@ -268,7 +268,7 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Display the changelog.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return  void
 	 */

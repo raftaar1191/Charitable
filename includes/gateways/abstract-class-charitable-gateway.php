@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 	 * Charitable_Gateway
 	 *
 	 * @abstract
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	abstract class Charitable_Gateway implements Charitable_Gateway_Interface {
 
@@ -29,13 +29,13 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 
 		/**
 		 * @var     string Name of the payment gateway.
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $name;
 
 		/**
 		 * @var     array The default values for all settings added by the gateway.
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $defaults;
 
@@ -43,14 +43,14 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * Supported features such as 'credit-card', and 'recurring' donations
 		 *
 		 * @var     string[]
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 */
 		protected $supports = array();
 
 		/**
 		 * Return the gateway name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Returns the default gateway label to be displayed to donors.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Provide default gateway settings fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array   $settings
 		 * @return  array
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Return the settings for this gateway.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Retrieve the gateway label.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -119,7 +119,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Return the value for a particular gateway setting.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $setting
 		 * @return  mixed
@@ -134,7 +134,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 *
 		 * Gateways should override this to declare support (or lack of support) for a feature.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param   string $feature string The name of a feature to test support for.
 		 * @return  bool True if the gateway supports the feature, false otherwise.
@@ -156,7 +156,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * If the gateway requires different fields, this can simply be redefined
 		 * in the child class.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -196,7 +196,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Redirect the donation to the processing page.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed $result
 		 * @param   int $donation_id
@@ -215,7 +215,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Returns whether a credit card form is required for this gateway.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 *
@@ -229,7 +229,7 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array   $settings
 		 * @return  array

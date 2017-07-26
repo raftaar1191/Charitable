@@ -8,7 +8,7 @@
  * @subpackage	Charitable/Charitable Session
  * @copyright 	Copyright (c) 2017, Eric Daams
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 // Exit if accessed directly.
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 	/**
 	 * Charitable_Session
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Session {
 
@@ -34,14 +34,14 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Holds our session data
 		 *
 		 * @var 	WP_Session
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private $session;
 
 		/**
 		 * Instantiate session object. Private constructor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Create the session.
 		 *
-		 * @since 1.4.17
+		 * @since   1.4.17
 		 *
 		 * @return  WP_Session
 		 */
@@ -94,7 +94,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 	     * Returns and/or create the single instance of this class.
 	     *
-	     * @since 1.2.0
+	     * @since   1.2.0
 	     *
 	     * @return  Charitable_Session
 	     */
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return a session variable.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key Session variable key.
 		 * @return 	mixed Session variable
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set a session variable.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key   Session variable key.
 		 * @param 	mixed  $value The value of the session variable.
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the length of the cookie session to 24 hours.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	int
 		 */
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Set the cookie expiration variant time to 23 hours.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	int
 		 */
@@ -173,7 +173,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Add a donation to a campaign to the session.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int $campaign_id Campaign ID.
 		 * @param 	int $amount 	 Donation amount.
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Remove a donation from the session.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int $campaign_id Campaign ID.
 		 * @return  void
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return the donation in session for a campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int $campaign_id The campaign ID.
 		 * @return  false|array
@@ -224,7 +224,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Store the donation key in the session, to ensure the user can access their receipt.
 		 *
-		 * @since 1.1.2
+		 * @since   1.1.2
 		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  void
@@ -244,7 +244,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Checks whether the donation key is stored in the session.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $donation_key The transaction key for the donation.
 		 * @return  boolean
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Add the all notices to the session.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -273,7 +273,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return any notices set in the session.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return 	array Session variable
 		 */
@@ -295,7 +295,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Returns the session ID.
 		 *
-		 * @since 1.3.5
+		 * @since   1.3.5
 		 *
 		 * @return 	string Session ID
 		 */
@@ -306,7 +306,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Determines if we should start sessions
 		 *
-		 * @since 1.4.17
+		 * @since   1.4.17
 		 *
 		 * @return  boolean
 		 */
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 *
 		 * These are the URIs where we never start sessions
 		 *
-		 * @since 1.4.17
+		 * @since   1.4.17
 		 *
 		 * @return  array
 		 */

@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 	 * Charitable_Form
 	 *
 	 * @abstract
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	abstract class Charitable_Form {
 
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Compares the ID of the form passed by the action and the current form object to ensure they're the same.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $id Current form ID.
 		 * @return 	boolean
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the form action.
 		 *
-		 * @since 1.3.1
+		 * @since   1.3.1
 		 *
 		 * @return  string
 		 */
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the form ID.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	string
 		 */
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Whether the given field type can use the default field template.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $field_type Type of field.
 		 * @return 	boolean
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Display error notices at the start of the form, if there are any.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	Charitable_Form $form Form object.
 		 * @return 	boolean Whether the notices were rendered.
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	Charitable_Form $form The form object.
 		 * @return 	boolean Whether the output is added.
@@ -183,7 +183,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Set how much the index should be incremented by.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int   $increment The number the index should be incremented by.
 		 * @param 	array $field     The field definition.
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Render a form field.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 		    $field     Field definition.
 		 * @param 	string 		    $key       Field key.
@@ -257,7 +257,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the template name used for this field.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $field Field definition.
 		 * @return 	string
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return classes that will be applied to the field.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $field Field definition.
 		 * @param 	int   $index Field index.
@@ -310,7 +310,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return array of classes based on the field type.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $type Type of field.
 		 * @return  string[]
@@ -339,7 +339,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Output the nonce.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -350,7 +350,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Validate nonce data passed by the submitted form.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	boolean
 		 */
@@ -368,7 +368,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Make sure that the honeypot field is empty.
 		 *
-		 * @since 1.4.3
+		 * @since   1.4.3
 		 *
 		 * @return 	boolean
 		 */
@@ -387,7 +387,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Callback method used to filter out non-required fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $field Field definition.
 		 * @return 	array
@@ -399,7 +399,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Filters array returning just the required fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array[] $fields Array of form fields.
 		 * @return 	array[]
@@ -413,7 +413,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Check the passed fields to ensure that all required fields have been submitted.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $fields    Array of form fields.
 		 * @param 	array $submitted Submitted values.
@@ -481,7 +481,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Organize fields by data type, also filtering out unused parameters (we just need the key and the type).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key   Key of the field to sort.
 		 * @param 	array  $field Field definition.
@@ -510,7 +510,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * Use this method instead of accessing the raw $_POST array to take
 		 * advantage of the filter on the values.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -525,7 +525,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Returns the submitted value for a particular field.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key The key to search for.
 		 * @return  mixed Submitted value if set. NULL if value was not set.
@@ -538,7 +538,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Uploads a file and attaches it to the given post.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $file_key  Key of the file input.
 		 * @param 	int    $post_id   Post ID.
@@ -567,7 +567,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return  array|WP_Error On success, returns an associative array of file attributes.
 		 *                         On failure, returns $overrides['upload_error_handler'](&$file, $message )
 		 *                         or array( 'error'=>$message ).
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function upload_file( $file_key, $overrides = array() ) {
 
@@ -590,7 +590,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * 							  function once for each uploaded file.
 		 * @param 	array  $overrides Optional. An associative array of names=>values to
 		 * 							  override default variables. Default false.
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -619,7 +619,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Checks whether a template is valid.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	mixed $template Template we're checking.
 		 * @return  boolean

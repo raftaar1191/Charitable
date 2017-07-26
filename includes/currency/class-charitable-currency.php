@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 	 * Charitable_Currency
 	 *
 	 * @final
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	final class Charitable_Currency {
 
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since 1.2.3
+		 * @since   1.2.3
 		 */
 		private function __construct() {
 		}
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.3
+		 * @since   1.2.3
 		 *
 		 * @return  Charitable_Currency
 		 */
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 *
 		 * 50.00 -> $50.00
 		 *
-		 * @since 	1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string    $amount        The amount to convert.
 		 * @param 	int|false $decimal_count Optional. If not set, default decimal count will be used.
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param 	string $amount The amount to be sanitized.
 		 * @return  string
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Checks whether the comma is being used as the separator.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	boolean
 		 */
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the number of decimals to use.
 		 *
 		 * @uses 	charitable_currency_decimal_count
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	int
 		 */
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return the currency format based on the position of the currency symbol.
 		 *
 		 * @uses 	charitable_currency_format
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	string
 		 */
@@ -224,7 +224,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		/**
 		 * Get the currency format for accounting.js
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  string
 		 */
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Return every currency symbol used with the
 		 *
 		 * @uses 	charitable_currencies		Hook to add custom currencies.
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	string[]
 		 */
@@ -300,7 +300,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * Credit: This is based on the WooCommerce implemenation.
 		 *
 		 * @uses 	charitable_currency_symbol
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $currency Optional. If not set, currency is based on currently selected currency.
 		 * @return 	string

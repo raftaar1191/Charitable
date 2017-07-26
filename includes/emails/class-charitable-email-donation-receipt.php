@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 	/**
 	 * Donation Receipt Email
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Email_Donation_Receipt extends Charitable_Email {
 
@@ -27,14 +27,14 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 
 		/**
 		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $object_types = array( 'donation' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array   $objects
 		 */
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @since 1.0.3
+		 * @since   1.0.3
 		 *
 		 * @return  string
 		 */
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Static method that is fired right after a donation is completed, sending the donation receipt.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the recipient for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -134,7 +134,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */

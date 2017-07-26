@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 	 * Charitable_Email
 	 *
 	 * @abstract
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	abstract class Charitable_Email implements Charitable_Email_Interface {
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Descriptive name of the email.
 		 *
 		 * @var     string
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $name;
 
@@ -39,7 +39,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Array of supported object types (campaigns, donations, donors, etc).
 		 *
 		 * @var     string[]
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $object_types = array();
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Whether the email allows you to define the email recipients.
 		 *
 		 * @var     boolean
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $has_recipient_field = false;
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Whether the email is required.
 		 *
 		 * @var     boolean
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 */
 		protected $required = false;
 
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Create a class instance.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[] $objects Objects for the email.
 		 */
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 *
 		 * If an email is required, it cannot be disabled/enabled, but it can still be edited.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  boolean
 		 */
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the types of objects.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  string[]
 		 */
@@ -142,7 +142,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the donation object.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  null|Charitable_Donation
 		 */
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign object.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  null|Charitable_Campaign
 		 */
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get from name for email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -175,7 +175,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get from address for email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -186,7 +186,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email recipients.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -197,7 +197,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email subject line.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get the email content type
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Get the email headers.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether we are currently previewing the email.
 		 *
-		 * @since 1.3.5
+		 * @since   1.3.5
 		 *
 		 * @return  boolean
 		 */
@@ -251,7 +251,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * particular field that was referenced in the shortcode. The second argument is
 		 * an optional array of arguments.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $field Value to return for a shortcode.
 		 * @param   array  $args  Optional. May contain additional arguments.
@@ -274,7 +274,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -294,7 +294,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the site/blog name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -305,7 +305,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Register email settings.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $settings Default email settings.
 		 * @return  array
@@ -366,7 +366,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add recipient field
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $settings Email settings as an array.
 		 * @return  array
@@ -391,7 +391,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add donation content fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
@@ -472,7 +472,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the first name of the donor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -487,7 +487,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the full name of the donor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -502,7 +502,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the email of the donor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -517,7 +517,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the address of the donor.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  string
 		 */
@@ -532,7 +532,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the donor's phone number.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  string
 		 */
@@ -547,7 +547,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the donation ID.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -562,7 +562,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns a summary of the donation, including all the campaigns that were donated to.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string           $value The content to show in place of the shortcode.
 		 * @param   mixed[]          $args  Array of optional arguments.
@@ -594,7 +594,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the total amount donated.
 		 *
-		 * @since 1.4.2
+		 * @since   1.4.2
 		 *
 		 * @param 	string $value Content to show in place of shortcode.
 		 * @return  string
@@ -610,7 +610,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the date the donation was made.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param   string  $value Content to show in place of shortcode.
 		 * @param   mixed[] $args  Optional arguments.
@@ -629,7 +629,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the status of the donation.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  string
 		 */
@@ -644,7 +644,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaigns donated to.
 		 *
-		 * @since 1.4.2
+		 * @since   1.4.2
 		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @param 	array  $args  Optional set of arguments.
@@ -663,7 +663,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the categories of the campaigns that were donated to.
 		 *
-		 * @since 1.4.2
+		 * @since   1.4.2
 		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @return  string
@@ -683,7 +683,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add donation content fields' fake data for previews.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
@@ -727,7 +727,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add campaign content fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
@@ -800,7 +800,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -817,7 +817,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -834,7 +834,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign creator's email address.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -851,7 +851,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the campaign end date.
 		 *
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 *
 		 * @return  string
 		 */
@@ -868,7 +868,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display whether the campaign achieved its goal.
 		 *
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 *
 		 * @param 	string $value The content to display in place of the shortcode.
 		 * @param 	array  $args  Optional set of arguments.
@@ -902,7 +902,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the total amount donated to the campaign.
 		 *
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 *
 		 * @return  string
 		 */
@@ -917,7 +917,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the number of donors to the campaign.
 		 *
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 *
 		 * @return  string
 		 */
@@ -932,7 +932,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the campaign's goal amount.
 		 *
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 *
 		 * @return  string
 		 */
@@ -947,7 +947,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the campaign's URL
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  string
 		 */
@@ -962,7 +962,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Display the link to where the campaign can be edited in the dashboard.
 		 *
-		 * @since 1.4.18
+		 * @since   1.4.18
 		 *
 		 * @return  string
 		 */
@@ -985,7 +985,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Add campaign content fields' fake data for previews.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 			 $fields Shortcode fields.
 		 * @param 	Charitable_Email $email  Email object.
@@ -1019,7 +1019,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Sends the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -1041,7 +1041,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has already been sent.
 		 *
-		 * @since 1.3.2
+		 * @since   1.3.2
 		 *
 		 * @param   int $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
 		 * @return  boolean
@@ -1063,7 +1063,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Log that the email was sent.
 		 *
-		 * @since 1.3.2
+		 * @since   1.3.2
 		 *
 		 * @param   int     $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
 		 * @param   boolean $sent    Whether the email was sent.
@@ -1084,7 +1084,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Preview the email. This will display a sample email within the browser.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1099,7 +1099,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Set preview mode in the shortcode attributes.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $atts Shortcode attributes.
 		 * @return  array
@@ -1112,7 +1112,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the body content of the email, formatted as HTML.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1126,7 +1126,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the email headline.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1139,7 +1139,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has a valid donation object set.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -1155,7 +1155,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the email has a valid donation object set.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -1171,7 +1171,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Build the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1192,7 +1192,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the meta key used for the log.
 		 *
-		 * @since 1.3.2
+		 * @since   1.3.2
 		 *
 		 * @return  string
 		 */
@@ -1203,7 +1203,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of an option specific to this email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $key     Settings option key.
 		 * @param 	mixed  $default Default value to return in case setting is not set.
@@ -1216,7 +1216,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1227,7 +1227,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1238,7 +1238,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1249,7 +1249,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -1260,7 +1260,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Returns the value of a particular field (generally called through the [charitable_email] shortcode).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $field Field key.
 		 * @return  string
@@ -1280,7 +1280,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Return the value of a field for the preview.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $field Field key.
 		 * @return  string
@@ -1328,7 +1328,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		/**
 		 * Checks whether the passed email is the same as the current email object.
 		 *
-		 * @since 1.3.2
+		 * @since   1.3.2
 		 *
 		 * @param 	Charitable_Email $email  Email object.
 		 * @return  boolean
@@ -1344,7 +1344,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 *
 		 * @deprecated 1.3.6
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed $return   Value to return.
 		 * @param   mixed $fallback Default value to return.

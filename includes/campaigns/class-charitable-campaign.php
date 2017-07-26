@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 	/**
 	 * Campaign Model
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Campaign {
 
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Class constructor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed $post The post ID or WP_Post object for this this campaign.
 		 */
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Magic getter.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key The key of the field to get.
 		 * @return  mixed
@@ -103,7 +103,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @param   boolean $single    Whether to return a single value or an array.
 		 * @return  mixed              This will return an array if single is false. If it's true,
 		 *                             the value of the meta_value field will be returned.
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function get( $meta_name, $single = true ) {
 			$meta_name = '_campaign_' . $meta_name;
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns whether the campaign is endless (i.e. no end date has been set).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -124,7 +124,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the suggested amounts, or an empty array if there are none.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * If a format is not provided, the user-defined date_format in WordPress settings is used.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $date_format A date format accepted by PHP's date() function.
 		 * @return  string|false        String if an end date is set. False if campaign has no end date.
@@ -171,7 +171,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the timetamp of the end date.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int|false           Int if campaign has an end date. False if campaign has no end date.
 		 */
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the amount of time left in the campaign in seconds.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int $time_left Int if campaign has an end date. False if campaign has no end date.
 		 */
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @uses charitabile_campaign_days_left     Change the text displayed when there is more than a day left.
 		 * @uses charitable_campaign_time_left      Change the text displayed when there is time left.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -275,7 +275,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns whether the campaign has ended.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -286,7 +286,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return a text notice to say that a campaign has finished.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the time since the campaign finished, or zero if it's still going.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -324,7 +324,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the fundraising goal of the campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string|false  Amount if goal is set. False otherwise.
 		 */
@@ -339,7 +339,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns whether a goal has been set (anything greater than $0 is a goal).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -350,7 +350,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the fundraising goal formatted as a monetary amount.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -365,7 +365,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns whether the goal has been achieved.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * If the campaign is published, this will return whether either 'active' or 'finished'.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -404,7 +404,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * ending : A campaign is ending soon.
 		 * active : A campaign that is active and not ending soon.
 		 *
-		 * @since 1.3.7
+		 * @since   1.3.7
 		 *
 		 * @return  string
 		 */
@@ -439,7 +439,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the campaign status tag.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -482,7 +482,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the donations made to this campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  WP_Query
 		 */
@@ -502,7 +502,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the current amount of donations.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	boolean $sanitize 	  Whether to sanitize the amount. False by default.
 		 * @return  string|float|WP_Error String if $sanitize is false. If $sanitize is true, return a float or WP_Error if the amount is not a string.
@@ -528,7 +528,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return a string describing the campaign's donation summary.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -552,7 +552,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the percentage donated. Use this if you want a formatted string.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string|false        String if campaign has a goal. False if no goal is set.
 		 */
@@ -571,7 +571,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the percentage donated as a number.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -586,7 +586,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Return the number of people who have donated to the campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -597,7 +597,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the donation form object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Donation_Form_Interface
 		 */
@@ -615,7 +615,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the amount to be donated to the campaign as it is currently set in the session.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -628,7 +628,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Renders the donate button template.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -662,7 +662,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Renders the donate button template.
 		 *
-		 * @since 1.2.3
+		 * @since   1.2.3
 		 *
 		 * @return  void
 		 */
@@ -690,7 +690,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * By default, this just returns the user from the post_author field, but
 		 * it can be overridden by plugins.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int $user_id
 		 */
@@ -701,7 +701,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign goal.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $value Current value of goal.
 		 * @return  string|int
@@ -721,7 +721,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @global 	WP_Locale $wp_locale
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $value     Current end date value.
 		 * @param 	array  $submitted The submitted data.
@@ -741,7 +741,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign suggested donations.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $value Current suggested donations value.
 		 * @return  array
@@ -767,7 +767,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Filter out any suggested donations that do not have an amount set.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array|string $donation Suggested donation or an array of suggested donations.
 		 * @return  boolean
@@ -783,7 +783,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize any checkbox value.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed $value Current checkbox value.
 		 * @return  boolean
@@ -795,7 +795,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the campaign description.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $value Current description value.
 		 * @return  string
@@ -807,7 +807,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Sanitize the value provided for custom donations.
 		 *
-		 * @since 1.3.6
+		 * @since   1.3.6
 		 *
 		 * @param   mixed $value     Current custom donations value.
 		 * @param   array $submitted All posted values.
@@ -837,7 +837,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Flush donations cache.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int $campaign_id The campaign ID.
 		 * @return  void
@@ -852,7 +852,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the key used for caching all donations made to this campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int $campaign_id The ID of the campaign.
 		 * @return  string
@@ -864,7 +864,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the key used for caching the donation amount for this campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int $campaign_id The ID of the campaign.
 		 * @return  string

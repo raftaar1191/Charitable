@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 	 * Charitable_Campaign_Post_Type class.
 	 *
 	 * @final
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	final class Charitable_Campaign_Post_Type {
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_Campaign_Post_Type
 		 */
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		 *
 		 * @see     get_column_headers
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $column_names The columns to show for campaigns.
 		 * @return  array
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		 *
 		 * @see     add_meta_boxes hook
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -180,7 +180,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display fields at the very top of the page.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   WP_Post $post Current post.
 		 * @return  void
@@ -194,7 +194,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Wrap elements around the main editor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -205,7 +205,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Wrap editor (and other advanced settings).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -216,7 +216,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * End wrapper around editor and other advanced settings.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -227,7 +227,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display advanced campaign fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   WP_Post $post Current post object.
 		 * @return  void
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		 * Return flat array of meta boxes, ordered by priority.
 		 *
 		 * @global  array       $wp_meta_boxes
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -267,7 +267,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Adds fields to the campaign donation options metabox.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -302,7 +302,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Save meta for the campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int     $campaign_id The campaign ID.
 		 * @param   WP_Post $post        Current Post object.
@@ -356,7 +356,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Set default post content when the extended description is left empty.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param   array $data    Submitted data.
 		 * @return  array
@@ -376,7 +376,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Sets the placeholder text of the campaign title field.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string  $placeholder Placeholder text.
 		 * @param   WP_Post $post        Current Post object.

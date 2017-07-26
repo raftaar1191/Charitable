@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 	/**
 	 * Charitable_Endpoints
 	 *
-	 * @since 1.5.0
+	 * @since   1.5.0
 	 */
 	class Charitable_Endpoints {
 
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 */
 		public function __construct() {
 			$this->endpoints = array();
@@ -49,7 +49,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Register an endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	Charitable_Endpoint $endpoint
 		 * @return  void
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Get the permalink/URL of a particular endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Checks if we're currently viewing a particular endpoint/page.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $endpoint
 		 * @param   array  $args Optional array of arguments.
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Set up the template for an endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $endpoint
 		 * @param 	string $default_template The default template to be used if the endpoint doesn't return its own.
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Set up the rewrite rules for the site.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @return  void
 		 */
@@ -186,7 +186,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Add custom query vars.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string[] $vars
 		 * @return  string[]
@@ -204,7 +204,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Load templates for our endpoints.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $template The default template.
 		 * @return  void
@@ -234,7 +234,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Get the content to display for the endpoint we're viewing.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string       $content
 		 * @param 	false|string $endpoint Fetch the content for a specific endpoint.
@@ -257,7 +257,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Add any custom body classes defined for the endpoint we're viewing.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string[] $classes
 		 * @return  string[]
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Return the current endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @return  string|false String if we're on one of our endpoints. False otherwise.
 		 */
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * Remove _page from the endpoint (required for backwards compatibility)
 		 * and make sure donation_cancel is changed to donation_cancellation.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $endpoint
 		 * @return  string

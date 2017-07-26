@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 	/**
 	 * Charitable_i18n
 	 *
-	 * @since 1.1.2
+	 * @since   1.1.2
 	 */
 	class Charitable_i18n {
 
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @since 1.1.2
+		 * @since   1.1.2
 		 */
 		private function __construct() {
 			$this->languages_directory = apply_filters( 'charitable_languages_directory', 'charitable/i18n/languages' );
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_i18n
 		 */
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.1.2
+		 * @since   1.1.2
 		 *
 		 * @return  void
 		 */
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		/**
 		 * Get the path to the MO file.
 		 *
-		 * @since 1.1.2
+		 * @since   1.1.2
 		 *
 		 * @param   string $source Either 'local' or 'global'.
 		 * @return  string

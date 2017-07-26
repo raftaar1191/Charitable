@@ -27,10 +27,10 @@ $campaign_id = $view_args['campaign'];
 	/**
 	 * Add output before the donor's avatar, name, etc.
 	 *
-	 * @since 	1.5.0
+	 * @since   1.5.0
 	 *
-	 * @param 	Charitable_Donor $donor     The Donor object.
-	 * @param 	array 			 $view_args View arguments.
+	 * @param   Charitable_Donor $donor     The Donor object.
+	 * @param   array            $view_args View arguments.
 	 */
 	do_action( 'charitable_donor_loop_before_donor', $donor, $view_args );
 
@@ -39,24 +39,64 @@ $campaign_id = $view_args['campaign'];
 	endif;
 
 	if ( $view_args['show_name'] ) : ?>
-		<p class="donor-name"><?php echo $donor->get_name() ?></p>
+		<p class="donor-name">
+		<?php
+			/**
+			 * Filter the name displayed for the donor.
+			 *
+			 * @since   1.5.0
+			 *
+			 * @param   string           $name  The name to be displayed.
+			 * @param   Charitable_Donor $donor The Donor object.
+			 * @return  string
+			 */
+			echo apply_filters( 'charitable_donor_loop_donor_name', $donor->get_name(), $donor );
+		?>
+		</p>
 	<?php endif;
 
 	if ( $view_args['show_location'] && strlen( $donor->get_location() ) ) : ?>
-		<div class="donor-location"><?php echo $donor->get_location() ?></div>
+		<div class="donor-location">
+		<?php
+			/**
+			 * Filter the location displayed for the donor.
+			 *
+			 * @since   1.5.0
+			 *
+			 * @param   string           $location The location to be displayed.
+			 * @param   Charitable_Donor $donor    The Donor object.
+			 * @return  string
+			 */
+			echo apply_filters( 'charitable_donor_loop_donor_location', $donor->get_location(), $donor );
+		?>
+		</div>
 	<?php endif;
 
 	if ( $view_args['show_amount'] ) : ?>
-		<div class="donor-donation-amount"><?php echo charitable_format_money( $donor->get_amount( $campaign_id ) ) ?></div>
+		<div class="donor-donation-amount">
+		<?php
+			/**
+			 * Filter the amount displayed for the donor.
+			 *
+			 * @since   1.5.0
+			 *
+			 * @param   string           $amount      The amount to be displayed.
+			 * @param   Charitable_Donor $donor       The Donor object.
+			 * @param   int              $campaign_id The campaign ID.
+			 * @return  string
+			 */
+			echo apply_filters( 'charitable_donor_loop_donor_amount', charitable_format_money( $donor->get_amount( $campaign_id ) ), $donor, $campaign_id );
+		?>
+		</div>
 	<?php endif;
 
 	/**
 	 * Add output after the donor's avatar, name, etc.
 	 *
-	 * @since 	1.5.0
+	 * @since   1.5.0
 	 *
-	 * @param 	Charitable_Donor $donor     The Donor object.
-	 * @param 	array 			 $view_args View arguments.
+	 * @param   Charitable_Donor $donor     The Donor object.
+	 * @param   array            $view_args View arguments.
 	 */
 	do_action( 'charitable_donor_loop_after_donor', $donor, $view_args );
 	?>

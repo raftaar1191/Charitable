@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Orders an array by the priority key.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param 	array $a First element.
  * @param 	array $b Element to compare against.
@@ -42,7 +42,7 @@ function charitable_priority_sort( $a, $b ) {
  *
  * Full credit to Pippin Williamson and the EDD team.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param 	string  $function 	Name of the function.
  * @return 	bool 				Whether or not function is disabled.
@@ -56,7 +56,7 @@ function charitable_is_func_disabled( $function ) {
 /**
  * Verify a nonce. This also just ensures that the nonce is set.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $nonce
  * @param   string $action
@@ -76,7 +76,7 @@ function charitable_verify_nonce( $nonce, $action, $request_args = array() ) {
  *
  * Credit: Pippin Williamson & the rest of the EDD team.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  string
  */
@@ -133,7 +133,7 @@ function charitable_array_subset( array $original_array, $subset_keys ) {
 /**
  * Ensure a number is a positive integer.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param 	mixed $i Number received.
  * @return  int|false
@@ -161,7 +161,7 @@ function charitable_sanitize_checkbox( $value = false ) {
  * If there are two items, it will return a string like this: "x and y".
  * If there are three or more items, it will return a string like this: "x, y and z".
  *
- * @since 1.3.0
+ * @since   1.3.0
  *
  * @param   string[] $list
  * @return  string
@@ -188,7 +188,7 @@ function charitable_list_to_sentence_part( $list ) {
  * We use WP_Locale to parse the month that the user has set.
  *
  * @global  WP_Locale $wp_locale
- * @since 1.4.10
+ * @since   1.4.10
  *
  * @param   string    $date
  * @param   string    $format The date format to return. Default is U (timestamp).

@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Template_Part' ) ) :
 /**
  * Charitable_Template_Part
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Charitable_Template_Part {	
 
@@ -34,7 +34,7 @@ class Charitable_Template_Part {
 	/**
 	 * Class constructor.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @param 	string $slug
 	 * @param 	string $name 	Optional name.
@@ -50,7 +50,7 @@ class Charitable_Template_Part {
 	/**
 	 * Returns the array of template names.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return 	array
 	 */

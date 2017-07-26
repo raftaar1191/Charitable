@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * Example usage: charitable_admin_view('metaboxes/cause-metabox');
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param 	string $view      The view to display.
  * @param 	array  $view_args Optional. Arguments to pass through to the view itself.
@@ -48,7 +48,7 @@ function charitable_admin_view( $view, $view_args = array() ) {
 /**
  * Returns the Charitable_Settings helper.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return 	Charitable_Settings
  */
@@ -59,7 +59,7 @@ function charitable_get_admin_settings() {
 /**
  * Returns the Charitable_Admin_Notices helper.
  *
- * @since 1.4.6
+ * @since   1.4.6
  *
  * @return  Charitable_Admin_Notices
  */
@@ -70,7 +70,7 @@ function charitable_get_admin_notices() {
 /**
  * Returns whether we are currently viewing the Charitable settings area.
  *
- * @since 1.2.0
+ * @since   1.2.0
  *
  * @param   string $tab Optional. If passed, the function will also check that we are on the given tab.
  * @return  boolean
@@ -111,7 +111,7 @@ function charitable_is_settings_view( $tab = '' ) {
  *
  * @global  $wp_settings_fields Storage array of settings fields and their pages/sections
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string  $page       Slug title of the admin page who's settings fields you want to show.
  * @param   string  $section    Slug title of the settings section who's fields you want to show.
@@ -156,7 +156,7 @@ function charitable_do_settings_fields( $page, $section ) {
 /**
  * Add new tab to the Charitable settings area.
  *
- * @since 1.3.0
+ * @since   1.3.0
  *
  * @param   string[] $tabs
  * @param   string $key

@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 	/**
 	 * Charitable_Templates
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Templates {
 
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_Templates
 		 */
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 

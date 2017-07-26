@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	/**
 	 * Paypal Payment Gateway
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Gateway_Paypal extends Charitable_Gateway {
 
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Instantiate the gateway class, defining its key values.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function __construct() {
 			$this->name = apply_filters( 'charitable_gateway_paypal_name', __( 'PayPal', 'charitable' ) );
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array   $settings
 		 * @return  array
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Validate the submitted credit card details.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   boolean $valid
 		 * @param   string $gateway
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Process the donation with PayPal.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   boolean|array $return
 		 * @param   int $donation_id
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Handle a call to our IPN listener.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Receives verified IPN data from PayPal and processes the donation.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $data        The data received in the IPN from PayPal.
 		 * @param 	int   $donation_id The donation ID received from PayPal.
@@ -398,7 +398,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Return the posted IPN data.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  mixed[]
 		 */
@@ -438,7 +438,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Validates an IPN request with PayPal.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[] $data
 		 * @return  boolean
@@ -473,7 +473,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Return a note to log for a pending payment.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $reason_code
 		 * @return  string
@@ -523,7 +523,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Return the base of the PayPal
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   bool $ssl_check
 		 * @return  string
@@ -547,7 +547,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Returns the current gateway's ID.
 		 *
-		 * @since 1.0.3
+		 * @since   1.0.3
 		 *
 		 * @return  string
 		 */
@@ -558,7 +558,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Receives the IPN from PayPal after the sandbox test and attempts to verify the result.
 		 *
-		 * @since 1.4.3
+		 * @since   1.4.3
 		 *
 		 * @return  void
 		 */

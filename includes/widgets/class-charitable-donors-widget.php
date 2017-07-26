@@ -15,7 +15,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 	/**
 	 * Charitable_Donors_Widget class.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Donors_Widget extends WP_Widget {
 
@@ -45,8 +45,8 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  void
 		 */
 		public function widget( $args, $instance ) {
-			$instance 			       = $this->get_parsed_args( $instance );
-			$view_args 			       = array_merge( $args, $instance );
+			$instance              = $this->get_parsed_args( $instance );
+			$view_args             = array_merge( $args, $instance );
 			$view_args['donors']   = $this->get_widget_donors( $instance );
 			$view_args['orderby']  = $view_args['order'];
 			$view_args['order']    = 'DESC';
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			/**
 			 * Filter the instance arguments.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param   array $instance     The parsed instance settings.
 			 * @param   array $new_instance The updated settings.
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			/**
 			 * Filter the default widget arguments.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param   array $args     The default arguments.
 			 * @param   array $instance The widget instance settings.
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param 	array $args       All the parsed arguments.

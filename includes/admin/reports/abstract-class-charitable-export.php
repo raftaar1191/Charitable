@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 	 * Charitable_Export
 	 *
 	 * @abstract
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	abstract class Charitable_Export {
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[] $args
 		 */
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Returns whether the current user can export data.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Export the CSV file.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Receives a row of data and maps it to the keys defined in the columns.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   object|array $data
 		 * @return  mixed
@@ -124,7 +124,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Print the CSV document headers.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -154,7 +154,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 *
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string[]
 		 */
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		/**
 		 * Get the data to be exported.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */

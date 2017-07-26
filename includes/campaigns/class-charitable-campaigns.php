@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 	/**
 	 * Charitable_Campaigns.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Campaigns {
 
@@ -26,14 +26,14 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * The arguments to be passed to WP_Query.
 		 *
 		 * @var 	array
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 */
 		private $args = array();
 
 		/**
 		 * Return WP_Query object with predefined defaults to query only campaigns.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $args
 		 * @return 	WP_Query
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * Returns a WP_Query that will return active campaigns, ordered by the date they're ending.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return	WP_Query
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		 * Returns a WP_Query that will return campaigns, ordered by the amount they raised.
 		 *
 		 * @global 	$wpdb
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $args     Additional arguments to pass to WP_Query
 		 * @return 	WP_Query
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $join_statement
 		 * @return  string
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to change the group by parameter of the campaigns query.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to change the ordering of the campaigns query, to order by the amount donated.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string   $orderby The current orderby value.
 		 * @param 	WP_Query $wp_query The WP_Query object.

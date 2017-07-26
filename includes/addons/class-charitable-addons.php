@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 	/**
 	 * Charitable_Addons
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Addons {
 
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * Load addons. This is executed before the charitable_start hook 
 		 * to allow addons to hook into that.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	Charitable 		$charitable
 		 * @return 	void
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {		
 			add_action( 'charitable_activate_addon', array( $this, 'activate_addon' ) );
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * This is programatically called on the charitable_activate_addon hook, 
 		 * triggered by a plugin.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Load activated addons.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -121,7 +121,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Load interface and abstract classes that addons use.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -132,7 +132,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Return the filepath to the given addon.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string 		$addon
 		 * @return 	string
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Get class name of addon.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string 		$addon
 		 * @return 	string

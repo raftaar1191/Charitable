@@ -4,7 +4,7 @@
  *
  * @author 	Studio 164a
  * @package Charitable/Admin View/Settings
- * @since 	1.0.0
+ * @since   1.0.0
  */
 
 $value = charitable_get_option( $view_args['key'] );

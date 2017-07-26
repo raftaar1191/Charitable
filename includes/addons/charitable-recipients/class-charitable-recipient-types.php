@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 	/**
 	 * Charitable_Recipient_Types
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Recipient_Types {
 
@@ -34,14 +34,14 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {}
 
 		/**
 		 * Returns the single instance of this class.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Recipient_Types
 		 */
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		/**
 		 * Registers a new recipient type.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Recipient_Types
 		 */
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Charitable_Recipient_Types' ) ) :
 		/**
 		 * Returns all registered recipient types.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */

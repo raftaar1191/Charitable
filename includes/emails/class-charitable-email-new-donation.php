@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 	/**
 	 * New Donation Email
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Email_New_Donation extends Charitable_Email {
 
@@ -27,20 +27,20 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 
 		/**
 		 * @var     boolean Whether the email allows you to define the email recipients.
-		 * @since 1.1.0
+		 * @since   1.1.0
 		 */
 		protected $has_recipient_field = true;
 
 		/**
 		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected $object_types = array( 'donation' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[]  $objects
 		 */
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @since 1.0.3
+		 * @since   1.0.3
 		 *
 		 * @return  string
 		 */
@@ -64,7 +64,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Static method that is fired right after a donation is completed, sending the donation receipt.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int     $donation_id
 		 * @return  boolean
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -147,7 +147,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */

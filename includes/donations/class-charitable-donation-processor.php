@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 	/**
 	 * Charitable Donation Processor.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Donation_Processor {
 
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Create class object. A protected constructor, so this is used in a singleton context.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		protected function __construct() {
 			$this->campaign = charitable_get_current_campaign();
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Donation_Processor
 		 */
@@ -93,7 +93,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * This is primarily useful for testing purposes, as it allows you to
 		 * create multiple donations in a single request.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  void
 		 */
@@ -104,7 +104,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the current campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  Charitable_Campaign|false False if no campaign is set. Campaign object otherwise.
 		 */
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the donation ID.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  int
 		 */
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Executed when a user first clicks the Donate button on a campaign.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * This is used by all donation form submissions, AJAX or not.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  mixed
 		 */
@@ -180,7 +180,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something before any donation form processing takes place.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	Charitable_Donation_Processor $processor The Donation Processor object.
 			 * @param 	Charitable_Donation_Form      $form 	 The Donation Form object.
@@ -197,7 +197,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Validate the gateway values.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	boolean $valid   Whether the submission passes validation.
 			 * @param 	string  $gateway The gateway ID.
@@ -234,7 +234,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *           `redirect` : The url to be redirected to.
 				 *           `safe` : Whether to use wp_safe_redirect. If unset, will default to true.
 				 *
-				 * @since 	1.3.0
+				 * @since   1.3.0
 				 *
 				 * @param 	mixed						  $result      The result of gateway processing.
 				 * @param 	int 						  $donation_id The donation ID.
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *
 				 * This is a fallback for payment gateways that have not been updated to the filter method above.
 				 *
-				 * @since 	1.0.0
+				 * @since   1.0.0
 				 *
 				 * @param 	int 						  $donation_id The donation ID.
 				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
@@ -269,7 +269,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save a donation submitted through a page reload (i.e. not AJAX).
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -285,7 +285,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a donation with AJAX.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  void
 		 */
@@ -324,7 +324,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save a donation.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -379,7 +379,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * We use this when integrating third-party systems like Easy Digital Downloads and
 		 * WooCommerce.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[] $values Submitted donation values.
 		 * @return  int $donation_id Returns 0 in case of failure. Positive donation ID otherwise.
@@ -388,7 +388,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Filter the donation values to be saved.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	array $values The donation values to be saved.
 			 */
@@ -415,7 +415,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something right before the donation is inserted into the database.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	Charitable_Donation_Processor $this The Processor instance.
 			 */
@@ -468,7 +468,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something after the donation has been saved in the database.
 			 *
-			 * @since 	1.0.0
+			 * @since   1.0.0
 			 *
 			 * @param 	int 						  $donation_id The donation ID.
 			 * @param 	Charitable_Donation_Processor $this        The Processor instance.
@@ -481,7 +481,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Inserts the campaign donations into the campaign_donations table.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  int The number of donations inserted.
@@ -533,7 +533,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Save the meta for the donation.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   int $donation_id The donation ID.
 		 * @return  void
@@ -561,7 +561,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Add a message to the donation log.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int    $donation_id The donation ID.
 		 * @param   string $message     The message to add to the log.
@@ -577,7 +577,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the submitted donation data.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  mixed[]
 		 */
@@ -588,7 +588,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the submitted value for a particular key.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $key     The key to search for.
 		 * @param   mixed  $default Fallback value to return if the data is not set.
@@ -602,7 +602,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Set a value for a particular key.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param   string $key The key to set.
 		 * @param   mixed  $value The value to be set.
@@ -615,7 +615,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the campaign donations array, or false if the data is invalid.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string[]|false
 		 */
@@ -649,7 +649,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the donor_id for the current donation.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int
 		 */
@@ -685,7 +685,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @uses    Charitable_Donation_Processor::get_redirection_after_gateway_processing()
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  void
@@ -727,7 +727,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Return the URL that the donor should be redirected to.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param   mixed $gateway_processing The result of the gateway processing.
 		 * @return  string
@@ -754,7 +754,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Validate user data passed to insert.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  boolean
 		 */
@@ -772,7 +772,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Parse the donation data, based on the passed $values array.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -796,7 +796,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the donation status. Defaults to charitable-pending.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -813,7 +813,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns the name of the donor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -828,7 +828,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Returns a comma separated list of the campaigns that are being donated to.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -840,7 +840,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Set a unique key for the donation.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -851,7 +851,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Checks whether the given gateway has been updated for compatibility with 1.3.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @param   string $gateway The gateway for the donation.
 		 * @return  boolean
@@ -867,7 +867,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @deprecated
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $gateway The gateway for the donation.
 		 * @return  string

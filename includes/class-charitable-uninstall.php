@@ -19,14 +19,14 @@ if ( ! class_exists( 'Charitable_Uninstall' ) ) :
 /**
  * Charitable_Uninstall
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Charitable_Uninstall {
 
 	/**
 	 * Uninstall the plugin.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	public function __construct() {
 		if ( charitable()->is_deactivation() && charitable_get_option( 'delete_data_on_uninstall' ) ) {
@@ -42,7 +42,7 @@ class Charitable_Uninstall {
 	/**
 	 * Remove plugin-specific roles.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return 	void
 	 */
@@ -54,7 +54,7 @@ class Charitable_Uninstall {
 	/**
 	 * Remove post objects created by Charitable.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return 	void
 	 */
@@ -74,7 +74,7 @@ class Charitable_Uninstall {
 	/**
 	 * Remove the custom tables added by Charitable.  
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 *
 	 * @return 	void
 	 */

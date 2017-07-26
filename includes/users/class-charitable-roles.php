@@ -17,14 +17,14 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 	/**
 	 * Charitable_Roles class.
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Roles {
 
 		/**
 		 * Sets up roles for Charitable. This is called by the install script.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		 * Sets up capabilities for Charitable. This is called by the install script.
 		 *
 		 * @global 	WP_Roles
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		 * Removes roles. This is called upon deactivation.
 		 *
 		 * @global 	WP_Roles
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	void
 		 */
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		/**
 		 * Returns the caps for the post types that Charitable adds.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	array
 		 */

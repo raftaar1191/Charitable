@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 	 * Charitable_Endpoint
 	 *
 	 * @abstract
-	 * @since 1.5.0
+	 * @since   1.5.0
 	 */
 	abstract class Charitable_Endpoint implements Charitable_Endpoint_Interface {
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * Unless the child class defines this, this won't do anything for an endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 */
 		public function setup_rewrite_rules() {
 			/* Do nothing by default. */
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * Unless the child class defines this, this won't do anything for an endpoint.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	array $vars
 		 */
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * By default, we will return the default template that WordPress already selected.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $template The default template.
 		 * @return  string
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * By default, we will return the default content that is passed by WordPress.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @param 	string $content
 		 * @return  string
@@ -86,7 +86,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 *
 		 * By default, this will be the endpoint ID with underscores replaced by hyphens.
 		 *
-		 * @since 1.5.0
+		 * @since   1.5.0
 		 *
 		 * @return 	string
 		 */

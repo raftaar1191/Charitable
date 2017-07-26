@@ -5,7 +5,7 @@
  * Override this template by copying it to yourtheme/charitable/campaign/summary.php
  *
  * @author 	Studio 164a
- * @since 	1.0.0
+ * @since   1.0.0
  */
 
 $campaign = $view_args['campaign'];

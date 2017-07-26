@@ -17,28 +17,28 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 	/**
 	 * Charitable_Benefactors_DB
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Benefactors_DB extends Charitable_DB {
 
 		/**
 		 * The version of our database table
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public $version = '1.0.0';
 
 		/**
 		 * The name of the primary column
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public $primary_key = 'campaign_benefactor_id';
 
 		/**
 		 * Set up the database table name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function __construct() {
 			global $wpdb;
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Create the table.
 		 *
 		 * @global 	$wpdb
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function create_table() {
 			global $wpdb;
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Default column values.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	array
 		 */
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Add a new benefactor object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array 	$data
 		 * @return 	int 				Positive ID if successful. 0 if failed.
@@ -164,7 +164,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Update a benefactor object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int 		$row_id
 		 * @param 	array 		$data
@@ -192,7 +192,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Delete a row identified by the primary key.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int 		$row_id
 		 * @return  bool
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		 * Get all active benefactors for a campaign.
 		 *
 		 * @global 	WPDB 		$wpdb
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int 		$campaign_id
 		 * @return 	Object[]
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Charitable_Benefactors_DB' ) ) :
 		/**
 		 * Get active benefactors for a campaign created through a specific extension.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	int 			$campaign_id
 		 * @param 	string 			$extension

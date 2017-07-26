@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 	/**
 	 * Charitable_Emails
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Emails {
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_Emails
 		 */
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Register Charitable emails.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string[]
 		 */
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Receives a request to enable or disable an email and validates it before passing it off.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array
 		 * @return  array
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Returns all available emails.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string
 		 */
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Returns the currently enabled emails.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  string[]
 		 */
@@ -155,7 +155,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Returns a list of the names of currently enabled emails.
 		 *
-		 * @since 1.3.0
+		 * @since   1.3.0
 		 *
 		 * @return  string[]
 		 */
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Return the email class name for a given email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string  $email
 		 * @return  string|false
@@ -190,7 +190,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Returns whether the passed email is enabled.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string  $email_id
 		 * @return  boolean
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Register email settings fields.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array   		 $settings
 		 * @param   Charitable_Email $email    The email's helper object.
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 * the email is required in order to allow the shortcode function (below)
 		 * to gather the correct information to display.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   Charitable_Email $email
 		 * @return  void
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Handles the parsing of the [charitable_email] shortcode.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   mixed[] $atts
 		 * @return  string
@@ -255,7 +255,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Enable an email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -276,7 +276,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		/**
 		 * Disable an email.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */

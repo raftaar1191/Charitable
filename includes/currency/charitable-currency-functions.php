@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Return currency helper class.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  Charitable_Currency
  */
@@ -26,7 +26,7 @@ function charitable_get_currency_helper() {
 /**
  * Return the site currency.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  string
  */
@@ -37,7 +37,7 @@ function charitable_get_currency() {
 /**
  * Formats the monetary amount.
  *
- * @since 1.1.5
+ * @since   1.1.5
  *
  * @param   string    $amount        The amount to be formatted.
  * @param   int|false $decimal_count Optional. If not set, default decimal count will be used.
@@ -51,7 +51,7 @@ function charitable_format_money( $amount, $decimal_count = false, $db_format = 
 /**
  * Sanitize an amount, converting it into a float.
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @param   string  $amount    The amount to be sanitized.
  * @param   boolean $db_format Optional. Whether the amount is in db format (i.e. using decimals for cents, regardless of site settings).

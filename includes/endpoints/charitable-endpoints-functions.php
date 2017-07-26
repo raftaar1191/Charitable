@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 /**
  * Get the endpoint API object.
  *
- * @since 1.5.0
+ * @since   1.5.0
  *
  * @return  Charitable_Endpoints
  */
@@ -25,7 +25,7 @@ function charitable_get_endpoints_api() {
 /**
  * Register a new endpoint.
  *
- * @since 1.5.0
+ * @since   1.5.0
  *
  * @param   Charitable_Endpoint $endpoint
  * @return  void
@@ -46,7 +46,7 @@ function charitable_register_endpoint( Charitable_Endpoint $endpoint ) {
  * - charitable_get_permalink( 'donation_receipt_page' );
  * - charitable_get_permalink( 'donation_cancellation_page' );
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string  $page
  * @param   array   $args       Optional array of arguments.
@@ -68,7 +68,7 @@ function charitable_get_permalink( $page, $args = array() ) {
  * - charitable_is_page( 'donation_receipt_page' );
  * - charitable_is_page( 'donation_cancellation_page' );
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string  $page
  * @param   array   $args       Optional array of arguments.
@@ -81,7 +81,7 @@ function charitable_is_page( $page, $args = array() ) {
 /**
  * Checks whether the current request is for a single campaign.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -98,7 +98,7 @@ function charitable_is_campaign_page() {
  * We keep both for backwards compatibility (pre 1.5).
  *
  * @uses    Charitable_Endpoints::get_page_url()
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -122,7 +122,7 @@ function charitable_get_campaign_donation_page_permalink( $url = null, $args = a
  * query var is set.
  *
  * @uses    Charitable_Endpoints::is_page()
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   boolean $ret Unused argument.
  * @param   array   $args
@@ -138,7 +138,7 @@ function charitable_is_campaign_donation_page( $ret = null, $args = array() ) {
  * This is functionally equivalent to use charitable_get_permalink( 'donation_receipt' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $url  Deprecated argument.
  * @param   array  $args
@@ -155,7 +155,7 @@ function charitable_get_donation_receipt_page_permalink( $url = null, $args = ar
  * In general, you should use charitable_is_page() instead since it will
  * take into account any filtering by plugins/themes.
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -169,7 +169,7 @@ function charitable_is_donation_receipt_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'donation_processing' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.2.0
+ * @since   1.2.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -185,7 +185,7 @@ function charitable_get_donation_processing_page_permalink( $url = null, $args =
  * This is functionally equivalent to use charitable_is_page( 'donation_processing' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -199,7 +199,7 @@ function charitable_is_donation_processing_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'donation_cancellation' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @param   string $url  Deprecated argument.
  * @param   array  $args
@@ -215,7 +215,7 @@ function charitable_get_donation_cancel_page_permalink( $url = null, $args = arr
  * This is functionally equivalent to use charitable_is_page( 'donation_cancellation' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @return  boolean
  */
@@ -229,7 +229,7 @@ function charitable_is_donation_cancel_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'campaign_widget' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.2.0
+ * @since   1.2.0
  *
  * @param   string $url  Deprecated argument.
  * @param   array  $args
@@ -245,7 +245,7 @@ function charitable_get_campaign_widget_page_permalink( $url = null, $args = arr
  * This is functionally equivalent to use charitable_is_page( 'campaign_widget' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -259,7 +259,7 @@ function charitable_is_campaign_widget_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'forgot_password' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -275,7 +275,7 @@ function charitable_get_forgot_password_page_permalink( $url = null, $args = arr
  * This is functionally equivalent to use charitable_is_page( 'forgot_password' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @return  boolean
  */
@@ -289,7 +289,7 @@ function charitable_is_forgot_password_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'reset_password' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -305,7 +305,7 @@ function charitable_get_reset_password_page_permalink( $url = null, $args = arra
  * This is functionally equivalent to use charitable_is_page( 'reset_password' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.4.0
+ * @since   1.4.0
  *
  * @return  boolean
  */
@@ -319,7 +319,7 @@ function charitable_is_reset_password_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'login' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -335,7 +335,7 @@ function charitable_get_login_page_permalink( $url = null, $args = array() ) {
  * This is functionally equivalent to use charitable_is_page( 'login' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -349,7 +349,7 @@ function charitable_is_login_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'registration' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -365,7 +365,7 @@ function charitable_get_registration_page_permalink( $url = null, $args = array(
  * This is functionally equivalent to use charitable_is_page( 'registration' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -379,7 +379,7 @@ function charitable_is_registration_page() {
  * This is functionally equivalent to use charitable_get_permalink( 'profile' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @param   string $url Deprecated argument.
  * @param   array  $args
@@ -395,7 +395,7 @@ function charitable_get_profile_page_permalink( $url = null, $args = array() ) {
  * This is functionally equivalent to use charitable_is_page( 'profile' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */
@@ -409,7 +409,7 @@ function charitable_is_profile_page() {
  * This is functionally equivalent to use charitable_is_page( 'email_preview' ).
  * It will produce the same results. We keep both for backwards compatibility (pre 1.5).
  *
- * @since 1.0.0
+ * @since   1.0.0
  *
  * @return  boolean
  */

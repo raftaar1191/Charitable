@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 	/**
 	 * Charitable_Licenses
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Licenses {
 
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_Licenses
 		 */
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 			$this->products = array();
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Checks for any Charitable extensions with updates.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param  	array $_transient_data The plugin updates data.
 		 * @return  array
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Register a product that requires licensing.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item_name The title of the product.
 		 * @param   string $author The author of the product.
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return the list of products requiring licensing.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return a specific product's details.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $item The item for which we are getting product details.
 		 * @return  string[]
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Returns whether the given product has a valid license.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item The item to check.
 		 * @return  boolean
@@ -232,7 +232,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Returns the license details for the given product.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item The item to get the license for.
 		 * @return  mixed[]
@@ -250,7 +250,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Returns the active license details for the given product.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item The item to get active licensing details for.
 		 * @return  mixed[]
@@ -271,7 +271,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 * Note: The licenses are not necessarily valid. If a user enters an invalid
 		 * license, the license will be stored but it will be flagged as invalid.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array[]
 		 */
@@ -286,7 +286,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Verify a license.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item The item to verify.
 		 * @param   string $license The license key for the item.
@@ -338,7 +338,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return the URL to deactivate a specific license.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item The item to deactivate.
 		 * @return  string
@@ -354,7 +354,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Deactivate a license.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -408,7 +408,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return a key for the item, based on the item name.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $item_name Name of the item.
 		 * @return  string
@@ -420,7 +420,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Return the latest versions of Charitable plugins.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  array
 		 */

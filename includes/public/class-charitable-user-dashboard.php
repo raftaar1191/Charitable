@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 	/**
 	 * Charitable_User_Dashboard
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_User_Dashboard {
 
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since 1.2.0
+		 * @since   1.2.0
 		 *
 		 * @return  Charitable_User_Dashboard
 		 */
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'register_menu' ), 100 );
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Register navigation menu for frontend dashboard.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Returns the user dashboard navigation menu.
 		 *
 		 * @uses    wp_nav_menu
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array       $args
 		 * @return  void
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Return the menu ID based on the theme location.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  int         0 if no menu found. Menu ID otherwise.
 		 */
@@ -110,7 +110,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Returns all objects in the user dashboard navigation.
 		 *
 		 * @uses    wp_get_nav_menu_items
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  WP_Post[]
 		 */
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Flushes the menu object cache after updating a menu or menu item.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Checks whether the current requested page is in the user dashboard nav.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   Object $object Optional. If not set, will base it on the current queried object.
 		 * @return  boolean
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Loads the user dashboard template.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   string $template
 		 * @return  string
@@ -231,7 +231,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Add the user-dashboard class to the body if we're looking at it.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array       $classes
 		 * @return  array

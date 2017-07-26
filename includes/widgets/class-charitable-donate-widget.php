@@ -18,14 +18,14 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 	 * A widget to display the downloads that are connected to the campaign.
 	 *
 	 * @see     WP_Widget
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Donate_Widget extends WP_Widget {
 
 		/**
 		 * Register the widget.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 */
 		public function __construct() {
 
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Displays the widget on the frontend.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $args 	Widget args.
 		 * @param   array $instance Widget instance.
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Displays the widget form.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $instance Widget instance. 
 		 * @return  void
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		/**
 		 * Update the widget settings.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array $new_instance New widget instance arguments.
 		 * @param   array $old_instance Old widget instance arguments.

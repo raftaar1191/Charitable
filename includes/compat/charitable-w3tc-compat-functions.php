@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Clear the campaign page cache after a donation is received.
  *
- * @since 1.4.18
+ * @since   1.4.18
  *
  * @param   int $campaign_id The campaign ID.
  * @return  void
@@ -35,7 +35,7 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_cam
  *
  * @see 	https://github.com/Charitable/Charitable/issues/347
  *
- * @since 1.4.18
+ * @since   1.4.18
  *
  * @return 	void
  */

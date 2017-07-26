@@ -17,14 +17,14 @@ if ( ! class_exists( 'Charitable_Donation_Stats_Widget' ) ) :
 /**
  * Charitable_Donation_Stats_Widget class.
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 class Charitable_Donation_Stats_Widget extends WP_Widget {
 
     /**
      * Instantiate the widget and set up basic configuration.
      *
-     * @since 1.0.0
+     * @since   1.0.0
      */
     public function __construct() {
         parent::__construct(
@@ -41,7 +41,7 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
      * Display the widget contents on the front-end.
 
      *
-     * @since 1.0.0
+     * @since   1.0.0
      *
      * @param   array $args
      * @param   array $instance
@@ -59,7 +59,7 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
     /**
      * Display the widget form in the admin.
      *
-     * @since 1.0.0
+     * @since   1.0.0
      *
      * @param   array $instance         The current settings for the widget options.
 
@@ -79,7 +79,7 @@ class Charitable_Donation_Stats_Widget extends WP_Widget {
      * Update the widget settings in the admin.
 
      *
-     * @since 1.0.0
+     * @since   1.0.0
      *
      * @param   array $new_instance         The updated settings.
 

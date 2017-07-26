@@ -17,20 +17,20 @@ if ( ! class_exists( 'Charitable_Donation' ) ) :
 	/**
 	 * Donation Model
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Donation extends Charitable_Abstract_Donation {
 
 		/**
 		 * @var     string
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 */
 		public $donation_type = 'simple';
 
 		/**
 		 * Process a refund.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   float $refund_amount
 		 * @param   string $message

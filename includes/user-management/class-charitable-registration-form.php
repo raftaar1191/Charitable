@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 	/**
 	 * Charitable_Registration_Form
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Registration_Form extends Charitable_Form {
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param   array       $args       User-defined shortcode attributes.
 		 */
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the arguments passed to the shortcode.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @return  mixed[]
 		 */
@@ -79,7 +79,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Profile fields to be displayed.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  array
 		 */
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the registration
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	Charitable_Form 	$form
 		 * @return 	void
@@ -152,7 +152,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Update registration after form submission.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return  void
 		 */
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the link to the login page, or false if we are not going to display it.
 		 *
-		 * @since 1.4.2
+		 * @since   1.4.2
 		 *
 		 * @return  false|string
 		 */

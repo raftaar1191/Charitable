@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 	/**
 	 * Charitable_Template
 	 *
-	 * @since 1.0.0
+	 * @since   1.0.0
 	 */
 	class Charitable_Template {
 
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Class constructor.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string|array $template_name A single template name or an ordered array of template.
 		 * @param 	bool 		 $load          If true the template file will be loaded if it is found.
@@ -80,7 +80,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 	     * Set theme template path.
 	     *
-	     * @since 1.0.0
+	     * @since   1.0.0
 	     *
 	     * @return  string
 	     */
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 	    /**
 	     * Return the base template path.
 	     *
-	     * @since 1.0.0
+	     * @since   1.0.0
 	     *
 	     * @return  string
 	     */
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Adds an array of view arguments.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	array $args Arguments to include in the view.
 		 * @return 	void
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Adds an argument to be accessed within the view.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $key   The key of the argument.
 		 * @param 	mixed  $value The vaalue of the argument.
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Renders the template.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	boolean $require_once Whether the template should be loaded with include_once instead of include.
 		 * @return 	false|string False if the template does not exist. Template file otherwise.
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		 * Locate the template file of the highest priority.
 		 *
 		 * @uses 	locate_template()
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	string
 		 */
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Checks whether the template file exists.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @param 	string $template The template file to check for.
 		 * @return  boolean
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Charitable_Template' ) ) :
 		/**
 		 * Return the theme template options for a specific template.
 		 *
-		 * @since 1.0.0
+		 * @since   1.0.0
 		 *
 		 * @return 	string[]
 		 */

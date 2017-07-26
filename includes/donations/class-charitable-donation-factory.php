@@ -5,7 +5,7 @@
  * The Charitable donation factory creating the right donation objects.
  *
  * @version		1.4.0
- * @since 1.4.0
+ * @since   1.4.0
  * @package		Charitable/Classes
  * @category	Class
  * @author 		Eric Daams
@@ -19,14 +19,14 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 	/**
 	 * Donation Factory
 	 *
-	 * @since 1.4.0
+	 * @since   1.4.0
 	 */
 	class Charitable_Donation_Factory {
 
 		/**
 		 * Get donation.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param 	bool $donation (default: false)
 		 * @return 	Charitable_Donation|bool
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		/**
 		 * Create a class name e.g. Charitable_Donation_Type_Class instead of chartiable_donation_type-class.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param  	string $donation_type
 		 * @return 	string|false
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		/**
 		 * Get the product class name.
 		 *
-		 * @since 1.4.0
+		 * @since   1.4.0
 		 *
 		 * @param  	WP_Post $the_donation
 		 * @return 	string

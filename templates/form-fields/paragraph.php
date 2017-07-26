@@ -3,7 +3,7 @@
  * The template used to display the suggested amounts field.
  *
  * @author 	Studio 164a
- * @since 	1.0.0
+ * @since   1.0.0
  * @version 1.0.0
  */
 
