@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 					'number',
 					'orderby',
 					'order',
-					'campaign_id',
+					'campaign',
 					'orientation',
 					'show_distinct',
 					'show_name',
