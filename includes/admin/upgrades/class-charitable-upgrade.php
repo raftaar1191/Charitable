@@ -23,11 +23,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 	 */
 	class Charitable_Upgrade {
 
-	    /**
-	     * @var     Charitable_Upgrade
-	     * @since   1.3.0
-	     */
-	    private static $instance = null;
+		/**
+		 * @var     Charitable_Upgrade
+		 * @since   1.3.0
+		 */
+		private static $instance = null;
 
 		/**
 		 * Current database version.
@@ -59,18 +59,18 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 */
 		protected $version_key = 'charitable_version';
 
-	    /**
-	     * Create and return the class object.
-	     *
-	     * @since   1.3.0
-	     */
-	    public static function get_instance() {
-	        if ( is_null( self::$instance ) ) {
-	            self::$instance = new Charitable_Upgrade();
-	        }
+		/**
+		 * Create and return the class object.
+		 *
+		 * @since   1.3.0
+		 */
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new Charitable_Upgrade();
+			}
 
-	        return self::$instance;
-	    }
+			return self::$instance;
+		}
 
 		/**
 		 * Manages the upgrade process.
@@ -756,7 +756,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @param 	false|string $db_version   The version stored in the database.
 		 * @param 	string 		 $edge_version The new version to upgrade to.
-	 	 * @return 	void
+		 * @return 	void
 		 */
 		public static function upgrade_from( $db_version, $edge_version ) {
 			if ( self::requires_upgrade( $db_version, $edge_version ) ) {
