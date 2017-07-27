@@ -404,11 +404,11 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			if ( false === $amount ) {
 
 				$args  = apply_filters( 'charitable_user_total_donated_query_args', array(
-					'output' 		  => 'raw',
-					'donor_id' 		  => $this->get_donor_id(),
+					'output'          => 'raw',
+					'donor_id'        => $this->get_donor_id(),
 					'distinct_donors' => true,
-					'fields' 		  => 'amount',
-					'campaign' 		  => (int) $campaign_id,
+					'fields'          => 'amount',
+					'campaign'        => (int) $campaign_id,
 				), $this );
 
 				$query = new Charitable_Donor_Query( $args );

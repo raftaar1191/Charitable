@@ -658,9 +658,9 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param mixed $public_query_vars
-		 * @param  str $post_type
-		 * @return array
+		 * @param   boolean $disable   Whether the months dropdown should be disabled.
+		 * @param   string  $post_type The current post type.
+		 * @return  array
 		 */
 		public function disable_months_dropdown( $disable, $post_type ) {
 			if ( Charitable::DONATION_POST_TYPE == $post_type ) {
@@ -675,16 +675,15 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param  string $post_type
+		 * @param   string $post_type The post type.
+		 * @return  void
 		 */
 		public function restrict_manage_posts( $post_type = '' ) {
 			global $typenow;
 
 			/* Show custom filters to filter orders by donor. */
 			if ( in_array( $typenow, array( Charitable::DONATION_POST_TYPE ) ) ) {
-
 				charitable_admin_view( 'donations-page/filters' );
-
 			}
 		}
 
@@ -693,7 +692,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param   string $which
+		 * @param   string $which Context.
 		 * @return  void
 		 */
 		public function extra_tablenav( $which ) {
@@ -703,16 +702,13 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 			if ( 'top' == $which && in_array( $typenow, array( Charitable::DONATION_POST_TYPE ) ) ) {
 				charitable_admin_view( 'donations-page/export' );
 			}
-
 		}
-
 
 		/**
 		 * Add modal template to footer
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param   string $which
 		 * @return  void
 		 */
 		public function modal_forms() {
@@ -733,6 +729,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
+		 * @param 	string $hook The current admin page hook.
 		 * @return  void
 		 */
 		public function load_scripts( $hook ) {
@@ -792,7 +789,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param   array $vars
+		 * @param   array $vars Request args.
 		 * @return  array
 		 */
 		public function request_query( $vars ) {
@@ -847,7 +844,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
-		 * @param   array $vars
+		 * @param   array $clauses Clauses used to filter the donations.
 		 * @return  array
 		 */
 		public function posts_clauses( $clauses ) {
@@ -909,7 +906,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 					$this->status_counts[ $key ] = $count;
 
 				}
-			}
+			}//end if
 
 			return $this->status_counts;
 		}
@@ -919,6 +916,7 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.4.0
 		 *
+		 * @param 	string $date The date as a string.
 		 * @return  string[]
 		 */
 		protected function get_parsed_date( $date ) {
@@ -936,19 +934,19 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 *
 		 * @since   1.2.0
 		 *
-		 * @param   string $new_status
-		 * @param   string $old_status
-		 * @param   WP_Post $post
+		 * @param   string  $new_status New donation status.
+		 * @param   string  $old_status Old donation status.
+		 * @param   WP_Post $post       The post object.
 		 * @return  void
 		 *
-		 * @deprecated   1.4.0
+		 * @deprecated 1.4.0
 		 */
 		public function handle_donation_status_change( $new_status, $old_status, $post ) {
 
 			charitable_get_deprecated()->deprecated_function(
 				__METHOD__,
 				'1.4.0',
-				__( 'Handled automatically when $donation->update_status() is called.', 'reach' )
+				__( 'Handled automatically when $donation->update_status() is called.', 'charitable' )
 			);
 
 			if ( Charitable::DONATION_POST_TYPE != $post->post_type ) {
@@ -970,7 +968,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 
 			charitable_get_donation( $post->ID )->update_donation_log( $message );
 		}
-
 	}
 
 endif;
