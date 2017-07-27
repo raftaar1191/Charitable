@@ -42,8 +42,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 				'hide_if_no_donors'	=> 0,
 			);
 
-			$args                = shortcode_atts( $default, $atts, 'donors' );
-			$args['donors']      = self::get_donors( $args );
+			$args           = shortcode_atts( $default, $atts, 'charitable_donors' );
+			$args['donors'] = self::get_donors( $args );
 
 			/**
 			 * Replace the default template with your own.
