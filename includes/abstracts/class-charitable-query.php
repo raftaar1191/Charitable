@@ -112,10 +112,12 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 				$this->parameters = array();
 
 				$sql = "SELECT {$this->fields()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
-				
+
 				if ( ! empty( $this->parameters ) ) {
 					$sql = $wpdb->prepare( $sql, $this->parameters );
 				}
+
+				// error_log($sql);
 
 				$this->query = $wpdb->get_results( $sql );
 
