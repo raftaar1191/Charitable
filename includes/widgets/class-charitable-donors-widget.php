@@ -120,7 +120,12 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 				<label for="<?php echo esc_attr( $this->get_field_id( 'hide_if_no_donors' ) ) ?>"><?php _e( 'Hide if there are no donors', 'charitable' ) ?></label>
 			</p>
 			<?php
-
+			/**
+			 * Add extra settings for the widget.
+			 *
+			 * @param 	array                    $args Widget instance arguments.
+			 * @param 	Charitable_Donors_Widget $this This widget instance.
+			 */
 			do_action( 'charitable_donor_widget_settings_bottom', $args, $this );
 		}
 
