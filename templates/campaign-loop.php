@@ -28,9 +28,15 @@ else :
 endif;
 
 /**
- * @hook charitable_campaign_loop_before
+ * Add something before the campaign loop.
+ *
+ * @since   1.5.0
+ *
+ * @param   WP_Query $campaigns The campaigns.
+ * @param   array    $args      Loop args.
+ * @param   array    $view_args All arguments passed to the view.
  */
-do_action( 'charitable_campaign_loop_before', $campaigns, $args );
+do_action( 'charitable_campaign_loop_before', $campaigns, $args, $view_args );
 
 ?>
 <ol class="<?php echo $loop_class ?>">
@@ -50,6 +56,12 @@ wp_reset_postdata();
 <?php
 
 /**
- * @hook charitable_campaign_loop_after
+ * Add something after the campaign loop.
+ *
+ * @since   1.5.0
+ *
+ * @param   WP_Query $campaigns The campaigns.
+ * @param   array    $args      Loop args.
  */
+do_action( 'charitable_campaign_loop_after', $campaigns, $args, $view_args );
 do_action( 'charitable_campaign_loop_after', $campaigns, $args );

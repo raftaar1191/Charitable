@@ -19,6 +19,7 @@ $campaigns_text  = 1 == $campaigns_count ? __( 'Campaign', 'charitable' ) : __( 
  * @since   1.5.0
  *
  * @param   array $donation_stats The default stats to show.
+ * @param 	array $view_args      All arguments passed to the view.
  */
 $donation_stats = apply_filters( 'charitable_donation_stats', array(
 	'campaign_count' => array(
@@ -33,7 +34,7 @@ $donation_stats = apply_filters( 'charitable_donation_stats', array(
 		'amount'      => charitable_get_table( 'donors' )->count_donors_with_donations(),
 		'description' => __( 'Donors', 'charitable' ),
 	),
-) );
+), $view_args );
 
 ?>
 <ul class="donation-stats">
