@@ -17,18 +17,30 @@ $content  = $view_args['content'];
 $donation = $view_args['donation'];
 
 /**
- * @hook    charitable_donation_receipt_before
+ * Add something before the donation receipt and the page content.
+ *
+ * @since   1.5.0
+ *
+ * @param   Charitable_Donation $donation The Donation object.
  */
 do_action( 'charitable_donation_receipt_before', $donation );
 
 echo $content;
 
 /**
- * @hook    charitable_donation_receipt
+ * Display the donation receipt content.
+ *
+ * @since   1.5.0
+ *
+ * @param   Charitable_Donation $donation The Donation object.
  */
 do_action( 'charitable_donation_receipt', $donation );
 
 /**
- * @hook    charitable_donation_receipt_after
+ * Add something after the donation receipt.
+ *
+ * @since   1.5.0
+ *
+ * @param   Charitable_Donation $donation The Donation object.
  */
-do_action( 'charitable_donation_receipt_after', $donation );
+do_action( 'charitable_donation_receipt_before', $donation );
