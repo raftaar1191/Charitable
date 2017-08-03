@@ -117,8 +117,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 					$sql = $wpdb->prepare( $sql, $this->parameters );
 				}
 
-				// error_log($sql);
-
 				$this->query = $wpdb->get_results( $sql );
 
 				do_action( 'charitable_post_query', $this );

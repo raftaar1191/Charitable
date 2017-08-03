@@ -70,11 +70,11 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Modify the view arguments that are passed to the donors template.
 			 *
-			 * @since   1.5.0
+			 * @since  1.5.0
 			 *
-			 * @param 	array $view_args The arguments to pass.
-			 * @param 	array $args      All the parsed arguments.
-	         * @return 	array
+			 * @param  array $view_args The arguments to pass.
+			 * @param  array $args      All the parsed arguments.
+	         * @return array
 	         */
 			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
 					'donors',
@@ -100,11 +100,11 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Customize the output of the shortcode.
 			 *
-			 * @since   1.5.0
+			 * @since  1.5.0
 			 *
-			 * @param 	string $content The content to be displayed.
-			 * @param 	array  $args    All the parsed arguments.
-	         * @return 	string
+			 * @param  string $content The content to be displayed.
+			 * @param  array  $args    All the parsed arguments.
+	         * @return string
 	         */
 			return apply_filters( 'charitable_donors_shortcode', ob_get_clean(), $args );
 		}
@@ -122,11 +122,11 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
-			 * @since   1.5.0
+			 * @since  1.5.0
 			 *
-			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
-			 * @param 	array $args       All the parsed arguments.
-	         * @return 	array
+			 * @param  array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
+			 * @param  array $args       All the parsed arguments.
+	         * @return array
 	         */
 			$query_args = apply_filters( 'charitable_donors_shortcode_donor_query_args',
 				charitable_array_subset( $args, array( 'number', 'orderby', 'order', 'campaign', 'distinct_donors' ) ),
