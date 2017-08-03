@@ -91,14 +91,18 @@
         -moz-border-radius: 0;
         border-radius: 0;
         background: none;
+        line-height: 1em;
+        height: auto;
 
         li {
             position: relative;
             top: 0;
             display: block;
+            width: 100%;
             float: none;
             background: none;           
             margin: 0;
+            padding: 0 1px 0 0;
             border: 0;  
             border-radius: 0;
             white-space: normal;                    
@@ -110,6 +114,11 @@
             padding: 10px;
             color: #747474;
             text-decoration: none;
+            border: none;
+            text-shadow: none;
+            margin: 0;
+            border-radius: 0;
+            font-weight: normal;
         }
 
         li.ui-tabs-active {
@@ -132,7 +141,8 @@
     }
 
     .ui-tabs-panel {
-        box-sizing: border-box;    
+        clear: none;
+        box-sizing: border-box;
         float: right;
         width: 80%;     
         padding: 20px;

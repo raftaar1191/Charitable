@@ -13,9 +13,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-/**
- * @var     Charitable_Donation
- */
+/* @var Charitable_Donation */
 $donation = $view_args['donation'];
 
 ?>

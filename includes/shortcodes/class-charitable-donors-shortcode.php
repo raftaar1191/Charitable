@@ -33,7 +33,7 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 				'orderby'			=> 'date',
 				'order'			    => 'DESC',
 				'campaign'			=> 0,
-				'distinct_donors'   => 1,
+				'distinct_donors'   => 0,
 				'orientation'      	=> 'horizontal',
 				'show_name'			=> 1,
 				'show_location'		=> 0,

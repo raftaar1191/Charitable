@@ -448,14 +448,18 @@ body.post-type-campaign .postbox-container .empty-container {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
-    background: none; }
+    background: none;
+    line-height: 1em;
+    height: auto; }
     #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li {
       position: relative;
       top: 0;
       display: block;
+      width: 100%;
       float: none;
       background: none;
       margin: 0;
+      padding: 0 1px 0 0;
       border: 0;
       border-radius: 0;
       white-space: normal; }
@@ -464,7 +468,12 @@ body.post-type-campaign .postbox-container .empty-container {
       float: none;
       padding: 10px;
       color: #747474;
-      text-decoration: none; }
+      text-decoration: none;
+      border: none;
+      text-shadow: none;
+      margin: 0;
+      border-radius: 0;
+      font-weight: normal; }
     #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li.ui-tabs-active {
       z-index: 2;
       margin-right: -2px;
@@ -478,6 +487,7 @@ body.post-type-campaign .postbox-container .empty-container {
       margin-bottom: 10px;
       border-bottom-color: transparent; }
   #charitable-campaign-advanced-metabox.ui-tabs .ui-tabs-panel {
+    clear: none;
     box-sizing: border-box;
     float: right;
     width: 80%;
