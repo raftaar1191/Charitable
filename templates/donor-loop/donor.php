@@ -18,7 +18,10 @@ if ( ! array_key_exists( 'donor', $view_args ) ) {
 	return;
 }
 
+/* @var Charitable_Donor */
 $donor  	 = $view_args['donor'];
+
+/* @var int */
 $campaign_id = $view_args['campaign'];
 
 ?>
