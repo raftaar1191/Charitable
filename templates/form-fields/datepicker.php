@@ -12,15 +12,14 @@ if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form 		 = $view_args['form'];
-$field 		 = $view_args['field'];
-$classes 	 = esc_attr( $view_args['classes'] );
+$form        = $view_args['form'];
+$field       = $view_args['field'];
+$classes     = esc_attr( $view_args['classes'] );
 $is_required = isset( $field['required'] ) ? $field['required'] : false;
-$value		 = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
-$min_date	 = isset( $field['min_date'] ) ? esc_attr( $field['min_date'] ) : '';
-$max_date	 = isset( $field['max_date'] ) ? esc_attr( $field['max_date'] ) : '';
+$value       = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
+$min_date    = isset( $field['min_date'] ) ? esc_attr( $field['min_date'] ) : '';
+$max_date    = isset( $field['max_date'] ) ? esc_attr( $field['max_date'] ) : '';
 $date_format = array_key_exists( 'date_format', $field ) ? $field['date_format'] : 'MM d, yy';
-
 $json_args   = array(
 	'changeMonth' => true,
 	'changeYear'  => true,

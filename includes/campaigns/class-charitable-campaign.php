@@ -171,9 +171,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the timetamp of the end date.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int|false           Int if campaign has an end date. False if campaign has no end date.
+		 * @return int|false Int if campaign has an end date. False if campaign has no end date.
 		 */
 		public function get_end_time() {
 			if ( ! isset( $this->end_time ) ) {
@@ -188,6 +188,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				$time       = explode( ':', $date_time[1] );
 				$this->end_time = mktime( $time[0], $time[1], $time[2], $date[1], $date[2], $date[0] );
 			}
+
 			return $this->end_time;
 		}
 
