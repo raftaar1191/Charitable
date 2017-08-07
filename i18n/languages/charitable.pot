@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-alpha.2\n"
+"Project-Id-Version: Charitable 1.5.0-alpha.3\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-03 06:17:11+00:00\n"
+"POT-Creation-Date: 2017-08-07 03:10:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5136,7 +5136,6 @@ msgstr ""
 #: includes/admin/reports/class-charitable-export-donations.php:156
 #: includes/donations/abstract-charitable-donation.php:455
 #: includes/donations/class-charitable-donation-form.php:196
-#: includes/user-management/class-charitable-password-form.php:143
 #: includes/user-management/class-charitable-profile-form.php:140
 #: includes/user-management/class-charitable-registration-form.php:89
 #: templates/donation-form/donor-fields/donor-details.php:26
@@ -5147,28 +5146,24 @@ msgstr ""
 #: includes/admin/reports/class-charitable-export-donations.php:157
 #: includes/donations/abstract-charitable-donation.php:459
 #: includes/donations/class-charitable-donation-form.php:205
-#: includes/user-management/class-charitable-password-form.php:186
 #: includes/user-management/class-charitable-profile-form.php:177
 msgid "Address"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:158
 #: includes/donations/class-charitable-donation-form.php:214
-#: includes/user-management/class-charitable-password-form.php:193
 #: includes/user-management/class-charitable-profile-form.php:184
 msgid "Address 2"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:159
 #: includes/donations/class-charitable-donation-form.php:223
-#: includes/user-management/class-charitable-password-form.php:200
 #: includes/user-management/class-charitable-profile-form.php:191
 msgid "City"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:160
 #: includes/donations/class-charitable-donation-form.php:232
-#: includes/user-management/class-charitable-password-form.php:207
 #: includes/user-management/class-charitable-profile-form.php:198
 msgid "State"
 msgstr ""
@@ -5179,7 +5174,6 @@ msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:162
 #: includes/donations/class-charitable-donation-form.php:250
-#: includes/user-management/class-charitable-password-form.php:221
 #: includes/user-management/class-charitable-profile-form.php:212
 msgid "Country"
 msgstr ""
@@ -5945,60 +5939,60 @@ msgid ""
 "href=\"%s\">GitHub is the place to go!</a>"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:238
+#: includes/campaigns/class-charitable-campaign.php:239
 #: includes/emails/class-charitable-email-campaign-end.php:151
 msgid "Campaign has ended"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:246
+#: includes/campaigns/class-charitable-campaign.php:247
 msgid "%s Minute Left"
 msgid_plural "%s Minutes Left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/campaigns/class-charitable-campaign.php:256
+#: includes/campaigns/class-charitable-campaign.php:257
 msgid "%s Hour Left"
 msgid_plural "%s Hours Left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/campaigns/class-charitable-campaign.php:266
+#: includes/campaigns/class-charitable-campaign.php:267
 msgid "%s Day Left"
 msgid_plural "%s Days Left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/campaigns/class-charitable-campaign.php:299
+#: includes/campaigns/class-charitable-campaign.php:300
 msgid "This campaign ended %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:301
+#: includes/campaigns/class-charitable-campaign.php:302
 msgid "This campaign successfully reached its funding goal and ended %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:303
+#: includes/campaigns/class-charitable-campaign.php:304
 msgid "This campaign failed to reach its funding goal %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:455
-#: includes/campaigns/class-charitable-campaign.php:459
-#: includes/campaigns/class-charitable-campaign.php:463
+#: includes/campaigns/class-charitable-campaign.php:456
+#: includes/campaigns/class-charitable-campaign.php:460
+#: includes/campaigns/class-charitable-campaign.php:464
 msgid "Ended"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:459
+#: includes/campaigns/class-charitable-campaign.php:460
 msgid "Successful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:463
+#: includes/campaigns/class-charitable-campaign.php:464
 msgid "Unsuccessful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:467
+#: includes/campaigns/class-charitable-campaign.php:468
 msgid "Ending Soon"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:471
+#: includes/campaigns/class-charitable-campaign.php:472
 msgid "Active"
 msgstr ""
 
@@ -6492,25 +6486,21 @@ msgid "Refunded"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:178
-#: includes/user-management/class-charitable-password-form.php:129
 #: includes/user-management/class-charitable-profile-form.php:126
 msgid "First name"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:187
-#: includes/user-management/class-charitable-password-form.php:136
 #: includes/user-management/class-charitable-profile-form.php:133
 msgid "Last name"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:241
-#: includes/user-management/class-charitable-password-form.php:214
 #: includes/user-management/class-charitable-profile-form.php:205
 msgid "Postcode / ZIP code"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:260
-#: includes/user-management/class-charitable-password-form.php:229
 #: includes/user-management/class-charitable-profile-form.php:220
 msgid "Phone"
 msgstr ""
@@ -6533,7 +6523,6 @@ msgid "Your Donation"
 msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:381
-#: includes/user-management/class-charitable-password-form.php:290
 #: includes/user-management/class-charitable-profile-form.php:280
 msgid "Your Details"
 msgstr ""
@@ -7417,52 +7406,32 @@ msgid ""
 "a link to reset your password."
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:150
 #: includes/user-management/class-charitable-profile-form.php:147
 msgid "Organization"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:157
 #: includes/user-management/class-charitable-profile-form.php:154
 msgid "Bio"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:166
-msgid "<a href=\"%s\">Change your password</a>"
-msgstr ""
-
-#: includes/user-management/class-charitable-password-form.php:253
 #: includes/user-management/class-charitable-profile-form.php:243
 msgid "Your Website"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:260
 #: includes/user-management/class-charitable-profile-form.php:250
 msgid "Twitter"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:267
 #: includes/user-management/class-charitable-profile-form.php:257
 msgid "Facebook"
 msgstr ""
 
-#: includes/user-management/class-charitable-password-form.php:296
-#: includes/user-management/class-charitable-profile-form.php:292
-msgid "Your Address"
-msgstr ""
-
-#: includes/user-management/class-charitable-password-form.php:302
-msgid "Your Social Passwords"
-msgstr ""
-
-#: includes/user-management/class-charitable-password-form.php:389
-msgid ""
-"charitable_user_Password_after_fields hook has been removed. Use "
-"charitable_form_after_fields instead."
-msgstr ""
-
 #: includes/user-management/class-charitable-profile-form.php:286
 msgid "Change Your Password"
+msgstr ""
+
+#: includes/user-management/class-charitable-profile-form.php:292
+msgid "Your Address"
 msgstr ""
 
 #: includes/user-management/class-charitable-profile-form.php:298
@@ -7845,12 +7814,12 @@ msgctxt "translate Charitable into language"
 msgid "Translate Charitable into %s"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:539
+#: includes/campaigns/class-charitable-campaign.php:540
 msgctxt "amount donated of goal"
 msgid "%s donated of %s goal"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:544
+#: includes/campaigns/class-charitable-campaign.php:545
 msgctxt "amount donated"
 msgid "%s donated"
 msgstr ""
