@@ -187,14 +187,14 @@ function charitable_list_to_sentence_part( $list ) {
  *
  * We use WP_Locale to parse the month that the user has set.
  *
- * @global  WP_Locale $wp_locale
- * @since   1.4.10
+ * @global WP_Locale $wp_locale
+ * @since  1.4.10
  *
- * @param   string    $date
- * @param   string    $format The date format to return. Default is U (timestamp).
- * @return  string|false
+ * @param  string $date          The date to be sanitized.
+ * @param  string $return_format The date format to return. Default is U (timestamp).
+ * @return string|false
  */
-function charitable_sanitize_date( $date, $format = 'U' ) {
+function charitable_sanitize_date( $date, $return_format = 'U' ) {
 
 	global $wp_locale;
 
@@ -210,10 +210,10 @@ function charitable_sanitize_date( $date, $format = 'U' ) {
 
 	$time  = mktime( 0, 0, 0, $month, $day, $year );
 
-	if ( 'U' == $format ) {
+	if ( 'U' == $return_format ) {
 		return $time;
 	}
 
-	return date( $format, $time );
+	return date( $return_format, $time );
 
 }
