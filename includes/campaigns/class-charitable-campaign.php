@@ -410,6 +410,13 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return  string
 		 */
 		public function get_status_key() {
+			/**
+			 * Set the threshold in seconds for defining whether a campaign is ending soon.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int $seconds By default, this equals 604,800.
+			 */
 			$ending_soon_threshold = apply_filters( 'charitable_campaign_ending_soon_threshold', WEEK_IN_SECONDS );
 
 			$ended = $this->has_ended();
@@ -445,7 +452,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return  string
 		 */
 		public function get_status_tag() {
-
 			$key              = $this->get_status_key();
 			$show_achievement = apply_filters( 'charitable_campaign_show_achievement_status_tag', true );
 			$show_active_tag  = apply_filters( 'charitable_campaign_show_active_status_tag', false );
@@ -477,6 +483,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
 			}//end switch
 
+			/**
+			 * Filter the campaign status tag.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string              $tag  The tag for the status.
+			 * @param string              $key  The key of the current status.
+			 * @param Charitable_Campaign $this This campaign object.
+			 */
 			return apply_filters( 'charitable_campaign_status_tag', $tag, $key, $this );
 		}
 
@@ -523,6 +538,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				$amount = Charitable_Currency::get_instance()->sanitize_database_amount( $amount );
 			}
 
+			/**
+			 * Filter the campaign donated amount.
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param string|float|WP_Error $amount   The donated amount.
+			 * @param Charitable_Campaign   $this     This campaign object.
+			 * @param boolean               $sanitize Whether the amount should be sanitized.
+			 */
 			return apply_filters( 'charitable_campaign_donated_amount', $amount, $this, $sanitize );
 		}
 
@@ -535,19 +559,33 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function get_donation_summary() {
 			$currency_helper = charitable_get_currency_helper();
+			$amount          = $this->get_donated_amount();
+			$goal            = $this->get( 'goal' );
 
-			if ( $this->has_goal() ) {
+			if ( $goal ) {
 				$ret = sprintf( _x( '%s donated of %s goal', 'amount donated of goal', 'charitable' ),
-					'<span class="amount">' . $currency_helper->get_monetary_amount( $this->get_donated_amount() ) . '</span>',
-					'<span class="goal-amount">' . $currency_helper->get_monetary_amount( $this->get( 'goal' ) ) . '</span>'
+					'<span class="amount">' . $currency_helper->get_monetary_amount( $amount ) . '</span>',
+					'<span class="goal-amount">' . $currency_helper->get_monetary_amount( $goal ) . '</span>'
 				);
 			} else {
 				$ret = sprintf( _x( '%s donated', 'amount donated', 'charitable' ),
-					'<span class="amount">' . $currency_helper->get_monetary_amount( $this->get_donated_amount() ) . '</span>'
+					'<span class="amount">' . $currency_helper->get_monetary_amount( $amount ) . '</span>'
 				);
 			}
 
-			return apply_filters( 'charitable_donation_summary', $ret, $this );
+			/**
+			 * Filter the returned string if you want to display the donation summary in a different way.
+			 *
+			 * @since 1.0.0
+			 * @since 1.5.0 Added the $amount argument.
+			 * @since 1.5.0 Added the $goal argument.
+			 *
+			 * @param string              $ret    The summary.
+			 * @param Charitable_Campaign $this   This campaign object.
+			 * @param float               $amount The amount donated.
+			 * @param int                 $goal   The campaign goal.
+			 */
+			return apply_filters( 'charitable_donation_summary', $ret, $this, $amount, $goal );
 		}
 
 		/**
@@ -592,6 +630,14 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return  int
 		 */
 		public function get_donor_count() {
+			/**
+			 * Set the number of donors who have donated to this campaign.
+			 *
+			 * @since 1.4.7
+			 *
+			 * @param int                 $count Number of donors.
+			 * @param Charitable_Campaign $this  This campaign object.
+			 */
 			return apply_filters( 'charitable_campaign_donor_count', charitable_get_table( 'campaign_donations' )->count_campaign_donors( $this->ID ), $this );
 		}
 
@@ -604,7 +650,14 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function get_donation_form() {
 			if ( ! isset( $this->donation_form ) ) {
-
+				/**
+				 * Return the class name of the donation form for this campaign.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param string              $class The form class.
+				 * @param Charitable_Campaign $this  This campaign object.
+				 */
 				$form_class = apply_filters( 'charitable_donation_form_class', 'Charitable_Donation_Form', $this );
 
 				$this->donation_form = new $form_class( $this );
@@ -623,6 +676,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public function get_donation_amount_in_session() {
 			$donation = charitable_get_session()->get_donation_by_campaign( $this->ID );
 			$amount   = is_array( $donation ) ? $donation['amount'] : 0;
+
+			/**
+			 * The donation amount for this campaign stored in the session.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param float|int           $amount The amount.
+			 * @param Charitable_Campaign $this   This campaign object.
+			 */
 			return apply_filters( 'charitable_session_donation_amount', $amount, $this );
 		}
 

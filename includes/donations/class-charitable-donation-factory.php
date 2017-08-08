@@ -32,7 +32,6 @@ if ( ! class_exists( 'Charitable_Donation_Factory' ) ) :
 		 * @return 	Charitable_Donation|bool
 		 */
 		public function get_donation( $donation = false ) {
-
 			global $post;
 
 			if ( false === $donation ) {
