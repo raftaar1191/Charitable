@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /* @var Charitable_Donation */
 $donation = $view_args['donation'];
+$amount   = $donation->get_total_donation_amount();
 
 ?>
 <h3 class="charitable-header"><?php _e( 'Your Donation', 'charitable' ) ?></h3>
@@ -47,9 +48,46 @@ $donation = $view_args['donation'];
 	<?php endforeach ?>
 	</tbody>
 	<tfoot>
-		<tr>
+		<?php
+			/**
+			 * Do something before displaying the total.
+			 *
+			 * If you add markup, make sure it's a table row with two cells.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Donation $donation The Donation object.
+			 */
+			do_action( 'charitable_donation_receipt_before_donation_total', $donation );
+		?>
+		<tr>			
 			<td><?php _e( 'Total', 'charitable' ) ?></td>
-			<td><?php echo charitable_format_money( $donation->get_total_donation_amount() ) ?></td>
+			<td><?php
+				/**
+				 * Filter the total donation amount.
+				 *
+				 * @since  1.5.0
+				 *
+				 * @param  string              $amount   The default amount to display.
+				 * @param  float               $total    The total, unformatted.
+				 * @param  Charitable_Donation $donation The Donation object.
+				 * @param  string              $context  The context in which this is being shown.
+				 * @return string
+				 */
+				echo apply_filters( 'charitable_donation_receipt_donation_amount', charitable_format_money( $amount ), $amount, $donation, 'details' )
+			?></td>
 		</tr>
+		<?php
+			/**
+			 * Do something after displaying the total.
+			 *
+			 * If you add markup, make sure it's a table row with two cells.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Donation $donation The Donation object.
+			 */
+			do_action( 'charitable_donation_receipt_after_donation_total', $donation );
+		?>
 	</tfoot>
 </table>
