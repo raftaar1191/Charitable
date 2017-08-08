@@ -386,6 +386,25 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * Filter a query by date.
+		 *
+		 * @uses   WP_Date_Query
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public function where_date( $where_statement ) {
+			if ( empty( $this->get( 'date_query' ) ) ) {
+				return $where_statement;
+			}
+
+			$date_query = new WP_Date_Query( $this->get( 'date_query' ) );
+
+			return $where_statement . $date_query->get_sql();
+		}
+
+		/**
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global  WPBD $wpdb
