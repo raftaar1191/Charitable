@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.0-alpha.4\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-08 07:48:34+00:00\n"
+"POT-Creation-Date: 2017-08-08 07:57:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4744,7 +4744,7 @@ msgstr ""
 #: includes/admin/campaigns/class-charitable-campaign-post-type.php:283
 #: includes/admin/campaigns/class-charitable-campaign-post-type.php:284
 #: includes/admin/class-charitable-admin.php:176
-#: templates/shortcodes/my-donations.php:34
+#: templates/shortcodes/my-donations.php:54
 msgid "Amount"
 msgstr ""
 
@@ -5632,15 +5632,15 @@ msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:60
 #: includes/class-charitable-post-types.php:80
-#: templates/donation-receipt/details.php:24 templates/donation-stats.php:14
-#: templates/shortcodes/my-donations.php:33
+#: templates/donation-receipt/details.php:25 templates/donation-stats.php:14
+#: templates/shortcodes/my-donations.php:43
 msgid "Campaign"
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:61
 #: includes/admin/views/metaboxes/donation/donation-overview.php:74
-#: templates/donation-receipt/details.php:25
-#: templates/donation-receipt/details.php:51
+#: templates/donation-receipt/details.php:26
+#: templates/donation-receipt/details.php:64
 msgid "Total"
 msgstr ""
 
@@ -5974,25 +5974,25 @@ msgstr ""
 msgid "This campaign failed to reach its funding goal %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:456
-#: includes/campaigns/class-charitable-campaign.php:460
-#: includes/campaigns/class-charitable-campaign.php:464
+#: includes/campaigns/class-charitable-campaign.php:462
+#: includes/campaigns/class-charitable-campaign.php:466
+#: includes/campaigns/class-charitable-campaign.php:470
 msgid "Ended"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:460
+#: includes/campaigns/class-charitable-campaign.php:466
 msgid "Successful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:464
+#: includes/campaigns/class-charitable-campaign.php:470
 msgid "Unsuccessful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:468
+#: includes/campaigns/class-charitable-campaign.php:474
 msgid "Ending Soon"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:472
+#: includes/campaigns/class-charitable-campaign.php:478
 msgid "Active"
 msgstr ""
 
@@ -6518,7 +6518,7 @@ msgstr ""
 
 #: includes/donations/class-charitable-donation-form.php:375
 #: templates/donation-form/donation-amount-header.php:10
-#: templates/donation-receipt/details.php:20
+#: templates/donation-receipt/details.php:21
 msgid "Your Donation"
 msgstr ""
 
@@ -7702,27 +7702,27 @@ msgstr ""
 msgid "When you make your donation, a new donor account will be created for you."
 msgstr ""
 
-#: templates/donation-receipt/not-authorized.php:22
+#: templates/donation-receipt/not-authorized.php:20
 msgid "You do not have access to this donation receipt."
 msgstr ""
 
-#: templates/donation-receipt/not-authorized.php:28
+#: templates/donation-receipt/not-authorized.php:24
 msgid "You must be logged in to access your donation receipt."
 msgstr ""
 
-#: templates/donation-receipt/summary.php:21
+#: templates/donation-receipt/summary.php:22
 msgid "Donation Number:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:23
+#: templates/donation-receipt/summary.php:24
 msgid "Date:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:25
+#: templates/donation-receipt/summary.php:26
 msgid "Total:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:27
+#: templates/donation-receipt/summary.php:41
 msgid "Payment Method:"
 msgstr ""
 
@@ -7746,11 +7746,11 @@ msgstr ""
 msgid "You have not made any donations yet."
 msgstr ""
 
-#: templates/shortcodes/my-donations.php:35
+#: templates/shortcodes/my-donations.php:65
 msgid "Receipt"
 msgstr ""
 
-#: templates/shortcodes/my-donations.php:44
+#: templates/shortcodes/my-donations.php:114
 msgid "View Receipt"
 msgstr ""
 
@@ -7814,12 +7814,12 @@ msgctxt "translate Charitable into language"
 msgid "Translate Charitable into %s"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:540
+#: includes/campaigns/class-charitable-campaign.php:566
 msgctxt "amount donated of goal"
 msgid "%s donated of %s goal"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:545
+#: includes/campaigns/class-charitable-campaign.php:571
 msgctxt "amount donated"
 msgid "%s donated"
 msgstr ""
