@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-alpha.4\n"
+"Project-Id-Version: Charitable 1.5.0-alpha.5\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-08 07:57:49+00:00\n"
+"POT-Creation-Date: 2017-08-09 06:47:12+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4983,7 +4983,7 @@ msgid "Donation Log"
 msgstr ""
 
 #: includes/admin/donations/class-charitable-donation-post-type.php:202
-#: includes/admin/views/metaboxes/donation/donation-overview.php:39
+#: includes/admin/views/metaboxes/donation/donation-overview.php:42
 #: includes/class-charitable-post-types.php:125
 msgid "Donation"
 msgstr ""
@@ -5002,7 +5002,7 @@ msgid "Date"
 msgstr ""
 
 #: includes/admin/donations/class-charitable-donation-post-type.php:206
-#: includes/admin/views/metaboxes/donation/donation-overview.php:43
+#: includes/admin/views/metaboxes/donation/donation-overview.php:44
 msgid "Status"
 msgstr ""
 
@@ -5020,7 +5020,7 @@ msgstr ""
 
 #: includes/admin/donations/class-charitable-donation-post-type.php:404
 #: includes/admin/views/donations-page/export-form.php:35
-#: includes/admin/views/donations-page/filter-form.php:36
+#: includes/admin/views/donations-page/filter-form.php:35
 msgid "All"
 msgstr ""
 
@@ -5472,32 +5472,32 @@ msgid "Export Donations"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:29
-#: includes/admin/views/donations-page/filter-form.php:30
+#: includes/admin/views/donations-page/filter-form.php:29
 msgid "Filter by Date"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:30
-#: includes/admin/views/donations-page/filter-form.php:31
+#: includes/admin/views/donations-page/filter-form.php:30
 msgid "From:"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:31
-#: includes/admin/views/donations-page/filter-form.php:32
+#: includes/admin/views/donations-page/filter-form.php:31
 msgid "To:"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:33
-#: includes/admin/views/donations-page/filter-form.php:34
+#: includes/admin/views/donations-page/filter-form.php:33
 msgid "Filter by Status"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:40
-#: includes/admin/views/donations-page/filter-form.php:41
+#: includes/admin/views/donations-page/filter-form.php:40
 msgid "Filter by Campaign"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:42
-#: includes/admin/views/donations-page/filter-form.php:43
+#: includes/admin/views/donations-page/filter-form.php:42
 msgid "All Campaigns"
 msgstr ""
 
@@ -5510,11 +5510,11 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: includes/admin/views/donations-page/filter-form.php:26
+#: includes/admin/views/donations-page/filter-form.php:25
 msgid "Filter Donations"
 msgstr ""
 
-#: includes/admin/views/donations-page/filter-form.php:50
+#: includes/admin/views/donations-page/filter-form.php:48
 #: includes/admin/views/donations-page/filters.php:20
 msgid "Filter"
 msgstr ""
@@ -5638,22 +5638,22 @@ msgid "Campaign"
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:61
-#: includes/admin/views/metaboxes/donation/donation-overview.php:74
+#: includes/admin/views/metaboxes/donation/donation-overview.php:110
 #: templates/donation-receipt/details.php:26
 #: templates/donation-receipt/details.php:64
 msgid "Total"
 msgstr ""
 
-#: includes/admin/views/metaboxes/donation/donation-overview.php:78
+#: includes/admin/views/metaboxes/donation/donation-overview.php:136
 #: includes/donations/abstract-charitable-donation.php:467
 msgid "Payment Method"
 msgstr ""
 
-#: includes/admin/views/metaboxes/donation/donation-overview.php:82
+#: includes/admin/views/metaboxes/donation/donation-overview.php:150
 msgid "Change Status"
 msgstr ""
 
-#: includes/admin/views/metaboxes/donation/donation-overview.php:93
+#: includes/admin/views/metaboxes/donation/donation-overview.php:171
 msgid "Update Status"
 msgstr ""
 
