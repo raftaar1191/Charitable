@@ -23,6 +23,10 @@ $max_uploads    = isset( $field['max_uploads'] ) ? $field['max_uploads'] : 1;
 $max_file_size  = isset( $field['max_file_size'] ) ? $field['max_file_size'] : wp_max_upload_size();
 $value          = isset( $field['value'] ) ? $field['value'] : array();
 
+if ( wp_is_mobile() ) {
+	$classes .= ' mobile';
+}
+
 if ( ! is_array( $value ) ) {
 	$value = array( $value );
 }
@@ -50,7 +54,7 @@ $params = array(
 	'urlstream_upload'    => true,
 	'filters'             => array(
 		array(
-			'title'      => _x( 'Allowed Image Files', 'image upload', 'meta-box' ),
+			'title'      => _x( 'Allowed Image Files', 'image upload', 'charitable' ),
 			'extensions' => 'jpg,jpeg,gif,png',
 		),
 	),

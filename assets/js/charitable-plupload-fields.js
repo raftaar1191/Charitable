@@ -16,11 +16,11 @@ CHARITABLE = window.CHARITABLE || {};
         this.$loader = this.$dragdrop.find('.charitable-drag-drop-image-loader').first();
         this.max_file_uploads = params.multipart_params.max_uploads;
         this.max_file_size = parseInt( this.$dragdrop.data( 'max-size' ), 10 );
-        
-        uploader.init();    
 
-        uploader.bind( 'PostInit', function() {
-            self.PostInit();
+        uploader.init();
+
+        uploader.bind( 'PostInit', function( uploader ) {
+            self.PostInit( uploader );
         });
 
         uploader.bind( 'FilesAdded', function( uploader, files ) {
@@ -37,26 +37,41 @@ CHARITABLE = window.CHARITABLE || {};
     };
 
     /**
-     * PostInit event
+     * Init event.
      */
-    Uploader.prototype.PostInit = function() {
+    Uploader.prototype.Init = function() {
         var self = this;
 
         if ( ! this.$dropzone ) {
             return;
-        }            
+        }
 
-        this.$dragdrop.parent().addClass( 'supports-drag-drop' );
 
-        // We may need to enhance this to account for the issue noted
-        // in https://core.trac.wordpress.org/ticket/21705
-        this.$dropzone.bind( 'dragover', function(){
-            self.$dropzone.addClass('drag-over');
-        });
+    };
 
-        this.$dropzone.bind( 'dragleave', function(){
-            self.$dropzone.removeClass('drag-over');
-        });
+    /**
+     * PostInit event
+     */
+    Uploader.prototype.PostInit = function( uploader ) {
+        var self = this;
+
+        if ( ! this.$dropzone ) {
+            return;
+        }
+
+        if ( uploader.features.dragdrop && ! this.$dragdrop.parent().hasClass('mobile') ) { 
+            this.$dragdrop.parent().addClass( 'supports-drag-drop' );
+
+            // We may need to enhance this to account for the issue noted
+            // in https://core.trac.wordpress.org/ticket/21705
+            this.$dropzone.bind( 'dragover', function(){
+                self.$dropzone.addClass('drag-over');
+            });
+
+            this.$dropzone.bind( 'dragleave', function(){
+                self.$dropzone.removeClass('drag-over');
+            });
+        }        
 
         // Set up image remove handler
         this.$dragdrop.on( 'click', '.remove-image', function() {
