@@ -19,8 +19,8 @@ CHARITABLE = window.CHARITABLE || {};
 
         uploader.init();
 
-        uploader.bind( 'PostInit', function( uploader ) {
-            self.PostInit( uploader );
+        uploader.bind( 'Init', function( uploader ) {
+            self.Init( uploader );
         });
 
         uploader.bind( 'FilesAdded', function( uploader, files ) {
@@ -37,22 +37,9 @@ CHARITABLE = window.CHARITABLE || {};
     };
 
     /**
-     * Init event.
-     */
-    Uploader.prototype.Init = function() {
-        var self = this;
-
-        if ( ! this.$dropzone ) {
-            return;
-        }
-
-
-    };
-
-    /**
      * PostInit event
      */
-    Uploader.prototype.PostInit = function( uploader ) {
+    Uploader.prototype.Init = function( uploader ) {
         var self = this;
 
         if ( ! this.$dropzone ) {
@@ -74,8 +61,9 @@ CHARITABLE = window.CHARITABLE || {};
         }        
 
         // Set up image remove handler
-        this.$dragdrop.on( 'click', '.remove-image', function() {
-            return self.remove_image( $(this) );
+        this.$dragdrop.on( 'click', '.remove-image', function( e ) {
+            e.preventDefault();
+            return self.remove_image( $(this), uploader );
         });
     };
 
@@ -189,7 +177,7 @@ CHARITABLE = window.CHARITABLE || {};
      *  
      * @return  void
      */
-    Uploader.prototype.remove_image = function($anchor) {
+    Uploader.prototype.remove_image = function($anchor, uploader) {
         var $image = $anchor.parent();
 
         $image.fadeOut( 300, function(){
@@ -197,6 +185,9 @@ CHARITABLE = window.CHARITABLE || {};
         });
 
         this.$dropzone.fadeIn( 300 );
+
+        // Required to ensure browse button works on iOS Safari.
+        uploader.refresh();
 
         return false;
     }
@@ -243,7 +234,6 @@ CHARITABLE = window.CHARITABLE || {};
      * Load the Uploaders
      */
     $(document).ready( function() {
-
         $('.charitable-drag-drop').each( function() {
             new Uploader( $(this) );
         });
