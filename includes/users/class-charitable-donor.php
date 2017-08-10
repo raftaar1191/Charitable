@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 	/**
 	 * Charitable_Donor
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Donor {
 
@@ -67,17 +67,17 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * A mapping of user keys.
 		 *
 		 * @var 	string[]
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 */
 		protected $mapped_keys;
 
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int $donor_id    Donor ID.
-		 * @param   int $donation_id Donation ID. Passed if this object is created through a donation.
+		 * @param  int $donor_id    Donor ID.
+		 * @param  int $donation_id Donation ID. Passed if this object is created through a donation.
 		 */
 		public function __construct( $donor_id, $donation_id = false ) {
 			$this->donor_id    = $donor_id;
@@ -88,10 +88,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Magic getter method. Looks for the specified key in as a property before using Charitable_User's __get method.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param 	string $key Key to search for.
-		 * @return  mixed
+		 * @return mixed
 		 */
 		public function __get( $key ) {
 			if ( isset( $this->$key ) ) {
@@ -108,9 +108,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Display the donor name when echoing object.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public function __toString() {
 			return $this->get_name();
@@ -119,10 +119,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * A thin wrapper around the Charitable_User::get() method.
 		 *
-		 * @since   1.2.4
+		 * @since  1.2.4
 		 *
-		 * @param   string $key
-		 * @return  mixed
+		 * @param  string $key
+		 * @return mixed
 		 */
 		public function get( $key ) {
 			return $this->get_user()->get( $key );
@@ -131,9 +131,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the Charitable_User object for this donor.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  Charitable_User
+		 * @return Charitable_User
 		 */
 		public function get_user() {
 			if ( ! isset( $this->user ) ) {
@@ -146,9 +146,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the Charitable_Donation object associated with this object.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  Charitable_Donation|false
+		 * @return Charitable_Donation|false
 		 */
 		public function get_donation() {
 			if ( ! isset( $this->donation ) ) {
@@ -161,9 +161,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the Charitable_Donation object associated with this object.
 		 *
-		 * @since   1.3.5
+		 * @since  1.3.5
 		 *
-		 * @return  object[]
+		 * @return object[]
 		 */
 		public function get_donations() {
 			return $this->get_user()->get_donations();
@@ -172,10 +172,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor meta stored for the particular donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $key Optional key passed to return a particular meta field.
-		 * @return  array|false
+		 * @param  string $key Optional key passed to return a particular meta field.
+		 * @return array|false
 		 */
 		public function get_donor_meta( $key = '' ) {
 			if ( ! $this->get_donation() ) {
@@ -210,9 +210,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor's name stored for the particular donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public function get_name() {
 			$meta = $this->get_donor_meta();
@@ -237,9 +237,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor's email address.
 		 *
-		 * @since   1.2.4
+		 * @since  1.2.4
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public function get_email() {
 			$email = $this->get_donor_meta( 'email' );
@@ -250,9 +250,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor's address.
 		 *
-		 * @since   1.2.4
+		 * @since  1.2.4
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public function get_address() {
 			return $this->get_user()->get_address( $this->donation_id );
@@ -261,10 +261,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor avatar.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int $size
-		 * @return  string
+		 * @param  int $size
+		 * @return string
 		 */
 		public function get_avatar( $size = 100 ) {
 			return apply_filters( 'charitable_donor_avatar', $this->get_user()->get_avatar(), $this );
@@ -273,9 +273,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the donor location.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public function get_location() {
 			if ( ! $this->get_donor_meta() ) {
@@ -310,10 +310,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * the total donated with this particular donation. Otherwise, this will
 		 * return the total amount ever donated by the donor.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int $campaign_id Optional. If set, returns total donated to this particular campaign.
-		 * @return  decimal
+		 * @param  int $campaign_id Optional. If set, returns total donated to this particular campaign.
+		 * @return decimal
 		 */
 		public function get_amount( $campaign_id = false ) {
 			if ( $this->get_donation() ) {
@@ -326,10 +326,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the amount of the donation.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @param   int $campaign_id Optional. If set, returns the amount donated to the campaign.
-		 * @return  decimal
+		 * @param  int $campaign_id Optional. If set, returns the amount donated to the campaign.
+		 * @return decimal
 		 */
 		public function get_donation_amount( $campaign_id = '' ) {
 			return apply_filters( 'charitable_donor_donation_amount', charitable_get_table( 'campaign_donations' )->get_donation_amount( $this->donation_id, $campaign_id ), $this, $campaign_id );
@@ -338,9 +338,9 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Return the array of mapped keys, where the key is mapped to a meta_key in the user meta table.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_mapped_keys() {
 			if ( ! isset( $this->mapped_keys ) ) {
@@ -355,10 +355,10 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @deprecated
 		 *
-		 * @since   1.2.4
+		 * @since  1.2.4
 		 *
-		 * @param   string $key
-		 * @return  mixed
+		 * @param  string $key
+		 * @return mixed
 		 */
 		public function get_value( $key ) {
 			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'Charitable_Donor::get_donor_meta()' );

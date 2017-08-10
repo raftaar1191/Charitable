@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Form Fields
  * @since   1.0.0
- * @version 1.4.0
+ * @version 1.5.0
  */
 
 if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
@@ -86,7 +86,7 @@ $params = array(
 			<p class="charitable-drag-drop-info"><?php echo 1 == $max_uploads ? _x( 'Drop image here', 'image upload', 'charitable' ) : _x( 'Drop images here', 'image upload plural', 'charitable' ) ?></p>
 			<p><?php _ex( 'or', 'image upload', 'charitable' ) ?></p>
 			<p class="charitable-drag-drop-buttons">
-				<button id="<?php echo $field['key'] ?>-browse-button" class="button"><?php _ex( 'Select Files', 'image upload', 'charitable' ) ?></button>
+				<button id="<?php echo $field['key'] ?>-browse-button" class="button" type="button"><?php _ex( 'Select Files', 'image upload', 'charitable' ) ?></button>
 			</p>
 		</div>
 		<div class="charitable-drag-drop-image-loader" style="display: none;">

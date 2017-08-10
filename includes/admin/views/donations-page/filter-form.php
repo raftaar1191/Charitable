@@ -7,18 +7,17 @@
  * @since   1.0.0
  */
 
-$modal_class  = apply_filters( 'charitable_modal_window_class', 'charitable-modal' );
-
-$campaign_id = isset( $_GET['campaign_id'] ) ? intval( $_GET['campaign_id'] )   : '';
+$modal_class = apply_filters( 'charitable_modal_window_class', 'charitable-modal' );
+$campaign_id = isset( $_GET['campaign_id'] ) ? intval( $_GET['campaign_id'] ) : '';
 $campaigns   = get_posts( array(
 	'post_type'   => Charitable::CAMPAIGN_POST_TYPE,
 	'nopaging'    => true,
 	'post_status' => 'any',
 ));
 
-$start_date   = isset( $_GET['start_date'] )  ? sanitize_text_field( $_GET['start_date'] ) : null;
-$end_date     = isset( $_GET['end_date'] )    ? sanitize_text_field( $_GET['end_date'] ) : null;
-$post_status  = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
+$start_date  = isset( $_GET['start_date'] )  ? sanitize_text_field( $_GET['start_date'] ) : null;
+$end_date    = isset( $_GET['end_date'] )    ? sanitize_text_field( $_GET['end_date'] ) : null;
+$post_status = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
 
 ?>
 <div id="charitable-donations-filter-modal" style="display: none" class="charitable-donations-modal <?php echo esc_attr( $modal_class ) ?>">
@@ -45,7 +44,6 @@ $post_status  = isset( $_GET['post_status'] ) ? $_GET['post_status'] : 'all';
 				<option value="<?php echo $campaign->ID ?>" <?php selected( $campaign_id, $campaign->ID );?> ><?php echo get_the_title( $campaign->ID ) ?></option>
 			<?php endforeach ?>
 		</select>
-
 		<?php do_action( 'charitable_filter_donations_form' ) ?>
 		<button type="submit" class="button button-primary"><?php _e( 'Filter', 'charitable' ) ?></button>
 	</form>
