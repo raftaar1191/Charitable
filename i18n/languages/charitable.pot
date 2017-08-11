@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-alpha.6\n"
+"Project-Id-Version: Charitable 1.5.0-alpha.7\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-10 11:41:07+00:00\n"
+"POT-Creation-Date: 2017-08-11 12:38:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:885 charitable.php:895
+#: charitable.php:890 charitable.php:904
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -5020,7 +5020,7 @@ msgstr ""
 
 #: includes/admin/donations/class-charitable-donation-post-type.php:404
 #: includes/admin/views/donations-page/export-form.php:35
-#: includes/admin/views/donations-page/filter-form.php:36
+#: includes/admin/views/donations-page/filter-form.php:35
 msgid "All"
 msgstr ""
 
@@ -5472,32 +5472,32 @@ msgid "Export Donations"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:29
-#: includes/admin/views/donations-page/filter-form.php:30
+#: includes/admin/views/donations-page/filter-form.php:29
 msgid "Filter by Date"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:30
-#: includes/admin/views/donations-page/filter-form.php:31
+#: includes/admin/views/donations-page/filter-form.php:30
 msgid "From:"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:31
-#: includes/admin/views/donations-page/filter-form.php:32
+#: includes/admin/views/donations-page/filter-form.php:31
 msgid "To:"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:33
-#: includes/admin/views/donations-page/filter-form.php:34
+#: includes/admin/views/donations-page/filter-form.php:33
 msgid "Filter by Status"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:40
-#: includes/admin/views/donations-page/filter-form.php:41
+#: includes/admin/views/donations-page/filter-form.php:40
 msgid "Filter by Campaign"
 msgstr ""
 
 #: includes/admin/views/donations-page/export-form.php:42
-#: includes/admin/views/donations-page/filter-form.php:43
+#: includes/admin/views/donations-page/filter-form.php:42
 msgid "All Campaigns"
 msgstr ""
 
@@ -5510,11 +5510,11 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: includes/admin/views/donations-page/filter-form.php:26
+#: includes/admin/views/donations-page/filter-form.php:25
 msgid "Filter Donations"
 msgstr ""
 
-#: includes/admin/views/donations-page/filter-form.php:50
+#: includes/admin/views/donations-page/filter-form.php:48
 #: includes/admin/views/donations-page/filters.php:20
 msgid "Filter"
 msgstr ""
@@ -6464,24 +6464,24 @@ msgid ""
 "action."
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:231
+#: includes/donations/charitable-donation-functions.php:238
 #: includes/emails/abstract-class-charitable-email.php:721
 msgid "Paid"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:232
+#: includes/donations/charitable-donation-functions.php:239
 msgid "Pending"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:233
+#: includes/donations/charitable-donation-functions.php:240
 msgid "Failed"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:234
+#: includes/donations/charitable-donation-functions.php:241
 msgid "Cancelled"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:235
+#: includes/donations/charitable-donation-functions.php:242
 msgid "Refunded"
 msgstr ""
 
@@ -6937,13 +6937,11 @@ msgstr ""
 msgid "Missing email_id in args for email preview endpoint URL."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:65
+#: includes/endpoints/class-charitable-endpoints.php:63
 msgid "Endpoint %s has already been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:94
-#: includes/endpoints/class-charitable-endpoints.php:125
-#: includes/endpoints/class-charitable-endpoints.php:156
+#: includes/endpoints/class-charitable-endpoints.php:130
 msgid "Endpoint %s has not been registered."
 msgstr ""
 
@@ -7738,7 +7736,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: templates/form-fields/picture.php:93
+#: templates/form-fields/picture.php:97
 msgid "Uploading..."
 msgstr ""
 
@@ -7921,27 +7919,27 @@ msgctxt "Continue reading about campaign"
 msgid "Continue reading about %s"
 msgstr ""
 
-#: templates/form-fields/picture.php:53
+#: templates/form-fields/picture.php:57
 msgctxt "image upload"
 msgid "Allowed Image Files"
 msgstr ""
 
-#: templates/form-fields/picture.php:86
+#: templates/form-fields/picture.php:90
 msgctxt "image upload"
 msgid "Drop image here"
 msgstr ""
 
-#: templates/form-fields/picture.php:87
+#: templates/form-fields/picture.php:91
 msgctxt "image upload"
 msgid "or"
 msgstr ""
 
-#: templates/form-fields/picture.php:89
+#: templates/form-fields/picture.php:93
 msgctxt "image upload"
 msgid "Select Files"
 msgstr ""
 
-#: templates/form-fields/picture.php:86
+#: templates/form-fields/picture.php:90
 msgctxt "image upload plural"
 msgid "Drop images here"
 msgstr ""
