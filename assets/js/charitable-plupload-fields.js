@@ -23,6 +23,10 @@ CHARITABLE = window.CHARITABLE || {};
             self.Init( uploader );
         });
 
+        uploader.bind( 'PostInit', function( uploader ) {
+            uploader.refresh();
+        });
+
         uploader.bind( 'FilesAdded', function( uploader, files ) {
             self.FilesAdded( uploader, files );            
         });
