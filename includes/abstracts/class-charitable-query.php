@@ -549,13 +549,16 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Filter query by status of the post.
 		 *
-		 * @global  WPBD $wpdb
+		 * @global WPBD $wpdb
+		 *
 		 * @since  1.0.0
 		 *
 		 * @param  string $where_statement The default where statement.
 		 * @return string
 		 */
 		public function where_status_is_in( $where_statement ) {
+			global $wpdb;
+
 			$status = $this->get( 'status', false );
 
 			if ( ! $status ) {
