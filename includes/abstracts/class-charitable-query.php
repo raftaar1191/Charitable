@@ -504,6 +504,33 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * A helper function used to populate the query parameters ith an item and a return a string
+		 * of placeholders that can be used in a MySQL `IN` statement.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  mixed    $item             The item.
+		 * @param  callable $filter_callback  A callback to use to filter out invalid items.
+		 * @param  string   $placeholder_type The type of placeholder to use. May be %s, %d or %f.
+		 * @return string                     A string containing the correct number of placeholders.
+		 */
+		public function get_where_in_placeholders( $item, $filter_callback, $placeholder_type ) {
+			if ( ! $item ) {
+				return $where_statement;
+			}
+
+			if ( ! is_array( $item ) ) {
+				$item = array( $item );
+			}
+
+			$item = array_filter( $item, $filter_callback );
+
+			$this->add_parameters( $item );
+
+			return $this->get_placeholders( count( $item ), $placeholder_type );
+		}
+
+		/**
 		 * Filter query by campaign receiving the donation.
 		 *
 		 * @since  1.0.0
@@ -512,21 +539,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_campaign_is_in( $where_statement ) {
-			$campaign = $this->get( 'campaign', 0 );
-
-			if ( ! $campaign ) {
-				return $where_statement;
-			}
-
-			if ( ! is_array( $campaign ) ) {
-				$campaign = array( $campaign );
-			}
-
-			$campaign = array_filter( $campaign, 'charitable_validate_absint' );
-
-			$placeholders = $this->get_placeholders( count( $campaign ), '%d' );
-
-			$this->add_parameters( $campaign );
+			$placeholders = $this->get_where_in_placeholders( $this->get( 'campaign', 0 ), 'charitable_validate_absint', '%d' );
 
 			return $where_statement . " AND cd.campaign_id IN ({$placeholders})";
 		}
@@ -541,23 +554,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_status_is_in( $where_statement ) {
-			global $wpdb;
-
-			$status = $this->get( 'status', false );
-
-			if ( ! $status ) {
-				return $where_statement;
-			}
-
-			if ( ! is_array( $status ) ) {
-				$status = array( $status );
-			}
-
-			$status = array_filter( $status, 'charitable_is_valid_donation_status' );
-
-			$placeholders = $this->get_placeholders( count( $status ), '%s' );
-
-			$this->add_parameters( $status );
+			$placeholders = $this->get_where_in_placeholders( $this->get( 'status', false ), 'charitable_is_valid_donation_status', '%s' );
 
 			return $where_statement . " AND {$wpdb->posts}.post_status IN ({$placeholders})";
 		}
@@ -572,23 +569,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_donor_id_is_in( $where_statement ) {
-			global $wpdb;
-
-			$donor_id = $this->get( 'donor_id', false );
-
-			if ( ! $donor_id ) {
-				return $where_statement;
-			}
-
-			if ( ! is_array( $donor_id ) ) {
-				$donor_id = array( $donor_id );
-			}
-
-			$donor_id = array_filter( $donor_id, 'charitable_validate_absint' );
-
-			$placeholders = $this->get_placeholders( count( $donor_id ), '%d' );
-
-			$this->add_parameters( $donor_id );
+			$placeholders = $this->get_where_in_placeholders( $this->get( 'donor_id', false ), 'charitable_validate_absint', '%d' );
 
 			return $where_statement . " AND cd.donor_id IN ({$placeholders})";
 		}
