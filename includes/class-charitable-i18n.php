@@ -121,28 +121,6 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 
 			return trailingslashit( $this->languages_directory ) . $this->mofile;
 		}
-
-		/**
-		 * Instantiate the class, but only during the start phase.
-		 *
-		 * This method is officially deprecated as of 1.2.0 since we are removing
-		 * the need for Charitable_Start_Object. It has been left intact for extensions
-		 * that have not been updated yet.
-		 *
-		 * Expect full removal in Charitable 1.3 or after.
-		 *
-		 * @deprecated
-		 *
-		 * @param 	Charitable $charitable The core Charitable object.
-		 */
-		public static function charitable_start( Charitable $charitable ) {
-			if ( ! $charitable->is_start() ) {
-				return;
-			}
-
-			$class = get_called_class();
-			$charitable->register_object( new $class );
-		}
 	}
 
 endif;
