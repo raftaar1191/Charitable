@@ -36,9 +36,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		protected $position = 0;
 
 		/**
-		 * The WP_Query object that is actually querying the data.
+		 * The raw query results.
 		 *
-		 * @var WP_Query
+		 * @var array
 		 */
 		protected $query;
 
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Result set.
 		 *
-		 * @var object[]
+		 * @var array
 		 */
 		protected $results;
 
