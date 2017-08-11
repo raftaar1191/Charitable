@@ -83,7 +83,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Donation_Receipt_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'donation_receipt', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'donation_receipt', $template );
 		}
 
 		/**
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Donation_Processing_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'donation_processing', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'donation_processing', $template );
 		}
 
 		/**
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Campaign_Donation_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'campaign_donation', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'campaign_donation', $template );
 		}
 
 		/**
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Campaign_Widget_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'campaign_widget', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'campaign_widget', $template );
 		}
 
 		/**
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Email_Preview_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'email_preview', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'email_preview', $template );
 		}
 
 		/**
@@ -148,7 +148,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Forgot_Password_Endpoint::get_template()'
 			);
 
-			return charitable()->get_endpoints()->get_template( 'forgot_password', $template );
+			return charitable()->get_endpoints()->get_endpoint_template( 'forgot_password', $template );
 		}
 
 		/**
@@ -161,7 +161,7 @@ if ( ! class_exists( 'Charitable_Templates' ) ) :
 				'Charitable_Reset_Password_Endpoint::get_template()'
 			);
 
-		return charitable()->get_endpoints()->get_template( 'reset_password', $template );
+		return charitable()->get_endpoints()->get_endpoint_template( 'reset_password', $template );
 		}
 
 		/**

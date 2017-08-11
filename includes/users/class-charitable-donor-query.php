@@ -32,10 +32,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			/**
 			 * Filter the default arguments for Charitable_Donor_Query.
 			 *
-			 * @since 	?
+			 * @since 1.0.0
 			 *
-			 * @param 	array $args The default arguments.
-	         * @return 	array
+			 * @param array $args The default arguments.
 	         */
 			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
 				'output'          => 'donors',
@@ -56,16 +55,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 
 			$this->prepare_query();
 
-			// echo '<pre>'; var_dump( $this->args ); echo '</pre>';
-
-			// echo '<pre>';
-			// debug_print_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS );
-			// echo '</pre>';
-
-			// error_log( var_export( debug_backtrace( false, 10 ), true ) );
-			// error_log( var_export( $this->args, true ) );
-
-			$this->results 			= $this->get_donors();
+			$this->results = $this->get_donors();
 		}
 
 		/**

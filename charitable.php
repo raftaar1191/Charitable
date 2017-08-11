@@ -7,7 +7,7 @@
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
- * Tested up to:        4.8
+ * Tested up to:        4.8.1
  *
  * Text Domain:         charitable
  * Domain Path:         /i18n/languages/
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 	 * Main Charitable class
 	 *
 	 * @class       Charitable
-	 * @version     1.4.0
+	 * @version     1.5.0
 	 */
 	class Charitable {
 
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 		/**
 		 * The absolute path to this plugin's directory.
-		 * 
+		 *
 		 * @var     string
 		 */
 		private $directory_path;
@@ -182,7 +182,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 			/* Abstracts */
 			require_once( $includes_path . 'abstracts/class-charitable-form.php' );
 			require_once( $includes_path . 'abstracts/class-charitable-query.php' );
-			require_once( $includes_path . 'abstracts/class-charitable-start-object.php' );
 
 			/* Functions & Core Classes */
 			require_once( $includes_path . 'charitable-core-functions.php' );
@@ -350,7 +349,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 			 * as addons) has a chance to run before the event.
 			 */
 			add_action( 'init', array( $this, 'do_charitable_actions' ), 20 );
-			add_filter( 'charitable_sanitize_donation_meta', 'charitable_sanitize_donation_meta', 10, 2 );
 		}
 
 		/**
@@ -781,12 +779,17 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @return  string[]
 		 */
 		private function get_tables() {
-			$default_tables = array(
+			/**
+			 * Filter the array of available Charitable table classes.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $tables List of tables as a key=>value array.
+			 */
+			return apply_filters( 'charitable_db_tables', array(
 				'campaign_donations' => 'Charitable_Campaign_Donations_DB',
 				'donors'             => 'Charitable_Donors_DB',
-			);
-
-			return apply_filters( 'charitable_db_tables', $default_tables );
+			) );
 		}
 
 		/**
@@ -794,7 +797,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @since   1.4.6
 		 *
-		 * @param 	int $blog_id
+		 * @param   int $blog_id
 		 * @return  boolean
 		 */
 		public function maybe_activate_charitable_on_new_site( $blog_id ) {
@@ -812,10 +815,10 @@ if ( ! class_exists( 'Charitable' ) ) :
 		/**
 		 * Runs on plugin activation.
 		 *
-		 * @see 	register_activation_hook
+		 * @see     register_activation_hook
 		 *
-		 * @param 	boolean $network_wide Whether to enable the plugin for all sites in the network
-		 *                           	  or just the current site. Multisite only. Default is false.
+		 * @param   boolean $network_wide Whether to enable the plugin for all sites in the network
+		 *                                or just the current site. Multisite only. Default is false.
 		 * @since   1.0.0
 		 *
 		 * @return  void
@@ -882,7 +885,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @return  void
 		 */
 		public function __clone() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'charitable' ), '1.0.0' );
+			charitable_get_deprecated()->doing_it_wrong(
+				__FUNCTION__,
+				__( 'Cheatin&#8217; huh?', 'charitable' ),
+				'1.0.0'
+			);
 		}
 
 		/**
@@ -892,7 +899,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @return  void
 		 */
 		public function __wakeup() {
-			_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'charitable' ), '1.0.0' );
+			charitable_get_deprecated()->doing_it_wrong(
+				__FUNCTION__,
+				__( 'Cheatin&#8217; huh?', 'charitable' ),
+				'1.0.0'
+			);
 		}
 
 		/**
