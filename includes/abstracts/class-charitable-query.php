@@ -515,10 +515,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string                     A string containing the correct number of placeholders.
 		 */
 		public function get_where_in_placeholders( $item, $filter_callback, $placeholder_type ) {
-			if ( ! $item ) {
-				return $where_statement;
-			}
-
 			if ( ! is_array( $item ) ) {
 				$item = array( $item );
 			}
@@ -539,6 +535,12 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_campaign_is_in( $where_statement ) {
+			$campaign = $this->get( 'campaign', 0 );
+
+			if ( ! $campaign ) {
+				return $where_statement;
+			}
+
 			$placeholders = $this->get_where_in_placeholders( $this->get( 'campaign', 0 ), 'charitable_validate_absint', '%d' );
 
 			return $where_statement . " AND cd.campaign_id IN ({$placeholders})";
@@ -554,7 +556,13 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_status_is_in( $where_statement ) {
-			$placeholders = $this->get_where_in_placeholders( $this->get( 'status', false ), 'charitable_is_valid_donation_status', '%s' );
+			$status = $this->get( 'status', false );
+
+			if ( ! $status ) {
+				return $where_statement;
+			}
+
+			$placeholders = $this->get_where_in_placeholders( $status, 'charitable_is_valid_donation_status', '%s' );
 
 			return $where_statement . " AND {$wpdb->posts}.post_status IN ({$placeholders})";
 		}
@@ -569,7 +577,13 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_donor_id_is_in( $where_statement ) {
-			$placeholders = $this->get_where_in_placeholders( $this->get( 'donor_id', false ), 'charitable_validate_absint', '%d' );
+			$donor_id = $this->get( 'donor_id', false );
+
+			if ( ! $donor_id ) {
+				return $where_statement;
+			}
+
+			$placeholders = $this->get_where_in_placeholders( $donor_id, 'charitable_validate_absint', '%d' );
 
 			return $where_statement . " AND cd.donor_id IN ({$placeholders})";
 		}
