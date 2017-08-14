@@ -16,11 +16,22 @@ CHARITABLE = window.CHARITABLE || {};
         this.$loader = this.$dragdrop.find('.charitable-drag-drop-image-loader').first();
         this.max_file_uploads = params.multipart_params.max_uploads;
         this.max_file_size = parseInt( this.$dragdrop.data( 'max-size' ), 10 );
+        this.uploaded = this.$images.children().length;
+        this.max_uploads_alert_shown = false;
+        this.max_upload_size_alert_shown = false;
 
         uploader.init();
 
         uploader.bind( 'Init', function( uploader ) {
             self.Init( uploader );
+        });
+
+        uploader.bind( 'PostInit', function( uploader ) {
+            uploader.refresh();
+        });
+
+        uploader.bind( 'FileFiltered', function( uploader, files ) {
+            self.FileFiltered( uploader, files );
         });
 
         uploader.bind( 'FilesAdded', function( uploader, files ) {
@@ -66,46 +77,52 @@ CHARITABLE = window.CHARITABLE || {};
             return self.remove_image( $(this), uploader );
         });
     };
+    
+    /**
+     * FileFiltered event
+     */
+    Uploader.prototype.FileFiltered = function( uploader, file ) {
+        var full = this.max_file_uploads && this.uploaded >= this.max_file_uploads;
 
+        // Don't queue file if the max number of files have been uploaded.
+        if ( full ) {
+            if ( ! this.max_uploads_alert_shown ) {
+                alert( this.get_max_uploads_message() );
+            }
+            
+            this.max_uploads_alert_shown = true;
+            return uploader.removeFile( file );
+        }
+
+        // If the file is too big, remove it and show a message.
+        if ( file.size >= this.max_file_size ) {
+            if ( ! this.max_upload_size_alert_shown ) {
+                alert( file, CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', this.bytes_to_mb( this.max_file_size ) ) );
+            }
+
+            this.max_upload_size_alert_shown = true;
+            return uploader.removeFile( file );
+        }
+
+        this.uploaded += 1;
+
+        // Hide drag & drop section if we have reached the max number of file uploads.
+        if ( this.uploaded === this.max_file_uploads ) {
+            this.hide_dropzone();
+        }
+
+        this.add_image_loader( file );
+    }
+    
     /**
      * FilesAdded event
      */
     Uploader.prototype.FilesAdded = function( uploader, files ) {
-        var self = this, 
-            uploaded = this.$images.children().length;
-
-        // Remove the drag-over class if it's still on the dropzone.
         this.$dropzone.removeClass('drag-over');
 
-        // Remove files from queue if the max number of files have been uploaded
-        if ( this.max_file_uploads > 0 && ( uploaded + files.length ) > this.max_file_uploads ) {
-
-            if ( uploaded < this.max_file_uploads ) {
-                var diff = this.max_file_uploads - uploaded;
-                uploader.splice( diff - 1, files.length - diff );
-                files = uploader.files;
-            }
-
-            alert( msg );
-        }
-
-        // Hide drag & drop section if we have reached the max number of file uploads.
-        if ( this.max_file_uploads > 0 && uploaded + files.length >= this.max_file_uploads ) {
-            this.hide_dropzone();                
-        }
-
-        // Upload files
-        plupload.each( files, function( file ) {
-
-            self.add_image_loader( file );
-
-            if ( file.size >= self.max_file_size ) {
-
-                uploader.removeFile( file );
-                
-                self.add_image_error( file, CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', self.bytes_to_mb( self.max_file_size ) ) );
-            }
-        });
+        // If the user tries to upload too many files again, or too large a file, show the alert again.
+        this.max_uploads_alert_shown = false;
+        this.max_upload_size_alert_shown = false;
 
         uploader.refresh();
         uploader.start();
@@ -198,7 +215,9 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  void
      */
     Uploader.prototype.hide_dropzone = function() {
-        this.$dropzone.removeClass('drag-over').fadeOut( 300 );
+        // this.$dropzone.removeClass('drag-over').fadeOut( 300 );
+        this.$dropzone.removeClass('drag-over');
+        this.$dropzone.hide();
     }
 
     /**

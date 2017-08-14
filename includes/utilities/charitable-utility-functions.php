@@ -4,11 +4,11 @@
  *
  * Utility functions.
  *
- * @package 	Charitable/Functions/Utility
- * @version     1.0.0
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Utility
+ * @version   1.0.0
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly.
@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Orders an array by the priority key.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	array $a First element.
- * @param 	array $b Element to compare against.
- * @return 	int
+ * @param  array $a First element.
+ * @param  array $b Element to compare against.
+ * @return int
  */
 function charitable_priority_sort( $a, $b ) {
 	foreach ( array( $a, $b ) as $item ) {
@@ -42,10 +42,10 @@ function charitable_priority_sort( $a, $b ) {
  *
  * Full credit to Pippin Williamson and the EDD team.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	string  $function 	Name of the function.
- * @return 	bool 				Whether or not function is disabled.
+ * @param  string  $function 	Name of the function.
+ * @return bool 				Whether or not function is disabled.
  */
 function charitable_is_func_disabled( $function ) {
 	$disabled = explode( ',',  ini_get( 'disable_functions' ) );
@@ -56,12 +56,12 @@ function charitable_is_func_disabled( $function ) {
 /**
  * Verify a nonce. This also just ensures that the nonce is set.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param   string $nonce
- * @param   string $action
- * @param   array  $request_args
- * @return  boolean
+ * @param  string $nonce
+ * @param  string $action
+ * @param  array  $request_args
+ * @return boolean
  */
 function charitable_verify_nonce( $nonce, $action, $request_args = array() ) {
 	if ( empty( $request_args ) ) {
@@ -76,9 +76,9 @@ function charitable_verify_nonce( $nonce, $action, $request_args = array() ) {
  *
  * Credit: Pippin Williamson & the rest of the EDD team.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return  string
+ * @return string
  */
 function charitable_get_timezone_id() {
 	$timezone = get_option( 'timezone_string' );
@@ -120,11 +120,11 @@ function charitable_get_timezone_id() {
  * Given an array and a separate array of keys, returns a new array that only contains the
  * elements in the original array with the specified keys.
  *
- * @since   1.5.0
+ * @since  1.5.0
  *
- * @param   array $original_array The original array we need to pull a subset from.
- * @param 	array $subset_keys    The keys to use for our subset.
- * @return  array
+ * @param  array $original_array The original array we need to pull a subset from.
+ * @param  array $subset_keys    The keys to use for our subset.
+ * @return array
  */
 function charitable_array_subset( array $original_array, $subset_keys ) {
 	return array_intersect_key( $original_array, array_flip( $subset_keys ) );
@@ -133,10 +133,10 @@ function charitable_array_subset( array $original_array, $subset_keys ) {
 /**
  * Ensure a number is a positive integer.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	mixed $i Number received.
- * @return  int|false
+ * @param  mixed $i Number received.
+ * @return int|false
  */
 function charitable_validate_absint( $i ) {
 	return filter_var( $i, FILTER_VALIDATE_INT, array( 'min_range' => 1 ) );
@@ -145,10 +145,10 @@ function charitable_validate_absint( $i ) {
 /**
  * Sanitize any checkbox value.
  *
- * @since   1.5.0
+ * @since  1.5.0
  *
- * @param 	mixed $value Value set for checkbox, or false.
- * @return  boolean
+ * @param  mixed $value Value set for checkbox, or false.
+ * @return boolean
  */
 function charitable_sanitize_checkbox( $value = false ) {
 	return intval( true == $value || 'on' == $value );
@@ -161,10 +161,10 @@ function charitable_sanitize_checkbox( $value = false ) {
  * If there are two items, it will return a string like this: "x and y".
  * If there are three or more items, it will return a string like this: "x, y and z".
  *
- * @since   1.3.0
+ * @since  1.3.0
  *
- * @param   string[] $list
- * @return  string
+ * @param  string[] $list
+ * @return string
  */
 function charitable_list_to_sentence_part( $list ) {
 	$list = array_values( $list );
@@ -188,6 +188,7 @@ function charitable_list_to_sentence_part( $list ) {
  * We use WP_Locale to parse the month that the user has set.
  *
  * @global WP_Locale $wp_locale
+ *
  * @since  1.4.10
  *
  * @param  string $date          The date to be sanitized.
@@ -195,7 +196,6 @@ function charitable_list_to_sentence_part( $list ) {
  * @return string|false
  */
 function charitable_sanitize_date( $date, $return_format = 'U' ) {
-
 	global $wp_locale;
 
 	if ( empty( $date ) || ! $date ) {
@@ -215,5 +215,4 @@ function charitable_sanitize_date( $date, $return_format = 'U' ) {
 	}
 
 	return date( $return_format, $time );
-
 }
