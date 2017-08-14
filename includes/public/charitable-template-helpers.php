@@ -174,3 +174,18 @@ function charitable_get_login_redirect_url() {
 
 	return apply_filters( 'charitable_signon_redirect_url', $redirect );
 }
+
+/**
+ * Displays a table.
+ *
+ * @since  1.5.0
+ *
+ * @param  array $columns The set of table columns.
+ * @param  array $data    The data to display in the table.
+ * @param  array $args    Optional set of extra arguments.
+ * @return void
+ */
+function charitable_table_template( array $columns, array $data, $args = array() ) {
+	$table = new Charitable_Table_Helper( $columns, $data, $args );
+	$table->render();
+}

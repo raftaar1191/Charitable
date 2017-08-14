@@ -37,10 +37,10 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * @var     mixed[]
 		 */
 		protected $defaults = array(
-			'start_date'    => '',
-			'end_date'      => '',
-			'campaign_id'   => 'all',
-			'status'        => 'all',
+			'start_date'  => '',
+			'end_date'    => '',
+			'campaign_id' => 'all',
+			'status'      => 'all',
 		);
 
 		/**
