@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-alpha.8\n"
+"Project-Id-Version: Charitable 1.5.0-alpha.9\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-11 12:53:30+00:00\n"
+"POT-Creation-Date: 2017-08-14 07:45:48+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:890 charitable.php:904
+#: charitable.php:893 charitable.php:907
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -7822,12 +7822,6 @@ msgctxt "amount donated"
 msgid "%s donated"
 msgstr ""
 
-#: includes/charitable-utility-functions.php:177
-#: includes/charitable-utility-functions.php:182
-msgctxt "x and y"
-msgid "%s and %s"
-msgstr ""
-
 #: includes/class-charitable-post-types.php:81
 msgctxt "Admin menu name"
 msgid "Campaigns"
@@ -7896,6 +7890,12 @@ msgstr ""
 #: includes/public/class-charitable-public.php:190
 msgctxt "remove image button text"
 msgid "Remove"
+msgstr ""
+
+#: includes/utilities/charitable-utility-functions.php:177
+#: includes/utilities/charitable-utility-functions.php:182
+msgctxt "x and y"
+msgid "%s and %s"
 msgstr ""
 
 #: templates/campaign/donate-link.php:23 templates/campaign/donate-modal.php:17
