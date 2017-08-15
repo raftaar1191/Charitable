@@ -203,6 +203,8 @@ CHARITABLE = window.CHARITABLE || {};
 
         this.$dropzone.fadeIn( 300 );
 
+        this.uploaded -= 1;
+
         // Required to ensure browse button works on iOS Safari.
         uploader.refresh();
 
