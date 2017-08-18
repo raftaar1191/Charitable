@@ -17,7 +17,17 @@ $field 			= $view_args['field'];
 $classes 		= $view_args['classes'];
 $is_required 	= isset( $field['required'] ) ? $field['required'] : false;
 $value			= isset( $field['value'] ) ? $field['value'] : '';
-$editor_args 	= isset( $field['editor'] ) ? $field['editor'] : array();
+$editor_args 	= isset( $field['editor'] ) ? wpautop( $field['editor'] ) : array();
+
+/**
+ * Change the editor settings.
+ *
+ * @see   https://developer.wordpress.org/reference/classes/_wp_editors/parse_settings/
+ *
+ * @since 1.5.0
+ *
+ * @param array $settings The default settings.
+ */
 $default_editor_args = array(
 	'media_buttons' => true,
 	'teeny'         => true,
@@ -25,8 +35,6 @@ $default_editor_args = array(
 	'tinymce'       => array(
 		'theme_advanced_path'     => false,
 		'theme_advanced_buttons1' => 'bold,italic,bullist,numlist,blockquote,justifyleft,justifycenter,justifyright,link,unlink',
-		'plugins'                 => 'paste',
-		'paste_remove_styles'     => true,
 	),
 );
 
