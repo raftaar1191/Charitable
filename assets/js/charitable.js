@@ -555,6 +555,7 @@ CHARITABLE = window.CHARITABLE || {};
         this.form.find( 'button[name="donate"]' ).show();
 
         this.submit_processing = false;
+        this.pause_processing = false;
     }
 
     /**
