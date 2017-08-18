@@ -218,15 +218,11 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 			$meta = $this->get_donor_meta();
 
 			if ( $meta ) {
-
 				$first_name = isset( $meta['first_name'] ) ? $meta['first_name'] : '';
-				$last_name = isset( $meta['last_name'] ) ? $meta['last_name'] : '';
-
+				$last_name  = isset( $meta['last_name'] ) ? $meta['last_name'] : '';
 			} else {
-
 				$first_name = $this->data->first_name;
-				$last_name = $this->data->last_name;
-
+				$last_name  = $this->data->last_name;
 			}
 
 			$name = trim( sprintf( '%s %s', $first_name, $last_name ) );
