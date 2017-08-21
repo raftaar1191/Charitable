@@ -87,6 +87,8 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 				'new_donation'     => 'Charitable_Email_New_Donation',
 				'campaign_end'     => 'Charitable_Email_Campaign_End',
 				'password_reset'   => 'Charitable_Email_Password_Reset',
+				'pledge_receipt'   => 'Charitable_Email_Pledge_Receipt',
+				'new_pledge'       => 'Charitable_Email_Pledge_Notification',
 			) );
 
 			return $this->emails;
