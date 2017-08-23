@@ -8,6 +8,9 @@
 .supports-drag-drop .charitable-drag-drop-images {
   padding: 1em;
   width: 100%; }
+.supports-drag-drop .charitable-drag-drop-images-1 {
+  padding: 0;
+  border: none; }
 .supports-drag-drop .charitable-drag-drop-dropzone {
   margin-bottom: 1em;
   border: 3px dashed #ebebeb;
@@ -49,10 +52,6 @@
       border: 1px dashed; }
       .charitable-drag-drop-images li:hover a.remove-image {
         display: block; }
-
-.charitable-drag-drop-images-1 {
-  padding: 0;
-  border: none; }
 
 .charitable-drag-drop-image-loader {
   border: 1px solid #ebebeb; }

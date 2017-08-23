@@ -16,6 +16,11 @@
         width: 100%; 
     }
 
+    .charitable-drag-drop-images-1 { 
+        padding: 0; 
+        border: none; 
+    }
+
     .charitable-drag-drop-dropzone { 
         margin-bottom: 1em;
         border: 3px dashed #ebebeb; 
@@ -77,11 +82,6 @@
             }
         }
     }
-}
-
-.charitable-drag-drop-images-1 { 
-    padding: 0; 
-    border: none; 
 }
 
 .charitable-drag-drop-image-loader {
