@@ -733,7 +733,6 @@ if ( ! class_exists( 'Charitable_Donation_Post_Type' ) ) :
 		 * @return  void
 		 */
 		public function load_scripts( $hook ) {
-
 			if ( 'edit.php' != $hook ) {
 				return;
 			}
