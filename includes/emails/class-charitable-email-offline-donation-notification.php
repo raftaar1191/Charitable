@@ -2,14 +2,13 @@
 
 defined( 'ABSPATH' ) or die( 'NO, HUMAN' );
 
-if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Charitable_Email_Donation_Receipt' ) ) {
-
-  class Charitable_Email_Pledge_Receipt extends Charitable_Email_Donation_Receipt {
+if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class_exists( 'Charitable_Email_New_Donation' ) ) {
+  class Charitable_Email_Offline_Donation_Notification extends Charitable_Email_New_Donation {
 
     /**
      * @var     string
      */
-    CONST ID = 'pledge_receipt';
+    CONST ID = 'offline_donation_notification';
 
     /**
      * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
@@ -17,15 +16,10 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
      */
     protected $object_types = array( 'donation' );
 
-    /**
-     * Instantiate the email class, defining its key values.
-     *
-     * @param   array   $objects
-     * @access  public
-     */
     public function __construct( $objects = array() ) {
       parent::__construct( $objects );
-      $this->name = apply_filters( 'charitable_email_pledge_receipt_name', __( 'Pledge Receipt', 'charitable' ) );
+
+      $this->name = apply_filters( 'charitable_email_offline_donation_notification_name', __( 'New Offline Donation Notification', 'charitable' ) );
     }
 
     /**
@@ -34,23 +28,14 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
      * @return  string
      * @access  public
      * @static
-     * @since   1.0.3
      */
     public static function get_email_id() {
       return self::ID;
     }
 
-    /**
-     * Static method that is fired right after a donation is completed, sending the donation receipt.
-     *
-     * @param   int     $donation_id
-     * @return  boolean
-     * @access  public
-     * @static
-     * @since   1.0.0
-     */
     public static function send_with_donation_id( $donation_id ) {
-      if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
+      /* Verify that the email is enabled. */
+      if ( ! charitable_get_helper( 'emails' )->is_enabled_email( Charitable_Email_Offline_Donation_Notification::get_email_id() ) ) {
         return false;
       }
 
@@ -65,7 +50,7 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
       }
 
       /* All three of those checks passed, so proceed with sending the email. */
-      $email = new Charitable_Email_Pledge_Receipt( array(
+      $email = new Charitable_Email_Offline_Donation_Notification( array(
         'donation' => new Charitable_Donation( $donation_id )
       ) );
 
@@ -81,7 +66,7 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
      * @access  protected
      */
     protected function get_default_subject() {
-      return apply_filters( 'charitable_email_pledge_receipt_default_subject', __( 'Thank you for your pledge', 'charitable' ), $this );
+      return __( 'You have received a new offline donation', 'charitable' );
     }
 
     /**
@@ -89,10 +74,9 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
      *
      * @return  string
      * @access  protected
-     * @since   1.0.0
      */
     protected function get_default_headline() {
-      return apply_filters( 'charitable_email_pledge_receipt_default_headline', __( 'Your Pledge Receipt', 'charitable' ), $this );
+      return apply_filters( 'charitable_email_offline_donation_notification_default_headline', __( 'New Offline Donation', 'charitable' ), $this );
     }
 
     /**
@@ -100,23 +84,19 @@ if ( ! class_exists( 'Charitable_Email_Pledge_Receipt' ) && class_exists( 'Chari
      *
      * @return  string
      * @access  protected
-     * @since   1.0.0
      */
     protected function get_default_body() {
       ob_start();
 ?>
-Dear [charitable_email show=donor_first_name],
+[charitable_email show=donor] ([charitable_email show=donor_email]) has just made a offline donation!
 
-Thank you so much for your generous pledge. Somebody from our fundraising team will contact you for your payment.
-
-<strong>Your Pledge</strong>
+<strong>Summary</strong>
 [charitable_email show=donation_summary]
-
-With thanks, [charitable_email show=site_name]
+Donation ID: [charitable_email show=donation_id]
 <?php
       $body = ob_get_clean();
 
-      return apply_filters( 'charitable_email_pledge_receipt_default_body', $body, $this );
+      return apply_filters( 'charitable_email_offline_donation_notification_default_body', $body, $this );
     }
   }
 }

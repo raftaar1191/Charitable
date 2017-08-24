@@ -240,8 +240,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
             require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-pledge-notification.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-pledge-receipt.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
 
             /* Database */
