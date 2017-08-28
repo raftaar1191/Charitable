@@ -128,9 +128,9 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 							continue;
 						}
 
-						$plugin_file  = plugin_basename( $product['file'] );
-						$product_key  = array_search( $product['name'], wp_list_pluck( $this->get_products(), 'name' ) );
-						$version_info = $versions[ array_search( $product['name'], $versions_name_lookup ) ];
+						$plugin_file             = plugin_basename( $product['file'] );
+						$product_key             = array_search( $product['name'], wp_list_pluck( $this->get_products(), 'name' ) );
+						$version_info            = $versions[ array_search( $product['name'], $versions_name_lookup ) ];
 						$version_info['license'] = $this->get_license_details( $product_key ); 
 
 						if ( version_compare( $product['version'], $version_info['new_version'], '<' ) ) {
@@ -143,7 +143,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 
 						}
 
-						$_transient_data->last_checked = time();
+						$_transient_data->last_checked            = time();
 						$_transient_data->checked[ $plugin_file ] = $product['version'];
 
 					}//end foreach
@@ -198,8 +198,8 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 * @param  false|object $update_cache Optional argument to pass update cache.
 		 * @return boolean
 		 */
-		public function is_missing_version_info( $product, $transient_data = false ) {
-			return ! $this->get_version_info( plugin_basename( $product['file'] ), $transient_data );
+		public function is_missing_version_info( $product, $update_cache = false ) {
+			return ! $this->get_version_info( plugin_basename( $product['file'] ), $update_cache );
 		}
 
 		/**
