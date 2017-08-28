@@ -8,7 +8,7 @@
  *
  * This is part of the EDD Software Licensing suite. Just renamed here for Charitable.
  *
- * @author Pippin Williamson
+ * @author  Pippin Williamson
  * @version 1.6
  */
 class Charitable_Plugin_Updater {
@@ -22,8 +22,8 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Class constructor.
 	 *
-	 * @uses plugin_basename()
-	 * @uses hook()
+	 * @uses  plugin_basename()
+	 * @uses  hook()
 	 *
 	 * @param string  $_api_url     The URL pointing to the custom API endpoint.
 	 * @param string  $_plugin_file Path to the plugin file.
@@ -46,11 +46,9 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Set up WordPress filters to hook into WP's update process.
 	 *
-	 * @uses    add_filter()
+	 * @since  1.0.0
 	 *
-	 * @since   1.0.0
-	 *
-	 * @return  void
+	 * @return void
 	 */
 	public function init() {
 		add_action( 'load-plugins.php', array( $this, 'setup_update_notification' ), 30 );
@@ -78,6 +76,8 @@ class Charitable_Plugin_Updater {
 	 * for a plugin. Replaced here to show our changelog and also
 	 * prompt to the user to renew/set their license if it has
 	 * expired or hasn't been added yet.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param string $file
 	 * @param array  $plugin
@@ -158,9 +158,9 @@ class Charitable_Plugin_Updater {
 	/**
 	 * Display the changelog.
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 *
-	 * @return  void
+	 * @return void
 	 */
 	public function show_changelog() {
 		if ( empty( $_REQUEST['edd_sl_action'] ) || 'view_plugin_changelog' != $_REQUEST['edd_sl_action'] ) {
