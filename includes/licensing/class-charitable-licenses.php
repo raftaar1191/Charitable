@@ -21,33 +21,36 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 	 */
 	class Charitable_Licenses {
 
-		/**
-		 * The base URL used for updates.
-		 *
-		 * @var string
-		 */
+		/* @var string */
 		const UPDATE_URL = 'https://www.wpcharitable.com';
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Licenses|null
+		 * @var Charitable_Licenses|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * All the registered products requiring licensing.
 		 *
-		 * @var     array
+		 * @var array
 		 */
 		private $products;
 
 		/**
 		 * All the stored licenses.
 		 *
-		 * @var     array
+		 * @var array
 		 */
 		private $licenses;
+
+		/**
+		 * Cached update data.
+		 *
+		 * @var array
+		 */
+		private $update_data;
 
 		/**
 		 * Returns and/or create the single instance of this class.
@@ -70,10 +73,14 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 * @since   1.0.0
 		 */
 		private function __construct() {
-			$this->products = array();
+			$this->products    = array();
+			$this->update_data = array();
 
 			add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_updates' ) );
+			add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
 			add_action( 'charitable_deactivate_license', array( $this, 'deactivate_license' ) );
+			add_filter( 'upgrader_pre_download', array( $this, 'set_upgrader_error_message' ), 10, 3 );
+			add_filter( 'upgrader_package_options', array( $this, 'set_upgrader_package_options' ) );			
 		}
 
 		/**
@@ -91,27 +98,16 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 				$_transient_data = new stdClass;
 			}
 
-			if ( 'plugins.php' === $pagenow && is_multisite() ) {
+			if ( 'plugins.php' == $pagenow && is_multisite() ) {
 				return $_transient_data;
 			}
 
 			/* Loop over our licensed products and check whether any are missing transient data. */
 			$missing_data = array();
 
-			foreach ( $this->get_licenses() as $product_key => $license_details ) {
-
-				if ( ! is_array( $license_details ) ) {
-					continue;
-				}
-
-				$product = $this->get_product_license_details( $product_key );
-
-				$plugin_file = plugin_basename( $product['file'] );
-
-				if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $plugin_file ] ) ) {
-
-					$missing_data[ $plugin_file ] = $product;
-
+			foreach ( $this->get_products() as $product ) {
+				if ( $this->is_missing_version_info( $product, $_transient_data ) ) {
+					$missing_data[] = $product;
 				}
 			}
 
@@ -119,16 +115,23 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			if ( ! empty( $missing_data ) ) {
 
 				$versions = $this->get_versions();
+				
+				unset( $versions['request_speed'] );
 
 				if ( ! empty( $versions ) ) {
+					
+					$versions_name_lookup = wp_list_pluck( $versions, 'name' );
 
-					foreach ( $missing_data as $plugin_file => $product ) {
+					foreach ( $missing_data as $product ) {
 
-						if ( ! isset( $versions[ $product['name'] ] ) ) {
+						if ( ! in_array( $product['name'], $versions_name_lookup ) ) {
 							continue;
 						}
 
-						$version_info = $versions[ $product['name'] ];
+						$plugin_file  = plugin_basename( $product['file'] );
+						$product_key  = array_search( $product['name'], wp_list_pluck( $this->get_products(), 'name' ) );
+						$version_info = $versions[ array_search( $product['name'], $versions_name_lookup ) ];
+						$version_info['license'] = $this->get_license_details( $product_key ); 
 
 						if ( version_compare( $product['version'], $version_info['new_version'], '<' ) ) {
 
@@ -148,6 +151,188 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			}//end if
 
 			return $_transient_data;
+		}
+
+		/**
+		 * Updates information on the "View version x.x details" page with custom data.
+		 *
+		 * @uses   api_request()
+		 *
+		 * @since  1.4.20
+		 *
+		 * @param  mixed  $_data   Default set of data.
+		 * @param  string $_action The current action.
+		 * @param  object $_args   Request args. 
+		 * @return object $_data
+		 */
+		public function plugins_api_filter( $_data, $_action = '', $_args = null ) {
+			if ( 'plugin_information' != $_action ) {
+				return $_data;
+			}
+
+			if ( ! isset( $_args->slug ) ) {
+				return $_data;
+			}
+
+			$plugin_key = str_replace( '-', '_', $_args->slug );
+
+			if ( ! array_key_exists( $plugin_key, $this->products ) ) {
+				return $_data;
+			}
+
+			$version_info = $this->get_version_info( plugin_basename( $this->products[ $plugin_key ]['file'] ) );
+
+			if ( $version_info ) {
+				$_data = $version_info;
+			}
+
+			return $_data;
+		}
+
+		/**
+		 * Return whether a particular plugin is missing version info.
+		 *
+		 * @since  1.4.20
+		 *
+		 * @param  array        $product      Product details array.
+		 * @param  false|object $update_cache Optional argument to pass update cache.
+		 * @return boolean
+		 */
+		public function is_missing_version_info( $product, $transient_data = false ) {
+			return ! $this->get_version_info( plugin_basename( $product['file'] ), $transient_data );
+		}
+
+		/**
+		 * Return the version update info for a particular plugin.
+		 *
+		 * @since  1.4.20
+		 *
+		 * @param  string       $slug         The plugin slug.
+		 * @param  false|object $update_cache Optional argument to pass update cache.
+		 * @return array|false Array if an update is available. False otherwise.
+		 */
+		public function get_version_info( $slug, $update_cache = false ) {
+			if ( ! $update_cache ) {
+				$update_cache = get_site_transient( 'update_plugins' );
+			}			
+
+			/* @todo Fetch it now? */
+			if ( ! is_object( $update_cache ) || empty( $update_cache->response ) || ! array_key_exists( $slug, $update_cache->response ) ) {
+				return false;
+			}
+
+			return $update_cache->response[ $slug ];
+		}
+
+		/**
+		 * Display an error message when users attempt to update a plugin
+		 * without a license or with an expired license.
+		 *
+		 * @since  1.4.20
+		 * 
+		 * @param  false|WP_Error  $reply    The messaage to return. Set to false by default.
+		 * @param  string          $package  Package URL. For Charitable extensions without a
+		 *                                   license or that have expired, we set this to a 
+		 *                                   key. Kind of a hack to pass a message to this hook.
+		 * @param  Plugin_Upgrader $upgrader The Plugin_Upgrader object.
+		 * @return false|WP_Error
+		 */
+		public function set_upgrader_error_message( $reply, $package, $upgrader ) {
+			$ajax_skin = 'WP_Ajax_Upgrader_Skin' == get_class( $upgrader->skin );
+
+			if ( 'missing_license' == $package ) {
+				if ( $ajax_skin ) {
+					$message = sprintf( __( 'You have not activated your license key. Activate your license to update: %s', 'charitable' ),
+						admin_url( 'admin.php?page=charitable-settings&tab=licenses' )
+					);
+				} else {
+					$message = sprintf( __( 'You have not activated your license key. <a href="%s" target="_top">Activate your license to update.</a>', 'charitable' ),
+						admin_url( 'admin.php?page=charitable-settings&tab=licenses' )
+					);
+				}
+
+				return new WP_Error( 'missing_license_key', $message );
+			}
+
+			if ( false !== strpos( $package, 'expired_license:' ) ) {
+				
+				$renewal_link = str_replace( 'expired_license:', '', $package );
+
+				if ( $ajax_skin ) {
+					$message = sprintf( __( 'Your license has expired. Renew your license key: %s', 'charitable' ),
+						$renewal_link
+					);
+				} else {
+					$message = sprintf( __( 'Your license has expired. <a href="%s" target="_blank">Renew your license key.</a>', 'charitable' ),
+						esc_url( $renewal_link )
+					);
+				}
+
+				return new WP_Error( 'expired_license_key', $message );
+			}
+
+			return $reply;
+		}
+
+		/**
+		 * Set upgrader package options.
+		 *
+		 * This is used for expired licenses and in certain cases for products that do
+		 * not have a license activated.
+		 *
+		 * @since  1.4.20
+		 *
+		 * @param  array $options Upgrader package options.
+		 * @return array
+		 */ 
+		public function set_upgrader_package_options( $options ) {
+			if ( 'expired_license' != $options['package'] && empty( $options['package'] ) ) {
+				return $options;
+			}
+
+			if ( ! array_key_exists( 'hook_extra', $options ) || ! array_key_exists( 'plugin', $options['hook_extra'] ) ) {
+				return $options;
+			}
+
+			list( $plugin_key, ) = explode( '/', str_replace( '-', '_', $options['hook_extra']['plugin'] ) );
+
+			if ( ! array_key_exists( $plugin_key, $this->products ) ) {
+				return $options;
+			}
+
+			/* Set up the renewal link for expired licenses. */
+			if ( 'expired_license' == $options['package'] ) {
+				$options['package'] = $this->get_expired_license_package( $options['hook_extra']['plugin'] );					
+
+				return $options;						
+			}
+
+			$license_details = $this->get_license_details( $plugin_key );				
+
+			if ( ! is_array( $license_details ) || ! array_key_exists( 'license', $license_details ) || empty( $license_details['license'] ) ) {
+				$options['package'] = 'missing_license';
+			}
+
+			return $options;
+		}
+
+		/**
+		 * Return the package string for an expired license.
+		 *
+		 * @since  1.4.20
+		 *
+		 * @param  string $plugin Plugin basename.
+		 * @return string
+		 */
+		public function get_expired_license_package( $plugin ) {
+			$version_info     = $this->get_version_info( $plugin );
+			$base_renewal_url = isset( $version_info->renewal_link ) ? $version_info->renewal_link : 'https://www.wpcharitable.com/account';		
+
+			return sprintf( 'expired_license:%s', add_query_arg( array(
+				'utm_source'   => 'plugin-upgrades', 
+				'utm_medium'   => 'wordpress-dashboard',
+				'utm_campaign' => 'expired-license',
+			), $base_renewal_url ) );
 		}
 
 		/**
@@ -250,10 +435,10 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		/**
 		 * Returns the active license details for the given product.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $item The item to get active licensing details for.
-		 * @return  mixed[]
+		 * @param  string $item The item to get active licensing details for.
+		 * @return mixed[]
 		 */
 		public function get_license_details( $item ) {
 			$licenses = $this->get_licenses();
@@ -432,14 +617,13 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 				$licenses = array();
 
 				foreach ( $this->get_licenses() as $license ) {
-
 					if ( isset( $license['license'] ) ) {
 						$licenses[] = $license['license'];
 					}
 				}
 
 				$response = wp_remote_post(
-					Charitable_Licenses::UPDATE_URL . '/edd-api/versions/',
+					Charitable_Licenses::UPDATE_URL . '/edd-api/versions-v2/',
 					array(
 						'sslverify' => false,
 						'timeout' => 15,
