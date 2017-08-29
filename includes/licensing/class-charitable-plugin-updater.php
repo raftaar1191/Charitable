@@ -12,12 +12,11 @@
  * @version 1.6
  */
 class Charitable_Plugin_Updater {
-	
-	private $api_url     = '';
-	private $api_data    = array();
-	private $name        = '';
-	private $slug        = '';
-	private $version     = '';
+	private $api_url  = '';
+	private $api_data = array();
+	private $name     = '';
+	private $slug     = '';
+	private $version  = '';
 
 	/**
 	 * Class constructor.
@@ -25,19 +24,16 @@ class Charitable_Plugin_Updater {
 	 * @uses  plugin_basename()
 	 * @uses  hook()
 	 *
-	 * @param string  $_api_url     The URL pointing to the custom API endpoint.
-	 * @param string  $_plugin_file Path to the plugin file.
-	 * @param array   $_api_data    Optional data to send with API calls.
+	 * @param string $_api_url     The URL pointing to the custom API endpoint.
+	 * @param string $_plugin_file Path to the plugin file.
+	 * @param array  $_api_data    Optional data to send with API calls.
 	 */
-	public function __construct( $_api_url, $_plugin_file, $_api_data = null ) {
-		$this->api_url     = trailingslashit( $_api_url );
-		$this->api_data    = $_api_data;
-		$this->name        = plugin_basename( $_plugin_file );
-		$this->slug        = basename( $_plugin_file, '.php' );
-		$this->version     = $_api_data['version'];
-		$this->wp_override = isset( $_api_data['wp_override'] ) ? (bool) $_api_data['wp_override'] : false;
-		$this->beta        = ! empty( $this->api_data['beta'] ) ? true : false;
-		$this->cache_key   = md5( serialize( $this->slug . $this->api_data['license'] . $this->beta ) );
+	public function __construct( $_api_url, $_plugin_file, $_api_data = array() ) {
+		$this->api_url  = trailingslashit( $_api_url );
+		$this->api_data = $_api_data;
+		$this->name     = plugin_basename( $_plugin_file );
+		$this->slug     = basename( $_plugin_file, '.php' );
+		$this->version  = $_api_data['version'];
 
 		// Set up hooks.
 		$this->init();
@@ -83,10 +79,6 @@ class Charitable_Plugin_Updater {
 	 * @param array  $plugin
 	 */
 	public function show_update_notification( $file, $plugin ) {
-		if ( is_network_admin() ) {
-			return;
-		}
-
 		if ( ! current_user_can( 'update_plugins' ) ) {
 			return;
 		}
@@ -104,7 +96,6 @@ class Charitable_Plugin_Updater {
 		if ( version_compare( $this->version, $version_info->new_version, '<' ) ) {
 
 			// Build a plugin list row, with update notification.
-			$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 			echo '<tr class="plugin-update-tr" id="' . $this->slug . '-update" data-slug="' . $this->slug . '" data-plugin="' . $this->slug . '/' . $file . '">';
 			echo '<td colspan="3" class="plugin-update colspanchange">';
 			echo '<div class="update-message notice inline notice-warning notice-alt">';
