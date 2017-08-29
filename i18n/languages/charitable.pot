@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.4.20\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-08-29 00:58:38+00:00\n"
+"POT-Creation-Date: 2017-08-29 03:30:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5435,7 +5435,7 @@ msgstr ""
 
 #: includes/admin/upgrades/class-charitable-upgrade.php:359
 #: includes/admin/upgrades/class-charitable-upgrade.php:394
-#: includes/licensing/class-charitable-plugin-updater.php:179
+#: includes/licensing/class-charitable-plugin-updater.php:174
 msgid "Error"
 msgstr ""
 
@@ -6901,7 +6901,7 @@ msgstr ""
 
 #: includes/emails/class-charitable-emails.php:110
 #: includes/gateways/class-charitable-gateways.php:102
-#: includes/licensing/class-charitable-licenses.php:549
+#: includes/licensing/class-charitable-licenses.php:551
 msgid "Cheatin' eh?!"
 msgstr ""
 
@@ -7283,15 +7283,15 @@ msgid ""
 "license key.</a>"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:556
+#: includes/licensing/class-charitable-licenses.php:558
 msgid "Missing product key"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:563
+#: includes/licensing/class-charitable-licenses.php:565
 msgid "This product is not valid or does not have a valid license key."
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:117
+#: includes/licensing/class-charitable-plugin-updater.php:112
 msgid ""
 "<p>There is a new version of %1$s available but you have not activated your "
 "license. <a target=\"_top\" href=\"%2$s\">Activate your license</a> or <a "
@@ -7299,7 +7299,7 @@ msgid ""
 "details</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:129
+#: includes/licensing/class-charitable-plugin-updater.php:124
 msgid ""
 "<p>There is a new version of %1$s available but your license has expired. "
 "<a target=\"_blank\" href=\"%2$s\">Renew your license</a> or <a "
@@ -7307,14 +7307,14 @@ msgid ""
 "details</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:143
+#: includes/licensing/class-charitable-plugin-updater.php:138
 msgid ""
 "<p>There is a new version of %1$s available. <a target=\"_blank\" "
 "class=\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a "
 "href=\"%4$s\">update now</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:179
+#: includes/licensing/class-charitable-plugin-updater.php:174
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
