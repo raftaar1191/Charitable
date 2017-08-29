@@ -511,6 +511,8 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 				return;
 			}
 
+			$this->flush_update_cache();
+
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 			return array(
@@ -579,6 +581,8 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			if ( is_wp_error( $response ) ) {
 				return;
 			}
+			
+			$this->flush_update_cache();
 
 			/* Decode the license data */
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -588,6 +592,18 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			unset( $settings['licenses'][ $product_key ] );
 
 			update_option( 'charitable_settings', $settings );
+		}
+
+		/**
+		 * Flush the version update cache.
+		 *
+		 * @since  1.4.20
+		 *
+		 * @return void
+		 */
+		protected function flush_update_cache() {
+			wp_cache_delete( 'plugin_versions', 'charitable' );
+			set_site_transient( 'update_plugins', null );
 		}
 
 		/**

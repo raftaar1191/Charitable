@@ -80,10 +80,6 @@ class Charitable_Plugin_Updater {
 	 * @param array  $plugin
 	 */
 	public function show_update_notification( $file, $plugin ) {
-		if ( is_network_admin() ) {
-			return;
-		}
-
 		if ( ! current_user_can( 'update_plugins' ) ) {
 			return;
 		}
