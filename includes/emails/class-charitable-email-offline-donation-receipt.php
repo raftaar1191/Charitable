@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 			 *
 			 * @param string $name
 			 */
-			$this->name = apply_filters( 'charitable_email_offline_donation_receipt_name', __( 'Offline Donation Receipt', 'charitable' ) );
+			$this->name = apply_filters( 'charitable_email_offline_donation_receipt_name', __( 'Donor: Offline Donation Receipt', 'charitable' ) );
 		}
 
 		/**
@@ -111,6 +111,82 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 		}
 
 		/**
+		 * Add donation content fields.
+		 *
+		 * @since   1.0.0
+		 *
+		 * @param 	array 			 $fields Shortcode fields.
+		 * @param 	Charitable_Email $email  Email object.
+		 * @return  array[]
+		 */
+		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
+			if ( ! $this->is_current_email( $email ) ) {
+				return $fields;
+			}
+
+			if ( ! in_array( 'donation', $this->object_types ) ) {
+				return $fields;
+			}
+
+			$fields = parent::add_donation_content_fields( $fields, $email );
+
+			$fields['offline_instructions'] = array(
+				'description' => __( 'Show Offline Donation instructions', 'charitable' ),
+				'callback'    => array( $this, 'get_offline_instructions' ),
+			);
+
+			return $fields;
+		}
+
+		/**
+		 * Return the offline donation instructions.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string           $default The default output for the shortcode.
+		 * @param  array            $args    Mixed args.
+		 * @param  Charitable_Email $email   The email object.
+		 * @return string
+		 */
+		public function get_offline_instructions( $default, $args, $email ) {
+			if ( ! $email->has_valid_donation() ) {
+				return '';
+			}
+
+			return wpautop( charitable_get_option( 
+					array( 'gateways_offline', 'instructions' ),
+					__( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' )
+			) );
+		}
+
+		/**
+		 * Add donation content fields' fake data for previews.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array 			$fields Shortcode fields.
+		 * @param  Charitable_Email $email  Email object.
+		 * @return array
+		 */
+		public function add_preview_donation_content_fields( $fields, Charitable_Email $email ) {
+			if ( ! $this->is_current_email( $email ) ) {
+				return $fields;
+			}
+
+			if ( ! in_array( 'donation', $this->object_types ) ) {
+				return $fields;
+			}
+
+			$fields                         = parent::add_preview_donation_content_fields( $fields, $email );
+			$fields['offline_instructions'] = wpautop( charitable_get_option(
+				array( 'gateways_offline', 'instructions' ),
+				__( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' ) ) 
+			);
+
+			return $fields;
+		}
+
+		/**
 		 * Return the default subject line for the email.
 		 *
 		 * @since  1.5.0
@@ -159,10 +235,13 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 ?>
 Dear [charitable_email show=donor_first_name],
 
-Thank you so much for your generous offline donation. Somebody from our fundraising team will contact you for your payment.
+Thank you so much for your generous offline donation.
 
-<strong>Your Offline Donation</strong>
+<strong>Your donation details</strong>
 [charitable_email show=donation_summary]
+
+<strong>Complete your donation</strong>
+[charitable_email show=offline_instructions]
 
 With thanks, [charitable_email show=site_name]
 <?php

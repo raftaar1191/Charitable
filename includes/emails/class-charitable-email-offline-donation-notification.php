@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 			 *
 			 * @param string $name
 			 */
-			$this->name = apply_filters( 'charitable_email_offline_donation_notification_name', __( 'New Offline Donation Notification', 'charitable' ) );
+			$this->name = apply_filters( 'charitable_email_offline_donation_notification_name', __( 'Admin: New Offline Donation Notification', 'charitable' ) );
 		}
 
 		/**
