@@ -238,6 +238,14 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 				$this->headers .= "Content-Type: {$this->get_content_type()}; charset=utf-8\r\n";
 			}
 
+			/**
+			 * Filter the email headers.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string           $headers The default email headers.
+             * @param Charitable_Email $email   The email object.
+             */
 			return apply_filters( 'charitable_email_headers', $this->headers, $this );
 		}
 
