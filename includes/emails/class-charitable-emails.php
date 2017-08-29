@@ -83,10 +83,12 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 */
 		public function register_emails() {
 			$this->emails = apply_filters( 'charitable_emails', array(
-				'donation_receipt' => 'Charitable_Email_Donation_Receipt',
-				'new_donation'     => 'Charitable_Email_New_Donation',
-				'campaign_end'     => 'Charitable_Email_Campaign_End',
-				'password_reset'   => 'Charitable_Email_Password_Reset',
+				'donation_receipt'              => 'Charitable_Email_Donation_Receipt',
+				'new_donation'                  => 'Charitable_Email_New_Donation',
+				'campaign_end'                  => 'Charitable_Email_Campaign_End',
+				'password_reset'                => 'Charitable_Email_Password_Reset',
+				'offline_donation_receipt'      => 'Charitable_Email_Offline_Donation_Receipt',
+				'offline_donation_notification' => 'Charitable_Email_Offline_Donation_Notification',
 			) );
 
 			return $this->emails;
