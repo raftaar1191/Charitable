@@ -1,92 +1,154 @@
 <?php
+/**
+ * Class that models the new offline donation email.
+ *
+ * @version     1.5.0
+ * @package     Charitable/Classes/Charitable_Email_Offline_Donation_Notification
+ * @author      Eric Daams
+ * @copyright   Copyright (c) 2017, Studio 164a
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ */
 
-defined( 'ABSPATH' ) or die( 'NO, HUMAN' );
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class_exists( 'Charitable_Email_New_Donation' ) ) {
-  class Charitable_Email_Offline_Donation_Notification extends Charitable_Email_New_Donation {
 
-    /**
-     * @var     string
-     */
-    CONST ID = 'offline_donation_notification';
+	/**
+	 * New Offline Donation Email
+	 *
+	 * @since 1.5.0
+	 */
+	class Charitable_Email_Offline_Donation_Notification extends Charitable_Email_New_Donation {
 
-    /**
-     * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-     * @access  protected
-     */
-    protected $object_types = array( 'donation' );
+		/* @var string */
+		CONST ID = 'offline_donation_notification';
 
-    public function __construct( $objects = array() ) {
-      parent::__construct( $objects );
+		/**
+		 * Array of supported object types (campaigns, donations, donors, etc).
+		 *
+		 * @var string[]
+		 */
+		protected $object_types = array( 'donation' );
 
-      $this->name = apply_filters( 'charitable_email_offline_donation_notification_name', __( 'New Offline Donation Notification', 'charitable' ) );
-    }
+		/**
+		 * Create email object.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param mixed[] $objects
+		 */
+		public function __construct( $objects = array() ) {
+			parent::__construct( $objects );
 
-    /**
-     * Returns the current email's ID.
-     *
-     * @return  string
-     * @access  public
-     * @static
-     */
-    public static function get_email_id() {
-      return self::ID;
-    }
+			/**
+			 * Customize the name of the offline donation notification.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param string $name
+			 */
+			$this->name = apply_filters( 'charitable_email_offline_donation_notification_name', __( 'New Offline Donation Notification', 'charitable' ) );
+		}
 
-    public static function send_with_donation_id( $donation_id ) {
-      /* Verify that the email is enabled. */
-      if ( ! charitable_get_helper( 'emails' )->is_enabled_email( Charitable_Email_Offline_Donation_Notification::get_email_id() ) ) {
-        return false;
-      }
+		/**
+		 * Returns the current email's ID.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public static function get_email_id() {
+			return self::ID;
+		}
 
-      /* If the donation is not pending, stop here. */
-      if ( 'charitable-pending' != get_post_status( $donation_id ) ) {
-        return false;
-      }
+		/**
+		 * Send the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int $donation_id The donation ID we're sending an email about.
+		 * @return boolean
+		 */
+		public static function send_with_donation_id( $donation_id ) {
+			/* Verify that the email is enabled. */
+			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( Charitable_Email_Offline_Donation_Notification::get_email_id() ) ) {
+				return false;
+			}
 
-      /* If the donation was not made with the offline payment option, stop here. */
-      if ( 'offline' != get_post_meta( $donation_id, 'donation_gateway', true ) ) {
-        return false;
-      }
+			/* If the donation is not pending, stop here. */
+			if ( 'charitable-pending' != get_post_status( $donation_id ) ) {
+				return false;
+			}
 
-      /* All three of those checks passed, so proceed with sending the email. */
-      $email = new Charitable_Email_Offline_Donation_Notification( array(
-        'donation' => new Charitable_Donation( $donation_id )
-      ) );
+			/* If the donation was not made with the offline payment option, stop here. */
+			if ( 'offline' != get_post_meta( $donation_id, 'donation_gateway', true ) ) {
+				return false;
+			}
 
-      $email->send();
+			if ( ! apply_filters( 'charitable_send_' . self::get_email_id(), true, $donation ) ) {
+				return false;
+			}
 
-      return true;
-    }
+			/* All three of those checks passed, so proceed with sending the email. */
+			$email = new Charitable_Email_Offline_Donation_Notification( array(
+				'donation' => new Charitable_Donation( $donation_id )
+			) );
 
-    /**
-     * Return the default subject line for the email.
-     *
-     * @return  string
-     * @access  protected
-     */
-    protected function get_default_subject() {
-      return __( 'You have received a new offline donation', 'charitable' );
-    }
+			/**
+			 * Don't resend the email.
+			 */
+			if ( $email->is_sent_already( $donation_id ) ) {
+				return false;
+			}
 
-    /**
-     * Return the default headline for the email.
-     *
-     * @return  string
-     * @access  protected
-     */
-    protected function get_default_headline() {
-      return apply_filters( 'charitable_email_offline_donation_notification_default_headline', __( 'New Offline Donation', 'charitable' ), $this );
-    }
+			$sent = $email->send();
 
-    /**
-     * Return the default body for the email.
-     *
-     * @return  string
-     * @access  protected
-     */
-    protected function get_default_body() {
-      ob_start();
+			/**
+			 * Log that the email was sent.
+			 */
+			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
+				$email->log( $donation_id, $sent );
+			}
+
+			return true;
+		}
+
+		/**
+		 * Return the default subject line for the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		protected function get_default_subject() {
+			return __( 'You have received a new offline donation', 'charitable' );
+		}
+
+		/**
+		 * Return the default headline for the email.
+		 *
+		 * @return string
+		 */
+		protected function get_default_headline() {
+			/**
+			 * Filter the default headline.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param string           $headline The default headline.
+			 * @param Charitable_Email $email    The Charitable_Email object.
+			 */
+			return apply_filters( 'charitable_email_offline_donation_notification_default_headline', __( 'New Offline Donation', 'charitable' ), $this );
+		}
+
+		/**
+		 * Return the default body for the email.
+		 *
+		 * @return  string
+		 * @access  protected
+		 */
+		protected function get_default_body() {
+			ob_start();
 ?>
 [charitable_email show=donor] ([charitable_email show=donor_email]) has just made a offline donation!
 
@@ -94,9 +156,15 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 [charitable_email show=donation_summary]
 Donation ID: [charitable_email show=donation_id]
 <?php
-      $body = ob_get_clean();
-
-      return apply_filters( 'charitable_email_offline_donation_notification_default_body', $body, $this );
-    }
-  }
+			/**
+			 * Filter the default body content.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param string           $body  The body content.
+			 * @param Charitable_Email $email The Charitable_Email object.
+			 */
+			return apply_filters( 'charitable_email_offline_donation_notification_default_body', ob_get_clean(), $this );
+		}
+	}
 }
