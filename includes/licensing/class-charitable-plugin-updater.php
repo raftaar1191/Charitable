@@ -35,9 +35,6 @@ class Charitable_Plugin_Updater {
 		$this->name        = plugin_basename( $_plugin_file );
 		$this->slug        = basename( $_plugin_file, '.php' );
 		$this->version     = $_api_data['version'];
-		$this->wp_override = isset( $_api_data['wp_override'] ) ? (bool) $_api_data['wp_override'] : false;
-		$this->beta        = ! empty( $this->api_data['beta'] ) ? true : false;
-		$this->cache_key   = md5( serialize( $this->slug . $this->api_data['license'] . $this->beta ) );
 
 		// Set up hooks.
 		$this->init();
@@ -60,9 +57,9 @@ class Charitable_Plugin_Updater {
 	 * and sets up our own callback to show the update notification.
 	 *
 	 * @since  1.4.20
-     *
-     * @return void
-     */
+	 *
+	 * @return void
+	 */
 	public function setup_update_notification() {
 		remove_action( 'after_plugin_row_' . $this->name, 'wp_plugin_update_row', 10 );
 		add_action( 'after_plugin_row_' . $this->name, array( $this, 'show_update_notification' ), 10, 2 );
