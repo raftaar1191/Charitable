@@ -193,6 +193,7 @@ module.exports = function(grunt) {
                     '!package.json',
                     '!.gitignore',
                     '!.tx/**',
+                    '!codeoversight.yml',
                     '!tests/**',
                     '!**/Gruntfile.js',
                     '!**/package.json',

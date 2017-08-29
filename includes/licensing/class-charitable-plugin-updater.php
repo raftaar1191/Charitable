@@ -12,7 +12,6 @@
  * @version 1.6
  */
 class Charitable_Plugin_Updater {
-	
 	private $api_url  = '';
 	private $api_data = array();
 	private $name     = '';

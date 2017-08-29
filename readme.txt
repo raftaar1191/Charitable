@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.8
-Stable tag: 1.4.19
+Tested up to: 4.8.1
+Stable tag: 1.4.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.4.20 =
+* Improve how plugin updates are shown for Charitable extensions. [#382](https://github.com/Charitable/Charitable/issues/382)
 
 = 1.4.19 =
 * Fixed a bug that prevented suggested donations with cents from showing correctly in sites where a comma is used for the decimal separator (i.e. 9,50). [#356](https://github.com/Charitable/Charitable/issues/356)
