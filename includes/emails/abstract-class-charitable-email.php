@@ -244,8 +244,8 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 			 * @since 1.0.0
 			 *
 			 * @param string           $headers The default email headers.
-             * @param Charitable_Email $email   The email object.
-             */
+			 * @param Charitable_Email $email   The email object.
+			 */
 			return apply_filters( 'charitable_email_headers', $this->headers, $this );
 		}
 
