@@ -83,10 +83,6 @@ class Charitable_Plugin_Updater {
 	 * @param array  $plugin
 	 */
 	public function show_update_notification( $file, $plugin ) {
-		if ( is_network_admin() ) {
-			return;
-		}
-
 		if ( ! current_user_can( 'update_plugins' ) ) {
 			return;
 		}
@@ -104,7 +100,6 @@ class Charitable_Plugin_Updater {
 		if ( version_compare( $this->version, $version_info->new_version, '<' ) ) {
 
 			// Build a plugin list row, with update notification.
-			$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 			echo '<tr class="plugin-update-tr" id="' . $this->slug . '-update" data-slug="' . $this->slug . '" data-plugin="' . $this->slug . '/' . $file . '">';
 			echo '<td colspan="3" class="plugin-update colspanchange">';
 			echo '<div class="update-message notice inline notice-warning notice-alt">';
