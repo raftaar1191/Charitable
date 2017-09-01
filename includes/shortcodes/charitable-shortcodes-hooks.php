@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @see     Charitable_Campaigns_Shortcode::display()
  * @see     Charitable_Donors_Shortcode::display()
  * @see     Charitable_My_Donations_Shortcode::display()
+ * @see     Charitable_Donation_Form_Shortcode::display()
  * @see     Charitable_Donation_Receipt_Shortcode::display()
  * @see     Charitable_Login_Shortcode::display()
  * @see     Charitable_Registration_Shortcode::display()
@@ -27,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 add_shortcode( 'campaigns',               array( 'Charitable_Campaigns_Shortcode', 'display' ) );
 add_shortcode( 'charitable_donors',       array( 'Charitable_Donors_Shortcode', 'display' ) );
+add_shortcode( 'donation_form',        	  array( 'Charitable_Donation_Form_Shortcode', 'display' ) );
 add_shortcode( 'donation_receipt',        array( 'Charitable_Donation_Receipt_Shortcode', 'display' ) );
 add_shortcode( 'charitable_my_donations', array( 'Charitable_My_Donations_Shortcode', 'display' ) );
 add_shortcode( 'charitable_login',        array( 'Charitable_Login_Shortcode', 'display' ) );
