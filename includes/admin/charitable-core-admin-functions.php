@@ -107,15 +107,15 @@ function charitable_is_settings_view( $tab = '' ) {
  * This is based on WordPress' do_settings_fields but allows the possibility
  * of leaving out a field lable/title, for fullwidth fields.
  *
- * @see     do_settings_fields
+ * @see    do_settings_fields 
  *
- * @global  $wp_settings_fields Storage array of settings fields and their pages/sections
+ * @since  1.0.0
  *
- * @since   1.0.0
+ * @global $wp_settings_fields Storage array of settings fields and their pages/sections
  *
- * @param   string  $page       Slug title of the admin page who's settings fields you want to show.
- * @param   string  $section    Slug title of the settings section who's fields you want to show.
- * @return  string
+ * @param  string  $page       Slug title of the admin page who's settings fields you want to show.
+ * @param  string  $section    Slug title of the settings section who's fields you want to show.
+ * @return string
  */
 function charitable_do_settings_fields( $page, $section ) {
 	global $wp_settings_fields;
@@ -156,21 +156,20 @@ function charitable_do_settings_fields( $page, $section ) {
 /**
  * Add new tab to the Charitable settings area.
  *
- * @since   1.3.0
+ * @since  1.3.0
  *
- * @param   string[] $tabs
- * @param   string $key
- * @param   string $name
- * @param   mixed[] $args
- * @return  string[]
+ * @param  string[] $tabs
+ * @param  string $key
+ * @param  string $name
+ * @param  mixed[] $args
+ * @return string[]
  */
 function charitable_add_settings_tab( $tabs, $key, $name, $args = array() ) {
 	$defaults = array(
 		'index' => 3,
 	);
 
-	$args = wp_parse_args( $args, $defaults );
-
+	$args   = wp_parse_args( $args, $defaults );
 	$keys   = array_keys( $tabs );
 	$values = array_values( $tabs );
 
@@ -178,4 +177,15 @@ function charitable_add_settings_tab( $tabs, $key, $name, $args = array() ) {
 	array_splice( $values, $args['index'], 0, $name );
 
 	return array_combine( $keys, $values );
+}
+
+/**
+ * Return the donation actions class.
+ *
+ * @since  1.5.0
+ *
+ * @return Charitable_Donation_Admin_Actions
+ */
+function charitable_get_donation_actions() {
+    return Charitable_Admin::get_instance()->get_donation_actions();
 }

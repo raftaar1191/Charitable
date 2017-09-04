@@ -22,6 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 add_action( 'init', array( Charitable_Emails::get_instance(), 'register_emails' ) );
 
 /**
+ * Register admin actions for Charitable emails.
+ *
+ * @see Charitable_Emails::register_email_admin_actions()
+ */
+add_action( 'admin_init', array( Charitable_Emails::get_instance(), 'register_admin_actions' ) );
+
+/**
  * Send the Donation Receipt and Donation Notification emails.
  *
  * Both of these emails are sent immediately a donation has been completed.

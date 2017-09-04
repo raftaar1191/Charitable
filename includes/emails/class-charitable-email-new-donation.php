@@ -77,12 +77,10 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  int                 $donation_id The ID of the donation that we're sending an email about.
-		 * @param  Charitable_Donation $donation    
-		 * @param  boolean             $force_send  If true, the email will be sent again even if it was sent previously.
+		 * @param  int $donation_id The ID of the donation that we're sending an email about.
 		 * @return boolean
 		 */
-		public static function send_with_donation_id( $donation_id, $donation = null, $force_send = false ) {
+		public static function send_with_donation_id( $donation_id ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
 				return false;
 			}
@@ -91,9 +89,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			if( $donation_id && ! is_a( $donation, 'Charitable_Donation' ) ) {
-				$donation = charitable_get_donation( $donation_id );
-			}
+			$donation = charitable_get_donation( $donation_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
 				return false;
@@ -110,7 +106,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 			/**
 			 * Don't resend the email.
 			 */
-			if ( ! $manual && $email->is_sent_already( $donation_id ) ) {
+			if ( $email->is_sent_already( $donation_id ) ) {
 				return false;
 			}
 
@@ -124,6 +120,51 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 			}
 
 			return $sent;
+		}
+
+		/**
+		 * Resend the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function resend( $object_id, $args = array() ) {
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
+				return false;
+			}
+
+			$email = new Charitable_Email_New_Donation( array(
+				'donation' => $donation,
+			) );
+
+			$sent = $email->send();
+
+			/**
+			 * Log that the email was sent.
+			 */
+			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
+				$email->log( $object_id, $sent );
+			}
+
+			return $sent;
+		}
+
+		/**
+		 * Checks whether an email can be resent.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function can_be_resent( $object_id, $args = array() ) {
+			return true;
 		}
 
 		/**

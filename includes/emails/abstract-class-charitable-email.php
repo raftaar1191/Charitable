@@ -1047,6 +1047,44 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Resend an email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function resend( $object_id, $args = array() ) {
+			charitable_get_deprecated()->doing_it_wrong(
+				__METHOD__,
+				__( 'A `resend` method has not been defined for this class.', 'charitable' ),
+				'1.5.0'
+			);
+
+			return false;
+		}
+
+		/**
+		 * Checks whether an email can be resent.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function can_be_resent( $object_id, $args = array() ) {
+			charitable_get_deprecated()->doing_it_wrong(
+				__METHOD__,
+				__( 'A `can_be_resent` method has not been defined for this class.', 'charitable' ),
+				'1.5.0'
+			);
+
+			return false;
+		}
+
+		/**
 		 * Checks whether the email has already been sent.
 		 *
 		 * @since   1.3.2

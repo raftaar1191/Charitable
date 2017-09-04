@@ -25,9 +25,16 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Admin|null
+		 * @var Charitable_Admin|null
 		 */
 		private static $instance = null;
+
+		/**
+		 * Donation actions class.
+		 *
+		 * @var Charitable_Donation_Admin_Actions
+		 */
+		private $donation_actions;
 
 		/**
 		 * Set up the class.
@@ -40,6 +47,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 */
 		protected function __construct() {
 			$this->load_dependencies();
+
+			$this->donation_actions = new Charitable_Donation_Admin_Actions;
 
 			do_action( 'charitable_admin_loaded' );
 		}
@@ -74,10 +83,15 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'class-charitable-admin-pages.php' );
 			require_once( $admin_dir . 'class-charitable-admin-notices.php' );
 
+			/* Admin Actions */
+			require_once( $admin_dir . 'actions/interface-charitable-admin-actions.php' );
+			require_once( $admin_dir . 'actions/abstract-charitable-admin-actions.php' );
+			require_once( $admin_dir . 'actions/class-charitable-donation-admin-actions.php' );
+
 			/* Campaigns */
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
 
-			/* Donations */
+			/* Donations */			
 			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
 			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
@@ -99,6 +113,17 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade.php' );
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade-page.php' );
 			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );
+		}
+
+		/**
+		 * Get Charitable_Donation_Admin_Actions class.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return Charitable_Donation_Admin_Actions
+		 */
+		public function get_donation_actions() {
+			return $this->donation_actions;
 		}
 
 		/**
