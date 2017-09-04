@@ -63,6 +63,41 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
         }
 
         /**
+         * Get available actions, given an object id and set of arguments.
+         *
+         * @since  1.5.0
+         *
+         * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+         * @param  array  $args      Optional. Mixed set of arguments.
+         * @return array
+         */
+        public function get_available_actions( $object_id, $args = array() ) {
+            $actions = array();
+
+            foreach ( $this->actions as $action => $action_args ) {
+                if ( $this->is_action_available( $action_args, $object_id, $args ) ) {
+                    $actions[ $action ] = $action_args;
+                }
+            }
+
+            return $actions;
+        }
+
+        /**
+         * Checks whether an action is available.
+         *
+         * @since  1.5.0
+         *
+         * @param  array $action_args Action arguments.
+         * @param  int   $object_id   The object ID. This could be the ID of the donation, campaign, donor, etc.
+         * @param  array $args        Optional. Mixed set of arguments.
+         * @return boolean
+         */
+        protected function is_action_available( $action_args, $object_id, $args = array() ) {
+            return ! array_key_exists( 'active_callback', $action_args ) || call_user_func( $action_args['active_callback'], $object_id, $args );
+        }
+
+        /**
          * Return the array of groups.
          *
          * @since  1.5.0
@@ -71,6 +106,30 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          */
         public function get_groups() {
             return $this->groups;
+        }
+
+        /**
+         * Returns all groups with at least one action available.
+         *
+         * @since  1.5.0
+         *
+         * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+         * @param  array  $args      Optional. Mixed set of arguments.
+         * @return array
+         */
+        public function get_available_groups( $object_id, $args = array() ) {
+            $groups = array();
+
+            foreach ( $this->groups as $group => $actions ) {
+                foreach ( $actions as $action ) {
+                    if ( $this->is_action_available( $this->actions[ $action ], $object_id, $args ) ) {
+                        $groups[ $group ] = $actions;
+                        break;
+                    }
+                }
+            }
+
+            return $groups;
         }
 
         /**
@@ -132,7 +191,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 
             $action_args = $this->actions[ $action ];
 
-            if ( array_key_exists( 'active_callback', $action_args ) && ! call_user_func( $action_args['active_callback'], $object_id, $args ) ) {
+            if ( ! $this->is_action_available( $action_args, $object_id, $args ) ) {
                 return false;
             }
 

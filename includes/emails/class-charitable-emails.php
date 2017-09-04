@@ -114,6 +114,8 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 			$emails = array(
 				'donation_receipt',
 				'new_donation',
+				'offline_donation_receipt',
+				'offline_donation_notification',
 			);
 
 			foreach ( $emails as $email )  {

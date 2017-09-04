@@ -114,6 +114,8 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 * @return array
 		 */
 		private function get_meta_boxes() {
+			global $post;
+
 			$meta_boxes = array(
 				'donation-overview' => array(
 					'title'    => __( 'Donation Overview', 'charitable' ),
@@ -140,6 +142,11 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 					'view'     => 'metaboxes/donation/donation-log',
 				),
 			);
+
+			/* Get rid of the donation actions meta box if it doesn't apply to this donation. */
+			if ( empty( charitable_get_donation_actions()->get_available_actions( $post->ID ) ) ) {
+				unset( $meta_boxes['donation-actions'] );
+			}
 
 			/**
 			 * Filter the meta boxes to be displayed on a donation overview page.

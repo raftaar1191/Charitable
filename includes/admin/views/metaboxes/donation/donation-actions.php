@@ -9,19 +9,26 @@
 global $post;
 
 $helper  = charitable_get_donation_actions();
-$actions = $helper->get_actions();
+$actions = $helper->get_available_actions( $post->ID );
+$groups  = $helper->get_available_groups( $post->ID );
+
+if ( empty( $actions ) ) {
+	return;
+}
 ?>
 <div id="charitable-donation-actions-metabox-wrapper" class="charitable-metabox charitable-actions-form-wrapper">
 	<div id="charitable-donation-actions-form" class="charitable-actions-form">
 		<?php do_action( 'charitable_donation_actions_start', $post->ID ); ?>
 		<select id="charitable_donation_actions" name="charitable_donation_action" class="charitable-action-select">
 			<option value=""><?php _e( 'Select an action', 'charitable' ) ?></option>
-			<?php foreach ( $helper->get_groups() as $label => $group_actions ) : ?>
+			<?php foreach ( $groups as $label => $group_actions ) : ?>
 				<?php if ( ! empty( $label ) ) : ?>
 					<optgroup label="<?php echo esc_attr( $label ) ?>">
 				<?php endif ?>
 					<?php foreach ( $group_actions as $action ) : ?>
-						<option value="<?php echo esc_attr( $action ) ?>" data-button-text="<?php echo esc_attr( $actions[ $action ]['button_text'] ) ?>"><?php echo esc_html( $actions[ $action ]['label'] ) ?></option>
+						<?php if ( array_key_exists( $action, $actions ) ) : ?>
+							<option value="<?php echo esc_attr( $action ) ?>" data-button-text="<?php echo esc_attr( $actions[ $action ]['button_text'] ) ?>"><?php echo esc_html( $actions[ $action ]['label'] ) ?></option>
+						<?php endif ?>
 					<?php endforeach ?>
 				<?php if ( ! empty( $label ) ) : ?>
 					</optgroup>

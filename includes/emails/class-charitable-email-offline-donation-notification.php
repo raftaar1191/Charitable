@@ -114,6 +114,52 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 		}
 
 		/**
+		 * Resend the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function resend( $object_id, $args = array() ) {
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
+				return false;
+			}
+
+			$email = new Charitable_Email_New_Donation( array(
+				'donation' => $donation,
+			) );
+
+			$sent = $email->send();
+
+			/**
+			 * Log that the email was sent.
+			 */
+			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
+				$email->log( $object_id, $sent );
+			}
+
+			return $sent;
+		}
+
+		/**
+		 * Checks whether an email can be resent.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function can_be_resent( $object_id, $args = array() ) {
+			return 'charitable-pending' == get_post_status( $object_id ) && 'offline' == get_post_meta( $object_id, 'donation_gateway', true );
+		}
+
+
+		/**
 		 * Return the default subject line for the email.
 		 *
 		 * @since  1.5.0
