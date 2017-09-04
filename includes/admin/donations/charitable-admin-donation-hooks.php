@@ -31,6 +31,13 @@ add_action( 'add_meta_boxes', array( Charitable_Donation_Metaboxes::get_instance
 add_action( 'save_post_' . Charitable::DONATION_POST_TYPE,  array( Charitable_Donation_Metaboxes::get_instance(), 'save_donation' ), 10, 2 );
 
 /**
+ * Save the donation.
+ *
+ * @see Charitable_Donation_Metaboxes::post_messages()
+ */
+add_filter( 'post_updated_messages', array( Charitable_Donation_Metaboxes::get_instance(), 'post_messages' ) );
+
+/**
  * Set the table columns for donations.
  *
  * @see Charitable_Donation_List_Table::dashboard_columns()
@@ -101,7 +108,6 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) ) {
  * @see Charitable_Donation_List_Table::bulk_messages()
  */
 add_action( 'admin_notices', array( Charitable_Donation_List_Table::get_instance(), 'bulk_admin_notices' ) );
-add_filter( 'post_updated_messages', array( Charitable_Donation_List_Table::get_instance(), 'post_messages' ) );
 add_filter( 'bulk_post_updated_messages', array( Charitable_Donation_List_Table::get_instance(), 'bulk_messages' ), 10, 2 );
 
 /**

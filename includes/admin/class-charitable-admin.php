@@ -48,7 +48,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		protected function __construct() {
 			$this->load_dependencies();
 
-			$this->donation_actions = new Charitable_Donation_Admin_Actions;
+			$this->donation_actions = new Charitable_Donation_Admin_Actions;			
 
 			do_action( 'charitable_admin_loaded' );
 		}

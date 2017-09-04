@@ -40,6 +40,15 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
         private $groups;
 
         /**
+         * The result of the most recently executed action.
+         *
+         * @since 1.5.0
+         *
+         * @var   int
+         */
+        private $result_message;
+
+        /**
          * Create class object.
          *
          * @since 1.5.0
@@ -133,6 +142,18 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
         }
 
         /**
+         * Get the result message.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $location
+         * @return string
+         */
+        public function show_result_message( $location ) {
+            return add_query_arg( 'message', $this->result_message, $location );
+        }
+
+        /**
          * Register a new action.
          *
          * @since  1.5.0
@@ -147,6 +168,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          *     @type callable $active_callback Optional. Any passed callback will receive a donation ID as its only parameter
          *                                     and should return a boolean result: TRUE if the action should be shown for
          *                                     the donation; FALSE if it should not.
+         *     @type string   $success_message Optional. Message to display when an action is successfully run.
+         *     @type string   $failure_message Optional. Message to display when an action fails to run.
          * }
          * @param  string $group  Optional. If set, action will be added to a group of other related actions, which will be
          *                        shown as an optgroup.
@@ -171,6 +194,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
             /* Register the action itself. */
             $this->actions[ $action ] = $args;
 
+            // $this->add_post_messages( $action, $args );
+
             return true;
         }
 
@@ -182,7 +207,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          * @param  string $action    The action to do.
          * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
          * @param  array  $args      Optional. Mixed set of arguments.
-         * @return mixed|WP_Error WP_Error in case of error. Mixed results if the action was performed.
+         * @return boolean|WP_Error WP_Error in case of error. Mixed results if the action was performed.
          */
         public function do_action( $action, $object_id, $args = array() ) {
             if ( ! array_key_exists( $action, $this->actions ) ) {
@@ -200,10 +225,10 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
             /**
              * Register the action's callback for the hook.
              */
-            add_action( $action_hook, $action_args['callback'], 10, 2 );
+            add_filter( $action_hook, $action_args['callback'], 10, 2 );
 
             /**
-             * Do something for this action.
+             * Do something for this action and return a boolean result.
              *
              * To find the hook for a particular action, you need to know the type of action (i.e. donation, campaign)
              * and the action key. The hook is constructed like this:
@@ -215,7 +240,21 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
              * @param int   $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
              * @param array $args      Optional. Mixed set of arguments.
              */
-            do_action( $action_hook, $object_id, $args );
+            $success = apply_filters( false, $action_hook, $object_id, $args );
+
+            if ( $success && array_key_exists( 'success_message', $action_args ) ) {
+                $this->result_message = $action_args['success_message'];
+            }
+
+            if ( ! $success && array_key_exists( 'failure_message', $action_args ) ) {
+                $this->result_message = $action_args['failure_message'];
+            }
+
+            if ( isset( $this->result_message ) ) {
+                add_action( 'redirect_post_location', array( $this, 'show_result_message' ) );
+            }
+
+            return $success;
         }
     }
 
