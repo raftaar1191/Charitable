@@ -168,8 +168,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          *     @type callable $active_callback Optional. Any passed callback will receive a donation ID as its only parameter
          *                                     and should return a boolean result: TRUE if the action should be shown for
          *                                     the donation; FALSE if it should not.
-         *     @type string   $success_message Optional. Message to display when an action is successfully run.
-         *     @type string   $failure_message Optional. Message to display when an action fails to run.
+         *     @type int      $success_message Optional. Message to display when an action is successfully run.
+         *     @type int      $failure_message Optional. Message to display when an action fails to run.
          * }
          * @param  string $group  Optional. If set, action will be added to a group of other related actions, which will be
          *                        shown as an optgroup.
@@ -193,8 +193,6 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 
             /* Register the action itself. */
             $this->actions[ $action ] = $args;
-
-            // $this->add_post_messages( $action, $args );
 
             return true;
         }
