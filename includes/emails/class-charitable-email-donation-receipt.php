@@ -150,7 +150,6 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 			return true;
 		}
 
-
 		/**
 		 * Return the recipient for the email.
 		 *
