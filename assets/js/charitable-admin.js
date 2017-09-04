@@ -342,6 +342,41 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		}
 	};
 
+	var setup_actions_form = function() {
+		var $form = $( '.charitable-actions-form-wrapper' ),
+			$select,
+			$submit,
+			$button;
+
+		if ( ! $form.length ) {
+			return;
+		}
+
+		$select = $form.find( '.charitable-action-select' );
+		$submit = $form.find( '.charitable-actions-submit' );
+		$button = $submit.find( 'button' );
+
+		$submit.hide();
+
+		$select.on( 'change', function() {
+			var action = $select.val(), 
+				text = $select.find( 'option:selected' ).data( 'button-text');
+
+			if ( '' === action ) {
+				$submit.hide();
+				return;
+			}
+
+			if ( text ) {
+				$button.text( text );
+			} else {
+				$button.text( $button.prop( 'title' ) );
+			}
+
+			$submit.show();
+		});
+	}
+
 	$(document).ready( function(){
 
 		if ( CHARITABLE_ADMIN.Datepicker ) {
@@ -364,6 +399,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		setup_charitable_toggle();	
 		setup_dashboard_widgets();
 		setup_campaign_end_date_field();
+		setup_actions_form();
 
 		$('[data-charitable-add-row]').on( 'click', function() {
 			var type = $( this ).data( 'charitable-add-row' );

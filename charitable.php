@@ -3,7 +3,7 @@
  * Plugin Name:         Charitable
  * Plugin URI:          https://www.wpcharitable.com
  * Description:         The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:             1.5.0-alpha.14
+ * Version:             1.5.0-alpha.15
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var     string
          */
-        const VERSION = '1.5.0-alpha.14';
+        const VERSION = '1.5.0-alpha.15';
 
         /**
          * Version of database schema.
@@ -240,6 +240,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
             require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
 
             /* Database */

@@ -60,7 +60,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 *
 		 * @since   1.0.0
 		 *
-		 * @param   int     $donation_id
+		 * @param   int $donation_id The donation ID.
 		 * @return  boolean
 		 */
 		public static function send_with_donation_id( $donation_id ) {
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return false;
 			}
 
-			$donation = new Charitable_Donation( $donation_id );
+			$donation = charitable_get_donation( $donation_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
 				return false;
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return false;
 			}
 
-			$email = new Charitable_Email_Donation_Receipt( array(
+			$email = new self( array(
 				'donation' => $donation,
 			) );
 
@@ -102,7 +102,52 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				$email->log( $donation_id, $sent );
 			}
 
-			return true;
+			return $sent;
+		}
+
+		/**
+		 * Resend an email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function resend( $object_id, $args = array() ) {
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
+				return false;
+			}
+
+			$email = new Charitable_Email_Donation_Receipt( array(
+				'donation' => $donation,
+			) );
+
+			$sent  = $email->send();
+
+			/**
+			 * Log that the email was sent.
+			 */
+			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
+				$email->log( $object_id, $sent );
+			}
+
+			return $sent;
+		}
+
+		/**
+		 * Checks whether an email can be resent.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function can_be_resent( $object_id, $args = array() ) {
+			return charitable_is_approved_status( get_post_status( $object_id ) );
 		}
 
 		/**

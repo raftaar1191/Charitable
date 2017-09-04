@@ -20,65 +20,76 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 	 */
 	class Charitable_Email_New_Donation extends Charitable_Email {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'new_donation';
 
 		/**
-		 * @var     boolean Whether the email allows you to define the email recipients.
-		 * @since   1.1.0
+		 * Whether the email allows you to define the email recipients.
+		 *
+		 * @since 1.1.0
+		 *
+		 * @var   boolean
 		 */
 		protected $has_recipient_field = true;
 
 		/**
-		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @since   1.0.0
+		 * Object types supported by this email.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string[] Array of supported object types (campaigns, donations, donors, etc).
 		 */
 		protected $object_types = array( 'donation' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   mixed[]  $objects
+		 * @param mixed[] $objects Array containing a Charitable_Donation object.
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
 
+			/**
+			 * Customize the name of the donation notification.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $name
+			 */
 			$this->name = apply_filters( 'charitable_email_new_donation_name', __( 'Admin: New Donation Notification', 'charitable' ) );
 		}
 
 		/**
 		 * Returns the current email's ID.
 		 *
-		 * @since   1.0.3
+		 * @since  1.0.3
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public static function get_email_id() {
 			return self::ID;
 		}
 
 		/**
-		 * Static method that is fired right after a donation is completed, sending the donation receipt.
+		 * Static method that triggers the sending of this email. Sends the receipt with the donation is marked complete.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int     $donation_id
-		 * @return  boolean
+		 * @param  int $donation_id The ID of the donation that we're sending an email about.
+		 * @return boolean
 		 */
 		public static function send_with_donation_id( $donation_id ) {
 			if ( ! charitable_get_helper( 'emails' )->is_enabled_email( self::get_email_id() ) ) {
 				return false;
 			}
 
-			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) {
+			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) { 
 				return false;
 			}
 
-			$donation = new Charitable_Donation( $donation_id );
+			$donation = charitable_get_donation( $donation_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
 				return false;
@@ -88,7 +99,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			$email = new Charitable_Email_New_Donation( array(
+			$email = new self( array(
 				'donation' => $donation,
 			) );
 
@@ -108,15 +119,60 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				$email->log( $donation_id, $sent );
 			}
 
-			return true;
+			return $sent;
+		}
+
+		/**
+		 * Resend the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function resend( $object_id, $args = array() ) {
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
+				return false;
+			}
+
+			$email = new Charitable_Email_New_Donation( array(
+				'donation' => $donation,
+			) );
+
+			$sent = $email->send();
+
+			/**
+			 * Log that the email was sent.
+			 */
+			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
+				$email->log( $object_id, $sent );
+			}
+
+			return $sent;
+		}
+
+		/**
+		 * Checks whether an email can be resent.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
+		 * @return boolean
+		 */
+		public static function can_be_resent( $object_id, $args = array() ) {
+			return charitable_is_approved_status( get_post_status( $object_id ) );
 		}
 
 		/**
 		 * Return the default recipient for the email.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_default_recipient() {
 			return get_option( 'admin_email' );
@@ -125,9 +181,9 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default subject line for the email.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_default_subject() {
 			return __( 'You have received a new donation', 'charitable' );
@@ -136,20 +192,28 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_default_headline() {
+			/**
+			 * Filter the default email headline.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string                        $headline Default headline.
+			 * @param Charitable_Email_New_Donation $email    The email object.
+			 */
 			return apply_filters( 'charitable_email_donation_receipt_default_headline', __( 'New Donation', 'charitable' ), $this );
 		}
 
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_default_body() {
 			ob_start();
@@ -158,9 +222,15 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 <p><strong>Summary</strong><br />
 [charitable_email show=donation_summary]</p>
 <?php
-			$body = ob_get_clean();
-
-			return apply_filters( 'charitable_email_new_donation_default_body', $body, $this );
+			/**
+			 * Filter the default body content.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string                        $body  Default email body content.
+			 * @param Charitable_Email_New_Donation $email The email object.
+			 */
+			return apply_filters( 'charitable_email_new_donation_default_body', ob_get_clean(), $this );
 		}
 	}
 
