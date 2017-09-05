@@ -32,9 +32,13 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		 */
 		public static function display( $atts ) {
 
-			if ( ! array_key_exists( 'campaign_id', $atts ) ) {
-		        return '';
-		    }
+			$defaults = array (
+		 		'campaign_id' => 0
+			);
+	
+			// Parse incoming $atts into an array and merge it with $defaults
+			$atts = wp_parse_args( $atts, $defaults );
+
 		    if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $atts['campaign_id'] ) ) {
 		        return '';
 		    }
