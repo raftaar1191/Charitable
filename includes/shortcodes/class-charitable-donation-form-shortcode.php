@@ -42,17 +42,24 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		    if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $atts['campaign_id'] ) ) {
 		        return '';
 		    }
+
 		    ob_start();
+
 		    if ( ! wp_script_is( 'charitable-script', 'enqueued' ) ) {
 		        Charitable_Public::get_instance()->enqueue_donation_form_scripts();
 		    }
 		    
 		    $form = charitable_get_campaign( $atts['campaign_id'] )->get_donation_form();
+
 		    do_action( 'charitable_donation_form_before', $form );
 		    
-		    $form->render();
+		    charitable_template( 'donation-form/form-donation.php', array(
+				'campaign' => $form->get_campaign(),
+				'form' => $form
+			) );
 		    
 		    do_action( 'charitable_donation_form_after', $form );
+		    
 		    return ob_get_clean();
 
 		}
