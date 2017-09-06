@@ -266,6 +266,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'shortcodes/class-charitable-campaigns-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-donors-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-my-donations-shortcode.php' );
+            require_once( $includes_path . 'shortcodes/class-charitable-donation-form-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-donation-receipt-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-login-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-registration-shortcode.php' );
