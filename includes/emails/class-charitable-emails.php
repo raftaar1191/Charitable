@@ -266,9 +266,9 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 * @param  Charitable_Email $email A `Charitable_Email` object.
 		 * @return void
 		 */
-		public function set_current_email( Charitable_Email $email ) {
-			$this->current_email = $email;
-		}
+		// public function set_current_email( Charitable_Email $email ) {
+		// 	$this->current_email = $email;
+		// }
 
 		/**
 		 * Handles the parsing of the [charitable_email] shortcode.

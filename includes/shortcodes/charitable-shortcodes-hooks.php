@@ -32,6 +32,7 @@ add_shortcode( 'charitable_my_donations', array( 'Charitable_My_Donations_Shortc
 add_shortcode( 'charitable_login',        array( 'Charitable_Login_Shortcode', 'display' ) );
 add_shortcode( 'charitable_registration', array( 'Charitable_Registration_Shortcode', 'display' ) );
 add_shortcode( 'charitable_profile',      array( 'Charitable_Profile_Shortcode', 'display' ) );
+add_shortcode( 'charitable_email',        array( 'Charitable_Email_Shortcode', 'display' ) );
 
 /**
  * Fingerprint the login form with our charitable=true hidden field.

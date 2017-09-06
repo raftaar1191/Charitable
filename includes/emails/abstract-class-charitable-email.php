@@ -478,217 +478,6 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
-		 * Return the first name of the donor.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  string
-		 */
-		public function get_donor_first_name() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donor()->get_donor_meta( 'first_name' );
-		}
-
-		/**
-		 * Return the full name of the donor.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  string
-		 */
-		public function get_donor_full_name() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donor()->get_name();
-		}
-
-		/**
-		 * Return the email of the donor.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  string
-		 */
-		public function get_donor_email() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donor()->get_email();
-		}
-
-		/**
-		 * Return the address of the donor.
-		 *
-		 * @since   1.4.0
-		 *
-		 * @return  string
-		 */
-		public function get_donor_address() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donor()->get_address();
-		}
-
-		/**
-		 * Return the donor's phone number.
-		 *
-		 * @since   1.4.0
-		 *
-		 * @return  string
-		 */
-		public function get_donor_phone() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donor()->get_donor_meta( 'phone' );
-		}
-
-		/**
-		 * Returns the donation ID.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  int
-		 */
-		public function get_donation_id() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_donation_id();
-		}
-
-		/**
-		 * Returns a summary of the donation, including all the campaigns that were donated to.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param   string           $value The content to show in place of the shortcode.
-		 * @param   mixed[]          $args  Array of optional arguments.
-		 * @param   Charitable_Email $email The email object.
-		 * @return  string
-		 */
-		public function get_donation_summary( $value, $args, $email ) {
-			if ( ! $this->has_valid_donation() ) {
-				return $value;
-			}
-
-			$output = '';
-
-			foreach ( $this->donation->get_campaign_donations() as $campaign_donation ) {
-
-				$line_item = sprintf( '%s: %s%s',
-					$campaign_donation->campaign_name,
-					charitable_format_money( $campaign_donation->amount ),
-					PHP_EOL
-				);
-
-				$output .= apply_filters( 'charitable_donation_summary_line_item_email', $line_item, $campaign_donation, $args, $email );
-
-			}
-
-			return $output;
-		}
-
-		/**
-		 * Return the total amount donated.
-		 *
-		 * @since   1.4.2
-		 *
-		 * @param 	string $value Content to show in place of shortcode.
-		 * @return  string
-		 */
-		public function get_donation_total( $value ) {
-			if ( ! $this->has_valid_donation() ) {
-				return $value;
-			}
-
-			return charitable_format_money( $this->donation->get_total_donation_amount() );
-		}
-
-		/**
-		 * Returns the date the donation was made.
-		 *
-		 * @since   1.3.0
-		 *
-		 * @param   string  $value Content to show in place of shortcode.
-		 * @param   mixed[] $args  Optional arguments.
-		 * @return  string
-		 */
-		public function get_donation_date( $value, $args ) {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			$format = isset( $args['format'] ) ? $args['format'] : get_option( 'date_format' );
-
-			return $this->donation->get_date( $format );
-		}
-
-		/**
-		 * Returns the status of the donation.
-		 *
-		 * @since   1.3.0
-		 *
-		 * @return  string
-		 */
-		public function get_donation_status() {
-			if ( ! $this->has_valid_donation() ) {
-				return '';
-			}
-
-			return $this->donation->get_status( true );
-		}
-
-		/**
-		 * Return the campaigns donated to.
-		 *
-		 * @since   1.4.2
-		 *
-		 * @param 	string $value The content to display in place of the shortcode.
-		 * @param 	array  $args  Optional set of arguments.
-		 * @return  string
-		 */
-		public function get_campaigns_for_donation( $value, $args ) {
-			if ( ! $this->has_valid_donation() ) {
-				return $value;
-			}
-
-			$linked = array_key_exists( 'with_links', $args ) ? $args['with_links'] : false;
-
-			return $this->donation->get_campaigns_donated_to( $linked );
-		}
-
-		/**
-		 * Return the categories of the campaigns that were donated to.
-		 *
-		 * @since   1.4.2
-		 *
-		 * @param 	string $value The content to display in place of the shortcode.
-		 * @return  string
-		 */
-		public function get_campaign_categories_for_donation( $value ) {
-			if ( ! $this->has_valid_donation() ) {
-				return $value;
-			}
-
-			$categories = $this->donation->get_campaign_categories_donated_to( 'campaign_category', array(
-				'fields' => 'names',
-			) );
-
-			return implode( ', ', $categories );
-		}
-
-		/**
 		 * Add donation content fields' fake data for previews.
 		 *
 		 * @since   1.0.0
@@ -1137,9 +926,27 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		public function preview() {
 			add_filter( 'charitable_email_shortcode_args', array( $this, 'set_preview_mode' ) );
 
+			/**
+			 * Do something before building the preview output.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param Charitable_Email $this Email object.
+			 */
 			do_action( 'charitable_before_preview_email', $this );
 
-			return $this->build_email();
+			$output = $this->build_email();
+
+			/**
+			 * Do something after building the preview output.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Email $this Email object.
+			 */
+			do_action( 'charitable_after_preview_email', $this );
+
+			return $output;
 		}
 
 		/**
