@@ -248,6 +248,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'emails/fields/class-charitable-email-fields.php' );
             require_once( $includes_path . 'emails/fields/class-charitable-email-fields-donation.php' );
             require_once( $includes_path . 'emails/fields/class-charitable-email-fields-campaign.php' );
+            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-user.php' );
 
             /* Database */
             require_once( $includes_path . 'db/abstract-class-charitable-db.php' );

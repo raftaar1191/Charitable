@@ -20,56 +20,57 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 	 */
 	class Charitable_Email_Password_Reset extends Charitable_Email {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'password_reset';
 
 		/**
 		 * Whether the email allows you to define the email recipients.
 		 *
-		 * @var     boolean
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   boolean
 		 */
 		protected $has_recipient_field = false;
 
 		/**
 		 * The Password Reset email is required.
 		 *
-		 * @var     boolean
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   boolean
 		 */
 		protected $required = true;
 
 		/**
 		 * The user data.
 		 *
-		 * @var     WP_User
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   WP_User
 		 */
 		protected $user;
 
 		/**
-		 * The reset link.
+		 * Array of supported object types (campaigns, donations, donors, etc).
+		 *		 
+		 * @since 1.5.0
 		 *
-		 * @var 	string|WP_Error
-		 * @since   1.4.0
+		 * @var   string[]
 		 */
-		protected $reset_link;
+		protected $object_types = array( 'user' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
-		 * @param   mixed[] $objects
+		 * @param mixed[] $objects
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
 
 			$this->name = apply_filters( 'charitable_email_password_reset_name', __( 'User: Password Reset', 'charitable' ) );
 			$this->user = isset( $objects['user'] ) ? $objects['user'] : false;
-
 		}
 
 		/**
@@ -81,89 +82,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 */
 		public static function get_email_id() {
 			return self::ID;
-		}
-
-		/**
-		 * Returns all fields that can be displayed using the [charitable_email] shortcode.
-		 *
-		 * @since   1.4.0
-		 *
-		 * @return  array
-		 */
-		public function get_fields() {
-			return apply_filters( 'charitable_email_content_fields', array(
-				'site_name' => array(
-					'description' => __( 'Your website title', 'charitable' ),
-					'callback'    => array( $this, 'get_site_name' ),
-				),
-				'site_url' => array(
-					'description' => __( 'Your website URL', 'charitable' ),
-					'callback'    => home_url(),
-				),
-				'user_login' => array(
-					'description' => __( 'The user login', 'charitable' ),
-					'callback'    => array( $this, 'get_user_login' ),
-				),
-				'reset_link' => array(
-					'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
-					'callback'    => array( $this, 'get_reset_link' ),
-				),
-			), $this );
-		}
-
-		/**
-		 * Return the reset link.
-		 *
-		 * @since   1.4.0
-		 *
-		 * @return  string|WP_Error|false If the reset key could not be generated, an error is returned.
-		 */
-		public function get_reset_link() {
-			if ( ! isset( $this->reset_link ) ) {
-
-				if ( ! is_a( $this->user, 'WP_User' ) ) {
-
-					charitable_get_deprecated()->doing_it_wrong(
-						__METHOD__,
-						__( 'Password reset link cannot be generated without a WP_User object.', 'charitable' ),
-						'1.4.0'
-					);
-
-					return '';
-
-				}
-
-				$base_url = charitable_get_permalink( 'reset_password_page' );
-				$key 	  = get_password_reset_key( $this->user );
-
-				if ( is_wp_error( $key ) ) {
-					return $key;
-				}
-
-				$this->reset_link = esc_url_raw( add_query_arg( array(
-					'key'   => $key,
-					'login' => rawurlencode( $this->user->user_login ),
-				), $base_url ) );
-
-			}
-
-			return $this->reset_link;
-		}
-
-		/**
-		 * Return the reset link.
-		 *
-		 * @since   1.4.0
-		 *
-		 * @return  string
-		 */
-		public function get_user_login() {
-			if ( ! isset( $this->user ) || ! is_a( $this->user, 'WP_User' ) ) {
-				return '';
-			}
-
-			return $this->user->user_login;
-		}
+		}	
 
 		/**
 		* Return the recipient for the email.

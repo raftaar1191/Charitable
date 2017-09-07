@@ -109,6 +109,22 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Return an instance property.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  key $property The property to return.
+		 * @return mixed
+		 */
+		public function get( $property ) {
+			if ( property_exists( $this, $property ) ) {
+				return $this->$property;
+			}
+
+			return '';
+		}
+
+		/**
 		 * Return the email name.
 		 *
 		 * @since  1.0.0
