@@ -2,11 +2,11 @@
 /**
  * Class that manages the display and processing of the reset password form.
  *
- * @package     Charitable/Classes/Charitable_Reset_Password_Form
- * @version     1.4.0
- * @author      Rafe Colton
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Reset_Password_Form
+ * @version   1.5.0
+ * @author    Rafe Colton, Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -15,66 +15,94 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 	/**
 	 * Charitable_Reset_Password_Form
 	 *
-	 * @since   1.4.0
+	 * @since 1.4.0
 	 */
 	class Charitable_Reset_Password_Form extends Charitable_Form {
 
 		/**
-		 * @var 	string
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_action = 'charitable_reset_password';
 
 		/**
-		 * @var 	string
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_name = '_charitable_reset_password_nonce';
 
 		/**
 		 * Form action.
 		 *
-		 * @var 	string
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string
 		 */
 		protected $form_action = 'reset_password';
 
 		/**
 		 * Reset key.
 		 *
-		 * @var 	string|null
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string|null
 		 */
 		protected $key;
 
 		/**
 		 * Form action.
 		 *
-		 * @var 	string|null
-		 * @since   1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string|null
 		 */
 		protected $login;
 
 		/**
+		 * Whether the reset key is available.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   boolean
+		 */
+		protected $has_key;
+
+		/**
 		 * Create class object.
 		 *
-		 * @since   1.4.0
+		 * @since 1.4.0
 		 *
-		 * @param   array $args User-defined shortcode attributes.
+		 * @param array $args User-defined shortcode attributes.
 		 */
 		public function __construct( $args = array() ) {
-			$this->id = uniqid();
-			$this->parse_reset_key();
+			$this->id      = uniqid();
+			$this->has_key = $this->parse_reset_key();
 			$this->attach_hooks_and_filters();
+		}
+
+		/**
+		 * Return whether the reset key is set correctly.
+		 *
+		 * If this returns false, the password reset will always fail so we avoid
+		 * displaying the form at all.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function has_key() {
+			return $this->has_key;
 		}
 
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.4.0
 		 *
-		 * @param 	Charitable_Form $form The form object.
-		 * @return 	void
+		 * @param  Charitable_Form $form The form object.
+		 * @return void
 		 */
 		public function add_hidden_fields( $form ) {
 			$ret = parent::add_hidden_fields( $form );
@@ -92,11 +120,15 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset password fields to be displayed.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_fields() {
+			if ( ! $this->has_key ) {
+				return array();
+			}
+
 			$fields = apply_filters( 'charitable_reset_password_fields', array(
 				'pass1' => array(
 					'label'    => __( 'New Password', 'charitable' ),
@@ -128,12 +160,11 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		/**
 		 * Reset the password.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  bool|WP_Error True: when finish. WP_Error on error
+		 * @return bool|WP_Error True: when finish. WP_Error on error
 		 */
 		public static function reset_password() {
-
 			$form = new Charitable_Reset_Password_Form();
 
 			if ( ! $form->validate_nonce() || ! $form->validate_honeypot() ) {
@@ -176,49 +207,47 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 			wp_safe_redirect( charitable_get_permalink( 'login_page' ) );
 
 			exit();
-
 		}
 
 		/**
 		 * Get the reset key and login from the cookie.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
+		 * @since  1.5.0 Returns a boolean to indicate whether the key and login are available.
 		 *
-		 * @return  void
+		 * @return boolean True if the reset key is found. False otherwise.
 		 */
 		protected function parse_reset_key() {
-
 			$this->key   = null;
 			$this->login = null;
 
 			if ( ! isset( $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ] ) ) {
-				return;
+				charitable_get_notices()->add_error( __( 'Missing password reset key.', 'charitable' ) );
+				return false;
 			}
 
 			$cookie = $_COOKIE[ 'wp-resetpass-' . COOKIEHASH ];
 
 			if ( ! strpos( $cookie, ':' ) ) {
-				return;
+				charitable_get_notices()->add_error( __( 'Missing password reset key.', 'charitable' ) );
+				return false;
 			}
 
-			$cookie_parts = explode( ':', wp_unslash( $cookie ), 2 );
-
+			$cookie_parts        = explode( ':', wp_unslash( $cookie ), 2 );
 			list( $login, $key ) = array_map( 'sanitize_text_field', $cookie_parts );
-
-			$user = check_password_reset_key( $key, $login );
+			$user                = check_password_reset_key( $key, $login );
 
 			if ( is_wp_error( $user ) ) {
-
 				charitable_get_notices()->add_errors_from_wp_error( $user );
 				Charitable_User_Management::get_instance()->set_reset_cookie();
-				return;
-
+				return false;
 			}
 
 			/* Reset key / login is correct, display reset password form with hidden key / login values */
 			$this->key   = $key;
 			$this->login = $login;
 
+			return true;
 		}
 	}
 

@@ -63,7 +63,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 
 			/* If we are using the default WordPress login process, return false. */
 			if ( wp_login_url() == $login_page ) {
-
 				charitable_get_deprecated()->doing_it_wrong(
 					__FUNCTION__,
 					__( 'Password reset link should not be called when using the default WordPress login.', 'charitable' ),
@@ -71,7 +70,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 				);
 
 				return false;
-
 			}
 
 			/* Get the base URL. */
