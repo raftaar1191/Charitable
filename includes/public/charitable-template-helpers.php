@@ -55,6 +55,26 @@ function charitable_get_template_path( $template, $default = '' ) {
 }
 
 /**
+ * Insert a particular template into an array of templates.
+ *
+ * @since  1.5.0
+ *
+ * @param  string $template  The template to be inserted.
+ * @param  array  $templates The default set of templates.
+ * @param  int    $index     The position at which to insert the template.
+ * @return array
+ */
+function charitable_splice_template( $template, $templates, $index = 1 ) {
+	if ( empty( $template ) ) {
+		return $templates;
+    }
+
+	array_splice( $templates, $index, 0, $template );
+
+	return $templates;
+}
+
+/**
  * Simple CSS compression.
  *
  * Removes all comments, removes spaces after colons and strips out all the whitespace.

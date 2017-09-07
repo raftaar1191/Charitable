@@ -478,25 +478,34 @@ if ( ! class_exists( 'Charitable' ) ) :
         /**
          * Setup the Endpoints API.
          *
-         * @since   1.5.0
+         * @since  1.5.0
          *
-         * @return  void
+         * @return void
          */
         public function setup_endpoints() {
             $api = $this->get_endpoints();
 
-            $api->register( new Charitable_Campaign_Endpoint );
+            /**
+             * The order in which we register endpoints is important, because
+             * it determines the order in which the endpoints are checked to
+             * find whether they are the current page.
+             *
+             * Any endpoint that builds on another endpoint should be registered
+             * BEFORE the endpoint it builds on. In other words, move from
+             * most specific to least specific.
+             */
             $api->register( new Charitable_Campaign_Donation_Endpoint );
             $api->register( new Charitable_Campaign_Widget_Endpoint );
+            $api->register( new Charitable_Campaign_Endpoint );
             $api->register( new Charitable_Donation_Cancellation_Endpoint );
             $api->register( new Charitable_Donation_Processing_Endpoint );
             $api->register( new Charitable_Donation_Receipt_Endpoint );
             $api->register( new Charitable_Email_Preview_Endpoint );
-            $api->register( new Charitable_Login_Endpoint );
-            $api->register( new Charitable_Forgot_Password_Endpoint );
-            $api->register( new Charitable_Profile_Endpoint );
-            $api->register( new Charitable_Reset_Password_Endpoint );
             $api->register( new Charitable_Registration_Endpoint );
+            $api->register( new Charitable_Forgot_Password_Endpoint );            
+            $api->register( new Charitable_Reset_Password_Endpoint );            
+            $api->register( new Charitable_Login_Endpoint );
+            $api->register( new Charitable_Profile_Endpoint );
 
         }
 

@@ -117,24 +117,26 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 			}
 
 			/* Prepare the email. */
-			$email      = new Charitable_Email_Password_Reset( array( 'user' => $user ) );
-			$reset_link = $email->get_reset_link();
+			$email = new Charitable_Email_Password_Reset( array( 'user' => $user ) );
+
+			/* Set up our shortcode class now so we can get the reset link. */
+			$shortcode = Charitable_Email_Shortcode::init( $email );
+			remove_action( 'charitable_before_send_email', array( 'Charitable_Email_Shortcode', 'init' ) );
+
+			/* Fetch the reset link using the shortcode. */
+			$reset_link = Charitable_Email_Shortcode::display( array( 'show' => 'reset_link' ) );
 
 			/* Make sure that the reset link was generated correctly. */
 			if ( is_wp_error( $reset_link ) ) {
-
-				charitable_get_notices()->add_errors_from_wp_error( $reset_link );
+			charitable_get_notices()->add_errors_from_wp_error( $reset_link );
 				return;
-
 			}
 
 			$sent = $email->send();
 
 			if ( ! $sent ) {
-
 				charitable_get_notices()->add_error( __( 'We were unable to send your password reset email.', 'charitable' ) );
 				return;
-
 			}
 
 			charitable_get_notices()->add_success( __( 'Your password reset request has been received. Please check your email for a link to reset your password.', 'charitable' ) );
