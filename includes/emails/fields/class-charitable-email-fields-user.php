@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
      *
      * @since 1.5.0
      */
-    class Charitable_Email_Fields_Donation extends Charitable_Email_Fields {
+    class Charitable_Email_Fields_Donation implements Charitable_Email_Fields_Interface {
 
         /**
          * The Charitable_Donation object.
@@ -110,58 +110,14 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
         }
 
         /**
-         * Get the value for a particular email field.
+         * Return fields.
          *
          * @since  1.5.0
          *
-         * @param  string $field The field.
-         * @param  array  $args  Mixed arguments.
-         * @return string
+         * @return array
          */
-        public function get_field_value( $field, $args ) {
-            $value = '';
-
-            if ( $this->preview ) {
-                return $this->get_field_preview_value( $field, $args );
-            }
-
-            if ( array_key_exists( $field, $this->fields ) ) {
-                $callback = false;
-
-                if ( array_key_exists( 'callback', $this->fields[ $field ] ) ) {
-                    $callback = $this->fields[ $field ]['callback'];
-                } elseif ( method_exists( array( $this, 'get_' . $field ) ) ) {
-                    $callback = array( $this, 'get_' . $field );
-                }
-
-                if ( is_callable( $callback ) ) {
-                    $value = call_user_func( $callback, $value, $args, $this->email );
-                }
-            }
-
-            /**
-             * Filter the returned value.
-             *
-             * @since 1.0.0
-             *
-             * @param string           $value The field value.
-             * @param array            $args  Mixed arguments.
-             * @param Charitable_Email $email The Email object.
-             */
-            return apply_filters( 'charitable_email_content_field_value_' . $field, $value, $args, $this->email );
-        }
-
-        /**
-         * Return the field preview value.
-         *
-         * @since  1.5.0
-         *
-         * @param  string $field The field to search for.
-         * @param  array  $args  Mixed arguments.
-         * @return string
-         */
-        public function get_field_preview_value( $field, $args ) {
-               
+        public function get_fields() {
+            return $this->fields;
         }
 
         /**

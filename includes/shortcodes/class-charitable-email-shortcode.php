@@ -27,25 +27,16 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
          *
          * @var   Charitable_Email_Shortcode
          */
-        private $instance;
+        private static $instance;
 
         /**
-         * Email object.
+         * The `Charitable_Email_Fields` instance.
          *
          * @since 1.5.0
          *
-         * @var   Charitable_Email
+         * @var   Charitable_Email_Fields
          */
-        private $email;
-
-        /**
-         * Whether this is an email preview.
-         *
-         * @since 1.5.0
-         *
-         * @var   boolean
-         */
-        private $preview;
+        private $fields;
 
         /**
          * Set up class instance.
@@ -92,7 +83,7 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
          * @return void
          */
         public static function flush() {
-            unset( Charitable_Email_Shortcode::$instance );
+            self::$instance = null;
         }
 
         /**
@@ -115,7 +106,8 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
             }
 
             $defaults = array(
-                'show' => '',
+                'show'    => '',
+                'preview' => self::$instance->fields->is_preview(),
             );
 
             $args = apply_filters( 'charitable_email_shortcode_args', wp_parse_args( $atts, $defaults ), $atts, $defaults );

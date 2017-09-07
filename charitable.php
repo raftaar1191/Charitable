@@ -232,7 +232,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'gateways/class-charitable-gateway-offline.php' );
             require_once( $includes_path . 'gateways/class-charitable-gateway-paypal.php' );
 
-            /* Emails */
+            /* Emails */            
             require_once( $includes_path . 'emails/interface-charitable-email.php' );
             require_once( $includes_path . 'emails/class-charitable-emails.php' );
             require_once( $includes_path . 'emails/abstract-class-charitable-email.php' );
@@ -241,8 +241,13 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
             require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
             require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );            
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
+
+            require_once( $includes_path . 'emails/fields/interface-charitable-email-fields.php' );
+            require_once( $includes_path . 'emails/fields/class-charitable-email-fields.php' );
+            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-donation.php' );
+            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-campaign.php' );
 
             /* Database */
             require_once( $includes_path . 'db/abstract-class-charitable-db.php' );
@@ -270,7 +275,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'shortcodes/class-charitable-donation-receipt-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-login-shortcode.php' );
             require_once( $includes_path . 'shortcodes/class-charitable-registration-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );
+            require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );   
+            require_once( $includes_path . 'shortcodes/class-charitable-email-shortcode.php' );
             require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
 
             /* Widgets */

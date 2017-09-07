@@ -36,13 +36,6 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		private $emails;
 
 		/**
-		 * The email currently being rendered.
-		 *
-		 * @var Charitable_Email
-		 */
-		private $current_email;
-
-		/**
 		 * Set up the class.
 		 *
 		 * Note that the only way to instantiate an object is with the charitable_start method,
@@ -52,10 +45,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 * @since 1.0.0
 		 */
 		private function __construct() {
-			/* Register email shortcode */
-			add_shortcode( 'charitable_email', array( $this, 'email_shortcode' ) );
-
-			/* 3rd party hook for overriding anything we've done above. */
+			/* 3rd party hook for overriding anything we've done so far. */
 			do_action( 'charitable_emails_start', $this );
 		}
 
@@ -237,59 +227,6 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		 */
 		public function is_enabled_email( $email_id ) {
 			return array_key_exists( $email_id, $this->get_enabled_emails() );
-		}
-
-		/**
-		 * Register email settings fields.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  array            $settings Settings for this email.
-		 * @param  Charitable_Email $email    The email's helper object.
-		 * @return array
-		 */
-		public function register_email_settings( $settings, Charitable_Email $email ) {
-			add_filter( 'charitable_settings_fields_emails_email_' . $email->get_email_id(), array( $email, 'add_recipients_field' ) );
-
-			return $email->email_settings( $settings );
-		}
-
-		/**
-		 * Set the email currently being rendered/sent.
-		 *
-		 * This is executed before an email is prepared for send/preview. Setting
-		 * the email is required in order to allow the shortcode function (below)
-		 * to gather the correct information to display.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  Charitable_Email $email A `Charitable_Email` object.
-		 * @return void
-		 */
-		// public function set_current_email( Charitable_Email $email ) {
-		// 	$this->current_email = $email;
-		// }
-
-		/**
-		 * Handles the parsing of the [charitable_email] shortcode.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  mixed[] $atts Mixed shortcode attributes.
-		 * @return string
-		 */
-		public function email_shortcode( $atts = array() ) {
-			$defaults = array(
-				'show' => '',
-			);
-
-			$args = apply_filters( 'charitable_email_shortcode_args', wp_parse_args( $atts, $defaults ), $atts, $defaults );
-
-			if ( ! isset( $args['show'] ) ) {
-				return '';
-			}
-
-			return $this->current_email->get_value( $args['show'], $args );
 		}
 
 		/**

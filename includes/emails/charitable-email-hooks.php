@@ -66,18 +66,8 @@ add_action( 'charitable_enable_email', array( Charitable_Emails::get_instance(),
 add_action( 'charitable_disable_email', array( Charitable_Emails::get_instance(), 'handle_email_settings_request' ) );
 
 /**
- * Set the current email before sending or previewing an email.
- *
- * @see Charitable_Email_Shortcode::init()
- */
-add_action( 'charitable_before_send_email', array( Charitable_Email_Shortcode::get_instance(), 'init' ) );
-add_action( 'charitable_before_preview_email', array( Charitable_Email_Shortcode::get_instance(), 'init_preview' ) );
-add_action( 'charitable_after_send_email', array( Charitable_Email_Shortcode::get_instance(), 'flush' ) );
-add_action( 'charitable_after_preview_email', array( Charitable_Email_Shortcode::get_instance(), 'flush' ) );
-
-/**
  * Register an email's settings.
  *
  * @see Charitable_Emails::register_email_settings()
  */
-add_filter( 'charitable_settings_fields_emails_email', array( Charitable_Emails::get_instance(), 'register_email_settings' ), 10, 2 );
+// add_filter( 'charitable_settings_fields_emails_email', array( Charitable_Emails::get_instance(), 'register_email_settings' ), 10, 2 );
