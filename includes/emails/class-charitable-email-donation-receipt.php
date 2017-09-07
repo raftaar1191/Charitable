@@ -158,7 +158,7 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * @return  string
 		 */
 		public function get_recipient() {
-			if ( ! $this->has_valid_donation() ) {
+			if ( ! is_a( $this->donation, 'Charitable_Donation' ) ) {
 				return '';
 			}
 
