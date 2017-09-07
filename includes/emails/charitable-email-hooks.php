@@ -64,10 +64,3 @@ add_action( 'charitable_campaign_end', array( 'Charitable_Email_Campaign_End', '
  */
 add_action( 'charitable_enable_email', array( Charitable_Emails::get_instance(), 'handle_email_settings_request' ) );
 add_action( 'charitable_disable_email', array( Charitable_Emails::get_instance(), 'handle_email_settings_request' ) );
-
-/**
- * Register an email's settings.
- *
- * @see Charitable_Emails::register_email_settings()
- */
-// add_filter( 'charitable_settings_fields_emails_email', array( Charitable_Emails::get_instance(), 'register_email_settings' ), 10, 2 );
