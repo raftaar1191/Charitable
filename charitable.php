@@ -225,22 +225,15 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'currency/charitable-currency-functions.php' );
             require_once( $includes_path . 'currency/class-charitable-currency.php' );
 
-             /* Database */
-            require_once( $includes_path . 'db/class-charitable-campaign-donations-db.php' );
-            require_once( $includes_path . 'db/class-charitable-donors-db.php' );
-
-            /* Deprecated */
-            require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
-            require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
-
-            /* Donations */    
+            /* Donations */
+            require_once( $includes_path . 'donations/abstract-charitable-donation.php' );            
             require_once( $includes_path . 'donations/class-charitable-donation-processor.php' );
             require_once( $includes_path . 'donations/class-charitable-donation.php' );
             require_once( $includes_path . 'donations/class-charitable-donation-factory.php' );
             require_once( $includes_path . 'donations/class-charitable-donations.php' );            
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
             require_once( $includes_path . 'donations/charitable-donation-functions.php' );
-            
+
             /* Emails */            
             require_once( $includes_path . 'emails/class-charitable-emails.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
