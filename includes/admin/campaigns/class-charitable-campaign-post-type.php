@@ -150,6 +150,8 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 			$meta_boxes = apply_filters( 'charitable_campaign_meta_boxes', $meta_boxes );
 
+			echo '<pre>'; var_dump( $meta_boxes ); echo '</pre>';
+
 			foreach ( $meta_boxes as $meta_box ) {
 				add_meta_box(
 					$meta_box['id'],

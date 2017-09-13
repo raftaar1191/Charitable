@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * If the view is not found, an Exception will be thrown.
  *
- * Example usage: charitable_admin_view('metaboxes/cause-metabox');
+ * Example usage: charitable_admin_view('metaboxes/campaign-title');
  *
  * @since   1.0.0
  *
@@ -28,7 +28,18 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return 	void
  */
 function charitable_admin_view( $view, $view_args = array() ) {
-	$filename = apply_filters( 'charitable_admin_view_path', charitable()->get_path( 'admin' ) . 'views/' . $view . '.php', $view, $view_args );
+	$base_path = array_key_exists( 'base_path', $view_args ) ? $view_args['base_path'] : charitable()->get_path( 'admin' ) . 'views/';	
+
+	/**
+	 * Filter the path to the view.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $path      The default path.
+	 * @param string $view      The view.
+	 * @param array  $view_args View args.
+	 */
+	$filename  = apply_filters( 'charitable_admin_view_path', $base_path . $view . '.php', $view, $view_args );
 
 	if ( ! is_readable( $filename ) ) {
 		charitable_get_deprecated()->doing_it_wrong(

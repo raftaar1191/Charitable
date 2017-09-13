@@ -2,11 +2,11 @@
 /**
  * Donation form model class.
  *
- * @version     1.0.0
- * @package     Charitable/Classes/Charitable_Donation_Form
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @version   1.5.0
+ * @package   Charitable/Classes/Charitable_Donation_Form
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly.
@@ -77,13 +77,15 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Create a donation form object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
+		 * @since 1.5.0 $campaign argument became optional. Previously it was required.
 		 *
-		 * @param   Charitable_Campaign $campaign Campaign receiving the donation.
+		 * @param Charitable_Campaign|null $campaign Optional. Campaign receiving the donation, or NULL if 
+		 *                                           the campaign will be selected in the form.
 		 */
-		public function __construct( Charitable_Campaign $campaign ) {
+		public function __construct( Charitable_Campaign $campaign = null ) {
 			$this->campaign = $campaign;
-			$this->id = uniqid();
+			$this->id       = uniqid();
 
 			$this->attach_hooks_and_filters();
 		}
@@ -111,9 +113,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the campaign associated with this donation form object.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
+		 * @since  1.5.0 May now return NULL when the donation form was set up without a campaign.
 		 *
-		 * @return  Charitable_Campaign
+		 * @return Charitable_Campaign|null
 		 */
 		public function get_campaign() {
 			return $this->campaign;
@@ -124,7 +127,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since   1.0.0
 		 *
-		 * @return  Charitable_User|false   Object if the user is logged in. False otherwise.
+		 * @return  Charitable_User|false Object if the user is logged in. False otherwise.
 		 */
 		public function get_user() {
 			if ( ! isset( $this->user ) ) {
@@ -466,7 +469,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return  array[]
 		 */
 		public function maybe_show_current_donation_amount( $fields ) {
-
 			if ( ! $this->get_campaign() ) {
 				return $fields;
 			}
@@ -517,7 +519,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		public function render() {
 			charitable_template( 'donation-form/form-donation.php', array(
 				'campaign' => $this->get_campaign(),
-				'form' => $this,
+				'form'     => $this,
 			) );
 		}
 
@@ -534,10 +536,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				return false;
 			}
 
-			$hidden_fields = array(
-				'campaign_id' => $this->campaign->ID,
-				'description' => get_the_title( $this->campaign->ID ),
-			);
+			$hidden_fields = array();
+
+			if ( ! is_null( $this->campaign ) ) {
+				$hidden_fields['campaign_id'] = $this->campaign->ID;
+				$hidden_fields['description'] = get_the_title( $this->campaign->ID );
+			}
 
 			if ( isset( $_GET['donation_id'] ) ) {
 				$hidden_fields['ID'] = $_GET['donation_id'];
