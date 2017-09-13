@@ -25,44 +25,65 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Temporary, unique ID of this form.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $id;
 
 		/**
 		 * Nonce action.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_action = 'charitable_form';
 
 		/**
 		 * Nonce name.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_name = '_charitable_form_nonce';
 
 		/**
 		 * Form action.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $form_action;
 
 		/**
 		 * Errors with the form submission.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $errors = array();
 
 		/**
 		 * Submitted values.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $submitted;
+
+		/**
+		 * Form View.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   Charitable_Form_View_Interface
+		 */
+		protected $view;
 
 		/**
 		 * Set up callbacks for actions and filters.
@@ -76,6 +97,33 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
 			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
 			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+		}
+
+		/**
+		 * Set the Form View object.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  Charitable_Form_View_Interface $form_view An object implementing theCharitable_Form_View_Interface.
+		 * @return void
+		 */
+		public function set_form_view( Charitable_Form_View_Interface $form_view ) {
+			$this->view = $form_view;
+		}
+
+		/**
+		 * Return the Form_View object for this form.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return Charitable_Form_View_Interface
+		 */
+		public function view() {
+			if ( ! isset( $this->view ) ) {
+				$this->view = new Charitable_Public_Form_View( $this );
+			}
+
+			return $this->view;
 		}
 
 		/**
@@ -200,140 +248,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			}
 
 			return $increment;
-		}
-
-		/**
-		 * Render a form field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array 		    $field     Field definition.
-		 * @param 	string 		    $key       Field key.
-		 * @param 	Charitable_Form $form      The form object.
-		 * @param 	int 			$index     The current index.
-		 * @param 	string 			$namespace Namespace for the form field's name attribute.
-		 * @return 	boolean False if the field was not rendered. True otherwise.
-		 */
-		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			if ( ! isset( $field['type'] ) ) {
-				return false;
-			}
-
-			$input_name   = is_null( $namespace ) ? $key : $namespace . '[' . $key . ']';
-			$field['key'] = apply_filters( 'charitable_form_field_key', $input_name, $key, $namespace, $form, $index );
-
-			/* Set default attributes array. */
-			if ( ! isset( $field['attrs'] ) ) {
-				$field['attrs'] = array();
-			}
-
-			/* Allows extensions/themes to plug in their own template objects here. */
-			$template = apply_filters( 'charitable_form_field_template', false, $field, $form, $index );
-
-			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
-			if ( ! $this->is_valid_template( $template ) ) {
-				$template = new Charitable_Template( $this->get_template_name( $field ), false );
-			}
-
-			if ( ! $template->template_file_exists() ) {
-				return false;
-			}
-
-			$template->set_view_args( array(
-				'form' 		=> $this,
-				'field' 	=> $field,
-				'classes'	=> $this->get_field_classes( $field, $index ),
-			) );
-
-			$template->render();
-
-			return true;
-		}
-
-		/**
-		 * Return the template name used for this field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array $field Field definition.
-		 * @return 	string
-		 */
-		public function get_template_name( $field ) {
-			if ( $this->use_default_field_template( $field['type'] ) ) {
-				$template_name = 'form-fields/default.php';
-			} else {
-				$template_name = 'form-fields/' . $field['type'] . '.php';
-			}
-
-			return apply_filters( 'charitable_form_field_template_name', $template_name );
-		}
-
-		/**
-		 * Return classes that will be applied to the field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array $field Field definition.
-		 * @param 	int   $index Field index.
-		 * @return 	string
-		 */
-		public function get_field_classes( $field, $index = 0 ) {
-			if ( 'hidden' == $field['type'] ) {
-				return;
-			}
-
-			$classes = $this->get_field_type_classes( $field['type'] );
-
-			if ( isset( $field['class'] ) ) {
-				$classes[] = $field['class'];
-			}
-
-			if ( isset( $field['required'] ) && $field['required'] ) {
-				$classes[] = 'required-field';
-			}
-
-			if ( isset( $field['fullwidth'] ) && $field['fullwidth'] ) {
-				$classes[] = 'fullwidth';
-			} elseif ( $index > 0 ) {
-				$classes[] = $index % 2 ? 'odd' : 'even';
-			}
-
-			$classes = apply_filters( 'charitable_form_field_classes', $classes, $field, $index );
-
-			return implode( ' ', $classes );
-		}
-
-		/**
-		 * Return array of classes based on the field type.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	string $type Type of field.
-		 * @return  string[]
-		 */
-		public function get_field_type_classes( $type ) {
-			$classes = array();
-
-			switch ( $type ) {
-
-				case 'paragraph' :
-					$classes[] = 'charitable-form-content';
-					break;
-
-				case 'fieldset' :
-					$classes[] = 'charitable-fieldset';
-					break;
-
-				default :
-					$classes[] = 'charitable-form-field';
-					$classes[] = 'charitable-form-field-' . $type;
-			}
-
-			return $classes;
 		}
 
 		/**
@@ -614,6 +528,41 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 
 			return $overrides;
 
+		}
+
+		/**
+		 * Render a form field.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  array           $field     Field definition.
+		 * @param  string          $key       Field key.
+		 * @param  Charitable_Form $form      The form object.
+		 * @param  int             $index     The current index.
+		 * @param  string         $namespace Namespace for the form field's name attribute.
+		 * @return boolean False if the field was not rendered. True otherwise.
+		 */
+		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
+			return $form->view()->render_field( $field, $key, array(
+				'index'     => $index,
+				'namespace' => $namespace,
+			) );
+		}
+
+		/**
+		 * Return the template name used for this field.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  array $field Field definition.
+		 * @return string
+		 */
+		public function get_template_name( $field ) {
+			return $form->view()->get_template_name( $field );			
 		}
 
 		/**

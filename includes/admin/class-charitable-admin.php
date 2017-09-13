@@ -92,6 +92,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
 
 			/* Donations */			
+			require_once( $admin_dir . 'donations/class-charitable-admin-donation-form.php' );
 			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
 			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );

@@ -179,10 +179,6 @@ if ( ! class_exists( 'Charitable' ) ) :
         private function load_dependencies() {
             $includes_path = $this->get_path( 'includes' );
 
-            /* Abstracts */
-            require_once( $includes_path . 'abstracts/class-charitable-form.php' );
-            require_once( $includes_path . 'abstracts/class-charitable-query.php' );
-
             /* Functions & Core Classes */
             require_once( $includes_path . 'charitable-core-functions.php' );           
             require_once( $includes_path . 'class-charitable-locations.php' );
@@ -206,24 +202,33 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'currency/class-charitable-currency.php' );
 
             /* Donations */
-            require_once( $includes_path . 'donations/abstract-charitable-donation.php' );
-            require_once( $includes_path . 'donations/interface-charitable-donation-form.php' );
+            require_once( $includes_path . 'donations/abstract-charitable-donation.php' );            
             require_once( $includes_path . 'donations/class-charitable-donation-processor.php' );
             require_once( $includes_path . 'donations/class-charitable-donation.php' );
             require_once( $includes_path . 'donations/class-charitable-donation-factory.php' );
-            require_once( $includes_path . 'donations/class-charitable-donations.php' );
-            require_once( $includes_path . 'donations/class-charitable-donations-query.php' );
-            require_once( $includes_path . 'donations/class-charitable-donation-form.php' );
-            require_once( $includes_path . 'donations/class-charitable-donation-amount-form.php' );
+            require_once( $includes_path . 'donations/class-charitable-donations.php' );            
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
             require_once( $includes_path . 'donations/charitable-donation-functions.php' );
+
+            /* Forms */
+            require_once( $includes_path . 'forms/interface-charitable-donation-form.php' );
+            require_once( $includes_path . 'forms/abstract-class-charitable-form.php' );            
+            require_once( $includes_path . 'forms/class-charitable-donation-form.php' );
+            require_once( $includes_path . 'forms/class-charitable-donation-amount-form.php' );
+            require_once( $includes_path . 'forms/views/interface-charitable-form-view.php' );
+            require_once( $includes_path . 'forms/views/class-charitable-public-form-view.php' );
+            require_once( $includes_path . 'forms/views/class-charitable-admin-form-view.php' );
+
+            /* Queries */
+            require_once( $includes_path . 'queries/abstract-class-charitable-query.php' );
+            require_once( $includes_path . 'queries/class-charitable-donations-query.php' );
+            require_once( $includes_path . 'queries/class-charitable-donor-query.php' );            
 
             /* Users */
             require_once( $includes_path . 'users/charitable-user-functions.php' );
             require_once( $includes_path . 'users/class-charitable-user.php' );
             require_once( $includes_path . 'users/class-charitable-roles.php' );
-            require_once( $includes_path . 'users/class-charitable-donor.php' );
-            require_once( $includes_path . 'users/class-charitable-donor-query.php' );
+            require_once( $includes_path . 'users/class-charitable-donor.php' );            
 
             /* Gateways */
             require_once( $includes_path . 'gateways/interface-charitable-gateway.php' );

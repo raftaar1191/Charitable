@@ -8,18 +8,8 @@
  * @since       1.2.0
  */
 
-global $post;
-
-if ( ! isset( $view_args['meta_key'] ) ) {
-	return;
-}
-
-$key = $view_args['meta_key'];
-$custom_keys = get_post_custom_keys( $post->ID );
-$value = $custom_keys && in_array( $key, $custom_keys ) ? get_post_meta( $post->ID, $key, true ) : $view_args['default'];
-
-$id = ltrim( $key, '_' );
-$id = str_replace( '_', '-', $id );
+$id         = ltrim( $view_args['key'], '_' );
+$id         = str_replace( '_', '-', $id );
 $wrapper_id = 'charitable-' . $id . '-wrap';
 
 ?>
@@ -29,6 +19,6 @@ $wrapper_id = 'charitable-' . $id . '-wrap';
 	<?php endif ?>
 	<input type="text" 
 		id="<?php echo $id ?>" 
-		name="<?php echo esc_attr( $key ) ?>"
-		value="<?php echo esc_attr( $value ) ?>" />    
+		name="<?php echo esc_attr( $view_args['key'] ) ?>"
+		value="<?php echo esc_attr( $view_args['value'] ) ?>" />    
 </div>

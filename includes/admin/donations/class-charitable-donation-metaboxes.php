@@ -114,6 +114,59 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 * @return array
 		 */
 		private function get_meta_boxes() {
+			$screen = get_current_screen();
+
+			if ( 'donation' == $screen->post_type && 'add' == $screen->action ) {
+				$meta_boxes = $this->get_form_meta_box();
+			} else {
+				$meta_boxes = $this->get_view_meta_boxes();
+			}
+
+			/**
+			 * Filter the meta boxes to be displayed on a donation overview page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $meta_boxes The array of meta boxes and their details.
+			 */
+			return apply_filters( 'charitable_donation_meta_boxes', $meta_boxes );
+		}
+
+		/**
+		 * Return the form meta box.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_form_meta_box() {
+			$meta_boxes = array(
+				'donation-form' => array(
+					'title'    => __( 'Donation Form', 'charitable' ),
+					'context'  => 'normal',
+					'priority' => 'high',
+					'view'     => 'metaboxes/donation/donation-form',
+				),
+			);
+
+			/**
+			 * Filter the meta boxes to be displayed on a donation add/edit page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $meta_boxes The array of meta boxes and their details.
+			 */
+			return apply_filters( 'charitable_donation_form_meta_boxes', $meta_boxes );
+		}
+
+		/**
+		 * Return the view meta boxes.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_view_meta_boxes() {
 			global $post;
 
 			$meta_boxes = array(
@@ -151,11 +204,11 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 			/**
 			 * Filter the meta boxes to be displayed on a donation overview page.
 			 *
-			 * @since 1.0.0
+			 * @since 1.5.0
 			 *
 			 * @param array $meta_boxes The array of meta boxes and their details.
 			 */
-			return apply_filters( 'charitable_donation_meta_boxes', $meta_boxes );
+			return apply_filters( 'charitable_donation_view_meta_boxes', $meta_boxes );
 		}
 
 		/**
