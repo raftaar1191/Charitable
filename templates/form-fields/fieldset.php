@@ -17,30 +17,18 @@ $field 	 = $view_args['field'];
 $classes = $view_args['classes'];
 $fields  = isset( $field['fields'] ) ? $field['fields'] : array();
 
-if ( count( $fields ) ) :
+if ( ! count( $fields ) ) :
+	return;
+endif;
 
 ?>
 <fieldset class="<?php echo $classes ?>">
 	<?php
 	if ( isset( $field['legend'] ) ) : ?>
-
 		<div class="charitable-form-header"><?php echo $field['legend'] ?></div>
-
 	<?php
 	endif;
 
-	$i = 1;
-
-	foreach ( $fields as $key => $fieldset_field ) :
-
-		do_action( 'charitable_form_field', $fieldset_field, $key, $form, $i );
-
-		$i += apply_filters( 'charitable_form_field_increment', 1, $fieldset_field, $key, $form );
-
-	endforeach;
-
+	$form->view()->render_fields( $fields );
 	?>
 </fieldset>
-<?php
-
-endif;
