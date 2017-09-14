@@ -95,8 +95,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
 			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
-			// add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-			// add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 		}
 
 		/**
@@ -136,6 +134,16 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 */
 		public function is_current_form( $id ) {
 			return $id === $this->id;
+		}
+
+		/**
+		 * Return the form fields.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_fields() {
 		}
 
 		/**
@@ -208,42 +216,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			<?php
 
 			return true;
-		}
-
-		/**
-		 * Set how much the index should be incremented by.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	int   $increment The number the index should be incremented by.
-		 * @param 	array $field     The field definition.
-		 * @return  int
-		 */
-		public function increment_index( $increment, $field ) {			
-            /**
-             * Remove form's hooked filter.
-             *
-             * Before 1.5, forms used the filter to set the increment level. For
-             * backwards-compatibility purposes, we still provide this method in the
-             * form class, but it calls the Form View. This method shoud
-             * default in the form abstract, but remove it when this function
-             * is called directly.
-             */
-            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
-
-			return $this->view()->increment_index( $field );			
-		}
-
-		/**
-		 * Whether the given field type can use the default field template.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  string $field_type Type of field.
-		 * @return boolean
-		 */
-		protected function use_default_field_template( $field_type ) {
-			return $this->view()->use_default_field_template( $field_type );			
 		}
 
 		/**
@@ -564,13 +536,76 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Checks whether a template is valid.
 		 *
-		 * @since   1.0.0
+		 * @deprecated
 		 *
-		 * @param 	mixed $template Template we're checking.
-		 * @return  boolean
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  mixed $template Template we're checking.
+		 * @return boolean
 		 */
 		protected function is_valid_template( $template ) {
-			return is_object( $template ) && is_a( $template, 'Charitable_Template' );
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::is_valid_template()'
+			);
+
+			return $this->view()->is_valid_template( $template );
+		}
+
+		/**
+		 * Set how much the index should be incremented by.
+		 *
+		 * @deprecated
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  int   $increment The number the index should be incremented by.
+		 * @param  array $field     The field definition.
+		 * @return int
+		 */
+		public function increment_index( $increment, $field ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::increment_index()'
+			);
+
+            /**
+             * Remove form's hooked filter.
+             *
+             * Before 1.5, forms used the filter to set the increment level. For
+             * backwards-compatibility purposes, we still provide this method in the
+             * form class, but it calls the Form View. This method shoud
+             * default in the form abstract, but remove it when this function
+             * is called directly.
+             */
+            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+
+			return $this->view()->increment_index( $field );			
+		}
+
+		/**
+		 * Whether the given field type can use the default field template.
+		 *
+		 * @deprecated
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0
+		 *
+		 * @param  string $field_type Type of field.
+		 * @return boolean
+		 */
+		protected function use_default_field_template( $field_type ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::use_default_field_template()'
+			);
+
+			return $this->view()->use_default_field_template( $field_type );			
 		}
 	}
 
