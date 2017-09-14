@@ -33,6 +33,15 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         protected $form;
 
         /**
+         * List of custom field templates.
+         *
+         * @since 1.5.0
+         *
+         * @var   array
+         */
+        protected $custom_field_templates;
+
+        /**
          * Set up view instance.
          *
          * @since  1.5.0
@@ -40,7 +49,22 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @param Charitable_Form $form Form object.
          */
         public function __construct( Charitable_Form $form ) {
-            $this->form = $form;
+            $this->form                   = $form;
+            $this->custom_field_templates = $this->init_custom_field_templates();
+        }
+
+        /**
+         * Register a custom field template.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $field_type The type of field we are registering this template for.
+         * @param  string $class      The template class name.
+         * @param  string $path       The path to the template.
+         * @return void
+         */
+        public function register_custom_field_template( $field_type, $class, $path ) {
+            $this->custom_field_templates[ $field_type ] = array( 'class' => $class, 'path' => $path );
         }
 
         /**
@@ -183,6 +207,8 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @return Charitable_Template|false Returns a template if the template file exists. If it doesn't returns false.
          */
         public function get_field_template( $field, $index ) {
+            $template = $this->get_custom_template( $field['type'] );
+
             /**
              * Filter the template to be used for the form.
              *
@@ -195,8 +221,8 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
              * @param array                     $field    Field definition.
              * @param Charitable_Form           $form     The Charitable_Form object.
              * @param int                       $index    The current index.
-             */
-            $template = apply_filters( 'charitable_form_field_template', false, $field, $this->form, $index );
+             */            
+            $template = apply_filters( 'charitable_form_field_template', $template, $field, $this->form, $index );
 
             /* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
             if ( ! $this->is_valid_template( $template ) ) {
@@ -208,6 +234,30 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             }
 
             return $template;
+        }
+
+        /**
+         * Return a custom template for a particular field.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $field_type The type of field.
+         * @return false|Charitable_Template False if there is no matching custom template.
+         */
+        public function get_custom_template( $field_type ) {
+            if ( ! array_key_exists( $field_type, $this->custom_field_templates ) ) {
+                return false;
+            }
+
+            $class = $this->custom_field_templates[ $field_type ]['class'];
+            $path  = $this->custom_field_templates[ $field_type ]['path'];
+
+            /* Final sanity check to make sure the template class exists. */
+            if ( ! class_exists( $class ) ) {
+                return false;
+            }
+
+            return new $class( $path, false );
         }
 
         /**
@@ -393,6 +443,42 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 
             return true;
         }
+
+        /**
+         * Set up custom field templates.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        protected function init_custom_field_templates() {
+            /**
+             * Filter the custom field templates.
+             *
+             * @since 1.5.0
+             */
+            $templates = apply_filters( 'charitable_public_form_view_custom_field_templates', array(
+                'donation-amount' => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donation-amount.php' ),
+                'donor-fields'    => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donor-fields.php' ),
+                'gateway-fields'  => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/gateway-fields.php' ),
+                'cc-expiration'   => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/cc-expiration.php' ),
+            ) );
+
+            return array_filter( $templates, array( $this, 'sanitize_custom_field_template' ) );
+        }
+
+        /**
+         * Filter custom field templates to make sure they all have a class and path.
+         *
+         * @since  1.5.0
+         *
+         * @param  array $template The registered template.
+         * @return boolean
+         */
+        protected function sanitize_custom_field_template( $template ) {
+            return is_array( $template ) && array_key_exists( 'path', $template ) && array_key_exists( 'class', $template );
+        }
+
     }
 
 endif; // End interface_exists check.
