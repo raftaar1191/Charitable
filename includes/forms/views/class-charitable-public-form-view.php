@@ -287,6 +287,18 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         }
 
         /**
+         * Checks whether a template is valid.
+         *
+         * @since  1.5.0
+         *
+         * @param  mixed $template Template we're checking.
+         * @return boolean
+         */
+        public function is_valid_template( $template ) {
+            return is_object( $template ) && is_a( $template, 'Charitable_Template' );
+        }
+
+        /**
          * Whether the given field type can use the default field template.
          *
          * @since  1.5.0
@@ -310,18 +322,6 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             ) );
 
             return in_array( $field_type, $default_field_types );
-        }
-
-        /**
-         * Checks whether a template is valid.
-         *
-         * @since  1.5.0
-         *
-         * @param  mixed $template Template we're checking.
-         * @return boolean
-         */
-        protected function is_valid_template( $template ) {
-            return is_object( $template ) && is_a( $template, 'Charitable_Template' );
         }
 
         /**

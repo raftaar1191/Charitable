@@ -287,7 +287,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             return $this->post_custom_keys;
         }
 
-
         /**
          * Return the key for a particular field.
          *
@@ -367,7 +366,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return false|Charitable_Template False if there is no matching custom template.
          */
         public function get_custom_template( $field_type ) {
-
             if ( ! array_key_exists( $field_type, $this->custom_field_templates ) ) {
                 return false;
             }
