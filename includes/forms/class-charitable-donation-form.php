@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 	/**
 	 * Charitable_Donation_Form
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Donation_Form extends Charitable_Form implements Charitable_Donation_Form_Interface {
 
@@ -88,24 +88,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$this->id       = uniqid();
 
 			$this->attach_hooks_and_filters();
-		}
-
-		/**
-		 * Set up callbacks for actions and filters.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  void
-		 */
-		protected function attach_hooks_and_filters() {
-			parent::attach_hooks_and_filters();
-
-			add_filter( 'charitable_form_field_template', array( $this, 'use_custom_templates' ), 10, 2 );
-			add_filter( 'charitable_donation_form_donation_fields', array( $this, 'maybe_show_current_donation_amount' ), 1 );
-			add_filter( 'charitable_donation_form_gateway_fields', array( $this, 'add_credit_card_fields' ), 10, 2 );
-			add_filter( 'charitable_donation_form_user_fields', array( $this, 'hide_non_required_user_fields' ) );
-			add_action( 'charitable_donation_form_after_user_fields', array( $this, 'add_password_field' ) );
-
 			$this->setup_payment_fields();
 			$this->check_test_mode();
 		}
@@ -125,9 +107,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the current user.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  Charitable_User|false Object if the user is logged in. False otherwise.
+		 * @return Charitable_User|false Object if the user is logged in. False otherwise.
 		 */
 		public function get_user() {
 			if ( ! isset( $this->user ) ) {
@@ -141,11 +123,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the set value for a particular user field.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $key
-		 * @param   string $default Optional. The value that will be used if none is set.
-		 * @return  mixed
+		 * @param  string $key
+		 * @param  string $default Optional. The value that will be used if none is set.
+		 * @return mixed
 		 */
 		public function get_user_value( $key, $default = '' ) {
 			if ( isset( $_POST[ $key ] ) ) {
@@ -171,131 +153,134 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the fields related to the person making the donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_user_fields() {
-			$user_fields = apply_filters( 'charitable_donation_form_user_fields', array(
+			$fields = array(
 				'first_name' => array(
-					'label'     => __( 'First name', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 4,
-					'value'     => $this->get_user_value( 'first_name' ),
-					'required'  => true,
+					'label'                 => __( 'First name', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 4,
+					'value'                 => $this->get_user_value( 'first_name' ),
+					'required'              => true,
 					'requires_registration' => false,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'last_name' => array(
-					'label'     => __( 'Last name', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 6,
-					'value'     => $this->get_user_value( 'last_name' ),
-					'required'  => true,
+					'label'                 => __( 'Last name', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 6,
+					'value'                 => $this->get_user_value( 'last_name' ),
+					'required'              => true,
 					'requires_registration' => false,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'email' => array(
-					'label'     => __( 'Email', 'charitable' ),
-					'type'      => 'email',
-					'required'  => true,
-					'priority'  => 8,
-					'value'     => $this->get_user_value( 'user_email' ),
+					'label'                 => __( 'Email', 'charitable' ),
+					'type'                  => 'email',
+					'required'              => true,
+					'priority'              => 8,
+					'value'                 => $this->get_user_value( 'user_email' ),
 					'requires_registration' => false,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'address' => array(
-					'label'     => __( 'Address', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 10,
-					'value'     => $this->get_user_value( 'donor_address' ),
-					'required'  => false,
+					'label'                 => __( 'Address', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 10,
+					'value'                 => $this->get_user_value( 'donor_address' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'address_2' => array(
-					'label'     => __( 'Address 2', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 12,
-					'value'     => $this->get_user_value( 'donor_address_2' ),
-					'required'  => false,
+					'label'                 => __( 'Address 2', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 12,
+					'value'                 => $this->get_user_value( 'donor_address_2' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'city' => array(
-					'label'     => __( 'City', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 14,
-					'value'     => $this->get_user_value( 'donor_city' ),
-					'required'  => false,
+					'label'                 => __( 'City', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 14,
+					'value'                 => $this->get_user_value( 'donor_city' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'state' => array(
-					'label'     => __( 'State', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 16,
-					'value'     => $this->get_user_value( 'donor_state' ),
-					'required'  => false,
+					'label'                 => __( 'State', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 16,
+					'value'                 => $this->get_user_value( 'donor_state' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'postcode' => array(
-					'label'     => __( 'Postcode / ZIP code', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 18,
-					'value'     => $this->get_user_value( 'donor_postcode' ),
-					'required'  => false,
+					'label'                 => __( 'Postcode / ZIP code', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 18,
+					'value'                 => $this->get_user_value( 'donor_postcode' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'country' => array(
-					'label'     => __( 'Country', 'charitable' ),
-					'type'      => 'select',
-					'options'   => charitable_get_location_helper()->get_countries(),
-					'priority'  => 20,
-					'value'     => $this->get_user_value( 'donor_country', charitable_get_option( 'country' ) ),
-					'required'  => false,
+					'label'                 => __( 'Country', 'charitable' ),
+					'type'                  => 'select',
+					'options'               => charitable_get_location_helper()->get_countries(),
+					'priority'              => 20,
+					'value'                 => $this->get_user_value( 'donor_country', charitable_get_option( 'country' ) ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
 				'phone' => array(
-					'label'     => __( 'Phone', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 22,
-					'value'     => $this->get_user_value( 'donor_phone' ),
-					'required'  => false,
+					'label'                 => __( 'Phone', 'charitable' ),
+					'type'                  => 'text',
+					'priority'              => 22,
+					'value'                 => $this->get_user_value( 'donor_phone' ),
+					'required'              => false,
 					'requires_registration' => true,
-					'data_type' => 'user',
+					'data_type'             => 'user',
 				),
-			), $this );
+			);
 
-			uasort( $user_fields, 'charitable_priority_sort' );
+			/**
+			 * Filter the donor fields.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                    $fields Set of donor fields.
+			 * @param Charitable_Donation_Form $form   Instance of `Charitable_Donation_Form`.
+			 */
+			$fields = apply_filters( 'charitable_donation_form_user_fields', $fields, $this );
+			$fields = $this->hide_non_required_user_fields( $fields );
 
-			return $user_fields;
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
 		}
 
 		/**
 		 * Only show the required user fields if that option was enabled by the site admin.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function hide_non_required_user_fields( $fields ) {
 			if ( ! charitable_get_option( 'donation_form_minimal_fields', false ) ) {
 				return $fields;
 			}
 
-			foreach ( $fields as $key => $field ) {
-				if ( isset( $field['required'] ) && $field['required'] ) {
-					continue;
-				}
-
-				unset( $fields[ $key ] );
-			}
-
-			return $fields;
+			return array_filter( $fields, array( $this, 'filter_required_fields' ) );
 		}
 
 		/**
@@ -304,9 +289,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * By default, this just returns the password field. You can include a username
 		 * field with ...
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_user_account_fields() {
 			$account_fields = array(
@@ -337,12 +322,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns the donation fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function get_donation_fields() {
-			$donation_fields = apply_filters( 'charitable_donation_form_donation_fields', array(
+			$fields = array(
 				'donation_amount_wrapper_start' => array(
 					'type'		=> 'content',
 					'content'   => '<div id="charitable-donation-options-' . esc_attr( $this->get_form_identifier() ) . '">',
@@ -358,19 +343,31 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'content'   => '</div>',
 					'priority' 	=> 100,
 				),
-			), $this );
+			);
 
-			uasort( $donation_fields, 'charitable_priority_sort' );
+			$fields = $this->maybe_show_current_donation_amount( $fields );
 
-			return $donation_fields;
+			/**
+			 * Filter the donation amount fields.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                    $fields The list of fields.
+			 * @param Charitable_Donation_Form $form   Instance of `Charitable_Donation_Form`.
+			 */
+			$fields = apply_filters( 'charitable_donation_form_donation_fields', $fields, $this );
+
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
 		}
 
 		/**
 		 * Return the donation form fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_donation_form_fields', array(
@@ -397,10 +394,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add payment fields to the donation form if necessary.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array[] $fields
-		 * @return  array[]
+		 * @param  array[] $fields
+		 * @return array[]
 		 */
 		public function add_payment_fields( $fields ) {
 			$gateways_helper = charitable_get_helper( 'gateways' );
@@ -410,8 +407,18 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$has_gateway_fields = false;
 
 			foreach ( $gateways_helper->get_active_gateways() as $gateway_id => $gateway_class ) {
-				$gateway = new $gateway_class;
-				$gateway_fields = apply_filters( 'charitable_donation_form_gateway_fields', array(), $gateway );
+				$gateway        = new $gateway_class;
+				$gateway_fields = $this->add_credit_card_fields( array(), $gateway );
+
+				/**
+				 * Filter the gateway fields.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array              $gateway_fields List of gateway fields.
+				 * @param Charitable_Gateway $gateway        Instance of `Charitable_Gateway`.
+				 */
+				$gateway_fields          = apply_filters( 'charitable_donation_form_gateway_fields', $gateway_fields, $gateway );
 				$gateways[ $gateway_id ] = array(
 					'label'     => $gateway->get_label(),
 					'fields'    => $gateway_fields,
@@ -440,11 +447,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Use custom template for some form fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string|false $custom_template
-		 * @param   array   $field
-		 * @return  string|false|Charitable_Template
+		 * @param  string|false $custom_template
+		 * @param  array   $field
+		 * @return string|false|Charitable_Template
 		 */
 		public function use_custom_templates( $custom_template, $field ) {
 			$donation_form_templates = array( 'donation-amount', 'donor-fields', 'gateway-fields', 'cc-expiration' );
@@ -463,10 +470,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * Include a paragraph showing the currently set donation
 		 * amount before the amount form, if one is set.
 		 *
-		 * @since   1.4.14
+		 * @since  1.4.14
 		 *
 		 * @param 	array[] $fields The array of fields.
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function maybe_show_current_donation_amount( $fields ) {
 			if ( ! $this->get_campaign() ) {
@@ -495,11 +502,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add credit card fields to the donation form if this gateway requires it.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array[] $fields
-		 * @param   Charitable_Gateway $gateway
-		 * @return  array[]
+		 * @param  array[]            $fields  Current gateway fields. Deprecated as of 1.5.0.
+		 * @param  Charitable_Gateway $gateway Instance of `Charitable_Gateway`.
+		 * @return array[]
 		 */
 		public function add_credit_card_fields( $fields, Charitable_Gateway $gateway ) {
 			if ( $gateway->supports( 'credit-card' ) ) {
@@ -512,9 +519,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function render() {
 			charitable_template( 'donation-form/form-donation.php', array(
@@ -526,10 +533,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   Charitable_Donation_Form $form
-		 * @return  void
+		 * @param  Charitable_Donation_Form $form
+		 * @return void
 		 */
 		public function add_hidden_fields( $form ) {
 			if ( false === parent::add_hidden_fields( $form ) ) {
@@ -557,9 +564,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Set the gateway as a hidden field when there is only one gateway.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string[]
+		 * @return string[]
 		 */
 		public function add_hidden_gateway_field( $fields ) {
 			$gateways = charitable_get_helper( 'gateways' )->get_active_gateways();
@@ -578,10 +585,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Add a password field to the end of the form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   Charitable_Donation_Form $form
-		 * @return  void
+		 * @param  Charitable_Donation_Form $form
+		 * @return void
 		 */
 		public function add_password_field( $form ) {
 			if ( ! $form->is_current_form( $this->id ) ) {
@@ -599,9 +606,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_submission() {
 
@@ -635,9 +642,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the security checks (nonce and honeypot) pass.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_security_check() {
 
@@ -666,9 +673,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the submitted email is valid.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_email() {
 
@@ -701,9 +708,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the submitted gateway is valid.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_gateway() {
 
@@ -733,9 +740,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the set amount is valid.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_amount() {
 			$ret = true;
@@ -775,9 +782,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donation values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
@@ -841,9 +848,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns all fields as a merged array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function get_merged_fields() {
 			$fields = array();
@@ -878,9 +885,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the user has all required fields.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function user_has_required_fields() {
 			if ( ! isset( $this->user_has_required_fields ) ) {
@@ -906,9 +913,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donation amount.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  float
+		 * @return float
 		 */
 		public static function get_donation_amount() {
 			$amount = isset( $_POST['donation_amount'] ) ? $_POST['donation_amount'] : 0;
@@ -926,9 +933,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Set up payment fields based on the gateways that are installed and which one is default.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		protected function setup_payment_fields() {
 			$active_gateways = charitable_get_helper( 'gateways' )->get_active_gateways();
@@ -954,9 +961,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * A formatted notice to advise that there are no gateways active.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_no_active_gateways_notice() {
 			$message = __( 'There are no active payment gateways.', 'charitable' );
@@ -975,9 +982,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Determine the status of Test Mode and display an alert if it is active
 		 *
-		 * @since   1.4.7
+		 * @since  1.4.7
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		protected function check_test_mode() {
 			$in_test_mode = charitable_get_option( 'test_mode', 0 );
@@ -986,15 +993,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			if ( $in_test_mode && current_user_can( 'manage_charitable_settings' ) ) {
 				charitable_get_notices()->add_error( $this->get_test_mode_active_notice() );
 			}
-
 		}
 
 		/**
 		 * A formatted notice to advise that Test Mode is active.
 		 *
-		 * @since   1.4.7
+		 * @since  1.4.7
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_test_mode_active_notice() {
 			$message = __( 'Test mode is active.', 'charitable' );
@@ -1013,9 +1019,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the donor value fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  string[]
+		 * @return string[]
 		 */
 		protected function get_donor_value_fields( $submitted ) {
 			$donor_fields = array();
@@ -1038,9 +1044,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Checks whether the form submission contains profile fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		protected function has_profile_fields( $submitted, $user_fields ) {
 			foreach ( $user_fields as $key => $field ) {
@@ -1055,10 +1061,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Returns true if required fields are missing.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array   $required_fields
-		 * @return  boolean
+		 * @param  array   $required_fields
+		 * @return boolean
 		 */
 		protected function is_missing_required_fields( $required_fields ) {
 			if ( is_user_logged_in() ) {
