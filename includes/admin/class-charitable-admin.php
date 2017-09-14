@@ -92,11 +92,15 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
 			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );//
 
-			/* Donations */			
-			require_once( $admin_dir . 'donations/class-charitable-admin-donation-form.php' );
+			/* Donations */						
 			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
 			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
+
+			/* Forms */
+			require_once( $admin_dir . 'forms/views/class-charitable-admin-form-view.php' );
+			require_once( $admin_dir . 'forms/class-charitable-admin-form.php' );
+			require_once( $admin_dir . 'forms/class-charitable-admin-donation-form.php' );
 
 			/* Settings */
 			require_once( $admin_dir . 'settings/class-charitable-settings.php' );

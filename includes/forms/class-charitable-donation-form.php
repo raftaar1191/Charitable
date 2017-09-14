@@ -400,10 +400,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array[]
 		 */
 		public function add_payment_fields( $fields ) {
-			$gateways_helper = charitable_get_helper( 'gateways' );
-			$default_gateway = $gateways_helper->get_default_gateway();
-
-			$gateways = array();
+			$gateways_helper    = charitable_get_helper( 'gateways' );
+			$default_gateway    = $gateways_helper->get_default_gateway();
+			$gateways           = array();
 			$has_gateway_fields = false;
 
 			foreach ( $gateways_helper->get_active_gateways() as $gateway_id => $gateway_class ) {
@@ -442,29 +441,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return $fields;
-		}
-
-		/**
-		 * Use custom template for some form fields.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  string|false $custom_template
-		 * @param  array   $field
-		 * @return string|false|Charitable_Template
-		 */
-		public function use_custom_templates( $custom_template, $field ) {
-			$donation_form_templates = array( 'donation-amount', 'donor-fields', 'gateway-fields', 'cc-expiration' );
-
-			if ( in_array( $field['type'], $donation_form_templates ) ) {
-
-				$template_name = 'donation-form/' . $field['type'] . '.php';
-				$custom_template = new Charitable_Template( $template_name, false );
-
-			}
-
-			return $custom_template;
-		}
+		}		
 
 		/**
 		 * Include a paragraph showing the currently set donation
@@ -1081,6 +1058,25 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return ! $this->check_required_fields( $required_fields );
+		}
+
+		/**
+		 * Use custom template for some form fields.
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. This is handled by `Charitable_Public_Form_View` now.
+		 *
+		 * @param  string|false $custom_template
+		 * @param  array   $field
+		 * @return string|false|Charitable_Template
+		 */
+		public function use_custom_templates( $custom_template, $field ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0'
+			);
+
+			return $custom_template;			
 		}
 	}
 
