@@ -27,25 +27,12 @@ if ( ! $form ) {
 	/**
 	 * @hook    charitable_form_before_fields
 	 */
-	do_action( 'charitable_form_before_fields', $form ) ?>
-	
-	<div class="charitable-form-fields cf">        
-	<?php
-
-	$i = 1;
-
-	foreach ( $form->get_fields() as $key => $field ) :
-
-		do_action( 'charitable_form_field', $field, $key, $form, $i );
-
-		$i += apply_filters( 'charitable_form_field_increment', 1, $field, $key, $form, $i );
-
-	endforeach;
+	do_action( 'charitable_form_before_fields', $form );
 
 	?>
-	
-	</div>
-
+	<div class="charitable-form-fields cf">
+		<?php $form->view()->render_fields() ?>
+	</div><!-- .charitable-form-fields -->
 	<?php
 	/**
 	 * @hook    charitable_form_after_fields
@@ -60,4 +47,3 @@ if ( ! $form ) {
 		</div>
 	</div>
 </form>
-<?php

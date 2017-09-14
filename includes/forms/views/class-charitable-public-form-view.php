@@ -59,14 +59,38 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          *
          * @since  1.5.0
          *
-         * @return void
+         * @param  array $fields Optional. A set of fields to display. If not set, 
+         *                       we will look for fields in the form's `get_fields()`
+         *                       method (if it has one).
+         * @return boolean       True if any fields were rendered. False otherwsie.
          */
-        public function render_fields() {
-            array_walk( $form->get_fields() )
+        public function render_fields( $fields = array() ) {
+            if ( empty( $fields ) ) {
+                if ( ! method_exists( $this->form, 'get_fields' ) ) {
+                    charitable_get_deprecated()->doing_it_wrong(
+                        __METHOD__,
+                        __( 'render_fields()` must be called with an array of fields or for a form with a `get_fields()` method.', 'charitable' ),
+                        '1.5.0'
+                    );
+                    return false;
+                }
+
+                $fields = $this->form->get_fields();
+            }
+
+            $i = 1;
+
+            foreach ( $fields as $key => $field ) {
+                $this->render_field( $field, $key, array(
+                    'index' => $i,
+                ) );
+
+                $i += $this->increment_index( $field, $key, $i );
+            }
         }
 
         /**
-         * Render a specific form fields.
+         * Render a specific form field.
          *
          * @since  1.5.0
          *
@@ -87,6 +111,18 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             /* Set up some form attributes. */
             $field['key']   = $this->get_field_name( $key, $namespace, $index );
             $field['attrs'] = array_key_exists( 'attrs', $field ) ? $field['attrs'] : array();
+
+            /**
+             * Do something before the field is rendered.
+             *
+             * @since 1.0.0
+             *
+             * @param array           $field Field definition.
+             * @param string          $key   The field's key.
+             * @param Charitable_Form $form  The Charitable_Form object.
+             * @param int             $index The current index.
+             */
+            do_action( 'charitable_form_field', $field, $key, $this->form, $index );
 
             /* Get the template and make sure it's valid. */
             $template = $this->get_field_template( $field, $index );
@@ -307,6 +343,55 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             }
 
             return $classes;
+        }
+
+        /**
+         * Set how much the index should be incremented by.
+         *
+         * @since  1.5.0
+         *
+         * @param  array    $field The field definition.
+         * @param  string   $key   The key of the current field. May be empty.
+         * @param  int|null $index The current index. May be null.
+         * @return int
+         */
+        public function increment_index( $field, $key = '', $index = null) {
+            if ( ! $this->should_increment( $field ) ) {
+                return 0;
+            }
+
+            /**
+             * Set the default increment.
+             *
+             * @since 1.0.0
+             *
+             * @param int             $increment The default increment amount. Defaults to 1.
+             * @param array           $field     The field definition.
+             * @param string          $key       The key of the current field.
+             * @param Charitable_Form $form      The form we are displaying.
+             * @param int             $index     The current index.
+             */
+            return apply_filters( 'charitable_form_field_increment', 1, $field, $key, $this->form, $index );            
+        }
+
+        /**
+         * Whether the index should be incremented.
+         *
+         * @since  1.5.0
+         *
+         * @param  array $field Field definition.
+         * @return boolean
+         */
+        protected function should_increment( $field ) {
+            if ( in_array( $field['type'], array( 'hidden', 'paragraph', 'fieldset' ) ) ) {
+                return false;
+            }
+
+            if ( array_key_exists( 'fullwidth', $field ) && $field['fullwidth'] ) {
+                return false;
+            }
+
+            return true;
         }
     }
 
