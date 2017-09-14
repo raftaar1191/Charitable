@@ -355,7 +355,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return $fields;
-		}		
+		}
 
 		/**
 		 * Include a paragraph showing the currently set donation
