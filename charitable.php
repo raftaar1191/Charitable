@@ -216,8 +216,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'forms/class-charitable-donation-form.php' );
             require_once( $includes_path . 'forms/class-charitable-donation-amount-form.php' );
             require_once( $includes_path . 'forms/views/interface-charitable-form-view.php' );
-            require_once( $includes_path . 'forms/views/class-charitable-public-form-view.php' );
-            require_once( $includes_path . 'forms/views/class-charitable-admin-form-view.php' );
+            require_once( $includes_path . 'forms/views/class-charitable-public-form-view.php' );            
 
             /* Queries */
             require_once( $includes_path . 'queries/abstract-class-charitable-query.php' );

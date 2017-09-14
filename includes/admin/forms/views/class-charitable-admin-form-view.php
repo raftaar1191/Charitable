@@ -1,11 +1,11 @@
 <?php
 /**
- * Public form view.
+ * Admin form view.
  *
- * This is responsible for rendering the output of forms.
+ * This is responsible for rendering the output of forms in the WordPress dashboard.
  *
  * @version   1.5.0
- * @package   Charitable/Forms/Charitable_Public_Form_View
+ * @package   Charitable/Forms/Charitable_Admin_Form_View
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -14,14 +14,14 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
+if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
     /**
-     * Charitable_Public_Form_View.
+     * Charitable_Admin_Form_View.
      *
      * @since 1.5.0
      */
-    class Charitable_Public_Form_View implements Charitable_Form_View_Interface {
+    class Charitable_Admin_Form_View implements Charitable_Form_View_Interface {
 
         /**
          * The Form we are responsible for rendering.
@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          */
         public function __construct( Charitable_Form $form ) {
             $this->form                   = $form;
-            $this->custom_field_templates = $this->init_custom_field_templates();
+            // $this->custom_field_templates = $this->init_custom_field_templates();
         }
 
         /**
@@ -287,18 +287,6 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         }
 
         /**
-         * Checks whether a template is valid.
-         *
-         * @since  1.5.0
-         *
-         * @param  mixed $template Template we're checking.
-         * @return boolean
-         */
-        public function is_valid_template( $template ) {
-            return is_object( $template ) && is_a( $template, 'Charitable_Template' );
-        }
-
-        /**
          * Whether the given field type can use the default field template.
          *
          * @since  1.5.0
@@ -322,6 +310,18 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             ) );
 
             return in_array( $field_type, $default_field_types );
+        }
+
+        /**
+         * Checks whether a template is valid.
+         *
+         * @since  1.5.0
+         *
+         * @param  mixed $template Template we're checking.
+         * @return boolean
+         */
+        protected function is_valid_template( $template ) {
+            return is_object( $template ) && is_a( $template, 'Charitable_Template' );
         }
 
         /**
@@ -458,7 +458,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
              *
              * @since 1.5.0
              */
-            $templates = apply_filters( 'charitable_public_form_view_custom_field_templates', array(
+            $templates = apply_filters( 'charitable_Admin_form_view_custom_field_templates', array(
                 'donation-amount' => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donation-amount.php' ),
                 'donor-fields'    => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donor-fields.php' ),
                 'gateway-fields'  => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/gateway-fields.php' ),

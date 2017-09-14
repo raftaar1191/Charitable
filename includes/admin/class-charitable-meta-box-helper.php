@@ -144,14 +144,18 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @return 	void
 		 */
 		public function display_fields( array $fields ) {
-			/**
-			 * Sort the fields by priority.
-			 */
-			usort( $fields, 'charitable_priority_sort' );
+			$form = new Charitable_Admin_Form();
+			$form->set_fields( $fields );
+			$form->render_fields();
 
-			$callback = array( $this, 'display_field' );
+			// /**
+			//  * Sort the fields by priority.
+			//  */
+			// usort( $fields, 'charitable_priority_sort' );
 
-			array_walk( $callback, $fields );
+			// $callback = array( $this, 'display_field' );
+
+			// array_walk( $callback, $fields );
 		}
 		
 		/**

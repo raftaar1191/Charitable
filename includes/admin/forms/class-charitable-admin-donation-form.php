@@ -19,62 +19,16 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 	 *
 	 * @since  1.5.0
 	 */
-	class Charitable_Admin_Donation_Form extends Charitable_Donation_Form implements Charitable_Donation_Form_Interface {
-
-		/**
-		 * Campaign object. May be null.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   Charitable_Campaign
-		 */
-		protected $campaign;
-
-		/**
-		 * Set of form fields.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   array
-		 */
-		protected $form_fields;
-
-		/**
-		 * Nonce action.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   string
-		 */
-		protected $nonce_action = 'charitable_admin_donation_form';
-
-		/**
-		 * Nonce name.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   string
-		 */
-		protected $nonce_name = '_charitable_admin_donation_form_nonce';
-
-		/**
-		 * Action to be executed upon form submission.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   string
-		 */
-		protected $form_action = 'save_donation_admin';
+	class Charitable_Admin_Donation_Form extends Charitable_Form {
 
 		/**
 		 * Create a donation form object.
 		 *
-		 * @since 1.5.0
+		 * @since 1.0.0
 		 *
-		 * @param Charitable_Campaign|null $campaign Optional. Campaign receiving the donation, or NULL if 
-		 *                                           the campaign will be selected in the form.
+		 * @param Charitable_Campaign|null $campaign Campaign receiving the donation.
 		 */
-		public function __construct( Charitable_Campaign $campaign = null ) {
+		public function __construct() {
 			$this->campaign = $campaign;
 			$this->id       = uniqid();
 
