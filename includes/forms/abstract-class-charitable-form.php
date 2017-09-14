@@ -95,8 +95,8 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
 			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
-			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+			// add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			// add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 		}
 
 		/**
@@ -161,24 +161,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
-		 * Whether the given field type can use the default field template.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	string $field_type Type of field.
-		 * @return 	boolean
-		 */
-		protected function use_default_field_template( $field_type ) {
-			$default_field_types = apply_filters( 'charitable_default_template_field_types', array(
-				'text',
-				'email',
-				'password',
-				'date',
-			) );
-			return in_array( $field_type, $default_field_types );
-		}
-
-		/**
 		 * Display error notices at the start of the form, if there are any.
 		 *
 		 * @since   1.0.0
@@ -237,17 +219,31 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @param 	array $field     The field definition.
 		 * @return  int
 		 */
-		public function increment_index( $increment, $field ) {
-			if ( in_array( $field['type'], array(
-				'hidden',
-				'paragraph',
-				'fieldset',
-			) )
-				|| ( isset( $field['fullwidth'] ) && $field['fullwidth'] ) ) {
-				$increment = 0;
-			}
+		public function increment_index( $increment, $field ) {			
+            /**
+             * Remove form's hooked filter.
+             *
+             * Before 1.5, forms used the filter to set the increment level. For
+             * backwards-compatibility purposes, we still provide this method in the
+             * form class, but it calls the Form View. This method shoud
+             * default in the form abstract, but remove it when this function
+             * is called directly.
+             */
+            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 
-			return $increment;
+			return $this->view()->increment_index( $field );			
+		}
+
+		/**
+		 * Whether the given field type can use the default field template.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $field_type Type of field.
+		 * @return boolean
+		 */
+		protected function use_default_field_template( $field_type ) {
+			return $this->view()->use_default_field_template( $field_type );			
 		}
 
 		/**
