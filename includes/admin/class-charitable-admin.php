@@ -90,6 +90,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			/* Campaigns */
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
+			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );//
 
 			/* Donations */			
 			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
