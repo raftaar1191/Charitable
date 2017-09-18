@@ -225,8 +225,15 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'currency/charitable-currency-functions.php' );
             require_once( $includes_path . 'currency/class-charitable-currency.php' );
 
-            /* Donations */
-            require_once( $includes_path . 'donations/abstract-charitable-donation.php' );            
+             /* Database */
+            require_once( $includes_path . 'db/class-charitable-campaign-donations-db.php' );
+            require_once( $includes_path . 'db/class-charitable-donors-db.php' );
+
+            /* Deprecated */
+            require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
+            require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
+
+            /* Donations */    
             require_once( $includes_path . 'donations/class-charitable-donation-processor.php' );
             require_once( $includes_path . 'donations/class-charitable-donation.php' );
             require_once( $includes_path . 'donations/class-charitable-donation-factory.php' );

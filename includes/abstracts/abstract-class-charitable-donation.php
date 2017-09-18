@@ -126,7 +126,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			/* Look for a local method. */
 			if ( method_exists( $this, 'get_' . $key ) ) {
 				$method = 'get_' . $key;
-				return $this->$method();
+				return $this->$method;
 			}
 
 			return $this->__get( $key );
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		public function fields() {
 			if ( ! isset( $this->fields ) ) {
-				$this->fields = new Charitable_Donation_Fields( charitable()->donation_fields(), $this );
+				$this->fields = new Charitable_Fields( charitable()->donation_fields(), $this );
 			}
 
 			return $this->fields;
@@ -155,13 +155,6 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return string
 		 */
 		public function get_number() {
-			/**
-			 * Filter the donation number.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param int $donation_id The donation ID.
-			 */
 			return apply_filters( 'charitable_donation_number', $this->donation_id );
 		}
 
@@ -196,17 +189,6 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			}
 
 			return $amount;
-		}
-
-		/**
-		 * Return the formatted donation amount.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return string
-		 */
-		public function get_amount_formatted() {
-			return charitable_format_money( $this->get_total_donation_amount() );
 		}
 
 		/**
@@ -287,80 +269,22 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Return an array of the categories of the campaigns that were donated to.
+		 * Return a comma separated list of the categories of the campaigns that were donated to.
 		 *
-		 * @uses   wp_get_object_terms
-		 * @uses   wp_list_pluck
-		 * @uses   Charitable_Donation::get_campaign_donations
+		 * @uses    wp_get_object_terms
+		 * @uses 	wp_list_pluck
+		 * @uses 	Charitable_Donation::get_campaign_donations
 		 *
 		 * @since  1.4.2
 		 *
-		 * @param  string $taxonomy The taxonomy. Defaults to 'campaign_category'.
-		 * @param  array  $args     Optional arguments to pass to `wp_get_object_terms`.
-		 * @return array|WP_Error The requested term data or empty array if no terms found.
-		 *                        WP_Error if any of the $taxonomies don't exist.
+		 * @param 	string $taxonomy The taxonomy. Defaults to 'campaign_category'.
+		 * @param 	array  $args Optional arguments to pass to `wp_get_object_terms`
+		 * @return string
 		 */
 		public function get_campaign_categories_donated_to( $taxonomy = 'campaign_category', $args = array() ) {
 			$campaigns = wp_list_pluck( $this->get_campaign_donations(), 'campaign_id' );
 
 			return wp_get_object_terms( $campaigns, $taxonomy, $args );
-		}
-
-		/**
-		 * Return a comma separated list of categories for the campaigns that were donated to.
-		 *
-		 * @uses   Charitalbe_Donation::get_campaign_categories_donated_to
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return string
-		 */
-		public function get_campaign_categories_list() {
-			$categories = $this->get_campaign_categories_donated_to( 'campaign_category', array(
-                'fields' => 'names',
-            ) );
-
-            return implode( ', ', $categories );
-		}
-
-		/**
-		 * Return a simple donation summary showing the campaigns that were donated to,
-		 * and the amount of the donation.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return string
-		 */
-		public function get_donation_summary() {
-			return implode( '', array_map( array( $this, 'get_donation_summary_line' ), $this->get_campaign_donations() ) );
-		}
-
-		/**
-		 * Return a single line of a donation summary.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  object $campaign_donation A campaign donation object.
-		 * @return string
-		 */
-		protected function get_donation_summary_line( $campaign_donation ) {
-			$line_item = sprintf( '%s: %s%s',
-                $campaign_donation->campaign_name,
-                charitable_format_money( $campaign_donation->amount ),
-                PHP_EOL
-            );
-
-			/**
-			 * Filter the line item.
-			 *
-			 * @since 1.0.0
-			 * @since 1.5.0 Filter was previously defined in Charitable_Email::get_donation_summary()
-			 *              and included an array of shortcode arguments and a Charitable_Email object.
-			 *
-			 * @param string $line_item         The line of text.
-			 * @param object $campaign_donation A campaign donation object.
-			 */
-			return apply_filters( 'charitable_donation_summary_line_item_email', $line_item, $campaign_donation );
 		}
 
 		/**
@@ -375,20 +299,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			if ( empty( $format ) ) {
 				$format = get_option( 'date_format' );
 			}
-
 			return date_i18n( $format, strtotime( $this->donation_data->post_date ) );
-		}
-
-		/**
-		 * Return the time of the donation.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  string $format Time format.
-		 * @return string
-		 */
-		public function get_time( $format = 'H:i A' ) {
-			return mysql2date( $format, $this->donation_data->post_date );
 		}
 
 		/**
@@ -433,16 +344,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		public function get_gateway_label() {
 			$gateway = $this->get_gateway_object();
-			$label   = $gateway ? $gateway->get_label() : $this->get_gateway();
 
-			/**
-			 * Filter the gateway label.
-			 *
-			 * @since 1.2.0
-			 *
-			 * @param string              $label    The label.
-			 * @param Charitable_Donation $donation This `Charitable_Donation` instance.
-			 */
+			$label = $gateway ? $gateway->get_label() : $this->get_gateway();
+
 			return apply_filters( 'charitable_donation_gateway_label', $label, $this );
 		}
 
@@ -467,7 +371,6 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * The status of this donation.
 		 *
 		 * @since  1.0.0
-		 * @since  1.5.0 Deprecated $label argument. Use Charitable_Donation::get_status_label() instead.
 		 *
 		 * @param  boolean $label Whether to return the label. If not, returns the key.
 		 * @return string
@@ -475,55 +378,21 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		public function get_status( $label = false ) {
 			$status = $this->donation_data->post_status;
 
-			if ( $label ) {
-				charitable_get_deprecated()->deprecated_function(
-				    __METHOD__,
-				    '1.5.0',
-				    'Charitable_Donation::get_status_label()'
-				);
-				return $this->get_status_label( $status );
+			if ( ! $label ) {
+				return $status;
 			}
 
-			return $status;
-		}
-
-		/**
-		 * Return the donation status label.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  string $status Optional. The status to return the label for.
-		 * @return string
-		 */
-		public function get_status_label( $status = '' ) {
 			$statuses = charitable_get_valid_donation_statuses();
-			$status   = empty( $status ) ? $this->get_status() : $status;
-
-			return array_key_exists( $status, $statuses ) ? $statuses[ $status ] : $status;
+			return isset( $statuses[ $status ] ) ? $statuses[ $status ] : $status;
 		}
 
 		/**
 		 * Checks the order status against a passed in status.
 		 *
-		 * @since  1.3.6
-		 *
-		 * @param  string|array $status A status or array of statuses to check against.
-		 * @return boolean
+		 * @return bool
 		 */
 		public function has_status( $status ) {
-			$donation_status = $this->get_status();
-			$has_status      = ( is_array( $status ) && in_array( $donation_status, $status ) ) || $donation_status === $status;
-
-			/**
-			 * Filter whether the donation has the status.
-			 *
-			 * @since 1.3.6
-			 *
-			 * @param boolean             $has_status Whether the donation has the status.
-			 * @param Charitable_Donation $donation   This instance of `Charitable_Donation`.
-			 * @param string|array        $status     The status we are checking for.
-			 */
-			return apply_filters( 'charitable_donation_has_status', $has_status, $this, $status );
+			return apply_filters( 'charitable_donation_has_status', ( is_array( $status ) && in_array( $this->get_status(), $status ) ) || $this->get_status() === $status ? true : false, $this, $status );
 		}
 
 		/**
@@ -597,45 +466,55 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Return 'Yes' or 'No' for whether a donation was made in test mode.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return string|boolean Whether to return 
-		 */
-		public function get_test_mode( $text = true ) {
-			$test_mode = get_post_meta( $this->donation_id, 'test_mode', true );
-
-			if ( $text ) {
-				return $test_mode ? __( 'Yes', 'charitable' ) : __( 'No', 'charitable' );
-			}
-
-			return abs( $test_mode );
-		}
-
-		/**
 		 * Return an array of meta relating to the donation.
-		 * 
+		 *
 		 * @since  1.2.0
 		 *
 		 * @return mixed[]
 		 */
 		public function get_donation_meta() {
-			$fields = charitable()->donation_fields()->get_meta_fields();
-			$meta   = array_map( array( $this, 'parse_donation_meta_field' ), $fields );
-			$meta   = array_combine( array_keys( $fields ), $meta );
+			$donor            = $this->get_donor_data();
+			$date_format      = get_option( 'date_format' );
+			$time_format      = get_option( 'time_format' );
+			$date_time_format = "$date_format - $time_format";
+			$address          = $this->get_donor_address();
+			$meta             = array(
+				'date_time' => array(
+					'label' => __( 'Date &amp; Time', 'charitable' ),
+					'value' => date_i18n( $date_time_format, strtotime( $this->postdata->post_date ) ),
+				),
+				'donor' => array(
+					'label' => __( 'Donor', 'charitable' ),
+					'value' => rtrim( sprintf( '%s %s', $donor['first_name'], $donor['last_name'] ) ),
+				),
+				'donor_email' => array(
+					'label' => __( 'Email', 'charitable' ),
+					'value' => isset( $donor['email'] ) ? $donor['email'] : '-',
+				),
+				'donor_address' => array(
+					'label' => __( 'Address', 'charitable' ),
+					'value' => strlen( $address ) ? $address : '-',
+				),
+				'donor_phone' => array(
+					'label' => __( 'Phone Number', 'charitable' ),
+					'value' => isset( $donor['phone'] ) ? $donor['phone'] : '-',
+				),
+				'gateway' => array(
+					'label' => __( 'Payment Method', 'charitable' ),
+					'value' => $this->get_gateway_label(),
+				),
+				'donation_key' => array(
+					'label' => __( 'Donation Key', 'charitable' ),
+					'value' => $this->get_donation_key(),
+				),
+				'test_mode_donation' => array(
+					'label' => __( 'Donation made in test mode?', 'charitable' ),
+					'value' => get_post_meta( $this->donation_id, 'test_mode', true ) ? 'Yes' : 'No',
+				),
+			);
 
-			/**
-			 * Filter the donation meta.
-			 *
-			 * @since 1.2.0
-			 *
-			 * @param array               $meta     Set of meta values in an array of arrays, with
-			 *                                      each array containing a 'label' and a 'value'.
-			 * @param Charitable_Donation $donation This instance of `Charitable_Donation`.
-			 */
 			return apply_filters( 'charitable_donation_admin_meta', $meta, $this );
-		}		
+		}
 
 		/**
 		 * Checks whether the donation is from the current user.
@@ -645,6 +524,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return boolean
 		 */
 		public function is_from_current_user() {
+
 			/* If the donation key is stored in the session, the user can access this receipt */
 			if ( charitable_get_session()->has_donation_key( $this->get_donation_key() ) ) {
 				return true;
@@ -664,24 +544,47 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			}
 
 			return $donor->get_email() == $user->user_email;
-		}		
+		}
+
+		/**
+		 * Add a message to the donation log.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $message
+		 * @return void
+		 * @deprecated 1.3.0
+		 */
+		public function update_donation_log( $message, $deprecated_message = null ) {
+			if ( is_int( $message ) ) {
+
+				charitable_get_deprecated()->deprecated_argument( __METHOD__, '1.3.0', sprintf( __( '$donation_id is no longer required as update_donation_log() is used in object context. Use $donation->update_donation_log($message)' ) ) );
+
+				$message = $deprecated_message;
+			}
+
+			$log = $this->get_donation_log();
+
+			$log[] = array(
+				'time'      => time(),
+				'message'   => $message,
+			);
+
+			update_post_meta( $this->donation_id, '_donation_log', $log );
+		}
 
 		/**
 		 * Get a donation's log.
 		 *
 		 * @since  1.0.0
-		 * @since  1.3.0 Deprecated $donation_id arg. Method is now expected to be called in an object context.
-		 *               i.e. $donation->get_donation_log().
 		 *
 		 * @return array
 		 */
 		public function get_donation_log( $donation_id = null ) {
 			if ( $donation_id ) {
-				charitable_get_deprecated()->deprecated_argument(
-					__METHOD__,
-					'1.3.0',
-					sprintf( __( '$donation_id is no longer required as get_donation_log() is used in object context. Use $donation->get_donation_log() instead.' ) )
-				);
+
+				charitable_get_deprecated()->deprecated_argument( __METHOD__, '1.3.0', sprintf( __( '$donation_id is no longer required as get_donation_log() is used in object context. Use $donation->get_donation_log() instead.' ) ) );
+
 			}
 
 			$log = get_post_meta( $this->donation_id, '_donation_log', true );;
@@ -692,7 +595,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Update the status of the donation.
 		 *
-		 * @uses   wp_update_post()
+		 * @uses    wp_update_post()
 		 *
 		 * @since  1.0.0
 		 *
@@ -700,6 +603,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return int|WP_Error The value 0 or WP_Error on failure. The donation ID on success.
 		 */
 		public function update_status( $new_status ) {
+
 			$statuses = charitable_get_valid_donation_statuses();
 
 			if ( false === charitable_is_valid_donation_status( $new_status ) ) {
@@ -707,11 +611,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				$new_status = array_search( $new_status, $statuses );
 
 				if ( false === $new_status ) {
-					charitable_get_deprecated()->doing_it_wrong(
-						__METHOD__,
-						sprintf( '%s is not a valid donation status.', $new_status ),
-						'1.0.0'
-					);
+					charitable_get_deprecated()->doing_it_wrong( __METHOD__, sprintf( '%s is not a valid donation status.', $new_status ), '1.0.0' );
 					return 0;
 				}
 			}
@@ -739,41 +639,6 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Add a message to the donation log.
-		 *
-		 * @since  1.0.0
-		 * @since  1.3.0 First parameter changed from $donation_id to $message, as function is now expected
-		 *               to be used in an object context. i.e.: $donation->update_donation_log( 'my message' )
-		 * @since  1.5.0 Removed $deprecated_message, which was only used for backwards compatibility. We now
-		 *               use func_get_arg() instead to get the second passed argument.
-		 *
-		 * @param  string $message
-		 * @param  string $deprecated_message
-		 * @return void
-		 */
-		public function update_donation_log( $message ) {
-			if ( is_int( $message ) ) {
-
-				charitable_get_deprecated()->deprecated_argument(
-					__METHOD__,
-					'1.3.0',
-					sprintf( __( '$donation_id is no longer required as update_donation_log() is used in object context. Use $donation->update_donation_log($message)' ) )
-				);
-
-				$message = func_get_arg( 1 );
-			}
-
-			$log = $this->get_donation_log();
-
-			$log[] = array(
-				'time'    => time(),
-				'message' => $message,
-			);
-
-			update_post_meta( $this->donation_id, '_donation_log', $log );
-		}
-
-		/**
 	     * Return the parent donation, if exists
 	     *
 	     * @since  1.4.5
@@ -783,6 +648,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 	    public function get_donation_plan_id() {
 	        return $this->donation_data->post_parent;
 	    }
+
 
 	    /**
 	     * Return the parent donation, if exists
@@ -807,6 +673,95 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 	        return $this->parent_donation;
 	    }
+
+		/**
+		 * Deprecated Methods
+		 */
+
+		/**
+		 * Return array of valid donations statuses.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return array
+		 *
+		 * @deprecated 1.4.0
+		 */
+		public function get_valid_donation_statuses() {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_get_valid_donation_statuses' );
+			return charitable_get_valid_donation_statuses();
+		}
+
+		/**
+		 * Returns whether the donation status is valid.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return boolean
+		 * @deprecated 1.4.0
+		 */
+		public function is_valid_donation_status( $status ) {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_is_valid_donation_status' );
+			return charitable_is_valid_donation_status( $status );
+		}
+
+		/**
+		 * Returns the donation statuses that signify a donation was complete.
+		 *
+		 * By default, this is just 'charitable-completed'. However, 'charitable-preapproval'
+		 * is also counted.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return string[]
+		 * @deprecated 1.4.0
+		 */
+		public function get_approval_statuses() {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_get_approval_statuses' );
+			return charitable_get_approval_statuses();
+		}
+
+		/**
+		 * Returns whether the passed status is an confirmed status.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return boolean
+		 * @deprecated 1.4.0
+		 */
+		public function is_approved_status( $status ) {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_is_approved_status' );
+			return charitable_is_approved_status( $status );
+		}
+
+		/**
+		 * Sanitize meta values before they are persisted to the database.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  mixed   $value
+		 * @param  string  $key
+		 * @return mixed
+		 * @deprecated 1.4.0
+		 */
+		public function sanitize_meta( $value, $key ) {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_sanitize_donation_meta()' );
+			return charitable_sanitize_donation_meta( $value, $key );
+		}
+
+		/**
+		 * Flush the donations cache for every campaign receiving a donation.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  int $donation_id
+		 * @return void
+		 * @deprecated 1.4.0
+		 */
+		public function flush_campaigns_donation_cache( $donation_id ) {
+			charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_sanitize_donation_meta()' );
+			return charitable_flush_campaigns_donation_cache( $donation_id );
+		}
 
 		/**
 		 * Save the gateway's transaction ID
@@ -836,167 +791,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			return $this->gateway_transaction_id;
 		}
 
-		/**
-		 * Return an array containing a label and value for a donation meta field.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  Charitable_Donation_Field $field Instance of `Charitable_Donation_Field`.
-		 * @return array
-		 */
-		protected function parse_donation_meta_field( Charitable_Donation_Field $field ) {
-			$value = $this->get( $field->field );
 
-			if ( empty( $value ) ) {
-				$value = '-';
-			}
-
-			return array(
-				'label' => $field->label,
-				'value' => $value,
-			);
-		}
-
-		/**
-		 * Deprecated Methods
-		 */
-
-		/**
-		 * Return array of valid donations statuses.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_get_valid_donation_statuses
-		 *
-		 * @since  1.0.0
-		 * @since  1.4.0 Deprecated
-		 *
-		 * @return array
-		 */
-		public function get_valid_donation_statuses() {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_get_valid_donation_statuses'
-			);
-
-			return charitable_get_valid_donation_statuses();
-		}
-
-		/**
-		 * Returns whether the donation status is valid.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_is_valid_donation_status
-		 *
-		 * @since  1.0.0
-		 * @since  1.4.0 Deprecated.
-		 *
-		 * @return boolean
-		 */
-		public function is_valid_donation_status( $status ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_is_valid_donation_status'
-			);
-
-			return charitable_is_valid_donation_status( $status );
-		}
-
-		/**
-		 * Returns the donation statuses that signify a donation was complete.
-		 *
-		 * By default, this is just 'charitable-completed'. However, 'charitable-preapproval'
-		 * is also counted.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_get_approval_statuses
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string[]
-		 */
-		public function get_approval_statuses() {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_get_approval_statuses'
-			);
-
-			return charitable_get_approval_statuses();
-		}
-
-		/**
-		 * Returns whether the passed status is an confirmed status.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_is_approved_status
-		 *
-		 * @since  1.0.0
-		 * @since  1.4.0 Deprecated.
-		 *
-		 * @return boolean
-		 */
-		public function is_approved_status( $status ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_is_approved_status'
-			);
-
-			return charitable_is_approved_status( $status );
-		}
-
-		/**
-		 * Sanitize meta values before they are persisted to the database.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_sanitize_donation_meta
-		 *
-		 * @since  1.0.0
-		 * @since  1.4.0
-		 *
-		 * @param  mixed   $value
-		 * @param  string  $key
-		 * @return mixed		 
-		 */
-		public function sanitize_meta( $value, $key ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_sanitize_donation_meta()'
-			);
-
-			return charitable_sanitize_donation_meta( $value, $key );
-		}
-
-		/**
-		 * Flush the donations cache for every campaign receiving a donation.
-		 *
-		 * @deprecated 1.7.0
-		 *
-		 * @see    charitable_flush_campaigns_donation_cache
-		 *
-		 * @since  1.0.0
-		 * @since  1.4.0 Deprecated.
-		 *
-		 * @param  int $donation_id
-		 * @return void
-		 */
-		public function flush_campaigns_donation_cache( $donation_id ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.4.0',
-				'charitable_sanitize_donation_meta()'
-			);
-
-			return charitable_flush_campaigns_donation_cache( $donation_id );
-		}
 	}
 
 endif;
