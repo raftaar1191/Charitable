@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 	 * Charitable_Form
 	 *
 	 * @abstract
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	abstract class Charitable_Form {
 
@@ -88,9 +88,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
@@ -127,10 +127,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Compares the ID of the form passed by the action and the current form object to ensure they're the same.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $id Current form ID.
-		 * @return 	boolean
+		 * @param  string $id Current form ID.
+		 * @return boolean
 		 */
 		public function is_current_form( $id ) {
 			return $id === $this->id;
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the form action.
 		 *
-		 * @since   1.3.1
+		 * @since  1.3.1
 		 *
 		 * @return  string
 		 */
@@ -160,9 +160,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the form ID.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public function get_form_identifier() {
 			return $this->id;
@@ -171,10 +171,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Display error notices at the start of the form, if there are any.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	Charitable_Form $form Form object.
-		 * @return 	boolean Whether the notices were rendered.
+		 * @param  Charitable_Form $form Form object.
+		 * @return boolean Whether the notices were rendered.
 		 */
 		public function render_error_notices( $form ) {
 			if ( ! $form->is_current_form( $this->id ) ) {
@@ -197,10 +197,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	Charitable_Form $form The form object.
-		 * @return 	boolean Whether the output is added.
+		 * @param  Charitable_Form $form The form object.
+		 * @return boolean Whether the output is added.
 		 */
 		public function add_hidden_fields( $form ) {
 			if ( ! $form->is_current_form( $this->id ) ) {
@@ -221,9 +221,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Output the nonce.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		public function nonce_field() {
 			wp_nonce_field( $this->nonce_action, $this->nonce_name );
@@ -232,9 +232,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Validate nonce data passed by the submitted form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	boolean
+		 * @return boolean
 		 */
 		public function validate_nonce() {
 			$submitted = $this->get_submitted_values();
@@ -250,9 +250,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Make sure that the honeypot field is empty.
 		 *
-		 * @since   1.4.3
+		 * @since  1.4.3
 		 *
-		 * @return 	boolean
+		 * @return boolean
 		 */
 		public function validate_honeypot() {
 			$submitted = $this->get_submitted_values();
@@ -269,10 +269,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Callback method used to filter out non-required fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   array $field Field definition.
-		 * @return 	array
+		 * @return array
 		 */
 		public function filter_required_fields( $field ) {
 			return isset( $field['required'] ) && true == $field['required'];
@@ -281,10 +281,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Filters array returning just the required fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array[] $fields Array of form fields.
-		 * @return 	array[]
+		 * @param  array[] $fields Array of form fields.
+		 * @return array[]
 		 */
 		public function get_required_fields( $fields ) {
 			$required_fields = array_filter( $fields, array( $this, 'filter_required_fields' ) );
@@ -295,20 +295,18 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Check the passed fields to ensure that all required fields have been submitted.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $fields    Array of form fields.
-		 * @param 	array $submitted Submitted values.
-		 * @return 	boolean
+		 * @param  array $fields    Array of form fields.
+		 * @param  array $submitted Submitted values.
+		 * @return boolean
 		 */
 		public function check_required_fields( $fields, $submitted = array() ) {
-
 			if ( empty( $submitted ) ) {
 				$submitted = $this->get_submitted_values();
 			}
 
-			$ret = true;
-
+			$ret     = true;
 			$missing = array();
 
 			foreach ( $this->get_required_fields( $fields ) as $key => $field ) {
@@ -363,11 +361,11 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Organize fields by data type, also filtering out unused parameters (we just need the key and the type).
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $key   Key of the field to sort.
-		 * @param 	array  $field Field definition.
-		 * @param 	array  $ret   Return value that we're carrying.
+		 * @param  string $key   Key of the field to sort.
+		 * @param  array  $field Field definition.
+		 * @param  array  $ret   Return value that we're carrying.
 		 * @return  array[]
 		 */
 		public function sort_field_by_data_type( $key, $field, $ret ) {
@@ -392,7 +390,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * Use this method instead of accessing the raw $_POST array to take
 		 * advantage of the filter on the values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @return  array
 		 */
@@ -407,9 +405,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Returns the submitted value for a particular field.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $key The key to search for.
+		 * @param  string $key The key to search for.
 		 * @return  mixed Submitted value if set. NULL if value was not set.
 		 */
 		public function get_submitted_value( $key ) {
@@ -420,13 +418,13 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Uploads a file and attaches it to the given post.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $file_key  Key of the file input.
-		 * @param 	int    $post_id   Post ID.
+		 * @param  string $file_key  Key of the file input.
+		 * @param  int    $post_id   Post ID.
 		 * @param   array  $post_data Overwrite some of the attachment. Optional.
 		 * @param   array  $overrides Override the wp_handle_upload() behavior. Optional.
-		 * @return 	int|WP_Error ID of the attachment or a WP_Error object on failure.
+		 * @return int|WP_Error ID of the attachment or a WP_Error object on failure.
 		 */
 		public function upload_post_attachment( $file_key, $post_id, $post_data = array(), $overrides = array() ) {
 
@@ -442,14 +440,14 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Upload a file.
 		 *
-		 * @param 	string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
 		 * 							  function once for each uploaded file.
-		 * @param 	array  $overrides Optional. An associative array of names=>values to
+		 * @param  array  $overrides Optional. An associative array of names=>values to
 		 * 							  override default variables. Default false.
 		 * @return  array|WP_Error On success, returns an associative array of file attributes.
 		 *                         On failure, returns $overrides['upload_error_handler'](&$file, $message )
 		 *                         or array( 'error'=>$message ).
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		public function upload_file( $file_key, $overrides = array() ) {
 
@@ -468,11 +466,11 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return overrides array for use with upload_file() and upload_post_attachment() methods.
 		 *
-		 * @param 	string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
 		 * 							  function once for each uploaded file.
-		 * @param 	array  $overrides Optional. An associative array of names=>values to
+		 * @param  array  $overrides Optional. An associative array of names=>values to
 		 * 							  override default variables. Default false.
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @return  array
 		 */

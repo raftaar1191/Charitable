@@ -93,7 +93,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
                 $fields = $this->form->get_fields();
 
                 /* If still missing fields, return false and throw an error. */
-                if ( ! empty( $fields ) ) {
+                if ( empty( $fields ) ) {
                     charitable_get_deprecated()->doing_it_wrong(
                         __METHOD__,
                         __( 'There are no fields to render.', 'charitable' ),
