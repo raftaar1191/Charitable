@@ -113,7 +113,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function get_user() {
 			if ( ! isset( $this->user ) ) {
-				$user = wp_get_current_user();
+				$user       = wp_get_current_user();
 				$this->user = $user->ID ? new Charitable_User( $user ) : false;
 			}
 
@@ -158,98 +158,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_user_fields() {
-			$fields = array(
-				'first_name' => array(
-					'label'                 => __( 'First name', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 4,
-					'value'                 => $this->get_user_value( 'first_name' ),
-					'required'              => true,
-					'requires_registration' => false,
-					'data_type'             => 'user',
-				),
-				'last_name' => array(
-					'label'                 => __( 'Last name', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 6,
-					'value'                 => $this->get_user_value( 'last_name' ),
-					'required'              => true,
-					'requires_registration' => false,
-					'data_type'             => 'user',
-				),
-				'email' => array(
-					'label'                 => __( 'Email', 'charitable' ),
-					'type'                  => 'email',
-					'required'              => true,
-					'priority'              => 8,
-					'value'                 => $this->get_user_value( 'user_email' ),
-					'requires_registration' => false,
-					'data_type'             => 'user',
-				),
-				'address' => array(
-					'label'                 => __( 'Address', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 10,
-					'value'                 => $this->get_user_value( 'donor_address' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'address_2' => array(
-					'label'                 => __( 'Address 2', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 12,
-					'value'                 => $this->get_user_value( 'donor_address_2' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'city' => array(
-					'label'                 => __( 'City', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 14,
-					'value'                 => $this->get_user_value( 'donor_city' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'state' => array(
-					'label'                 => __( 'State', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 16,
-					'value'                 => $this->get_user_value( 'donor_state' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'postcode' => array(
-					'label'                 => __( 'Postcode / ZIP code', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 18,
-					'value'                 => $this->get_user_value( 'donor_postcode' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'country' => array(
-					'label'                 => __( 'Country', 'charitable' ),
-					'type'                  => 'select',
-					'options'               => charitable_get_location_helper()->get_countries(),
-					'priority'              => 20,
-					'value'                 => $this->get_user_value( 'donor_country', charitable_get_option( 'country' ) ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
-				'phone' => array(
-					'label'                 => __( 'Phone', 'charitable' ),
-					'type'                  => 'text',
-					'priority'              => 22,
-					'value'                 => $this->get_user_value( 'donor_phone' ),
-					'required'              => false,
-					'requires_registration' => true,
-					'data_type'             => 'user',
-				),
+			$fields = charitable()->donation_fields()->get_donation_form_fields();
+			$keys   = array_keys( $fields );
+			$fields = array_combine(
+				$keys,
+				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'donation_form' ), $keys )
 			);
 
 			/**
@@ -887,6 +800,36 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			add_action( 'charitable_donation_form_fields', array( $this, 'add_payment_fields' ) );
+		}
+
+		/**
+		 * Set a field's initial value.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array  $field Field definition.
+		 * @param  string $key   The key of the field.
+		 * @return array
+		 */
+		protected function set_field_value( $field, $key ) {
+			if ( array_key_exists( $key, $_POST ) ) {
+				$field['value'] = $_POST[ $key ];
+			} elseif ( array_key_exists( 'donation_id', $_GET ) ) {
+				$donation = charitable_get_donation( $_GET['donation_id'] );
+				$field['value'] = $donation->get( $key );
+			}
+
+			if ( array_key_exists( 'value', $field ) ) {
+				return $field;
+			}
+
+			if ( 'user' == $field['data_type'] ) {
+				$field['value'] = $this->get_user_value( $key, $field['default'] );
+			} else {
+				$field['value'] = $field['default'];
+			}
+
+			return $field;
 		}
 
 		/**

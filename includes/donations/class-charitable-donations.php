@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
+if ( ! class_exists( 'Charitable_Donations' ) ) :
 
 	/**
 	 * Charitable_Donations

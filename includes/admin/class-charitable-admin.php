@@ -76,21 +76,31 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * @return  void
 		 */
 		private function load_dependencies() {
-			$admin_dir = charitable()->get_path( 'admin' );
+			$includes_dir = charitable()->get_path( 'includes' );
+			$admin_dir    = $includes_dir . 'admin/';
 
+			/* Interfaces */
+			require_once( $includes_dir . 'interfaces/interface-charitable-admin-actions.php' );
+
+			/* Abstracts */
+			require_once( $includes_dir . 'abstracts/abstract-class-charitable-admin-actions.php' );
+
+			/* Core */
 			require_once( $admin_dir . 'charitable-core-admin-functions.php' );
 			require_once( $admin_dir . 'class-charitable-meta-box-helper.php' );
 			require_once( $admin_dir . 'class-charitable-admin-pages.php' );
 			require_once( $admin_dir . 'class-charitable-admin-notices.php' );
 
-			/* Admin Actions */
-			require_once( $admin_dir . 'actions/interface-charitable-admin-actions.php' );
-			require_once( $admin_dir . 'actions/abstract-charitable-admin-actions.php' );
+			/* Admin Actions */			
 			require_once( $admin_dir . 'actions/class-charitable-donation-admin-actions.php' );
 
 			/* Campaigns */
 			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
 			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );//
+
+			/* Dashboard widgets */
+			require_once( $admin_dir . 'dashboard-widgets/class-charitable-donations-dashboard-widget.php' );
+			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
 
 			/* Donations */						
 			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
@@ -110,10 +120,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'settings/class-charitable-licenses-settings.php' );
 			require_once( $admin_dir . 'settings/class-charitable-advanced-settings.php' );
 			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );
-
-			/* Dashboard widgets */
-			require_once( $admin_dir . 'dashboard-widgets/class-charitable-donations-dashboard-widget.php' );
-			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
 
 			/* Upgrades */
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade.php' );
