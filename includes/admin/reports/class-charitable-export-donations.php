@@ -16,7 +16,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 
 	/* Include Charitable_Export base class. */
 	if ( ! class_exists( 'Charitable_Export' ) ) {
-		require_once( 'abstract-class-charitable-export.php' );
+		require_once( charitable()->get_path( 'includes' ) . 'abstracts/abstract-class-charitable-export.php' );
 	}
 
 	/**

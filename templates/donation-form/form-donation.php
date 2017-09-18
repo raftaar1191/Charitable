@@ -5,17 +5,16 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
- * @version 1.3.0
+ * @version 1.5.0
  */
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-$form        = $view_args['form'];
-$user_fields = $form->get_user_fields();
-$user        = wp_get_current_user();
-$use_ajax    = 'make_donation' == $form->get_form_action() && (int) Charitable_Gateways::get_instance()->gateways_support_ajax();
-$form_id     = isset( $view_args['form_id'] ) ? $view_args['form_id'] : 'charitable-donation-form';
+$form     = $view_args['form'];
+$user     = wp_get_current_user();
+$use_ajax = 'make_donation' == $form->get_form_action() && (int) Charitable_Gateways::get_instance()->gateways_support_ajax();
+$form_id  = isset( $view_args['form_id'] ) ? $view_args['form_id'] : 'charitable-donation-form';
 
 if ( ! $form ) {
 	return;
@@ -46,4 +45,4 @@ if ( ! $form ) {
 			<img src="<?php echo esc_url( charitable()->get_path( 'assets', false ) ) ?>/images/charitable-loading.gif" width="60" height="60" alt="<?php esc_attr_e( 'Loading&hellip;', 'charitable' ) ?>" />
 		</div>
 	</div>
-</form>
+</form><!-- #<?php echo $form_id ?>-->

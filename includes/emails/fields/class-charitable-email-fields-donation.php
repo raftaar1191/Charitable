@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
         public function init_fields() {
             $fields = array(
                 'donor' => array(
-                    'description' => __( 'The full name of the donor', 'charitable' ),                    
+                    'description' => __( 'The full name of the donor', 'charitable' ),
                     'preview'     => 'John Deere',            
                 ),
                 'donor_first_name' => array(
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
                     'campaigns'           => array( 'callback' => array( $this, 'get_campaigns_for_donation' ) ),
                     'campaign_categories' => array( 'callback' => array( $this, 'get_campaign_categories_for_donation' ) ),
                 ) );
-            }            
+            }
 
             /**
              * Filter the donation email fields.
