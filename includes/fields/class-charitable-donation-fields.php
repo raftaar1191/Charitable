@@ -1,8 +1,8 @@
 <?php
 /**
- * Charitable Fields model.
+ * Charitable Donation Fields model.
  *
- * @package   Charitable/Classes/Charitable_Fields
+ * @package   Charitable/Classes/Charitable_Donation_Fields
  * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
@@ -12,10 +12,10 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Fields' ) ) :
+if ( ! class_exists( 'Charitable_Donation_Fields' ) ) :
 
     /**
-     * Charitable_Fields
+     * Charitable_Donation_Fields
      *
      * @since 1.5.0
      */
@@ -57,15 +57,17 @@ if ( ! class_exists( 'Charitable_Fields' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $field The field to get a value for.
+         * @param  string $field_key The field to get a value for.
          * @return mixed
          */
-        public function get( $field ) {
-            if ( ! $this->has( $field ) ) {
+        public function get( $field_key ) {
+            $field = $this->registry->get_field( $field_key );
+
+            if ( ! $field ) {
                 return null;
             }
             
-            return call_user_func( $this->registry[ $field ]->value_callback, $this->donation, $field );        
+            return call_user_func( $field->value_callback, $this->donation, $field_key );
         }
 
         /**
@@ -73,11 +75,11 @@ if ( ! class_exists( 'Charitable_Fields' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $field The field to check for.
+         * @param  string $field_key The field to check for.
          * @return boolean
          */
-        public function has( $field ) {
-            return array_key_exists( $field, $this->registry );
+        public function has( $field_key ) {
+            return false !== $this->registry->get_field( $field_key );
         }
 
         /**
@@ -85,11 +87,12 @@ if ( ! class_exists( 'Charitable_Fields' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $field The field to check for.
+         * @param  string $field_key The field to check for.
          * @return boolean
          */
-        public function has_value_callback( $field ) {
-            return $this->has( $field ) && false !== $this->registry[ $field ]->value_callback;
+        public function has_value_callback( $field_key ) {
+            $field = $this->registry->get_field( $field_key );
+            return $field && false !== $field->value_callback;
         }
     }
 

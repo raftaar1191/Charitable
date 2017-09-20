@@ -576,6 +576,47 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Checks whether the email has a valid donation object set.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return boolean
+		 */
+		public function has_valid_donation() {
+			if ( is_null( $this->donation ) || ! is_a( $this->donation, 'Charitable_Donation' ) ) {
+				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
+					__( 'You cannot send this email without a donation!', 'charitable' ),
+					'1.0.0'
+				);
+
+				return false;
+			}
+
+			return true;
+		}
+		/**
+		 * Checks whether the email has a valid campaign object set.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return boolean
+		 */
+		public function has_valid_campaign() {
+			if ( is_null( $this->campaign ) || ! is_a( $this->campaign, 'Charitable_Campaign' ) ) {
+				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
+					__( 'You cannot send this email without a campaign!', 'charitable' ),
+					'1.0.0'
+				);
+
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
 		 * Build the email.
 		 *
 		 * @since   1.0.0
@@ -696,24 +737,19 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 			return apply_filters( 'charitable_email_shortcode_options_text', $html, $this );
 		}
 
-		/**		 
+		/**
 		 * This function is deprecated as of 1.5.0. Checks whether the passed email is the
 		 * same as the current email object.
 		 *
-		 * @deprecated
+		 * @deprecated 1.8.0
 		 *
 		 * @since  1.3.2
-		 * @since  1.5.0 Deprecated.
+		 * @since  1.5.0 Deprecated. No notice added to allow extensions to be updated first.
 		 *
 		 * @param  Charitable_Email $email  Email object.
 		 * @return boolean
 		 */
 		protected function is_current_email( Charitable_Email $email ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.5.0'
-			);
-
 			return $email->get_email_id() == $this->get_email_id();
 		}
 	}

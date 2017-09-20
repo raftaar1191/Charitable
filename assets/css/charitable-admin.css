@@ -673,7 +673,7 @@ body.post-type-donation .closed .inside {
   padding: 0; }
 
 #charitable-donation-actions-form {
-  padding: 12px; }
+  padding: 0 12px 12px 12px; }
 
 #charitable-donation-actions-submit {
   background-color: #f8f8f8;

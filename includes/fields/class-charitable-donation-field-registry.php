@@ -62,6 +62,28 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
         }
 
         /**
+         * Return the donation form fields.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        public function get_admin_form_fields() {
+            return array_filter( $this->fields, array( $this, 'show_field_in_admin_form' ) );
+        }
+
+        /**
+         * Return the donation form fields.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        public function get_email_tag_fields() {
+            return array_filter( $this->fields, array( $this, 'show_field_as_email_tag' ) );
+        }
+
+        /**
          * Return the fields to be included in the export.
          *
          * @since  1.5.0
@@ -69,7 +91,18 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
          * @return array
          */
         public function get_export_fields() {
-            return array_filter( $this->fields, array( $this, 'is_field_exportable' ) );
+            return array_filter( $this->fields, array( $this, 'show_field_in_export' ) );
+        }
+
+        /**
+         * Return the fields to be included in the donation meta.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        public function get_meta_fields() {
+            return array_filter( $this->fields, array( $this, 'show_field_in_meta' ) );
         }
 
         /**
@@ -97,37 +130,12 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
             if ( ! is_a( $field, 'Charitable_Donation_Field' ) ) {
                 return;
             }
- 
+
             $field->value_callback         = $this->get_field_value_callback( $field );
             $field->donation_form          = $this->get_field_donation_form( $field );
             $field->admin_form             = $this->get_field_admin_form( $field );
             $field->email_tag              = $this->get_field_email_tag( $field );
             $this->fields[ $field->field ] = $field;
-
-            // $default = array(
-            //     'label'                 => '',
-            //     'type'                  => 'text',
-            //     'required'              => false,
-            //     'data_type'             => 'user',
-            //     'show_in_meta'          => true,
-            //     'show_as_email_tag'     => true,
-            //     'show_in_export'        => true,
-            //     'show_in_donation_form' => true,
-            //     'show_in_admin_form'    => true,
-            // );
-
-            // $args                   = array_merge( $default, $args );
-            // $args['admin_label']    = $this->get_field_admin_label( $args );
-            // $args['priority']       = $this->get_field_priority( $args );
-            // $args['value_callback'] = $this->get_field_value_callback( $args );
-
-            // /* Make sure that options are set for fields that need it. */
-            // if ( $this->field_needs_options( $field['type'] ) ) {
-            //     $has_options     = array_key_exists( 'options', $args ) && is_array( $args['options'] );
-            //     $args['options'] = $has_options ? $args['options'] : array();
-            // }
-
-            // $this->fields[ $field->key ] = $field;
         }
 
         /**

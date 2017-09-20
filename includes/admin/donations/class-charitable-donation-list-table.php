@@ -127,7 +127,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 
 					$display = sprintf( '<mark class="status %s">%s</mark>',
 						esc_attr( $donation->get_status() ),
-						strtolower( $donation->get_status( true ) )
+						strtolower( $donation->get_status_label() )
 					);
 
 					break;

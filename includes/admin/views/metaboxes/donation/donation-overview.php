@@ -38,8 +38,8 @@ $amount   = $donation->get_total_donation_amount();
 	</div>
 	<div id="donation-summary">
 		<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ) ?></h3>
-		<span class="donation-date"><?php echo $donation->get_date() ?></span>
-		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status( true ) ) ?></span>
+		<span class="donation-date"><?php printf( '%s - %s', $donation->get_date(), $donation->get_time() ) ?></span>
+		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status_label() ) ?></span>
 	</div>
 	<?php
 		/**
