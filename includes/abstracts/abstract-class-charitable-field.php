@@ -97,7 +97,7 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		 * @param  array $args Mixed set of field arguments.
 		 * @return array       Parsed arguments.
 		 */
-		protected function parse_args( $args ) {			
+		protected function parse_args( $args ) {		
 			$args      = array_merge( $this->get_defaults(), $args );
 			$keys      = array_keys( $args );
 			$sanitized = array_map( array( $this, 'sanitize_arg' ), $keys, $args );

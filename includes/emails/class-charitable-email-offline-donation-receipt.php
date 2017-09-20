@@ -82,7 +82,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 				return false;
 			}
 
-			if ( ! apply_filters( 'charitable_send_' . self::get_email_id(), true, $donation ) ) {
+			if ( ! apply_filters( 'charitable_send_' . self::get_email_id(), true, $donation_id ) ) {
 				return false;
 			}
 

@@ -147,22 +147,6 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		}
 
 		/**
-		 * Sanitize the value_callback setting.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  mixed $value The argument setting. 
-		 * @return false|callable
-		 */
-		protected function sanitize_value_callback( $value ) {
-			if ( false !== $value && is_callable( $value ) ) {
-				$value = false;
-			}
-
-			return false;
-		}
-
-		/**
 		 * Sanitize the donation_form setting.
 		 *
 		 * @since  1.5.0
