@@ -51,7 +51,7 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 */
 		public function __construct( $args = array() ) {
 			$this->columns = $this->get_csv_columns();
-			$this->args = wp_parse_args( $args, $this->defaults );
+			$this->args    = wp_parse_args( $args, $this->defaults );
 
 			$this->export();
 		}
@@ -75,7 +75,6 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		 * @return  void
 		 */
 		protected function export() {
-
 			$data = array_map( array( $this, 'map_data' ), $this->get_data() );
 
 			$this->print_headers();

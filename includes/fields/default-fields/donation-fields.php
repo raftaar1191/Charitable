@@ -282,7 +282,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'preview'     => '$50.00',
 		),
 		'show_in_meta'   => false,
-		'show_in_export' => true,
+		'show_in_export' => false,
 	),
 	'date' => array(
 		'label'          => __( 'Date of Donation', 'charitable' ),
@@ -342,7 +342,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => false,
 	),
-	'test_mode_text' => array(
+	'test_mode' => array(
 		'label'          => __( 'Donation made in test mode?', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_test_mode_text()

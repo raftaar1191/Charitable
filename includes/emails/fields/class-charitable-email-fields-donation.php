@@ -113,7 +113,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
          * @return string
          */
         public function get_value_from_donation_field( $value, $args ) {
-            if ( ! array_key_exists( $args['show'], $field ) || ! array_key_exists( 'field', $this->fields[ $args['show'] ] ) ) {
+            if ( ! array_key_exists( $args['show'], $this->fields ) || ! array_key_exists( 'field', $this->fields[ $args['show'] ] ) ) {
                 return '';
             }
 
