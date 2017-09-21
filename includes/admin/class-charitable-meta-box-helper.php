@@ -49,24 +49,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		protected $nonce_added = false;
 
 		/**
-		 * Current WP_Post object.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   WP_Post
-		 */
-		protected $post;
-
-		/**
-		 * Custom keys for the current post.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   array
-		 */
-		protected $post_custom_keys;		
-
-		/**
 		 * Create a helper instance.
 		 *
 		 * @since  1.0.0
@@ -76,10 +58,7 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @param  string $nonce_action
 		 */
 		public function __construct( $nonce_action = 'charitable' ) {
-			global $post;
-
 			$this->nonce_action = $nonce_action;
-			$this->post         = $post;
 		} 
 
 		/**
@@ -166,91 +145,6 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		    $is_valid_nonce = ( isset( $_POST[ $this->nonce_name ] ) && wp_verify_nonce( $_POST[ $this->nonce_name ], $this->nonce_action ) );
 
 		    return ! ( $is_autosave || $is_revision ) && $is_valid_nonce;
-		}
-		
-		/**
-		 * Display a field inside a meta box.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  array $field Field definition.
-		 * @return void
-		 */
-		protected function display_field( $field ) {
-			$view           = $this->get_field_view( $field );
-			$field['key']   = $this->get_field_key( $field );
-			$field['value'] = $this->get_field_value( $field );
-
-			charitable_admin_view( $field['view'], $field );
-		}
-
-		/**
-		 * Return the key for a particular field.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  array $field Field definition.
-		 * @return string|void
-		 */
-		protected function get_field_key( $field ) {
-			foreach ( array( 'key', 'meta_key' ) as $key ) {
-				if ( array_key_exists( $key, $field ) ) {
-					return $field[ $key ];
-				}
-			}
-		}
-
-		/**
-		 * Return the current value of a particular field.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  array $field Field definition.
-		 * @return string
-		 */
-		protected function get_field_value( $field ) {
-			if ( array_key_exists( 'value', $field ) ) {
-				return $field['value'];
-			}
-
-			if ( empty( $field['key'] ) ) {
-				return;
-			}
-
-			$default = array_key_exists( 'default', $field ) ? $field['default'] : '';
-
-			if ( ! is_a( $this->post, 'WP_Post' ) ) {
-				return $default;
-			}
-
-			if ( array_key_exists( 'meta_key', $field ) && in_array( $field['meta_key'], $this->get_post_custom_keys() ) ) {
-				return get_post_meta( $this->post->ID, $field['meta_key'], true );
-			}
-
-			return $default;
-		}
-
-		/**
-		 * Return the custom keys for the current post.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return array
-		 */
-		protected function get_post_custom_keys() {
-			if ( ! is_a( $this->post, 'WP_Post' ) ) {
-				return array();
-			}
-
-			if ( ! isset( $this->post_custom_keys ) ) {
-				$this->post_custom_keys = get_post_custom_keys( $this->post->ID );
-
-				if ( ! is_array( $this->post_custom_keys ) ) {
-					$this->post_custom_keys = array();
-				}
-			}
-
-			return $this->post_custom_keys;
 		}
 	}
 

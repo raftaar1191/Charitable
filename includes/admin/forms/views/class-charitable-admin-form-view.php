@@ -288,6 +288,60 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
         }
 
         /**
+         * Return the current value of a particular field.
+         *
+         * @since  1.5.0
+         *
+         * @param  array $field Field definition.
+         * @return string
+         */
+        protected function get_field_value( $field ) {
+            if ( array_key_exists( 'value', $field ) ) {
+                return $field['value'];
+            }
+
+            if ( empty( $field['key'] ) ) {
+                return;
+            }
+
+            $default = array_key_exists( 'default', $field ) ? $field['default'] : '';
+
+            if ( ! is_a( $this->post, 'WP_Post' ) ) {
+                return $default;
+            }
+
+            if ( array_key_exists( 'meta_key', $field ) && in_array( $field['meta_key'], $this->get_post_custom_keys() ) ) {
+                return get_post_meta( $this->post->ID, $field['meta_key'], true );
+            }
+
+            return $default;
+        }
+
+        /**
+         * Return the custom keys for the current post.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        protected function get_post_custom_keys() {
+            if ( ! is_a( $this->post, 'WP_Post' ) ) {
+                return array();
+            }
+
+            if ( ! isset( $this->post_custom_keys ) ) {
+                $this->post_custom_keys = get_post_custom_keys( $this->post->ID );
+
+                if ( ! is_array( $this->post_custom_keys ) ) {
+                    $this->post_custom_keys = array();
+                }
+            }
+
+            return $this->post_custom_keys;
+        }
+
+
+        /**
          * Return the key for a particular field.
          *
          * @since  1.5.0
@@ -366,6 +420,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return false|Charitable_Template False if there is no matching custom template.
          */
         public function get_custom_template( $field_type ) {
+
             if ( ! array_key_exists( $field_type, $this->custom_field_templates ) ) {
                 return false;
             }
