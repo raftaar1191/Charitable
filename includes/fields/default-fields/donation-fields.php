@@ -205,6 +205,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'donation_form'  => array(
 			'priority' => 20,
 			'required' => false,
+			'type'     => 'select',
 			'options'  => charitable_get_location_helper()->get_countries(),
 		),
 		'admin_form'     => true,
