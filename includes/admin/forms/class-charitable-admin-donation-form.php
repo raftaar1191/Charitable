@@ -19,7 +19,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 	 *
 	 * @since  1.5.0
 	 */
-	class Charitable_Admin_Donation_Form extends Charitable_Form {
+	class Charitable_Admin_Donation_Form extends Charitable_Admin_Form {
 
 		/**
 		 * Create a donation form object.
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			$fields = apply_filters( 'charitable_admin_donation_form_fields', array(
 				'donation_fields' => array(
 					'legend'   => __( 'Donation', 'charitable' ),
-					'type'     => 'charitable-fieldset',
+					'type'     => 'fieldset',
 					'fields'   => $this->get_donation_fields(),
 					'priority' => 20,
 				),
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'legend'   => __( 'Donor Details', 'charitable' ),
 					'type'     => 'fieldset',
 					'fields'   => $this->get_user_fields(),
-					'class'    => 'charitable-fieldset',
+					'class'    => 'fieldset',
 					'priority' => 40,
 				),
 			), $this );
