@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * Example usage: charitable_admin_view('metaboxes/campaign-title');
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	string $view      The view to display.
- * @param 	array  $view_args Optional. Arguments to pass through to the view itself.
- * @return 	void
+ * @param  string $view      The view to display.
+ * @param  array  $view_args Optional. Arguments to pass through to the view itself.
+ * @return boolean True if the view exists and was rendered. False otherwise.
  */
 function charitable_admin_view( $view, $view_args = array() ) {
 	$base_path = array_key_exists( 'base_path', $view_args ) ? $view_args['base_path'] : charitable()->get_path( 'admin' ) . 'views/';	
@@ -47,6 +47,8 @@ function charitable_admin_view( $view, $view_args = array() ) {
 			__( 'Passed view (' . $filename . ') not found or is not readable.', 'charitable' ),
 			'1.0.0'
 		);
+
+		return false;
 	}
 
 	ob_start();
@@ -54,14 +56,16 @@ function charitable_admin_view( $view, $view_args = array() ) {
 	include( $filename );
 
 	ob_end_flush();
+
+	return true;
 }
 
 /**
  * Returns the Charitable_Settings helper.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Settings
+ * @return Charitable_Settings
  */
 function charitable_get_admin_settings() {
 	return Charitable_Settings::get_instance();
@@ -70,9 +74,9 @@ function charitable_get_admin_settings() {
 /**
  * Returns the Charitable_Admin_Notices helper.
  *
- * @since   1.4.6
+ * @since  1.4.6
  *
- * @return  Charitable_Admin_Notices
+ * @return Charitable_Admin_Notices
  */
 function charitable_get_admin_notices() {
 	return Charitable_Admin_Notices::get_instance();
@@ -81,10 +85,10 @@ function charitable_get_admin_notices() {
 /**
  * Returns whether we are currently viewing the Charitable settings area.
  *
- * @since   1.2.0
+ * @since  1.2.0
  *
- * @param   string $tab Optional. If passed, the function will also check that we are on the given tab.
- * @return  boolean
+ * @param  string $tab Optional. If passed, the function will also check that we are on the given tab.
+ * @return boolean
  */
 function charitable_is_settings_view( $tab = '' ) {
 	if ( ! empty( $_POST ) ) {

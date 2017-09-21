@@ -2,10 +2,10 @@
 /**
  * Display text field.
  *
- * @author      Eric Daams
- * @package     Charitable/Admin Views/Metaboxes
- * @copyright   Copyright (c) 2017, Studio 164a
- * @since       1.2.0
+ * @author    Eric Daams
+ * @package   Charitable/Admin Views/Metaboxes
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @since     1.2.0
  */
 
 $id         = ltrim( $view_args['key'], '_' );
