@@ -146,7 +146,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
          * @param  Charitable_Donation_Field $field Instance of `Charitable_Donation_Field`.
          * @return boolean
          */
-        public function show_field_in_export( array $field ) {
+        public function show_field_in_export( Charitable_Donation_Field $field ) {
             return $field->show_in_export;
         }
 
@@ -217,11 +217,11 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
             $before = false;
 
             if ( array_key_exists( 'show_after', $settings ) && array_key_exists( $settings['show_after'], $fields ) ) {
-                $after = $fields( $settings['show_after'] );
+                $after = $fields[ $settings['show_after'] ];
             }
 
             if ( array_key_exists( 'show_before', $settings ) && array_key_exists( $settings['show_before'], $fields )  ) {
-                $before = $fields( $settings['show_before'] );
+                $before = $fields[ $settings['show_before'] ];
             }
 
             /* If the field was set to show after a certain field and before another field. */
@@ -306,6 +306,9 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
             if ( true === $settings ) {
                 return $field->donation_form;
             }
+
+            $defaults = $field->donation_form;
+            $settings = array_merge( $defaults, $settings );
 
             return $this->parse_form_settings( $settings, $field );
         }

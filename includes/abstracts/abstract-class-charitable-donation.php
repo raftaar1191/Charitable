@@ -601,10 +601,16 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string
+		 * @return string|boolean Whether to return 
 		 */
-		public function get_test_mode_text() {
-			return get_post_meta( $this->donation_id, 'test_mode', true ) ? 'Yes' : 'No';
+		public function get_test_mode( $text = true ) {
+			$test_mode = get_post_meta( $this->donation_id, 'test_mode', true );
+
+			if ( $text ) {
+				return $test_mode ? __( 'Yes', 'charitable' ) : __( 'No', 'charitable' );
+			}
+
+			return abs( $test_mode );
 		}
 
 		/**
