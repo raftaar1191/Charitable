@@ -29,8 +29,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @param Charitable_Campaign|null $campaign Campaign receiving the donation.
 		 */
 		public function __construct() {
-			$this->campaign = $campaign;
-			$this->id       = uniqid();
+			$this->id = uniqid();
 
 			$this->attach_hooks_and_filters();
 		}
@@ -73,6 +72,26 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		public function get_donation_fields() {
 			return array();
+		}
+
+		/**
+		 * Get the user fields.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_user_fields() {
+			$fields = charitable()->donation_fields()->get_admin_form_fields();
+			$keys   = array_keys( $fields );
+			$fields = array_combine(
+				$keys,
+				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
+			);
+
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
 		}
 
 		/**
@@ -152,6 +171,28 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			}
 
 			
+		}
+
+		/**
+		 * Set a field's initial value.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array  $field Field definition.
+		 * @param  string $key   The key of the field.
+		 * @return array
+		 */
+		protected function set_field_value( $field, $key ) {
+			$field['value'] = $field['default'];
+
+			if ( array_key_exists( $key, $_POST ) ) {
+				$field['value'] = $_POST[ $key ];
+			} elseif ( array_key_exists( 'donation_id', $_GET ) ) {
+				$donation = charitable_get_donation( $_GET['donation_id'] );
+				$field['value'] = $donation->get( $key );
+			}
+
+			return $field;
 		}
 	}
 
