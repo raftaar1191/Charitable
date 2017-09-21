@@ -42,20 +42,6 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		 */
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
-
-			// Campaign columns.
-			add_filter( 'manage_edit-campaign_columns',                 array( $this, 'dashboard_columns' ), 11, 1 );
-
-			add_action( 'add_meta_boxes',                               array( $this, 'add_meta_boxes' ), 10 );
-			add_action( 'add_meta_boxes_campaign',                      array( $this, 'wrap_editor' ) );
-			add_action( 'edit_form_after_title',                        array( $this, 'campaign_form_top' ) );
-			add_action( 'save_post_' . Charitable::CAMPAIGN_POST_TYPE,  array( $this, 'save_campaign' ), 10, 2 );
-			add_filter( 'wp_insert_post_data',                          array( $this, 'set_default_post_content' ) );
-			add_action( 'charitable_campaign_donation_options_metabox', array( $this, 'campaign_donation_options_metabox' ) );
-			add_filter( 'enter_title_here',                             array( $this, 'campaign_enter_title' ), 10, 2 );
-			add_filter( 'get_user_option_meta-box-order_campaign',      '__return_false' );
-			add_filter( 'post_updated_messages', 						array( $this, 'post_messages' ) );
-			add_filter( 'bulk_post_updated_messages',                   array( $this, 'bulk_messages' ), 10, 2 );
 		}
 
 		/**
