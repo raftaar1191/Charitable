@@ -6,7 +6,6 @@
  *
  * @author Studio 164a 
  */
-global $post;
 
 $form = new Charitable_Admin_Donation_Form();
 
