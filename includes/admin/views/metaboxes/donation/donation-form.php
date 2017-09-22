@@ -7,7 +7,9 @@
  * @author Studio 164a 
  */
 
-$form = new Charitable_Admin_Donation_Form();
+global $post;
+
+$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $post->ID ) );
 
 ?>
 <div class="charitable-form-fields cf">        

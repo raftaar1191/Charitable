@@ -114,9 +114,9 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 * @return array
 		 */
 		private function get_meta_boxes() {
-			$screen = get_current_screen();
+			$screen  = get_current_screen();
 
-			if ( 'donation' == $screen->post_type && 'add' == $screen->action ) {
+			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show-form'] ) ) ) {
 				$meta_boxes = $this->get_form_meta_box();
 			} else {
 				$meta_boxes = $this->get_view_meta_boxes();
