@@ -125,7 +125,7 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		public function display_fields( array $fields ) {
 			$form = new Charitable_Admin_Form();
 			$form->set_fields( $fields );
-			$form->render_fields();
+			$form->view()->render_fields();
 		}
 		
 		/**
