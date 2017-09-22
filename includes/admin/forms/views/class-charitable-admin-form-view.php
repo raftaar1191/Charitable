@@ -86,7 +86,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return void
          */
         public function render() {
-
         }
 
         /**
@@ -114,15 +113,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
                 }
             }
 
-            $i = 1;
-
-            foreach ( $fields as $key => $field ) {
-                $this->render_field( $field, $key, array(
-                    'index' => $i,
-                ) );
-
-                $i += $this->increment_index( $field, $key, $i );
-            }
+            array_walk( $fields, array( $this, 'render_field' ) );
         }
 
         /**
@@ -132,7 +123,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          *
          * @param  array  $field Field definition.
          * @param  string $key   Field key.
-         * @param  array $args   Mixed array of arguments.
+         * @param  array $args   Unused. Mixed array of arguments.
          * @return boolean       False if the field was not rendered. True otherwise.
          */
         public function render_field( $field, $key, $args = array() ) {
@@ -287,127 +278,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             return $this->post_custom_keys;
         }
 
-
-        /**
-         * Return the key for a particular field.
-         *
-         * @since  1.5.0
-         *
-         * @param  string      $key       Field key.
-         * @param  string|null $namespace Namespace for the form field's name attribute.
-         * @param  int         $index     The current index.         
-         * @return string
-         */
-        protected function get_field_name( $key, $namespace = null, $index = 0 ) {
-            $name = $key;
-
-            if ( ! is_null( $namespace ) ) {
-                $name = $namespace . '[' . $name . ']';
-            }
-
-            /**
-             * Filter the name attribute to be used for the field.
-             *
-             * @since 1.0.0
-             *
-             * @param string          $name      The name attribute.
-             * @param string          $key       The field's key.
-             * @param string|null     $namespace Namespace for the field's attribute.
-             * @param Charitable_Form $form      The Charitable_Form object.
-             * @param int             $index     The current index.
-             */
-            return apply_filters( 'charitable_form_field_key', $name, $key, $namespace, $this->form, $index );
-        }
-
-        /**
-         * Return a field template.
-         *
-         * @since  1.5.0
-         *
-         * @param  array $field              Field definition.
-         * @param  int   $index              The current index.
-         * @return Charitable_Template|false Returns a template if the template file exists. If it doesn't returns false.
-         */
-        public function get_field_template( $field, $index ) {
-            $template = $this->get_custom_template( $field['type'] );
-
-            /**
-             * Filter the template to be used for the form.
-             *
-             * Any callback hooking into this filter should return a `Charitable_Template` 
-             * instance. Anything else will be ignored.
-             *
-             * @since 1.0.0
-             *
-             * @param false|Charitable_Template $template False by default.
-             * @param array                     $field    Field definition.
-             * @param Charitable_Form           $form     The Charitable_Form object.
-             * @param int                       $index    The current index.
-             */            
-            $template = apply_filters( 'charitable_form_field_template', $template, $field, $this->form, $index );
-
-            /* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
-            if ( ! $this->is_valid_template( $template ) ) {
-                $template = new Charitable_Template( $this->get_template_name( $field ), false );
-            }
-
-            if ( ! $template->template_file_exists() ) {
-                return false;
-            }
-
-            return $template;
-        }
-
-        /**
-         * Return a custom template for a particular field.
-         *
-         * @since  1.5.0
-         *
-         * @param  string $field_type The type of field.
-         * @return false|Charitable_Template False if there is no matching custom template.
-         */
-        public function get_custom_template( $field_type ) {
-
-            if ( ! array_key_exists( $field_type, $this->custom_field_templates ) ) {
-                return false;
-            }
-
-            $class = $this->custom_field_templates[ $field_type ]['class'];
-            $path  = $this->custom_field_templates[ $field_type ]['path'];
-
-            /* Final sanity check to make sure the template class exists. */
-            if ( ! class_exists( $class ) ) {
-                return false;
-            }
-
-            return new $class( $path, false );
-        }
-
-        /**
-         * Return the template name used for this field.
-         *
-         * @since  1.5.0
-         *
-         * @param  array $field Field definition.
-         * @return string
-         */
-        public function get_template_name( $field ) {
-            if ( $this->use_default_field_template( $field['type'] ) ) {
-                $template_name = 'form-fields/default.php';
-            } else {
-                $template_name = 'form-fields/' . $field['type'] . '.php';
-            }
-
-            /**
-             * Filter the template name.
-             *
-             * @since 1.0.0
-             *
-             * @param string $template_name Default template name.
-             */
-            return apply_filters( 'charitable_form_field_template_name', $template_name );
-        }
-
         /**
          * Whether the given field type can use the default field template.
          *
@@ -432,174 +302,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             ) );
 
             return in_array( $field_type, $default_field_types );
-        }
-
-        /**
-         * Checks whether a template is valid.
-         *
-         * @since  1.5.0
-         *
-         * @param  mixed $template Template we're checking.
-         * @return boolean
-         */
-        protected function is_valid_template( $template ) {
-            return is_object( $template ) && is_a( $template, 'Charitable_Template' );
-        }
-
-        /**
-         * Return classes that will be applied to the field.
-         *
-         * @since  1.5.0
-         *
-         * @param  array $field Field definition.
-         * @param  int   $index Field index.
-         * @return string
-         */
-        public function get_field_classes( $field, $index = 0 ) {
-            if ( 'hidden' == $field['type'] ) {
-                return;
-            }
-
-            $classes = $this->get_field_type_classes( $field['type'] );
-
-            if ( array_key_exists( 'class', $field ) ) {
-                $classes[] = $field['class'];
-            }
-
-            if ( array_key_exists( 'required', $field ) && $field['required'] ) {
-                $classes[] = 'required-field';
-            }
-
-            if ( array_key_exists( 'fullwidth', $field ) && $field['fullwidth'] ) {
-                $classes[] = 'fullwidth';
-            } elseif ( $index > 0 ) {
-                $classes[] = $index % 2 ? 'odd' : 'even';
-            }
-
-            /**
-             * Filter the array of classes before it is returned as a string.
-             *
-             * @since 1.0.0
-             *
-             * @param array $classes List of classes.
-             * @param array $field   Field definition.
-             * @param int   $index   The field index.
-             */
-            $classes = apply_filters( 'charitable_form_field_classes', $classes, $field, $index );
-
-            return implode( ' ', $classes );
-        }
-
-        /**
-         * Return array of classes based on the field type.
-         *
-         * @since  1.5.0
-         *
-         * @param  string $type Type of field.
-         * @return string[]
-         */
-        public function get_field_type_classes( $type ) {
-            $classes = array();
-
-            switch ( $type ) {
-                case 'paragraph' :
-                    $classes[] = 'charitable-form-content';
-                    break;
-
-                case 'fieldset' :
-                    $classes[] = 'charitable-fieldset';
-                    break;
-
-                default :
-                    $classes[] = 'charitable-form-field';
-                    $classes[] = 'charitable-form-field-' . $type;
-            }
-
-            return $classes;
-        }
-
-        /**
-         * Set how much the index should be incremented by.
-         *
-         * @since  1.5.0
-         *
-         * @param  array    $field The field definition.
-         * @param  string   $key   The key of the current field. May be empty.
-         * @param  int|null $index The current index. May be null.
-         * @return int
-         */
-        public function increment_index( $field, $key = '', $index = null) {
-            if ( ! $this->should_increment( $field ) ) {
-                return 0;
-            }
-
-            /**
-             * Set the default increment.
-             *
-             * @since 1.0.0
-             *
-             * @param int             $increment The default increment amount. Defaults to 1.
-             * @param array           $field     The field definition.
-             * @param string          $key       The key of the current field.
-             * @param Charitable_Form $form      The form we are displaying.
-             * @param int             $index     The current index.
-             */
-            return apply_filters( 'charitable_form_field_increment', 1, $field, $key, $this->form, $index );            
-        }
-
-        /**
-         * Whether the index should be incremented.
-         *
-         * @since  1.5.0
-         *
-         * @param  array $field Field definition.
-         * @return boolean
-         */
-        protected function should_increment( $field ) {
-            if ( in_array( $field['type'], array( 'hidden', 'paragraph', 'fieldset' ) ) ) {
-                return false;
-            }
-
-            if ( array_key_exists( 'fullwidth', $field ) && $field['fullwidth'] ) {
-                return false;
-            }
-
-            return true;
-        }
-
-        /**
-         * Set up custom field templates.
-         *
-         * @since  1.5.0
-         *
-         * @return array
-         */
-        protected function init_custom_field_templates() {
-            /**
-             * Filter the custom field templates.
-             *
-             * @since 1.5.0
-             */
-            $templates = apply_filters( 'charitable_Admin_form_view_custom_field_templates', array(
-                'donation-amount' => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donation-amount.php' ),
-                'donor-fields'    => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donor-fields.php' ),
-                'gateway-fields'  => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/gateway-fields.php' ),
-                'cc-expiration'   => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/cc-expiration.php' ),
-            ) );
-
-            return array_filter( $templates, array( $this, 'sanitize_custom_field_template' ) );
-        }
-
-        /**
-         * Filter custom field templates to make sure they all have a class and path.
-         *
-         * @since  1.5.0
-         *
-         * @param  array $template The registered template.
-         * @return boolean
-         */
-        protected function sanitize_custom_field_template( $template ) {
-            return is_array( $template ) && array_key_exists( 'path', $template ) && array_key_exists( 'class', $template );
         }
 
         /**
