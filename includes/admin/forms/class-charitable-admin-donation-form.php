@@ -22,16 +22,38 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 	class Charitable_Admin_Donation_Form extends Charitable_Admin_Form {
 
 		/**
+		 * Current Charitable_Donation object, or false if it's a new donation.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   Charitable_Donation|false
+		 */
+		protected $donation;
+
+		/**
 		 * Create a donation form object.
 		 *
-		 * @since 1.0.0
+		 * @since 1.5.0
 		 *
-		 * @param Charitable_Campaign|null $campaign Campaign receiving the donation.
+		 * @param Charitable_Donation|false $donation For existing donations, the `Charitable_Donation` instance.
+		 *                                            False for new donations.
 		 */
-		public function __construct() {
-			$this->id = uniqid();
+		public function __construct( $donation ) {
+			$this->id       = uniqid();
+			$this->donation = $donation;
 
 			$this->attach_hooks_and_filters();
+		}
+
+		/**
+		 * Return the current Charitable_Donation instance, or false if this is a new donation.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return Charitable_Donation|false
+		 */
+		public function get_donation() {
+			return $this->donation;
 		}
 
 		/**
@@ -71,7 +93,18 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_donation_fields() {
-			return array();
+			if ( ! $this->donation ) {
+				$value = array();
+			} else {
+				$value = $this->donation->get_campaign_donations();
+			}
+
+			return array(
+				'campaign_donations' => array(
+					'type'  => 'campaign-donations',
+					'value' => $value,
+				),
+			);
 		}
 
 		/**

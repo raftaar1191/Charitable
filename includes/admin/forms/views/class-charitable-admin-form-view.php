@@ -58,10 +58,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @param Charitable_Form $form Form object.
          */
         public function __construct( Charitable_Form $form ) {
-            global $post;
-
             $this->form = $form;
-            $this->post = $post;
         }
 
         /**
@@ -127,6 +124,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return boolean       False if the field was not rendered. True otherwise.
          */
         public function render_field( $field, $key, $args = array() ) {
+            // echo '<pre>'; var_dump( $this ); echo '</pre>';
             $field['form_view']  = $this;
             $field['view']       = $this->get_field_view( $field );
             $field['type']       = $this->get_field_type( $field );
@@ -244,15 +242,13 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
             $default = array_key_exists( 'default', $field ) ? $field['default'] : '';
 
-            if ( ! is_a( $this->post, 'WP_Post' ) ) {
+            if ( ! $this->form->get_donation() ) {
                 return $default;
             }
 
-            if ( array_key_exists( 'meta_key', $field ) && in_array( $field['meta_key'], $this->get_post_custom_keys() ) ) {
-                return get_post_meta( $this->post->ID, $field['meta_key'], true );
-            }
+            $value = $this->form->get_donation()->get( $field['key'] );
 
-            return $default;
+            return $value ? $value : $default;
         }
 
         /**

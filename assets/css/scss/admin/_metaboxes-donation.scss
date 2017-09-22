@@ -12,8 +12,7 @@ body.post-type-donation {
     }
 }
 
-#donation-overview {    
-
+#donation-overview {
     .charitable-metabox {
         @include clearfix;
     }
@@ -160,4 +159,33 @@ body.post-type-donation {
     tbody td {
         border-bottom: 1px solid #e5e5e5;
     }    
+}
+
+#charitable-user-fields-wrap {
+    width: 100%;
+    max-width: 600px;
+
+    .charitable-metabox-wrap input,
+    .charitable-metabox-wrap select {
+        padding: 14px 10px;
+    }
+
+    #charitable-first-name-wrap,
+    #charitable-last-name-wrap {
+        width: 48%;
+    }
+
+    #charitable-first-name-wrap {
+        padding-right: 4%;
+    }
+
+    #charitable-postcode-wrap {
+        width: 26%;
+        padding-right: 4%;
+    }
+
+    #charitable-country-wrap {
+        width: 70%;
+        clear: right;
+    }
 }

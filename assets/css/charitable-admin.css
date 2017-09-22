@@ -121,6 +121,8 @@
   display: block;
   padding-top: 6px;
   font-style: italic; }
+.charitable-metabox .charitable-metabox .charitable-metabox-wrap {
+  margin-bottom: 24px; }
 .charitable-metabox .charitable-metabox .widefat th {
   font-size: 13px; }
 .charitable-metabox .charitable-metabox .widefat tbody th {
@@ -162,16 +164,23 @@
   margin-top: 0; }
 
 .charitable-metabox-wrap {
-  margin-bottom: 24px; }
+  width: 100%;
+  float: left;
+  margin-bottom: 12px; }
   .charitable-metabox-wrap label {
     display: block;
     margin-bottom: 6px; }
-
-.charitable-checkbox-wrap,
-.charitable-select-wrap,
-.charitable-textarea-wrap,
-.charitable-image-wrap {
-  margin-bottom: 12px; }
+  .charitable-metabox-wrap input,
+  .charitable-metabox-wrap select,
+  .charitable-metabox-wrap textarea {
+    width: 100%;
+    padding: 14px 10px; }
+  .charitable-metabox-wrap select {
+    height: 46px;
+    line-height: 46px; }
+  .charitable-metabox-wrap input[type=checkbox],
+  .charitable-metabox-wrap input[type=radio] {
+    width: auto; }
 
 .charitable-checkbox-wrap label {
   display: inline; }
@@ -265,6 +274,11 @@ body.post-type-campaign .postbox-container .empty-container {
   display: block;
   padding-top: 6px;
   font-style: italic; }
+#campaign-title .charitable-metabox .charitable-metabox-wrap,
+#campaign-goal .charitable-metabox .charitable-metabox-wrap,
+#campaign-end-date .charitable-metabox .charitable-metabox-wrap,
+#campaign-description .charitable-metabox .charitable-metabox-wrap {
+  margin-bottom: 24px; }
 #campaign-title .charitable-metabox .widefat th,
 #campaign-goal .charitable-metabox .widefat th,
 #campaign-end-date .charitable-metabox .widefat th,
@@ -671,6 +685,24 @@ body.post-type-donation .closed .inside {
   background: #f8f8f8; }
 #donation-log tbody td {
   border-bottom: 1px solid #e5e5e5; }
+
+#charitable-user-fields-wrap {
+  width: 100%;
+  max-width: 600px; }
+  #charitable-user-fields-wrap .charitable-metabox-wrap input,
+  #charitable-user-fields-wrap .charitable-metabox-wrap select {
+    padding: 14px 10px; }
+  #charitable-user-fields-wrap #charitable-first-name-wrap,
+  #charitable-user-fields-wrap #charitable-last-name-wrap {
+    width: 48%; }
+  #charitable-user-fields-wrap #charitable-first-name-wrap {
+    padding-right: 4%; }
+  #charitable-user-fields-wrap #charitable-postcode-wrap {
+    width: 26%;
+    padding-right: 4%; }
+  #charitable-user-fields-wrap #charitable-country-wrap {
+    width: 70%;
+    clear: right; }
 
 .charitable-settings-field {
   padding: 7px 10px;
