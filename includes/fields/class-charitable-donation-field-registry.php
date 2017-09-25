@@ -31,12 +31,22 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
         protected $fields;
 
         /**
+         * Admin form fields.
+         *
+         * @since 1.5.0
+         *
+         * @var   array
+         */
+        protected $admin_form_fields;
+
+        /**
          * Create class object.
          *
          * @since 1.5.0
          */
         public function __construct() {
-            $this->fields = array();
+            $this->fields           = array();
+            $this->default_sections = array();
         }
 
         /**
@@ -68,8 +78,26 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
          *
          * @return array
          */
-        public function get_admin_form_fields() {
-            return array_filter( $this->fields, array( $this, 'show_field_in_admin_form' ) );
+        public function get_admin_form_fields( $section = '' ) {
+            if ( ! isset( $this->admin_form_fields ) ) {
+                $this->admin_form_fields = array_filter( $this->fields, array( $this, 'show_field_in_admin_form' ) );
+            }
+
+            if ( empty( $section ) ) {
+                return $this->admin_form_fields;
+            }
+
+            $fields = array();
+
+            foreach ( $this->admin_form_fields as $key => $field ) {
+                if ( $section != $field->admin_form['section'] ) {
+                    continue;
+                }
+
+                $fields[ $key ] = $field;
+            }
+
+            return $fields;
         }
 
         /**
@@ -118,7 +146,20 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
             return array_key_exists( $field_key, $this->fields ) ? $this->fields[ $field_key ] : false;
         }
 
-         /**
+        /**
+         * Set the default form section.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $section Section to register.
+         * @param  string $form    Which form we're registering the section in.
+         * @return void
+         */
+        public function set_default_section( $section, $form = 'public' ) {
+            $this->default_sections[ $form ] = $section;
+        }
+
+        /**
          * Register a field.
          *
          * @since  1.5.0
@@ -283,6 +324,10 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
                 return $settings;
             }
 
+            if ( ! array_key_exists( 'section', $settings ) ) {
+                $settings['section'] = $this->default_sections['public'];    
+            }
+
             return $this->parse_form_settings( $settings, $field );
         }
 
@@ -307,8 +352,13 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
                 return $field->donation_form;
             }
 
-            $defaults = $field->donation_form;
-            $settings = array_merge( $defaults, $settings );
+            if ( is_array( $field->donation_form ) ) {
+                $settings = array_merge( $field->donation_form, $settings );
+            }
+
+            if ( ! array_key_exists( 'section', $settings ) ) {
+                $settings['section'] = $this->default_sections['admin'];    
+            }
 
             return $this->parse_form_settings( $settings, $field );
         }

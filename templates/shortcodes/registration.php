@@ -28,7 +28,7 @@ do_action( 'charitable_user_registration_before', $form );
 
 	?>
 	<div class="charitable-form-fields cf">
-		<?php $form->view()->render_fields() ?>
+		<?php $form->view()->render() ?>
 	</div><!-- .charitable-form-fields -->
 	<?php
 

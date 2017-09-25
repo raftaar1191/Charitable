@@ -140,12 +140,23 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 * @return array
 		 */
 		public function get_form_meta_box() {
+			global $post;
+			
+			$form       = new Charitable_Admin_Donation_Form( charitable_get_donation( $post->ID ) );
 			$meta_boxes = array(
 				'donation-form' => array(
 					'title'    => __( 'Donation Form', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'high',
 					'view'     => 'metaboxes/donation/donation-form',
+					'form'     => $form,
+				),
+				'donation-form-meta' => array(
+					'title'    => __( 'Additional Details', 'charitable' ),
+					'context'  => 'side',
+					'priority' => 'high',
+					'view'     => 'metaboxes/donation/donation-form-meta',
+					'form'     => $form,
 				),
 			);
 
@@ -223,6 +234,14 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		public function save_donation( $donation_id, WP_Post $post ) {
 			if ( ! $this->meta_box_helper->user_can_save( $donation_id ) ) {
 				return;
+			}
+
+			if ( array_key_exists( 'charitable_action', $_POST ) && ! did_action( 'charitable_before_save_donation' ) ) {
+				$form   = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
+				
+				if ( $form->validate_submission() ) {
+					charitable_create_donation( $form->get_donation_values() );
+				}
 			}
 
 			/* Handle any fired actions */

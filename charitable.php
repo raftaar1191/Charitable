@@ -503,8 +503,12 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
         public function donation_fields() {
             if ( ! isset( $this->donation_fields ) ) {
+                /* Instantiate Registry and set default sections. */
                 $this->donation_fields = new Charitable_Donation_Field_Registry();
-                $fields                = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+                $this->donation_fields->set_default_section( 'user', 'public' );
+                $this->donation_fields->set_default_section( 'user', 'admin' );
+
+                $fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
 
                 foreach ( $fields as $key => $args ) {
                     $this->donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );

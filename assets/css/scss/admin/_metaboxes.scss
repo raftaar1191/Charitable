@@ -130,6 +130,11 @@
     @include charitable_metabox();    
 }
 
+.charitable-metabox-header {
+    float: left;
+    width: 100%;
+}
+
 .charitable-metabox-wrap {
     width: 100%;
     float: left;

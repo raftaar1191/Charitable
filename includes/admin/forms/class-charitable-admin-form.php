@@ -46,6 +46,24 @@ if ( ! class_exists( 'Charitable_Admin_Form' ) ) :
         }
 
         /**
+         * Returns hidden fields to be added to the form.
+         *
+         * @since  1.5.0
+         *
+         * @return array
+         */
+        public function get_hidden_fields() {
+            $fields = parent::get_hidden_fields();
+
+            unset(
+                $fields['_wp_http_referer'],
+                $fields[$this->nonce_name]
+            );
+            
+            return $fields;
+        }
+
+        /**
          * Set the form fields.
          *
          * @since  1.5.0

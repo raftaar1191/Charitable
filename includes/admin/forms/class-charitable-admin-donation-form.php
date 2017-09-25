@@ -31,6 +31,15 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		protected $donation;
 
 		/**
+		 * Form action.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   string
+		 */
+		protected $form_action;
+
+		/**
 		 * Create a donation form object.
 		 *
 		 * @since 1.5.0
@@ -39,8 +48,9 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *                                            False for new donations.
 		 */
 		public function __construct( $donation ) {
-			$this->id       = uniqid();
-			$this->donation = $donation;
+			$this->id          = uniqid();
+			$this->donation    = $donation;
+			$this->form_action = $this->has_donation() ? 'update_donation' : 'add_donation';
 
 			$this->attach_hooks_and_filters();
 		}
@@ -57,6 +67,17 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		}
 
 		/**
+		 * Whether there is a current active donation we are editing.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function has_donation() {
+			return $this->donation && 'auto-draft' != $this->donation->get_status();
+		}
+
+		/**
 		 * Return the donation form fields.
 		 *
 		 * @since  1.5.0
@@ -64,21 +85,71 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array[]
 		 */
 		public function get_fields() {
-			$fields = apply_filters( 'charitable_admin_donation_form_fields', array(
-				'donation_fields' => array(
-					'legend'   => __( 'Donation', 'charitable' ),
-					'type'     => 'fieldset',
-					'fields'   => $this->get_donation_fields(),
+			$fields = array(
+				'donation_header' => array(
+					'type'     => 'heading',
+					'level'    => 'h3',
+					'title'    => __( 'Donation', 'charitable' ),
 					'priority' => 20,
 				),
-				'user_fields' => array(
-					'legend'   => __( 'Donor Details', 'charitable' ),
+				'donation_fields' => array(
 					'type'     => 'fieldset',
-					'fields'   => $this->get_user_fields(),
-					'class'    => 'fieldset',
+					'fields'   => $this->get_donation_fields(),
+					'priority' => 21,
+				),
+				'donor_header' => array(
+					'type'     => 'heading',
+					'level'    => 'h3',
+					'title'    => __( 'Donor', 'charitable' ),
 					'priority' => 40,
 				),
-			), $this );
+				'donor_id' => array(
+					'type'     => 'select',
+					'options'  => $this->get_all_donors(),
+					'priority' => 41,
+				),
+				'user_fields' => array(
+					'type'     => 'fieldset',
+					'fields'   => $this->get_section_fields( 'user' ),
+					'priority' => 50,
+				),
+				'meta_fields' => array(
+					'type'     => 'fieldset',
+					'fields'   => $this->get_section_fields( 'meta' ),
+					'priority' => 60,
+				),
+			);
+
+			if ( ! $this->has_donation() ) {
+				$fields['user_fields']['attrs'] = array(
+					'data-trigger-key'   => '#donor-id',
+					'data-trigger-value' => 'new',
+				);
+
+				$fields['meta_fields']['fields']['send_donation_receipt'] = array(
+					'type'     => 'checkbox',
+					'label'    => __( 'Send an email receipt to the donor.', 'charitable' ),
+					'value'    => 1,
+					'default'  => 1,
+					'priority' => 70,
+				);
+			}
+
+			/**
+			 * Filter the admin donation form fields.
+			 *
+			 * Note that the recommended way to add fields to the form is
+			 * with the Donation Fields API. This filter provides the ability
+			 * to re-organize the sections within the form and change fields
+			 * in the form that do not come from the Donation Fields API
+			 * (headers, campaign/amount field, resend receipt).
+			 *
+			 * @since 1.5.0
+			 *
+			 * @var   array                          $fields Array of fields.
+			 * @var   Charitable_Admin_Donation_Form $form   This instance of `Charitable_Admin_Donation_Form`.
+			 */
+			$fields = apply_filters( 'charitable_admin_donation_form_fields', $fields, $this );
 
 			uasort( $fields, 'charitable_priority_sort' );
 
@@ -108,34 +179,82 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		}
 
 		/**
-		 * Get the user fields.
+		 * Return all the fields in a particular section.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $section The section we're fetching fields for.
+		 * @return array
+		 */
+		public function get_section_fields( $section ) {
+			$fields = charitable()->donation_fields()->get_admin_form_fields( $section );			
+			$keys   = array_keys( $fields );
+			$fields = array_combine(
+				$keys,
+				array_map( array( $this, 'maybe_set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
+			);
+
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;		
+		}
+
+		/**
+		 * Return the merged fields.
 		 *
 		 * @since  1.5.0
 		 *
 		 * @return array
 		 */
-		public function get_user_fields() {
-			$fields = charitable()->donation_fields()->get_admin_form_fields();
-			$keys   = array_keys( $fields );
-			$fields = array_combine(
-				$keys,
-				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
-			);
+		public function get_merged_fields() {
+			$fields = array();
 
-			uasort( $fields, 'charitable_priority_sort' );
+			foreach ( $this->get_fields() as $section_id => $section ) {
+				if ( array_key_exists( 'fields', $section ) ) {
+					$fields = array_merge( $fields, $section['fields'] );
+				} else {
+					$fields[ $section_id ] = $section;
+				}
+			}
 
 			return $fields;
 		}
 
 		/**
+		 * Get the value submitted for a particular field.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $field The field.
+		 * @return mixed
+		 */
+		public function get_submitted_value( $field ) {
+			return array_key_exists( $field, $_POST ) ? $_POST[ $field ] : false;
+		}
+
+		/**
+		 * Filter a campaign donation array, making sure both a campaign
+		 * and amount are provided.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function filter_campaign_donation( $campaign_donation ) {
+			return array_key_exists( 'campaign_id', $campaign_donation )
+				&& array_key_exists( 'amount', $campaign_donation )
+				&& ! empty( $campaign_donation['campaign_id'] )
+				&& ! empty( $campaign_donation['amount'] );
+		}
+
+		/**
 		 * Validate the form submission.
 		 *
-		 * @since  1.4.4
+		 * @since  1.5.0
 		 *
 		 * @return boolean
 		 */
 		public function validate_submission() {
-
 			/* If we have already validated the submission, return the value. */
 			if ( $this->validated ) {
 				return $this->valid;
@@ -143,14 +262,34 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			$this->validated = true;
 
-			$this->valid = $this->validate_security_check()
-				&& $this->check_required_fields( $this->get_merged_fields() )
-				&& $this->validate_amount();
+			$this->valid = $this->check_required_fields( $this->get_merged_fields() );
 
+			$campaign_donations          = array_key_exists( 'campaign_donations', $_POST ) ? $_POST['campaign_donations'] : array();
+			$_POST['campaign_donations'] = array_filter( $campaign_donations, array( $this, 'filter_campaign_donation' ) );
+			
+			if ( empty( $_POST['campaign_donations'] ) ) {
+				charitable_get_notices()->add_error( __( 'You must provide both a campaign and amount.', 'charitable' ) );
+
+				$this->valid = false;
+			}
+
+			if ( ! $this->get_submitted_value( 'donor_id' ) && ! $this->get_submitted_value( 'email' ) ) {
+				charitable_get_notices()->add_error( __( 'Please choose an existing donor or provide an email address for a new donor.', 'charitable' ) );
+
+				$this->valid = false;
+			}
+
+			/**
+			 * Filter whether the admin donation form passes validation.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param boolean                        $valid Whether the form submission is valid.
+			 * @param Charitable_Admin_Donation_Form $form  This instance of `Charitable_Admin_Donation_Form`.
+			 */
 			$this->valid = apply_filters( 'charitable_validate_admin_donation_form_submission', $this->valid, $this );
 
 			return $this->valid;
-
 		}
 
 		/**
@@ -161,49 +300,74 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_donation_values() {
-			$submitted = $this->get_submitted_values();
+			$values = array(
+				'ID'        => $this->get_submitted_value( 'ID' ),				
+				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),
+				'campaigns' => $this->get_submitted_value( 'campaign_donations' ),
+				'status'    => $this->get_submitted_value( 'status' ),
+				'date_gmt'  => charitable_sanitize_date( $this->get_submitted_value( 'date' ), 'Y-m-d H:i:s' ),
+			);
+
+			if ( 'add_donation' == $this->get_submitted_value( 'charitable_action' ) ) {
+				$values['donation_gateway'] = __( 'Manual', 'charitable' );
+			}
 
 
-			return apply_filters( 'charitable_admin_donation_form_submission_values', $values, $submitted, $this );
+			foreach ( $this->get_merged_fields() as $key => $field ) {
+				if ( array_key_exists( 'data_type', $field ) && 'core' != $field['data_type'] ) {
+					if ( array_key_exists( 'type', $field ) ) {
+						$data_type  = $field['data_type'];
+						$field_type = $field['type'];
+						$default    = 'checkbox' == $field_type ? false : '';
+						$submitted  = $this->get_submitted_value( $key );
+
+						$values[ $data_type ][ $key ] = $submitted ? $submitted : $default;
+					}
+				}
+			}
+
+			/**
+			 * Filter the submitted values.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array                          $values The submitted values.
+			 * @param Charitable_Admin_Donation_Form $form   This instance of `Charitable_Admin_Donation_Form`.
+			 */
+			return apply_filters( 'charitable_admin_donation_form_submission_values', $values, $this );
 		}
 
 		/**
-		 * Render the donation form.
+		 * Get a key=>value array of all existing donors.
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return void
+		 * @return array
 		 */
-		public function render() {
-			charitable_template( 'donation-form/form-donation.php', array(
-				'campaign' => null,
-				'form'     => $this,
-				'form_id'  => 'charitable-admin-donation-form',
+		protected function get_all_donors() {
+			$donors = new Charitable_Donor_Query( array(
+				'number'  => -1,
+				'orderby' => 'name',
+				'order'   => 'ASC',
+				'output'  => 'raw',
 			) );
-		}
 
-		/**
-		 * Render a form field.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  array           $field     Field definition.
-		 * @param  string          $key       Field key.
-		 * @param  Charitable_Form $form      The form object.
-		 * @param  int             $index     The current index.
-		 * @param  string          $namespace Namespace for the form field's name attribute.
-		 * @return boolean False if the field was not rendered. True otherwise.
-		 */
-		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
+			$donor_list = array();
+
+			foreach ( $donors as $donor ) {
+				$donor_list[ $donor->donor_id ] = trim( sprintf( '%s %s', $donor->first_name, $donor->last_name ) ) . ' - ' . $donor->email;
 			}
 
-			if ( ! isset( $field['type'] ) ) {
-				return false;
-			}
+			$list = array(
+				''         => __( 'Select a Donor', 'charitable' ),
+				'new'      => __( 'Add a New Donor', 'charitable' ),
+				'existing' => array(
+					'label'   => __( 'Existing Donors', 'charitable' ),
+					'options' => $donor_list,
+				),
+			);
 
-			
+			return $list;
 		}
 
 		/**
@@ -215,17 +379,24 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @param  string $key   The key of the field.
 		 * @return array
 		 */
-		protected function set_field_value( $field, $key ) {
-			$field['value'] = $field['default'];
-
+		protected function maybe_set_field_value( $field, $key ) {
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
-			} elseif ( array_key_exists( 'donation_id', $_GET ) ) {
-				$donation = charitable_get_donation( $_GET['donation_id'] );
-				$field['value'] = $donation->get( $key );
 			}
 
-			return $field;
+			$field['value'] = array_key_exists( 'default', $field ) ? $field['default'] : '';
+
+            if ( ! $this->has_donation() ) {
+                return $field;
+            }
+
+            $value = $this->donation->get( $key );
+
+            if ( $value ) {
+            	$field['value'] = $value;
+            }
+
+            return $field;
 		}
 	}
 

@@ -124,7 +124,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			/* Upgrades */
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade.php' );
 			require_once( $admin_dir . 'upgrades/class-charitable-upgrade-page.php' );
-			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );
+			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );			
 		}
 
 		/**

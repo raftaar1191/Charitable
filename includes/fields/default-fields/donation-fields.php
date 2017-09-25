@@ -1,4 +1,4 @@
-<?php
+'<?php
 /**
  * Returns an array of all the default donation fields.
  *
@@ -58,7 +58,9 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'priority' => 4,
 			'required' => true,            
 		),
-		'admin_form'     => true,
+		'admin_form'     => array(
+			'required' => false,            
+		),
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 		'email_tag'      => array(
@@ -76,7 +78,9 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'priority' => 6,
 			'required' => true,
 		),
-		'admin_form'     => true,
+		'admin_form'     => array(
+			'required' => false,
+		),
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 		'email_tag'      => false,
@@ -104,7 +108,9 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'priority' => 8,
 			'required' => true,            
 		),
-		'admin_form'     => true,        
+		'admin_form'     => array(
+			'required' => false,
+		),        
 		'email_tag'      => array(
 			'tag'         => 'donor_email',
 			'description' => __( 'The email address of the donor', 'charitable' ),                    
@@ -290,7 +296,13 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_date()
 		'donation_form'  => false,
-		'admin_form'     => false,
+		'admin_form'     => array(
+			'type'     => 'datepicker',
+			'priority' => 4,			
+			'required' => true,
+			'section'  => 'meta',
+			'default'  => date_i18n( 'F d, Y', time() ),
+		),
 		'email_tag'      => array(
 			'tag'         => 'donation_date',
 			'description' => __( 'The date the donation was made', 'charitable' ),
@@ -308,6 +320,22 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'email_tag'      => false,
 		'show_in_meta'   => false,
 		'show_in_export' => true,
+	),
+	'status' => array(
+		'label'          => __( 'Donation Status', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false, // Will use Charitable_Donation::get_status()
+		'donation_form'  => false,
+		'admin_form'     => array(
+			'type'     => 'select',
+			'priority' => 8,
+			'required' => true,
+			'section'  => 'meta',
+			'options'  => charitable_get_valid_donation_statuses(),
+		),
+		'email_tag'      => false,
+		'show_in_meta'   => false,
+		'show_in_export' => false,
 	),
 	'status_label' => array(
 		'label'          => __( 'Donation Status', 'charitable' ),
@@ -363,6 +391,21 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'description' => __( 'A summary of the donation', 'charitable' ),
 			'preview'     => __( 'Fake Campaign: $50.00', 'charitable' ) . PHP_EOL,
 		),
+		'show_in_meta'   => false,
+		'show_in_export' => false,
+	),
+	'manual_donation_note' => array(
+		'label'          => __( 'Note', 'charitable' ),
+		'data_type'      => 'meta',
+		'value_callback' => 'charitable_get_donation_meta_value',
+		'donation_form'  => false,
+		'admin_form'     => array(
+			'type'     => 'textarea',
+			'priority' => 12,
+			'required' => false,
+			'section'  => 'meta',
+		),
+		'email_tag'      => false,
 		'show_in_meta'   => false,
 		'show_in_export' => false,
 	),

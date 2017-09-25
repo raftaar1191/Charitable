@@ -28,7 +28,7 @@ $form = $view_args['form'];
 		<div class="charitable-form-fields cf">
 			<input type="hidden" id="user_login" name="rp_login" value="<?php echo esc_attr( $view_args['login'] ); ?>" autocomplete="off" >
 			<input type="hidden" name="rp_key" value="<?php echo esc_attr( $view_args['key'] ); ?>" >
-			<?php $form->view()->render_fields() ?>
+			<?php $form->view()->render() ?>
 			<p class="description"><?php echo wp_get_password_hint(); ?></p>
 		</div><!-- .charitable-form-fields -->
 		<?php do_action( 'charitable_form_after_fields', $form ); ?>
