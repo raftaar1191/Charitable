@@ -207,7 +207,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          * @param  array  $args      Optional. Mixed set of arguments.
          * @return boolean|WP_Error WP_Error in case of error. Mixed results if the action was performed.
          */
-        public function do_action( $action, $object_id, $args = array() ) {
+        public function do_action( $action, $object_id, $args = array() ) {      
             if ( ! array_key_exists( $action, $this->actions ) ) {
                 return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );
             }
@@ -223,7 +223,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
             /**
              * Register the action's callback for the hook.
              */
-            add_filter( $action_hook, $action_args['callback'], 10, 2 );
+            add_filter( $action_hook, $action_args['callback'], 10, 3 );
 
             /**
              * Do something for this action and return a boolean result.
@@ -235,10 +235,11 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
              *
              * @since 1.5.0
              *
-             * @param int   $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
-             * @param array $args      Optional. Mixed set of arguments.
-             */
-            $success = apply_filters( false, $action_hook, $object_id, $args );
+             * @param boolean $success   Whether the action has been successfully completed.
+             * @param int     $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+             * @param array   $args      Optional. Mixed set of arguments.
+             */            
+            $success = apply_filters( $action_hook, false, $object_id, $args );
 
             if ( $success && array_key_exists( 'success_message', $action_args ) ) {
                 $this->result_message = $action_args['success_message'];
