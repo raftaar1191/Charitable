@@ -4,6 +4,7 @@
  *
  * @author  Studio 164a
  * @since   1.0.0
+ * @version 1.5.0
  * @package Charitable/Admin Views/Metaboxes
  */
 
@@ -12,9 +13,6 @@ global $post;
 $donation = charitable_get_donation( $post->ID );
 $donor    = $donation->get_donor();
 $amount   = $donation->get_total_donation_amount();
-
-$table_body   = array();
-$table_footer = array();
 
 ?>
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">
@@ -29,10 +27,10 @@ $table_footer = array();
 			/**
 			 * Display additional details about the donor.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 	 		 *
-			 * @param 	Charitable_Donor    $donor    The donor object.
-			 * @param 	Charitable_Donation $donation The donation object.
+			 * @param Charitable_Donor    $donor    The donor object.
+			 * @param Charitable_Donation $donation The donation object.
 			 */
 			do_action( 'charitable_donation_details_donor_facts', $donor, $donation );
 			?>
@@ -47,10 +45,10 @@ $table_footer = array();
 		/**
 		 * Add additional output before the table of donations.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 *
-		 * @param 	Charitable_Donor    $donor    The donor object.
-		 * @param 	Charitable_Donation $donation The donation object.
+		 * @param Charitable_Donor    $donor    The donor object.
+		 * @param Charitable_Donation $donation The donation object.
 		 */
 		do_action( 'charitable_donation_details_before_campaign_donations', $donor, $donation );
 	?>
@@ -69,11 +67,11 @@ $table_footer = array();
 						/**
 						 * Filter the campaign name.
 						 *
-						 * @since  1.5.0
+						 * @since 1.5.0
 						 *
-						 * @param  string              $campaign_name     The name of the campaign.
-						 * @param  object              $campaign_donation The campaign donation object.
-						 * @param  Charitable_Donation $donation          The Donation object.
+						 * @param string              $campaign_name     The name of the campaign.
+						 * @param object              $campaign_donation The campaign donation object.
+						 * @param Charitable_Donation $donation          The Donation object.
 						 */
 						echo apply_filters( 'charitable_donation_details_table_campaign_donation_campaign', $campaign_donation->campaign_name, $campaign_donation, $donation )
 					?>
@@ -83,11 +81,11 @@ $table_footer = array();
 						/**
 						 * Filter the campaign donation amount.
 						 *
-						 * @since  1.5.0
+						 * @since 1.5.0
 						 *
-						 * @param  string              $amount            The default amount to display.
-						 * @param  object              $campaign_donation The campaign donation object.
-						 * @param  Charitable_Donation $donation          The Donation object.
+						 * @param string              $amount            The default amount to display.
+						 * @param object              $campaign_donation The campaign donation object.
+						 * @param Charitable_Donation $donation          The Donation object.
 						 */
 						echo apply_filters( 'charitable_donation_details_table_campaign_donation_amount', charitable_format_money( $campaign_donation->amount ), $campaign_donation, $donation )
 					?>					
@@ -112,12 +110,11 @@ $table_footer = array();
 					/**
 					 * Filter the total donation amount.
 					 *
-					 * @since  1.5.0
+					 * @since 1.5.0
 					 *
-					 * @param  string              $total    The default amount to display.
-					 * @param  float               $amount   The total, unformatted.
-					 * @param  Charitable_Donation $donation The Donation object.
-					 * @return string
+					 * @param string              $total    The default amount to display.
+					 * @param float               $amount   The total, unformatted.
+					 * @param Charitable_Donation $donation The Donation object.
 					 */
 					echo apply_filters( 'charitable_donation_details_table_total', charitable_format_money( $amount ), $amount, $donation )
 				?></td>
