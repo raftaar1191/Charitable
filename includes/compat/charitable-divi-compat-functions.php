@@ -33,6 +33,8 @@ function charitable_divi_compat_admin_excluded_shortcodes( $shortcodes ) {
 			'charitable_my_campaigns',
 			'charitable_creator_donations',
 			'campaign_updates',
+			'charitable_donors',
+			'charitable_donation_form',
 		) );
 	}
 
