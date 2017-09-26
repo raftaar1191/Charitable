@@ -75,7 +75,7 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 				's'          => null,
 				'start_date' => null,
 				'end_date'   => null,
-				'post_type'	 => 'donation',
+				'post_type'  => 'donation',
 			);
 
 			$args = wp_parse_args( $args, $defaults );
@@ -83,8 +83,7 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 			$where_clause = $wpdb->prepare( 'post_type = %s', $args['post_type'] );
 
 			if ( ! empty( $args['s'] ) ) {
-
-				$where_clause .= "AND ((p.post_title LIKE '%{$args['s']}%') OR (p.post_content LIKE '%{$args['s']}%'))";
+				$where_clause .= " AND ((post_title LIKE '%{$args['s']}%') OR (post_content LIKE '%{$args['s']}%'))";
 			}
 
 			if ( ! empty( $args['start_date'] ) ) {
@@ -94,9 +93,7 @@ if ( ! class_exists( 'Charitable_Donation_Query' ) ) :
 				$day   = $args['start_date']['day'];
 
 				if ( false !== checkdate( $month, $day, $year ) ) {
-
 					$where_clause .= $wpdb->prepare( " AND post_date >= '%s'", date( 'Y-m-d', mktime( 0, 0, 0, $month, $day, $year ) ) );
-
 				}
 			}
 
