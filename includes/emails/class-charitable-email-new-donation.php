@@ -127,11 +127,12 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  int   $object_id An object ID.
-		 * @param  array $args      Mixed set of arguments.
+		 * @param  boolean $success   Whether the action has been successfully completed.
+		 * @param  int     $object_id An object ID.
+		 * @param  array   $args      Mixed set of arguments.
 		 * @return boolean
 		 */
-		public static function resend( $object_id, $args = array() ) {
+		public static function resend( $success, $object_id, $args = array() ) {
 			$donation = charitable_get_donation( $object_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
@@ -142,16 +143,16 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				'donation' => $donation,
 			) );
 
-			$sent = $email->send();
+			$success = $email->send();
 
 			/**
 			 * Log that the email was sent.
 			 */
 			if ( apply_filters( 'charitable_log_email_send', true, self::get_email_id(), $email ) ) {
-				$email->log( $object_id, $sent );
+				$email->log( $object_id, $success );
 			}
 
-			return $sent;
+			return $success;
 		}
 
 		/**
