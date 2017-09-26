@@ -367,3 +367,21 @@ function charitable_flush_campaigns_donation_cache( $donation_id ) {
 
 	do_action( 'charitable_flush_donation_cache', $donation_id );
 }
+
+/**
+ * Return the minimum donation amount.
+ *
+ * @since  1.5.0
+ *
+ * @return float
+ */
+function charitable_get_minimum_donation_amount() {
+	/**
+	 * Filter the minimum donation amount.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param float $minimum The minimum amount.
+	 */
+	return apply_filters( 'charitable_minimum_donation_amount', 0 );
+}

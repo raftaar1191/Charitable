@@ -103,6 +103,11 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			$assets_dir = charitable()->get_path( 'assets', false );
 
 			/* Main Charitable script. */
+			$minimum    = charitable_get_minimum_donation_amount();
+			$amount_msg = $minimum > 0
+				? sprintf( __( 'You must donate at least %s.', 'charitable' ), charitable_format_money( $minimum ) )
+				: sprintf( __( 'You must donate more than %s.', 'charitable' ), charitable_format_money( $minimum ) );
+
 			$vars = apply_filters( 'charitable_javascript_vars', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'loading_gif' => $assets_dir . '/images/charitable-loading.gif',
@@ -110,11 +115,12 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 				'currency_format_decimal_sep' => esc_attr( charitable_get_option( 'decimal_separator', '.' ) ),
 				'currency_format_thousand_sep' => esc_attr( charitable_get_option( 'thousands_separator', ',' ) ),
 				'currency_format' => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ), // For accounting.js.
-				'error_invalid_amount' => sprintf( __( 'You must donate more than %s.', 'charitable' ), charitable_format_money( '0' ) ),
+				'minimum_donation' => $minimum,
+				'error_invalid_amount' => $amount_msg,
 				'error_required_fields' => __( 'Please fill out all required fields.', 'charitable' ),
 				'error_unknown' => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
 				'error_invalid_cc_number' => __( 'The credit card passed is not valid.', 'charitable' ),
-				'error_invalid_cc_expiry' => __( 'The credit card expiry date is not valid.', 'charitable' ),
+				'error_invalid_cc_expiry' => __( 'The credit card expiry date is not valid.', 'charitable' ),				
 			) );
 
 			/* Accounting.js */

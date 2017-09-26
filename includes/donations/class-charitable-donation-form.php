@@ -614,6 +614,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				&& $this->validate_amount()
 				&& $this->validate_gateway();
 
+			/**
+			 * Filter the overall validation result.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean                  $ret  The result to be returned. True or False.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
 			$this->valid = apply_filters( 'charitable_validate_donation_form_submission', $this->valid, $this );
 
 			return $this->valid;
@@ -639,6 +647,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			}
 
+			/**
+			 * Filter the security validation result.
+			 *
+			 * @since 1.4.7
+			 *
+			 * @param boolean                  $ret  The result to be returned. True or False.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_security_check', $ret, $this );
 
 		}
@@ -666,6 +682,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			}
 
+			/**
+			 * Filter the email validation result.
+			 *
+			 * @since 1.4.7
+			 *
+			 * @param boolean                  $ret  The result to be returned. True or False.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_email_check', $ret, $this );
 
 		}
@@ -690,6 +714,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			}
 
+			/**
+			 * Filter the gateway validation result.
+			 *
+			 * @since 1.4.7
+			 *
+			 * @param boolean                  $ret  The result to be returned. True or False.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_gateway_check', $ret, $this );
 
 		}
@@ -702,21 +734,36 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return  boolean
 		 */
 		public function validate_amount() {
-
 			$ret = true;
 
 			/* Ensure that a valid amount has been submitted. */
-			if ( self::get_donation_amount() <= 0 && ! apply_filters( 'charitable_permit_0_donation', false ) ) {
+			$minimum = charitable_get_minimum_donation_amount();
+			$amount  = self::get_donation_amount();
 
+			if ( $minimum > 0 && $amount < $minimum ) {
 				charitable_get_notices()->add_error( sprintf(
 					__( 'You must donate more than %s.', 'charitable' ),
-					charitable_format_money( '0' )
+					charitable_format_money( $minimum )
 				) );
 
 				$ret = false;
+			} elseif ( $minimum == 0 && $amount <= 0 && ! apply_filters( 'charitable_permit_0_donation', false ) ) {
+				charitable_get_notices()->add_error( sprintf(
+					__( 'You must donate more than %s.', 'charitable' ),
+					charitable_format_money( $minimum )
+				) );
 
+				$ret = false;
 			}
 
+			/**
+			 * Filter the amount validation result.
+			 *
+			 * @since 1.4.7
+			 *
+			 * @param boolean                  $ret  The result to be returned. True or False.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_amount_check', $ret, $this );
 
 		}
