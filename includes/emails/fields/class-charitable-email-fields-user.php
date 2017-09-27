@@ -52,26 +52,18 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 		 * @return array
 		 */
 		public function init_fields() {
-			// $fields = array(
-			// 	'user_login' => array(
-			// 		'description' => __( 'The user login', 'charitable' ),
-			// 		'preview'     => 'adam123',
-			// 	),
-			// 	'reset_link' => array(
-			// 		'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
-			// 		'preview'     => add_query_arg( array(
-			// 			'key'   => '123123123',
-			// 			'login' => 'adam123',
-			// 		), charitable_get_permalink( 'reset_password_page' ) ),
-			// 	),
-			// );
+			$fields = array(
+				'user_login' => array(
+					'description' => __( 'The user login', 'charitable' ),
+					'preview'     => 'adam123',
+				),
+			);
 			
-			// if ( $this->has_valid_user() ) {
-			// 	$fields = array_merge_recursive( $fields, array(
-			// 		'user_login' => array( 'value' => $this->user->user_login ),
-			// 		'reset_link' => array( 'callback' => array( $this, 'get_reset_link' ) ),
-			// 	) );
-			// }
+			if ( $this->has_valid_user() ) {
+				$fields = array_merge_recursive( $fields, array(
+					'user_login' => array( 'value' => $this->user->user_login ),
+				) );
+			}
 
 			$fields = array();
 

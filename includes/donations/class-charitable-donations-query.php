@@ -47,6 +47,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 				'campaign' => 0,
 				// Only get donations by a specific donor.
 				'donor_id' => 0,
+				// Only get donations by a specific user.
+				'user_id'  => 0,
 			);
 
 			$this->args = wp_parse_args( $args, $defaults );
@@ -163,6 +165,7 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			remove_filter( 'charitable_query_where',   array( $this, 'where_status_is_in' ), 5 );
 			remove_filter( 'charitable_query_where',   array( $this, 'where_campaign_is_in' ), 6 );
 			remove_filter( 'charitable_query_where',   array( $this, 'where_donor_id_is_in' ), 7 );
+			remove_filter( 'charitable_query_where',   array( $this, 'where_user_id_is_in' ), 8 );
 			remove_action( 'charitable_pre_query',     array( $this, 'setup_orderby' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
@@ -186,6 +189,7 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			add_filter( 'charitable_query_where',   array( $this, 'where_status_is_in' ), 5 );
 			add_filter( 'charitable_query_where',   array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where',   array( $this, 'where_donor_id_is_in' ), 7 );
+			add_filter( 'charitable_query_where',   array( $this, 'where_user_id_is_in' ), 8 );
 			add_filter( 'charitable_query_groupby', array( $this, 'groupby_donation_id' ) );
 			add_action( 'charitable_post_query',    array( $this, 'unhook_callbacks' ) );
 

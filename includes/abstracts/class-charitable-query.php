@@ -592,6 +592,29 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * Filter query by user ID.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @global WPBD   $wpdb
+		 * @param  string $where_statement The default where statement.
+		 * @return string
+		 */
+		public function where_user_id_is_in( $where_statement ) {
+			global $wpdb;
+
+			$user_id = $this->get( 'user_id', false );
+
+			if ( ! $user_id ) {
+				return $where_statement;
+			}
+
+			$placeholders = $this->get_where_in_placeholders( $user_id, 'charitable_validate_absint', '%d' );
+
+			return $where_statement . " AND {$wpdb->posts}.post_author IN ({$placeholders})";
+		}
+
+		/**
 		 * Filter a query by date.
 		 *
 		 * @uses   WP_Date_Query

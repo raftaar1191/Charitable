@@ -310,6 +310,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-email-preview-endpoint.php' );
+            require_once( $includes_path . 'endpoints/class-charitable-email-verification-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-forgot-password-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-login-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-profile-endpoint.php' );
@@ -502,6 +503,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             $api->register( new Charitable_Donation_Processing_Endpoint );
             $api->register( new Charitable_Donation_Receipt_Endpoint );
             $api->register( new Charitable_Email_Preview_Endpoint );
+            $api->register( new Charitable_Email_Verification_Endpoint );
             $api->register( new Charitable_Registration_Endpoint );
             $api->register( new Charitable_Forgot_Password_Endpoint );            
             $api->register( new Charitable_Reset_Password_Endpoint );            
@@ -895,7 +897,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
                 $action = $_REQUEST['charitable_action'];
 
-                do_action( 'charitable_' . $action, 20 );
+                do_action( 'charitable_' . $action );
             }
         }
 

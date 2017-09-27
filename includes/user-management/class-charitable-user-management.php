@@ -338,6 +338,34 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		}
 
 		/**
+		 * Send the user verification email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  WP_User $user An instance of `WP_User`.
+		 * @return boolean True if the email is sent. False otherwise.
+		 */
+		public function send_verification_email( $user = '' ) {
+			if ( empty( $user ) && array_key_exists( 'user', $_GET ) ) {
+				$user = get_user_by( 'id', $_GET['user'] );
+			}
+
+			if ( ! is_a( $user, 'WP_User' ) ) {
+				return false;
+			}
+
+			/* Prepare the email. */
+			$email = new Charitable_Email_Email_Verification( array( 'user' => $user ) );
+
+			/* If the confirmation link is generated corretly and the email is sent, set a notice. */
+			if ( is_wp_error( $email->get_confirmation_link() ) ) {
+				return false;
+			}
+
+			return $email->send();
+		}
+
+		/**
 		 * Check whether the user has admin access.
 		 *
 		 * @since   1.4.0

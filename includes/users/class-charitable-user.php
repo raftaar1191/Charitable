@@ -173,7 +173,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 			} else {
 
-				$donor = charitable_get_table( 'donors' )->get_by( 'user_id', $this->ID );
+				$donor = charitable_get_table( 'donors' )->get_by( 'email', $this->get( 'user_email' ) );
 
 				if ( ! is_object( $donor ) ) {
 					return null;
@@ -191,12 +191,49 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Returns whether the user has ever made a donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function is_donor() {
 			return ! is_null( $this->get_donor() );
+		}
+
+		/**
+		 * Returns whether the user has verified their email address.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return int If verified, return 1. Otherwise return 0.
+		 */
+		public function is_verified() {
+			return absint( get_user_meta( $this->ID, '_charitable_user_verified', true ) );
+		}
+
+		/**
+		 * Mark a user as verified.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  boolean $verified Whether the user is verified.
+		 * @return int|boolean Meta ID if the key didn't exist, true on successful update, false on failure.
+		 */
+		public function mark_as_verified( $verified ) {
+			$verified = update_user_meta( $this->ID, '_charitable_user_verified', $verified );
+
+			if ( ! $verified ) {
+				return $verified;
+			}
+
+			/* Check for an existing donor account. */
+			$donor_id = $this->get_donor_id();
+
+			if ( $donor_id ) {
+				$donor = new Charitable_Donor( $donor_id );
+				$donor->set_user_id( $this->ID );
+			}
+
+			return $verified;
 		}
 
 		/**
@@ -213,6 +250,14 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$email = $this->get( 'user_email' );
 			}
 
+			/**
+			 * Filter the user email address.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string          $email The email address.
+			 * @param Charitable_User $user  This instance of `Charitable_User`.
+			 */
 			return apply_filters( 'charitable_user_email', $email, $this );
 		}
 
@@ -554,11 +599,11 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 */
 		public function get_activity( $args = array() ) {
 			$defaults = array(
-				'author'        => $this->ID,
-				'post_status'   => array( 'charitable-completed', 'charitable-preapproved', 'publish' ),
-				'post_type'     => array( 'donation', 'campaign' ),
-				'order'         => 'DESC',
-				'orderby'       => 'date',
+				'author'      => $this->ID,
+				'post_status' => array( 'charitable-completed', 'charitable-preapproved', 'publish' ),
+				'post_type'   => array( 'donation', 'campaign' ),
+				'order'       => 'DESC',
+				'orderby'     => 'date',
 			);
 
 			$args = wp_parse_args( $args, $defaults );

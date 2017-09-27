@@ -137,7 +137,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 */
 		public function get_user() {
 			if ( ! isset( $this->user ) ) {
-				$this->user = $this->user = Charitable_User::init_with_donor( $this->donor_id );
+				$this->user = Charitable_User::init_with_donor( $this->donor_id );
 			}
 
 			return $this->user;
@@ -167,6 +167,18 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 */
 		public function get_donations() {
 			return $this->get_user()->get_donations();
+		}
+
+		/**
+		 * Attach a user ID to the donor record.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int $user_id The user ID for the donor record.
+		 * @return boolean
+		 */
+		public function set_user_id( $user_id ) {
+			return charitable_get_table( 'donors' )->update( $this->donor_id, array( 'user_id' => $user_id ), 'donor_id' );
 		}
 
 		/**

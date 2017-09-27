@@ -45,33 +45,37 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 				) );
 
 				return;
-	        }
+			}
 
-	        $donor_id = charitable_get_user( get_current_user_id() )->get_donor_id();
+			$user = charitable_get_user( get_current_user_id() );
+			$args = array(
+				'output'   => 'posts',				
+				'orderby'  => 'date',
+				'order'    => 'DESC',
+				'number'   => -1,
+				'donor_id' => $user->get_donor_id(),
+			);
 
-	        /* Only fetch donations if the donor ID exists. */
-	        if ( $donor_id ) {
+			if ( ! $user->is_verified() ) {
+				$args['user_id'] = $user->ID;
+			}
 
-	        	$donations = new Charitable_Donations_Query( array(
-					'output'   => 'posts',
-					'donor_id' => $donor_id,
-					'orderby'  => 'date',
-					'order'    => 'DESC',
-					'number'   => -1,
-				) );
-
-	        } else {
-
-	        	$donations = array();
-
-	        }
-
-	        $view_args = array(
-				'donations' => $donations,
+			$view_args = array(
+				'donations' => new Charitable_Donations_Query( $args ),
+				'user'      => $user,
 			);
 
 			charitable_template( 'shortcodes/my-donations.php', $view_args );
 
+			/**
+			 * Filter the output of the shortcode.
+			 *
+			 * @since 1.4.0
+			 *
+			 * @param string $output    The default output.
+			 * @param array  $view_args The view arguments.
+			 * @param array  $args      The query arguments.
+			 */
 			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $view_args, $args );
 		}
 	}

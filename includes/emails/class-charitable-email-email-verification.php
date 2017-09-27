@@ -125,11 +125,12 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 				'confirmation_link' => array(
 					'description' => __( 'The link the user needs to verify their email address.', 'charitable' ),
 					'preview'     => add_query_arg( array(
-						'key' => '123123123',
+						'key'   => '123123123',
+						'login' => 'adam123',
 					), charitable_get_permalink( 'email_verification' ) ),
 				),
 			);
-			
+
 			if ( $this->has_valid_user() ) {
 				$fields = array_merge_recursive( $fields, array(
 					'confirmation_link' => array( 'callback' => array( $this, 'get_confirmation_link' ) ),
@@ -144,14 +145,19 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string|WP_Error|false If the reset key could not be generated, an error is returned.
+		 * @return string|WP_Error If the reset key could not be generated, an error is returned.
 		 */
 		public function get_confirmation_link() {
 			if ( ! isset( $this->confirmation_link ) ) {
-				$key = wp_generate_password( 20, false );
+				$key = get_password_reset_key( $this->user );
+
+				if ( is_wp_error( $key ) ) {
+					return $key;
+				}
 
 				$this->confirmation_link = esc_url_raw( add_query_arg( array(
-					'key' => $key,
+					'key'   => $key,
+					'login' => rawurlencode( $this->user->user_login ),
 				), charitable_get_permalink( 'email_verification' ) ) );
 			}
 
@@ -172,9 +178,9 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		/**
 		 * Return the default headline for the email.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		protected function get_default_headline() {
 			/**
@@ -198,8 +204,8 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		protected function get_default_body() {
 			ob_start();
 ?>
-<p><?php _e( 'Hi', 'charitable' ) ?></p>
-<p><?php _e( 'To complete your registration for [charitable_email show=site_name], please confirm your email address by clicking the link below:', 'charitable' ) ?></p>
+<p><?php _e( 'Welcome to [charitable_email show=site_name]', 'charitable' ) ?></p>
+<p><?php _e( 'To complete your registration, please confirm your email address by clicking the link below:', 'charitable' ) ?></p>
 <p><a href="[charitable_email show=confirmation_link]">[charitable_email show=confirmation_link]</a></p>
 <?php
 			/**

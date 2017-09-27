@@ -121,11 +121,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * @return array
 		 */
 		public function email_fields() {
-			$fields = array(
-				'user_login' => array(
-					'description' => __( 'The user login', 'charitable' ),
-					'preview'     => 'adam123',
-				),
+			$fields = array(				
 				'reset_link' => array(
 					'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
 					'preview'     => add_query_arg( array(
@@ -137,7 +133,6 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 
 			if ( $this->has_valid_user() ) {
 				$fields = array_merge_recursive( $fields, array(
-					'user_login' => array( 'value' => $this->user->user_login ),
 					'reset_link' => array( 'callback' => array( $this, 'get_reset_link' ) ),
 				) );
 			}

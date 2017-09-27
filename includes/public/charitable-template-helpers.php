@@ -209,3 +209,18 @@ function charitable_table_template( array $columns, array $data, $args = array()
 	$table = new Charitable_Table_Helper( $columns, $data, $args );
 	$table->render();
 }
+
+/**
+ * Return the email verification link.
+ *
+ * @since  1.5.0
+ *
+ * @param  WP_User $user An instance of `WP_User`.
+ * @return string
+ */
+function charitable_get_email_verification_link( WP_User $user ) {
+	return add_query_arg( array(
+		'charitable_action' => 'verify_email',
+		'user'              => $user->ID,
+	) );
+}
