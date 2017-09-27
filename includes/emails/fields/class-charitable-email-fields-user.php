@@ -30,15 +30,6 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 		private $user;
 
 		/**
-		 * The reset link.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @var   string|WP_Error
-		 */
-		protected $reset_link;
-
-		/**
 		 * Set up class instance.
 		 *
 		 * @since 1.5.0
@@ -61,26 +52,28 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 		 * @return array
 		 */
 		public function init_fields() {
-			$fields = array(
-				'user_login' => array(
-					'description' => __( 'The user login', 'charitable' ),
-					'preview'     => 'adam123',
-				),
-				'reset_link' => array(
-					'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
-					'preview'     => add_query_arg( array(
-						'key'   => '123123123',
-						'login' => 'adam123',
-					), charitable_get_permalink( 'reset_password_page' ) ),
-				),
-			);
+			// $fields = array(
+			// 	'user_login' => array(
+			// 		'description' => __( 'The user login', 'charitable' ),
+			// 		'preview'     => 'adam123',
+			// 	),
+			// 	'reset_link' => array(
+			// 		'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
+			// 		'preview'     => add_query_arg( array(
+			// 			'key'   => '123123123',
+			// 			'login' => 'adam123',
+			// 		), charitable_get_permalink( 'reset_password_page' ) ),
+			// 	),
+			// );
 			
-			if ( $this->has_valid_user() ) {
-				$fields = array_merge_recursive( $fields, array(
-					'user_login' => array( 'value' => $this->user->user_login ),
-					'reset_link' => array( 'callback' => array( $this, 'get_reset_link' ) ),
-				) );
-			}
+			// if ( $this->has_valid_user() ) {
+			// 	$fields = array_merge_recursive( $fields, array(
+			// 		'user_login' => array( 'value' => $this->user->user_login ),
+			// 		'reset_link' => array( 'callback' => array( $this, 'get_reset_link' ) ),
+			// 	) );
+			// }
+
+			$fields = array();
 
 			/**
 			 * Filter the user email fields.
@@ -91,7 +84,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 			 * @param Charitable_User  $user   Instance of `WP_User`.
 			 * @param Charitable_Email $email  Instance of `Charitable_Email`.
 			 */
-			return apply_filters( 'charitable_email_campaign_fields', $fields, $this->user, $this->email );
+			return apply_filters( 'charitable_email_user_fields', $fields, $this->user, $this->email );
 		}
 
 		/**
@@ -114,32 +107,7 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 		 */
 		public function has_valid_user() {
 			return is_a( $this->user, 'WP_User' );
-		}
-
-		/**
-		 * Return the reset link.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return string|WP_Error|false If the reset key could not be generated, an error is returned.
-		 */
-		public function get_reset_link() {
-			if ( ! isset( $this->reset_link ) ) {
-				$base_url = charitable_get_permalink( 'reset_password_page' );
-				$key      = get_password_reset_key( $this->user );
-
-				if ( is_wp_error( $key ) ) {
-					return $key;
-				}
-
-				$this->reset_link = esc_url_raw( add_query_arg( array(
-					'key'   => $key,
-					'login' => rawurlencode( $this->user->user_login ),
-				), $base_url ) );
-			}
-
-			return $this->reset_link;
-		}
+		}		
 	}
 
 endif;

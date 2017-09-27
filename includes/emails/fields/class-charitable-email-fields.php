@@ -99,6 +99,8 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
                 $fields = array_merge( $fields, array_reduce( $this->email->get_object_types(), array( $this, 'get_object_type_fields' ) ) );    
             }
 
+            $fields = array_merge( $fields, $this->email->email_fields() );
+
             /**
              * Filter the email content fields.
              *

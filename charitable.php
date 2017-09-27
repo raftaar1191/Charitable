@@ -7,7 +7,7 @@
  * Author:              WP Charitable
  * Author URI:          https://wpcharitable.com
  * Requires at least:   4.1
- * Tested up to:        4.8.1
+ * Tested up to:        4.8.2
  *
  * Text Domain:         charitable
  * Domain Path:         /i18n/languages/
@@ -236,6 +236,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'emails/interface-charitable-email.php' );
             require_once( $includes_path . 'emails/class-charitable-emails.php' );
             require_once( $includes_path . 'emails/abstract-class-charitable-email.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-email-verification.php' );
             require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
             require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );

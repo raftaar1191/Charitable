@@ -74,11 +74,12 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		public function register_emails() {
 			$this->emails = apply_filters( 'charitable_emails', array(
 				'donation_receipt'              => 'Charitable_Email_Donation_Receipt',
+				'offline_donation_receipt'      => 'Charitable_Email_Offline_Donation_Receipt',
 				'new_donation'                  => 'Charitable_Email_New_Donation',
 				'campaign_end'                  => 'Charitable_Email_Campaign_End',
-				'password_reset'                => 'Charitable_Email_Password_Reset',
-				'offline_donation_receipt'      => 'Charitable_Email_Offline_Donation_Receipt',
 				'offline_donation_notification' => 'Charitable_Email_Offline_Donation_Notification',
+				'password_reset'                => 'Charitable_Email_Password_Reset',
+				'email_verification'            => 'Charitable_Email_Email_Verification',
 			) );
 
 			return $this->emails;
@@ -176,8 +177,9 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		public function get_enabled_emails() {
 			$enabled = charitable_get_option( 'enabled_emails', array() );
 
-			/* The Password Reset email is always enabled. */
-			$enabled['password_reset'] = 'Charitable_Email_Password_Reset';
+			/* The Password Reset & Email Verification emails are always enabled. */
+			$enabled['password_reset']     = 'Charitable_Email_Password_Reset';
+			$enabled['email_verification'] = 'Charitable_Email_Email_Verification';
 
 			return $enabled;
 		}

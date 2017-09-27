@@ -564,6 +564,18 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Return an array of email fields that are specifically available
+		 * for this email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function email_fields() {
+			return array();
+		}
+
+		/**
 		 * Build the email.
 		 *
 		 * @since   1.0.0
