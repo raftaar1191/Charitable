@@ -240,16 +240,17 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'donations/class-charitable-donations.php' );            
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
             require_once( $includes_path . 'donations/charitable-donation-functions.php' );
-
+            
             /* Emails */            
             require_once( $includes_path . 'emails/class-charitable-emails.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
             require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-email-verification.php' );
             require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
             require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
             require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
 
             /* Email Fields */
@@ -338,7 +339,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
             /* User Management */
             require_once( $includes_path . 'user-management/class-charitable-user-management.php' );
-            require_once( $includes_path . 'user-management/charitable-user-management-hooks.php' );
+            require_once( $includes_path . 'user-management/charitable-user-management-hooks.php' );            
 
             /* Utilities */
             require_once( $includes_path . 'utilities/charitable-utility-functions.php' );
@@ -504,8 +505,12 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
         public function donation_fields() {
             if ( ! isset( $this->donation_fields ) ) {
+                /* Instantiate Registry and set default sections. */
                 $this->donation_fields = new Charitable_Donation_Field_Registry();
-                $fields                = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+                $this->donation_fields->set_default_section( 'user', 'public' );
+                $this->donation_fields->set_default_section( 'user', 'admin' );
+
+                $fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
 
                 foreach ( $fields as $key => $args ) {
                     $this->donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );

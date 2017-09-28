@@ -75,7 +75,38 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @return void
          */
         public function render() {
+            $this->render_honeypot();
+            $this->render_hidden_fields();
+            $this->render_fields();
+        }
 
+        /**
+         * Render the honeypot fields.
+         *
+         * @since  1.5.0
+         *
+         * @return void
+         */
+        public function render_honeypot() {
+            printf( '<input type="hidden" name="charitable_form_id" value="%1$s" autocomplete="off" /><input type="text" name="%1$s" class="charitable-hidden" value="" autocomplete="off" />', esc_attr( $this->form->get_form_identifier() ) );
+        }
+
+        /**
+         * Render a form's hidden fields.
+         *
+         * @since  1.5.0
+         *
+         * @return boolean True if any fields were rendered. False otherwise.
+         */
+        public function render_hidden_fields() {
+            $fields = $this->form->get_hidden_fields();
+
+            if ( ! is_array( $fields ) || empty( $fields ) ) {
+                return false;
+            }
+
+            array_walk( $fields, array( $this, 'render_hidden_field' ) );
+>>>>>>> a73d7d297699069afa0d62672a05ca95631f4022
         }
 
         /**
@@ -112,6 +143,19 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 
                 $i += $this->increment_index( $field, $key, $i );
             }
+        }
+
+        /**
+         * Render a hidden field.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $value Field value.
+         * @param  string $key   Field key.
+         * @return void
+         */
+        public function render_hidden_field( $value, $key ) {
+            printf( '<input type="hidden" name="%s" value="%s" />', esc_attr( $key ), esc_attr( $value ) );
         }
 
         /**

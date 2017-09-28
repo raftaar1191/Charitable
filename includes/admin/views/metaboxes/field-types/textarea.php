@@ -8,24 +8,14 @@
  * @since       1.2.0
  */
 
-global $post;
-
-if ( ! isset( $view_args['meta_key'] ) ) {
-	return;
+if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']->field_has_required_args( $view_args ) ) {
+    return;
 }
 
-$key = $view_args['meta_key'];
-$custom_keys = get_post_custom_keys( $post->ID );
-$value = $custom_keys && in_array( $key, $custom_keys ) ? get_post_meta( $post->ID, $key, true ) : $view_args['default'];
-
-$id = ltrim( $key, '_' );
-$id = str_replace( '_', '-', $id );
-$wrapper_id = 'charitable-' . $id . '-wrap';
-
 ?>
-<div id="<?php echo $wrapper_id ?>" class="charitable-metabox-wrap charitable-text-field-wrap">
+<div id="<?php echo esc_attr( $view_args['wrapper_id'] ) ?>" class="charitable-metabox-wrap charitable-textarea-wrap">
 	<?php if ( isset( $view_args['label'] ) ) : ?>
-		<label for="<?php echo $id ?>"><?php echo $view_args['label']  ?></label>
-	<?php endif ?>
-	<textarea id="<?php echo $id ?>" name="<?php echo esc_attr( $key ) ?>"><?php echo esc_textarea( $value ) ?></textarea>
-</div>
+        <label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label'] ?></label>
+    <?php endif ?>
+	<textarea id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>"><?php echo esc_textarea( $view_args['value'] ) ?></textarea>
+</div><!-- #<?php echo $view_args['wrapper_id'] ?> -->

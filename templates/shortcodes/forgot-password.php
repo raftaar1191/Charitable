@@ -27,7 +27,7 @@ $form = $view_args['form'];
 		<?php do_action( 'charitable_form_before_fields', $form ) ?>
 
 		<div class="charitable-form-fields cf">
-			<?php $form->view()->render_fields() ?>
+			<?php $form->view()->render() ?>
 		</div><!-- .charitable-form-fields -->
 
 		<?php do_action( 'charitable_form_after_fields', $form ); ?>

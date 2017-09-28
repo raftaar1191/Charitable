@@ -40,7 +40,7 @@ if ( empty( $campaign_donations ) ) {
 		<?php foreach ( $campaign_donations as $i => $campaign_donation ) : ?>
 			<tr>
 				<td>
-					<select name="<?php echo esc_attr( sprintf( '%s[%d][campaign]', $view_args['key'], $i ) ) ?>" labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-campaign-label">
+					<select name="<?php echo esc_attr( sprintf( '%s[%d][campaign_id]', $view_args['key'], $i ) ) ?>" labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-campaign-label">
 						<option value=""><?php _e( 'Select a campaign', 'charitable' ) ?></option>
 						<?php foreach ( $campaigns as $campaign_id ) : ?>
 							<option value="<?php echo $campaign_id ?>" <?php selected( $campaign_id, $campaign_donation->campaign_id ) ?>><?php echo get_the_title( $campaign_id ) ?></option>

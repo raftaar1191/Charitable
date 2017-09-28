@@ -424,32 +424,23 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
-		 * @since  1.0.0
+		 * @since  1.5.0
 		 *
-		 * @param  Charitable_Donation_Form $form
-		 * @return void
+		 * @return array
 		 */
-		public function add_hidden_fields( $form ) {
-			if ( false === parent::add_hidden_fields( $form ) ) {
-				return false;
-			}
-
-			$hidden_fields = array();
+		public function get_hidden_fields() {
+			$fields = parent::get_hidden_fields();
 
 			if ( ! is_null( $this->campaign ) ) {
-				$hidden_fields['campaign_id'] = $this->campaign->ID;
-				$hidden_fields['description'] = get_the_title( $this->campaign->ID );
+				$fields['campaign_id'] = $this->campaign->ID;
+				$fields['description'] = get_the_title( $this->campaign->ID );
 			}
 
 			if ( isset( $_GET['donation_id'] ) ) {
-				$hidden_fields['ID'] = $_GET['donation_id'];
+				$fields['ID'] = $_GET['donation_id'];
 			}
 
-			$hidden_fields = apply_filters( 'charitable_donation_form_hidden_fields', $hidden_fields, $this );
-
-			foreach ( $hidden_fields as $name => $value  ) {
-				printf( '<input type="hidden" name="%s" value="%s" />', $name, $value );
-			}
+			return apply_filters( 'charitable_donation_form_hidden_fields', $fields, $this );
 		}
 
 		/**
@@ -538,7 +529,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function validate_security_check() {
-
 			$ret = true;
 
 			if ( ! $this->validate_nonce() || ! $this->validate_honeypot() ) {
@@ -558,7 +548,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
 			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_security_check', $ret, $this );
-
 		}
 
 		/**
@@ -818,7 +807,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$amount = charitable_get_currency_helper()->sanitize_monetary_amount( $amount );
 
 			return apply_filters( 'charitable_donation_form_amount', $amount );
-
 		}
 
 		/**

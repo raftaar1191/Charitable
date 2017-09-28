@@ -83,6 +83,27 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return void
          */
         public function render() {
+            $this->render_hidden_fields();
+            $this->render_fields();
+        }
+
+        /**
+         * Render a form's hidden fields.
+         *
+         * @since  1.5.0
+         *
+         * @return boolean True if any fields were rendered. False otherwise.
+         */
+        public function render_hidden_fields() {
+            $fields = $this->form->get_hidden_fields();
+
+            if ( ! is_array( $fields ) || empty( $fields ) ) {
+                return false;
+            }
+
+            array_walk( $fields, array( $this, 'render_hidden_field' ) );
+
+            return true;
         }
 
         /**
@@ -114,6 +135,19 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
         }
 
         /**
+         * Render a hidden field.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $value Field value.
+         * @param  string $key   Field key.
+         * @return void
+         */
+        public function render_hidden_field( $value, $key ) {
+            printf( '<input type="hidden" name="%s" value="%s" />', esc_attr( $key ), esc_attr( $value ) );
+        }
+
+        /**
          * Render a specific form field.
          *
          * @since  1.5.0
@@ -124,7 +158,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return boolean       False if the field was not rendered. True otherwise.
          */
         public function render_field( $field, $key, $args = array() ) {
-            // echo '<pre>'; var_dump( $this ); echo '</pre>';
             $field['form_view']  = $this;
             $field['view']       = $this->get_field_view( $field );
             $field['type']       = $this->get_field_type( $field );
@@ -132,6 +165,10 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             $field['value']      = $this->get_field_value( $field );
             $field['id']         = str_replace( '_', '-', ltrim( $field['key'] ) );
             $field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
+
+            if ( 'checkbox' == $field['type'] ) {
+                $field['checked'] = $this->is_field_checked( $field );
+            }
 
             return charitable_admin_view( $field['view'], $field );
         }
@@ -160,6 +197,10 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
             if ( $this->field_needs_options( $type ) ) {
                 return array_key_exists( 'options', $view_args );
+            }
+
+            if ( 'checkbox' == $type ) {
+                return array_key_exists( 'checked', $view_args );
             }
 
             return true;
@@ -236,72 +277,40 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
                 return $field['value'];
             }
 
-            if ( empty( $field['key'] ) ) {
-                return;
-            }
-
-            $default = array_key_exists( 'default', $field ) ? $field['default'] : '';
-
-            if ( ! $this->form->get_donation() ) {
-                return $default;
-            }
-
-            $value = $this->form->get_donation()->get( $field['key'] );
-
-            return $value ? $value : $default;
+            return $this->get_current_value( $field );
         }
 
         /**
-         * Return the custom keys for the current post.
-         *
-         * @since  1.5.0
-         *
-         * @return array
-         */
-        protected function get_post_custom_keys() {
-            if ( ! is_a( $this->post, 'WP_Post' ) ) {
-                return array();
-            }
-
-            if ( ! isset( $this->post_custom_keys ) ) {
-                $this->post_custom_keys = get_post_custom_keys( $this->post->ID );
-
-                if ( ! is_array( $this->post_custom_keys ) ) {
-                    $this->post_custom_keys = array();
-                }
-            }
-
-            return $this->post_custom_keys;
-        }
-
-        /**
-         * Return the current value of a particular field.
+         * Check whether the field is checked.
          *
          * @since  1.5.0
          *
          * @param  array $field Field definition.
-         * @return string
+         * @return boolean
          */
-        protected function get_field_value( $field ) {
-            if ( array_key_exists( 'value', $field ) ) {
-                return $field['value'];
-            }
+        protected function is_field_checked( $field ) {
+            return $field['value'] == $this->get_current_value( $field );
+        }
+
+        /**
+         * Fetches the current value for a field, ignoring the 'value' setting of the field.
+         *
+         * @since  1.5.0
+         *
+         * @param  array $field Field definition.
+         * @return mixed
+         */
+        protected function get_current_value( $field ) {
+            global $post;
 
             if ( empty( $field['key'] ) ) {
                 return;
             }
 
             $default = array_key_exists( 'default', $field ) ? $field['default'] : '';
+            $value   = get_post_meta( $post->ID, $field['key'], true );
 
-            if ( ! is_a( $this->post, 'WP_Post' ) ) {
-                return $default;
-            }
-
-            if ( array_key_exists( 'meta_key', $field ) && in_array( $field['meta_key'], $this->get_post_custom_keys() ) ) {
-                return get_post_meta( $this->post->ID, $field['meta_key'], true );
-            }
-
-            return $default;
+            return $value ? $value : $default;
         }
 
         /**

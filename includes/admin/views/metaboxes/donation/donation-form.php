@@ -7,14 +7,15 @@
  * @author Studio 164a 
  */
 
-global $post;
+$form   = $view_args['form'];
+$fields = $form->get_fields();
 
-$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $post->ID ) );
+unset( $fields['meta_fields'] );
 
 ?>
-<div class="charitable-form-fields cf">        
-    <?php $form->view()->render_fields() ?>    
+<div class="charitable-form-fields primary">
+    <?php
+    $form->view()->render_hidden_fields();
+    $form->view()->render_fields( $fields );
+    ?>
 </div><!-- .charitable-form-fields -->
-<div class="charitable-form-field charitable-submit-field">
-    <button class="button button-primary" type="submit" name="donate"><?php _e( 'Submit Donation', 'charitable' ) ?></button>    
-</div><!-- .charitable-submit-field -->
