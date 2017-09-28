@@ -777,8 +777,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
-
-			$values = array(
+			$values    = array(
 				'user_id'   => get_current_user_id(),
 				'gateway'   => $submitted['gateway'],
 				'campaigns' => array(

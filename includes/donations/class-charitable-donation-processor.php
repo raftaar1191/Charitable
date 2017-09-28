@@ -672,9 +672,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					$user           = new Charitable_User( $this->get_donation_data_value( 'user_id', get_current_user_id() ) );
 					$this->donor_id = $user->add_donor( $user_data );
 				}
-
-				error_log( var_export( $user_data, true ) );
-				error_log($this->donor_id);
 			}//end if			
 
 			return $this->donor_id;

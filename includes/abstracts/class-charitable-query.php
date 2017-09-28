@@ -874,8 +874,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		protected function get_placeholders( $count = 1, $placeholder = '%s' ) {
-			$placeholders = array_fill( 0, $count, $placeholder );
-			return implode( ', ', $placeholders );
+			return charitable_get_query_placeholders( $count, $placeholder );
 		}
 	}
 

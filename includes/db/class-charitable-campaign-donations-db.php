@@ -796,9 +796,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @return  string
 		 */
 		private function get_in_clause( $list, $placeholder = '%s' ) {
-			$placeholders = array_fill( 0, count( $list ), $placeholder );
-
-			return implode( ', ', $placeholders );
+			return charitable_get_query_placeholders( count( $list ), $placeholder );
 		}
 
 		/**

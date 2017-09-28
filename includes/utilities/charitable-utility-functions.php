@@ -216,3 +216,17 @@ function charitable_sanitize_date( $date, $return_format = 'U' ) {
 
 	return date( $return_format, $time );
 }
+
+/**
+ * Return a string containing the correct number & type of placeholders.
+ *
+ * @since  1.5.0
+ *
+ * @param  int   $count       The number of placeholders to add.
+ * @param  array $placeholder Type of placeholder to insert.
+ * @return string
+ */
+function charitable_get_query_placeholders( $count = 1, $placeholder = '%s' ) {
+	$placeholders = array_fill( 0, $count, $placeholder );
+	return implode( ', ', $placeholders );
+}

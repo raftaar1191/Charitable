@@ -531,17 +531,34 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						}
 					}
 
-					/* It seems very unlikely that this would ever be the case, but 
-					if ( false !== $canonical ) {
-
+					/**
+					 * It seems very unlikely that this would ever be the case, but
+					 * it could theoretically happen if someone registers an account,
+					 * donates while logged in, then registers a different account
+					 * (using a different email address), and makes a donation while
+					 * logged into that account but with the first email address. In
+					 * that case, there could be two donor records, both with user IDs.
+					 *
+					 * To reconcile that, we just pick the first donor record and consider
+					 * the remainder as duplicates.
+					 */
+					if ( false === $canonical ) {
+						$canonical = array_shift( $duplicates );
 					}
 
-					For every donation made under the second donor record (i.e. the one where the user_id is set), change the donor_id to the donor_id of the first donor record (the one with user_id set to 0).
-Delete the second donor record.
+					/* Update donations from duplicate accounts and set canonical donor_id. */
+					$donor_id_placeholders = charitable_get_query_placeholders( count( $duplicates ), '%d' );
+					$sql                   = "UPDATE {$wpdb->prefix}charitable_campaign_donations
+						SET donor_id = %d
+						WHERE donor_id IN ( {$donor_id_placeholders} )";
 
-									echo '<pre>'; var_dump( $donors ); echo '</pre>';
-				die;
-*/
+					$parameters = array_merge( array( $canonical ), $duplicates );
+					$updated    = $wpdb->query( $wpdb->prepare( $sql, array_merge( array( $canonical ), $duplicates ) ) );
+
+					if ( false !== $updated ) {
+						$sql     = "DELETE FROM {$wpdb->prefix}charitable_donors WHERE donor_id IN ( {$donor_id_placeholders} );";
+						$deleted = $wpdb->query( $wpdb->prepare( $sql, $duplicates ) );
+					}
 				}//end foreach
 
 				$step++;
