@@ -11,8 +11,8 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-$form 	= $view_args['form'];
-$donor	= charitable_get_user( wp_get_current_user() );
+$form  = $view_args['form'];
+$donor = charitable_get_user( wp_get_current_user() );
 
 /**
  * @hook 	charitable_user_profile_before

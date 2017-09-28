@@ -190,11 +190,8 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 */
 		public function get_redirect_url() {
 			if ( ! isset( $this->redirect_url ) ) {
-				$this->redirect_url = charitable_get_option( 'profile_page', false );
-
-				if ( ! $this->redirect_url ) {
-					$this->redirect_url = false;
-				}
+				$profile = charitable_get_option( 'profile_page', false );
+				$this->redirect_url = $profile ? get_permalink( $profile ) : false;
 			}
 
 			return $this->redirect_url;

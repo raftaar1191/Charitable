@@ -1010,7 +1010,7 @@ if ( ! function_exists( 'charitable_template_notices' ) ) :
 	 * @param   array $notices
 	 * @return  void
 	 */
-	function charitable_template_notices( $notices = array() ) {
+	function charitable_template_notices( $notices = array() ) {		
 		if ( empty( $notices ) ) {
 			$notices = charitable_get_notices()->get_notices();
 		}

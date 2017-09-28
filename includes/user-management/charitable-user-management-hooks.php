@@ -41,11 +41,13 @@ add_action( 'charitable_update_profile', array( 'Charitable_Profile_Form', 'upda
 add_action( 'charitable_save_registration', array( 'Charitable_Registration_Form', 'save_registration' ) );
 
 /**
- * Display any notices before the login form.
+ * Display any notices before the login, profile and donation history pages.
  *
  * @see charitable_template_notices
  */
 add_action( 'charitable_login_form_before', 'charitable_template_notices' );
+add_action( 'charitable_user_profile_before', 'charitable_template_notices' );
+add_action( 'charitable_my_donations_before', 'charitable_template_notices', 10, 0 );
 
 /**
  * Add support for deprecated `charitable_user_profile_after_fields` hook.

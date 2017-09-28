@@ -58,6 +58,17 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 
 			if ( ! $user->is_verified() ) {
 				$args['user_id'] = $user->ID;
+
+				if ( array_key_exists( 'charitable_action', $_GET ) && 'verify_email' == $_GET['charitable_action'] ) {
+					$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
+				} else {
+					$message = sprintf(
+						__( '<a href="%s">Verify your email address</a> to access your full donation history.', 'charitable' ),
+						esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
+					);
+				}
+
+				charitable_get_notices()->add_error( $message );
 			}
 
 			$view_args = array(

@@ -66,6 +66,19 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		}
 
 		/**
+		 * Set up callbacks for actions and filters.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		protected function attach_hooks_and_filters() {
+			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+		}
+
+		/**
 		 * Return the current user's Charitable_User object.
 		 *
 		 * @since   1.0.0

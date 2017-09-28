@@ -422,13 +422,12 @@
   padding: 1em;
   margin-bottom: 1em;
   border: 1px solid; }
-  .charitable-notice > ul.errors {
+  .charitable-notice > ul {
     padding: 0;
     margin: 0;
     list-style: none; }
-    .charitable-notice > ul.errors li {
+    .charitable-notice > ul li {
       padding: 0;
-      border: none;
-      list-style: none; }
+      border: none; }
 
 /*# sourceMappingURL=charitable.css.map */

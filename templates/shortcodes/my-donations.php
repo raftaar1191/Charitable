@@ -21,18 +21,6 @@ $donations = $view_args['donations'];
  */
 do_action( 'charitable_my_donations_before', $donations );
 
-if ( ! $user->is_verified() ) :
-
-	charitable_template( 'form-fields/errors.php', array(
-		'errors' => array(
-			sprintf( __( '<a href="%s">Verify your email address</a> to access your full donation history.', 'charitable' ),
-				esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
-			),
-		),
-	) );
-
-endif;
-
 if ( empty( $donations ) ) : ?>
 
 	<p><?php _e( 'You have not made any donations yet.', 'charitable' ) ?></p>
