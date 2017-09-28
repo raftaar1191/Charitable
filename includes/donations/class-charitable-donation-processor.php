@@ -517,7 +517,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 				}
 
-				$campaign['donor_id'] = $this->get_donor_id();
+				$campaign['donor_id']    = $this->get_donor_id();
 				$campaign['donation_id'] = $donation_id;
 
 				$campaign_donation_id = charitable_get_table( 'campaign_donations' )->insert( $campaign );
@@ -661,21 +661,21 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					return $this->donor_id;
 				}
 
-				$user_id = $this->get_donation_data_value( 'user_id', get_current_user_id() );
 				$user_data = $this->get_donation_data_value( 'user', array() );
 
-				if ( $user_id ) {
-					$this->donor_id = charitable_get_table( 'donors' )->get_donor_id( $user_id );
-				} elseif ( isset( $user_data['email'] ) ) {
+				if ( array_key_exists( 'email', $user_data ) ) {
 					$this->donor_id = charitable_get_table( 'donors' )->get_donor_id_by_email( $user_data['email'] );
 				}
 
 				/* If we still do not have a donor ID, it means that this is a first-time donor */
 				if ( 0 == $this->donor_id ) {
-					$user = new Charitable_User( $user_id );
+					$user           = new Charitable_User( $this->get_donation_data_value( 'user_id', get_current_user_id() ) );
 					$this->donor_id = $user->add_donor( $user_data );
 				}
-			}//end if
+
+				error_log( var_export( $user_data, true ) );
+				error_log($this->donor_id);
+			}//end if			
 
 			return $this->donor_id;
 		}
@@ -763,7 +763,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			if ( ! $ret ) {
 				$user = $this->get_donation_data_value( 'user' );
-				$ret = isset( $user['email'] );
+				$ret  = array_key_exists( 'email', $user );
 			}
 
 			return $ret;

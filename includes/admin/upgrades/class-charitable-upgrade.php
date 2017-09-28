@@ -166,6 +166,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						'prompt'   => false,
 						'callback' => array( $this, 'trim_upgrade_log' ),
 					),
+					'remove_duplicate_donors' => array(
+						'version' => '1.5.0',
+						'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
+						'prompt'  => true,
+					),
 				);
 			}//end if
 		}
@@ -465,6 +470,96 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			$this->upgrade_logs();
 
 			$this->finish_upgrade( 'fix_donation_dates' );
+		}
+
+		/**
+		 * Remove duplicate donor records.
+		 *
+		 * This upgrade routine was added in 1.5.0
+		 *
+		 * @see 	https://github.com/Charitable/Charitable/issues/409
+		 *
+		 * @since 	1.5.0
+		 *
+		 * @global  WPDB $wpdb
+		 * @return 	void
+		 */
+		public function remove_duplicate_donors() {
+			global $wpdb;
+
+			if ( ! current_user_can( 'manage_charitable_settings' ) ) {
+				wp_die( __( 'You do not have permission to do Charitable upgrades', 'charitable' ), __( 'Error', 'charitable' ), array( 'response' => 403 ) );
+			}
+
+			ignore_user_abort( true );
+
+			if ( ! charitable_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
+				@set_time_limit( 0 );
+			}
+
+			$step     = array_key_exists( 'step', $_GET ) ? absint( $_GET['step'] ) : 1;
+			$number   = 20;
+			$subquery = "SELECT GROUP_CONCAT(donor_id, ':', user_id) AS donor, COUNT(*) AS count
+				FROM {$wpdb->prefix}charitable_donors
+				GROUP BY email";
+			$total    = $wpdb->get_var( "SELECT COUNT( d.donor ) FROM ( {$subquery} ) AS d WHERE d.count > 1" );
+
+			/**
+			 * If there are no donors left to remove, go ahead and wrap it up right now.
+			 */
+			if ( ! $total ) {
+				$this->finish_upgrade( 'remove_duplicate_donors' );
+			}
+
+			$donors = $wpdb->get_col( "SELECT d.donor FROM ( {$subquery} ) AS d WHERE d.count > 1" );
+
+			if ( count( $donors ) ) {
+
+				foreach ( $donors as $donor ) {
+
+					$records    = explode( ',', $donor );
+					$canonical  = false;
+					$duplicates = array();
+
+					foreach ( $records as $record ) {
+						list( $donor_id, $user_id ) = explode( ':', $record );
+
+						if ( 0 == $user_id && false === $canonical ) {
+							$canonical = $donor_id;
+						} else {
+							$duplicates[] = $donor_id;
+						}
+					}
+
+					/* It seems very unlikely that this would ever be the case, but 
+					if ( false !== $canonical ) {
+
+					}
+
+					For every donation made under the second donor record (i.e. the one where the user_id is set), change the donor_id to the donor_id of the first donor record (the one with user_id set to 0).
+Delete the second donor record.
+
+									echo '<pre>'; var_dump( $donors ); echo '</pre>';
+				die;
+*/
+				}//end foreach
+
+				$step++;
+
+				$redirect = add_query_arg( array(					
+					'charitable-upgrade' => 'remove_duplicate_donors',
+					'page'               => 'charitable-upgrades',
+					'step'               => $step,
+					'number'             => $number,
+					'total'              => $total,
+				), admin_url( 'index.php' ) );
+
+				wp_redirect( $redirect );
+
+				exit;
+			}//end if
+
+			$this->finish_upgrade( 'remove_duplicate_donors' );
 		}
 
 		/**
