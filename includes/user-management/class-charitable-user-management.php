@@ -193,6 +193,13 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 */
 		public function maybe_redirect_to_custom_lostpassword() {
 
+			/**
+			 * Set whether the WP login should be disabled.
+			 *
+			 * @since 1.4.0
+			 *
+			 * @param boolean $disable Whether to disable the WP login.
+			 */
 			if ( ! apply_filters( 'charitable_disable_wp_login', false ) ) {
 				return;
 			}
@@ -342,10 +349,12 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  WP_User $user An instance of `WP_User`.
+		 * @param  WP_User $user         An instance of `WP_User`.
+		 * @param  string  $redirect_url Where the user should be redirected
+		 *                               to after verifying their email.
 		 * @return boolean True if the email is sent. False otherwise.
 		 */
-		public function send_verification_email( $user = '' ) {
+		public function send_verification_email( $user = '', $redirect_url = '' ) {
 			if ( empty( $user ) && array_key_exists( 'user', $_GET ) ) {
 				$user = get_user_by( 'id', $_GET['user'] );
 			}
@@ -354,11 +363,19 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 				return false;
 			}
 
+			if ( empty( $redirect_url ) && array_key_exists( 'redirect_url', $_GET ) ) {
+				$redirect_url = $_GET['redirect_url'];
+			}
+
 			/* Prepare the email. */
 			$email = new Charitable_Email_Email_Verification( array( 'user' => $user ) );
 
-			/* If the confirmation link is generated corretly and the email is sent, set a notice. */
-			if ( is_wp_error( $email->get_confirmation_link() ) ) {
+			if ( ! empty( $redirect_url ) ) {
+				$email->set_redirect_url( $redirect_url );
+			}
+
+			/* If the confirmation link is generated correctly and the email is sent, set a notice. */
+			if ( is_wp_error( $email->get_confirmation_url() ) ) {
 				return false;
 			}
 

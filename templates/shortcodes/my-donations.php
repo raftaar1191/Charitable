@@ -26,7 +26,7 @@ if ( ! $user->is_verified() ) :
 	charitable_template( 'form-fields/errors.php', array(
 		'errors' => array(
 			sprintf( __( '<a href="%s">Verify your email address</a> to access your full donation history.', 'charitable' ),
-				esc_url( charitable_get_email_verification_link( $user ) )
+				esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
 			),
 		),
 	) );

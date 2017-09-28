@@ -66,7 +66,16 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 *
 		 * @var   string|WP_Error
 		 */
-		protected $confirmation_link;
+		protected $confirmation_url;
+
+		/**
+		 * The URL to redirect to after verification.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   string|WP_Error
+		 */
+		protected $redirect_url;
 
 		/**
 		 * Instantiate the email class, defining its key values.
@@ -122,7 +131,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 */
 		public function email_fields() {
 			$fields = array(
-				'confirmation_link' => array(
+				'confirmation_url' => array(
 					'description' => __( 'The link the user needs to verify their email address.', 'charitable' ),
 					'preview'     => add_query_arg( array(
 						'key'   => '123123123',
@@ -133,7 +142,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 
 			if ( $this->has_valid_user() ) {
 				$fields = array_merge_recursive( $fields, array(
-					'confirmation_link' => array( 'callback' => array( $this, 'get_confirmation_link' ) ),
+					'confirmation_url' => array( 'callback' => array( $this, 'get_confirmation_url' ) ),
 				) );
 			}
 
@@ -147,21 +156,60 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 *
 		 * @return string|WP_Error If the reset key could not be generated, an error is returned.
 		 */
-		public function get_confirmation_link() {
-			if ( ! isset( $this->confirmation_link ) ) {
+		public function get_confirmation_url() {
+			if ( ! isset( $this->confirmation_url ) ) {
 				$key = get_password_reset_key( $this->user );
 
 				if ( is_wp_error( $key ) ) {
 					return $key;
 				}
 
-				$this->confirmation_link = esc_url_raw( add_query_arg( array(
+				$args = array(
 					'key'   => $key,
 					'login' => rawurlencode( $this->user->user_login ),
-				), charitable_get_permalink( 'email_verification' ) ) );
+				);
+
+				$redirect_url = $this->get_redirect_url();
+
+				if ( $redirect_url ) {
+					$args['redirect_to'] = $redirect_url;
+				}
+
+				$this->confirmation_url = esc_url_raw( add_query_arg( $args, charitable_get_permalink( 'email_verification' ) ) );
 			}
 
-			return $this->confirmation_link;
+			return $this->confirmation_url;
+		}
+
+		/**
+		 * Return the redirect URL.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public function get_redirect_url() {
+			if ( ! isset( $this->redirect_url ) ) {
+				$this->redirect_url = charitable_get_option( 'profile_page', false );
+
+				if ( ! $this->redirect_url ) {
+					$this->redirect_url = false;
+				}
+			}
+
+			return $this->redirect_url;
+		}
+
+		/**
+		 * Set the redirect URL.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $redirect_url The URL.
+		 * @return void
+		 */
+		public function set_redirect_url( $redirect_url ) {
+			$this->redirect_url = $redirect_url;
 		}
 
 		/**
@@ -206,7 +254,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 ?>
 <p><?php _e( 'Welcome to [charitable_email show=site_name]', 'charitable' ) ?></p>
 <p><?php _e( 'To complete your registration, please confirm your email address by clicking the link below:', 'charitable' ) ?></p>
-<p><a href="[charitable_email show=confirmation_link]">[charitable_email show=confirmation_link]</a></p>
+<p><a href="[charitable_email show=confirmation_url]">[charitable_email show=confirmation_url]</a></p>
 <?php
 			/**
 			 * Filter the default email body.

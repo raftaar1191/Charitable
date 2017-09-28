@@ -215,12 +215,14 @@ function charitable_table_template( array $columns, array $data, $args = array()
  *
  * @since  1.5.0
  *
- * @param  WP_User $user An instance of `WP_User`.
+ * @param  WP_User      $user         An instance of `WP_User`.
+ * @param  string|false $redirect_url The URL to redirect to after verification.
  * @return string
  */
-function charitable_get_email_verification_link( WP_User $user ) {
+function charitable_get_email_verification_link( WP_User $user, $redirect_url = false ) {
 	return add_query_arg( array(
 		'charitable_action' => 'verify_email',
 		'user'              => $user->ID,
+		'redirect_url'      => $redirect_url,
 	) );
 }
