@@ -564,6 +564,18 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		}
 
 		/**
+		 * Return an array of email fields that are specifically available
+		 * for this email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function email_fields() {
+			return array();
+		}
+
+		/**
 		 * Checks whether the email has a valid donation object set.
 		 *
 		 * @since  1.0.0

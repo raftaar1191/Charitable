@@ -106,7 +106,6 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             }
 
             array_walk( $fields, array( $this, 'render_hidden_field' ) );
->>>>>>> a73d7d297699069afa0d62672a05ca95631f4022
         }
 
         /**

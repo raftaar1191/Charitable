@@ -94,7 +94,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 */
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
-			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
+			// add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
 		}
 
 		/**
@@ -195,27 +195,26 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
-		 * Adds hidden fields to the start of the donation form.
+		 * Retrieve hidden fields.
 		 *
-		 * @since  1.0.0
+		 * @since  1.5.0
 		 *
-		 * @param  Charitable_Form $form The form object.
-		 * @return boolean Whether the output is added.
+		 * @return array
 		 */
-		public function add_hidden_fields( $form ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			$this->nonce_field();
-
-			?>			
-			<input type="hidden" name="charitable_action" value="<?php echo esc_attr( $this->form_action ) ?>" />
-			<input type="hidden" name="charitable_form_id" value="<?php echo esc_attr( $this->id ) ?>" autocomplete="off" />
-			<input type="text" name="<?php echo esc_attr( $this->id ) ?>" class="charitable-hidden" value="" autocomplete="off" />			
-			<?php
-
-			return true;
+		public function get_hidden_fields() {
+			/**
+			 * Filter hidden fields.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array           $fields The hidden fields as a key=>value array.
+			 * @param Charitable_Form $form   This instance of `Charitable_Form`.
+			 */
+			return apply_filters( 'charitable_form_hidden_fields', array(
+				$this->nonce_name   => wp_create_nonce( $this->nonce_action ),
+				'_wp_http_referer'  => wp_unslash( $_SERVER['REQUEST_URI'] ),
+				'charitable_action' => $this->form_action,
+			), $this );
 		}
 
 		/**
@@ -534,10 +533,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Checks whether a template is valid.
 		 *
-		 * @deprecated
+		 * @deprecated 1.8.0
 		 *
 		 * @since  1.0.0
-		 * @since  1.5.0 Deprecated.
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
 		 *
 		 * @param  mixed $template Template we're checking.
 		 * @return boolean
@@ -555,10 +554,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Set how much the index should be incremented by.
 		 *
-		 * @deprecated
+		 * @deprecated 1.8.0
 		 *
 		 * @since  1.0.0
-		 * @since  1.5.0 Deprecated.
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
 		 *
 		 * @param  int   $increment The number the index should be incremented by.
 		 * @param  array $field     The field definition.
@@ -588,10 +587,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Whether the given field type can use the default field template.
 		 *
-		 * @deprecated
+		 * @deprecated 1.8.0
 		 *
 		 * @since  1.0.0
-		 * @since  1.5.0
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
 		 *
 		 * @param  string $field_type Type of field.
 		 * @return boolean
@@ -604,6 +603,25 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			);
 
 			return $this->view()->use_default_field_template( $field_type );			
+		}
+
+		/**
+		 * Adds hidden fields to the start of the donation form.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Hidden fields are rendered by the Form View now.
+		 *
+		 * @param  Charitable_Form $form The form object.
+		 * @return boolean Whether the output is added.
+		 */
+		public function add_hidden_fields( $form ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::use_default_field_template()'
+			);
 		}
 	}
 

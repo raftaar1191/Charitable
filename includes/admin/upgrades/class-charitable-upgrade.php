@@ -563,7 +563,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 				$step++;
 
-				$redirect = add_query_arg( array(					
+				$redirect = add_query_arg( array(
 					'charitable-upgrade' => 'remove_duplicate_donors',
 					'page'               => 'charitable-upgrades',
 					'step'               => $step,

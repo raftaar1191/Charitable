@@ -243,14 +243,13 @@ if ( ! class_exists( 'Charitable' ) ) :
             
             /* Emails */            
             require_once( $includes_path . 'emails/class-charitable-emails.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
             require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
             require_once( $includes_path . 'emails/class-charitable-email-email-verification.php' );
             require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
             require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
             require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
+            require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
 
             /* Email Fields */
@@ -267,6 +266,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-email-preview-endpoint.php' );
+            require_once( $includes_path . 'endpoints/class-charitable-email-verification-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-forgot-password-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-login-endpoint.php' );
             require_once( $includes_path . 'endpoints/class-charitable-profile-endpoint.php' );
