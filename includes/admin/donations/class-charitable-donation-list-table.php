@@ -238,16 +238,26 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 				unset( $actions['inline hide-if-no-js'] );
 			}
 
-			if ( isset( $actions['edit'] ) ) {
-				$title = esc_attr__( 'View Details', 'charitable' );
-				$text  = __( 'View', 'charitable' );
-				$url   = esc_url( add_query_arg( array(
-					'post'   => $post->ID,
-					'action' => 'edit',
-				), admin_url( 'post.php' ) ) );
+			$actions['edit'] = sprintf( '<a href="%s" aria-label="%s">%s</a>',
+				esc_url( add_query_arg( array(
+					'post'      => $post->ID,
+					'action'    => 'edit',
+					'show_form' => true,
+				), admin_url( 'post.php' ) ) ),
+				esc_attr__( 'Edit Donation', 'charitable' ),
+				__( 'Edit', 'charitable' )
+			);
 
-				$actions['edit'] = sprintf( '<a href="%s" aria-label="%s">%s</a>', $url, $title, $text );
-			}
+			$actions = array_merge( array(
+				'view' => sprintf( '<a href="%s" aria-label="%s">%s</a>',
+					esc_url( add_query_arg( array(
+						'post'      => $post->ID,
+						'action'    => 'edit',
+					), admin_url( 'post.php' ) ) ),
+					esc_attr__( 'View Details', 'charitable' ),
+					__( 'View', 'charitable' )
+				)
+			), $actions );
 
 			return $actions;
 		}   

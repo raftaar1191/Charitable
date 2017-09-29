@@ -433,7 +433,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		public function get_gateway_label() {
 			$gateway = $this->get_gateway_object();
-			$label   = $gateway ? $gateway->get_label() : $this->get_gateway();
+			$label   = $gateway ? $gateway->get_label() : ucfirst( $this->get_gateway() );
 
 			/**
 			 * Filter the gateway label.
@@ -594,6 +594,17 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		public function get_donor_address() {
 			return $this->get_donor()->get_address();
+		}
+
+		/**
+		 * Return whether the donation has been manually edited.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function was_manually_edited() {
+			return (bool) get_post_meta( $this->ID, '_donation_manually_edited', true );
 		}
 
 		/**

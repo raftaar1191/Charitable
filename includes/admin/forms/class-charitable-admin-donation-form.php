@@ -86,12 +86,12 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		public function get_fields() {
 			$fields = array(
-				'donation_header' => array(
-					'type'     => 'heading',
-					'level'    => 'h3',
-					'title'    => __( 'Donation', 'charitable' ),
-					'priority' => 20,
-				),
+				// 'donation_header' => array(
+				// 	'type'     => 'heading',
+				// 	'level'    => 'h3',
+				// 	'title'    => __( 'Donation', 'charitable' ),
+				// 	'priority' => 20,
+				// ),
 				'donation_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_donation_fields(),
@@ -102,12 +102,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'level'    => 'h3',
 					'title'    => __( 'Donor', 'charitable' ),
 					'priority' => 40,
-				),
-				'donor_id' => array(
-					'type'     => 'select',
-					'options'  => $this->get_all_donors(),
-					'priority' => 41,
-				),
+				),				
 				'user_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'user' ),
@@ -120,7 +115,18 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				),
 			);
 
-			if ( ! $this->has_donation() ) {
+			if ( $this->has_donation() ) {
+				if ( 'manual' != $this->get_donation()->get_gateway() ) {
+					unset( $fields['meta_fields']['fields']['date'] );
+				}
+			} else {
+				$fields['donor_id'] = array(
+					'type'     => 'select',
+					'options'  => $this->get_all_donors(),
+					'priority' => 41,
+					'value'    => '',
+				);
+
 				$fields['user_fields']['attrs'] = array(
 					'data-trigger-key'   => '#donor-id',
 					'data-trigger-value' => 'new',
@@ -256,12 +262,10 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		public function validate_submission() {
 			/* If we have already validated the submission, return the value. */
-			if ( $this->validated ) {
+			if ( isset( $this->validated ) ) {
 				return $this->valid;
 			}
-
-			$this->validated = true;
-
+			
 			$this->valid = $this->check_required_fields( $this->get_merged_fields() );
 
 			$campaign_donations          = array_key_exists( 'campaign_donations', $_POST ) ? $_POST['campaign_donations'] : array();
@@ -287,7 +291,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			 * @param boolean                        $valid Whether the form submission is valid.
 			 * @param Charitable_Admin_Donation_Form $form  This instance of `Charitable_Admin_Donation_Form`.
 			 */
-			$this->valid = apply_filters( 'charitable_validate_admin_donation_form_submission', $this->valid, $this );
+			$this->valid     = apply_filters( 'charitable_validate_admin_donation_form_submission', $this->valid, $this );
+			$this->validated = true;
 
 			return $this->valid;
 		}
@@ -350,6 +355,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				'orderby' => 'name',
 				'order'   => 'ASC',
 				'output'  => 'raw',
+				'status'  => false, // Return any.
 			) );
 
 			$donor_list = array();

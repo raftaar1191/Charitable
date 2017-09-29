@@ -13,9 +13,17 @@ global $post;
 $donation = charitable_get_donation( $post->ID );
 $donor    = $donation->get_donor();
 $amount   = $donation->get_total_donation_amount();
+$date     = 'gateway' == $donation->get_gateway() ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
 
 ?>
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">
+	<div class="donation-banner-wrapper">
+		<div class="donation-banner">
+			<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ) ?></h3>
+			<span class="donation-date"><?php echo $date ?></span>
+			<a href="<?php echo esc_url( add_query_arg( 'show_form', true ) ) ?>" class="donation-edit-link"><?php _e( 'Edit Donation', 'charitable' ) ?></a>
+		</div>
+	</div>
 	<div id="donor" class="charitable-media-block">
 		<div class="donor-avatar charitable-media-image">
 			<?php echo $donor->get_avatar( 80 ) ?>
@@ -36,9 +44,7 @@ $amount   = $donation->get_total_donation_amount();
 			?>
 		</div>
 	</div>
-	<div id="donation-summary">
-		<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ) ?></h3>
-		<span class="donation-date"><?php printf( '%s - %s', $donation->get_date(), $donation->get_time() ) ?></span>
+	<div id="donation-summary">		
 		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status_label() ) ?></span>
 	</div>
 	<?php

@@ -487,10 +487,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return  int The number of donations inserted.
 		 */
 		public function save_campaign_donations( $donation_id ) {
+			$donor_id  = $this->get_donor_id();
 			$campaigns = $this->get_campaign_donations_data();
 
 			if ( false !== $this->get_donation_data_value( 'ID', false ) ) {
-				$records = charitable_get_table( 'campaign_donations' )->get_donation_records( $donation_id );
+				$records            = charitable_get_table( 'campaign_donations' )->get_donation_records( $donation_id );
 				$campaign_donations = wp_list_pluck( $records, 'campaign_id', 'campaign_donation_id' );
 			} else {
 				$campaign_donations = array();
@@ -498,32 +499,38 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			foreach ( $campaigns as $campaign ) {
 
-				$campaign_donation_id = array_search( $campaign['campaign_id'], $campaign_donations );
+				if ( array_key_exists( 'campaign_donation_id', $campaign ) ) {
+					$campaign_donation_id = $campaign['campaign_donation_id'];
+				} else {
+					$campaign_donation_id = array_search( $campaign['campaign_id'], $campaign_donations );
+				}
 
 				/* Avoid adding duplicate campaign donations when re-submitting a campaign. */
 				if ( false !== $campaign_donation_id ) {
 
-					$campaign_donation = $records[ $campaign_donation_id ];
+					/* Cast the existing campaign_donation record to an array and sanitize the amount. */
+					$campaign_donation           = (array) $records[ $campaign_donation_id ];
+					$campaign_donation['amount'] = charitable_sanitize_amount( $campaign_donation['amount'], true );
 
-					/* If the donation amount has changed, update the campaign donation record. */
-					if ( $campaign_donation->amount != $campaign['amount'] ) {
+					/* Get our updated campaign donation values. */
+					$args             = charitable_array_subset( $campaign, array( 'campaign_id', 'campaign_name', 'amount' ) );
+					$args['donor_id'] = $donor_id;
 
-						charitable_get_table( 'campaign_donations' )->update( $campaign_donation_id, array(
-							'amount' => $campaign['amount'],
-						), 'campaign_donation_id' );
+					/* If any values have changed, update the record. */
+					if ( count( array_diff( $args, $campaign_donation ) ) ) {
+						charitable_get_table( 'campaign_donations' )->update( $campaign_donation_id, $args, 'campaign_donation_id' );
 					}
 
-					continue;
+				} else {
 
-				}
+					/* Add a new donation */
+					$campaign['donor_id']    = $donor_id;
+					$campaign['donation_id'] = $donation_id;
+					$campaign_donation_id    = charitable_get_table( 'campaign_donations' )->insert( $campaign );
 
-				$campaign['donor_id']    = $this->get_donor_id();
-				$campaign['donation_id'] = $donation_id;
-
-				$campaign_donation_id = charitable_get_table( 'campaign_donations' )->insert( $campaign );
-
-				if ( 0 == $campaign_donation_id ) {
-					return 0;
+					if ( 0 == $campaign_donation_id ) {
+						return 0;
+					}
 				}
 			}//end foreach
 

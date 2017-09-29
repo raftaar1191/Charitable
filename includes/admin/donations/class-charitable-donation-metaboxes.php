@@ -116,7 +116,7 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		private function get_meta_boxes() {
 			$screen  = get_current_screen();
 
-			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show-form'] ) ) ) {
+			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show_form'] ) ) ) {
 				$meta_boxes = $this->get_form_meta_box();
 			} else {
 				$meta_boxes = $this->get_view_meta_boxes();
@@ -242,6 +242,8 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 				if ( $form->validate_submission() ) {
 					charitable_create_donation( $form->get_donation_values() );
 				}
+
+				update_post_meta( $donation_id, '_donation_manually_edited', true );
 			}
 
 			/* Handle any fired actions */

@@ -351,6 +351,19 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
+	'donation_gateway' => array(
+		'label'          => __( 'Payment Method', 'charitable' ),
+		'data_type'      => 'meta',
+		'value_callback' => 'charitable_get_donation_meta_value',
+		'donation_form'  => false,
+		'admin_form'     => array(
+			'type'    => 'hidden',
+			'section' => 'meta',
+		),
+		'email_tag'      => false,
+		'show_in_meta'   => false,
+		'show_in_export' => false,
+	),
 	'gateway_label' => array(
 		'label'          => __( 'Payment Method', 'charitable' ),
 		'data_type'      => 'core',

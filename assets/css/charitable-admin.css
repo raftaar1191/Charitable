@@ -174,6 +174,8 @@
   .charitable-metabox-wrap label {
     display: block;
     margin-bottom: 6px; }
+  .charitable-metabox-wrap th label {
+    margin-bottom: 0; }
   .charitable-metabox-wrap input,
   .charitable-metabox-wrap select,
   .charitable-metabox-wrap textarea {
@@ -586,11 +588,27 @@ body.post-type-campaign .postbox-container .empty-container {
   border-top: 1px solid #e1e1e1; }
 
 body.post-type-donation #post-body-content,
-body.post-type-donation #titlediv,
-body.post-type-donation .page-title-action {
+body.post-type-donation #titlediv {
   display: none; }
 body.post-type-donation .closed .inside {
   display: block; }
+body.post-type-donation .donation-banner-wrapper {
+  float: left;
+  width: 100%;
+  background: #f8f8f8;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid #e5e5e5; }
+body.post-type-donation .donation-banner {
+  position: relative;
+  padding: 12px 20px; }
+  body.post-type-donation .donation-banner .donation-edit-link {
+    position: absolute;
+    top: 12px;
+    right: 20px; }
+  body.post-type-donation .donation-banner .donation-number {
+    margin: 0;
+    padding: 0;
+    font-size: 1.3em; }
 
 #donation-overview .charitable-metabox {
   *zoom: 1; }
@@ -621,7 +639,6 @@ body.post-type-donation .closed .inside {
   padding: 20px 20px 40px 0;
   max-width: 33%;
   text-align: right; }
-#donation-overview .donation-date,
 #donation-overview .donation-status {
   display: block;
   margin-bottom: 6px; }
@@ -696,13 +713,22 @@ body.post-type-donation .closed .inside {
   border: 1px solid #dedede;
   border-radius: 4px;
   background: #fff; }
+.post-type-charitable.post-type-donation .charitable-metabox-wrap {
+  margin-bottom: 24px; }
+  .post-type-charitable.post-type-donation .charitable-metabox-wrap.charitable-fieldset-wrap {
+    margin-bottom: 0; }
 .post-type-charitable.post-type-donation #donation-form {
-  padding: 24px 12px 12px;
   border: none;
   background: transparent;
   box-shadow: none; }
   .post-type-charitable.post-type-donation #donation-form .postbox-title {
     display: none; }
+  .post-type-charitable.post-type-donation #donation-form .inside {
+    padding: 0;
+    margin: 0; }
+    .post-type-charitable.post-type-donation #donation-form .inside > .charitable-form-fields {
+      clear: both;
+      padding: 20px; }
   .post-type-charitable.post-type-donation #donation-form .charitable-form-fields > h3:first-of-type {
     margin-top: 0; }
   .post-type-charitable.post-type-donation #donation-form .charitable-form-fields > .charitable-metabox-wrap:not(.charitable-fieldset-wrap) {
