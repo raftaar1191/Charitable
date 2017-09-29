@@ -768,7 +768,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @return array[]
 		 */
 		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
-			return array();
+			return $fields;
 		}
 
 		/**
@@ -784,7 +784,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @return array[]
 		 */
 		public function add_preview_donation_content_fields( $fields, Charitable_Email $email ) {
-			return array();
+			return $fields;
 		}
 
 		/**
@@ -800,7 +800,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @return array[]
 		 */
 		public function add_campaign_content_fields( $fields, Charitable_Email $email ) {
-			return array();
+			return $fields;
 		}
 
 		/**
@@ -816,7 +816,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @return array[]
 		 */
 		public function add_preview_campaign_content_fields( $fields, Charitable_Email $email ) {
-			return array();
+			return $fields;
 		}
 	}
 
