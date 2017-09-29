@@ -18,7 +18,7 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	<?php if ( isset( $view_args['label'] ) ) : ?>
 		<label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label']  ?></label>
 	<?php endif ?>
-	<select id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>" <?php echo charitable_get_arbitrary_attributes( $view_args ) ?>>
+	<select id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>" tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" <?php echo charitable_get_arbitrary_attributes( $view_args ) ?>>
 	<?php
 	foreach ( $view_args['options'] as $key => $option ) :
 		if ( is_array( $option ) ) :

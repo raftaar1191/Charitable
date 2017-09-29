@@ -40,7 +40,7 @@ if ( empty( $campaign_donations ) ) {
 		<?php foreach ( $campaign_donations as $i => $campaign_donation ) : ?>
 			<tr>
 				<td>
-					<select name="<?php echo esc_attr( sprintf( '%s[%d][campaign_id]', $view_args['key'], $i ) ) ?>" labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-campaign-label">
+					<select name="<?php echo esc_attr( sprintf( '%s[%d][campaign_id]', $view_args['key'], $i ) ) ?>" labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-campaign-label" tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>">
 						<option value=""><?php _e( 'Select a campaign', 'charitable' ) ?></option>
 						<?php foreach ( $campaigns as $campaign_id ) : ?>
 							<option value="<?php echo $campaign_id ?>" <?php selected( $campaign_id, $campaign_donation->campaign_id ) ?>><?php echo get_the_title( $campaign_id ) ?></option>
@@ -49,8 +49,9 @@ if ( empty( $campaign_donations ) ) {
 				</td>
 				<td>
 					<input type="text"
-					name="<?php echo esc_attr( sprintf( '%s[%d][amount]', $view_args['key'], $i ) ) ?>" 
+					name="<?php echo esc_attr( sprintf( '%s[%d][amount]', $view_args['key'], $i ) ) ?>"
 					labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-amount-label"
+					tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>"
 					value="<?php echo empty( $campaign_donation->amount ) ? '' : esc_attr( charitable_sanitize_amount( $campaign_donation->amount, true ) ) ?>" />
 					<?php if ( isset( $campaign_donation->campaign_donation_id ) ) : ?>
 						<input type="hidden" name="<?php echo esc_attr( sprintf( '%s[%d][campaign_donation_id]', $view_args['key'], $i ) ) ?>" value="<?php echo $campaign_donation->campaign_donation_id  ?>" />

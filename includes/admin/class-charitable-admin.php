@@ -226,6 +226,24 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		}
 
 		/**
+		 * Set admin body classes.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $classes Existing list of classes.
+		 * @return string
+		 */
+		public function set_body_class( $classes ) {
+			$screen = get_current_screen();
+
+			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show_form'] ) ) ) {
+				$classes .= ' charitable-admin-donation-form';
+			}
+
+			return $classes;
+		}
+
+		/**
 		 * Add notices to the dashboard.
 		 *
 		 * @since   1.4.0

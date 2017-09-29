@@ -237,10 +237,14 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 			}
 
 			if ( array_key_exists( 'charitable_action', $_POST ) && ! did_action( 'charitable_before_save_donation' ) ) {
-				$form   = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
+				$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
 				
 				if ( $form->validate_submission() ) {
+					$this->disable_automatic_emails();
+
 					charitable_create_donation( $form->get_donation_values() );
+
+					$this->reenable_automatic_emails();
 				}
 
 				update_post_meta( $donation_id, '_donation_manually_edited', true );
@@ -291,6 +295,57 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 			);
 
 			return $messages;
+		}
+
+		/**
+		 * Disable automatic emails when a donation is created.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function disable_automatic_emails() {
+			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
+
+			remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+			if ( ! $send_receipt ) {
+				remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+			}
+
+			foreach ( charitable_get_approval_statuses() as $status ) {
+				remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+				if ( ! $send_receipt ) {
+					remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+				}
+			}
+		}
+
+		/**
+		 * Re-enable automatic emails after the donation has been saved.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function reenable_automatic_emails() {
+			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
+
+			add_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+			if ( ! $send_receipt ) {
+				add_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+			}
+
+			foreach ( charitable_get_approval_statuses() as $status ) {
+				add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+				if ( ! $send_receipt ) {
+					add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+				}
+			}
+
 		}
 	}
 

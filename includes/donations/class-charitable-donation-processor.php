@@ -439,11 +439,13 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			$this->save_donation_meta( $donation_id );
 
-			if ( isset( $values['ID'] ) ) {
-				$this->update_donation_log( $donation_id, __( 'Payment attempted.', 'charitable' ) );
-			} else {
-				$this->update_donation_log( $donation_id, __( 'Donation created.', 'charitable' ) );
+			$log_note = array_key_exists( 'log_note', $values ) ? $values['log_note'] : '';
+
+			if ( empty( $log_note ) ) {
+				$log_note = isset( $values['ID'] ) ? __( 'Payment attempted.', 'charitable' ) : __( 'Donation created.', 'charitable' );
 			}
+
+			$this->update_donation_log( $donation_id, $log_note );
 
 			/**
 			 * Update the user session if we're on the public site or in an AJAX request.
@@ -557,9 +559,26 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				$meta = array_merge( $meta, $this->get_donation_data_value( 'meta' ) );
 			}
 
+			/**
+			 * Filter the donation meta to be saved.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                         $meta        The meta to be saved, in a key=>value array.
+			 * @param int                           $donation_id The donation ID.
+			 * @param Charitable_Donation_Processor $processor   This instance of `Charitable_Donation_Processor`.
+			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
 
 			foreach ( $meta as $meta_key => $value ) {
+				/**
+				 * Sanitize a particular meta value.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param mixed  $value    The value.
+				 * @param string $meta_key The meta key.
+				 */
 				$value = apply_filters( 'charitable_sanitize_donation_meta', $value, $meta_key );
 				update_post_meta( $donation_id, $meta_key, $value );
 			}

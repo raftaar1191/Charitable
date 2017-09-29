@@ -34,6 +34,21 @@ body.post-type-donation {
             font-size: 1.3em;
         }
     }
+
+    @include bp(1120) {
+        #poststuff #post-body.columns-2 {
+            margin-right: 340px;
+
+            #postbox-container-1 {
+                margin-right: -340px;
+                width: 320px;
+
+                #side-sortables {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
 
 #donation-overview {
@@ -136,10 +151,14 @@ body.post-type-donation {
     .inside {
         padding: 0;
     }
+
+    .postbox-title {
+        padding: 20px 20px 12px 20px;
+    }
 }
 
 #charitable-donation-actions-form {
-    padding: 0 12px 12px 12px;
+    padding: 0 20px 20px 20px;
 }
 
 #charitable-donation-actions-submit {
@@ -185,7 +204,7 @@ body.post-type-donation {
 }
 
 /* Donation Form */
-.post-type-charitable.post-type-donation {
+.post-type-donation.charitable-admin-donation-form {
     #postbox-container-2 {
         margin-bottom: 0;
         border: 1px solid #dedede;
@@ -233,22 +252,7 @@ body.post-type-donation {
 
     #donation-form-meta {
         padding: 24px 12px 12px;
-    }
-
-    @include bp(1120) {
-        #poststuff #post-body.columns-2 {
-            margin-right: 400px;
-
-            #postbox-container-1 {
-                margin-right: -400px;
-                width: 380px;
-
-                #side-sortables {
-                    width: 100%;
-                }
-            }
-        }
-    }
+    }    
 }
 
 #charitable-campaign-donations thead th {

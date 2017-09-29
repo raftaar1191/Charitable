@@ -51,6 +51,15 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
         protected $post_custom_keys;
 
         /**
+         * Current tabindex.
+         *
+         * @since 1.5.0
+         *
+         * @var   int
+         */
+        protected $tabindex;
+
+        /**
          * Set up view instance.
          *
          * @since  1.5.0
@@ -58,21 +67,8 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @param Charitable_Form $form Form object.
          */
         public function __construct( Charitable_Form $form ) {
-            $this->form = $form;
-        }
-
-        /**
-         * Register a custom field template.
-         *
-         * @since  1.5.0
-         *
-         * @param  string $field_type The type of field we are registering this template for.
-         * @param  string $class      The template class name.
-         * @param  string $path       The path to the template.
-         * @return void
-         */
-        public function register_custom_field_template( $field_type, $class, $path ) {
-            $this->custom_field_templates[ $field_type ] = array( 'class' => $class, 'path' => $path );
+            $this->form     = $form;
+            $this->tabindex = 0;
         }
 
         /**
@@ -165,10 +161,14 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             $field['value']      = $this->get_field_value( $field );
             $field['id']         = str_replace( '_', '-', ltrim( $field['key'] ) );
             $field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
+            $field['tabindex']   = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
 
             if ( 'checkbox' == $field['type'] ) {
                 $field['checked'] = $this->is_field_checked( $field );
             }
+
+            /* Increment the tabindex. */
+            $this->tabindex = $field['tabindex'] + 1;
 
             return charitable_admin_view( $field['view'], $field );
         }

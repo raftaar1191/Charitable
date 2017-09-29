@@ -96,22 +96,25 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'type'     => 'fieldset',
 					'fields'   => $this->get_donation_fields(),
 					'priority' => 21,
+					'tabindex' => 1,
 				),
 				'donor_header' => array(
 					'type'     => 'heading',
 					'level'    => 'h3',
 					'title'    => __( 'Donor', 'charitable' ),
-					'priority' => 40,
+					'priority' => 40,					
 				),				
 				'user_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'user' ),
 					'priority' => 50,
+					'tabindex' => 100,
 				),
 				'meta_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'meta' ),
 					'priority' => 60,
+					'tabindex' => 200,
 				),
 			);
 
@@ -130,14 +133,6 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				$fields['user_fields']['attrs'] = array(
 					'data-trigger-key'   => '#donor-id',
 					'data-trigger-value' => 'new',
-				);
-
-				$fields['meta_fields']['fields']['send_donation_receipt'] = array(
-					'type'     => 'checkbox',
-					'label'    => __( 'Send an email receipt to the donor.', 'charitable' ),
-					'value'    => 1,
-					'default'  => 1,
-					'priority' => 70,
 				);
 			}
 
@@ -200,6 +195,25 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				array_map( array( $this, 'maybe_set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
 			);
 
+			if ( 'meta' == $section ) {
+				$fields['log_note'] = array(
+					'label'    => __( 'Donation Note', 'charitable' ),
+					'type'     => 'textarea',
+					'priority' => 12,
+					'required' => false,
+				);
+
+				if ( ! $this->has_donation() ) {
+					$fields['send_donation_receipt'] = array(
+						'type'     => 'checkbox',
+						'label'    => __( 'Send an email receipt to the donor.', 'charitable' ),
+						'value'    => 1,
+						'default'  => 1,
+						'priority' => 16,
+					);
+				}
+			}
+
 			uasort( $fields, 'charitable_priority_sort' );
 
 			return $fields;		
@@ -231,11 +245,12 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $field The field.
+		 * @param  string $field   The field.
+		 * @param  mixed  $default The default value to return if the value was not submitted.
 		 * @return mixed
 		 */
-		public function get_submitted_value( $field ) {
-			return array_key_exists( $field, $_POST ) ? $_POST[ $field ] : false;
+		public function get_submitted_value( $field, $default = false ) {
+			return array_key_exists( $field, $_POST ) ? $_POST[ $field ] : $default;
 		}
 
 		/**
@@ -311,12 +326,38 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				'campaigns' => $this->get_submitted_value( 'campaign_donations' ),
 				'status'    => $this->get_submitted_value( 'status' ),
 				'date_gmt'  => charitable_sanitize_date( $this->get_submitted_value( 'date' ), 'Y-m-d H:i:s' ),
+				'log_note'  => $this->get_submitted_value( 'log_note' ),
 			);
 
 			if ( 'add_donation' == $this->get_submitted_value( 'charitable_action' ) ) {
 				$values['donation_gateway'] = __( 'Manual', 'charitable' );
 			}
 
+			if ( ! $values['log_note'] ) {
+				$values['log_note'] = sprintf( __( 'Donation updated manually by <a href="%s">%s</a>.', 'charitable' ),
+					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
+					wp_get_current_user()->display_name
+				);
+			} else {
+				$values['log_note'] .= sprintf( ' - <a href="%s">%s</a>',
+					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
+					wp_get_current_user()->display_name
+				);
+			}
+
+			$fields = $this->get_merged_fields();
+
+			if ( $values['donor_id'] ) {
+				$donor = charitable_get_table( 'donors' )->get( $values['donor_id'] );
+
+				if ( $donor ) {
+					$values['user'] = array(
+						'email'      => $donor->email,
+						'first_name' => $donor->first_name,
+						'last_name'  => $donor->last_name,
+					);
+				}
+			}
 
 			foreach ( $this->get_merged_fields() as $key => $field ) {
 				if ( array_key_exists( 'data_type', $field ) && 'core' != $field['data_type'] ) {
@@ -326,7 +367,9 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 						$default    = 'checkbox' == $field_type ? false : '';
 						$submitted  = $this->get_submitted_value( $key );
 
-						$values[ $data_type ][ $key ] = $submitted ? $submitted : $default;
+						if ( ! isset( $values[ $data_type ][ $key ] ) || false != $submitted ) {
+							$values[ $data_type ][ $key ] = $submitted ? $submitted : $default;
+						}
 					}
 				}
 			}

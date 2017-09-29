@@ -406,20 +406,5 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		),
 		'show_in_meta'   => false,
 		'show_in_export' => false,
-	),
-	'manual_donation_note' => array(
-		'label'          => __( 'Note', 'charitable' ),
-		'data_type'      => 'meta',
-		'value_callback' => 'charitable_get_donation_meta_value',
-		'donation_form'  => false,
-		'admin_form'     => array(
-			'type'     => 'textarea',
-			'priority' => 12,
-			'required' => false,
-			'section'  => 'meta',
-		),
-		'email_tag'      => false,
-		'show_in_meta'   => false,
-		'show_in_export' => false,
-	),
+	),		
 ) );

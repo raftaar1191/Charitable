@@ -13,7 +13,7 @@ global $post;
 $donation = charitable_get_donation( $post->ID );
 $donor    = $donation->get_donor();
 $amount   = $donation->get_total_donation_amount();
-$date     = 'gateway' == $donation->get_gateway() ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
+$date     = 'manual' == $donation->get_gateway() ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
 
 ?>
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">

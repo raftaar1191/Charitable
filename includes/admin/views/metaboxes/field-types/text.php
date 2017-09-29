@@ -21,5 +21,6 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	<input type="text" 
 		id="<?php echo esc_attr( $view_args['id'] ) ?>" 
 		name="<?php echo esc_attr( $view_args['key'] ) ?>"
-		value="<?php echo esc_attr( $view_args['value'] ) ?>" />
+		value="<?php echo esc_attr( $view_args['value'] ) ?>"
+        tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" />
 </div>

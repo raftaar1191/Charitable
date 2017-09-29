@@ -17,5 +17,5 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	<?php if ( isset( $view_args['label'] ) ) : ?>
         <label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label'] ?></label>
     <?php endif ?>
-	<textarea id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>"><?php echo esc_textarea( $view_args['value'] ) ?></textarea>
+	<textarea id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>" tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>"><?php echo esc_textarea( $view_args['value'] ) ?></textarea>
 </div><!-- #<?php echo $view_args['wrapper_id'] ?> -->
