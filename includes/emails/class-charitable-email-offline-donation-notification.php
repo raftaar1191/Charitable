@@ -174,6 +174,8 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 		/**
 		 * Return the default headline for the email.
 		 *
+		 * @since  1.5.0
+		 *
 		 * @return string
 		 */
 		protected function get_default_headline() {
@@ -191,17 +193,16 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 		/**
 		 * Return the default body for the email.
 		 *
-		 * @return  string
-		 * @access  protected
+		 * @since  1.5.0
+		 *
+		 * @return string
 		 */
 		protected function get_default_body() {
 			ob_start();
 ?>
-[charitable_email show=donor] ([charitable_email show=donor_email]) has just made a offline donation!
-
-<strong>Summary</strong>
-[charitable_email show=donation_summary]
-Donation ID: [charitable_email show=donation_id]
+<p><?php _e( '[charitable_email show=donor] ([charitable_email show=donor_email]) has just made a offline donation!', 'charitable' ) ?></p>
+<p><strong><?php _e( 'Summary', 'charitable' ) ?></strong></p>
+<p>[charitable_email show=donation_summary]</p>
 <?php
 			/**
 			 * Filter the default body content.

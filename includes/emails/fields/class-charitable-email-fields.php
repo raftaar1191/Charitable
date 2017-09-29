@@ -173,12 +173,12 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
          * @return string
          */
         private function get_field_value_from_field_details( array $field_details, array $args ) {
-            if ( $this->preview ) {
-                return array_key_exists( 'preview', $field_details ) ? $field_details['preview'] : '';
-            }
-            
             if ( array_key_exists( 'value', $field_details ) ) {
                 return $field_details['value'];
+            }
+
+            if ( $this->preview ) {
+                return array_key_exists( 'preview', $field_details ) ? $field_details['preview'] : '';
             }
 
             if ( array_key_exists( 'callback', $field_details ) ) {
