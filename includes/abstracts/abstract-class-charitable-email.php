@@ -106,6 +106,8 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		public function __construct( $objects = array() ) {
 			$this->donation = isset( $objects['donation'] ) ? $objects['donation'] : null;
 			$this->campaign = isset( $objects['campaign'] ) ? $objects['campaign'] : null;
+
+
 		}
 
 		/**
@@ -751,6 +753,70 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 */
 		protected function is_current_email( Charitable_Email $email ) {
 			return $email->get_email_id() == $this->get_email_id();
+		}
+
+		/**
+		 * Add donation content fields.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  array            $fields Shortcode fields.
+		 * @param  Charitable_Email $email  Email object.
+		 * @return array[]
+		 */
+		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
+			return array();
+		}
+
+		/**
+		 * Add donation preview fields.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  array            $fields Shortcode fields.
+		 * @param  Charitable_Email $email  Email object.
+		 * @return array[]
+		 */
+		public function add_preview_donation_content_fields( $fields, Charitable_Email $email ) {
+			return array();
+		}
+
+		/**
+		 * Add campaign content fields.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  array            $fields Shortcode fields.
+		 * @param  Charitable_Email $email  Email object.
+		 * @return array[]
+		 */
+		public function add_campaign_content_fields( $fields, Charitable_Email $email ) {
+			return array();
+		}
+
+		/**
+		 * Add campaign preview fields.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
+		 *
+		 * @param  array            $fields Shortcode fields.
+		 * @param  Charitable_Email $email  Email object.
+		 * @return array[]
+		 */
+		public function add_preview_campaign_content_fields( $fields, Charitable_Email $email ) {
+			return array();
 		}
 	}
 

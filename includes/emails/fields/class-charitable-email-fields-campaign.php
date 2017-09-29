@@ -95,8 +95,6 @@ if ( ! class_exists( 'Charitable_Email_Fields_Campaign' ) ) :
                 ),
             );
 
-            error_log( var_export( $fields, true ) );
-
             if ( $this->has_valid_campaign() ) {
                 $fields = array_merge_recursive( $fields, array(
                     'campaign_title'          => array( 'value' => $this->campaign->post_title ),
