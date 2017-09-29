@@ -148,7 +148,7 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 
             /* Get the field value if the field is registered and has a 'value' or 'callback' set. */
             if ( array_key_exists( $field, $this->fields ) ) {
-                $value = $this->get_field_value_from_field_details( $this->fields[ $field ] );
+                $value = $this->get_field_value_from_field_details( $this->fields[ $field ], $args );
             }
 
             /**
@@ -168,10 +168,11 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  array $field_details
+         * @param  array $field_details Email field definition.
+         * @param  array $args          Mixed shortcode arguments.
          * @return string
          */
-        private function get_field_value_from_field_details( $field_details ) {
+        private function get_field_value_from_field_details( array $field_details, array $args ) {
             if ( $this->preview ) {
                 return array_key_exists( 'preview', $field_details ) ? $field_details['preview'] : '';
             }
@@ -181,7 +182,7 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
             }
 
             if ( array_key_exists( 'callback', $field_details ) ) {
-                return call_user_func( $field_details['callback'], $value, $args, $this->email );
+                return call_user_func( $field_details['callback'], '', $args, $this->email );
             }
 
             /* If we still don't have a value, return an empty string. */

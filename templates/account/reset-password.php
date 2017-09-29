@@ -34,31 +34,18 @@ $form = $view_args['form'];
 			<?php do_action( 'charitable_form_before_fields', $form ); ?>
 
 			<div class="charitable-form-fields cf">
-				<?php
-
-				$i = 1;
-
-				foreach ( $form->get_fields() as $key => $field ) :
-
-					do_action( 'charitable_form_field', $field, $key, $form, $i );
-
-					$i += apply_filters( 'charitable_form_field_increment', 1, $field, $key, $form, $i );
-
-				endforeach;
-
-				?>
+				<?php $form->view()->render_fields() ?>
 				<p class="description"><?php echo wp_get_password_hint() ?></p>
-			</div>
+			</div><!-- .charitable-form-fields -->
 
 			<?php do_action( 'charitable_form_after_fields', $form ); ?>
 
 			<div class="charitable-form-field charitable-submit-field resetpass-submit">
 				<button id="resetpass-button" class="button button-primary lostpassword-button" type="submit"><?php _e( 'Reset Password', 'charitable' ) ?></button>
 			</div>
-
 		</form>
-
 		<?php
+
 		/**
 		 * @hook charitable_reset_password_after
 		 */

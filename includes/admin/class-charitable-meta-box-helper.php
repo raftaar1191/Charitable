@@ -22,27 +22,40 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 	class Charitable_Meta_Box_Helper {
 
 		/**
-		 * @var 	string 		Nonce action.
+		 * Nonce action.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string 		
 		 */
 		protected $nonce_action;
 
 		/**
-		 * @var 	string 		Nonce name.
+		 * Nonce name.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string 		
 		 */
 		protected $nonce_name = '_charitable_nonce';
 
 		/**
-		 * @var 	boolean		Whether nonce has been added.
+		 * Whether nonce has been added.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   boolean
 		 */
 		protected $nonce_added = false;
 
 		/**
 		 * Create a helper instance.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $nonce_action 
-		 * @return 	void
+		 * @global WP_Post $post
+		 *
+		 * @param  string $nonce_action
 		 */
 		public function __construct( $nonce_action = 'charitable' ) {
 			$this->nonce_action = $nonce_action;
@@ -79,7 +92,7 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @param 	string $view 		The view to render.
 		 * @return 	void
 		 */
-		public function display( $view, $view_args ) {		
+		public function display( $view, $view_args ) {
 			/**
 			 * Set the nonce.
 			 */
@@ -110,19 +123,11 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @return 	void
 		 */
 		public function display_fields( array $fields ) {
-			/**
-			 * Sort the fields by priority.
-			 */
-			usort( $fields, 'charitable_priority_sort' );
-
-			/**
-			 * Loop over the fields and display each one using the view provided.
-			 */
-			foreach ( $fields as $field ) {
-				charitable_admin_view( $field['view'], $field );
-			}
+			$form = new Charitable_Admin_Form();
+			$form->set_fields( $fields );
+			$form->view()->render_fields();
 		}
-
+		
 		/**
 		 * Verifies that the user who is currently logged in has permission to save the data
 		 * from the meta box to the database.
@@ -135,8 +140,8 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		 * @return 	boolean 			True if the user can save the information
 		 */
 		public function user_can_save( $post_id ) {
-		    $is_autosave = wp_is_post_autosave( $post_id );
-		    $is_revision = wp_is_post_revision( $post_id );
+		    $is_autosave    = wp_is_post_autosave( $post_id );
+		    $is_revision    = wp_is_post_revision( $post_id );
 		    $is_valid_nonce = ( isset( $_POST[ $this->nonce_name ] ) && wp_verify_nonce( $_POST[ $this->nonce_name ], $this->nonce_action ) );
 
 		    return ! ( $is_autosave || $is_revision ) && $is_valid_nonce;

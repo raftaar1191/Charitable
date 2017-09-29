@@ -114,6 +114,70 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 * @return array
 		 */
 		private function get_meta_boxes() {
+			$screen  = get_current_screen();
+
+			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show_form'] ) ) ) {
+				$meta_boxes = $this->get_form_meta_box();
+			} else {
+				$meta_boxes = $this->get_view_meta_boxes();
+			}
+
+			/**
+			 * Filter the meta boxes to be displayed on a donation overview page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $meta_boxes The array of meta boxes and their details.
+			 */
+			return apply_filters( 'charitable_donation_meta_boxes', $meta_boxes );
+		}
+
+		/**
+		 * Return the form meta box.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_form_meta_box() {
+			global $post;
+			
+			$form       = new Charitable_Admin_Donation_Form( charitable_get_donation( $post->ID ) );
+			$meta_boxes = array(
+				'donation-form' => array(
+					'title'    => __( 'Donation Form', 'charitable' ),
+					'context'  => 'normal',
+					'priority' => 'high',
+					'view'     => 'metaboxes/donation/donation-form',
+					'form'     => $form,
+				),
+				'donation-form-meta' => array(
+					'title'    => __( 'Additional Details', 'charitable' ),
+					'context'  => 'side',
+					'priority' => 'high',
+					'view'     => 'metaboxes/donation/donation-form-meta',
+					'form'     => $form,
+				),
+			);
+
+			/**
+			 * Filter the meta boxes to be displayed on a donation add/edit page.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $meta_boxes The array of meta boxes and their details.
+			 */
+			return apply_filters( 'charitable_donation_form_meta_boxes', $meta_boxes );
+		}
+
+		/**
+		 * Return the view meta boxes.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_view_meta_boxes() {
 			global $post;
 
 			$meta_boxes = array(
@@ -151,11 +215,11 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 			/**
 			 * Filter the meta boxes to be displayed on a donation overview page.
 			 *
-			 * @since 1.0.0
+			 * @since 1.5.0
 			 *
 			 * @param array $meta_boxes The array of meta boxes and their details.
 			 */
-			return apply_filters( 'charitable_donation_meta_boxes', $meta_boxes );
+			return apply_filters( 'charitable_donation_view_meta_boxes', $meta_boxes );
 		}
 
 		/**
@@ -170,6 +234,20 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		public function save_donation( $donation_id, WP_Post $post ) {
 			if ( ! $this->meta_box_helper->user_can_save( $donation_id ) ) {
 				return;
+			}
+
+			if ( array_key_exists( 'charitable_action', $_POST ) && ! did_action( 'charitable_before_save_donation' ) ) {
+				$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
+				
+				if ( $form->validate_submission() ) {
+					$this->disable_automatic_emails();
+
+					charitable_create_donation( $form->get_donation_values() );
+
+					$this->reenable_automatic_emails();
+				}
+
+				update_post_meta( $donation_id, '_donation_manually_edited', true );
 			}
 
 			/* Handle any fired actions */
@@ -217,6 +295,57 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 			);
 
 			return $messages;
+		}
+
+		/**
+		 * Disable automatic emails when a donation is created.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function disable_automatic_emails() {
+			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
+
+			remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+			if ( ! $send_receipt ) {
+				remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+			}
+
+			foreach ( charitable_get_approval_statuses() as $status ) {
+				remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+				if ( ! $send_receipt ) {
+					remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+				}
+			}
+		}
+
+		/**
+		 * Re-enable automatic emails after the donation has been saved.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function reenable_automatic_emails() {
+			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
+
+			add_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+			if ( ! $send_receipt ) {
+				add_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+			}
+
+			foreach ( charitable_get_approval_statuses() as $status ) {
+				add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
+
+				if ( ! $send_receipt ) {
+					add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+				}
+			}
+
 		}
 	}
 

@@ -80,7 +80,7 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
-		 *		 
+		 *
 		 * @since  1.5.0
 		 *
 		 * @global WP_Query $wp_query

@@ -121,7 +121,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * @return array
 		 */
 		public function email_fields() {
-			$fields = array(				
+			$fields = array(
 				'reset_link' => array(
 					'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
 					'preview'     => add_query_arg( array(

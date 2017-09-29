@@ -56,10 +56,14 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		}
 
 		toggle_setting = function($setting, $trigger) {
-			var $tr = $setting.parents('tr').first(),
-				value = get_setting_value( $setting );
+			var $el = (function($setting){
+					var $tr = $setting.parent('tr');
+					return $tr.length ? tr.first() : $setting;
+				})($setting),
+				value = get_setting_value( $setting ), 
+				show = show_setting(value, $trigger);
 
-			$tr.toggle( show_setting(value, $trigger) );
+			$el.toggle(show);
 		};
 
 		get_setting_value = function($setting) {
@@ -132,7 +136,8 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 		on_change = function() {
 			var $trigger = $( this ), 
-				trigger_idx = $trigger.data( 'trigger_idx' );
+				trigger_idx = $trigger.data( 'trigger_idx' ),
+				settings;
 
 			for ( idx in trigger_idx ) {
 				if ( ! trigger_idx.hasOwnProperty( idx ) ) {
@@ -155,7 +160,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 						toggle_options( $setting, $trigger );
 					}
 				};
-			}			
+			}
 		};
 
 		this.$el = $el;
@@ -385,7 +390,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			});
 		}
 
-		$( '#charitable-settings, body.post-type-campaign form#post' ).each( function(){
+		$( '#charitable-settings, body.post-type-campaign form#post, body.post-type-donation form#post' ).each( function(){
 			CHARITABLE_ADMIN.Settings( $(this) );
 		});
 

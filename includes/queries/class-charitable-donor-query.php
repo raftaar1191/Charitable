@@ -138,7 +138,22 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				case 'amount' :
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
 					break;
+
+				case 'name' :
+					add_filter( 'charitable_query_orderby', array( $this, 'orderby_name' ) );
+					break;
 			}
+		}
+
+		/**
+		 * Order the results by name.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public function orderby_name() {
+			return 'ORDER BY d.last_name, d.first_name';
 		}
 
 		/**
@@ -182,6 +197,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
+			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_name' ) );
 			remove_action( 'charitable_post_query',    array( $this, 'unhook_callbacks' ) );
 		}
 

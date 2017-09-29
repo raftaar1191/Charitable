@@ -5,7 +5,7 @@
  * @author 	Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.5.0
  */
 
 // Exit if accessed directly.
@@ -40,19 +40,8 @@ if ( empty( $fields ) ) {
 
 	?>
 	<div class="charitable-form-fields cf">
-
-		<?php
-		$i = 1;
-
-		foreach ( $fields as $key => $field ) :
-
-			do_action( 'charitable_form_field', $field, $key, $form, $i );
-
-			$i += apply_filters( 'charitable_form_field_increment', 1, $field, $key, $form, $i );
-
-		endforeach; ?>
-
-	</div>
+		<?php $form->view()->render_fields( $fields ) ?>
+	</div><!-- .charitable-form-fields -->
 	<?php
 
 	/**

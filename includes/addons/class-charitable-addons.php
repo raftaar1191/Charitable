@@ -126,7 +126,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * @return 	void
 		 */
 		private function load_addon_dependencies() {
-			require_once( charitable()->get_path( 'includes' ) . 'addons/interface-charitable-addon.php' );
+			require_once( charitable()->get_path( 'includes' ) . 'interfaces/interface-charitable-addon.php' );
 		}
 
 		/**

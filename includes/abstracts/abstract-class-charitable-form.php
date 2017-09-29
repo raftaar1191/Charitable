@@ -18,82 +18,138 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 	 * Charitable_Form
 	 *
 	 * @abstract
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	abstract class Charitable_Form {
 
 		/**
 		 * Temporary, unique ID of this form.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $id;
 
 		/**
 		 * Nonce action.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_action = 'charitable_form';
 
 		/**
 		 * Nonce name.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_name = '_charitable_form_nonce';
 
 		/**
 		 * Form action.
 		 *
-		 * @var 	string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $form_action;
 
 		/**
 		 * Errors with the form submission.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $errors = array();
 
 		/**
 		 * Submitted values.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $submitted;
 
 		/**
+		 * Form View.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   Charitable_Form_View_Interface
+		 */
+		protected $view;
+
+		/**
 		 * Set up callbacks for actions and filters.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
-			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
-			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+			// add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
+		}
+
+		/**
+		 * Set the Form View object.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  Charitable_Form_View_Interface $form_view An object implementing theCharitable_Form_View_Interface.
+		 * @return void
+		 */
+		public function set_form_view( Charitable_Form_View_Interface $form_view ) {
+			$this->view = $form_view;
+		}
+
+		/**
+		 * Return the Form_View object for this form.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return Charitable_Form_View_Interface
+		 */
+		public function view() {
+			if ( ! isset( $this->view ) ) {
+				$this->view = new Charitable_Public_Form_View( $this );
+			}
+
+			return $this->view;
 		}
 
 		/**
 		 * Compares the ID of the form passed by the action and the current form object to ensure they're the same.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $id Current form ID.
-		 * @return 	boolean
+		 * @param  string $id Current form ID.
+		 * @return boolean
 		 */
 		public function is_current_form( $id ) {
 			return $id === $this->id;
 		}
 
 		/**
+		 * Return the form fields.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_fields() {
+		}
+
+		/**
 		 * Return the form action.
 		 *
-		 * @since   1.3.1
+		 * @since  1.3.1
 		 *
 		 * @return  string
 		 */
@@ -104,39 +160,21 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return the form ID.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public function get_form_identifier() {
 			return $this->id;
 		}
 
 		/**
-		 * Whether the given field type can use the default field template.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	string $field_type Type of field.
-		 * @return 	boolean
-		 */
-		protected function use_default_field_template( $field_type ) {
-			$default_field_types = apply_filters( 'charitable_default_template_field_types', array(
-				'text',
-				'email',
-				'password',
-				'date',
-			) );
-			return in_array( $field_type, $default_field_types );
-		}
-
-		/**
 		 * Display error notices at the start of the form, if there are any.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	Charitable_Form $form Form object.
-		 * @return 	boolean Whether the notices were rendered.
+		 * @param  Charitable_Form $form Form object.
+		 * @return boolean Whether the notices were rendered.
 		 */
 		public function render_error_notices( $form ) {
 			if ( ! $form->is_current_form( $this->id ) ) {
@@ -157,191 +195,34 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
-		 * Adds hidden fields to the start of the donation form.
+		 * Retrieve hidden fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.5.0
 		 *
-		 * @param 	Charitable_Form $form The form object.
-		 * @return 	boolean Whether the output is added.
+		 * @return array
 		 */
-		public function add_hidden_fields( $form ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			$this->nonce_field();
-
-			?>			
-			<input type="hidden" name="charitable_action" value="<?php echo esc_attr( $this->form_action ) ?>" />
-			<input type="hidden" name="charitable_form_id" value="<?php echo esc_attr( $this->id ) ?>" autocomplete="off" />
-			<input type="text" name="<?php echo esc_attr( $this->id ) ?>" class="charitable-hidden" value="" autocomplete="off" />			
-			<?php
-
-			return true;
-		}
-
-		/**
-		 * Set how much the index should be incremented by.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	int   $increment The number the index should be incremented by.
-		 * @param 	array $field     The field definition.
-		 * @return  int
-		 */
-		public function increment_index( $increment, $field ) {
-			if ( in_array( $field['type'], array(
-				'hidden',
-				'paragraph',
-				'fieldset',
-			) )
-				|| ( isset( $field['fullwidth'] ) && $field['fullwidth'] ) ) {
-				$increment = 0;
-			}
-
-			return $increment;
-		}
-
-		/**
-		 * Render a form field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array 		    $field     Field definition.
-		 * @param 	string 		    $key       Field key.
-		 * @param 	Charitable_Form $form      The form object.
-		 * @param 	int 			$index     The current index.
-		 * @param 	string 			$namespace Namespace for the form field's name attribute.
-		 * @return 	boolean False if the field was not rendered. True otherwise.
-		 */
-		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			if ( ! isset( $field['type'] ) ) {
-				return false;
-			}
-
-			$input_name   = is_null( $namespace ) ? $key : $namespace . '[' . $key . ']';
-			$field['key'] = apply_filters( 'charitable_form_field_key', $input_name, $key, $namespace, $form, $index );
-
-			/* Set default attributes array. */
-			if ( ! isset( $field['attrs'] ) ) {
-				$field['attrs'] = array();
-			}
-
-			/* Allows extensions/themes to plug in their own template objects here. */
-			$template = apply_filters( 'charitable_form_field_template', false, $field, $form, $index );
-
-			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
-			if ( ! $this->is_valid_template( $template ) ) {
-				$template = new Charitable_Template( $this->get_template_name( $field ), false );
-			}
-
-			if ( ! $template->template_file_exists() ) {
-				return false;
-			}
-
-			$template->set_view_args( array(
-				'form' 		=> $this,
-				'field' 	=> $field,
-				'classes'	=> $this->get_field_classes( $field, $index ),
-			) );
-
-			$template->render();
-
-			return true;
-		}
-
-		/**
-		 * Return the template name used for this field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array $field Field definition.
-		 * @return 	string
-		 */
-		public function get_template_name( $field ) {
-			if ( $this->use_default_field_template( $field['type'] ) ) {
-				$template_name = 'form-fields/default.php';
-			} else {
-				$template_name = 'form-fields/' . $field['type'] . '.php';
-			}
-
-			return apply_filters( 'charitable_form_field_template_name', $template_name );
-		}
-
-		/**
-		 * Return classes that will be applied to the field.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array $field Field definition.
-		 * @param 	int   $index Field index.
-		 * @return 	string
-		 */
-		public function get_field_classes( $field, $index = 0 ) {
-			if ( 'hidden' == $field['type'] ) {
-				return;
-			}
-
-			$classes = $this->get_field_type_classes( $field['type'] );
-
-			if ( isset( $field['class'] ) ) {
-				$classes[] = $field['class'];
-			}
-
-			if ( isset( $field['required'] ) && $field['required'] ) {
-				$classes[] = 'required-field';
-			}
-
-			if ( isset( $field['fullwidth'] ) && $field['fullwidth'] ) {
-				$classes[] = 'fullwidth';
-			} elseif ( $index > 0 ) {
-				$classes[] = $index % 2 ? 'odd' : 'even';
-			}
-
-			$classes = apply_filters( 'charitable_form_field_classes', $classes, $field, $index );
-
-			return implode( ' ', $classes );
-		}
-
-		/**
-		 * Return array of classes based on the field type.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	string $type Type of field.
-		 * @return  string[]
-		 */
-		public function get_field_type_classes( $type ) {
-			$classes = array();
-
-			switch ( $type ) {
-
-				case 'paragraph' :
-					$classes[] = 'charitable-form-content';
-					break;
-
-				case 'fieldset' :
-					$classes[] = 'charitable-fieldset';
-					break;
-
-				default :
-					$classes[] = 'charitable-form-field';
-					$classes[] = 'charitable-form-field-' . $type;
-			}
-
-			return $classes;
+		public function get_hidden_fields() {
+			/**
+			 * Filter hidden fields.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array           $fields The hidden fields as a key=>value array.
+			 * @param Charitable_Form $form   This instance of `Charitable_Form`.
+			 */
+			return apply_filters( 'charitable_form_hidden_fields', array(
+				$this->nonce_name   => wp_create_nonce( $this->nonce_action ),
+				'_wp_http_referer'  => wp_unslash( $_SERVER['REQUEST_URI'] ),
+				'charitable_action' => $this->form_action,
+			), $this );
 		}
 
 		/**
 		 * Output the nonce.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		public function nonce_field() {
 			wp_nonce_field( $this->nonce_action, $this->nonce_name );
@@ -350,9 +231,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Validate nonce data passed by the submitted form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	boolean
+		 * @return boolean
 		 */
 		public function validate_nonce() {
 			$submitted = $this->get_submitted_values();
@@ -368,9 +249,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Make sure that the honeypot field is empty.
 		 *
-		 * @since   1.4.3
+		 * @since  1.4.3
 		 *
-		 * @return 	boolean
+		 * @return boolean
 		 */
 		public function validate_honeypot() {
 			$submitted = $this->get_submitted_values();
@@ -387,10 +268,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Callback method used to filter out non-required fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   array $field Field definition.
-		 * @return 	array
+		 * @return array
 		 */
 		public function filter_required_fields( $field ) {
 			return isset( $field['required'] ) && true == $field['required'];
@@ -399,10 +280,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Filters array returning just the required fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array[] $fields Array of form fields.
-		 * @return 	array[]
+		 * @param  array[] $fields Array of form fields.
+		 * @return array[]
 		 */
 		public function get_required_fields( $fields ) {
 			$required_fields = array_filter( $fields, array( $this, 'filter_required_fields' ) );
@@ -413,20 +294,18 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Check the passed fields to ensure that all required fields have been submitted.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $fields    Array of form fields.
-		 * @param 	array $submitted Submitted values.
-		 * @return 	boolean
+		 * @param  array $fields    Array of form fields.
+		 * @param  array $submitted Submitted values.
+		 * @return boolean
 		 */
 		public function check_required_fields( $fields, $submitted = array() ) {
-
 			if ( empty( $submitted ) ) {
 				$submitted = $this->get_submitted_values();
 			}
 
-			$ret = true;
-
+			$ret     = true;
 			$missing = array();
 
 			foreach ( $this->get_required_fields( $fields ) as $key => $field ) {
@@ -481,11 +360,11 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Organize fields by data type, also filtering out unused parameters (we just need the key and the type).
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $key   Key of the field to sort.
-		 * @param 	array  $field Field definition.
-		 * @param 	array  $ret   Return value that we're carrying.
+		 * @param  string $key   Key of the field to sort.
+		 * @param  array  $field Field definition.
+		 * @param  array  $ret   Return value that we're carrying.
 		 * @return  array[]
 		 */
 		public function sort_field_by_data_type( $key, $field, $ret ) {
@@ -510,7 +389,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * Use this method instead of accessing the raw $_POST array to take
 		 * advantage of the filter on the values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @return  array
 		 */
@@ -525,9 +404,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Returns the submitted value for a particular field.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $key The key to search for.
+		 * @param  string $key The key to search for.
 		 * @return  mixed Submitted value if set. NULL if value was not set.
 		 */
 		public function get_submitted_value( $key ) {
@@ -538,13 +417,13 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Uploads a file and attaches it to the given post.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $file_key  Key of the file input.
-		 * @param 	int    $post_id   Post ID.
+		 * @param  string $file_key  Key of the file input.
+		 * @param  int    $post_id   Post ID.
 		 * @param   array  $post_data Overwrite some of the attachment. Optional.
 		 * @param   array  $overrides Override the wp_handle_upload() behavior. Optional.
-		 * @return 	int|WP_Error ID of the attachment or a WP_Error object on failure.
+		 * @return int|WP_Error ID of the attachment or a WP_Error object on failure.
 		 */
 		public function upload_post_attachment( $file_key, $post_id, $post_data = array(), $overrides = array() ) {
 
@@ -560,14 +439,14 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Upload a file.
 		 *
-		 * @param 	string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
 		 * 							  function once for each uploaded file.
-		 * @param 	array  $overrides Optional. An associative array of names=>values to
+		 * @param  array  $overrides Optional. An associative array of names=>values to
 		 * 							  override default variables. Default false.
 		 * @return  array|WP_Error On success, returns an associative array of file attributes.
 		 *                         On failure, returns $overrides['upload_error_handler'](&$file, $message )
 		 *                         or array( 'error'=>$message ).
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		public function upload_file( $file_key, $overrides = array() ) {
 
@@ -586,11 +465,11 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return overrides array for use with upload_file() and upload_post_attachment() methods.
 		 *
-		 * @param 	string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
 		 * 							  function once for each uploaded file.
-		 * @param 	array  $overrides Optional. An associative array of names=>values to
+		 * @param  array  $overrides Optional. An associative array of names=>values to
 		 * 							  override default variables. Default false.
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @return  array
 		 */
@@ -617,15 +496,132 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
+		 * Render a form field.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  array           $field     Field definition.
+		 * @param  string          $key       Field key.
+		 * @param  Charitable_Form $form      The form object.
+		 * @param  int             $index     The current index.
+		 * @param  string         $namespace Namespace for the form field's name attribute.
+		 * @return boolean False if the field was not rendered. True otherwise.
+		 */
+		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
+			return $form->view()->render_field( $field, $key, array(
+				'index'     => $index,
+				'namespace' => $namespace,
+			) );
+		}
+
+		/**
+		 * Return the template name used for this field.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  array $field Field definition.
+		 * @return string
+		 */
+		public function get_template_name( $field ) {
+			return $form->view()->get_template_name( $field );			
+		}
+
+		/**
 		 * Checks whether a template is valid.
 		 *
-		 * @since   1.0.0
+		 * @deprecated 1.8.0
 		 *
-		 * @param 	mixed $template Template we're checking.
-		 * @return  boolean
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
+		 *
+		 * @param  mixed $template Template we're checking.
+		 * @return boolean
 		 */
 		protected function is_valid_template( $template ) {
-			return is_object( $template ) && is_a( $template, 'Charitable_Template' );
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::is_valid_template()'
+			);
+
+			return $this->view()->is_valid_template( $template );
+		}
+
+		/**
+		 * Set how much the index should be incremented by.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
+		 *
+		 * @param  int   $increment The number the index should be incremented by.
+		 * @param  array $field     The field definition.
+		 * @return int
+		 */
+		public function increment_index( $increment, $field ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::increment_index()'
+			);
+
+            /**
+             * Remove form's hooked filter.
+             *
+             * Before 1.5, forms used the filter to set the increment level. For
+             * backwards-compatibility purposes, we still provide this method in the
+             * form class, but it calls the Form View. This method shoud
+             * default in the form abstract, but remove it when this function
+             * is called directly.
+             */
+            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+
+			return $this->view()->increment_index( $field );			
+		}
+
+		/**
+		 * Whether the given field type can use the default field template.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
+		 *
+		 * @param  string $field_type Type of field.
+		 * @return boolean
+		 */
+		protected function use_default_field_template( $field_type ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::use_default_field_template()'
+			);
+
+			return $this->view()->use_default_field_template( $field_type );			
+		}
+
+		/**
+		 * Adds hidden fields to the start of the donation form.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Hidden fields are rendered by the Form View now.
+		 *
+		 * @param  Charitable_Form $form The form object.
+		 * @return boolean Whether the output is added.
+		 */
+		public function add_hidden_fields( $form ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::use_default_field_template()'
+			);
 		}
 	}
 

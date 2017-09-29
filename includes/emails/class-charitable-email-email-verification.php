@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 */
 		public static function get_email_id() {
 			return self::ID;
-		}	
+		}
 
 		/**
 		* Return the recipient for the email.

@@ -47,6 +47,32 @@ function charitable_get_donation( $donation_id, $force = false ) {
 }
 
 /**
+ * Given a donation ID and a key, return the submitted value.
+ *
+ * @since  1.5.0
+ *
+ * @param  Charitable_Donation $donation The donation ID.
+ * @param  string              $key      The meta key.
+ * @return mixed
+ */
+function charitable_get_donor_meta_value( Charitable_Donation $donation, $key ) {
+    return $donation->get_donor()->get_donor_meta( $key );
+}
+
+/**
+ * Given a donation ID and a key, return the submitted value.
+ *
+ * @since  1.5.0
+ *
+ * @param  Charitable_Donation $donation The donation ID.
+ * @param  string              $key      The meta key.
+ * @return mixed
+ */
+function charitable_get_donation_meta_value( Charitable_Donation $donation, $key ) {
+    return get_post_meta( $donation->ID, $key, true );
+}
+
+/**
  * Returns the donation for the current request.
  *
  * @since  1.0.0
