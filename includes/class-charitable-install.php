@@ -5,11 +5,11 @@
  * The responsibility of this class is to manage the events that need to happen
  * when the plugin is activated.
  *
- * @package		Charitable
- * @subpackage	Charitable/Charitable Install
- * @copyright 	Copyright (c) 2017, Eric Daams
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since   1.0.0
+ * @package   Charitable/Class/Charitable Install
+ * @copyright Copyright (c) 2017, Eric Daams
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Charitable_Install' ) ) :
 		 * @return 	void
 		 */
 		protected function create_tables() {
-			require_once( 'db/abstract-class-charitable-db.php' );
+			require_once( 'abstracts/abstract-class-charitable-db.php' );
 
 			require_once( 'db/class-charitable-campaign-donations-db.php' );
 			$table_helper = new Charitable_Campaign_Donations_DB();
