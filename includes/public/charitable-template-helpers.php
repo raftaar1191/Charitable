@@ -50,20 +50,39 @@ function charitable_template( $template_name, array $args = array() ) {
  *                                        in the AJAX request.
  * @return void Content is echoed.
  */
-function charitable_session_reliant_template( $template_name, array $args, $template_key, $wrapper_args = array() ) {
-	/* When we have a session ID, we just load the template normally. */
-    if ( charitable_get_session()->has_session_id() ) {
-		charitable_template( $template_name, $args );
-    }
+function charitable_template_from_session( $template_name, array $args, $template_key, $wrapper_args = array() ) {
+	ob_start();
 
-    $id = 'charitable-session-content-fallback-' . uniqid();
+	charitable_template( $template_name, $args );
 
-    echo '<div class="charitable-session-content" data-fallback-id="' . esc_attr( $id ) . '" data-template="' . esc_attr( $template_key ) . '" data-args="' . esc_attr( http_build_query( $wrapper_args ) ) . '" style="display: none;">';
-    charitable_template( $template_name, $args );
-    echo '</div>';
-    echo '<noscript id="' . esc_attr( $id ) . '">';
-    charitable_template( $template_name, $args );
-    echo '</noscript>';
+	echo charitable_template_from_session_content( $template_key, $wrapper_args, ob_get_clean() );
+}
+
+/**
+ * Returns a piece of content or an empty string, wrapped in the correct markup
+ * for on-demand session content retrieval.
+ *
+ * @since  1.5.0
+ *
+ * @param  string $template_key  A key representing the template, which will be passed
+ *                               as one of the arguments in the AJAX request.
+ * @param  array  $wrapper_args  A mixed set of arguments that need to be passed along
+ *                               in the AJAX request.
+ * @param  string $default       The default content to be displayed if no content is
+ *                               returned from the AJAX request, or the user does not
+ *                               have Javascript enabled.
+ * @return string
+ */
+function charitable_template_from_session_content( $template_key, $wrapper_args = array(), $default = '' ) {
+	/* When we have a session ID, we just print the default. */
+	if ( charitable_get_session()->has_session_id() ) {
+		return $default;
+	}
+
+	$content  = '<div class="charitable-session-content" data-template="' . esc_attr( $template_key ) . '" data-args="' . esc_attr( http_build_query( $wrapper_args, '', '|' ) ) . '" style="display: none;">' . $default . '</div>';
+	$content .= '<noscript>' . $default . '</noscript>';
+
+	return $content;
 }
 
 /**
@@ -98,7 +117,7 @@ function charitable_get_template_path( $template, $default = '' ) {
 function charitable_splice_template( $template, $templates, $index = 1 ) {
 	if ( empty( $template ) ) {
 		return $templates;
-    }
+	}
 
 	array_splice( $templates, $index, 0, $template );
 

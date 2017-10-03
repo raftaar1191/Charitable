@@ -37,3 +37,16 @@ add_action( 'wp_ajax_nopriv_charitable_plupload_image_upload', 'charitable_plupl
  */
 add_action( 'wp_ajax_charitable_get_session_content', 'charitable_ajax_get_session_content' );
 add_action( 'wp_ajax_nopriv_charitable_get_session_content', 'charitable_ajax_get_session_content' );
+
+/** 
+ * Return the content for particular templates.
+ *
+ * @see charitable_ajax_get_session_donation_receipt
+ * @see charitable_ajax_get_session_donation_amount_form
+ * @see charitable_ajax_get_session_donation_form_amount_field
+ * @see charitable_ajax_get_session_donation_form_current_amount_text
+ */
+add_filter( 'charitable_session_content_donation_receipt', 'charitable_ajax_get_session_donation_receipt', 10, 2 );
+add_filter( 'charitable_session_content_donation_amount_form', 'charitable_ajax_get_session_donation_amount_form', 10, 2 );
+add_filter( 'charitable_session_content_donation_form_amount_field', 'charitable_ajax_get_session_donation_form_amount_field', 10, 2 );
+add_filter( 'charitable_session_content_donation_form_current_amount_text', 'charitable_ajax_get_session_donation_form_current_amount_text', 10, 2 );

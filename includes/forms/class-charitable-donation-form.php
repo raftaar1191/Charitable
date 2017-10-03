@@ -373,16 +373,17 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			$amount = $this->get_campaign()->get_donation_amount_in_session();
 
-			if ( ! $amount ) {
-				return $fields;
+			if ( ! $amount ) {	
+				$content = charitable_template_from_session_content( 'donation_form_current_amount_text', array(
+					'campaign_id' => $this->get_campaign()->ID,
+					'form_id'     => $this->get_form_identifier(),
+				), '' );
+			} else {
+				$content = charitable_template_donation_form_current_amount_text( $amount, $this->get_form_identifier(), $this->get_campaign()->ID );
 			}
 
-			$amount_formatted = apply_filters( 'charitable_session_donation_amount_formatted', charitable_format_money( $amount ), $amount, $this );
-			$content          = sprintf( __( 'Your Donation Amount: <strong>%s</strong>.', 'charitable' ), $amount_formatted );
-			$content         .= '&nbsp;<a href="#" class="change-donation" data-charitable-toggle="charitable-donation-options-' . esc_attr( $this->get_form_identifier() ) . '">' . __( 'Change', 'charitable' ) . '</a>';
-
 			$fields['current_donation_amount'] = array(
-				'type' 	   => 'paragraph',
+				'type' 	   => 'content',
 				'content'  => $content,
 				'priority' => 0.9,
 			);

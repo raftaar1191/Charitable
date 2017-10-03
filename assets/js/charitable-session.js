@@ -27,29 +27,44 @@ CHARITABLE = window.CHARITABLE || {};
 
         // Init.
         function init() {
-            var elements = document.querySelectorAll('.charitable-session-content');
-            var i = 0; 
+            var elements = document.querySelectorAll('.charitable-session-content'),
+                data     = 'action=charitable_get_session_content&templates=',
+                i;
 
-            for (i; i < elements.length; i++) {
-                var element = elements[i];
-                var template = element.getAttribute('data-template');
-                var data = 'action=charitable_get_session_content&template=' + element.getAttribute('data-template') + '&' + element.getAttribute('data-args');
-                var request = new XMLHttpRequest();
-                request.open('POST', CHARITABLE_SESSION.ajaxurl, true);
-                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-                request.onreadystatechange = function() {
-                    if (this.readyState === 4) {
-                        if (this.status >= 200 && this.status < 400) {
-                            element.innerHTML = JSON.parse( this.response ).data;
-                            element.style.display = 'block';
-                        } else {
-                            element.style.display = 'block';                            
+            for (i = 0; i < elements.length; i++) {
+                var element  = elements[i],
+                    template = element.getAttribute('data-template'),
+                    args     = element.getAttribute('data-args');
+
+                data += template + ':' + args;
+
+                if (i !== length - 1) {
+                    data += ',';
+                }
+            }
+
+            var request  = new XMLHttpRequest();
+            request.open('POST', CHARITABLE_SESSION.ajaxurl, true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            request.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    if (this.status >= 200 && this.status < 400) {
+                        var response = JSON.parse( this.response );
+                        if (response.success) {
+                            for (i = 0; i < response.data.length; i += 1) {
+                                if ( response.data[i].length ) {
+                                    elements[i].innerHTML = response.data[i];
+                                    elements[i].style.display = 'block';
+                                }
+                            }
                         }
                     }
-                };
-                request.send(data);
-                request = null;
-            }
+
+                    element.style.display = 'block';
+                }
+            };
+            request.send(data);
+            request = null;
         }
 
         // Set cookie.

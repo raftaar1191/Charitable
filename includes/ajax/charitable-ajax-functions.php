@@ -118,23 +118,131 @@ endif;
  * @return void
  */
 function charitable_ajax_get_session_content() {
-	if ( ! array_key_exists( 'template', $_POST ) ) {
-		wp_send_json_error( __( 'Missing template in request.', 'charitable' ) );
+	if ( ! array_key_exists( 'templates', $_POST ) ) {
+		wp_send_json_error( __( 'Missing templates in request.', 'charitable' ) );
 	}
 
-	$template =  $_POST['template'];
+	$templates = explode( ',', $_POST['templates'] );
+	$output    = array();
+	
+	foreach ( $templates as $i => $template ) {
+		if ( empty( $template ) ) {
+			continue;
+		}
 
-	switch ( $_POST['template'] ) {
-		case 'donation_receipt' :
-			$donation = array_key_exists( 'donation_id', $_POST ) ? charitable_get_donation( $_POST['donation_id'] ) : null;
-			$content  = charitable_template_donation_receipt_output( '', $donation );
-			break;
-		default :
-			$content = '';
-			break;
+		list( $template_key, $_args ) = explode( ':', $template );
+
+		if ( empty( $_args ) ) {
+			$args = array();
+		} else {
+			$args = array();
+			foreach ( explode( '|', $_args ) as $arg ) {
+				list( $key, $value ) = explode( '=', $arg );
+				$args[ $key ] = $value;
+			}
+		}
+
+		/**
+		 * Get the output for the session content item.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param false|string $content The content to return, or a false in case of failure.
+		 * @param array        $args    Mixed set of arguments.
+		 */
+		$output[ $i ] = apply_filters( 'charitable_session_content_' . $template_key, false, $args );
 	}
 
-	error_log( charitable_get_session()->get_session_id() );
-
-	wp_send_json_success( $content );
+	wp_send_json_success( $output );
 }
+
+/**
+ * Return the donation receipt.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @param  array        $args    Mixed array of args.
+ * @return string|false
+ */
+function charitable_ajax_get_session_donation_receipt( $content, $args ) {
+	if ( ! array_key_exists( 'donation_id', $args ) ) {
+		return $content;
+	}
+
+	return charitable_template_donation_receipt_output( '', charitable_get_donation( $args['donation_id'] ) );
+}
+
+/**
+ * Return the donation amount form.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @param  array        $args    Mixed array of args.
+ * @return string|false
+ */
+function charitable_ajax_get_session_donation_amount_form( $content, $args ) {
+	if ( ! array_key_exists( 'campaign_id', $args ) ) {
+		return $content;
+	}
+
+	ob_start();
+
+	$form = new Charitable_Donation_Amount_Form( charitable_get_campaign( $args['campaign_id'] ) );
+	$form->render();
+
+	return ob_get_clean();
+}
+
+/**
+ * Return the donation form's amount field.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @param  array        $args    Mixed array of args.
+ * @return string|false
+ */
+function charitable_ajax_get_session_donation_form_amount_field( $content, $args ) {
+	if ( ! array_key_exists( 'campaign_id', $args ) ) {
+		return $content;
+	}
+
+	if ( ! array_key_exists( 'form_id', $args ) ) {
+		return $content;
+	}
+
+	ob_start();
+
+	charitable_template( 'donation-form/donation-amount-list.php',
+		array(
+			'campaign' => charitable_get_campaign( $args['campaign_id'] ),
+			'form_id'  => $args['form_id'],
+		)
+	);
+
+	return ob_get_clean();
+}
+
+/**
+ * Return the donation form's amount field.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @param  array        $args    Mixed array of args.
+ * @return string|false
+ */
+function charitable_ajax_get_session_donation_form_current_amount_text( $content, $args ) {
+	if ( ! array_key_exists( 'campaign_id', $args ) ) {
+		return $content;
+	}
+
+	if ( ! array_key_exists( 'form_id', $args ) ) {
+		return $content;
+	}
+
+	return charitable_template_donation_form_current_amount_text( charitable_get_campaign( $args['campaign_id'] )->get_donation_amount_in_session(), $args['form_id'], $args['campaign_id'] );
+}
+
