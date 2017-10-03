@@ -16,6 +16,7 @@ if ( ! isset( $view_args['form'] ) ) {
 
 /* @var Charitable_Donation_Form */
 $form     = $view_args['form'];
+$form_id  = $form->get_form_identifier();
 $campaign = $form->get_campaign();
 
 if ( is_null( $campaign ) ) {
@@ -23,7 +24,6 @@ if ( is_null( $campaign ) ) {
 }
 
 $suggested       = $campaign->get_suggested_donations();
-$amount          = $campaign->get_donation_amount_in_session();
 $currency_helper = charitable_get_currency_helper();
 
 if ( empty( $suggested ) && ! $campaign->get( 'allow_custom_donations' ) ) {
@@ -33,7 +33,7 @@ if ( empty( $suggested ) && ! $campaign->get( 'allow_custom_donations' ) ) {
 /**
  * @hook    charitable_donation_form_before_donation_amount
  */
-do_action( 'charitable_donation_form_before_donation_amount', $view_args['form'] );
+do_action( 'charitable_donation_form_before_donation_amount', $form );
 
 ?>
 <div class="charitable-donation-options">
@@ -43,20 +43,30 @@ do_action( 'charitable_donation_form_before_donation_amount', $view_args['form']
 	/**
 	 * @hook    charitable_donation_form_before_donation_amounts
 	 */
-	do_action( 'charitable_donation_form_before_donation_amounts', $view_args['form'] );
+	do_action( 'charitable_donation_form_before_donation_amounts', $form );
 
-	charitable_template( 'donation-form/donation-amount-list.php', array( 'campaign' => $campaign, 'form' => $form ) );
+	charitable_template_from_session( 'donation-form/donation-amount-list.php',
+		array(
+			'campaign' => $campaign,
+			'form_id'  => $form_id,
+		),
+		'donation_form_amount_field',
+		array(
+			'campaign_id' => $campaign->ID,
+			'form_id'     => $form_id,
+		)
+	);
 	
 	/**
 	 * @hook    charitable_donation_form_after_donation_amounts
 	 */
-	do_action( 'charitable_donation_form_after_donation_amounts', $view_args['form'] );
+	do_action( 'charitable_donation_form_after_donation_amounts', $form );
 	?>
 
-</div><!-- #charitable-donation-options-<?php echo $view_args['form']->get_form_identifier() ?> -->
+</div><!-- #charitable-donation-options-<?php echo $form_id ?> -->
 
 <?php
 /**
  * @hook    charitable_donation_form_after_donation_amount
  */
-do_action( 'charitable_donation_form_after_donation_amount', $view_args['form'] );
+do_action( 'charitable_donation_form_after_donation_amount', $form );

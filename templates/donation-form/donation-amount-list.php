@@ -10,15 +10,13 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! array_key_exists( 'form', $view_args ) || ! array_key_exists( 'campaign', $view_args ) ) {
+if ( ! array_key_exists( 'form_id', $view_args ) || ! array_key_exists( 'campaign', $view_args ) ) {
 	return;
 }
 
-/* @var Charitable_Donation_Form */
-$form = $view_args['form'];
-
 /* @var Charitable_Campaign */
-$campaign  = $form->get_campaign();
+$campaign  = $view_args['campaign'];
+$form_id   = $view_args['form_id'];
 $suggested = $campaign->get_suggested_donations();
 $custom    = $campaign->get( 'allow_custom_donations' );
 $amount    = $campaign->get_donation_amount_in_session();
@@ -36,7 +34,7 @@ if ( count( $suggested ) ) :
 
 			$checked  = checked( $suggestion['amount'], $amount, false );
 			$field_id = esc_attr( sprintf( 'form-%s-field-%s',
-				$form->get_form_identifier(),
+				$form_id,
 				$suggestion['amount']
 			) );
 
@@ -65,9 +63,9 @@ if ( count( $suggested ) ) :
 		?>
 			<li class="donation-amount custom-donation-amount">
 				<span class="custom-donation-amount-wrapper">
-					<label for="form-<?php echo esc_attr( $form->get_form_identifier() ) ?>-field-custom-amount">
+					<label for="form-<?php echo esc_attr( $form_id ) ?>-field-custom-amount">
 						<input
-							id="form-<?php echo esc_attr( $form->get_form_identifier() ) ?>-field-custom-amount"
+							id="form-<?php echo esc_attr( $form_id ) ?>-field-custom-amount"
 							type="radio"
 							name="donation_amount"
 							value="custom" <?php checked( $has_custom_donation_amount ) ?>

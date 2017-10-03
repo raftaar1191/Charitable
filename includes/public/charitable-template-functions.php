@@ -673,7 +673,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_output' ) ) :
 		ob_start();
 
 		if ( ! $donation->is_from_current_user() ) {
-			charitable_session_reliant_template( 'donation-receipt/not-authorized.php', array( 'content' => $content ), 'donation_receipt', array( 'donation_id' => $donation->ID ) );
+			charitable_template_from_session( 'donation-receipt/not-authorized.php', array( 'content' => $content ), 'donation_receipt', array( 'donation_id' => $donation->ID ) );
 			return ob_get_clean();
 		}
 
@@ -862,6 +862,48 @@ if ( ! function_exists( 'charitable_template_donation_form_donor_fields_hidden_w
 	}
 
 endif;
+
+if ( ! function_exists( 'charitable_template_donation_form_current_amount_text' ) ) :
+
+	/**
+	 * Display the amount currently selected to donate.
+	 *
+	 * @since  1.5.0
+	 *
+	 * @param  int|float $amount      The current donation amount.
+	 * @param  string    $form_id     The current form ID.
+	 * @param  string    $campaign_id The current campaign ID.
+	 * @return string
+	 */
+	function charitable_template_donation_form_current_amount_text( $amount, $form_id, $campaign_id ) {
+		if ( ! $amount ) {
+			return '';
+		}
+
+		/**
+		 * Format the donation amount.
+		 *
+		 * @since 1.4.14
+		 * @since 1.5.0 Third parameter has been changed from an instance of
+		 *              `Charitable_Donation_Form` to a campaign ID.
+		 *
+		 * @param string    $amount_formatted The formatted amount.
+		 * @param int|float $amount           The raw amount.
+		 * @param int       $campaign_id      Campaign ID.
+		 */
+		$amount_formatted = apply_filters( 'charitable_session_donation_amount_formatted', charitable_format_money( $amount ), $amount, $campaign_id );
+
+		$content  = '<p>';
+		$content .= sprintf( __( 'Your Donation Amount: <strong>%s</strong>.', 'charitable' ), $amount_formatted );
+		$content .= '&nbsp;<a href="#" class="change-donation" data-charitable-toggle="charitable-donation-options-' . esc_attr( $form_id ) . '">' . __( 'Change', 'charitable' ) . '</a>';
+		$content .= '</p>';
+
+		return $content;
+	}
+
+endif;
+
+
 
 /**********************************************/
 /* DONATION PROCESSING PAGE

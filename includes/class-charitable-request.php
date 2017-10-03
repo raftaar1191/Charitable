@@ -94,13 +94,9 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 */
 		public function set_current_campaign( $post ) {
 			if ( 'campaign' == $post->post_type ) {
-
 				$this->campaign = new Charitable_Campaign( $post );
-
 			} else {
-
 				unset( $this->campaign, $this->campaign_id );
-
 			}
 		}
 
