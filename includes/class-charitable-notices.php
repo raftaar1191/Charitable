@@ -62,13 +62,8 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 			/* Retrieve the notices from the session */
 			$this->notices = charitable_get_session()->get_notices();
 
-			/* Reset the session back to empty */
-			charitable_get_session()->set( 'notices', array(
-				'error'		=> array(),
-				'warning'	=> array(),
-				'success'	=> array(),
-				'info'		=> array(),
-			) );
+			/* Remove the notices from the session. */
+			charitable_get_session()->remove( 'notices' );
 		}
 
 		/**

@@ -24,11 +24,11 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 	class Charitable_Session {
 
 		/**
-	     * The single instance of this class.
-	     *
-	     * @var     Charitable_Session|null
-	     */
-	    private static $instance = null;
+		 * The single instance of this class.
+		 *
+		 * @var     Charitable_Session|null
+		 */
+		private static $instance = null;
 
 		/**
 		 * Holds our session data
@@ -88,23 +88,86 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		public function init() {
 			$this->session = WP_Session::get_instance();
 
+			/* We're missing a Session ID, so we'll need to queue up our session scripts. */
+			if ( ! $this->has_session_id() ) {
+				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			}
+
 			return $this->session;
 		}
 
 		/**
-	     * Returns and/or create the single instance of this class.
-	     *
-	     * @since   1.2.0
-	     *
-	     * @return  Charitable_Session
-	     */
-	    public static function get_instance() {
-	        if ( is_null( self::$instance ) ) {
-	            self::$instance = new Charitable_Session();
-	        }
+		 * Set up scripts to create & manage cookies client-side.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function enqueue_scripts() {
+			if ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ) {
+				$suffix  = '';
+				$version = '';
+			} else {
+				$suffix  = '.min';
+				$version = charitable()->get_version();
+			}
 
-	        return self::$instance;
-	    }
+			$assets_dir = charitable()->get_path( 'assets', false );
+
+			wp_register_script(
+				'js-cookie',
+				$assets_dir . 'js/libraries/js.cookie' . $suffix . '.js',
+				array(),
+				'2.1.4',
+				false
+			);
+
+			wp_enqueue_script(
+				'charitable-sessions',
+				$assets_dir . 'js/charitable-session'. $suffix . '.js',
+				array( 'js-cookie' ),
+				$version,
+				false
+			);
+
+			wp_localize_script( 'charitable-sessions', 'CHARITABLE_SESSION', array(
+				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+				'id'                 => charitable_get_session()->get_session_id(),
+				'cookie_name'        => WP_SESSION_COOKIE,
+				'expiration'         => $this->set_session_length(),
+				'expiration_variant' => $this->set_session_expiration_variant_length(),
+				'secure'             => (bool) apply_filters( 'wp_session_cookie_secure', false ),
+				'cookie_path'        => COOKIEPATH,
+				'cookie_domain'      => COOKIE_DOMAIN,
+				'generated_id'       => WP_Session_Utils::generate_id(),
+			) );
+		}
+
+		/**
+		 * Returns and/or create the single instance of this class.
+		 *
+		 * @since   1.2.0
+		 *
+		 * @return  Charitable_Session
+		 */
+		public static function get_instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new Charitable_Session();
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Checks whether the current request has a session ID.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function has_session_id() {
+			return ! empty( $this->session->session_id );
+		}
 
 		/**
 		 * Return a session variable.
@@ -141,33 +204,45 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		}
 
 		/**
+		 * Remove a session variable.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $key Session variable key.
+		 * @return mixed The session variable value.
+		 */
+		public function remove( $key ) {
+			unset( $this->session[ $key ] );
+		}
+
+		/**
 		 * Set the length of the cookie session to 24 hours.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	int
+		 * @return int
 		 */
 		public function set_session_length() {
 			if ( ! defined( 'DAY_IN_SECONDS' ) ) {
 				define( 'DAY_IN_SECONDS', 86400 );
 			}
 
-			return DAY_IN_SECONDS;
+			return apply_filters( 'charitable_session_length', DAY_IN_SECONDS );
 		}
 
 		/**
 		 * Set the cookie expiration variant time to 23 hours.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	int
+		 * @return int
 		 */
 		public function set_session_expiration_variant_length() {
 			if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 				define( 'HOUR_IN_SECONDS', 3600 );
 			}
 
-			return HOUR_IN_SECONDS * 23;
+			return apply_filters( 'charitable_session_expiration_variant_length', HOUR_IN_SECONDS * 23 );
 		}
 
 		/**
@@ -273,9 +348,9 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Return any notices set in the session.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return 	array Session variable
+		 * @return array Session variable
 		 */
 		public function get_notices() {
 			$notices = $this->get( 'notices' );

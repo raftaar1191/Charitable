@@ -417,7 +417,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @return  void
          */
         private function maybe_start_public() {
-            if ( is_admin() ) {
+            if ( is_admin() && ! $this->is_ajax() ) {
                 return;
             }
 
@@ -460,6 +460,17 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
+         * Checks whether the current request is an AJAX request.
+         *
+         * @since  1.5.0
+         *
+         * @return boolean
+         */
+        private function is_ajax() {
+            return false !== ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+        }
+
+        /**
          * Checks whether we're executing an AJAX hook and if so, loads some AJAX functionality.
          *
          * @since   1.0.0
@@ -467,7 +478,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @return  void
          */
         private function maybe_start_ajax() {
-            if ( false === ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+            if ( ! $this->is_ajax() ) {
                 return;
             }
 

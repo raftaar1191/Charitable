@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Retrieve a campaign's donation form via AJAX.
  *
- * @see     charitable_template_get_donation_form_ajax
+ * @see charitable_ajax_get_donation_form
  */
 add_action( 'wp_ajax_get_donation_form', 'charitable_ajax_get_donation_form' );
 add_action( 'wp_ajax_nopriv_get_donation_form', 'charitable_ajax_get_donation_form' );
@@ -25,7 +25,15 @@ add_action( 'wp_ajax_nopriv_get_donation_form', 'charitable_ajax_get_donation_fo
 /**
  * Upload an image through pupload uploader.
  *
- * @see     charitable_plupload_image_upload
+ * @see charitable_plupload_image_upload
  */
 add_action( 'wp_ajax_charitable_plupload_image_upload', 'charitable_plupload_image_upload' );
 add_action( 'wp_ajax_nopriv_charitable_plupload_image_upload', 'charitable_plupload_image_upload' );
+
+/**
+ * Get session content.
+ *
+ * @see charitable_ajax_get_session_content()
+ */
+add_action( 'wp_ajax_charitable_get_session_content', 'charitable_ajax_get_session_content' );
+add_action( 'wp_ajax_nopriv_charitable_get_session_content', 'charitable_ajax_get_session_content' );

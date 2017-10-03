@@ -108,3 +108,33 @@ if ( ! function_exists( 'charitable_plupload_image_upload' ) ) :
 	}
 
 endif;
+
+/**
+ * Receives an AJAX request to load session content and returns
+ * the output to be loaded.
+ *
+ * @since  1.5.0
+ *
+ * @return void
+ */
+function charitable_ajax_get_session_content() {
+	if ( ! array_key_exists( 'template', $_POST ) ) {
+		wp_send_json_error( __( 'Missing template in request.', 'charitable' ) );
+	}
+
+	$template =  $_POST['template'];
+
+	switch ( $_POST['template'] ) {
+		case 'donation_receipt' :
+			$donation = array_key_exists( 'donation_id', $_POST ) ? charitable_get_donation( $_POST['donation_id'] ) : null;
+			$content  = charitable_template_donation_receipt_output( '', $donation );
+			break;
+		default :
+			$content = '';
+			break;
+	}
+
+	error_log( charitable_get_session()->get_session_id() );
+
+	wp_send_json_success( $content );
+}

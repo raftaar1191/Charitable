@@ -36,6 +36,37 @@ function charitable_template( $template_name, array $args = array() ) {
 }
 
 /**
+ * When a session-reliant template is displayed without a session ID being
+ * set, wrap the output in a wrapper that tells our client-side session
+ * handler to fetch content via AJAX.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|string[] $template_name A single template name or an ordered array of template.
+ * @param  mixed[]         $args          Array of arguments to pass to the view.
+ * @param  string          $template_key  A key representing the template, which will be passed
+ *                                        as one of the arguments in the AJAX request.
+ * @param  array           $wrapper_args  A mixed set of arguments that need to be passed along
+ *                                        in the AJAX request.
+ * @return void Content is echoed.
+ */
+function charitable_session_reliant_template( $template_name, array $args, $template_key, $wrapper_args = array() ) {
+	/* When we have a session ID, we just load the template normally. */
+    if ( charitable_get_session()->has_session_id() ) {
+		charitable_template( $template_name, $args );
+    }
+
+    $id = 'charitable-session-content-fallback-' . uniqid();
+
+    echo '<div class="charitable-session-content" data-fallback-id="' . esc_attr( $id ) . '" data-template="' . esc_attr( $template_key ) . '" data-args="' . esc_attr( http_build_query( $wrapper_args ) ) . '" style="display: none;">';
+    charitable_template( $template_name, $args );
+    echo '</div>';
+    echo '<noscript id="' . esc_attr( $id ) . '">';
+    charitable_template( $template_name, $args );
+    echo '</noscript>';
+}
+
+/**
  * Return the template path if the template exists. Otherwise, return default.
  *
  * @since   1.0.0

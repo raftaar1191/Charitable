@@ -749,7 +749,7 @@ CHARITABLE = window.CHARITABLE || {};
         }
     }    
 
-    exports.Toggle = Toggle();     
+    exports.Toggle = Toggle();
 
 })( CHARITABLE, jQuery );
 
