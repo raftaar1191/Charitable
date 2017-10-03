@@ -86,15 +86,16 @@ final class WP_Session extends Recursive_ArrayAccess {
 				delete_option( "_wp_session_expires_{$this->session_id}" );
 				add_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
 			}
+
+			$this->read_data();		
 		} else {
-			$this->session_id = WP_Session_Utils::generate_id();
-			$this->set_expiration();
+			$this->session_id = '';
+			$this->container  = array();
 		}
 
-		$this->read_data();
+		error_log( var_export( $_COOKIE, true ) );
 
-		$this->set_cookie();
-
+		// $this->set_cookie();
 	}
 
 	/**
@@ -129,7 +130,13 @@ final class WP_Session extends Recursive_ArrayAccess {
 	protected function set_cookie() {
 		$secure   = apply_filters( 'wp_session_cookie_secure', false );
 		$httponly = apply_filters( 'wp_session_cookie_httponly', false );
-		setcookie( WP_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant , $this->expires, COOKIEPATH, COOKIE_DOMAIN, $secure, $httponly );
+		setcookie( WP_SESSION_COOKIE, $this->session_id . '||' . $this->expires . '||' . $this->exp_variant,
+			$this->expires,
+			COOKIEPATH,
+			COOKIE_DOMAIN,
+			$secure,
+			$httponly
+		);
 	}
 
 	/**

@@ -655,12 +655,16 @@ if ( ! function_exists( 'charitable_template_donation_receipt_output' ) ) :
 	 * Render the donation receipt. This can be used by the [donation_receipt] shortcode or through `the_content` filter.
 	 *
 	 * @since   1.0.0
+	 * @since   1.5.0 Added $donation argument.
 	 *
-	 * @param   string $content Page content.
+	 * @param   string                   $content  Page content.
+	 * @param   Charitable_Donation|null $donation Optional. Useful when the donation is not the current donation.
 	 * @return  string
 	 */
-	function charitable_template_donation_receipt_output( $content ) {
-		$donation = charitable_get_current_donation();
+	function charitable_template_donation_receipt_output( $content, $donation = null ) {
+		if ( is_null( $donation ) ) {
+			$donation = charitable_get_current_donation();
+		}
 
 		if ( ! $donation ) {
 			return $content;
@@ -669,11 +673,8 @@ if ( ! function_exists( 'charitable_template_donation_receipt_output' ) ) :
 		ob_start();
 
 		if ( ! $donation->is_from_current_user() ) {
-
-			charitable_template( 'donation-receipt/not-authorized.php', array( 'content' => $content ) );
-
+			charitable_session_reliant_template( 'donation-receipt/not-authorized.php', array( 'content' => $content ), 'donation_receipt', array( 'donation_id' => $donation->ID ) );
 			return ob_get_clean();
-
 		}
 
 		do_action( 'charitable_donation_receipt_page', $donation );

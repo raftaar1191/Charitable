@@ -120,7 +120,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 				'error_required_fields' => __( 'Please fill out all required fields.', 'charitable' ),
 				'error_unknown' => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
 				'error_invalid_cc_number' => __( 'The credit card passed is not valid.', 'charitable' ),
-				'error_invalid_cc_expiry' => __( 'The credit card expiry date is not valid.', 'charitable' ),				
+				'error_invalid_cc_expiry' => __( 'The credit card expiry date is not valid.', 'charitable' ),
 			) );
 
 			/* Accounting.js */
