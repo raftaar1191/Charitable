@@ -52,7 +52,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @global WP_Rewrite $wp_rewrite
-		 *
 		 * @param  array $args Mixed arguments.
 		 * @return string
 		 */

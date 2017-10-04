@@ -476,10 +476,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$status = $this->donation_data->post_status;
 
 			if ( $label ) {
-				charitable_get_deprecated()->deprecated_function(
+				charitable_get_deprecated()->deprecated_argument(
 				    __METHOD__,
 				    '1.5.0',
-				    'Charitable_Donation::get_status_label()'
+				    __( 'The $label argument is deprecated. Use Charitable_Donation::get_status_label() instead.', 'charitable' )
 				);
 				return $this->get_status_label( $status );
 			}

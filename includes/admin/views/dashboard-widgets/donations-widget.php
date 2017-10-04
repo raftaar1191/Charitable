@@ -53,7 +53,7 @@ $this_year = $table->get_donations_summary_by_period( date( 'Y-%' ) );
             <tr>
                 <td class="donation-date"><?php echo $donation->get_date() ?></td>
                 <td class="donation-id">#<?php echo $donation->get_number() ?></td>
-                <td class="donation-status"><?php echo $donation->get_status( true ) ?></td>
+                <td class="donation-status"><?php echo $donation->get_status_label() ?></td>
                 <td class="donation-total"><?php echo charitable_format_money( $donation->get_total_donation_amount() ) ?></td>
             </tr>
             <?php
