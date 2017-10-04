@@ -576,7 +576,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @param  Charitable_Form $form Form object.
 		 * @return boolean Whether the notices were rendered.
 		 */
-		public function render_error_notices( $form ) {
+		public function render_error_notices() {
 			return $this->view()->render_notices();
 		}
 

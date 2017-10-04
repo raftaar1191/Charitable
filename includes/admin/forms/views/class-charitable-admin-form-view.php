@@ -103,6 +103,16 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
         }
 
         /**
+         * Render notices before the form.
+         *
+         * @since  1.5.0
+         *
+         * @return string
+         */
+        public function render_notices() {
+        }
+
+        /**
          * Render all of a form's fields.
          *
          * @since  1.5.0

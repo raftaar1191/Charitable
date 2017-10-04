@@ -44,9 +44,9 @@ final class WP_Session extends Recursive_ArrayAccess {
 	/**
 	 * Singleton instance.
 	 *
-	 * @var bool|WP_Session
+	 * @var WP_Session
 	 */
-	private static $instance = false;
+	private static $instance;
 
 	/**
 	 * Retrieve the current session instance.
@@ -54,8 +54,8 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * @return WP_Session
 	 */
 	public static function get_instance() {
-		if ( ! self::$instance ) {
-			self::$instance = new self();
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new WP_Session();
 		}
 
 		return self::$instance;

@@ -33,6 +33,24 @@ if ( ! interface_exists( 'Charitable_Form_View_Interface' ) ) :
         public function render();
 
         /**
+         * Render notices before the form.
+         *
+         * @since  1.5.0
+         *
+         * @return string
+         */
+        public function render_notices();
+
+        /**
+         * Render a form's hidden fields.
+         *
+         * @since  1.5.0
+         *
+         * @return boolean True if any fields were rendered. False otherwise.
+         */
+        public function render_hidden_fields();
+
+        /**
          * Render all of a form's fields.
          *
          * @since  1.5.0
