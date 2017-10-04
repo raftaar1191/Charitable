@@ -120,7 +120,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * @return  WP_User|void
 		 */
 		public function maybe_redirect_at_authenticate( $user_or_error, $username ) {
-
 			if ( 'POST' != $_SERVER['REQUEST_METHOD'] ) {
 				return $user_or_error;
 			}
@@ -139,34 +138,28 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 				switch ( $code ) {
 
 					case 'invalid_email' :
-						
 						$error = __( '<strong>ERROR</strong>: Invalid email address.', 'charitable' ) .
 							' <a href="' . esc_url( charitable_get_permalink( 'forgot_password_page' ) ) . '">' .
 							__( 'Lost your password?' ) .
 							'</a>';
-						
 						break;
 
 					case 'incorrect_password' :
-						
 						$error = sprintf(
 							/* translators: %s: email address */
-							__( '<strong>ERROR</strong>: The password you entered for the email address %s is incorrect.' ),
-							'<strong>' . $email . '</strong>'
+							__( '<strong>ERROR</strong>: The password you entered for %s is incorrect.' ),
+							'<strong>' . $username . '</strong>'
 						) .
 						' <a href="' . esc_url( charitable_get_permalink( 'forgot_password_page' ) ) . '">' .
 						__( 'Lost your password?' ) .
 						'</a>';
-						
 						break;
 
 					default :
 						$error = $error[0];
-
 				}
 
 				charitable_get_notices()->add_error( $error );
-
 			}
 
 			charitable_get_session()->add_notices();

@@ -132,7 +132,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 
 			wp_localize_script( 'charitable-sessions', 'CHARITABLE_SESSION', array(
 				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
-				'id'                 => charitable_get_session()->get_session_id(),
+				'id'                 => $this->get_session_id(),
 				'cookie_name'        => WP_SESSION_COOKIE,
 				'expiration'         => $this->set_session_length(),
 				'expiration_variant' => $this->set_session_expiration_variant_length(),
@@ -200,7 +200,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 				$this->session[ $key ] = $value;
 			}
 
-			error_log( 'SESSION ID -> ' . $this->session->get_session_id() );
+			error_log( 'SESSION ID -> ' . $this->get_session_id() );
 			error_log( sprintf( 'SETTING -> %s : %s', $key, $this->session[ $key ] ) );
 
 			return $this->session[ $key ];

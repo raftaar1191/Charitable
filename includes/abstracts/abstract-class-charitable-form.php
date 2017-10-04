@@ -181,15 +181,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 				return false;
 			}
 
-			$errors = charitable_get_notices()->get_errors();
-
-			if ( ! empty( $errors ) ) {
-
-				charitable_template( 'form-fields/errors.php', array(
-					'errors' => $errors,
-				) );
-
-			}
+			charitable_template_from_session( 'form-fields/errors.php', array(
+				'errors' => charitable_get_notices()->get_errors(),
+			), 'errors' );
 
 			return true;
 		}

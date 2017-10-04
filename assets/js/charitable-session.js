@@ -27,33 +27,23 @@ CHARITABLE = window.CHARITABLE || {};
 
         // Init.
         function init() {
-            var elements = document.querySelectorAll('.charitable-session-content'),
-                data     = 'action=charitable_get_session_content&templates=',
-                i;
+            var elements = document.querySelectorAll('.charitable-session-content');
+            var data = 'action=charitable_get_session_content';
+            var element, template, args, key, value, i;
 
-            // data = {
-            //     action : 'charitable_get_session_content',
-            //     templates : {
-            //         template1 : {
-            //             'campaign_id' : 123,
-            //             'form_id' : '9decieu42',
-            //         },
-            //         template2 : {
-            //             'campaign_id' : 123,
-            //             'form_id' : '9decieu42',  
-            //         }
-            //     }
-            // }
+            if (!elements.length) {
+                return;
+            }
 
             for (i = 0; i < elements.length; i++) {
-                var element  = elements[i],
-                    template = element.getAttribute('data-template'),
-                    args     = element.getAttribute('data-args');
+                element = elements[i],
+                template = element.getAttribute('data-template'),
+                args = JSON.parse(element.getAttribute('data-args')),
 
-                data += template + ':' + args;
-
-                if (i !== length - 1) {
-                    data += ',';
+                // Append template arguments to the data string.
+                data += '&templates[' + i + '][template]=' + template;
+                for (key in args) {
+                    data += '&templates[' + i + '][' + key + ']=' + args[key];
                 }
             }
 
@@ -61,21 +51,19 @@ CHARITABLE = window.CHARITABLE || {};
             request.open('POST', CHARITABLE_SESSION.ajaxurl, true);
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             request.onreadystatechange = function() {
-                if (this.readyState === 4) {
-                    if (this.status >= 200 && this.status < 400) {
-                        var response = JSON.parse( this.response );
-                        if (!response.success) {
-                            return;
+                if (this.readyState === 4 && (this.status >= 200 && this.status < 400)) {
+                    var response = JSON.parse( this.response );
+                    if (!response.success) {
+                        return;
+                    }
+
+                    for (i = 0; i < response.data.length; i += 1) {
+                        if (!response.data[i].length) {
+                            continue;
                         }
 
-                        for (i = 0; i < response.data.length; i += 1) {
-                            if ( response.data[i].length ) {
-                                continue;
-                            }
-
-                            elements[i].innerHTML = response.data[i];
-                            elements[i].style.display = 'block';
-                        }
+                        elements[i].innerHTML = response.data[i];
+                        elements[i].style.display = 'block';
                     }
                 }
             };

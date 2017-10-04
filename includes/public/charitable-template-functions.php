@@ -1048,20 +1048,19 @@ if ( ! function_exists( 'charitable_template_notices' ) ) :
 	/**
 	 * Render any notices.
 	 *
-	 * @since   1.4.0
+	 * @since  1.4.0
 	 *
-	 * @param   array $notices
-	 * @return  void
+	 * @param  array $notices
+	 * @return void
 	 */
 	function charitable_template_notices( $notices = array() ) {		
 		if ( empty( $notices ) ) {
 			$notices = charitable_get_notices()->get_notices();
 		}
 
-		charitable_template( 'form-fields/notices.php', array(
-			'notices' => $notices,
-		) );
-
+		charitable_template_from_session( 'form-fields/notices.php', array(
+			'notices' => charitable_get_notices()->get_notices(),
+		), 'notices' );
 	}
 
 endif;

@@ -79,7 +79,7 @@ function charitable_template_from_session_content( $template_key, $wrapper_args 
 		return $default;
 	}
 
-	$content  = '<div class="charitable-session-content" data-template="' . esc_attr( $template_key ) . '" data-args="' . esc_attr( http_build_query( $wrapper_args, '', '|' ) ) . '" style="display: none;">' . $default . '</div>';
+	$content  = '<div class="charitable-session-content" data-template="' . esc_attr( $template_key ) . '" data-args="' . esc_attr( json_encode( $wrapper_args ) ) . '" style="display: none;">' . $default . '</div>';
 	$content .= '<noscript>' . $default . '</noscript>';
 
 	return $content;

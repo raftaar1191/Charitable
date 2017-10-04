@@ -156,14 +156,18 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * Write the data from the current session to the data storage system.
 	 */
 	public function write_data() {
-		// No need to store an empty array in the DB
-		if( $this->container === array() ){
+		/* Nothing has changed. */
+		if ( ! $this->dirty ) {
 			return;
 		}
-		
-		$option_key = "_wp_session_{$this->session_id}";
 
-		if ( false === get_option( $option_key ) ) {
+		if ( empty( $this->container ) ) {
+			delete_option( "_wp_session_{$this->session_id}" );
+			delete_option( "_wp_session_expires_{$this->session_id}" );
+			return;
+		}
+
+		if ( false === get_option( "_wp_session_{$this->session_id}" ) ) {
 			add_option( "_wp_session_{$this->session_id}", $this->container, '', 'no' );
 			add_option( "_wp_session_expires_{$this->session_id}", $this->expires, '', 'no' );
 		} else {

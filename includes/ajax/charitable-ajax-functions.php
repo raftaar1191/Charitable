@@ -122,24 +122,9 @@ function charitable_ajax_get_session_content() {
 		wp_send_json_error( __( 'Missing templates in request.', 'charitable' ) );
 	}
 
-	$templates = explode( ',', $_POST['templates'] );
-	$output    = array();
-	
-	foreach ( $templates as $i => $template ) {
-		if ( empty( $template ) ) {
+	foreach ( $_POST['templates'] as $i => $template_args ) {
+		if ( empty( $template_args ) || ! array_key_exists( 'template', $template_args ) ) {
 			continue;
-		}
-
-		list( $template_key, $_args ) = explode( ':', $template );
-
-		if ( empty( $_args ) ) {
-			$args = array();
-		} else {
-			$args = array();
-			foreach ( explode( '|', $_args ) as $arg ) {
-				list( $key, $value ) = explode( '=', $arg );
-				$args[ $key ] = $value;
-			}
 		}
 
 		/**
@@ -150,7 +135,7 @@ function charitable_ajax_get_session_content() {
 		 * @param false|string $content The content to return, or a false in case of failure.
 		 * @param array        $args    Mixed set of arguments.
 		 */
-		$output[ $i ] = apply_filters( 'charitable_session_content_' . $template_key, false, $args );
+		$output[ $i ] = apply_filters( 'charitable_session_content_' . $template_args['template'], false, $template_args );
 	}
 
 	wp_send_json_success( $output );
@@ -171,28 +156,6 @@ function charitable_ajax_get_session_donation_receipt( $content, $args ) {
 	}
 
 	return charitable_template_donation_receipt_output( '', charitable_get_donation( $args['donation_id'] ) );
-}
-
-/**
- * Return the donation amount form.
- *
- * @since  1.5.0
- *
- * @param  string|false $content Content to return, or false in case of failure.
- * @param  array        $args    Mixed array of args.
- * @return string|false
- */
-function charitable_ajax_get_session_donation_amount_form( $content, $args ) {
-	if ( ! array_key_exists( 'campaign_id', $args ) ) {
-		return $content;
-	}
-
-	ob_start();
-
-	$form = new Charitable_Donation_Amount_Form( charitable_get_campaign( $args['campaign_id'] ) );
-	$form->render();
-
-	return ob_get_clean();
 }
 
 /**
@@ -246,3 +209,50 @@ function charitable_ajax_get_session_donation_form_current_amount_text( $content
 	return charitable_template_donation_form_current_amount_text( charitable_get_campaign( $args['campaign_id'] )->get_donation_amount_in_session(), $args['form_id'], $args['campaign_id'] );
 }
 
+/**
+ * Return the error messages.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @return string|false
+ */
+function charitable_ajax_get_session_errors( $content ) {
+	$errors = charitable_get_notices()->get_errors();
+
+	if ( empty( $errors ) ) {
+		return $content;
+	}
+
+	ob_start();
+
+	charitable_template( 'form-fields/errors.php', array(
+		'errors' => $errors,
+	) );
+
+	return ob_get_clean();
+}
+
+/**
+ * Return the error messages.
+ *
+ * @since  1.5.0
+ *
+ * @param  string|false $content Content to return, or false in case of failure.
+ * @return string|false
+ */
+function charitable_ajax_get_session_notices( $content ) {
+	$notices = charitable_get_notices()->get_notices();
+
+	if ( empty( $notices ) ) {
+		return $content;
+	}
+
+	ob_start();
+
+	charitable_template( 'form-fields/notices.php', array(
+		'notices' => $notices,
+	) );
+
+	return ob_get_clean();
+}
