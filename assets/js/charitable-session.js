@@ -1,7 +1,4 @@
-CHARITABLE = window.CHARITABLE || {};
-
-( function( exports ){
-
+( function( exports ) {
     var Sessions = function() {
         this.session_id = Cookies.get( CHARITABLE_SESSION.cookie_name );
 
@@ -89,4 +86,4 @@ CHARITABLE = window.CHARITABLE || {};
 
     exports.Sessions = Sessions();
 
-})( CHARITABLE );
+})( window.CHARITABLE || {} );

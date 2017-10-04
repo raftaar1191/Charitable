@@ -42,7 +42,6 @@ add_action( 'wp_ajax_nopriv_charitable_get_session_content', 'charitable_ajax_ge
  * Return the content for particular templates.
  *
  * @see charitable_ajax_get_session_donation_receipt
- * @see charitable_ajax_get_session_donation_amount_form
  * @see charitable_ajax_get_session_donation_form_amount_field
  * @see charitable_ajax_get_session_donation_form_current_amount_text
  * @see charitable_ajax_get_session_errors

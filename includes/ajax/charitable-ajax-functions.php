@@ -234,7 +234,7 @@ function charitable_ajax_get_session_errors( $content ) {
 }
 
 /**
- * Return the error messages.
+ * Return the notices
  *
  * @since  1.5.0
  *
