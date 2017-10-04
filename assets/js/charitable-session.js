@@ -31,6 +31,20 @@ CHARITABLE = window.CHARITABLE || {};
                 data     = 'action=charitable_get_session_content&templates=',
                 i;
 
+            // data = {
+            //     action : 'charitable_get_session_content',
+            //     templates : {
+            //         template1 : {
+            //             'campaign_id' : 123,
+            //             'form_id' : '9decieu42',
+            //         },
+            //         template2 : {
+            //             'campaign_id' : 123,
+            //             'form_id' : '9decieu42',  
+            //         }
+            //     }
+            // }
+
             for (i = 0; i < elements.length; i++) {
                 var element  = elements[i],
                     template = element.getAttribute('data-template'),
@@ -50,17 +64,19 @@ CHARITABLE = window.CHARITABLE || {};
                 if (this.readyState === 4) {
                     if (this.status >= 200 && this.status < 400) {
                         var response = JSON.parse( this.response );
-                        if (response.success) {
-                            for (i = 0; i < response.data.length; i += 1) {
-                                if ( response.data[i].length ) {
-                                    elements[i].innerHTML = response.data[i];
-                                    elements[i].style.display = 'block';
-                                }
+                        if (!response.success) {
+                            return;
+                        }
+
+                        for (i = 0; i < response.data.length; i += 1) {
+                            if ( response.data[i].length ) {
+                                continue;
                             }
+
+                            elements[i].innerHTML = response.data[i];
+                            elements[i].style.display = 'block';
                         }
                     }
-
-                    element.style.display = 'block';
                 }
             };
             request.send(data);
