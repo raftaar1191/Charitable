@@ -51,8 +51,9 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		 * @return void
 		 */
 		public function setup_rewrite_rules() {
-			add_rewrite_endpoint( 'email_verification', EP_PERMALINK );
+			add_rewrite_endpoint( 'email_verification', EP_PERMALINK | EP_ROOT );
 			add_rewrite_rule( '(.?.+?)(?:/([0-9]+))?/email-verification/?$', 'index.php?pagename=$matches[1]&page=$matches[2]&email_verification=1', 'top' );
+			add_rewrite_rule( 'email-verification/?$', 'index.php?&email_verification=1', 'top' );
 		}
 
 		/**

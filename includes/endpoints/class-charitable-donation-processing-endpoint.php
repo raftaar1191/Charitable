@@ -43,10 +43,8 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		 * @since   1.5.0
 		 */
 		public function setup_rewrite_rules() {
-
 			add_rewrite_endpoint( 'donation_processing', EP_ROOT );
 			add_rewrite_rule( 'donation-processing/([0-9]+)/?$', 'index.php?donation_id=$matches[1]&donation_processing=1', 'top' );
-
 		}
 
 		/**
