@@ -123,7 +123,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			$fields   = parent::get_hidden_fields();
 			$redirect = $this->get_redirect_url();
 
-			if ( $redirect ) {
+			if ( false !== $redirect ) {
 				$fields['redirect_to'] = $redirect;
 			}
 

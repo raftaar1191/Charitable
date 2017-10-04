@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 	/**
 	 * Charitable_Donation_Amount_Form
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Donation_Amount_Form extends Charitable_Donation_Form implements Charitable_Donation_Form_Interface {
 
@@ -49,27 +49,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		protected $form_action = 'make_donation_streamlined';
 
 		/**
-		 * Set up callbacks for actions and filters.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @return  void
-		 */
-		protected function attach_hooks_and_filters() {
-			parent::attach_hooks_and_filters();
-
-			remove_filter( 'charitable_donation_form_gateway_fields', array( $this, 'add_credit_card_fields' ), 10, 2 );
-			remove_action( 'charitable_donation_form_after_user_fields', array( $this, 'add_password_field' ) );
-
-			do_action( 'charitable_donation_amount_form_start', $this );
-		}
-
-		/**
 		 * Return the donation form fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function get_fields() {
 			return $this->get_donation_fields();
@@ -78,12 +62,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Validate the form submission.
 		 *
-		 * @since   1.4.4
+		 * @since  1.4.4
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function validate_submission() {
-
 			/* If we have already validated the submission, return the value. */
 			if ( $this->validated ) {
 				return $this->valid;
@@ -98,15 +81,14 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 			$this->valid = apply_filters( 'charitable_validate_donation_amount_form_submission', $this->valid, $this );
 
 			return $this->valid;
-
 		}
 
 		/**
 		 * Return the donation values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
@@ -122,11 +104,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Redirect to payment form after submission.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int     $campaign_id
-		 * @param   int     $amount
-		 * @return  void
+		 * @param  int $campaign_id The campaign we are donating to.
+		 * @param  int $amount      The donation amount.
+		 * @return void
 		 */
 		public function redirect_after_submission( $campaign_id, $amount ) {
 			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
@@ -149,12 +131,11 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 		/**
 		 * Render the donation form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function render() {
-
 			/* Load the script if it hasn't been loaded yet. */
 			if ( ! wp_script_is( 'charitable-script', 'enqueued' ) ) {
 
@@ -165,12 +146,10 @@ if ( ! class_exists( 'Charitable_Donation_Amount_Form' ) ) :
 				Charitable_Public::get_instance()->enqueue_donation_form_scripts();
 			}
 
-			charitable_template_from_session( 'donation-form/form-donation.php', array(
+			charitable_template( 'donation-form/form-donation.php', array(
 				'campaign' => $this->get_campaign(),
 				'form'     => $this,
 				'form_id'  => 'charitable-donation-amount-form',
-			), 'donation_amount_form', array(
-				'campaign_id' => $this->get_campaign()->ID,
 			) );
 		}
 	}

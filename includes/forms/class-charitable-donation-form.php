@@ -88,7 +88,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$this->campaign = $campaign;
 			$this->id       = uniqid();
 
-			$this->attach_hooks_and_filters();
 			$this->setup_payment_fields();
 			$this->check_test_mode();
 		}
@@ -343,7 +342,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			/* Add the payment section if there are gateway fields to be filled out. */
 			if ( $has_gateway_fields || count( $gateways ) > 1 ) {
-
 				$fields['payment_fields'] = array(
 					'type'      => 'gateway-fields',
 					'legend'    => __( 'Payment', 'charitable' ),
@@ -351,7 +349,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'gateways'  => $gateways,
 					'priority'  => 60,
 				);
-
 			}
 
 			return $fields;
@@ -830,9 +827,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			if ( count( $active_gateways ) == 1 ) {
-
 				add_filter( 'charitable_donation_form_hidden_fields', array( $this, 'add_hidden_gateway_field' ) );
-
 			}
 
 			add_action( 'charitable_donation_form_fields', array( $this, 'add_payment_fields' ) );

@@ -93,8 +93,16 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return void
 		 */
 		protected function attach_hooks_and_filters() {
+			charitable_get_deprecated()->doing_it_wrong(
+				__METHOD__,
+				__( 'None of the callbacks are required as of Charitable 1.5; use `Charitable_Public_Form_View` instead.' ),
+				'1.5.0'
+			);
+
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
 			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 		}
 
 		/**
@@ -102,7 +110,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  Charitable_Form_View_Interface $form_view An object implementing theCharitable_Form_View_Interface.
+		 * @param  Charitable_Form_View_Interface $form_view An object implementing the `Charitable_Form_View_Interface`.
 		 * @return void
 		 */
 		public function set_form_view( Charitable_Form_View_Interface $form_view ) {
@@ -439,16 +447,15 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		/**
 		 * Return overrides array for use with upload_file() and upload_post_attachment() methods.
 		 *
-		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
-		 * 							  function once for each uploaded file.
-		 * @param  array  $overrides Optional. An associative array of names=>values to
-		 * 							  override default variables. Default false.
 		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * 							 function once for each uploaded file.
+		 * @param  array  $overrides Optional. An associative array of names=>values to
+		 * 							 override default variables. Default false.
+		 * @return array
 		 */
 		protected function get_file_overrides( $file_key, $overrides = array() ) {
-
 			$allowed_mimes = array(
 				'jpg|jpeg|jpe' => 'image/jpeg',
 				'gif'          => 'image/gif',
@@ -466,41 +473,26 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			$overrides = wp_parse_args( $overrides, $defaults );
 
 			return $overrides;
-
-		}
-
-		/**
-		 * Render a form field.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  array           $field     Field definition.
-		 * @param  string          $key       Field key.
-		 * @param  Charitable_Form $form      The form object.
-		 * @param  int             $index     The current index.
-		 * @param  string         $namespace Namespace for the form field's name attribute.
-		 * @return boolean False if the field was not rendered. True otherwise.
-		 */
-		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			return $form->view()->render_field( $field, $key, array(
-				'index'     => $index,
-				'namespace' => $namespace,
-			) );
-		}
+		}		
 
 		/**
 		 * Return the template name used for this field.
 		 *
+		 * @deprecated 1.8.0
+		 *
 		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated.
 		 *
 		 * @param  array $field Field definition.
 		 * @return string
 		 */
 		public function get_template_name( $field ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::get_template_name()'
+			);
+
 			return $form->view()->get_template_name( $field );			
 		}
 
@@ -526,39 +518,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
-		 * Set how much the index should be incremented by.
-		 *
-		 * @deprecated 1.8.0
-		 *
-		 * @since  1.0.0
-		 * @since  1.5.0 Deprecated. Implemented by Form View.
-		 *
-		 * @param  int   $increment The number the index should be incremented by.
-		 * @param  array $field     The field definition.
-		 * @return int
-		 */
-		public function increment_index( $increment, $field ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.5.0',
-				'Charitable_Public_Form_View::increment_index()'
-			);
-
-            /**
-             * Remove form's hooked filter.
-             *
-             * Before 1.5, forms used the filter to set the increment level. For
-             * backwards-compatibility purposes, we still provide this method in the
-             * form class, but it calls the Form View. This method shoud
-             * default in the form abstract, but remove it when this function
-             * is called directly.
-             */
-            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
-
-			return $this->view()->increment_index( $field );			
-		}
-
-		/**
 		 * Whether the given field type can use the default field template.
 		 *
 		 * @deprecated 1.8.0
@@ -576,7 +535,34 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 				'Charitable_Public_Form_View::use_default_field_template()'
 			);
 
-			return $this->view()->use_default_field_template( $field_type );			
+			return $this->view()->use_default_field_template( $field_type );
+		}
+
+		/**
+		 * Set how much the index should be incremented by.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Implemented by Form View.
+		 *
+		 * @param  int   $increment The number the index should be incremented by.
+		 * @param  array $field     The field definition.
+		 * @return int
+		 */
+		public function increment_index( $increment, $field ) {
+            /**
+             * Remove form's hooked filter.
+             *
+             * Before 1.5, forms used the filter to set the increment level. For
+             * backwards-compatibility purposes, we still provide this method in the
+             * form class, but it calls the Form View. This method shoud
+             * default in the form abstract, but remove it when this function
+             * is called directly.
+             */
+            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+
+			return $this->view()->increment_index( $field );			
 		}
 
 		/**
@@ -591,11 +577,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean Whether the notices were rendered.
 		 */
 		public function render_error_notices( $form ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.5.0',
-				'Charitable_Public_Form_View::render_notices()'
-			);
+			return $this->view()->render_notices();
 		}
 
 		/**
@@ -610,11 +592,48 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean Whether the output is added.
 		 */
 		public function add_hidden_fields( $form ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.5.0',
-				'Charitable_Public_Form_View::use_default_field_template()'
-			);
+			return $this->view()->render_hidden_fields();
+		}
+
+		/**
+		 * Render a form field.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Use `Charitable_Public_Form_View` instead.
+		 *
+		 * @param  array           $field     Field definition.
+		 * @param  string          $key       Field key.
+		 * @param  Charitable_Form $form      The form object.
+		 * @param  int             $index     The current index.
+		 * @param  string          $namespace Namespace for the form field's name attribute.
+		 * @return boolean False if the field was not rendered. True otherwise.
+		 */
+		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
+            /**
+             * Remove form's hooked action.
+             *
+             * Before 1.5, forms used the filter to set the increment level. For
+             * backwards-compatibility purposes, we still provide this method in the
+             * form class, but it calls the Form View. This method shoud
+             * default in the form abstract, but remove it when this function
+             * is called directly.
+             */
+            remove_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+
+			$rendered = $form->view()->render_field( $field, $key, array(
+				'index'     => $index,
+				'namespace' => $namespace,
+			) );
+
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+
+			return $rendered;
 		}
 	}
 

@@ -122,6 +122,8 @@ function charitable_ajax_get_session_content() {
 		wp_send_json_error( __( 'Missing templates in request.', 'charitable' ) );
 	}
 
+	$output = array();
+
 	foreach ( $_POST['templates'] as $i => $template_args ) {
 		if ( empty( $template_args ) || ! array_key_exists( 'template', $template_args ) ) {
 			continue;
@@ -155,7 +157,13 @@ function charitable_ajax_get_session_donation_receipt( $content, $args ) {
 		return $content;
 	}
 
-	return charitable_template_donation_receipt_output( '', charitable_get_donation( $args['donation_id'] ) );
+	$donation = charitable_get_donation( $args['donation_id'] );
+
+	if ( ! $donation ) {
+		return $content;
+	}
+
+	return charitable_template_donation_receipt_output( '', $donation );
 }
 
 /**
@@ -206,7 +214,9 @@ function charitable_ajax_get_session_donation_form_current_amount_text( $content
 		return $content;
 	}
 
-	return charitable_template_donation_form_current_amount_text( charitable_get_campaign( $args['campaign_id'] )->get_donation_amount_in_session(), $args['form_id'], $args['campaign_id'] );
+	$amount = charitable_get_campaign( $args['campaign_id'] )->get_donation_amount_in_session();
+
+	return charitable_template_donation_form_current_amount_text( $amount, $args['form_id'], $args['campaign_id'] );
 }
 
 /**

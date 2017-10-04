@@ -1059,7 +1059,7 @@ if ( ! function_exists( 'charitable_template_notices' ) ) :
 		}
 
 		charitable_template_from_session( 'form-fields/notices.php', array(
-			'notices' => charitable_get_notices()->get_notices(),
+			'notices' => $notices,
 		), 'notices' );
 	}
 

@@ -51,9 +51,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	/**
 	 * Retrieve the current session instance.
 	 *
-	 * @param bool $session_id Session ID from which to populate data.
-	 *
-	 * @return bool|WP_Session
+	 * @return WP_Session
 	 */
 	public static function get_instance() {
 		if ( ! self::$instance ) {
@@ -68,8 +66,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 * Will rebuild the session collection from the given session ID if it exists. Otherwise, will
 	 * create a new session with that ID.
 	 *
-	 * @param $session_id
-	 * @uses apply_filters Calls `wp_session_expiration` to determine how long until sessions expire.
+	 * @param $session_id	 
 	 */
 	protected function __construct() {
 		if ( isset( $_COOKIE[WP_SESSION_COOKIE] ) ) {
@@ -92,10 +89,6 @@ final class WP_Session extends Recursive_ArrayAccess {
 			$this->session_id = '';
 			$this->container  = array();
 		}
-
-		error_log( var_export( $_COOKIE, true ) );
-
-		// $this->set_cookie();
 	}
 
 	/**

@@ -81,16 +81,16 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		/**
 		 * Create the session.
 		 *
-		 * @since   1.4.17
+		 * @since  1.4.17
 		 *
-		 * @return  WP_Session
+		 * @return WP_Session
 		 */
 		public function init() {
 			$this->session = WP_Session::get_instance();
 
 			/* We're missing a Session ID, so we'll need to queue up our session scripts. */
 			if ( ! $this->has_session_id() ) {
-				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 1 );
 			}
 
 			return $this->session;

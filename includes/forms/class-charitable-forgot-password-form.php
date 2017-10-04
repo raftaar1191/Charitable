@@ -56,7 +56,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 */
 		public function __construct() {
 			$this->id = uniqid();
-			// $this->attach_hooks_and_filters();
 		}
 
 		/**
