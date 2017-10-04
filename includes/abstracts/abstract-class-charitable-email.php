@@ -763,11 +763,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @since  1.0.0
 		 * @since  1.5.0 Deprecated.
 		 *
-		 * @param  array            $fields Shortcode fields.
-		 * @param  Charitable_Email $email  Email object.
+		 * @param  array $fields Shortcode fields.
 		 * @return array[]
 		 */
-		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
+		public function add_donation_content_fields( $fields ) {
 			return $fields;
 		}
 
@@ -779,11 +778,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @since  1.0.0
 		 * @since  1.5.0 Deprecated.
 		 *
-		 * @param  array            $fields Shortcode fields.
-		 * @param  Charitable_Email $email  Email object.
+		 * @param  array $fields Shortcode fields.
 		 * @return array[]
 		 */
-		public function add_preview_donation_content_fields( $fields, Charitable_Email $email ) {
+		public function add_preview_donation_content_fields( $fields ) {
 			return $fields;
 		}
 
@@ -795,11 +793,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @since  1.0.0
 		 * @since  1.5.0 Deprecated.
 		 *
-		 * @param  array            $fields Shortcode fields.
-		 * @param  Charitable_Email $email  Email object.
+		 * @param  array $fields Shortcode fields.
 		 * @return array[]
 		 */
-		public function add_campaign_content_fields( $fields, Charitable_Email $email ) {
+		public function add_campaign_content_fields( $fields ) {
 			return $fields;
 		}
 
@@ -811,11 +808,10 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @since  1.0.0
 		 * @since  1.5.0 Deprecated.
 		 *
-		 * @param  array            $fields Shortcode fields.
-		 * @param  Charitable_Email $email  Email object.
+		 * @param  array $fields Shortcode fields.
 		 * @return array[]
 		 */
-		public function add_preview_campaign_content_fields( $fields, Charitable_Email $email ) {
+		public function add_preview_campaign_content_fields( $fields ) {
 			return $fields;
 		}
 	}

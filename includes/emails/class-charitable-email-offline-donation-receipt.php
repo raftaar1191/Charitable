@@ -176,34 +176,6 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 		}
 
 		/**
-		 * Add donation content fields.
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param 	array 			 $fields Shortcode fields.
-		 * @param 	Charitable_Email $email  Email object.
-		 * @return  array[]
-		 */
-		public function add_donation_content_fields( $fields, Charitable_Email $email ) {
-			if ( ! $this->is_current_email( $email ) ) {
-				return $fields;
-			}
-
-			if ( ! in_array( 'donation', $this->object_types ) ) {
-				return $fields;
-			}
-
-			$fields = parent::add_donation_content_fields( $fields, $email );
-
-			$fields['offline_instructions'] = array(
-				'description' => __( 'Show Offline Donation instructions', 'charitable' ),
-				'callback'    => array( $this, 'get_offline_instructions' ),
-			);
-
-			return $fields;
-		}
-
-		/**
 		 * Return the default subject line for the email.
 		 *
 		 * @since  1.5.0
