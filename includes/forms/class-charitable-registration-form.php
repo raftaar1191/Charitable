@@ -62,7 +62,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		public function __construct( $args = array() ) {
 			$this->id = uniqid();
 			$this->shortcode_args = $args;
-			$this->attach_hooks_and_filters();
 		}
 
 		/**
@@ -114,39 +113,21 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		}
 
 		/**
-		 * Adds hidden fields to the start of the registration
+		 * Return the hidden fields for this form.
 		 *
-		 * @since   1.0.0
+		 * @since  1.5.0
 		 *
-		 * @param 	Charitable_Form 	$form
-		 * @return 	void
+		 * @return array
 		 */
-		public function add_hidden_fields( $form ) {
-			$ret = parent::add_hidden_fields( $form );
+		public function get_hidden_fields() {
+			$fields   = parent::get_hidden_fields();
+			$redirect = $this->get_redirect_url();
 
-			if ( false === $ret ) {
-				return;
+			if ( $redirect ) {
+				$fields['redirect_to'] = $redirect;
 			}
 
-			$redirect = false;
-
-			if ( isset( $_GET['redirect_to'] ) && strlen( $_GET['redirect_to'] ) ) {
-
-				$redirect = $_GET['redirect_to'];
-
-			} elseif ( isset( $this->shortcode_args['redirect'] ) && strlen( $this->shortcode_args['redirect'] ) ) {
-
-				$redirect = $this->shortcode_args['redirect'];
-
-			}
-
-			if ( ! $redirect ) {
-				return;
-			}
-
-			?>
-			<input type="hidden" name="redirect_to" value="<?php echo esc_url( $redirect ) ?>" />
-			<?php
+			return $fields;
 		}
 
 		/**
@@ -233,6 +214,25 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 				esc_url( $login_link ),
 				$this->shortcode_args['login_link_text']
 			);
+		}
+
+		/**
+		 * Get the redirect URL.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string|false
+		 */
+		protected function get_redirect_url() {
+			$redirect = false;
+
+			if ( isset( $_GET['redirect_to'] ) && strlen( $_GET['redirect_to'] ) ) {
+				$redirect = $_GET['redirect_to'];
+			} elseif ( isset( $this->shortcode_args['redirect'] ) && strlen( $this->shortcode_args['redirect'] ) ) {
+				$redirect = $this->shortcode_args['redirect'];
+			}
+
+			return $redirect;
 		}
 	}
 

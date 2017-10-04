@@ -34,7 +34,7 @@ $form = $view_args['form'];
 			<?php do_action( 'charitable_form_before_fields', $form ); ?>
 
 			<div class="charitable-form-fields cf">
-				<?php $form->view()->render_fields() ?>
+				<?php $form->view()->render() ?>
 				<p class="description"><?php echo wp_get_password_hint() ?></p>
 			</div><!-- .charitable-form-fields -->
 

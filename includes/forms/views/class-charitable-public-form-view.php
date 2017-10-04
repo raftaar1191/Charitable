@@ -75,9 +75,23 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @return void
          */
         public function render() {
+            $this->render_notices();
             $this->render_honeypot();
             $this->render_hidden_fields();
             $this->render_fields();
+        }
+
+        /**
+         * Render notices before the form.
+         *
+         * @since  1.5.0
+         *
+         * @return string
+         */
+        public function render_notices() {
+            charitable_template_from_session( 'form-fields/errors.php', array(
+                'errors' => charitable_get_notices()->get_errors(),
+            ), 'errors' );
         }
 
         /**

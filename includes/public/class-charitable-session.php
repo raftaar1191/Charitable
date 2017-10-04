@@ -200,9 +200,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 				$this->session[ $key ] = $value;
 			}
 
-			error_log( 'SESSION ID -> ' . $this->get_session_id() );
-			error_log( sprintf( 'SETTING -> %s : %s', $key, $this->session[ $key ] ) );
-
 			return $this->session[ $key ];
 		}
 

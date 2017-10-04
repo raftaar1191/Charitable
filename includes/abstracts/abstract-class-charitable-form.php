@@ -94,7 +94,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 */
 		protected function attach_hooks_and_filters() {
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
-			// add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
+			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
 		}
 
 		/**
@@ -166,26 +166,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 */
 		public function get_form_identifier() {
 			return $this->id;
-		}
-
-		/**
-		 * Display error notices at the start of the form, if there are any.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  Charitable_Form $form Form object.
-		 * @return boolean Whether the notices were rendered.
-		 */
-		public function render_error_notices( $form ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			charitable_template_from_session( 'form-fields/errors.php', array(
-				'errors' => charitable_get_notices()->get_errors(),
-			), 'errors' );
-
-			return true;
 		}
 
 		/**
@@ -597,6 +577,25 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			);
 
 			return $this->view()->use_default_field_template( $field_type );			
+		}
+
+		/**
+		 * Display error notices at the start of the form, if there are any.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Notices are rendered by the Form View now.
+		 *
+		 * @param  Charitable_Form $form Form object.
+		 * @return boolean Whether the notices were rendered.
+		 */
+		public function render_error_notices( $form ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::render_notices()'
+			);
 		}
 
 		/**
