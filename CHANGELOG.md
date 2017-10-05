@@ -1,4 +1,5 @@
-= 1.5.0 =
+== 1.5.0
+
 * NEW: Added a `[charitable_donation_form]` shortcode. Display a campaign's donation form anywhere like this: [charitable_donation_form campaign_id=123]. [#136](https://github.com/Charitable/Charitable/issues/136)
 * NEW: Added a `[charitable_donors]` shortcode. [#129](https://github.com/Charitable/Charitable/issues/129)
 * NEW: Create and edit donations in the WordPress dashboard. No more adding mock donations through the Offline payment method. You can easily change donor details, add notes or change the amount/campaign of the donation. [#18](https://github.com/Charitable/Charitable/issues/18), [#241](https://github.com/Charitable/Charitable/issues/241), [#172](https://github.com/Charitable/Charitable/issues/172)
@@ -31,13 +32,16 @@
 * FIX: Fixed styling issue in REHub theme. [#406](https://github.com/Charitable/Charitable/issues/406)
 * FIX: Campaign metabox tabs broke with Social Warfare activated. [#364](https://github.com/Charitable/Charitable/issues/364)
 
-= 1.4.20 =
+== 1.4.20
+
 * Improve how plugin updates are shown for Charitable extensions. [#382](https://github.com/Charitable/Charitable/issues/382)
 
-= 1.4.19 =
+== 1.4.19
+
 * Fixed a bug that prevented suggested donations with cents from showing correctly in sites where a comma is used for the decimal separator (i.e. 9,50). [#356](https://github.com/Charitable/Charitable/issues/356)
 
-= 1.4.18 =
+== 1.4.18
+
 * Added an end time when editing campaigns to make it clearer when a campaign ends. Previously, a campaign's end time was ambiguous and this caused confusion for some users. [#335](https://github.com/Charitable/Charitable/issues/335)
 * Add space as a thousands separator for countries where `12 500,00` would be the correct way to format an amount. [#332](https://github.com/Charitable/Charitable/issues/332)
 * Add campaign edit link as email shortcode option for campaign-related emails. [#345](https://github.com/Charitable/Charitable/issues/345) 
@@ -47,7 +51,8 @@
 * Fixed an error during donation processing that prevented donations when database caching is enabled in W3 Total Cache. [#347](https://github.com/Charitable/Charitable/issues/347)
 * Improved the way upgrades are run to ensure they are not re-run unneccesarily and store the minimum required information about each upgrade.
  
-= 1.4.17 =
+== 1.4.17
+
 * **THANK YOU**: Thanks to first-time contributor [@qriouslad](https://github.com/qriouslad) for his contribution to this release!
 * When using Stripe Checkout, amounts over $999 were sometimes incorrectly sent to the Stripe modal. [#339](https://github.com/Charitable/Charitable/issues/339)
 * Avoid fatal error in rare instances (only encountered in the Layers theme by Obox) when the donation form scripts are loaded through an admin AJAX request. [#340](https://github.com/Charitable/Charitable/issues/340)
@@ -61,24 +66,29 @@
 = 1.4.16 = 
 * Updated bundled version of WP Session Manager library to latest version (1.2.2).
 
-= 1.4.15 =
+== 1.4.15
+
 * Add recurring donations support to Offline gateway. [#329](https://github.com/Charitable/Charitable/issues/329)
 
-= 1.4.14 =
+== 1.4.14
+
 * After submitting the donate widget, redirect to the actual donation form on the page. [#328](https://github.com/Charitable/Charitable/issues/328)
 * Improved compatibility for the donate widget with Recurring Donations.
 
-= 1.4.13 =
+== 1.4.13
+
 * Added `tag` parameter to the [campaigns] shortcode. [#313](https://github.com/Charitable/Charitable/issues/313)
 * We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310) 
 * Persist un-rendered notices across page loads. [#314](https://github.com/Charitable/Charitable/issues/314)
 * Hide radio inputs when Javascript is enabled. [#312](https://github.com/Charitable/Charitable/issues/312)
 * We made some minor improvements to how the donation form submission is processed in Javascript. Needed for improvements to Stripe extension.
 
-= 1.4.12 =
+== 1.4.12
+
 * If you were using our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect) and your site language is not English, you may have had problems with end dates for your benefactor relationships not saving correctly. We've fixed up that bug now. [#305](https://github.com/Charitable/Charitable/issues/305)
 
-= 1.4.11 =
+== 1.4.11
+
 * Corrected a problem that caused newly created/saved campaigns without an end date to stop showing in the `[campaigns]` shortcode output. [#301](https://github.com/Charitable/Charitable/issues/301)
 * Fixed an issue that resulted in PayPal donations left as Pending when `allow_url_fopen` was turned off on the server. [#302](https://github.com/Charitable/Charitable/issues/302)
 * Avoid displaying the donation form & campaign information outside of the loop (this caused weird issues in the Layers theme). [#303](https://github.com/Charitable/Charitable/issues/303)
@@ -96,7 +106,8 @@
 = 1.4.8 = 
 * Removed some code left over from plugin testing.
 
-= 1.4.7 =
+== 1.4.7
+
 * Avoid issues with PayPal IPNs missing the 'invoice' parameter in certain cases — likely a bug on the PayPal end. This resulted in donations remaining stuck as Pending. We have reworked how IPNs are processed to avoid reliance on this and avoid further issues. [#289](https://github.com/Charitable/Charitable/issues/289)
 * Store the PayPal transaction ID for donations after an IPN has been received. [#270](https://github.com/Charitable/Charitable/issues/270)
 * Add a notice to the donation form when viewed by site admin to remind them that Test Mode is enabled. [#233](https://
@@ -110,7 +121,8 @@ github.com/Charitable/Charitable/issues/233)
 * Remove the Licenses tab from the Settings area when you don't have any extensions installed. [#249](https://github.com/Charitable/Charitable/issues/249)
 * Miscellaneous other minor, under-the-hood improvements and tweaks.
 
-= 1.4.6 =
+== 1.4.6
+
 * Properly activate Charitable on all sites when it is network activated. Also makes sure that Charitable is correctly installed when a new site is added to a network that has Charitable network-activated. [#225](https://github.com/Charitable/Charitable/issues/225)
 * Display success messages to the user after settings are updated in the admin. [#54](https://github.com/Charitable/Charitable/issues/54)
 * Fixes a bug that prevented donations from being displayed in the admin when filtering by campaign. [#242](https://github.com/Charitable/Charitable/issues/242)
@@ -121,7 +133,8 @@ github.com/Charitable/Charitable/issues/233)
 * Fixes a bug that prevented the password reset from working correctly. [#238](https://github.com/Charitable/Charitable/issues/238)
 * Refer to campaigns as campaigns instead of posts in admin update messages. [#234](https://github.com/Charitable/Charitable/issues/234)
 
-= 1.4.5 =
+== 1.4.5
+
 * The permissions for accessing Donations and Campaigns in the WordPress dashboard has changed. Users who are set up as Campaign Managers can access both Donations and Campaigns, but cannot access Charitable settings. This permission is reserved for admin users. In addition, the `manage_charitable_settings` permission has been removed from Campaign Managers. [#209](https://github.com/Charitable/Charitable/issues/209)
 * Fixes the way donations are processed in Javascript to avoid issues when the donation is *not* processed with AJAX (currently, this is only the case if you're using the Easy Digital Downloads extension, Pronamic iDEAL or an old version of one of our premium payment gateway extensions). [#223](https://github.com/Charitable/Charitable/issues/223)
 * Fixes the registration form shortcode, which was being printed out too early on the page. [#224](https://github.com/Charitable/Charitable/issues/224)
@@ -130,7 +143,8 @@ github.com/Charitable/Charitable/issues/233)
 * Export files now include the type of export (note: this does not work if you are on PHP 5.2). [#200](https://github.com/Charitable/Charitable/issues/200)
 * The `custom` parameter for PayPal donations now accepts a JSON string. [PR #198](https://github.com/Charitable/Charitable/pull/198)
 
-= 1.4.4 =
+== 1.4.4
+
 * Resolves a new issue related to the donation form validation introduced in version 1.4.3, which prevented the donation widget form from being submitted. [#221](https://github.com/Charitable/Charitable/issues/204) and [#205](https://github.com/Charitable/Charitable/issues/221)
 * Fixes a bug that resulted in logged in users who had never made a donation being able to see a list of all donations with the `[charitable_my_donations]` shortcode. No personal donor data was displayed, and the donation receipts remained inaccessible to the users. All they could see was the date of the donation, the campaign donated to and the amount of the donation. [#220](https://github.com/Charitable/Charitable/issues/204) and [#205](https://github.com/Charitable/Charitable/issues/220)
 
@@ -140,7 +154,8 @@ github.com/Charitable/Charitable/issues/233)
 * Prevent donations from being created if an invalid email address or payment gateway is used.
 * Ensure that client-side validation is always performed for donations, even when the gateway integration has not been updated for compatibility with the AJAX-driven donations introduced in version 1.3. The only gateway that we know of that falls into this category is Pronamic iDEAL, so this is a nice update if you are using Pronamic iDEAL.
 
-= 1.4.2 =
+== 1.4.2
+
 * Added a link to the registration form from the login form and vice versa. [#204](https://github.com/Charitable/Charitable/issues/204) and [#205](https://github.com/Charitable/Charitable/issues/205)
 * Included two new parameters in the `[charitable_registration]` shortcode: `redirect` sets the default page that people should be redirect to after registering, and `login_link_text` sets the text of the login link (see above). [#208](https://github.com/Charitable/Charitable/issues/208) and [#205](https://github.com/Charitable/Charitable/issues/205)
 * Also included a new parameter in the `[charitable_login]` shortcode: `registration_link_text` sets the text of the login link (see above). [#204](https://github.com/Charitable/Charitable/issues/204)
@@ -158,7 +173,8 @@ github.com/Charitable/Charitable/issues/233)
 * Pending and draft campaigns are now included in the filtering options on the Donations page. [#187]((https://github.com/Charitable/Charitable/issues/187)
 * The Bolivian Boliviano currency (BOB) has been added. [#193]((https://github.com/Charitable/Charitable/issues/193)
 
-= 1.4.0 =
+== 1.4.0
+
 * Added the `[charitable_my_donations]` shortcode. Use this shortcode to allow logged in users to view a history of their donations, including links to the donation receipts. [#14](https://github.com/Charitable/Charitable/issues/14)
 * Scale the campaign grid gracefully when viewing on smaller screens. The `[campaigns]` shortcode now supports a `responsive` paramater, which is enabled by default. You can set it to a specific px/em amount to change the breakpoint, or set it to `0` to disable responsive styling. [#88](https://github.com/Charitable/Charitable/issues/88)
 * Also provided appropriately responsive styling for suggested donation amounts on small screens. [#159](https://github.com/Charitable/Charitable/issues/159)
@@ -196,7 +212,8 @@ github.com/Charitable/Charitable/issues/233)
 * Fixed errors when exporting donations with errors set to display. [#128](https://github.com/Charitable/Charitable/issues/128)
 * Deprecated `Charitable_Email::return_value_if_has_valid_donation()` method, since this was completely broken and should not be used.
 
-= 1.3.5 =
+== 1.3.5
+
 * Added `is_preview()` method to `Charitable_Email` class.
 * Added `get_donations()` method to `Charitable_Donor` class.
 * Improved custom post status labels.
@@ -204,7 +221,8 @@ github.com/Charitable/Charitable/issues/233)
 * Fixed PHP notices in email previews.
 * Deprecated `Charitable_Session::get_session_id()`. We are no longer using a public session ID.
 
-= 1.3.4 =
+== 1.3.4
+
 * Added selective refresh support for Charitable widgets.
 * Added support for passing multiple campaign IDs to campaign donation queries. [#112](https://github.com/Charitable/Charitable/issues/112)
 * Fixed a bug where donors without a completed donation were included in the donor count in the Donation Stats widget. [#114](https://github.com/Charitable/Charitable/issues/114)
@@ -315,16 +333,20 @@ github.com/Charitable/Charitable/issues/233)
 * Fix: Localization with the .po/.mo files now works correctly.
 * Fix: Chrome 45 bug when clicking directly on suggested amount inputs is resolved.
 
-= 1.0.3 =
+== 1.0.3
+
 * Improvement: Using `wp_list_pluck` instead of `array_column` for compatibility with versions of PHP prior to 5.5.
 * PHP 5.2 Compatibility: Avoid T_PAAMAYIM_NEKUDOTAYIM error in older versions of PHP.
 
-= 1.0.2 =
+== 1.0.2
+
 * Fix: Added missing file into the repo.
 
-= 1.0.1 =
+== 1.0.1
+
 * Improvement: Moved the user dashboard functionality into the core of the plugin, so that it is always available.
 * Fix: The installation routine now flushes permalinks correctly -- no more "Page not Found" problems!
 
-= 1.0.0 =
+== 1.0.0
+
 * Initial release
