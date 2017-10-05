@@ -96,24 +96,20 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		}
 
 		/**
-		 * Adds hidden fields to the start of the donation form.
+		 * Retrieve hidden fields.
 		 *
-		 * @since  1.4.0
+		 * @since  1.5.0
 		 *
-		 * @param  Charitable_Form $form The form object.
-		 * @return void
+		 * @return array
 		 */
-		public function add_hidden_fields( $form ) {
-			$ret = parent::add_hidden_fields( $form );
-
-			if ( false === $ret ) {
-				return;
-			}
-
-			?>
-			<input type="hidden" name="login" value="<?php echo esc_attr( $this->login ) ?>" autocomplete="off" />
-			<input type="hidden" name="key" value="<?php echo esc_attr( $this->key ) ?>" />
-			<?php
+		public function get_hidden_fields() {
+			$fields          = parent::get_hidden_fields();
+			$fields['key']   = $this->key;
+			$fields['login'] = array(
+				'value'        => $this->login,
+				'autocomplete' => 'off',
+			);
+			return $fields;
 		}
 
 		/**

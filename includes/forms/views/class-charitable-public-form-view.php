@@ -163,12 +163,27 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $value Field value.
-         * @param  string $key   Field key.
+         * @param  string|array $value Field value.
+         * @param  string       $key   Field key.
          * @return void
          */
         public function render_hidden_field( $value, $key ) {
-            printf( '<input type="hidden" name="%s" value="%s" />', esc_attr( $key ), esc_attr( $value ) );
+            $attrs = '';
+
+            if ( is_array( $value ) ) {
+                if ( ! array_key_exists( 'value', $value ) ) {
+                    return;
+                }
+
+                $args  = $value;
+                $value = $args['value'];
+
+                unset( $args['value'] );
+
+                $attrs = charitable_get_arbitrary_attributes( array( 'attrs' => $args ) );
+            }
+
+            printf( '<input type="hidden" name="%s" value="%s" %s />', esc_attr( $key ), esc_attr( $value ), $attrs );
         }
 
         /**
