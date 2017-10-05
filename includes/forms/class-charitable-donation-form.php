@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Donation form model class.
@@ -23,55 +22,83 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 	class Charitable_Donation_Form extends Charitable_Form implements Charitable_Donation_Form_Interface {
 
 		/**
-		 * @var     Charitable_Campaign
+		 * The current campaign.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_Campaign
 		 */
 		protected $campaign;
 
 		/**
-		 * @var     Charitable_User
+		 * The current user, or false if the user is not logged in.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_User|false
 		 */
 		protected $user;
 
 		/**
-		 * @var     array
+		 * Form fields.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $form_fields;
 
 		/**
-		 * @var     string
+		 * Nonce action.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_action = 'charitable_donation';
 
 		/**
-		 * @var     string
+		 * Nonce name.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_name = '_charitable_donation_nonce';
 
 		/**
 		 * Action to be executed upon form submission.
 		 *
-		 * @var     string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $form_action = 'make_donation';
 
 		/**
 		 * Value to indicate whether the user has all required fields filled out.
 		 *
-		 * @var     bool
+		 * @since 1.0.0
+		 *
+		 * @var   boolean
 		 */
 		protected $user_has_required_fields;
 
 		/**
 		 * Flag thrown when the form submission has been validated.
 		 *
-		 * @var     bool
+		 * @since 1.0.0
+		 *
+		 * @var   boolean
 		 */
 		protected $validated = false;
 
 		/**
 		 * Whether the form submission is valid.
 		 *
-		 * @var     bool
+		 * @since 1.0.0
+		 *
+		 * @var   boolean
 		 */
 		protected $valid;
 
@@ -136,7 +163,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			if ( isset( $_GET['donation_id'] ) ) {
 				$donation = charitable_get_donation( $_GET['donation_id'] );
-				$value = $donation->get_donor()->get_donor_meta( $key );
+				$value    = $donation->get_donor()->get_donor_meta( $key );
 
 				if ( $value ) {
 					return $value;
@@ -271,7 +298,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array[]
 		 */
 		public function get_fields() {
-			// $this->get_donation_fields()
 			$fields = apply_filters( 'charitable_donation_form_fields', array(
 				'donation_fields' => array(
 					'legend'        => __( 'Your Donation', 'charitable' ),
@@ -686,7 +712,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 								/* Strip extra spaces from the credit card number. */
 								if ( 'cc_number' == $key ) {
-									$value  = trim( str_replace( ' ', '', $value ) );
+									$value = trim( str_replace( ' ', '', $value ) );
 								}
 
 								$values['gateways'][ $gateway_id ][ $key ] = $value;
@@ -800,14 +826,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		protected function setup_payment_fields() {
 			$active_gateways = charitable_get_helper( 'gateways' )->get_active_gateways();
-			$has_gateways = apply_filters( 'charitable_has_active_gateways', ! empty( $active_gateways ) );
+			$has_gateways    = apply_filters( 'charitable_has_active_gateways', ! empty( $active_gateways ) );
 
 			/* If no gateways have been selected, display a notice and return the fields */
 			if ( ! $has_gateways ) {
-
 				charitable_get_notices()->add_error( $this->get_no_active_gateways_notice() );
 				return;
-
 			}
 
 			if ( count( $active_gateways ) == 1 ) {
@@ -830,8 +854,8 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
 			} elseif ( array_key_exists( 'donation_id', $_GET ) ) {
-				$donation = charitable_get_donation( $_GET['donation_id'] );
-				$field['value'] = $donation->get( $key );
+				$donation       = charitable_get_donation( $_GET['donation_id'] );
+				$field['value'] = is_a( $donation, 'Charitable_Donation' ) ? $donation->get( $key ) : '';
 			}
 
 			if ( array_key_exists( 'value', $field ) ) {
@@ -848,6 +872,23 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		}
 
 		/**
+		 * Given a notice and an additional action that requires
+		 * admin credentials, return the appropriate notice for
+		 * the current user.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		protected function get_credentialed_notice( $notice, $admin_action ) {
+			if ( current_user_can( 'manage_charitable_settings' ) ) {
+				$notice .= '&nbsp;' . $admin_action;
+			}
+
+			return $notice;
+		}
+
+		/**
 		 * A formatted notice to advise that there are no gateways active.
 		 *
 		 * @since  1.0.0
@@ -855,17 +896,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return string
 		 */
 		protected function get_no_active_gateways_notice() {
-			$message = __( 'There are no active payment gateways.', 'charitable' );
+			$notice = $this->get_credentialed_notice(
+				__( 'There are no active payment gateways.', 'charitable' ),
+				sprintf( '<a href="%s">%s</a>.', admin_url( 'admin.php?page=charitable-settings&tab=gateways' ), _x( 'Enable one now', 'enable payment gateway', 'charitable' ) )
+			);
 
-			if ( current_user_can( 'manage_charitable_settings' ) ) {
-				$message = sprintf( '%s <a href="%s">%s</a>.',
-					$message,
-					admin_url( 'admin.php?page=charitable-settings&tab=gateways' ),
-					__( 'Enable one now', 'charitable' )
-				);
-			}
-
-			return apply_filters( 'charitable_no_active_gateways_notice', $message, current_user_can( 'manage_charitable_settings' ) );
+			return apply_filters( 'charitable_no_active_gateways_notice', $notice, current_user_can( 'manage_charitable_settings' ) );
 		}
 
 		/**
@@ -892,17 +928,15 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return string
 		 */
 		protected function get_test_mode_active_notice() {
-			$message = __( 'Test mode is active.', 'charitable' );
-
-			if ( current_user_can( 'manage_charitable_settings' ) ) {
-				$message = sprintf( '%s <a href="%s">%s</a>.',
-					$message,
+			$notice = $this->get_credentialed_notice(
+				__( 'There are no active payment gateways.', 'charitable' ),
+				sprintf( '<a href="%s">%s</a>.',
 					admin_url( 'admin.php?page=charitable-settings&tab=gateways' ),
 					__( 'Disable Test Mode', 'charitable' )
-				);
-			}
+				)
+			);
 
-			return apply_filters( 'charitable_test_mode_active_notice', $message, current_user_can( 'manage_charitable_settings' ) );
+			return apply_filters( 'charitable_test_mode_active_notice', $notice, current_user_can( 'manage_charitable_settings' ) );
 		}
 
 		/**
@@ -979,10 +1013,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @since  1.5.0 Deprecated. This is handled by `Charitable_Public_Form_View` now.
 		 *
 		 * @param  string|false $custom_template
-		 * @param  array   $field
 		 * @return string|false|Charitable_Template
 		 */
-		public function use_custom_templates( $custom_template, $field ) {
+		public function use_custom_templates( $custom_template ) {
 			charitable_get_deprecated()->deprecated_function(
 				__METHOD__,
 				'1.5.0'

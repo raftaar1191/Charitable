@@ -17,7 +17,32 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 	/**
 	 * Campaign Model
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
+	 *
+	 * @property int    $ID
+	 * @property int    $post_author
+	 * @property string $post_date
+	 * @property string $post_date_gmt
+	 * @property string $post_content
+	 * @property string $post_title
+	 * @property string $post_excerpt
+	 * @property string $post_status
+	 * @property string $comment_status
+	 * @property string $ping_status
+	 * @property string $post_password
+	 * @property string $post_name
+	 * @property string $to_ping
+	 * @property string $pinged
+	 * @property string $post_modified
+	 * @property string $post_modified_gmt
+	 * @property string $post_content_filtered
+	 * @property int    $post_parent
+	 * @property string $guid
+	 * @property int    $menu_order
+	 * @property string $post_type
+	 * @property string $post_mime_type
+	 * @property int    $comment_count
+	 * @property string $filter
 	 */
 	class Charitable_Campaign {
 
@@ -66,9 +91,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Class constructor.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   mixed $post The post ID or WP_Post object for this this campaign.
+		 * @param mixed $post The post ID or WP_Post object for this this campaign.
 		 */
 		public function __construct( $post ) {
 			if ( ! is_a( $post, 'WP_Post' ) ) {
