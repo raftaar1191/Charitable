@@ -17,59 +17,73 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 	/**
 	 * Charitable_Registration_Form
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Registration_Form extends Charitable_Form {
 
 		/**
 		 * Shortcode parameters.
 		 *
-		 * @var     array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $shortcode_args;
 
 		/**
-		 * @var     string
+		 * Nonce action.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_action = 'charitable_user_registration';
 
 		/**
-		 * @var     string
+		 * Nonce name.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $nonce_name = '_charitable_user_registration_nonce';
 
 		/**
 		 * Action to be executed upon form submission.
 		 *
-		 * @var     string
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		protected $form_action = 'save_registration';
 
 		/**
 		 * The current donor.
 		 *
-		 * @var     Charitable_Donor
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_Donor
 		 */
 		protected $donor;
 
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   array       $args       User-defined shortcode attributes.
+		 * @param array $args User-defined shortcode attributes.
 		 */
 		public function __construct( $args = array() ) {
-			$this->id = uniqid();
+			$this->id             = uniqid();
 			$this->shortcode_args = $args;
 		}
 
 		/**
 		 * Return the arguments passed to the shortcode.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  mixed[]
+		 * @return mixed[]
 		 */
 		public function get_shortcode_args() {
 			return $this->shortcode_args;
@@ -78,9 +92,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Profile fields to be displayed.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_user_registration_fields', array(
@@ -133,9 +147,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Update registration after form submission.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public static function save_registration() {
 			$form = new Charitable_Registration_Form();
@@ -190,9 +204,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		/**
 		 * Return the link to the login page, or false if we are not going to display it.
 		 *
-		 * @since   1.4.2
+		 * @since  1.4.2
 		 *
-		 * @return  false|string
+		 * @return false|string
 		 */
 		public function get_login_link() {
 

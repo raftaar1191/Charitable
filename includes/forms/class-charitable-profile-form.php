@@ -60,9 +60,8 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * @param array $args User-defined shortcode attributes.
 		 */
 		public function __construct( $args = array() ) {
-			$this->id = uniqid();
+			$this->id             = uniqid();
 			$this->shortcode_args = $args;
-			$this->attach_hooks_and_filters();
 		}
 
 		/**

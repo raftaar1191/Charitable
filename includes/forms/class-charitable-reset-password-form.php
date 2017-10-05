@@ -79,7 +79,6 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		public function __construct( $args = array() ) {
 			$this->id      = uniqid();
 			$this->has_key = $this->parse_reset_key();
-			$this->attach_hooks_and_filters();
 		}
 
 		/**
