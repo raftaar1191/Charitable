@@ -443,8 +443,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			 * @param int $seconds By default, this equals 604,800.
 			 */
 			$ending_soon_threshold = apply_filters( 'charitable_campaign_ending_soon_threshold', WEEK_IN_SECONDS );
-
-			$ended = $this->has_ended();
+			$ended                 = $this->has_ended();
 
 			if ( 'publish' != $this->post->post_status ) {
 				return 'inactive';
@@ -482,7 +481,6 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$show_active_tag  = apply_filters( 'charitable_campaign_show_active_status_tag', false );
 
 			switch ( $key ) {
-
 				case 'ended' :
 					$tag = __( 'Ended', 'charitable' );
 					break;

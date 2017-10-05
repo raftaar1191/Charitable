@@ -1,0 +1,36 @@
+.edit-php.post-type-campaign  {
+    th.manage-column.column-ID,
+    td.column-ID {
+        width: 2.2em;
+        padding: 11px 3px;
+    }
+
+    .column-status {
+        mark {
+            padding: 2px 4px;
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+            background: #999;
+            color: #fff;
+            border-radius: 2px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;            
+            font-weight: bold;
+
+            &.active {
+                background-color: #f7a129;
+            }
+            &.finished {
+                background-color: #3fb8f5;
+            }
+            &.successful {
+                background-color: #008000;
+            }
+            &.unsuccessful {
+                background-color: #ff0000;
+            }
+        }
+    }
+}

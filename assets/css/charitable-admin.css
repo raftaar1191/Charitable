@@ -1031,6 +1031,31 @@ select.charitable-settings-field {
       width: 48%;
       display: inline-block; }
 
+.edit-php.post-type-campaign th.manage-column.column-ID,
+.edit-php.post-type-campaign td.column-ID {
+  width: 2.2em;
+  padding: 11px 3px; }
+.edit-php.post-type-campaign .column-status mark {
+  padding: 2px 4px;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+  background: #999;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: bold; }
+  .edit-php.post-type-campaign .column-status mark.active {
+    background-color: #f7a129; }
+  .edit-php.post-type-campaign .column-status mark.finished {
+    background-color: #3fb8f5; }
+  .edit-php.post-type-campaign .column-status mark.successful {
+    background-color: #008000; }
+  .edit-php.post-type-campaign .column-status mark.unsuccessful {
+    background-color: #ff0000; }
+
 #charitable_dashboard_donations .hide-if-no-js {
   padding: 10px 0;
   text-align: center; }

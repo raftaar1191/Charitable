@@ -51,8 +51,6 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			$this->id          = uniqid();
 			$this->donation    = $donation;
 			$this->form_action = $this->has_donation() ? 'update_donation' : 'add_donation';
-
-			$this->attach_hooks_and_filters();
 		}
 
 		/**

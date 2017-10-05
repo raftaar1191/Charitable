@@ -36,11 +36,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		protected $donation_type;
 
 		/**
-	     * Charitable_Donation donation data for the donation plan this donation is part of
-	     *
-	     * @var false|Charitable_Donation
-	     */
-	    protected $donation_plan = false;
+		 * Charitable_Donation donation data for the donation plan this donation is part of
+		 *
+		 * @var false|Charitable_Donation
+		 */
+		protected $donation_plan = false;
 
 		/**
 		 * The database record for this donation from the Posts table.

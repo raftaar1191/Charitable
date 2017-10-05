@@ -18,7 +18,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 	 * Charitable_Admin
 	 *
 	 * @final
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	final class Charitable_Admin {
 
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		protected function __construct() {
 			$this->load_dependencies();
@@ -56,9 +56,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_Admin
+		 * @return Charitable_Admin
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -71,9 +71,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Include admin-only files.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		private function load_dependencies() {
 			$includes_dir = charitable()->get_path( 'includes' );
@@ -95,7 +95,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'actions/class-charitable-donation-admin-actions.php' );
 
 			/* Campaigns */
-			require_once( $admin_dir . 'campaigns/class-charitable-campaign-post-type.php' );
+			require_once( $admin_dir . 'campaigns/class-charitable-campaign-meta-boxes.php' );
+			require_once( $admin_dir . 'campaigns/class-charitable-campaign-list-table.php' );
 			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );//
 
 			/* Dashboard widgets */
@@ -141,12 +142,11 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Loads admin-only scripts and stylesheets.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function admin_enqueue_scripts() {
-
 			if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 				$suffix  = '';
 				$version = '';
@@ -246,9 +246,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add notices to the dashboard.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function add_notices() {
 
@@ -266,12 +266,11 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add version update notices to the dashboard.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function add_version_update_notices() {
-
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
@@ -287,7 +286,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			);
 
 			if ( Charitable_Gateways::get_instance()->is_active_gateway( 'paypal' ) ) {
-
 				$notices['release-143-paypal'] = sprintf( __( "PayPal is upgrading its SSL certificates. <a href='%s'>Test your integration now to avoid disruption.</a>", 'charitable' ),
 					esc_url( add_query_arg( array(
 		                'page'         => 'charitable-settings',
@@ -295,11 +293,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		                'group'        => 'gateways_paypal',
 		            ), admin_url( 'admin.php#paypal-sandbox-test' ) ) )
 		        );
-
 			} else {
-
 				delete_transient( 'charitable_release-143-paypal_notice' );
-
 			}
 
 			$notices['release-1410-recurring-donations'] = sprintf( __( "<strong>NEW:</strong> Supercharge your online fundraising with Recurring Donations. <a href='%s'>Read more</a>", 'charitable' ), 
@@ -309,22 +304,20 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			$helper = charitable_get_admin_notices();
 
 			foreach ( $notices as $notice => $message ) {
-
 				if ( ! get_transient( 'charitable_' . $notice . '_notice' ) ) {
 					continue;
 				}
 
 				$helper->add_version_update( $message, $notice );
-
 			}
 		}
 
 		/**
 		 * Dismiss a notice.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function dismiss_notice() {
 			if ( ! isset( $_POST['notice'] ) ) {
@@ -343,10 +336,10 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Adds one or more classes to the body tag in the dashboard.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $classes Current body classes.
-		 * @return  string          Altered body classes.
+		 * @param  string $classes Current body classes.
+		 * @return string Altered body classes.
 		 */
 		public function add_admin_body_class( $classes ) {
 			$screen = get_current_screen();
@@ -361,10 +354,10 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add custom links to the plugin actions.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string[] $links Plugin action links.
-		 * @return  string[]
+		 * @param  string[] $links Plugin action links.
+		 * @return string[]
 		 */
 		public function add_plugin_action_links( $links ) {
 			$links[] = '<a href="' . admin_url( 'admin.php?page=charitable-settings' ) . '">' . __( 'Settings', 'charitable' ) . '</a>';
@@ -374,11 +367,11 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Add Extensions link to the plugin row meta.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @param   string[] $links Plugin action links.
-		 * @param   string $file        The plugin file
-		 * @return  string[] $links
+		 * @param  string[] $links Plugin action links.
+		 * @param  string   $file  The plugin file.
+		 * @return string[] $links
 		 */
 		public function add_plugin_row_meta( $links, $file ) {
 			if ( plugin_basename( charitable()->get_path() ) != $file ) {
@@ -401,9 +394,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Remove the jQuery UI styles added by Ninja Forms.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function remove_jquery_ui_styles_nf( $context ) {
 			wp_dequeue_style( 'jquery-smoothness' );
@@ -413,9 +406,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Export donations.
 		 *
-		 * @since   1.3.0
+		 * @since  1.3.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function export_donations() {
 			if ( ! wp_verify_nonce( $_GET['_charitable_export_nonce'], 'charitable_export_donations' ) ) {
@@ -444,16 +437,25 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		/**
 		 * Returns an array of screen IDs where the Charitable scripts should be loaded.
 		 *
-		 * @uses    charitable_admin_screens
-		 * @since   1.0.0
+		 * @uses   charitable_admin_screens
 		 *
-		 * @return  array
+		 * @since  1.0.0
+		 *
+		 * @return array
 		 */
 		public function get_charitable_screens() {
+			/**
+			 * Filter admin screens where Charitable styles & scripts should be loaded.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $screens List of screen ids.
+			 */
 			return apply_filters( 'charitable_admin_screens', array(
 				'campaign',
 				'donation',
 				'charitable_page_charitable-settings',
+				'edit-campaign',
 				'edit-donation',
 				'dashboard',
 			) );

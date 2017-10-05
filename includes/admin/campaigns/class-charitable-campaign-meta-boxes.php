@@ -2,8 +2,8 @@
 /**
  * The class that defines how campaigns are managed on the admin side.
  *
- * @package     Charitable/Admin/Charitable_Campaign_Post_Type
- * @version     1.0.0
+ * @package     Charitable/Admin/Charitable_Campaign_Meta_Boxes
+ * @version     1.5.0
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -11,20 +11,20 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
+if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 
 	/**
-	 * Charitable_Campaign_Post_Type class.
+	 * Charitable_Campaign_Meta_Boxes class.
 	 *
 	 * @final
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
-	final class Charitable_Campaign_Post_Type {
+	final class Charitable_Campaign_Meta_Boxes {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Campaign_Post_Type|null
+		 * @var     Charitable_Campaign_Meta_Boxes|null
 		 */
 		private static $instance = null;
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Create object instance.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
@@ -47,58 +47,26 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_Campaign_Post_Type
+		 * @return Charitable_Campaign_Meta_Boxes
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Campaign_Post_Type();
+				self::$instance = new Charitable_Campaign_Meta_Boxes();
 			}
 
 			return self::$instance;
 		}
 
 		/**
-		 * Customize campaigns columns.
-		 *
-		 * @see     get_column_headers
-		 *
-		 * @since   1.0.0
-		 *
-		 * @param   array $column_names The columns to show for campaigns.
-		 * @return  array
-		 */
-		public function dashboard_columns( $column_names ) {
-
-			/* The creator as an array for subsequent array manipulation. */
-			$creator = array( 'author' => __( 'Creator', 'charitable' ) );
-
-			/* Insert after title column. */
-			if ( isset( $column_names['title'] ) ) {
-
-				/* Find the "title" column. */
-				$index = array_search( 'title', array_keys( $column_names ) );
-
-				/* Reform the array. */
-				$column_names = array_merge( array_slice( $column_names, 0, $index + 1, true ), $creator, array_slice( $column_names, $index, count( $column_names ) - $index, true ) );
-
-			} else {
-				$column_names = array_merge( $column_names, $creator );
-			}
-
-			return $column_names;
-		}
-
-
-		/**
 		 * Add meta boxes.
 		 *
 		 * @see     add_meta_boxes hook
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function add_meta_boxes() {
 			$meta_boxes = array(
@@ -148,6 +116,13 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 				),
 			);
 
+			/**
+			 * Filter campaign meta boxes.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $meta_boxes The meta boxes.
+			 */
 			$meta_boxes = apply_filters( 'charitable_campaign_meta_boxes', $meta_boxes );
 
 			foreach ( $meta_boxes as $meta_box ) {
@@ -166,10 +141,10 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display fields at the very top of the page.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   WP_Post $post Current post.
-		 * @return  void
+		 * @param  WP_Post $post Current post.
+		 * @return void
 		 */
 		public function campaign_form_top( $post ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE == $post->post_type ) {
@@ -180,9 +155,9 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Wrap elements around the main editor.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function wrap_editor() {
 			add_filter( 'edit_form_after_title', array( $this, 'advanced_campaign_settings' ), 20 );
@@ -191,9 +166,9 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Wrap editor (and other advanced settings).
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function editor_wrap_before() {
 			charitable_admin_view( 'metaboxes/campaign-advanced-wrap-before', array( 'meta_boxes' => $this->get_advanced_meta_boxes() ) );
@@ -202,9 +177,9 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * End wrapper around editor and other advanced settings.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function editor_wrap_after() {
 			charitable_admin_view( 'metaboxes/campaign-advanced-wrap-after' );
@@ -213,10 +188,10 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Display advanced campaign fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   WP_Post $post Current post object.
-		 * @return  void
+		 * @param  WP_Post $post Current post object.
+		 * @return void
 		 */
 		public function advanced_campaign_settings( $post ) {
 			charitable_admin_view( 'metaboxes/campaign-advanced-settings', array( 'meta_boxes' => $this->get_advanced_meta_boxes() ) );
@@ -225,10 +200,10 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Return flat array of meta boxes, ordered by priority.
 		 *
-		 * @global  array       $wp_meta_boxes
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @global array $wp_meta_boxes
+		 * @return array
 		 */
 		private function get_advanced_meta_boxes() {
 			global $wp_meta_boxes;
@@ -253,9 +228,9 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Adds fields to the campaign donation options metabox.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function campaign_donation_options_metabox() {
 			/* Get the array of fields to be displayed within the campaign donations metabox. */
@@ -288,17 +263,24 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Save meta for the campaign.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int     $campaign_id The campaign ID.
-		 * @param   WP_Post $post        Current Post object.
-		 * @return  void
+		 * @param  int     $campaign_id The campaign ID.
+		 * @param  WP_Post $post        Current Post object.
+		 * @return void
 		 */
 		public function save_campaign( $campaign_id, WP_Post $post ) {
 			if ( ! $this->meta_box_helper->user_can_save( $campaign_id ) ) {
 				return;
 			}
 
+			/**
+			 * Filter the set of meta keys to be saved.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $meta_keys An array of strings representing meta keys.
+			 */
 			$meta_keys = apply_filters( 'charitable_campaign_meta_keys', array(
 				'_campaign_end_date',
 				'_campaign_goal',
@@ -316,18 +298,23 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 				/**
 				 * This filter is deprecated. Use charitable_sanitize_campaign_meta{$key} instead.
 				 *
-				 * @deprecated
+				 * @deprecated 1.7.0
+				 *
+				 * @since 1.4.12 Deprecated.
 				 */
 				$value = apply_filters( 'charitable_sanitize_campaign_meta', $value, $key, $submitted, $campaign_id );
 
 				/**
-				 * Filter this meta value.
-				 *
-				 * The filter hook is charitable_sanitize_campaign_meta{$key}
-				 *
-				 * For example, for _campaign_end_date the filter hook will be:
-				 *
+				 * Filter this meta value. The filter hook is
+				 * charitable_sanitize_campaign_meta{$key}. For example,
+				 * for _campaign_end_date the filter hook will be:
 				 * charitable_sanitize_campaign_meta_campaign_end_date
+				 *
+				 * @since 1.4.12
+				 *
+				 * @param mixed $value       The submitted value, or false.
+				 * @param array $submitted   All of the submitted values.
+				 * @param int   $campaign_id The campaign ID.
 				 */
 				$value = apply_filters( 'charitable_sanitize_campaign_meta' . $key, $value, $submitted, $campaign_id );
 
@@ -335,17 +322,23 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 
 			}//end foreach
 
-			/* Hook for plugins to do something else with the posted data */
+			/**
+			 * Do something with the posted data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param WP_Post $post An instance of `WP_Post`.
+			 */
 			do_action( 'charitable_campaign_save', $post );
 		}
 
 		/**
 		 * Set default post content when the extended description is left empty.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @param   array $data    Submitted data.
-		 * @return  array
+		 * @param  array $data    Submitted data.
+		 * @return array
 		 */
 		public function set_default_post_content( $data ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE != $data['post_type'] ) {
@@ -362,11 +355,11 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Sets the placeholder text of the campaign title field.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string  $placeholder Placeholder text.
-		 * @param   WP_Post $post        Current Post object.
-		 * @return  string
+		 * @param  string  $placeholder Placeholder text.
+		 * @param  WP_Post $post        Current Post object.
+		 * @return string
 		 */
 		public function campaign_enter_title( $placeholder, WP_Post $post ) {
 			if ( 'campaign' == $post->post_type ) {
@@ -379,10 +372,10 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 		/**
 		 * Change messages when a post type is updated.
 		 *
-		 * @global  WP_Post $post
-		 * @global  int     $post_ID
-		 * @param   array $messages Messages to display.
-		 * @return  array
+		 * @global WP_Post $post
+		 * @global int     $post_ID
+		 * @param  array $messages Messages to display.
+		 * @return array
 		 */
 		public function post_messages( $messages ) {
 			global $post, $post_ID;
@@ -421,28 +414,6 @@ if ( ! class_exists( 'Charitable_Campaign_Post_Type' ) ) :
 			);
 
 			return $messages;
-		}
-
-		/**
-		 * Modify bulk messages
-		 *
-		 * @param 	array $bulk_messages Messages to show after bulk actions.
-		 * @param 	array $bulk_counts   Array showing how many items were affected by the action.
-		 * @return 	array
-		 */
-		public function bulk_messages( $bulk_messages, $bulk_counts ) {
-
-			$bulk_messages[ Charitable::CAMPAIGN_POST_TYPE ] = array(
-				'updated'   => _n( '%d campaign updated.', '%d campaigns updated.', $bulk_counts['updated'], 'charitable' ),
-				'locked'    => ( 1 == $bulk_counts['locked'] ) ? __( '1 campaign not updated, somebody is editing it.' ) :
-								   _n( '%s campaign not updated, somebody is editing it.', '%s campaigns not updated, somebody is editing them.', $bulk_counts['locked'], 'charitable' ),
-				'deleted'   => _n( '%s campaign permanently deleted.', '%s campaigns permanently deleted.', $bulk_counts['deleted'], 'charitable' ),
-				'trashed'   => _n( '%s campaign moved to the Trash.', '%s campaigns moved to the Trash.', $bulk_counts['trashed'], 'charitable' ),
-				'untrashed' => _n( '%s campaign restored from the Trash.', '%s campaigns restored from the Trash.', $bulk_counts['untrashed'], 'charitable' ),
-			);
-
-			return $bulk_messages;
-
 		}
 	}
 
