@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
- * @version 1.4.18
+ * @version 1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -31,15 +31,17 @@ if ( empty( $suggested ) && ! $campaign->get( 'allow_custom_donations' ) ) {
 }
 
 /**
- * @hook    charitable_donation_form_before_donation_amount
+ * Do something before the donation options fields.
+ *
+ * @since 1.0.0
+ *
+ * @param Charitable_Donation_Form $form An instance of `Charitable_Donation_Form`.
  */
 do_action( 'charitable_donation_form_before_donation_amount', $form );
 
 ?>
 <div class="charitable-donation-options">
-
-	<?php
-
+<?php
 	/**
 	 * @hook    charitable_donation_form_before_donation_amounts
 	 */
@@ -61,12 +63,16 @@ do_action( 'charitable_donation_form_before_donation_amount', $form );
 	 * @hook    charitable_donation_form_after_donation_amounts
 	 */
 	do_action( 'charitable_donation_form_after_donation_amounts', $form );
-	?>
 
-</div><!-- #charitable-donation-options-<?php echo $form_id ?> -->
-
+?>
+</div><!-- .charitable-donation-options -->
 <?php
+
 /**
- * @hook    charitable_donation_form_after_donation_amount
+ * Do something after the donation options fields.
+ *
+ * @since 1.0.0
+ *
+ * @param Charitable_Donation_Form $form An instance of `Charitable_Donation_Form`.
  */
 do_action( 'charitable_donation_form_after_donation_amount', $form );

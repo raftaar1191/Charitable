@@ -726,27 +726,42 @@ CHARITABLE = window.CHARITABLE || {};
          * @access  private
          */
         var on_toggle = function() {
+            var $this   = $( this ),
+                $target = get_target( $this );
 
-            var $this  = $( this ), 
-                hidden = (function(){
+            $target.toggleClass( 'charitable-hidden', ( function(){
                     if ( $this.is( ':checkbox' ) ) {
                         return ! $this.is( ':checked' );
                     }
-                })();            
-
-            get_target( $this ).toggleClass( 'charitable-hidden', hidden );
+                    return false === $target.hasClass( 'charitable-hidden' );
+                })()
+            );
 
             return false;
+        };
 
+        /**
+         * Initializing function.
+         */
+        var init = function() {
+            $( '[data-charitable-toggle]' ).each( hide_target );
         };
 
         // Initialization only required once.
         $( 'body' ).on( 'click', '[data-charitable-toggle]', on_toggle );
 
-        // Initialization that will be performed everytime
-        return function() {    
-            $( '[data-charitable-toggle]' ).each( hide_target );
+        // Check whether content is being loaded from the session.
+        if ( exports.content_loading ) {
+            var timer = setInterval(function(){
+                if ( false === exports.content_loading ) {
+                    init();
+                    clearInterval(timer);
+                }
+            }, 500);
         }
+
+        // Initialization that will be performed everytime
+        return init;
     }    
 
     exports.Toggle = Toggle();

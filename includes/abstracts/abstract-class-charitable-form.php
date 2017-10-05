@@ -95,7 +95,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		protected function attach_hooks_and_filters() {
 			charitable_get_deprecated()->doing_it_wrong(
 				__METHOD__,
-				__( 'None of the callbacks are required as of Charitable 1.5; use `Charitable_Public_Form_View` instead.' ),
+				sprintf( __( 'None of the callbacks are required as of Charitable 1.5; use `Charitable_Public_Form_View` instead. Issue encountered in %s class.' ), get_class( $this ) ),
 				'1.5.0'
 			);
 

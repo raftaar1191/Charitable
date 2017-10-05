@@ -25,16 +25,18 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Public|null
+		 * @since 1.2.0
+		 *
+		 * @var   Charitable_Public|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_Public
+		 * @return Charitable_Public
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -47,7 +49,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Set up the class.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'load_template_files' ) );
@@ -74,9 +76,9 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 *
 		 * This gives themes time to override the functions.
 		 *
-		 * @since   1.2.3
+		 * @since  1.2.3
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function load_template_files() {
 			require_once( 'charitable-template-functions.php' );
@@ -86,12 +88,11 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		/**
 		 * Loads public facing scripts and stylesheets.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		public function setup_scripts() {
-
 			if ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ) {
 				$suffix  = '';
 				$version = '';
@@ -132,10 +133,16 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 				true
 			);
 
+			$deps = array( 'accounting', 'jquery-core' );
+
+			if ( wp_script_is( 'charitable-sessions', 'enqueued' ) ) {
+				array_unshift( $deps, 'charitable-sessions' );
+			}
+
 			wp_register_script(
 				'charitable-script',
 				$assets_dir . 'js/charitable'. $suffix . '.js',
-				array( 'accounting', 'jquery-core' ),
+				$deps,
 				$version,
 				true
 			);

@@ -1,3 +1,5 @@
+CHARITABLE = window.CHARITABLE || {};
+
 ( function( exports ) {
     var Sessions = function() {
         this.session_id = Cookies.get( CHARITABLE_SESSION.cookie_name );
@@ -12,13 +14,18 @@
             return;
         }
 
+        exports.content_loading = true;
+
         if (document.readyState != 'loading') {
             init();
+            exports.content_loading = false;
         } else if (document.addEventListener) {
             document.addEventListener('DOMContentLoaded', init);
+            exports.content_loading = false;
         } else {
             document.attachEvent('onreadystatechange', function() {
                 document.readyState != 'loading' && init();
+                exports.content_loading = false;
             });
         }
 
@@ -28,7 +35,7 @@
             var data = 'action=charitable_get_session_content';
             var element, template, args, key, value, i;
 
-            if (!elements.length) {
+            if (!elements.length) {                
                 return;
             }
 
@@ -86,4 +93,4 @@
 
     exports.Sessions = Sessions();
 
-})( window.CHARITABLE || {} );
+})( CHARITABLE );

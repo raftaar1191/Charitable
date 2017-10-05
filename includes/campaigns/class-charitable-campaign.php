@@ -669,9 +669,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * Returns the amount to be donated to the campaign as it is currently set in the session.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int
+		 * @return int
 		 */
 		public function get_donation_amount_in_session() {
 			$donation = charitable_get_session()->get_donation_by_campaign( $this->ID );

@@ -241,24 +241,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function get_donation_fields() {
 			$fields = array(
-				'donation_amount_wrapper_start' => array(
-					'type'		=> 'content',
-					'content'   => '<div id="charitable-donation-options-' . esc_attr( $this->get_form_identifier() ) . '">',
-					'priority' 	=> 1,
-				),
 				'donation_amount' => array(
 					'type'      => 'donation-amount',
 					'priority'  => 4,
 					'required'  => false,
 				),
-				'donation_amount_wrapper_end' => array(
-					'type'		=> 'content',
-					'content'   => '</div>',
-					'priority' 	=> 100,
-				),
 			);
-
-			$fields = $this->maybe_show_current_donation_amount( $fields );
 
 			/**
 			 * Filter the donation amount fields.
@@ -283,10 +271,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array[]
 		 */
 		public function get_fields() {
+			// $this->get_donation_fields()
 			$fields = apply_filters( 'charitable_donation_form_fields', array(
 				'donation_fields' => array(
 					'legend'        => __( 'Your Donation', 'charitable' ),
-					'type'          => 'fieldset',
+					'type'          => 'donation-amount-wrapper',
 					'fields'        => $this->get_donation_fields(),
 					'priority'      => 20,
 				),
@@ -294,7 +283,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'legend'        => __( 'Your Details', 'charitable' ),
 					'type'          => 'donor-fields',
 					'fields'        => $this->get_user_fields(),
-					'class'         => 'charitable-fieldset',
+					'class'         => 'fieldset',
 					'priority'      => 40,
 				),
 			), $this );
@@ -359,13 +348,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * amount before the amount form, if one is set.
 		 *
 		 * @since  1.4.14
+		 * @since  1.5.0 $fields argument deprecated and return
+		 *               type changed to string.
 		 *
-		 * @param 	array[] $fields The array of fields.
-		 * @return array[]
+		 * @return string
 		 */
-		public function maybe_show_current_donation_amount( $fields ) {
+		public function maybe_show_current_donation_amount() {
 			if ( ! $this->get_campaign() ) {
-				return $fields;
+				return '';
 			}
 
 			$amount = $this->get_campaign()->get_donation_amount_in_session();
@@ -379,13 +369,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				$content = charitable_template_donation_form_current_amount_text( $amount, $this->get_form_identifier(), $this->get_campaign()->ID );
 			}
 
-			$fields['current_donation_amount'] = array(
-				'type' 	   => 'content',
-				'content'  => $content,
-				'priority' => 0.9,
-			);
-
-			return $fields;
+			return $content;
 		}
 
 		/**
