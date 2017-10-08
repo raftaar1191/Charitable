@@ -37,7 +37,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Cron();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

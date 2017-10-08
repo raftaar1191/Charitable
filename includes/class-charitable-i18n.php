@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_i18n();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

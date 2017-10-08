@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Donation_Processor();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

@@ -60,7 +60,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Locations();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

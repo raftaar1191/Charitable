@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
          */
         public static function init( Charitable_Email $email ) {
             $fields         = new Charitable_Email_Fields( $email, false );
-            self::$instance = new Charitable_Email_Shortcode( $fields );
+            self::$instance = new self( $fields );
         }
 
         /**
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
          */
         public static function init_preview( Charitable_Email $email ) {
             $fields         = new Charitable_Email_Fields( $email, true );
-            self::$instance = new Charitable_Email_Shortcode( $fields );
+            self::$instance = new self( $fields );
         }        
 
         /**

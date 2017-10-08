@@ -39,7 +39,7 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Campaign_List_Table();
+				self::$instance = new self();
 			}
 
 			return self::$instance;
