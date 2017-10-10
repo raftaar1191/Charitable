@@ -150,7 +150,8 @@ module.exports = function(grunt) {
                         'assets/js/*.js',                         
                         '!assets/js/*.min.js', 
                         '!assets/js/libraries/*.js',
-                        'assets/js/libraries/leanModal.js'
+                        'assets/js/libraries/leanModal.js',
+                        'assets/js/libraries/js-cookie.js'
                     ], // Actual pattern(s) to match.
                     'ext' : '.min.js',   // Dest filepaths will have this extension.
                 }]

@@ -116,7 +116,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 
 			wp_register_script(
 				'js-cookie',
-				$assets_dir . 'js/libraries/js.cookie' . $suffix . '.js',
+				$assets_dir . 'js/libraries/js-cookie' . $suffix . '.js',
 				array(),
 				'2.1.4',
 				false
