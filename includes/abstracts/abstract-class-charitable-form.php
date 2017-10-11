@@ -624,22 +624,23 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			 * default in the form abstract, but remove it when this function
 			 * is called directly.
 			 */
-			$hooked = has_action( 'charitable_form_field', array( $this, 'render_field' ) );
-
-			if ( $hooked ) {
+			if ( has_action( 'charitable_form_field', array( $this, 'render_field' ) ) ) {
 				remove_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-			}
 
-			$rendered = $form->view()->render_field( $field, $key, array(
+				$rendered = $form->view()->render_field( $field, $key, array(
+					'index'     => $index,
+					'namespace' => $namespace,
+				) );
+
+				add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+
+				return $rendered;
+			} 
+
+			return $form->view()->render_field( $field, $key, array(
 				'index'     => $index,
 				'namespace' => $namespace,
 			) );
-
-			if ( $hooked ) {
-				add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-			}
-
-			return $rendered;
 		}
 	}
 
