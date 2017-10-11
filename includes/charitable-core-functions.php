@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * Use this whenever you want to get an instance of the class. There is no
  * reason to instantiate a new object, though you can do so if you're stubborn :)
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable
+ * @return Charitable
  */
 function charitable() {
 	return Charitable::get_instance();
@@ -31,12 +31,12 @@ function charitable() {
 /**
  * This returns the value for a particular Charitable setting.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	mixed $key 		Accepts an array of strings or a single string.
- * @param 	mixed $default  The value to return if key is not set.
- * @param 	array $settings Optional. Used when $key is an array.
- * @return 	mixed
+ * @param  mixed $key      Accepts an array of strings or a single string.
+ * @param  mixed $default  The value to return if key is not set.
+ * @param  array $settings Optional. Used when $key is an array.
+ * @return mixed
  */
 function charitable_get_option( $key, $default = false, $settings = array() ) {
 	if ( empty( $settings ) ) {
@@ -75,10 +75,10 @@ function charitable_get_option( $key, $default = false, $settings = array() ) {
 /**
  * Returns a helper class.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	string $class_key
- * @return 	mixed
+ * @param  string $class_key
+ * @return mixed
  */
 function charitable_get_helper( $class_key ) {
 	if ( false !== strpos( $class_key, '_' ) ) {
@@ -104,9 +104,9 @@ function charitable_get_helper( $class_key ) {
 /**
  * Returns the Charitable_Notices class instance.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Notices
+ * @return Charitable_Notices
  */
 function charitable_get_notices() {
 	return Charitable_Notices::get_instance();
@@ -115,9 +115,9 @@ function charitable_get_notices() {
 /**
  * Returns the Charitable_Donation_Processor class instance.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return  Charitable_Donation_Processor
+ * @return Charitable_Donation_Processor
  */
 function charitable_get_donation_processor() {
 	return Charitable_Donation_Processor::get_instance();
@@ -126,9 +126,9 @@ function charitable_get_donation_processor() {
 /**
  * Return Charitable_Locations helper class.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Locations
+ * @return Charitable_Locations
  */
 function charitable_get_location_helper() {
 	return Charitable_Locations::get_instance();
@@ -137,9 +137,9 @@ function charitable_get_location_helper() {
 /**
  * Returns the current user's session object.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Session
+ * @return Charitable_Session
  */
 function charitable_get_session() {
 	return Charitable_Session::get_instance();
@@ -148,9 +148,9 @@ function charitable_get_session() {
 /**
  * Returns the current request helper object.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Request
+ * @return Charitable_Request
  */
 function charitable_get_request() {
 	return Charitable_Request::get_instance();
@@ -159,9 +159,9 @@ function charitable_get_request() {
 /**
  * Returns the Charitable_User_Dashboard object.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_User_Dashboard
+ * @return Charitable_User_Dashboard
  */
 function charitable_get_user_dashboard() {
 	return Charitable_User_Dashboard::get_instance();
@@ -170,10 +170,10 @@ function charitable_get_user_dashboard() {
 /**
  * Return the database table helper object.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	string 	$table
- * @return  Charitable_DB|null
+ * @param  string $table The table key.
+ * @return Charitable_DB|null
  */
 function charitable_get_table( $table ) {
 	return charitable()->get_db_table( $table );
@@ -182,9 +182,9 @@ function charitable_get_table( $table ) {
 /**
  * Returns the current donation form.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return 	Charitable_Donation_Form_Interface|false
+ * @return Charitable_Donation_Form_Interface|false
  */
 function charitable_get_current_donation_form() {
 	$campaign = charitable_get_current_campaign();
@@ -194,10 +194,10 @@ function charitable_get_current_donation_form() {
 /**
  * Returns the provided array as a HTML element attribute.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @param 	array 		$args
- * @return 	string
+ * @param  array $args Arguments to be added.
+ * @return string
  */
 function charitable_get_action_args( $args ) {
 	return sprintf( "data-charitable-args='%s'", json_encode( $args ) );
@@ -206,9 +206,9 @@ function charitable_get_action_args( $args ) {
 /**
  * Returns the Charitable_Deprecated class, loading the file if required.
  *
- * @since   1.4.0
+ * @since  1.4.0
  *
- * @return 	Charitable_Deprecated
+ * @return Charitable_Deprecated
  */
 function charitable_get_deprecated() {
 	if ( ! class_exists( 'Charitable_Deprecated' ) ) {

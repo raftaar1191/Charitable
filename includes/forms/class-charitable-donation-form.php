@@ -929,7 +929,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		protected function get_test_mode_active_notice() {
 			$notice = $this->get_credentialed_notice(
-				__( 'There are no active payment gateways.', 'charitable' ),
+				__( 'Test mode is active.', 'charitable' ),
 				sprintf( '<a href="%s">%s</a>.',
 					admin_url( 'admin.php?page=charitable-settings&tab=gateways' ),
 					__( 'Disable Test Mode', 'charitable' )

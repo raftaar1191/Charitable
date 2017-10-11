@@ -17,30 +17,34 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 	/**
 	 * Charitable_Notices
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Notices {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var 	Charitable_Notices|null
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_Notices|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * The array of notices.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		protected $notices;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  Charitable_Notices
+		 * @return Charitable_Notices
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -53,9 +57,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		private function __construct() {
 			/* Retrieve the notices from the session */
@@ -68,14 +72,19 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a notice message.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $message The message to display.
-		 * @param   string $type    The type of message.
-		 * @param   string $key 	Optional. If not set, next numeric key is used.
-		 * @return  void
+		 * @param  string $message The message to display.
+		 * @param  string $type    The type of message.
+		 * @param  string $key     Optional. If not set, next numeric key is used.
+		 * @return void
 		 */
 		public function add_notice( $message, $type, $key = false ) {
+			/* Avoid adding the same notice twice. */
+			if ( in_array( $message, $this->notices[ $type ] ) ) {
+				return;
+			}
+
 			if ( false === $key ) {
 				$this->notices[ $type ][] = $message;
 			} else {
@@ -86,11 +95,11 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Add multiple notices at once.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array  $messages Array of messages.
-		 * @param   string $type     Type of message we're adding.
-		 * @return  void
+		 * @param  array  $messages Array of messages.
+		 * @param  string $type     Type of message we're adding.
+		 * @return void
 		 */
 		public function add_notices( $messages, $type ) {
 			if ( ! is_array( $messages ) ) {
@@ -103,11 +112,11 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an error message.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $message The error message to add.
-		 * @param   string $key 	Optional. If not set, next numeric key is used.
-		 * @return  void
+		 * @param  string $message The error message to add.
+		 * @param  string $key     Optional. If not set, next numeric key is used.
+		 * @return void
 		 */
 		public function add_error( $message, $key = false ) {
 			$this->add_notice( $message, 'error', $key );
@@ -116,11 +125,11 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a warning message.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $message The warning message to add.
-		 * @param   string $key 	Optional. If not set, next numeric key is used.
-		 * @return  void
+		 * @param  string $message The warning message to add.
+		 * @param  string $key     Optional. If not set, next numeric key is used.
+		 * @return void
 		 */
 		public function add_warning( $message, $key = false ) {
 			$this->add_notice( $message, 'warning', $key );
@@ -129,11 +138,11 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds a success message.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $message The success message to add.
-		 * @param   string $key 	Optional. If not set, next numeric key is used.
-		 * @return  void
+		 * @param  string $message The success message to add.
+		 * @param  string $key     Optional. If not set, next numeric key is used.
+		 * @return void
 		 */
 		public function add_success( $message, $key = false ) {
 			$this->add_notice( $message, 'success', $key );
@@ -142,11 +151,11 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Adds an info message.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $message The info message to add.
-		 * @param   string $key 	Optional. If not set, next numeric key is used.
-		 * @return  void
+		 * @param  string $message The info message to add.
+		 * @param  string $key     Optional. If not set, next numeric key is used.
+		 * @return void
 		 */
 		public function add_info( $message, $key = false ) {
 			$this->add_notice( $message, 'info', $key );
@@ -155,10 +164,10 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Receives a WP_Error object and adds the error messages to our array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   WP_Error $error The WP_Error object to add to the messages queue.
-		 * @return  void
+		 * @param  WP_Error $error The WP_Error object to add to the messages queue.
+		 * @return void
 		 */
 		public function add_errors_from_wp_error( WP_Error $error ) {
 			$this->add_notices( $error->get_error_messages(), 'error' );
@@ -167,9 +176,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all errors as an array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_errors() {
 			return $this->notices['error'];
@@ -178,9 +187,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all warnings as an array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_warnings() {
 			return $this->notices['warning'];
@@ -189,9 +198,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all successs as an array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_success_notices() {
 			return $this->notices['success'];
@@ -200,9 +209,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all infos as an array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_info_notices() {
 			return $this->notices['info'];
@@ -211,9 +220,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Return all notices as an array.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_notices() {
 			return $this->notices;
@@ -222,9 +231,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		/**
 		 * Clear out all existing notices.
 		 *
-		 * @since   1.4.0
+		 * @since  1.4.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function clear() {
 			$clear = array(
