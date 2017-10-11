@@ -84,12 +84,6 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		public function get_fields() {
 			$fields = array(
-				// 'donation_header' => array(
-				// 	'type'     => 'heading',
-				// 	'level'    => 'h3',
-				// 	'title'    => __( 'Donation', 'charitable' ),
-				// 	'priority' => 20,
-				// ),
 				'donation_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_donation_fields(),
@@ -118,8 +112,14 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			if ( $this->has_donation() ) {
 				if ( 'manual' != $this->get_donation()->get_gateway() ) {
-					unset( $fields['meta_fields']['fields']['date'] );
+					$fields['meta_fields']['fields']['date']['type'] = 'hidden';
 				}
+
+				$fields['meta_fields']['fields']['time'] = array(
+					'type'     => 'hidden',
+					'priority' => 2,
+					'value'    => date( 'H:i:s', strtotime( $this->get_donation()->post_date_gmt ) ),
+				);
 			} else {
 				$fields['donor_id'] = array(
 					'type'     => 'select',
@@ -318,14 +318,29 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_donation_values() {
-			$values = array(
+			$donation = charitable_get_donation( $this->get_submitted_value( 'ID' ) );
+			$is_new   = false === $donation || 'Auto Draft' === $donation->post_title;
+			$values   = array(
 				'ID'        => $this->get_submitted_value( 'ID' ),				
 				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),
 				'campaigns' => $this->get_submitted_value( 'campaign_donations' ),
 				'status'    => $this->get_submitted_value( 'status' ),
-				'date_gmt'  => charitable_sanitize_date( $this->get_submitted_value( 'date' ), 'Y-m-d H:i:s' ),
 				'log_note'  => $this->get_submitted_value( 'log_note' ),
 			);
+
+			$date               = $this->get_submitted_value( 'date' );
+			$time               = $this->get_submitted_value( 'time', '00:00:00' );
+			$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d ' . $time );
+
+			/* If the date matches today's date and it's a new donation, save the time too. */
+			if ( date( 'Y-m-d 00:00:00' ) == $values['date_gmt'] && $is_new ) {
+				$values['date_gmt'] = date( 'Y-m-d H:i:s' );
+			}
+
+			/* If the donation date has been changed, the time is always set to 00:00:00 */
+			if ( $values['date_gmt'] !== $donation->post_date_gmt && ! $is_new ) {
+				$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d 00:00:00' );
+			}
 
 			if ( 'add_donation' == $this->get_submitted_value( 'charitable_action' ) ) {
 				$values['donation_gateway'] = __( 'Manual', 'charitable' );

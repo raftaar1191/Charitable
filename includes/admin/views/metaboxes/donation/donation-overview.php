@@ -13,7 +13,7 @@ global $post;
 $donation = charitable_get_donation( $post->ID );
 $donor    = $donation->get_donor();
 $amount   = $donation->get_total_donation_amount();
-$date     = 'manual' == $donation->get_gateway() ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
+$date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H:i:s', $donation->post_date_gmt ) ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
 
 ?>
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">
