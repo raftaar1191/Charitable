@@ -551,16 +551,16 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return int
 		 */
 		public function increment_index( $increment, $field ) {
-            /**
-             * Remove form's hooked filter.
-             *
-             * Before 1.5, forms used the filter to set the increment level. For
-             * backwards-compatibility purposes, we still provide this method in the
-             * form class, but it calls the Form View. This method shoud
-             * default in the form abstract, but remove it when this function
-             * is called directly.
-             */
-            remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
+			/**
+			 * Remove form's hooked filter.
+			 *
+			 * Before 1.5, forms used the filter to set the increment level. For
+			 * backwards-compatibility purposes, we still provide this method in the
+			 * form class, but it calls the Form View. This method shoud
+			 * default in the form abstract, but remove it when this function
+			 * is called directly.
+			 */
+			remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 
 			return $this->view()->increment_index( $field );			
 		}
@@ -615,23 +615,29 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 				return false;
 			}
 
-            /**
-             * Remove form's hooked action.
-             *
-             * Before 1.5, forms used the filter to set the increment level. For
-             * backwards-compatibility purposes, we still provide this method in the
-             * form class, but it calls the Form View. This method shoud
-             * default in the form abstract, but remove it when this function
-             * is called directly.
-             */
-            remove_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			/**
+			 * Remove form's hooked action.
+			 *
+			 * Before 1.5, forms used the filter to set the increment level. For
+			 * backwards-compatibility purposes, we still provide this method in the
+			 * form class, but it calls the Form View. This method should
+			 * default in the form abstract, but remove it when this function
+			 * is called directly.
+			 */
+			$hooked = has_action( 'charitable_form_field', array( $this, 'render_field' ) );
+
+			if ( $hooked ) {
+				remove_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			}
 
 			$rendered = $form->view()->render_field( $field, $key, array(
 				'index'     => $index,
 				'namespace' => $namespace,
 			) );
 
-			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			if ( $hooked ) {
+				add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			}
 
 			return $rendered;
 		}

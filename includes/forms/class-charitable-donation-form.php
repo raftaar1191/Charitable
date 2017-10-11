@@ -346,23 +346,21 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				 * @param Charitable_Gateway $gateway        Instance of `Charitable_Gateway`.
 				 */
 				$gateway_fields          = apply_filters( 'charitable_donation_form_gateway_fields', $gateway_fields, $gateway );
+				$has_gateway_fields      = $has_gateway_fields || ! empty( $gateway_fields );
 				$gateways[ $gateway_id ] = array(
-					'label'     => $gateway->get_label(),
-					'fields'    => $gateway_fields,
+					'label'  => $gateway->get_label(),
+					'fields' => $gateway_fields,
 				);
-
-				$has_gateway_fields = $has_gateway_fields || ! empty( $gateway_fields );
-
 			}
 
 			/* Add the payment section if there are gateway fields to be filled out. */
 			if ( $has_gateway_fields || count( $gateways ) > 1 ) {
 				$fields['payment_fields'] = array(
-					'type'      => 'gateway-fields',
-					'legend'    => __( 'Payment', 'charitable' ),
-					'default'   => $default_gateway,
-					'gateways'  => $gateways,
-					'priority'  => 60,
+					'type'     => 'gateway-fields',
+					'legend'   => __( 'Payment', 'charitable' ),
+					'default'  => $default_gateway,
+					'gateways' => $gateways,
+					'priority' => 60,
 				);
 			}
 
