@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.0-beta.1\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-10-10 07:02:26+00:00\n"
+"POT-Creation-Date: 2017-10-11 07:52:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5299,7 +5299,7 @@ msgstr ""
 msgid "Email could not be resent."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:102
+#: includes/admin/forms/class-charitable-admin-donation-form.php:96
 #: includes/fields/default-fields/donation-fields.php:89
 #: includes/users/class-charitable-roles.php:63
 msgid "Donor"
@@ -5321,23 +5321,23 @@ msgstr ""
 msgid "Please choose an existing donor or provide an email address for a new donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:331
+#: includes/admin/forms/class-charitable-admin-donation-form.php:346
 msgid "Manual"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:335
+#: includes/admin/forms/class-charitable-admin-donation-form.php:350
 msgid "Donation updated manually by <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:409
+#: includes/admin/forms/class-charitable-admin-donation-form.php:424
 msgid "Select a Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:410
+#: includes/admin/forms/class-charitable-admin-donation-form.php:425
 msgid "Add a New Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:412
+#: includes/admin/forms/class-charitable-admin-donation-form.php:427
 msgid "Existing Donors"
 msgstr ""
 
@@ -7204,11 +7204,11 @@ msgstr ""
 msgid "Your Details"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:362
+#: includes/forms/class-charitable-donation-form.php:360
 msgid "Payment"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:544
+#: includes/forms/class-charitable-donation-form.php:542
 #: includes/forms/class-charitable-forgot-password-form.php:94
 #: includes/forms/class-charitable-profile-form.php:377
 #: includes/forms/class-charitable-registration-form.php:159
@@ -7218,31 +7218,34 @@ msgid ""
 "page and try again."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:576
+#: includes/forms/class-charitable-donation-form.php:574
 #: includes/forms/class-charitable-registration-form.php:176
 msgid "%s is not a valid email address."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:610
+#: includes/forms/class-charitable-donation-form.php:608
 msgid "The gateway submitted is not valid."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:644
-#: includes/forms/class-charitable-donation-form.php:651
+#: includes/forms/class-charitable-donation-form.php:642
+#: includes/forms/class-charitable-donation-form.php:649
 #: includes/public/class-charitable-public.php:110
 msgid "You must donate more than %s."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:900
-#: includes/forms/class-charitable-donation-form.php:932
+#: includes/forms/class-charitable-donation-form.php:898
 msgid "There are no active payment gateways."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:935
+#: includes/forms/class-charitable-donation-form.php:930
+msgid "Test mode is active."
+msgstr ""
+
+#: includes/forms/class-charitable-donation-form.php:933
 msgid "Disable Test Mode"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1000
+#: includes/forms/class-charitable-donation-form.php:998
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
@@ -8222,7 +8225,7 @@ msgctxt "Taxonomy Singular Name"
 msgid "Campaign Tag"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:901
+#: includes/forms/class-charitable-donation-form.php:899
 msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
