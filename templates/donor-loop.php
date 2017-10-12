@@ -22,7 +22,7 @@ $donors      = $view_args['donors'];
 $args        = $view_args;
 $campaign_id = $view_args['campaign'];
 
-if ( ! charitable_is_campaign_page() && 'current' == $campaign_id ) {
+if ( ! charitable_is_campaign_page() && 'current' === $campaign_id ) {
 	return;
 }
 

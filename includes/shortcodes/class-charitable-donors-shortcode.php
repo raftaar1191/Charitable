@@ -37,8 +37,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 				'orientation'      	=> 'horizontal',
 				'show_name'			=> 1,
 				'show_location'		=> 0,
-				'show_amount'		=> 0,
-				'show_avatar'		=> 0,
+				'show_amount'		=> 1,
+				'show_avatar'		=> 1,
 				'hide_if_no_donors'	=> 0,
 			);
 
@@ -118,7 +118,6 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 		 * @return Charitable_Donor_Query
 		 */
 		public static function get_donors( $args ) {
-
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
@@ -134,7 +133,6 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			);
 
 			return new Charitable_Donor_Query( $query_args );
-
 		}
 	}
 

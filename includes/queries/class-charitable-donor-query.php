@@ -51,6 +51,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 
 			$this->args             = wp_parse_args( $args, $defaults );
 			$this->args['campaign'] = $this->sanitize_campaign();
+
 			$this->position         = 0;
 
 			$this->prepare_query();
