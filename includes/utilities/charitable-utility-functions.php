@@ -15,6 +15,30 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
+ * Orders an array by a particular key.
+ *
+ * @since  1.5.0
+ *
+ * @param  strign $key The key to sort by.
+ * @param  array  $a   First element.
+ * @param  array  $b   Element to compare against.
+ * @return int
+ */
+function charitable_element_key_sort( $key, $a, $b ) {
+	foreach ( array( $a, $b ) as $item ) {
+		if ( ! array_key_exists( $key, $item ) ) {			
+			error_log( sprintf( '%s missing from element: ' . json_encode( $item ), $key ) );
+		}
+	}
+
+	if ( $a[ $key ] == $b[ $key ] ) {
+		return 0;
+	}
+
+	return $a[ $key ] < $b[ $key ] ? -1 : 1;
+}
+
+/**
  * Orders an array by the priority key.
  *
  * @since  1.0.0
@@ -24,17 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return int
  */
 function charitable_priority_sort( $a, $b ) {
-	foreach ( array( $a, $b ) as $item ) {
-		if ( ! array_key_exists( 'priority', $item ) ) {
-			error_log( 'Priority missing from field: ' . json_encode( $item ) );
-		}
-	}
-
-	if ( $a['priority'] == $b['priority'] ) {
-		return 0;
-	}
-
-	return $a['priority'] < $b['priority'] ? -1 : 1;
+	return charitable_element_key_sort( 'priority', $a, $b );	
 }
 
 /**
@@ -47,17 +61,7 @@ function charitable_priority_sort( $a, $b ) {
  * @return int
  */
 function charitable_timestamp_sort( $a, $b ) {
-	foreach ( array( $a, $b ) as $item ) {
-		if ( ! array_key_exists( 'time', $item ) ) {
-			error_log( 'Time missing from field: ' . json_encode( $item ) );
-		}
-	}
-
-	if ( $a['time'] == $b['time'] ) {
-		return 0;
-	}
-
-	return $a['time'] < $b['time'] ? -1 : 1;
+	return charitable_element_key_sort( 'time', $a, $b );
 }
 
 /**

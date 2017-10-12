@@ -176,7 +176,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          * @return boolean True if the action was registerd. False if not.
          */
         public function register( $action, $args, $group = 'default' ) {
-            if ( array_key_exists( $action, $this->actions ) ) {
+            if ( $this->action_exists( $action ) ) {
                 return false;
             }
 
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          * @return boolean|WP_Error WP_Error in case of error. Mixed results if the action was performed.
          */
         public function do_action( $action, $object_id, $args = array() ) {      
-            if ( ! array_key_exists( $action, $this->actions ) ) {
+            if ( ! $this->action_exists( $action ) ) {
                 return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );
             }
 
@@ -266,9 +266,9 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
          * @return string
          */
         public function get_action_link( $action, $object_id ) {
-            if ( ! array_key_exists( $action, $this->actions ) ) {
-                return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );
-            }
+            if ( ! $this->action_exists( $action ) ) {
+                return;
+            }            
 
             return esc_url( add_query_arg( array(
                 'charitable_admin_action' => $action,
@@ -276,6 +276,18 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
                 'object_id'               => $object_id,
                 '_nonce'                  => wp_create_nonce( 'donation_action' ),
             ) ) );
+        }
+
+        /**
+         * Checks whether a particular action has been registered.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $action The action to check.
+         * @return boolean
+         */
+        public function action_exists( $action ) {
+            return array_key_exists( $action, $this->actions );
         }
     }
 

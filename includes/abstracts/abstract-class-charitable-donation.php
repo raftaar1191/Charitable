@@ -17,7 +17,32 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 	/**
 	 * Donation Model
 	 *
-	 * @since  1.4.0
+	 * @since 1.4.0
+	 *
+	 * @property int    $ID
+	 * @property int    $post_author
+	 * @property string $post_date
+	 * @property string $post_date_gmt
+	 * @property string $post_content
+	 * @property string $post_title
+	 * @property string $post_excerpt
+	 * @property string $post_status
+	 * @property string $comment_status
+	 * @property string $ping_status
+	 * @property string $post_password
+	 * @property string $post_name
+	 * @property string $to_ping
+	 * @property string $pinged
+	 * @property string $post_modified
+	 * @property string $post_modified_gmt
+	 * @property string $post_content_filtered
+	 * @property int    $post_parent
+	 * @property string $guid
+	 * @property int    $menu_order
+	 * @property string $post_type
+	 * @property string $post_mime_type
+	 * @property int    $comment_count
+	 * @property string $filter
 	 */
 	abstract class Charitable_Abstract_Donation {
 
@@ -720,7 +745,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 			if ( ! is_null( $emails ) ) {
 				foreach ( $emails as $email_log ) {
-					$log  = $this->parse_email_log( $email_log );
+					$log = $this->parse_email_log( $email_log );
 
 					if ( ! empty( $log ) ) {
 						$logs = array_merge( $logs, $this->parse_email_log( $email_log ) );
@@ -942,7 +967,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$logs  = array();
 			$class = Charitable_Emails::get_instance()->get_email( $matches[1] );
 
-			if ( ! $class ) {
+			if ( false === $class ) {
 				$email_name = ucwords( str_replace( '_', ' ', $matches[1] ) );
 			} else {
 				$email      = new $class;
@@ -953,15 +978,15 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				$action = Charitable_Admin::get_instance()->get_donation_actions()->get_action_link( 'resend_' . $matches[1], $this->ID );
 
 				if ( $sent ) {
-					$message  = sprintf( __( '%s was sent successfully.', 'charitable' ), $email_name );
+					$message = sprintf( __( '%s was sent successfully.', 'charitable' ), $email_name );
 
-					if ( $class ) {
+					if ( false !== $class ) {
 						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Resend it now', 'charitable' ) );
 					}
 				} else {
-					$message  = sprintf( __( '%s failed to send.', 'charitable' ), $email_name );
+					$message = sprintf( __( '%s failed to send.', 'charitable' ), $email_name );
 
-					if ( $class ) {
+					if ( false !== $class ) {
 						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Retry email send', 'charitable' ) );
 					}
 				}
