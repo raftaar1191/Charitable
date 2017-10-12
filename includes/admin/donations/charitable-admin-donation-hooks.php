@@ -4,11 +4,11 @@
  *
  * Action/filter hooks used for setting up donations in the admin.
  *
- * @package     Charitable/Functions/Admin
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Admin
+ * @version   1.5.0
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly.
@@ -17,25 +17,25 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Add and remove metaboxes.
  *
- * @see Charitable_Donation_Metaboxes::add_meta_boxes()
- * @see Charitable_Donation_Metaboxes::remove_meta_boxes()
+ * @see Charitable_Donation_Meta_Boxes::add_meta_boxes()
+ * @see Charitable_Donation_Meta_Boxes::remove_meta_boxes()
  */
-add_action( 'add_meta_boxes', array( Charitable_Donation_Metaboxes::get_instance(), 'add_meta_boxes' ) );
-add_action( 'add_meta_boxes', array( Charitable_Donation_Metaboxes::get_instance(), 'remove_meta_boxes' ), 20 );
+add_action( 'add_meta_boxes', array( Charitable_Donation_Meta_Boxes::get_instance(), 'add_meta_boxes' ) );
+add_action( 'add_meta_boxes', array( Charitable_Donation_Meta_Boxes::get_instance(), 'remove_meta_boxes' ), 20 );
 
 /**
  * Save the donation.
  *
- * @see Charitable_Donation_Metaboxes::save_donation()
+ * @see Charitable_Donation_Meta_Boxes::save_donation()
  */
-add_action( 'save_post_' . Charitable::DONATION_POST_TYPE,  array( Charitable_Donation_Metaboxes::get_instance(), 'save_donation' ), 10, 2 );
+add_action( 'save_post_' . Charitable::DONATION_POST_TYPE,  array( Charitable_Donation_Meta_Boxes::get_instance(), 'save_donation' ), 10, 2 );
 
 /**
  * Save the donation.
  *
- * @see Charitable_Donation_Metaboxes::post_messages()
+ * @see Charitable_Donation_Meta_Boxes::post_messages()
  */
-add_filter( 'post_updated_messages', array( Charitable_Donation_Metaboxes::get_instance(), 'post_messages' ) );
+add_filter( 'post_updated_messages', array( Charitable_Donation_Meta_Boxes::get_instance(), 'post_messages' ) );
 
 /**
  * Set the table columns for donations.

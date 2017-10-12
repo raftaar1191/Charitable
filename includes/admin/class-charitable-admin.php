@@ -103,8 +103,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'dashboard-widgets/class-charitable-donations-dashboard-widget.php' );
 			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
 
-			/* Donations */						
-			require_once( $admin_dir . 'donations/class-charitable-donation-metaboxes.php' );
+			/* Donations */
+			require_once( $admin_dir . 'donations/class-charitable-donation-meta-boxes.php' );
 			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
 

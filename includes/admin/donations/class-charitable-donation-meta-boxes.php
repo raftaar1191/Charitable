@@ -1,8 +1,9 @@
 <?php
 /**
- * Sets up the donation metaboxes.
+ * Sets up the donation meta boxes.
  *
- * @package   Charitable/Classes/Charitable_Donation_Metaboxes
+ * @package   Charitable/Classes/Charitable_Donation_Meta_Boxes
+ * @since     1.5.0
  * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
@@ -11,20 +12,20 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
+if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 
 	/**
-	 * Charitable_Donation_Metaboxes class.
+	 * Charitable_Donation_Meta_Boxes class.
 	 *
 	 * @final
 	 * @since 1.5.0
 	 */
-	final class Charitable_Donation_Metaboxes {
+	final class Charitable_Donation_Meta_Boxes {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var Charitable_Donation_Metaboxes|null
+		 * @var Charitable_Donation_Meta_Boxes|null
 		 */
 		private static $instance = null;
 
@@ -49,11 +50,11 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return Charitable_Donation_Metaboxes
+		 * @return Charitable_Donation_Meta_Boxes
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Donation_Metaboxes(
+				self::$instance = new Charitable_Donation_Meta_Boxes(
 					new Charitable_Meta_Box_Helper( 'charitable-donation' )
 				);
 			}
@@ -148,14 +149,14 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 					'title'    => __( 'Donation Form', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-form',
+					'view'     => 'meta boxes/donation/donation-form',
 					'form'     => $form,
 				),
 				'donation-form-meta' => array(
 					'title'    => __( 'Additional Details', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-form-meta',
+					'view'     => 'meta boxes/donation/donation-form-meta',
 					'form'     => $form,
 				),
 			);
@@ -185,25 +186,25 @@ if ( ! class_exists( 'Charitable_Donation_Metaboxes' ) ) :
 					'title'    => __( 'Donation Overview', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-overview',
+					'view'     => 'meta boxes/donation/donation-overview',
 				),
 				'donation-actions' => array(
 					'title'    => __( 'Donation Actions', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-actions',
+					'view'     => 'meta boxes/donation/donation-actions',
 				),
 				'donation-details' => array(
 					'title'    => __( 'Donation Details', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-details',
+					'view'     => 'meta boxes/donation/donation-details',
 				),
 				'donation-log' => array(
 					'title'    => __( 'Donation Log', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'low',
-					'view'     => 'metaboxes/donation/donation-log',
+					'view'     => 'meta boxes/donation/donation-log',
 				),
 			);
 
