@@ -377,8 +377,10 @@
     .donors-list .donor > *:first-child {
       margin-top: 0; }
   .donors-list.donors-list-horizontal .donor {
-    float: left;
-    padding: 0 20px 1em 0; }
+    display: inline-block;
+    padding: 0 20px 1em 0;
+    width: 100px;
+    vertical-align: top; }
   .donors-list.donors-list-vertical .donor {
     border-bottom: 1px solid #e6e6e6; }
 

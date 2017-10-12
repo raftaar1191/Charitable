@@ -33,8 +33,18 @@ if ( 'all' == $campaign_id ) {
 }
 
 $orientation = array_key_exists( 'orientation', $view_args ) ? $view_args['orientation'] : 'vertical';
+$style       = '';
 
-if ( $donors->count() ) : ?>	
+if ( 'horizontal' == $orientation ) {
+	$width = array_key_exists( 'width', $view_args ) ? $view_args['width'] : get_option( 'thumbnail_size_w', 100 );
+	if ( 100 != $width ) {
+		$style = '<style>.donors-list.donors-list-horizontal .donor{ width:'. $width . 'px; }</style>';
+	}
+}
+
+if ( $donors->count() ) :
+	echo $style;
+	?>
 	<ol class="donors-list donors-list-<?php echo $orientation ?>">
 		<?php
 		foreach ( $donors as $donor ) :
