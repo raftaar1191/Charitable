@@ -701,6 +701,50 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
+		 * Returns the main donation log with other logs (such as the email log) merged in.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @global WPDB $wpdb
+		 * @return array
+		 */
+		public function get_merged_logs() {
+			global $wpdb;
+
+			$logs   = $this->get_donation_log();
+			$emails = $wpdb->get_results( $wpdb->prepare(
+				"SELECT meta_key, meta_value
+				FROM $wpdb->postmeta
+				WHERE meta_key LIKE '_email_%_log'
+				AND post_id = %d", $this->ID ) );
+
+			if ( ! is_null( $emails ) ) {
+				foreach ( $emails as $email_log ) {
+					$log  = $this->parse_email_log( $email_log );
+
+					if ( ! empty( $log ) ) {
+						$logs = array_merge( $logs, $this->parse_email_log( $email_log ) );
+					}
+				}
+			}
+
+			/**
+			 * Filter the list of donation logs.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array               $logs     All of the logs.
+			 * @param Charitable_Donation $donation Instance of `Charitable_Donation`.
+			 */
+			$logs = apply_filters( 'charitable_donation_logs', $logs, $this );
+
+			/* Order the logs by time. */
+			usort( $logs, 'charitable_timestamp_sort' );
+
+			return $logs;
+		}
+
+		/**
 		 * Update the status of the donation.
 		 *
 		 * @uses   wp_update_post()
@@ -866,6 +910,69 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				'label' => $field->label,
 				'value' => $value,
 			);
+		}
+
+		/**
+		 * Receives an email log record as an object and returns an array
+		 * with the time and message to show in the log.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  object $email_log The email log record. Should include
+		 *                           meta_key and meta_value fields.
+		 * @return array
+		 */
+		protected function parse_email_log( $email_log ) {
+			if ( ! isset( $email_log->meta_key ) || ! isset( $email_log->meta_value ) ) {
+				return array();
+			}
+
+			$log = maybe_unserialize( $email_log->meta_value );
+
+			if ( ! $log || ! is_array( $log ) ) {
+				return array();
+			}
+
+			$matches = array();
+
+			if ( ! preg_match( '/^_email_(.*)_log$/', $email_log->meta_key, $matches ) ) {
+				return array();
+			}
+
+			$logs  = array();
+			$class = Charitable_Emails::get_instance()->get_email( $matches[1] );
+
+			if ( ! $class ) {
+				$email_name = ucwords( str_replace( '_', ' ', $matches[1] ) );
+			} else {
+				$email      = new $class;
+				$email_name = $email->get_name();
+			}
+
+			foreach ( $log as $time => $sent ) {
+				$action = Charitable_Admin::get_instance()->get_donation_actions()->get_action_link( 'resend_' . $matches[1], $this->ID );
+
+				if ( $sent ) {
+					$message  = sprintf( __( '%s was sent successfully.', 'charitable' ), $email_name );
+
+					if ( $class ) {
+						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Resend it now', 'charitable' ) );
+					}
+				} else {
+					$message  = sprintf( __( '%s failed to send.', 'charitable' ), $email_name );
+
+					if ( $class ) {
+						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Retry email send', 'charitable' ) );
+					}
+				}
+
+				$logs[] = array(
+					'time'    => $time,
+					'message' => $message,
+				);
+			}
+
+			return $logs;
 		}
 
 		/**

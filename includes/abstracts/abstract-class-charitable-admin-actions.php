@@ -255,6 +255,28 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 
             return $success;
         }
+
+        /**
+         * Returns a link that will execute a particular action.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $action    The action to be executed.
+         * @param  int    $object_id The ID of the object we are executing this action for.
+         * @return string
+         */
+        public function get_action_link( $action, $object_id ) {
+            if ( ! array_key_exists( $action, $this->actions ) ) {
+                return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );
+            }
+
+            return esc_url( add_query_arg( array(
+                'charitable_admin_action' => $action,
+                'action_type'             => $this->get_type(),
+                'object_id'               => $object_id,
+                '_nonce'                  => wp_create_nonce( 'donation_action' ),
+            ) ) );
+        }
     }
 
 endif;

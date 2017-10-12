@@ -149,14 +149,14 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'title'    => __( 'Donation Form', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'high',
-					'view'     => 'meta boxes/donation/donation-form',
+					'view'     => 'metaboxes/donation/donation-form',
 					'form'     => $form,
 				),
 				'donation-form-meta' => array(
 					'title'    => __( 'Additional Details', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'meta boxes/donation/donation-form-meta',
+					'view'     => 'metaboxes/donation/donation-form-meta',
 					'form'     => $form,
 				),
 			);
@@ -186,25 +186,25 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'title'    => __( 'Donation Overview', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'high',
-					'view'     => 'meta boxes/donation/donation-overview',
+					'view'     => 'metaboxes/donation/donation-overview',
 				),
 				'donation-actions' => array(
 					'title'    => __( 'Donation Actions', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'meta boxes/donation/donation-actions',
+					'view'     => 'metaboxes/donation/donation-actions',
 				),
 				'donation-details' => array(
 					'title'    => __( 'Donation Details', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'meta boxes/donation/donation-details',
+					'view'     => 'metaboxes/donation/donation-details',
 				),
 				'donation-log' => array(
 					'title'    => __( 'Donation Log', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'low',
-					'view'     => 'meta boxes/donation/donation-log',
+					'view'     => 'metaboxes/donation/donation-log',
 				),
 			);
 

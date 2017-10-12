@@ -38,6 +38,29 @@ function charitable_priority_sort( $a, $b ) {
 }
 
 /**
+ * Orders an array by the time key.
+ *
+ * @since  1.5.0
+ *
+ * @param  array $a First element.
+ * @param  array $b Element to compare against.
+ * @return int
+ */
+function charitable_timestamp_sort( $a, $b ) {
+	foreach ( array( $a, $b ) as $item ) {
+		if ( ! array_key_exists( 'time', $item ) ) {
+			error_log( 'Time missing from field: ' . json_encode( $item ) );
+		}
+	}
+
+	if ( $a['time'] == $b['time'] ) {
+		return 0;
+	}
+
+	return $a['time'] < $b['time'] ? -1 : 1;
+}
+
+/**
  * Checks whether function is disabled.
  *
  * Full credit to Pippin Williamson and the EDD team.

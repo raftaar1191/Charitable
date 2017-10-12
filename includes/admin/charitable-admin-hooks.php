@@ -27,6 +27,13 @@ add_action( 'admin_enqueue_scripts', array( Charitable_Admin::get_instance(), 'a
 add_filter( 'admin_body_class', array( Charitable_Admin::get_instance(), 'set_body_class' ) );
 
 /**
+ * Do an admin action.
+ *
+ * @see Charitable_Admin::maybe_do_admin_action()
+ */
+add_action( 'admin_init', array( Charitable_Admin::get_instance(), 'maybe_do_admin_action' ), 999 );
+
+/**
  * Check if there are any notices to be displayed in the admin.
  *
  * @see Charitable_Admin::add_notices()

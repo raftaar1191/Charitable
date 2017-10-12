@@ -106,8 +106,6 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		public function __construct( $objects = array() ) {
 			$this->donation = isset( $objects['donation'] ) ? $objects['donation'] : null;
 			$this->campaign = isset( $objects['campaign'] ) ? $objects['campaign'] : null;
-
-
 		}
 
 		/**

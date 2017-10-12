@@ -140,6 +140,33 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		}
 
 		/**
+		 * Do an admin action.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean|WP_Error WP_Error in case of error. Mixed results if the action was performed.
+		 */
+		public function maybe_do_admin_action() {
+			if ( ! array_key_exists( 'charitable_admin_action', $_GET ) ) {
+				return false;
+			}
+
+			if ( count( array_diff( array( 'action_type', '_nonce', 'object_id' ), array_keys( $_GET ) ) ) ) {
+				return new WP_Error( __( 'Action could not be executed.', 'charitable' ) );
+			}
+
+			if ( ! wp_verify_nonce( $_GET['_nonce'], 'donation_action' ) ) {
+				return new WP_Error( __( 'Action could not be executed. Nonce check failed.', 'charitable' ) );
+			}
+
+			if ( 'donation' != $_GET['action_type'] ) {
+				return new WP_Error( __( 'Action from an unknown action type executed.', 'charitable' ) );
+			}
+
+			return $this->donation_actions->do_action( $_GET['charitable_admin_action'], $_GET['object_id'] );
+		}
+
+		/**
 		 * Loads admin-only scripts and stylesheets.
 		 *
 		 * @since  1.0.0
