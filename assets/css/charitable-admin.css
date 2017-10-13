@@ -968,7 +968,7 @@ select.charitable-settings-field {
   .edit-php.post-type-charitable .wp-list-table .column-post_status mark.charitable-pending {
     background-color: #999; }
   .edit-php.post-type-charitable .wp-list-table .column-post_status mark.charitable-completed {
-    background-color: #008000; }
+    background-color: #34d058; }
   .edit-php.post-type-charitable .wp-list-table .column-post_status mark.charitable-failed {
     background-color: #f7a129; }
   .edit-php.post-type-charitable .wp-list-table .column-post_status mark.charitable-cancelled {
@@ -1048,11 +1048,11 @@ select.charitable-settings-field {
   text-transform: uppercase;
   font-weight: bold; }
   .edit-php.post-type-campaign .column-status mark.active {
-    background-color: #f7a129; }
+    background-color: #23282d; }
   .edit-php.post-type-campaign .column-status mark.finished {
     background-color: #3fb8f5; }
   .edit-php.post-type-campaign .column-status mark.successful {
-    background-color: #008000; }
+    background-color: #34d058; }
   .edit-php.post-type-campaign .column-status mark.unsuccessful {
     background-color: #ff0000; }
 
