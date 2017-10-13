@@ -576,7 +576,11 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @param  Charitable_Form $form Form object.
 		 * @return boolean Whether the notices were rendered.
 		 */
-		public function render_error_notices() {
+		public function render_error_notices( $form ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
 			return $this->view()->render_notices();
 		}
 
@@ -592,6 +596,10 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean Whether the output is added.
 		 */
 		public function add_hidden_fields( $form ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
 			return $this->view()->render_hidden_fields();
 		}
 
