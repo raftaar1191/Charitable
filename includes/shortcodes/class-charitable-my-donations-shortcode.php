@@ -47,32 +47,40 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 				return;
 			}
 
-			$user = charitable_get_user( get_current_user_id() );
-			$args = array(
-				'output'   => 'posts',				
-				'orderby'  => 'date',
-				'order'    => 'DESC',
-				'number'   => -1,
-				'donor_id' => $user->get_donor_id(),
-			);
+			$user     = charitable_get_user( get_current_user_id() );
+			$donor_id = $user->get_donor_id();
 
-			if ( ! $user->is_verified() ) {
-				$args['user_id'] = $user->ID;
+			if ( false === $donor_id ) {
+				$donations = array();
+			} else {
+				$args = array(
+					'output'   => 'posts',
+					'orderby'  => 'date',
+					'order'    => 'DESC',
+					'number'   => -1,
+					'donor_id' => $donor_id,
+				);
 
-				if ( array_key_exists( 'charitable_action', $_GET ) && 'verify_email' == $_GET['charitable_action'] ) {
-					$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
-				} else {
-					$message = sprintf(
-						__( '<a href="%s">Confirm your email address</a> to access your full donation history.', 'charitable' ),
-						esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
-					);
+				if ( ! $user->is_verified() ) {
+					$args['user_id'] = $user->ID;
+
+					if ( array_key_exists( 'charitable_action', $_GET ) && 'verify_email' == $_GET['charitable_action'] ) {
+						$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
+					} else {
+						$message = sprintf(
+							__( '<a href="%s">Confirm your email address</a> to access your full donation history.', 'charitable' ),
+							esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
+						);
+					}
+
+					charitable_get_notices()->add_error( $message );
 				}
 
-				charitable_get_notices()->add_error( $message );
+				$donations = new Charitable_Donations_Query( $args );
 			}
 
 			$view_args = array(
-				'donations' => new Charitable_Donations_Query( $args ),
+				'donations' => $donations,
 				'user'      => $user,
 			);
 

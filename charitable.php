@@ -572,7 +572,6 @@ if ( ! class_exists( 'Charitable' ) ) :
             $api->register( new Charitable_Reset_Password_Endpoint );            
             $api->register( new Charitable_Login_Endpoint );
             $api->register( new Charitable_Profile_Endpoint );
-
         }
 
         /**

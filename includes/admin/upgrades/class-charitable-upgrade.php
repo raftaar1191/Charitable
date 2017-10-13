@@ -146,27 +146,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						'prompt'   => false,
 						'callback' => array( $this, 'flush_permalinks' ),
 					),
-					'show_release_140_upgrade_notice' => array(
-						'version' => '1.4.0',
-						'notice'  => 'release-140',
-					),
-					'show_release_142_upgrade_notice' => array(
-						'version' => '1.4.2',
-						'notice'  => 'release-142',
-					),
-					'show_release_143_paypal_notice' => array(
-						'version' => '1.4.3',
-						'notice'  => 'release-143-paypal',
-					),
 					'remove_campaign_manager_cap' => array(
 						'version'  => '1.4.5',
 						'message'  => '',
 						'prompt'   => false,
 						'callback' => array( $this, 'remove_campaign_manager_cap' ),
-					),
-					'show_recurring_donations_notice' => array(
-						'version'  => '1.4.10',
-						'notice'   => 'release-1410-recurring-donations',
 					),
 					'fix_empty_campaign_end_date_meta' => array(
 						'version'  => '1.4.11',
@@ -191,11 +175,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
 						'prompt'  => true,
 					),
-					'flush_permalinks_150' => array(
+					'flush_permalinks_150_beta_2' => array(
 						'version'  => '1.5.0',
 						'message'  => '',
 						'prompt'   => false,
-						'callback' => array( $this, 'flush_permalinks' ),
+						'callback' => 'flush_rewrite_rules',
 					),
 				);
 			}//end if
