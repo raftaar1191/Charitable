@@ -728,6 +728,10 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 				);
 			}
 
+			if ( isset( $vars['date_query'] ) ) {
+				$vars['date_query']['inclusive'] = true;
+			}
+
 			/* Filter by campaign. */
 			if ( isset( $_GET['campaign_id'] ) && 'all' != $_GET['campaign_id'] ) {
 				$vars['post__in'] = charitable_get_table( 'campaign_donations' )->get_donation_ids_for_campaign( $_GET['campaign_id'] );
