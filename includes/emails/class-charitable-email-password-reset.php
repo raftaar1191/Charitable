@@ -121,6 +121,11 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 		 * @return array
 		 */
 		public function email_fields() {
+			/* If we are using the default WordPress login process, return an empty array. */
+			if ( wp_login_url() == charitable_get_permalink( 'login_page' ) ) {
+				return array();
+			}
+
 			$fields = array(
 				'reset_link' => array(
 					'description' => __( 'The link the user needs to click to reset their password', 'charitable' ),
