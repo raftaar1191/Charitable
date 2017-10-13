@@ -133,6 +133,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * NEW: Added `charitable_monetary_amount` filter to tweak how monetary amounts are formatted. [#308](https://github.com/Charitable/Charitable/issues/308)
 * NEW: Added `charitable_sanitize_value_{$section}_{$key}` filter to sanitize individual settings fields. [#352](https://github.com/Charitable/Charitable/issues/352)
 * NEW: Added basic styling for the `datepicker` form field. [#317](https://github.com/Charitable/Charitable/issues/317)
+* NEW: Improved the Campaigns table in the admin to provide more helpful information at a glance, such as the current campaign status, end date and total funds raised. [#417](https://github.com/Charitable/Charitable/issues/417)
 * FIX: Sessions have been improved to work alongside full page caching solutions like Varnish. Previously these caused problems with things like the donation receipt becoming inaccessible to donors after they donated. [#383](https://github.com/Charitable/Charitable/issues/383)
 * FIX: Avoid creating records in `wp_options` for sessions that have no data. [#399](https://github.com/Charitable/Charitable/pull/399)
 * FIX: Significantly improved the speed of Charitable settings pages. [#236](https://github.com/Charitable/Charitable/issues/236)
