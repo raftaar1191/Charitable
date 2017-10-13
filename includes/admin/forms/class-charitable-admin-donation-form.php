@@ -326,6 +326,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				'campaigns' => $this->get_submitted_value( 'campaign_donations' ),
 				'status'    => $this->get_submitted_value( 'status' ),
 				'log_note'  => $this->get_submitted_value( 'log_note' ),
+				'user_id'   => 0,
 			);
 
 			$date               = $this->get_submitted_value( 'date' );
@@ -369,6 +370,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 						'first_name' => $donor->first_name,
 						'last_name'  => $donor->last_name,
 					);
+
+					$values['user_id'] = $donor->user_id;
 				}
 			}
 
@@ -444,6 +447,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		protected function maybe_set_field_value( $field, $key ) {
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
+				return $field;
 			}
 
 			$field['value'] = array_key_exists( 'default', $field ) ? $field['default'] : '';
