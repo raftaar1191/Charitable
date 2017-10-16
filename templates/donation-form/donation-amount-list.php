@@ -92,4 +92,4 @@ if ( empty( $suggested ) && ! $custom ) {
 			/>
 		</div><!-- #custom-donation-amount-field -->
 	<?php endif ?>
-</div><!--
+</div><!-- .charitable-donation-options -->
