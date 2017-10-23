@@ -82,7 +82,7 @@ $params = array(
 		<p class="charitable-field-help"><?php echo $field['help'] ?></p>
 	<?php endif ?>
 	<div id="<?php echo $field['key'] ?>-dragdrop" 
-		class="charitable-drag-drop hide-if-no-js"                 
+		class="charitable-drag-drop"
 		data-max-size="<?php echo $max_file_size ?>"
 		data-images="<?php echo $field['key'] ?>-dragdrop-images"
 		data-params="<?php echo esc_attr( wp_json_encode( $params ) ) ?>">
