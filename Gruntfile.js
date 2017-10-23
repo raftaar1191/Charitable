@@ -264,7 +264,7 @@ module.exports = function(grunt) {
 
         map = map.concat( ");");
 
-        grunt.file.write('includes/charitable-class-map.php', map );
+        grunt.file.write('includes/autoloader/charitable-class-map.php', map );
 
     });
 

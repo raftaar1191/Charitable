@@ -12,13 +12,9 @@ spl_autoload_register( 'charitable_autoloader' );
  * Dynamically loads the class attempting to be instantiated elsewhere in the
  * plugin by looking at the $class_name parameter being passed as an argument.
  *
- * The argument should be in the form: TutsPlus_Namespace_Demo\Namespace. The
- * function will then break the fully-qualified class name into its pieces and
- * will then build a file to the path based on the namespace.
- *
- * The namespaces in this plugin map to the paths in the directory structure.
- *
  * @param string $class_name The fully-qualified name of the class to load.
+ * @since   1.5.0
+ * @return  bool
  */
 function charitable_autoloader( $class_name ) {
  
@@ -36,13 +32,16 @@ function charitable_autoloader( $class_name ) {
     include( 'charitable-class-map.php' );
     // End class map.
 
-    $file_path = isset( $mapping[$class_name] ) ? trailingslashit( __DIR__ ) . $mapping[$class_name] : false;
+    static $includes_path = charitable()->get_path( 'includes' );
+
+    $file_path = isset( $mapping[$class_name] ) ? trailingslashit( $includes_path ) . $mapping[$class_name] : false;
 
     if ( $file_path && file_exists( $file_path ) && is_file( $file_path ) ) {
         require_once( $file_path );
+        return true;
     }
 
-    return;
+    return false;
 }
 
 
