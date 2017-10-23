@@ -34,28 +34,28 @@ if ( ! class_exists( 'Charitable' ) ) :
         /**
          * Plugin version.
          *
-         * @var     string
+         * @var string
          */
         const VERSION = '1.5.0-beta.2';
 
         /**
          * Version of database schema.
          *
-         * @var     string A date in the format: YYYYMMDD
+         * @var string A date in the format: YYYYMMDD
          */
         const DB_VERSION = '20150615';
 
         /**
          * Campaign post type.
          *
-         * @var     string
+         * @var string
          */
         const CAMPAIGN_POST_TYPE = 'campaign';
 
         /**
          * Donation post type.
          *
-         * @var     string
+         * @var string
          */
         const DONATION_POST_TYPE = 'donation';
 
@@ -113,7 +113,9 @@ if ( ! class_exists( 'Charitable' ) ) :
         /**
          * Donation Fields.
          *
-         * @var Charitable_Donation_Field_Registry
+         * @since 1.5.0
+         *
+         * @var   Charitable_Donation_Field_Registry
          */
         public $donation_fields;
 

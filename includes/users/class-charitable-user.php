@@ -727,15 +727,11 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 			/* If we're updating an active user, set the ID */
 			if ( 0 !== $this->ID ) {
-
 				$values['ID'] = $this->ID;
-
 			}
 
 			foreach ( $core_fields as $field ) {
-
 				$values[ $field ] = $submitted[ $field ];
-
 			}
 
 			/* Insert the user */
@@ -752,7 +748,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 				/**
 				 * `wp_insert_user` calls `sanitize_user` internally - make the
-				 * same call here so `$values[ 'user_login' ]` matches what is
+				 * same call here so `$values['user_login']` matches what is
 				 * eventually saved to the database
 				 */
 				$values['user_login'] = sanitize_user( $values['user_login'], true );

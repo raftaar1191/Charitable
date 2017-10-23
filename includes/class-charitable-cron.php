@@ -2,11 +2,11 @@
 /**
  * Charitable Events
  *
- * @package     Charitable/Classes/Charitable_Cron
- * @version     1.1.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Cron
+ * @version   1.1.0
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly.
@@ -17,23 +17,25 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 	/**
 	 * Charitable_Cron
 	 *
-	 * @since   1.1.0
+	 * @since 1.1.0
 	 */
 	class Charitable_Cron {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Cron|null
+		 * @since 1.1.0
+		 *
+		 * @var   Charitable_Cron|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_Cron
+		 * @return Charitable_Cron
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -46,7 +48,7 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.1.0
+		 * @since  1.1.0
 		 */
 		private function __construct() {
 			add_action( 'charitable_daily_scheduled_events', array( $this, 'check_expired_campaigns' ) );
@@ -55,11 +57,13 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Schedule Charitable event hooks.
 		 *
-		 * @since   1.1.0
+		 * @since  1.1.0
 		 *
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public static function schedule_events() {
+			$ret = false;
+
 			if ( ! wp_next_scheduled( 'charitable_daily_scheduled_events' ) ) {
 				$ret = wp_schedule_event( time(), 'daily', 'charitable_daily_scheduled_events' );
 			}
@@ -70,9 +74,9 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 		/**
 		 * Check for expired campaigns.
 		 *
-		 * @since   1.1.0
+		 * @since  1.1.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function check_expired_campaigns() {
 			$yesterday = date( 'Y-m-d H:i:s', strtotime( '-24 hours' ) );
