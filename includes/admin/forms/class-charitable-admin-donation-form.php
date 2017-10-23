@@ -132,7 +132,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'data-trigger-key'   => '#donor-id',
 					'data-trigger-value' => 'new',
 				);
-			}
+			}			
 
 			/**
 			 * Filter the admin donation form fields.
@@ -162,11 +162,11 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *
 		 * @return array
 		 */
-		public function get_donation_fields() {
+		public function get_donation_fields() {			
 			if ( ! $this->donation ) {
 				$value = array();
 			} else {
-				$value = $this->donation->get_campaign_donations();
+				$value = (array) $this->donation->get_campaign_donations();
 			}
 
 			return array(

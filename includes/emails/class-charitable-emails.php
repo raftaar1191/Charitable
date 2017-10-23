@@ -115,13 +115,34 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 
 				$donation_actions->register( 'resend_' . $email, array(
 					'label'           => $object->get_name(),
-					'callback'        => array( $class, 'resend' ),
+					'callback'        => array( $this, 'resend_email' ),
 					'button_text'     => __( 'Resend Email', 'charitable' ),
 					'active_callback' => array( $class, 'can_be_resent' ),
 					'success_message' => 11,
 					'failed_message'  => 12,
 				), __( 'Resend Donation Emails', 'charitable' ) );
 			}
+		}
+
+		/**
+		 * Resend an email.
+		 *
+		 * This is the callback for all of the resend email actions.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  boolean $success   Whether the action has been successfully completed.
+		 * @param  int     $object_id An object ID.
+		 * @param  array   $args      Mixed set of arguments.
+		 * @param  string  $action    The action we are executing.
+		 * @return boolean
+		 */
+		public function resend_email( $success, $object_id, $args, $action ) {
+			$email  = str_replace( 'resend_', '', $action );
+			$class  = $this->get_email( $email );
+			$object = new $class;
+
+			return $object->resend( $object_id, $args );
 		}
 
 		/**
@@ -199,8 +220,8 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 					continue;
 				}
 
-				$email              = new $class;
-				$emails[$email::ID] = $email->get_name();
+				$email                            = new $class;
+				$emails[ $email->get_email_id() ] = $email->get_name();
 			}
 
 			return $emails;

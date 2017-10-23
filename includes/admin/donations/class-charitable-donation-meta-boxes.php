@@ -115,7 +115,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		 * @return array
 		 */
 		private function get_meta_boxes() {
-			$screen  = get_current_screen();
+			$screen = get_current_screen();
 
 			if ( 'donation' == $screen->post_type && ( 'add' == $screen->action || isset( $_GET['show_form'] ) ) ) {
 				$meta_boxes = $this->get_form_meta_box();
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 			);
 
 			/* Get rid of the donation actions meta box if it doesn't apply to this donation. */
-			if ( empty( charitable_get_donation_actions()->get_available_actions( $post->ID ) ) ) {
+			if ( ! charitable_get_donation_actions()->has_available_actions( $post->ID ) ) {
 				unset( $meta_boxes['donation-actions'] );
 			}
 

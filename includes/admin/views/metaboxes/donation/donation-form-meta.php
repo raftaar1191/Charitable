@@ -2,13 +2,13 @@
 /**
  * Renders the donation form meta box for the Donation post type.
  *
- * @since  1.5.0
- *
- * @author Studio 164a 
+ * @since   1.5.0
+ * @version 1.5.0
+ * @author  Studio 164a 
  */
 
-$form        = $view_args['form'];
-$fields      = $form->get_fields();
+$form   = $view_args['form'];
+$fields = $form->get_fields();
 
 if ( $form->has_donation() ) :
     $button_text = __( 'Update Donation', 'charitable' );

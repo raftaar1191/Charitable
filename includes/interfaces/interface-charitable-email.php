@@ -41,7 +41,7 @@ if ( ! interface_exists( 'Charitable_Email_Interface' ) ) :
          * @param  array $args      Mixed set of arguments.
          * @return boolean
          */
-        public static function resend( $object_id, $args );
+        public static function resend( $object_id, $args = array() );
 
         /**
          * Checks whether an email can be resent.
@@ -52,7 +52,7 @@ if ( ! interface_exists( 'Charitable_Email_Interface' ) ) :
          * @param  array $args      Mixed set of arguments.
          * @return boolean
          */
-        public static function can_be_resent( $object_id, $args );
+        public static function can_be_resent( $object_id, $args = array() );
     }
 
 endif;

@@ -95,8 +95,10 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 				),
 			);
 
-			if ( ! empty( $this->email->get_object_types() ) ) {
-				$fields = array_merge( $fields, array_reduce( $this->email->get_object_types(), array( $this, 'get_object_type_fields' ) ) );    
+			$object_types = $this->email->get_object_types();
+
+			if ( ! empty( $object_types ) ) {
+				$fields = array_merge( $fields, array_reduce( $object_types, array( $this, 'get_object_type_fields' ) ) );
 			}
 
 			$fields = array_merge( $fields, $this->email->email_fields() );

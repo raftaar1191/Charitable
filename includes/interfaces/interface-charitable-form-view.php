@@ -69,7 +69,7 @@ if ( ! interface_exists( 'Charitable_Form_View_Interface' ) ) :
          * @param  array  $args  Mixed array of arguments.
          * @return boolean
          */
-        public function render_field( $field, $key, $args );
+        public function render_field( $field, $key, $args = array() );
     }
 
 endif; // End interface_exists check.

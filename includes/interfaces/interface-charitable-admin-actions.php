@@ -54,7 +54,7 @@ if ( ! interface_exists( 'Charitable_Admin_Actions_Interface' ) ) :
          *                        shown as an optgroup.
          * @return boolean True if the action was registerd. False if not.
          */
-        public function register( $action, $args, $group );
+        public function register( $action, $args, $group = 'default' );
 
         /**
          * Do a particular action.
@@ -66,7 +66,7 @@ if ( ! interface_exists( 'Charitable_Admin_Actions_Interface' ) ) :
          * @param  array  $args      Optional. Mixed set of arguments.
          * @return mixed|WP_Error WP_Error in case of error. Mixed results if the action was performed.
          */
-        public function do_action( $action, $object_id, $args );        
+        public function do_action( $action, $object_id, $args = array() );
     }
 
 endif;

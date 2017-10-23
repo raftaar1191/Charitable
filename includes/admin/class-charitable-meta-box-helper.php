@@ -76,7 +76,7 @@ if ( ! class_exists( 'Charitable_Meta_Box_Helper' ) ) :
 		public function metabox_display( WP_Post $post, array $args ) {	
 			if ( ! isset( $args['args']['view'] ) ) {
 				return;
-			}	
+			}
 
 			$view_args = $args['args'];
 			unset( $view_args['view'] );

@@ -625,11 +625,13 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function where_date( $where_statement ) {
-			if ( empty( $this->get( 'date_query' ) ) ) {
+			$date_args = $this->get( 'date_query' );
+
+			if ( empty( $date_args ) ) {
 				return $where_statement;
 			}
 
-			$date_query = new WP_Date_Query( $this->get( 'date_query' ) );
+			$date_query = new WP_Date_Query( $date_args );
 
 			return $where_statement . $date_query->get_sql();
 		}

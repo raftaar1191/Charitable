@@ -2,9 +2,10 @@
 /**
  * Renders the donation form meta box for the Donation post type.
  *
- * @since  1.5.0
+ * @since   1.5.0
+ * @version 1.5.0
  *
- * @author Studio 164a 
+ * @author  Studio 164a 
  */
 
 $form   = $view_args['form'];

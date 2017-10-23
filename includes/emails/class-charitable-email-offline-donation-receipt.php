@@ -134,12 +134,11 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  boolean $success   Whether the action has been successfully completed.
-		 * @param  int     $object_id An object ID.
-		 * @param  array   $args      Mixed set of arguments.
+		 * @param  int   $object_id An object ID.
+		 * @param  array $args      Mixed set of arguments.
 		 * @return boolean
 		 */
-		public static function resend( $success, $object_id, $args = array() ) {
+		public static function resend( $object_id, $args = array() ) {
 			$donation = charitable_get_donation( $object_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {

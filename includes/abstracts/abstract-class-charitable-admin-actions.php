@@ -93,6 +93,25 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
         }
 
         /**
+         * Check if there are any available actions, given an object id and set of arguments.
+         *
+         * @since  1.5.0
+         *
+         * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+         * @param  array  $args      Optional. Mixed set of arguments.
+         * @return boolean
+         */
+        public function has_available_actions( $object_id, $args = array() ) {
+            foreach ( $this->actions as $action => $action_args ) {
+                if ( $this->is_action_available( $action_args, $object_id, $args ) ) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
          * Checks whether an action is available.
          *
          * @since  1.5.0
@@ -223,7 +242,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
             /**
              * Register the action's callback for the hook.
              */
-            add_filter( $action_hook, $action_args['callback'], 10, 3 );
+            add_filter( $action_hook, $action_args['callback'], 10, 4 );
 
             /**
              * Do something for this action and return a boolean result.
@@ -238,8 +257,9 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
              * @param boolean $success   Whether the action has been successfully completed.
              * @param int     $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
              * @param array   $args      Optional. Mixed set of arguments.
+             * @param string  $action    The action we are executing.
              */            
-            $success = apply_filters( $action_hook, false, $object_id, $args );
+            $success = apply_filters( $action_hook, false, $object_id, $args, $action );
 
             if ( $success && array_key_exists( 'success_message', $action_args ) ) {
                 $this->result_message = $action_args['success_message'];
