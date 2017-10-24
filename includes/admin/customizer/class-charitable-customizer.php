@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 			}
 
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Customizer();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

@@ -62,7 +62,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Admin();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

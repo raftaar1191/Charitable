@@ -222,6 +222,53 @@ module.exports = function(grunt) {
 
     });
 
+    grunt.registerTask( 'classmap', 'Generate class to file array" task.', function() {
+        var map = "<?php \n$mapping = array( \n";
+
+        //loop through all files in logo directory
+        grunt.file.recurse("includes", function (abspath, rootdir, subdir, filename) {
+            
+            var classname = filename.replace('.php', '');
+
+            if( filename.includes('interface') ) {
+                classname = classname.replace('interface-', '') + '_Interface';
+            } else if ( filename.includes('abstract') ) {
+                classname = classname.replace('abstract-class-', '');
+            } else if ( filename.includes('class') ) {
+                classname = classname.replace('class-', '');
+            } else {
+                classname = '';
+            }
+
+            // Ignore function files.
+            if( classname != '' ) {
+
+                // Replace the hyphens - with underderscores and capitalize.
+                classname = classname.replace(/-/g, '_' ).replace(/^\w|\_[a-z]/g, function(letter) {
+                    return letter.toUpperCase();
+                });
+
+                // A few gotchas.
+                classname = classname.replace('_Db', '_DB');
+                classname = classname.replace('_I18n', '_i18n');
+                
+                // Get the path relative to the /includes/ folder.
+                if( typeof subdir != 'undefined' ) {
+                    filename = subdir + '/' + filename;
+                }
+
+            
+                map = map.concat( '"' + classname + '"  =>  "' + filename + '", \n' );
+             
+            }     
+        });
+
+        map = map.concat( ");");
+
+        grunt.file.write('includes/autoloader/charitable-class-map.php', map );
+
+    });
+
 
     // Default task. - grunt watch
     grunt.registerTask( 'default', 'watch' );
@@ -229,7 +276,7 @@ module.exports = function(grunt) {
     // Build task(s).
     grunt.registerTask( 'build-scripts', [ 'uglify' ] );
     grunt.registerTask( 'build-styles', [ 'cssmin' ] );
-    grunt.registerTask( 'build', [ 'uglify', 'cssmin', 'makepot', 'clean', 'copy', 'compress' ] );
+    grunt.registerTask( 'build', [ 'classmap', 'uglify', 'cssmin', 'makepot', 'clean', 'copy', 'compress' ] );
 
     // grunt.registerTask('default', ['watch']);
     // grunt.registerTask('build', ['sync', 'jshint', 'uglify', 'makepot']);

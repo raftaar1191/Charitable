@@ -40,7 +40,7 @@ if ( ! class_exists( 'Charitable_Widgets' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Widgets();
+				self::$instance = new self();
 			}
 
 			return self::$instance;

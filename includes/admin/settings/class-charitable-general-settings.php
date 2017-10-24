@@ -46,7 +46,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_General_Settings();
+				self::$instance = new self();
 			}
 
 			return self::$instance;
