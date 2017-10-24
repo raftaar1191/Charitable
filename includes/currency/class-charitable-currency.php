@@ -95,7 +95,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 
 			$amount = number_format(
 				$amount,
-				$decimal_count,
+				(int) $decimal_count,
 				charitable_get_option( 'decimal_separator', '.' ),
 				charitable_get_option( 'thousands_separator', ',' )
 			);
