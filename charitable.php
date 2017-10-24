@@ -3,7 +3,7 @@
  * Plugin Name:       Charitable
  * Plugin URI:        https://www.wpcharitable.com
  * Description:       The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:           1.5.0-beta.2
+ * Version:           1.5.0-beta.3
  * Author:            WP Charitable
  * Author URI:        https://wpcharitable.com
  * Requires at least: 4.1
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var string
          */
-        const VERSION = '1.5.0-beta.2';
+        const VERSION = '1.5.0-beta.3';
 
         /**
          * Version of database schema.
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var   Charitable_Endpoints|null
          */
-        public $endpoints = null;
+        private $endpoints = null;
   
         /**
          * Donation Fields.
@@ -117,7 +117,16 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var   Charitable_Donation_Field_Registry
          */
-        public $donation_fields;
+        private $donation_fields;
+
+        /**
+         * Classmap.
+         *
+         * @since 1.5.0
+         *
+         * @var   array
+         */
+        private $classmap;
 
         /**
          * Create class instance.
@@ -128,6 +137,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             $this->directory_path = plugin_dir_path( __FILE__ );
             $this->directory_url  = plugin_dir_url( __FILE__ );
             $this->includes_path  = $this->directory_path . 'includes/';
+
+            spl_autoload_register( array( $this, 'autoloader' ) );
 
             $this->load_dependencies();
 
@@ -190,63 +201,56 @@ if ( ! class_exists( 'Charitable' ) ) :
         private function load_dependencies() {
             $includes_path = $this->get_path( 'includes' );
 
-            /* Autoload Mapping */
-            require_once( $includes_path . 'charitable-autoloader.php' ); 
-
-            /* Core Functions */
+            /* Load files with hooks & functions. Classes are autoloaded. */
             require_once( $includes_path . 'charitable-core-functions.php' );
-
-            /* Campaigns */
             require_once( $includes_path . 'campaigns/charitable-campaign-functions.php' );
             require_once( $includes_path . 'campaigns/charitable-campaign-hooks.php' );
-
-            /* Currency */
             require_once( $includes_path . 'currency/charitable-currency-functions.php' );
-
-            /* Deprecated */
             require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
-            require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
-
-            /* Donations */                
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
             require_once( $includes_path . 'donations/charitable-donation-functions.php' );
-            
-            /* Emails */            
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
-
-            /* Endpoints */
             require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
-
-            /* Public */
             require_once( $includes_path . 'public/charitable-template-helpers.php' );        
-
-            /* Shortcodes */
             require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
-
-            /* Users */
 			require_once( $includes_path . 'users/charitable-user-functions.php' );
-
-            /* User Management */
             require_once( $includes_path . 'user-management/charitable-user-management-hooks.php' );            
-
-            /* Utilities */
             require_once( $includes_path . 'utilities/charitable-utility-functions.php' );
+        }
 
-            /**
-             * We are registering this object only for backwards compatibility. It
-             * will be removed in or after Charitable 1.3.
-             *
-             * @deprecated
-             */
-            $this->register_object( Charitable_Emails::get_instance() );
-            $this->register_object( Charitable_Request::get_instance() );
-            $this->register_object( Charitable_Gateways::get_instance() );
-            $this->register_object( Charitable_i18n::get_instance() );
-            $this->register_object( Charitable_Post_Types::get_instance() );
-            $this->register_object( Charitable_Cron::get_instance() );
-            $this->register_object( Charitable_Widgets::get_instance() );
-            $this->register_object( Charitable_Licenses::get_instance() );
-            $this->register_object( Charitable_User_Dashboard::get_instance() );
+        /**
+         * Dynamically loads the class attempting to be instantiated elsewhere in the
+         * plugin by looking at the $class_name parameter being passed as an argument.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $class_name The fully-qualified name of the class to load.
+         * @return boolean
+         */
+        public function autoloader( $class_name ) {
+            /* If the specified $class_name already exists, bail. */
+            if ( class_exists( $class_name ) ) {
+                return false;
+            }
+
+            /* If the specified $class_name does not include our namespace, duck out. */
+            if ( false === strpos( $class_name, 'Charitable_' ) ) {
+                return false;
+            }
+
+            /* Autogenerated class map. */
+            if ( ! isset( $this->classmap ) ) {
+                $this->classmap = include( 'includes/autoloader/charitable-class-map.php' );
+            }
+
+            $file_path = isset( $this->classmap[ $class_name ] ) ? $this->get_path( 'includes' ) . $this->classmap[ $class_name ] : false;
+
+            if ( $file_path && file_exists( $file_path ) && is_file( $file_path ) ) {
+                require_once( $file_path );
+                return true;
+            }
+
+            return false;
         }
 
         /**

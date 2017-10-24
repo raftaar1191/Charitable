@@ -223,7 +223,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask( 'classmap', 'Generate class to file array" task.', function() {
-        var map = "<?php \n$mapping = array( \n";
+        var map = "<?php \nreturn array( \n";
 
         //loop through all files in logo directory
         grunt.file.recurse("includes", function (abspath, rootdir, subdir, filename) {
@@ -234,6 +234,8 @@ module.exports = function(grunt) {
                 classname = classname.replace('interface-', '') + '_Interface';
             } else if ( filename.includes('abstract') ) {
                 classname = classname.replace('abstract-class-', '');
+            } else if ( filename.includes('deprecated-class-' ) ) {
+                classname = classname.replace('deprecated-class-', '');
             } else if ( filename.includes('class') ) {
                 classname = classname.replace('class-', '');
             } else {
@@ -258,7 +260,7 @@ module.exports = function(grunt) {
                 }
 
             
-                map = map.concat( '"' + classname + '"  =>  "' + filename + '", \n' );
+                map = map.concat( '"' + classname + '"  =>  "' + filename + '",\n' );
              
             }     
         });
