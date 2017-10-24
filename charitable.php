@@ -3,7 +3,7 @@
  * Plugin Name:       Charitable
  * Plugin URI:        https://www.wpcharitable.com
  * Description:       The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:           1.5.0-beta.2
+ * Version:           1.5.0-beta.3
  * Author:            WP Charitable
  * Author URI:        https://wpcharitable.com
  * Requires at least: 4.1
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var string
          */
-        const VERSION = '1.5.0-beta.2';
+        const VERSION = '1.5.0-beta.3';
 
         /**
          * Version of database schema.
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var   Charitable_Endpoints|null
          */
-        public $endpoints = null;
+        private $endpoints = null;
   
         /**
          * Donation Fields.
@@ -117,7 +117,16 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @var   Charitable_Donation_Field_Registry
          */
-        public $donation_fields;
+        private $donation_fields;
+
+        /**
+         * Classmap.
+         *
+         * @since 1.5.0
+         *
+         * @var   array
+         */
+        private $classmap;
 
         /**
          * Create class instance.
@@ -128,6 +137,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             $this->directory_path = plugin_dir_path( __FILE__ );
             $this->directory_url  = plugin_dir_url( __FILE__ );
             $this->includes_path  = $this->directory_path . 'includes/';
+
+            spl_autoload_register( array( $this, 'autoloader' ) );
 
             $this->load_dependencies();
 
@@ -190,186 +201,56 @@ if ( ! class_exists( 'Charitable' ) ) :
         private function load_dependencies() {
             $includes_path = $this->get_path( 'includes' );
 
-            /* Interfaces */
-            require_once( $includes_path . 'interfaces/interface-charitable-donation-form.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-email-fields.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-email.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-endpoint.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-field-registry.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-field.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-fields.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-form-view.php' );
-            require_once( $includes_path . 'interfaces/interface-charitable-gateway.php' );
-
-            /* Abstracts */
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-db.php' );
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-donation.php' );
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-email.php' );
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-endpoint.php' );
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-field.php' );
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-form.php');
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-gateway.php');
-            require_once( $includes_path . 'abstracts/abstract-class-charitable-query.php');
-
-            /* Functions & Core Classes */
-            require_once( $includes_path . 'charitable-core-functions.php' );           
-            require_once( $includes_path . 'class-charitable-locations.php' );
-            require_once( $includes_path . 'class-charitable-notices.php' );
-            require_once( $includes_path . 'class-charitable-post-types.php' );
-            require_once( $includes_path . 'class-charitable-request.php' );
-            require_once( $includes_path . 'class-charitable-cron.php' );
-            require_once( $includes_path . 'class-charitable-i18n.php' );
-
-            /* Addons */
-            require_once( $includes_path . 'addons/class-charitable-addons.php' );
-
-            /* Admin - Customizer */
-            require_once( $includes_path . 'admin/customizer/class-charitable-customizer.php' );
-
-            /* Campaigns */
+            /* Load files with hooks & functions. Classes are autoloaded. */
+            require_once( $includes_path . 'charitable-core-functions.php' );
             require_once( $includes_path . 'campaigns/charitable-campaign-functions.php' );
-            require_once( $includes_path . 'campaigns/class-charitable-campaign.php' );
-            require_once( $includes_path . 'campaigns/class-charitable-campaigns.php' );
             require_once( $includes_path . 'campaigns/charitable-campaign-hooks.php' );
-
-            /* Currency */
             require_once( $includes_path . 'currency/charitable-currency-functions.php' );
-            require_once( $includes_path . 'currency/class-charitable-currency.php' );
-
-             /* Database */
-            require_once( $includes_path . 'db/class-charitable-campaign-donations-db.php' );
-            require_once( $includes_path . 'db/class-charitable-donors-db.php' );
-
-            /* Deprecated */
             require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
-            require_once( $includes_path . 'deprecated/deprecated-class-charitable-templates.php' );
-
-            /* Donations */    
-            require_once( $includes_path . 'donations/class-charitable-donation-processor.php' );
-            require_once( $includes_path . 'donations/class-charitable-donation.php' );
-            require_once( $includes_path . 'donations/class-charitable-donation-factory.php' );
-            require_once( $includes_path . 'donations/class-charitable-donations.php' );            
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
             require_once( $includes_path . 'donations/charitable-donation-functions.php' );
-            
-            /* Emails */            
-            require_once( $includes_path . 'emails/class-charitable-emails.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-campaign-end.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-donation-receipt.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-email-verification.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-new-donation.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-notification.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-offline-donation-receipt.php' );
-            require_once( $includes_path . 'emails/class-charitable-email-password-reset.php' );
             require_once( $includes_path . 'emails/charitable-email-hooks.php' );
-
-            /* Email Fields */
-            require_once( $includes_path . 'emails/fields/class-charitable-email-fields.php' );
-            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-donation.php' );
-            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-campaign.php' );
-            require_once( $includes_path . 'emails/fields/class-charitable-email-fields-user.php' );            
-
-            /* Endpoints */
-            require_once( $includes_path . 'endpoints/class-charitable-campaign-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-campaign-donation-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-campaign-widget-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-donation-cancellation-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-donation-processing-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-donation-receipt-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-email-preview-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-email-verification-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-forgot-password-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-login-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-profile-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-registration-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-reset-password-endpoint.php' );
-            require_once( $includes_path . 'endpoints/class-charitable-endpoints.php' );
             require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
-
-            /* Fields */
-            require_once( $includes_path . 'fields/class-charitable-donation-field-registry.php' );
-            require_once( $includes_path . 'fields/class-charitable-donation-field.php' );
-            require_once( $includes_path . 'fields/class-charitable-donation-fields.php' );
-
-            /* Forms */
-            require_once( $includes_path . 'forms/class-charitable-donation-form.php' );
-            require_once( $includes_path . 'forms/class-charitable-donation-amount-form.php' );
-            require_once( $includes_path . 'forms/class-charitable-forgot-password-form.php' );
-            require_once( $includes_path . 'forms/class-charitable-profile-form.php' );
-            require_once( $includes_path . 'forms/class-charitable-registration-form.php' );
-            require_once( $includes_path . 'forms/class-charitable-reset-password-form.php' );
-            require_once( $includes_path . 'forms/views/class-charitable-public-form-view.php' );           
-
-            /* Gateways */
-            require_once( $includes_path . 'gateways/class-charitable-gateways.php' );
-            require_once( $includes_path . 'gateways/class-charitable-gateway-offline.php' );
-            require_once( $includes_path . 'gateways/class-charitable-gateway-paypal.php' );
-
-            /* Licensing */
-            require_once( $includes_path . 'licensing/class-charitable-licenses.php' );
-            require_once( $includes_path . 'licensing/class-charitable-plugin-updater.php' );
-
-            /* Queries */
-            require_once( $includes_path . 'queries/class-charitable-donations-query.php' );
-            require_once( $includes_path . 'queries/class-charitable-donor-query.php' );
-
-            /* Users */
-            require_once( $includes_path . 'users/charitable-user-functions.php' );
-            require_once( $includes_path . 'users/class-charitable-user.php' );
-            require_once( $includes_path . 'users/class-charitable-roles.php' );
-            require_once( $includes_path . 'users/class-charitable-donor.php' );
-
-            /* Public */
-            require_once( $includes_path . 'public/charitable-template-helpers.php' );
-            require_once( $includes_path . 'public/class-charitable-session.php' );
-            require_once( $includes_path . 'public/class-charitable-table-helper.php' );
-            require_once( $includes_path . 'public/class-charitable-template.php' );
-            require_once( $includes_path . 'public/class-charitable-template-part.php' );
-            require_once( $includes_path . 'public/class-charitable-ghost-page.php' );
-            require_once( $includes_path . 'public/class-charitable-user-dashboard.php' );          
-
-            /* Shortcodes */
-            require_once( $includes_path . 'shortcodes/class-charitable-campaigns-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-donors-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-my-donations-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-donation-form-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-donation-receipt-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-login-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-registration-shortcode.php' );
-            require_once( $includes_path . 'shortcodes/class-charitable-profile-shortcode.php' );   
-            require_once( $includes_path . 'shortcodes/class-charitable-email-shortcode.php' );
+            require_once( $includes_path . 'public/charitable-template-helpers.php' );        
             require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
-
-            /* Widgets */
-            require_once( $includes_path . 'widgets/class-charitable-widgets.php' );
-            require_once( $includes_path . 'widgets/class-charitable-campaign-terms-widget.php' );
-            require_once( $includes_path . 'widgets/class-charitable-campaigns-widget.php' );
-            require_once( $includes_path . 'widgets/class-charitable-donors-widget.php' );
-            require_once( $includes_path . 'widgets/class-charitable-donate-widget.php' );
-            require_once( $includes_path . 'widgets/class-charitable-donation-stats-widget.php' );
-
-            /* User Management */
-            require_once( $includes_path . 'user-management/class-charitable-user-management.php' );
+			require_once( $includes_path . 'users/charitable-user-functions.php' );
             require_once( $includes_path . 'user-management/charitable-user-management-hooks.php' );            
-
-            /* Utilities */
             require_once( $includes_path . 'utilities/charitable-utility-functions.php' );
+        }
 
-            /**
-             * We are registering this object only for backwards compatibility. It
-             * will be removed in or after Charitable 1.3.
-             *
-             * @deprecated
-             */
-            $this->register_object( Charitable_Emails::get_instance() );
-            $this->register_object( Charitable_Request::get_instance() );
-            $this->register_object( Charitable_Gateways::get_instance() );
-            $this->register_object( Charitable_i18n::get_instance() );
-            $this->register_object( Charitable_Post_Types::get_instance() );
-            $this->register_object( Charitable_Cron::get_instance() );
-            $this->register_object( Charitable_Widgets::get_instance() );
-            $this->register_object( Charitable_Licenses::get_instance() );
-            $this->register_object( Charitable_User_Dashboard::get_instance() );
+        /**
+         * Dynamically loads the class attempting to be instantiated elsewhere in the
+         * plugin by looking at the $class_name parameter being passed as an argument.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $class_name The fully-qualified name of the class to load.
+         * @return boolean
+         */
+        public function autoloader( $class_name ) {
+            /* If the specified $class_name already exists, bail. */
+            if ( class_exists( $class_name ) ) {
+                return false;
+            }
+
+            /* If the specified $class_name does not include our namespace, duck out. */
+            if ( false === strpos( $class_name, 'Charitable_' ) ) {
+                return false;
+            }
+
+            /* Autogenerated class map. */
+            if ( ! isset( $this->classmap ) ) {
+                $this->classmap = include( 'includes/autoloader/charitable-class-map.php' );
+            }
+
+            $file_path = isset( $this->classmap[ $class_name ] ) ? $this->get_path( 'includes' ) . $this->classmap[ $class_name ] : false;
+
+            if ( $file_path && file_exists( $file_path ) && is_file( $file_path ) ) {
+                require_once( $file_path );
+                return true;
+            }
+
+            return false;
         }
 
         /**

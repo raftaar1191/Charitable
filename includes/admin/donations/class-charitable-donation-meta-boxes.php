@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Donation_Meta_Boxes(
+				self::$instance = new self(
 					new Charitable_Meta_Box_Helper( 'charitable-donation' )
 				);
 			}

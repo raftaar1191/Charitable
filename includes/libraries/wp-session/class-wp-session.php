@@ -55,7 +55,7 @@ final class WP_Session extends Recursive_ArrayAccess {
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
-			self::$instance = new WP_Session();
+			self::$instance = new self();
 		}
 
 		return self::$instance;

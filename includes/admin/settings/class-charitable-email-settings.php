@@ -38,7 +38,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
-				self::$instance = new Charitable_Email_Settings();
+				self::$instance = new self();
 			}
 
 			return self::$instance;
