@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Account
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.5.0
  */
 
 // Exit if accessed directly.
@@ -18,3 +18,6 @@ $message = isset( $view_args['logged_in_message'] )
 	: __( 'You are already logged in!', 'charitable' );
 
 echo wpautop( $message );
+
+?>
+<a href="<?php echo wp_logout_url( charitable_get_current_url() ) ?>"><?php _e( 'Logout.', 'charitable' ) ?></a>

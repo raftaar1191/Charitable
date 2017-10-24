@@ -555,7 +555,7 @@ if ( ! function_exists( 'charitable_template_campaign_loop_donate_link' ) ) :
 	 * @param   mixed[]             $args     Optional arguments.
 	 * @return  void
 	 */
-	function charitable_template_campaign_loop_donate_link( $campaign, $args = array() ) {
+	function charitable_template_campaign_loop_donate_link( $campaign, $args = array() ) {		
 		if ( isset( $args['button'] ) && 'donate' != $args['button'] ) {
 			return;
 		}
