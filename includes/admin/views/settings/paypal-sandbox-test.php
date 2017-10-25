@@ -52,13 +52,11 @@ endif ?>
 		<input type="hidden" name="item_name" value="<?php esc_attr_e( 'Sandbox Test Donation', 'charitable' ) ?>" />
 		<input type="hidden" name="no_shipping" value="1" />
 		<input type="hidden" name="shipping" value="0" />
-		<input type="hidden" name="no_note" value="1" />
 		<input type="hidden" name="currency_code" value="<?php echo esc_attr( charitable_get_currency() ) ?>" />
 		<input type="hidden" name="charset" value="<?php echo esc_attr( get_bloginfo( 'charset' ) ) ?>" />
 		<input type="hidden" name="rm" value="2" />
 		<input type="hidden" name="return" value="<?php echo esc_url( $return_url ) ?>" />
 		<input type="hidden" name="notify_url" value="<?php echo esc_url( $notify_url ) ?>" />
-		<input type="hidden" name="cbt" value="<?php echo esc_attr( get_bloginfo( 'name' ) ) ?>" />
 		<input type="hidden" name="bn" value="Charitable_SP" />
 		<input type="hidden" name="cmd" value="<?php echo $mode ?>" />
 		<input type="hidden" name="country" value="<?php echo esc_attr( charitable_get_option( 'country', 'AU' ) ) ?>" />        
