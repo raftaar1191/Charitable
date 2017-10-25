@@ -152,7 +152,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'item_name'     => html_entity_decode( $donation->get_campaigns_donated_to(), ENT_COMPAT, 'UTF-8' ),
 				'no_shipping'   => '1',
 				'shipping'      => '0',
-				'no_note'       => '1',
 				'currency_code' => charitable_get_currency(),
 				'charset'       => get_bloginfo( 'charset' ),
 				// 'custom'        => json_encode( array( 'donation_id' => $donation_id, 'donation_key' => $donation_key ) ),
@@ -161,7 +160,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'return'        => charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $donation_id ) ),
 				'cancel_return' => charitable_get_permalink( 'donation_cancel_page', array( 'donation_id' => $donation_id ) ),
 				'notify_url'    => charitable_get_ipn_url( Charitable_Gateway_Paypal::ID ),
-				'cbt'           => get_bloginfo( 'name' ),
 				'bn'            => 'Charitable_SP',
 				'cmd'           => 'donations' == $transaction_mode ? '_donations' : '_xclick',
 			), $donation_id, $processor );
