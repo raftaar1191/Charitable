@@ -130,7 +130,7 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 	 */
 	function test_comments_disabled_on_donation_receipt_page() {
 
-		charitable()->get_endpoints()->setup_rewrite_rules();
+		charitable()->endpoints()->setup_rewrite_rules();
 
 		$this->set_charitable_option( 'donation_form_display', 'separate_page' );
 
@@ -149,7 +149,7 @@ class Test_Charitable_Public extends Charitable_UnitTestCase {
 	 */
 	function test_comments_disabled_on_donation_processing_page() {
 
-		charitable()->get_endpoints()->setup_rewrite_rules();
+		charitable()->endpoints()->setup_rewrite_rules();
 
 		$this->set_charitable_option( 'donation_form_display', 'separate_page' );
 

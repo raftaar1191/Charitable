@@ -41,6 +41,7 @@ return array(
 "Charitable_Upgrade_Page"  =>  "admin/upgrades/class-charitable-upgrade-page.php",
 "Charitable_Upgrade"  =>  "admin/upgrades/class-charitable-upgrade.php",
 "Charitable_Map"  =>  "autoloader/charitable-class-map.php",
+"Charitable_Registry"  =>  "autoloader/class-charitable-registry.php",
 "Charitable_Campaign"  =>  "campaigns/class-charitable-campaign.php",
 "Charitable_Campaigns"  =>  "campaigns/class-charitable-campaigns.php",
 "Charitable_Cron"  =>  "class-charitable-cron.php",

@@ -2,11 +2,12 @@
 /**
  * Class that sets up the Charitable Admin functionality.
  *
- * @package     Charitable/Classes/Charitable_Admin
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Admin 
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -18,7 +19,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 	 * Charitable_Admin
 	 *
 	 * @final
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Admin {
 

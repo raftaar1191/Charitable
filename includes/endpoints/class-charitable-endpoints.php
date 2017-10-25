@@ -22,19 +22,27 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 	class Charitable_Endpoints {
 
 		/**
-		 * @var 	Charitable_Endpoint[]
+		 * Registered endpoints.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   Charitable_Endpoint[]
 		 */
 		protected $endpoints;
 
 		/**
-		 * @var 	string
+		 * Current endpoint.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   string
 		 */
 		protected $current_endpoint;
 
 		/**
 		 * Create class object.
 		 *
-		 * @since  1.5.0
+		 * @since 1.5.0
 		 */
 		public function __construct() {
 			$this->endpoints = array();
@@ -89,6 +97,19 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				$default = $this->endpoints[ $endpoint ]->get_page_url( $args );
 			}
 
+			/**
+			 * Filter the URL of a particular endpoint.
+			 *
+			 * The hook takes the format of charitable_permalink_{endpoint}_page. For example,
+			 * for the campaign_donation endpoint, the hook is:
+			 *
+			 * charitable_permalink_campaign_donation_page
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $default The endpoint's URL.
+			 * @param array  $args    Mixed set of arguments.
+			 */
 			return apply_filters( 'charitable_permalink_' . $endpoint . '_page', $default, $args );
 		}
 
@@ -109,6 +130,19 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				$default = $this->endpoints[ $endpoint ]->is_page( $args );
 			}
 
+			/**
+			 * Return whether we are currently viewing a particular endpoint.
+			 *
+			 * The hook takes the format of charitable_is_page_{endpoint}_page. For example,
+			 * for the campaign_donation endpoint, the hook is:
+			 *
+			 * charitable_is_page_campaign_donation_page
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $default Whether we are currently on the endpoint.
+			 * @param array   $args    Mixed set of arguments.
+			 */
 			return apply_filters( 'charitable_is_page_' . $endpoint . '_page', $default, $args );
 		}
 
@@ -134,7 +168,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				return $default_template;
 			}
 
-			return $this->endpoints[ $endpoint ]->get_endpoint_template( $default_template );
+			return $this->endpoints[ $endpoint ]->get_template( $default_template );
 		}
 
 		/**

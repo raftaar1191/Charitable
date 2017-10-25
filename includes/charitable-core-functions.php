@@ -77,28 +77,11 @@ function charitable_get_option( $key, $default = false, $settings = array() ) {
  *
  * @since  1.0.0
  *
- * @param  string $class_key
- * @return mixed
+ * @param  string $class_key The class to get an object for.
+ * @return mixed|false
  */
 function charitable_get_helper( $class_key ) {
-	if ( false !== strpos( $class_key, '_' ) ) {
-
-		$class_words = str_replace( '_', ' ', $class_key );
-
-	} else {
-
-		$class_words = $class_key;
-
-	}
-
-	$class_words = ucwords( $class_words );
-	$class_name = 'Charitable_' . str_replace( ' ', '_', $class_words );
-
-	if ( ! class_exists( $class_name ) ) {
-		return false;
-	}
-
-	return charitable()->get_registered_object( $class_name );
+	return charitable()->registry()->get( $class_key );
 }
 
 /**
@@ -109,7 +92,7 @@ function charitable_get_helper( $class_key ) {
  * @return Charitable_Notices
  */
 function charitable_get_notices() {
-	return Charitable_Notices::get_instance();
+	return charitable()->registry()->get( 'notices' );
 }
 
 /**
@@ -120,7 +103,7 @@ function charitable_get_notices() {
  * @return Charitable_Donation_Processor
  */
 function charitable_get_donation_processor() {
-	return Charitable_Donation_Processor::get_instance();
+	return charitable()->registry()->get( 'donation_processor' );
 }
 
 /**
@@ -131,7 +114,7 @@ function charitable_get_donation_processor() {
  * @return Charitable_Locations
  */
 function charitable_get_location_helper() {
-	return Charitable_Locations::get_instance();
+	return charitable()->registry()->get( 'locations' );
 }
 
 /**
@@ -142,7 +125,7 @@ function charitable_get_location_helper() {
  * @return Charitable_Session
  */
 function charitable_get_session() {
-	return Charitable_Session::get_instance();
+	return charitable()->registry()->get( 'session' );
 }
 
 /**
@@ -153,7 +136,7 @@ function charitable_get_session() {
  * @return Charitable_Request
  */
 function charitable_get_request() {
-	return Charitable_Request::get_instance();
+	return charitable()->registry()->get( 'request' );
 }
 
 /**
@@ -164,7 +147,7 @@ function charitable_get_request() {
  * @return Charitable_User_Dashboard
  */
 function charitable_get_user_dashboard() {
-	return Charitable_User_Dashboard::get_instance();
+	return charitable()->registry()->get( 'user_dashboard' );
 }
 
 /**
@@ -211,9 +194,5 @@ function charitable_get_action_args( $args ) {
  * @return Charitable_Deprecated
  */
 function charitable_get_deprecated() {
-	if ( ! class_exists( 'Charitable_Deprecated' ) ) {
-		require_once( charitable()->get_path( 'includes' ) . 'deprecated/class-charitable-deprecated.php' );
-	}
-
-	return Charitable_Deprecated::get_instance();
+	return charitable()->registry()->get( 'deprecated' );
 }

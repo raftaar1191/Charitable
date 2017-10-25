@@ -2,11 +2,12 @@
 /**
  * Charitable Donation Functions.
  *
- * @package     Charitable/Functions/Donation
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Donation 
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -39,7 +40,7 @@ function charitable_get_donation( $donation_id, $force = false ) {
 	$donation = wp_cache_get( $donation_id, 'charitable_donation', $force );
 
 	if ( ! $donation ) {
-		$donation = charitable()->donation_factory->get_donation( $donation_id );
+		$donation = charitable()->registry()->get( 'donation_factory' )->get_donation( $donation_id );
 		wp_cache_set( $donation_id, $donation, 'charitable_donation' );
 	}
 
@@ -166,7 +167,14 @@ function charitable_ipn_listener() {
 	if ( isset( $_GET['charitable-listener'] ) ) {
 
 		$gateway = $_GET['charitable-listener'];
+
+		/**
+		 * Handle a gateway's IPN.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'charitable_process_ipn_' . $gateway );
+
 		return true;
 	}
 
@@ -183,7 +191,6 @@ function charitable_ipn_listener() {
  * @return boolean Whether this is after a donation.
  */
 function charitable_is_after_donation() {
-
 	if ( is_admin() ) {
 		return false;
 	}
@@ -194,12 +201,17 @@ function charitable_is_after_donation() {
 		return false;
 	}
 
+	/**
+	 * Do something on a user's first page load after a donation has been made.
+	 *
+	 * @since 1.3.6
+	 *
+	 * @param Charitable_Donation_Processor $processor The instance of `Charitable_Donation_Processor`.
+	 */
 	do_action( 'charitable_after_donation', $processor );
 
 	foreach ( $processor->get_campaign_donations_data() as $campaign_donation ) {
-
 		charitable_get_session()->remove_donation( $campaign_donation['campaign_id'] );
-
 	}
 
 	delete_transient( 'charitable_donation_' . charitable_get_session()->get_session_id() );
@@ -230,6 +242,13 @@ function charitable_is_valid_donation_status( $status ) {
  * @return string[]
  */
 function charitable_get_approval_statuses() {
+	/**
+	 * Filter the list of donation statuses that we consider "approved".
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string[] $statuses List of statuses.
+	 */
 	return apply_filters( 'charitable_approval_donation_statuses', array( 'charitable-completed' ) );
 }
 
@@ -360,8 +379,8 @@ function charitable_get_donation_gateway( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  mixed   $value
- * @param  string  $key
+ * @param  mixed  $value
+ * @param  string $key
  * @return mixed
  */
 function charitable_sanitize_donation_meta( $value, $key ) {
@@ -371,7 +390,29 @@ function charitable_sanitize_donation_meta( $value, $key ) {
 		}
 	}
 
-	return apply_filters( 'charitable_sanitize_donation_meta-' . $key, $value );
+	/**
+	 * Deprecated hook for filtering donation meta.
+	 *
+	 * @since 1.0.0
+	 * @since 1.5.0 Deprecated.
+	 *
+	 * @param mixed $value The value of the donation meta field.
+	 */
+	$value = apply_filters( 'charitable_sanitize_donation_meta-' . $key, $value );
+
+	/**
+	 * Filter donation meta.
+	 *
+	 * This hook takes the form of charitable_sanitize_donation_meta_{key}.
+	 * For example, to filter the `donation_gateway` meta, the hook would be:
+	 *
+	 * charitable_sanitize_donation_meta_doantion_gateway
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param mixed $value The value of the donation meta field.
+	 */
+	return apply_filters( 'charitable_sanitize_donation_meta_' . $key, $value );
 }
 
 /**
@@ -391,6 +432,13 @@ function charitable_flush_campaigns_donation_cache( $donation_id ) {
 
 	wp_cache_delete( $donation_id, 'charitable_donation' );
 
+	/**
+	 * Do something when the donation cache is flushed.
+	 *
+	 * @since 1.4.18
+	 *
+	 * @param int $donation_id The donation ID.
+	 */
 	do_action( 'charitable_flush_donation_cache', $donation_id );
 }
 

@@ -83,23 +83,21 @@ if ( ! class_exists( 'Charitable' ) ) :
         /**
          * Directory path for the includes folder of the plugin.
          *
-         * @var     string
+         * @since 1.0.0
+         *
+         * @var   string
          */
         private $includes_path;
 
         /**
          * Store of registered objects.
          *
-         * @var     array
+         * @since 1.0.0
+         * @since 1.5.0 Changed to Charitable_Registry object. Previously it was an array.
+         * 
+         * @var   Charitable_Registry
          */
         private $registry;
-
-        /**
-         * Donation factory instance.
-         *
-         * @var Charitable_Donation_Factory
-         */
-        public $donation_factory = null;
 
         /**
          * Endpoints registry object.
@@ -177,8 +175,8 @@ if ( ! class_exists( 'Charitable' ) ) :
             /* Set static instance. */
             self::$instance = $this;
 
-            /* Factory to create new donation instances. */
-            $this->donation_factory = new Charitable_Donation_Factory();
+            /* Set up the registry and instantiate objects we need straight away. */
+            $this->registry();
 
             $this->maybe_start_ajax();
 
@@ -227,7 +225,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @param  string $class_name The fully-qualified name of the class to load.
          * @return boolean
          */
-        public function autoloader( $class_name ) {
+        public function autoloader( $class_name ) {            
             /* If the specified $class_name already exists, bail. */
             if ( class_exists( $class_name ) ) {
                 return false;
@@ -254,6 +252,31 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
+         * Returns a registered class object.
+         *
+         * @since  1.5.0
+         *
+         * @param  string $class_key The class to return.
+         * @return Charitable_Registry
+         */
+        public function registry() {
+            if ( ! isset( $this->registry ) ) {
+                $this->registry = new Charitable_Registry();
+                $this->registry->register_object( Charitable_Emails::get_instance() );
+                $this->registry->register_object( Charitable_Request::get_instance() );
+                $this->registry->register_object( Charitable_Gateways::get_instance() );
+                $this->registry->register_object( Charitable_i18n::get_instance() );
+                $this->registry->register_object( Charitable_Post_Types::get_instance() );
+                $this->registry->register_object( Charitable_Cron::get_instance() );
+                $this->registry->register_object( Charitable_Widgets::get_instance() );
+                $this->registry->register_object( Charitable_Licenses::get_instance() );
+                $this->registry->register_object( Charitable_User_Dashboard::get_instance() );
+            }
+
+            return $this->registry;
+        }
+
+        /**
          * Set up hook and filter callback functions.
          *
          * @since  1.0.0
@@ -264,7 +287,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             add_action( 'wpmu_new_blog', array( $this, 'maybe_activate_charitable_on_new_site' ) );
             add_action( 'plugins_loaded', array( $this, 'charitable_install' ), 100 );
             add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
-            add_action( 'plugins_loaded', array( $this, 'setup_endpoints' ), 100 );
+            add_action( 'plugins_loaded', array( $this, 'endpoints' ), 100 );
             add_action( 'plugins_loaded', array( $this, 'donation_fields' ), 100 );
             add_action( 'plugins_loaded', array( $this, 'load_plugin_compat_files' ) );
             add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
@@ -282,23 +305,17 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @since  1.0.0
          *
-         * @return void
+         * @return Charitable_Admin|false
          */
         private function maybe_start_admin() {
             if ( ! is_admin() ) {
-                return;
+                return false;
             }
 
             require_once( $this->get_path( 'admin' ) . 'class-charitable-admin.php' );
             require_once( $this->get_path( 'admin' ) . 'charitable-admin-hooks.php' );
 
-            /**
-             * We are registering this object only for backwards compatibility. It
-             * will be removed in or after Charitable 1.3.
-             *
-             * @deprecated
-             */
-            $this->register_object( Charitable_Admin::get_instance() );
+            return $this->registry->get( 'admin' );
         }
 
         /**
@@ -306,22 +323,16 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @since  1.0.0
          *
-         * @return void
+         * @return Charitable_Public|false
          */
         private function maybe_start_public() {
             if ( is_admin() && ! $this->is_ajax() ) {
-                return;
+                return false;
             }
 
             require_once( $this->get_path( 'public' ) . 'class-charitable-public.php' );
 
-            /**
-             * We are registering this object only for backwards compatibility. It
-             * will be removed in or after Charitable 1.3.
-             *
-             * @deprecated
-             */
-            $this->register_object( Charitable_Public::get_instance() );
+            return $this->registry->get( 'public' );
         }
 
         /**
@@ -376,14 +387,6 @@ if ( ! class_exists( 'Charitable' ) ) :
 
             require_once( $this->get_path( 'includes' ) . 'ajax/charitable-ajax-functions.php' );
             require_once( $this->get_path( 'includes' ) . 'ajax/charitable-ajax-hooks.php' );
-
-            /**
-             * We are registering this object only for backwards compatibility. It
-             * will be removed in or after Charitable 1.3.
-             *
-             * @deprecated
-             */
-            $this->register_object( Charitable_Session::get_instance() );
         }
 
         /**
@@ -397,80 +400,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
         public function charitable_start() {
             do_action( 'charitable_start', $this );
-        }
-
-        /**
-         * Set up the default donation fields.
-         *
-         * @since  1.5.0
-         *
-         * @return Charitable_Donation_Field_Registry
-         */
-        public function donation_fields() {
-            if ( ! isset( $this->donation_fields ) ) {
-                /* Instantiate Registry and set default sections. */
-                $this->donation_fields = new Charitable_Donation_Field_Registry();
-                $this->donation_fields->set_default_section( 'user', 'public' );
-                $this->donation_fields->set_default_section( 'user', 'admin' );
-
-                $fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
-
-                foreach ( $fields as $key => $args ) {
-                    $this->donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );
-                }
-            }
-
-            return $this->donation_fields;
-        }
-
-        /**
-         * Setup the Endpoints API.
-         *
-         * @since  1.5.0
-         *
-         * @return void
-         */
-        public function setup_endpoints() {
-            $api = $this->get_endpoints();
-
-            /**
-             * The order in which we register endpoints is important, because
-             * it determines the order in which the endpoints are checked to
-             * find whether they are the current page.
-             *
-             * Any endpoint that builds on another endpoint should be registered
-             * BEFORE the endpoint it builds on. In other words, move from
-             * most specific to least specific.
-             */
-            $api->register( new Charitable_Campaign_Donation_Endpoint );
-            $api->register( new Charitable_Campaign_Widget_Endpoint );
-            $api->register( new Charitable_Campaign_Endpoint );
-            $api->register( new Charitable_Donation_Cancellation_Endpoint );
-            $api->register( new Charitable_Donation_Processing_Endpoint );
-            $api->register( new Charitable_Donation_Receipt_Endpoint );
-            $api->register( new Charitable_Email_Preview_Endpoint );
-            $api->register( new Charitable_Email_Verification_Endpoint );
-            $api->register( new Charitable_Registration_Endpoint );
-            $api->register( new Charitable_Forgot_Password_Endpoint );            
-            $api->register( new Charitable_Reset_Password_Endpoint );            
-            $api->register( new Charitable_Login_Endpoint );
-            $api->register( new Charitable_Profile_Endpoint );
-        }
-
-        /**
-         * Return the Endpoints API object.
-         *
-         * @since  1.5.0
-         *
-         * @return Charitable_Endpoints
-         */
-        public function get_endpoints() {
-            if ( is_null( $this->endpoints ) ) {
-                $this->endpoints = new Charitable_Endpoints();
-            }
-
-            return $this->endpoints;
-        }
+        }        
 
         /**
          * Load plugin compatibility files on plugins_loaded hook.
@@ -577,36 +507,6 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
-         * Stores an object in the plugin's registry.
-         *
-         * @since  1.0.0
-         *
-         * @param  mixed $object Object to be registered.
-         * @return void
-         */
-        public function register_object( $object ) {
-            if ( ! is_object( $object ) ) {
-                return;
-            }
-
-            $class = get_class( $object );
-
-            $this->registry[ $class ] = $object;
-        }
-
-        /**
-         * Returns a registered object.
-         *
-         * @since  1.0.0
-         *
-         * @param  string $class The type of class you want to retrieve.
-         * @return mixed The object if it's registered. Otherwise false.
-         */
-        public function get_registered_object( $class ) {
-            return isset( $this->registry[ $class ] ) ? $this->registry[ $class ] : false;
-        }
-
-        /**
          * Returns plugin paths.
          *
          * @since  1.0.0
@@ -670,6 +570,92 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
+         * Get the donation fields registry
+         *
+         * If the registry has not been set up yet, this will also
+         * perform the task of setting it up initially.
+         *
+         * This method is called on the plugins_loaded hook.
+         *
+         * @since  1.5.0
+         *
+         * @return Charitable_Donation_Field_Registry
+         */
+        public function donation_fields() {
+            if ( ! $this->registry->has( 'donation_field_registry' ) ) {
+                $donation_fields = new Charitable_Donation_Field_Registry();
+                $donation_fields->set_default_section( 'user', 'public' );
+                $donation_fields->set_default_section( 'user', 'admin' );
+
+                $fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+
+                foreach ( $fields as $key => $args ) {
+                    $donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );
+                }
+
+                $this->registry->register_object( $donation_fields );
+            }
+
+            return $this->registry->get( 'donation_field_registry' );
+        }
+
+        /**
+         * Return the Endpoints API object.
+         *
+         * If the Endpoints API has not been set up yet, this will also
+         * perform the task of setting it up initially.
+         *
+         * This method is called on the plugins_loaded hook.
+         *
+         * @since  1.5.0
+         *
+         * @return Charitable_Endpoints
+         */
+        public function endpoints() {
+            if ( ! $this->registry->has( 'endpoints' ) ) {
+                /**
+                 * The order in which we register endpoints is important, because
+                 * it determines the order in which the endpoints are checked to
+                 * find whether they are the current page.
+                 *
+                 * Any endpoint that builds on another endpoint should be registered
+                 * BEFORE the endpoint it builds on. In other words, move from
+                 * most specific to least specific.
+                 */
+                $endpoints = new Charitable_Endpoints();
+                $endpoints->register( new Charitable_Campaign_Donation_Endpoint );
+                $endpoints->register( new Charitable_Campaign_Widget_Endpoint );
+                $endpoints->register( new Charitable_Campaign_Endpoint );
+                $endpoints->register( new Charitable_Donation_Cancellation_Endpoint );
+                $endpoints->register( new Charitable_Donation_Processing_Endpoint );
+                $endpoints->register( new Charitable_Donation_Receipt_Endpoint );
+                $endpoints->register( new Charitable_Email_Preview_Endpoint );
+                $endpoints->register( new Charitable_Email_Verification_Endpoint );
+                $endpoints->register( new Charitable_Registration_Endpoint );
+                $endpoints->register( new Charitable_Forgot_Password_Endpoint );
+                $endpoints->register( new Charitable_Reset_Password_Endpoint );
+                $endpoints->register( new Charitable_Login_Endpoint );
+                $endpoints->register( new Charitable_Profile_Endpoint );
+
+                $this->registry->register_object( $endpoints );
+            }
+
+            return $this->registry->get( 'endpoints' );
+        }
+
+        /**
+         * Returns a registered object.
+         *
+         * @since  1.0.0
+         *
+         * @param  string $class The type of class to be retrieved.
+         * @return mixed The object if it's registered. Otherwise false.
+         */
+        public function get_registered_object( $class ) {
+            return $this->registry->get( $class );
+        }
+
+        /**
          * Returns the public class.
          *
          * @since  1.0.0
@@ -677,7 +663,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @return Charitable_Public
          */
         public function get_public() {
-            return $this->get_registered_object( 'Charitable_Public' );
+            return $this->registry->get( 'Charitable_Public' );
         }
 
         /**
@@ -688,7 +674,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @return Charitable_Admin
          */
         public function get_admin() {
-            return $this->get_registered_object( 'Charitable_Admin' );
+            return $this->registry->get( 'Charitable_Admin' );
         }
 
         /**
@@ -699,14 +685,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @return Charitable_Request
          */
         public function get_request() {
-            $request = $this->get_registered_object( 'Charitable_Request' );
-
-            if ( false === $request ) {
-                $request = new Charitable_Request();
-                $this->register_object( $request );
-            }
-
-            return $request;
+            return $this->registry->get( 'Charitable_Request' );
         }
 
         /**
@@ -729,16 +708,7 @@ if ( ! class_exists( 'Charitable' ) ) :
                 return null;
             }
 
-            $class_name = $tables[ $table ];
-
-            $db_table = $this->get_registered_object( $class_name );
-
-            if ( false === $db_table ) {
-                $db_table = new $class_name;
-                $this->register_object( $db_table );
-            }
-
-            return $db_table;
+            return $this->registry->get( $tables[ $table ] );
         }
 
         /**
@@ -831,6 +801,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 
                 $action = $_REQUEST['charitable_action'];
 
+                /**
+                 * Handle Charitable action.
+                 *
+                 * @since 1.0.0
+                 */
                 do_action( 'charitable_' . $action );
             }
         }
@@ -872,7 +847,28 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
 
         /**
-         * @deprecated
+         * Stores an object in the plugin's registry.
+         *
+         * @deprecated 1.8.0
+         *
+         * @since  1.0.0
+         * @since  1.5.0 Deprecated.
+         *
+         * @param  mixed $object Object to be registered.
+         * @return void
+         */
+        public function register_object( $object ) {
+            charitable_get_deprecated()->deprecated_function(
+                __METHOD__,
+                '1.5.0',
+                'charitable()->registry()->register_object()'
+            );
+
+            return $this->registry->register_object( $object );
+        }
+
+        /**
+         * @deprecated 1.7.0
          */
         public function get_currency_helper() {
             charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_get_currency_helper' );
@@ -880,7 +876,7 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
-         * @deprecated
+         * @deprecated 1.6.0
          */
         public function get_location_helper() {
             charitable_get_deprecated()->deprecated_function( __METHOD__, '1.2.0', 'charitable_get_location_helper' );

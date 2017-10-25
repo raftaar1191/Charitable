@@ -163,7 +163,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
      * @covers Charitable::setup_endpoints()
      */
     public function test_is_donate_endpoint_added() {
-        charitable()->get_endpoints()->setup_rewrite_rules();
+        charitable()->endpoints()->setup_rewrite_rules();
         $this->assertContains( 'donate', $GLOBALS['wp']->public_query_vars );
     }
 
@@ -171,7 +171,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
      * @covers Charitable::setup_endpoints()
      */
     public function test_is_widget_endpoint_added() {
-        charitable()->get_endpoints()->setup_rewrite_rules();
+        charitable()->endpoints()->setup_rewrite_rules();
         $this->assertContains( 'widget', $GLOBALS['wp']->public_query_vars );
     }
 
@@ -179,7 +179,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
      * @covers Charitable::setup_endpoints()
      */
     public function test_is_donation_receipt_endpoint_added() {
-        charitable()->get_endpoints()->setup_rewrite_rules();
+        charitable()->endpoints()->setup_rewrite_rules();
         $this->assertContains( 'donation_receipt', $GLOBALS['wp']->public_query_vars );
     }
 
@@ -187,7 +187,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
      * @covers Charitable::setup_endpoints()
      */
     public function test_is_donation_processing_endpoint_added() {
-        charitable()->get_endpoints()->setup_rewrite_rules();
+        charitable()->endpoints()->setup_rewrite_rules();
         $this->assertContains( 'donation_processing', $GLOBALS['wp']->public_query_vars );
     }
 }

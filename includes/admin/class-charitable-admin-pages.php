@@ -118,38 +118,47 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 			$campaign_post_type = get_post_type_object( 'campaign' );
 			$donation_post_type = get_post_type_object( 'donation' );
 
+			/**
+			 * Filter the list of submenu pages that come
+			 * under the Charitable menu tab.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $pages Every page is an array with at least a page_title,
+			 *                     menu_title and menu_slug set.
+			 */
 			return apply_filters( 'charitable_submenu_pages', array(
 				array(
-					'page_title'    => $campaign_post_type->labels->menu_name,
-					'menu_title'    => $campaign_post_type->labels->menu_name,
-					'menu_slug'     => 'edit.php?post_type=campaign',
+					'page_title' => $campaign_post_type->labels->menu_name,
+					'menu_title' => $campaign_post_type->labels->menu_name,
+					'menu_slug'  => 'edit.php?post_type=campaign',
 				),
 				array(
-					'page_title'    => $campaign_post_type->labels->add_new,
-					'menu_title'    => $campaign_post_type->labels->add_new,
-					'menu_slug'     => 'post-new.php?post_type=campaign',
+					'page_title' => $campaign_post_type->labels->add_new,
+					'menu_title' => $campaign_post_type->labels->add_new,
+					'menu_slug'  => 'post-new.php?post_type=campaign',
 				),
 				array(
-					'page_title'    => $donation_post_type->labels->menu_name,
-					'menu_title'    => $donation_post_type->labels->menu_name,
-					'menu_slug'     => 'edit.php?post_type=donation',
+					'page_title' => $donation_post_type->labels->menu_name,
+					'menu_title' => $donation_post_type->labels->menu_name,
+					'menu_slug'  => 'edit.php?post_type=donation',
 				),
 				array(
-					'page_title'    => __( 'Campaign Categories', 'charitable' ),
-					'menu_title'    => __( 'Categories', 'charitable' ),
-					'menu_slug'     => 'edit-tags.php?taxonomy=campaign_category&post_type=campaign',
+					'page_title' => __( 'Campaign Categories', 'charitable' ),
+					'menu_title' => __( 'Categories', 'charitable' ),
+					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_category&post_type=campaign',
 				),
 				array(
-					'page_title'    => __( 'Campaign Tags', 'charitable' ),
-					'menu_title'    => __( 'Tags', 'charitable' ),
-					'menu_slug'     => 'edit-tags.php?taxonomy=campaign_tag&post_type=campaign',
+					'page_title' => __( 'Campaign Tags', 'charitable' ),
+					'menu_title' => __( 'Tags', 'charitable' ),
+					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_tag&post_type=campaign',
 				),
 				array(
-					'page_title'    => __( 'Charitable Settings', 'charitable' ),
-					'menu_title'    => __( 'Settings', 'charitable' ),
-					'menu_slug'     => 'charitable-settings',
-					'function'      => array( $this, 'render_settings_page' ),
-					'capability'    => 'manage_charitable_settings',
+					'page_title' => __( 'Charitable Settings', 'charitable' ),
+					'menu_title' => __( 'Settings', 'charitable' ),
+					'menu_slug'  => 'charitable-settings',
+					'function'   => array( $this, 'render_settings_page' ),
+					'capability' => 'manage_charitable_settings',
 				),
 			) );
 		}

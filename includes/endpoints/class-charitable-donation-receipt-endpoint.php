@@ -115,6 +115,13 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 				return $template;
 			}
 
+			/**
+			 * Filter the title of the donation receipt page.
+			 *
+			 * @since 1.4.0
+			 *
+			 * @param string $title The page title.
+			 */
 			$donation_receipt_page_title = apply_filters( 'charitable_donation_receipt_page_title', __( 'Your Receipt', 'charitable' ) );
 
 			new Charitable_Ghost_Page( 'donation-receipt-page', array(

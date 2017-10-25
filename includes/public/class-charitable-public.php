@@ -52,21 +52,14 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @since 1.0.0
 		 */
 		private function __construct() {
+			charitable()->registry()->register_object( Charitable_Session::get_instance() );
+
 			add_action( 'after_setup_theme', array( $this, 'load_template_files' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'setup_scripts' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_donation_form_scripts' ), 11 );
 			add_action( 'charitable_campaign_loop_before', array( $this, 'maybe_enqueue_donation_form_scripts' ) );
 			add_filter( 'post_class', array( $this, 'campaign_post_class' ) );
-			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ) );
-
-			/**
-			 * We are registering this object only for backwards compatibility. It
-			 * will be removed in or after Charitable 1.3.
-			 *
-			 * @deprecated
-			 */
-			charitable()->register_object( Charitable_Session::get_instance() );
-			charitable()->register_object( Charitable_Templates::get_instance() );
+			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ) );			
 
 			do_action( 'charitable_public_start', $this );
 		}
@@ -237,7 +230,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @return  boolean True if scripts were loaded. False otherwise.
 		 */
 		public function maybe_enqueue_donation_form_scripts() {
-
 			$load = charitable_is_page( 'campaign_donation_page' );
 
 			if ( ! $load ) {
@@ -259,7 +251,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @return  void
 		 */
 		public function enqueue_donation_form_scripts() {
-
 			wp_enqueue_script( 'charitable-script' );
 
 			if ( Charitable_Gateways::get_instance()->any_gateway_supports( 'credit-card' ) ) {
@@ -296,7 +287,6 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 * @return  boolean
 		 */
 		public function disable_comments_on_application_pages( $open ) {
-
 			/* If open is already false, just hit return. */
 			if ( ! $open ) {
 				return $open;

@@ -51,7 +51,7 @@ if ( ! function_exists( 'charitable_template_campaign_content' ) ) :
 			'Charitable_Endpoints::get_content()'
 		);
 
-		return charitable()->get_endpoints()->get_content( $content, 'campaign' );
+		return charitable()->endpoints()->get_content( $content, 'campaign' );
 	}
 
 endif;
@@ -68,7 +68,7 @@ if ( ! function_exists( 'charitable_template_donation_form_content' ) ) :
 			'Charitable_Endpoints::get_content()'
 		);
 
-		return charitable()->get_endpoints()->get_content( $content, 'campaign_donation' );
+		return charitable()->endpoints()->get_content( $content, 'campaign_donation' );
 	}
 
 endif;
@@ -85,7 +85,7 @@ if ( ! function_exists( 'charitable_template_donation_receipt_content' ) ) :
 			'Charitable_Endpoints::get_content()'
 		);
 
-		return charitable()->get_endpoints()->get_content( $content, 'donation_receipt' );
+		return charitable()->endpoints()->get_content( $content, 'donation_receipt' );
 	}
 
 endif;
@@ -101,7 +101,7 @@ if ( ! function_exists( 'charitable_template_donation_processing_content' ) ) :
 			'1.5.0',
 			'Charitable_Endpoints::get_content()'
 		);
-		return charitable()->get_endpoints()->get_content( $content, 'donation_processing' );
+		return charitable()->endpoints()->get_content( $content, 'donation_processing' );
 
 	}
 
@@ -119,7 +119,7 @@ if ( ! function_exists( 'charitable_template_forgot_password_content' ) ) :
 			'Charitable_Endpoints::get_content()'
 		);
 
-		return charitable()->get_endpoints()->get_content( $content, 'forgot_password' );
+		return charitable()->endpoints()->get_content( $content, 'forgot_password' );
 	}
 
 endif;
@@ -136,7 +136,7 @@ if ( ! function_exists( 'charitable_template_reset_password_content' ) ) :
 			'Charitable_Endpoints::get_content()'
 		);
 
-		return charitable()->get_endpoints()->get_content( $content, 'reset_password' );
+		return charitable()->endpoints()->get_content( $content, 'reset_password' );
 	}
 
 endif;
@@ -153,7 +153,7 @@ if ( ! function_exists( 'charitable_add_body_classes' ) ) :
 			'Charitable_Endpoints::add_body_classes()'
 		);
 
-		return charitable()->get_endpoints()->add_body_classes( $classes );
+		return charitable()->endpoints()->add_body_classes( $classes );
 	}
 
 endif;
