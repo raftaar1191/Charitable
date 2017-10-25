@@ -62,21 +62,27 @@ if ( ! class_exists( 'Charitable' ) ) :
         /**
          * Single instance of this class.
          *
-         * @var     Charitable
+         * @since 1.0.0
+         *
+         * @var   Charitable
          */
         private static $instance = null;
 
         /**
          * The absolute path to this plugin's directory.
          *
-         * @var     string
+         * @since 1.0.0
+         *
+         * @var   string
          */
         private $directory_path;
 
         /**
          * The URL of this plugin's directory.
          *
-         * @var     string
+         * @since 1.0.0
+         *
+         * @var   string
          */
         private $directory_url;
 
@@ -98,24 +104,6 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @var   Charitable_Registry
          */
         private $registry;
-
-        /**
-         * Endpoints registry object.
-         *
-         * @since 1.5.0
-         *
-         * @var   Charitable_Endpoints|null
-         */
-        private $endpoints = null;
-  
-        /**
-         * Donation Fields.
-         *
-         * @since 1.5.0
-         *
-         * @var   Charitable_Donation_Field_Registry
-         */
-        private $donation_fields;
 
         /**
          * Classmap.
@@ -256,7 +244,6 @@ if ( ! class_exists( 'Charitable' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $class_key The class to return.
          * @return Charitable_Registry
          */
         public function registry() {
@@ -649,7 +636,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          * @since  1.0.0
          *
          * @param  string $class The type of class to be retrieved.
-         * @return mixed The object if it's registered. Otherwise false.
+         * @return object
          */
         public function get_registered_object( $class ) {
             return $this->registry->get( $class );

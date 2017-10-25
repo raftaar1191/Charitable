@@ -56,13 +56,7 @@ if ( ! class_exists( 'Charitable_Registry' ) ) :
                 }
 
                 if ( ! class_exists( $class ) ) {
-                    charitable_get_deprecated()->doing_it_wrong(
-                        __METHOD__,
-                        sprintf( __( 'Class %s does not exists.', 'charitable' ), $class ),
-                        '1.5.0'
-                    );
-
-                    return false;
+                    wp_die( sprintf( __( 'Class %s does not exists.', 'charitable' ), $class ) );
                 }
 
                 if ( method_exists( $class, 'get_instance' ) ) {
