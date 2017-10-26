@@ -191,6 +191,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'charitable-core-functions.php' );
             require_once( $includes_path . 'campaigns/charitable-campaign-functions.php' );
             require_once( $includes_path . 'campaigns/charitable-campaign-hooks.php' );
+            require_once( $includes_path . 'compat/charitable-compat-functions.php' );
             require_once( $includes_path . 'currency/charitable-currency-functions.php' );
             require_once( $includes_path . 'deprecated/charitable-deprecated-functions.php' );
             require_once( $includes_path . 'donations/charitable-donation-hooks.php' );
@@ -277,7 +278,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
             add_action( 'plugins_loaded', array( $this, 'endpoints' ), 100 );
             add_action( 'plugins_loaded', array( $this, 'donation_fields' ), 100 );
-            add_action( 'plugins_loaded', array( $this, 'load_plugin_compat_files' ) );
+            add_action( 'plugins_loaded', 'charitable_load_compat_functions' );
             add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
             add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
 
@@ -396,42 +397,6 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
         public function charitable_start() {
             do_action( 'charitable_start', $this );
-        }        
-
-        /**
-         * Load plugin compatibility files on plugins_loaded hook.
-         *
-         * @since  1.4.18
-         *
-         * @return void
-         */
-        public function load_plugin_compat_files() {
-            $includes_path = $this->get_path( 'includes' );
-
-            /* Divi */
-            if ( class_exists( 'ET_Builder_Plugin' ) || 'divi' == strtolower( wp_get_theme()->get_template() ) ) {
-                require_once( $includes_path . 'compat/charitable-divi-compat-functions.php' );
-            }
-
-            /* WP Super Cache */
-            if ( function_exists( 'wp_super_cache_text_domain' ) ) {
-                require_once( $includes_path . 'compat/charitable-wp-super-cache-compat-functions.php' );
-            }
-
-            /* W3TC */
-            if ( defined( 'W3TC' ) && W3TC ) {
-                require_once( $includes_path . 'compat/charitable-w3tc-compat-functions.php' );
-            }
-
-            /* WP Rocket */
-            if ( defined( 'WP_ROCKET_VERSION' )  ) {
-                require_once( $includes_path . 'compat/charitable-wp-rocket-compat-functions.php' );
-            }
-
-            /* WP Fastest Cache */
-            if ( class_exists( 'WpFastestCache' ) ) {
-                require_once( $includes_path . 'compat/charitable-wp-fastest-cache-compat-functions.php' );
-            }
         }
 
         /**
@@ -649,40 +614,7 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
         public function get_registered_object( $class ) {
             return $this->registry->get( $class );
-        }
-
-        /**
-         * Returns the public class.
-         *
-         * @since  1.0.0
-         *
-         * @return Charitable_Public
-         */
-        public function get_public() {
-            return $this->registry->get( 'Charitable_Public' );
-        }
-
-        /**
-         * Returns the admin class.
-         *
-         * @since  1.0.0
-         *
-         * @return Charitable_Admin
-         */
-        public function get_admin() {
-            return $this->registry->get( 'Charitable_Admin' );
-        }
-
-        /**
-         * Return the current request object.
-         *
-         * @since  1.0.0
-         *
-         * @return Charitable_Request
-         */
-        public function get_request() {
-            return $this->registry->get( 'Charitable_Request' );
-        }
+        }        
 
         /**
          * Returns the model for one of Charitable's database tables.
@@ -843,6 +775,26 @@ if ( ! class_exists( 'Charitable' ) ) :
          */
 
         /**
+         * Load plugin compatibility files on plugins_loaded hook.
+         *
+         * @deprecated 1.8.0
+         *
+         * @since  1.4.18
+         * @since  1.5.0 Deprecated.
+         *
+         * @return void
+         */
+        public function load_plugin_compat_files() {
+            charitable_get_deprecated()->deprecated_function(
+                __METHOD__,
+                '1.5.0.',
+                'charitable_load_compat_functions'
+            );
+
+            charitable_load_compat_functions();
+        }
+
+        /**
          * Stores an object in the plugin's registry.
          *
          * @deprecated 1.8.0
@@ -864,7 +816,69 @@ if ( ! class_exists( 'Charitable' ) ) :
         }
 
         /**
+         * Returns the public class.
+         *
+         * @deprecated 1.8.0
+         *
+         * @since  1.0.0
+         * @since  1.5.0 Deprecated.
+         *
+         * @return Charitable_Public
+         */
+        public function get_public() {
+            charitable_get_deprecated()->deprecated_function(
+                __METHOD__,
+                '1.5.0',
+                'charitable_get_helper'
+            );
+
+            return $this->registry->get( 'Charitable_Public' );
+        }
+
+        /**
+         * Returns the admin class.
+         *
+         * @deprecated 1.8.0
+         *
+         * @since  1.0.0
+         * @since  1.5.0 Deprecated.
+         *
+         * @return Charitable_Admin
+         */
+        public function get_admin() {
+            charitable_get_deprecated()->deprecated_function(
+                __METHOD__,
+                '1.5.0',
+                'charitable_get_helper'
+            );
+
+            return $this->registry->get( 'Charitable_Admin' );
+        }
+
+        /**
+         * Return the current request object.
+         *
+         * @deprecated 1.8.0
+         *
+         * @since  1.0.0
+         * @since  1.5.0 Deprecated.
+         *
+         * @return Charitable_Request
+         */
+        public function get_request() {
+            charitable_get_deprecated()->deprecated_function(
+                __METHOD__,
+                '1.5.0',
+                'charitable_get_helper'
+            );
+
+            return $this->registry->get( 'Charitable_Request' );
+        }
+
+        /**
          * @deprecated 1.7.0
+         *
+         * @since 1.4.0 Deprecated.
          */
         public function get_currency_helper() {
             charitable_get_deprecated()->deprecated_function( __METHOD__, '1.4.0', 'charitable_get_currency_helper' );
@@ -873,6 +887,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 
         /**
          * @deprecated 1.6.0
+         *
+         * @since 1.2.0 Deprecated.
          */
         public function get_location_helper() {
             charitable_get_deprecated()->deprecated_function( __METHOD__, '1.2.0', 'charitable_get_location_helper' );
