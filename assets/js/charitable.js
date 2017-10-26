@@ -457,7 +457,6 @@ CHARITABLE = window.CHARITABLE || {};
                 precision : CHARITABLE_VARS.currency_format_num_decimals,
                 format: CHARITABLE_VARS.currency_format  
         }).trim();
-
     };
 
     /**

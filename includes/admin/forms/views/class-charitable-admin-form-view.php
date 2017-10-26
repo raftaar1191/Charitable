@@ -167,14 +167,15 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             $field['form_view']  = $this;
             $field['view']       = $this->get_field_view( $field );
             $field['type']       = $this->get_field_type( $field );
-            $field['key']        = $this->get_field_key( $field, $key );
-            $field['value']      = $this->get_field_value( $field );
+            $field['key']        = $this->get_field_key( $field, $key );            
             $field['id']         = str_replace( '_', '-', ltrim( $field['key'] ) );
             $field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
             $field['tabindex']   = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
 
             if ( 'checkbox' == $field['type'] ) {
                 $field['checked'] = $this->is_field_checked( $field );
+            } else {
+                $field['value'] = $this->get_field_value( $field );
             }
 
             /* Increment the tabindex. */
@@ -192,7 +193,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return boolean
          */
         public function field_has_required_args( $view_args ) {
-            $required = array( 'view', 'key', 'value', 'id', 'wrapper_id', 'type' );
+            $required = array( 'view', 'key', 'id', 'wrapper_id', 'type' );
             $missing  = count( array_diff( $required, array_keys( $view_args ) ) );
 
             if ( $missing > 0 ) {
@@ -213,7 +214,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
                 return array_key_exists( 'checked', $view_args );
             }
 
-            return true;
+            return array_key_exists( 'value', $view_args );
         }
 
         /**
@@ -299,7 +300,13 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return boolean
          */
         protected function is_field_checked( $field ) {
-            return $field['value'] == $this->get_current_value( $field );
+            $value = $this->get_current_value( $field );
+
+            if ( array_key_exists( 'value', $field ) ) {
+                return $field['value'] == $value;
+            }
+
+            return false != $value;
         }
 
         /**

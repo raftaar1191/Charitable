@@ -283,7 +283,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			$campaign_donations          = array_key_exists( 'campaign_donations', $_POST ) ? $_POST['campaign_donations'] : array();
 			$_POST['campaign_donations'] = array_filter( $campaign_donations, array( $this, 'filter_campaign_donation' ) );
-			
+
 			if ( empty( $_POST['campaign_donations'] ) ) {
 				charitable_get_notices()->add_error( __( 'You must provide both a campaign and amount.', 'charitable' ) );
 
@@ -318,62 +318,24 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_donation_values() {
-			$donation = charitable_get_donation( $this->get_submitted_value( 'ID' ) );
-			$is_new   = false === $donation || 'Auto Draft' === $donation->post_title;
 			$values   = array(
-				'ID'        => $this->get_submitted_value( 'ID' ),				
-				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),
-				'campaigns' => $this->get_submitted_value( 'campaign_donations' ),
+				'ID'        => $this->get_submitted_value( 'ID' ),
+				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),				
 				'status'    => $this->get_submitted_value( 'status' ),
 				'log_note'  => $this->get_submitted_value( 'log_note' ),
 				'user_id'   => 0,
 			);
 
-			$date               = $this->get_submitted_value( 'date' );
-			$time               = $this->get_submitted_value( 'time', '00:00:00' );
-			$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d ' . $time );
-
-			/* If the date matches today's date and it's a new donation, save the time too. */
-			if ( date( 'Y-m-d 00:00:00' ) == $values['date_gmt'] && $is_new ) {
-				$values['date_gmt'] = date( 'Y-m-d H:i:s' );
-			}
-
-			/* If the donation date has been changed, the time is always set to 00:00:00 */
-			if ( $values['date_gmt'] !== $donation->post_date_gmt && ! $is_new ) {
-				$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d 00:00:00' );
-			}
-
 			if ( 'add_donation' == $this->get_submitted_value( 'charitable_action' ) ) {
 				$values['donation_gateway'] = __( 'Manual', 'charitable' );
 			}
 
-			if ( ! $values['log_note'] ) {
-				$values['log_note'] = sprintf( __( 'Donation updated manually by <a href="%s">%s</a>.', 'charitable' ),
-					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
-					wp_get_current_user()->display_name
-				);
-			} else {
-				$values['log_note'] .= sprintf( ' - <a href="%s">%s</a>',
-					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
-					wp_get_current_user()->display_name
-				);
-			}
+			$values = $this->sanitize_submitted_campaign_donation( $values );
+			$values = $this->sanitize_submitted_date( $values );
+			$values = $this->sanitize_submitted_log_note( $values );
+			$values = $this->sanitize_submitted_donor( $values );
 
 			$fields = $this->get_merged_fields();
-
-			if ( $values['donor_id'] ) {
-				$donor = charitable_get_table( 'donors' )->get( $values['donor_id'] );
-
-				if ( $donor ) {
-					$values['user'] = array(
-						'email'      => $donor->email,
-						'first_name' => $donor->first_name,
-						'last_name'  => $donor->last_name,
-					);
-
-					$values['user_id'] = $donor->user_id;
-				}
-			}
 
 			foreach ( $this->get_merged_fields() as $key => $field ) {
 				if ( array_key_exists( 'data_type', $field ) && 'core' != $field['data_type'] ) {
@@ -399,6 +361,111 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			 * @param Charitable_Admin_Donation_Form $form   This instance of `Charitable_Admin_Donation_Form`.
 			 */
 			return apply_filters( 'charitable_admin_donation_form_submission_values', $values, $this );
+		}
+
+		/**
+		 * Return donor values.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array $values The submitted values.
+		 * @return array
+		 */
+		protected function sanitize_submitted_donor( $values ) {
+			/* If we did not receive a donor id, return without doing anything. */
+			if ( ! $values[ 'donor_id' ] ) {
+				return $values;
+			}
+
+			$donor = charitable_get_table( 'donors' )->get( $values['donor_id'] );
+
+			if ( ! $donor ) {
+				return $values;
+			}
+
+			/* Populate the 'user' and 'user_id' args with this donor's stored details. */
+			$values['user'] = array(
+				'email'      => $donor->email,
+				'first_name' => $donor->first_name,
+				'last_name'  => $donor->last_name,
+			);
+
+			$values['user_id'] = $donor->user_id;
+
+			return $values;
+		}
+
+		/**
+		 * Sanitize the log note, or add one if none was included.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array $values The submitted values.
+		 * @return array
+		 */
+		protected function sanitize_submitted_log_note( $values ) {
+			if ( ! $values['log_note'] ) {
+				$values['log_note'] = sprintf( __( 'Donation updated manually by <a href="%s">%s</a>.', 'charitable' ),
+					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
+					wp_get_current_user()->display_name
+				);
+			} else {
+				$values['log_note'] .= sprintf( ' - <a href="%s">%s</a>',
+					admin_url( 'user-edit.php?user_id=' . wp_get_current_user()->ID ),
+					wp_get_current_user()->display_name
+				);
+			}
+
+			return $values;
+		}
+
+		/**
+		 * Sanitize the campaign donation submitted.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array $values The submitted values.
+		 * @return array
+		 */
+		protected function sanitize_submitted_campaign_donation( $values ) {
+			$campaigns = array();
+
+			foreach ( $this->get_submitted_value( 'campaign_donations' ) as $key => $campaign_donation ) {
+				$campaign_donation['amount'] = charitable_get_currency_helper()->sanitize_monetary_amount( $campaign_donation['amount'] );
+				$campaigns[ $key ]           = $campaign_donation;
+			}
+
+			$values['campaigns'] = $campaigns;
+
+			return $values;
+		}
+
+		/**
+		 * Sanitize the date.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  array $values The submitted values.
+		 * @return array
+		 */
+		protected function sanitize_submitted_date( $values ) {
+			$donation           = charitable_get_donation( $this->get_submitted_value( 'ID' ) );
+			$is_new             = false === $donation || 'Auto Draft' === $donation->post_title;
+			$date               = $this->get_submitted_value( 'date' );
+			$time               = $this->get_submitted_value( 'time', '00:00:00' );
+			$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d ' . $time );
+
+			/* If the date matches today's date and it's a new donation, save the time too. */
+			if ( date( 'Y-m-d 00:00:00' ) == $values['date_gmt'] && $is_new ) {
+				$values['date_gmt'] = date( 'Y-m-d H:i:s' );
+			}
+
+			/* If the donation date has been changed, the time is always set to 00:00:00 */
+			if ( $values['date_gmt'] !== $donation->post_date_gmt && ! $is_new ) {
+				$values['date_gmt'] = charitable_sanitize_date( $date, 'Y-m-d 00:00:00' );
+			}
+
+			return $values;
 		}
 
 		/**
@@ -450,19 +517,22 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				return $field;
 			}
 
-			$field['value'] = array_key_exists( 'default', $field ) ? $field['default'] : '';
+			/* Checkboxes don't need a value set. */
+			if ( 'checkbox' != $field['type'] ) {
+				$field['value'] = array_key_exists( 'default', $field ) ? $field['default'] : '';
+			}
 
-            if ( ! $this->has_donation() ) {
-                return $field;
-            }
+			if ( ! $this->has_donation() ) {
+				return $field;
+			}
 
-            $value = $this->donation->get( $key );
+			$value = $this->donation->get( $key );
 
-            if ( $value ) {
-            	$field['value'] = $value;
-            }
+			if ( $value ) {
+				$field['value'] = $value;
+			}
 
-            return $field;
+			return $field;
 		}
 	}
 

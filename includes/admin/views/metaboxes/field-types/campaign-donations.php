@@ -49,6 +49,7 @@ if ( empty( $campaign_donations ) ) {
 				</td>
 				<td>
 					<input type="text"
+					class="currency-input"
 					name="<?php echo esc_attr( sprintf( '%s[%d][amount]', $view_args['key'], $i ) ) ?>"
 					labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-amount-label"
 					tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>"

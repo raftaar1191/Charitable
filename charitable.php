@@ -258,6 +258,7 @@ if ( ! class_exists( 'Charitable' ) ) :
                 $this->registry->register_object( Charitable_Widgets::get_instance() );
                 $this->registry->register_object( Charitable_Licenses::get_instance() );
                 $this->registry->register_object( Charitable_User_Dashboard::get_instance() );
+                $this->registry->register_object( Charitable_Locations::get_instance() );
             }
 
             return $this->registry;
@@ -302,7 +303,11 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $this->get_path( 'admin' ) . 'class-charitable-admin.php' );
             require_once( $this->get_path( 'admin' ) . 'charitable-admin-hooks.php' );
 
-            return $this->registry->get( 'admin' );
+            $admin = Charitable_Admin::get_instance();
+
+            $this->registry->register_object( $admin );
+
+            return $admin;
         }
 
         /**
@@ -319,7 +324,11 @@ if ( ! class_exists( 'Charitable' ) ) :
 
             require_once( $this->get_path( 'public' ) . 'class-charitable-public.php' );
 
-            return $this->registry->get( 'public' );
+            $public = Charitable_Public::get_instance();
+
+            $this->registry->register_object( $public );
+
+            return $public;
         }
 
         /**

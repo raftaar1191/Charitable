@@ -103,7 +103,13 @@ function charitable_get_notices() {
  * @return Charitable_Donation_Processor
  */
 function charitable_get_donation_processor() {
-	return charitable()->registry()->get( 'donation_processor' );
+	$registry = charitable()->registry();
+
+	if ( ! $registry->has( 'donation_processor' ) ) {
+		$registry->register_object( Charitable_Donation_Processor::get_instance() );
+	}
+
+	return $registry->get( 'donation_processor' );
 }
 
 /**
@@ -136,7 +142,13 @@ function charitable_get_session() {
  * @return Charitable_Request
  */
 function charitable_get_request() {
-	return charitable()->registry()->get( 'request' );
+	$registry = charitable()->registry();
+
+	if ( ! $registry->has( 'request' ) ) {
+		$registry->register_object( Charitable_Request::get_instance() );
+	}
+
+	return $registry->get( 'request' );
 }
 
 /**
@@ -194,5 +206,11 @@ function charitable_get_action_args( $args ) {
  * @return Charitable_Deprecated
  */
 function charitable_get_deprecated() {
-	return charitable()->registry()->get( 'deprecated' );
+	$registry = charitable()->registry();
+
+	if ( ! $registry->has( 'deprecated' ) ) {
+		$registry->register_object( Charitable_Deprecated::get_instance() );
+	}
+
+	return $registry->get( 'deprecated' );
 }

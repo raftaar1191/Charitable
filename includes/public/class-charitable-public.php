@@ -53,6 +53,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 		 */
 		private function __construct() {
 			charitable()->registry()->register_object( Charitable_Session::get_instance() );
+            charitable()->registry()->register_object( Charitable_Notices::get_instance() );
 
 			add_action( 'after_setup_theme', array( $this, 'load_template_files' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'setup_scripts' ) );

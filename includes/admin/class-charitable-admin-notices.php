@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 	/**
 	 * Charitable_Admin_Notices
 	 *
-	 * @since   1.4.6
+	 * @since 1.4.6
 	 */
 	class Charitable_Admin_Notices extends Charitable_Notices {
 

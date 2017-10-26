@@ -237,33 +237,58 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 				return;
 			}
 
-			if ( array_key_exists( 'charitable_action', $_POST ) && ! did_action( 'charitable_before_save_donation' ) ) {
-				$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
-				
-				if ( $form->validate_submission() ) {
-					$this->disable_automatic_emails();
-
-					charitable_create_donation( $form->get_donation_values() );
-
-					$this->reenable_automatic_emails();
-				}
-
-				update_post_meta( $donation_id, '_donation_manually_edited', true );
-			}
+			$this->maybe_save_form_submission( $donation_id );
 
 			/* Handle any fired actions */
 			if ( ! empty( $_POST['charitable_donation_action'] ) ) {
 				charitable_get_donation_actions()->do_action( sanitize_text_field( $_POST['charitable_donation_action'] ), $donation_id );
 			}
 
-			/* Hook for plugins to do something else with the posted data */
+			/**
+			 * Hook for plugins to do something else with the posted data.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int     $donation_id The donation ID.
+			 * @param WP_Post $post        Instance of `WP_Post`.
+			 */
 			do_action( 'charitable_donation_save', $donation_id, $post );
+		}
+
+		/**
+		 * Save a donation after the admin donation form has been submitted.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  int $donation_id The donation ID.
+		 * @return boolean True if this was a form submission. False otherwise.
+		 */
+		public function maybe_save_form_submission( $donation_id ) {
+			if ( ! array_key_exists( 'charitable_action', $_POST ) || did_action( 'charitable_before_save_donation' ) ) {
+				return false;
+			}
+
+			$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
+			
+			if ( $form->validate_submission() ) {
+				$this->disable_automatic_emails();
+
+				charitable_create_donation( $form->get_donation_values() );
+
+				$this->reenable_automatic_emails();
+			}
+
+			update_post_meta( $donation_id, '_donation_manually_edited', true );
+
+			return true;
 		}
 
 		/**
 		 * Change messages when a post type is updated.
 		 *
-		 * @param  array $messages
+		 * @since  1.5.0
+		 *
+		 * @param  array $messages The post messages.
 		 * @return array
 		 */
 		public function post_messages( $messages ) {

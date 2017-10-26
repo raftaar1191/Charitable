@@ -382,6 +382,36 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		});
 	}
 
+	var setup_currency_inputs = function() {
+		if ( 'undefined' === typeof accounting ) {
+			return;
+		}
+
+		var unformat = function( amount ) {
+			return Math.abs( parseFloat( accounting.unformat( amount, CHARITABLE.currency_format_decimal_sep ) ) );
+		}
+
+		var format = function( amount ) {
+			return accounting.formatMoney( amount, {
+				symbol : '',
+				decimal : CHARITABLE.currency_format_decimal_sep,
+				thousand : CHARITABLE.currency_format_thousand_sep,
+				precision : CHARITABLE.currency_format_num_decimals,
+				format : CHARITABLE.currency_format
+			}).trim();
+		}
+
+		$( 'body' ).on( 'change', '.currency-input', function() {
+			var amount = unformat( $( this ).val() );
+
+			if ( $.trim( amount ) > 0 ) {
+				$( this ).val( format( amount ) );
+			}
+		} );
+
+		$( '.currency-input' ).trigger( 'change' );
+	};
+
 	$(document).ready( function(){
 
 		if ( CHARITABLE_ADMIN.Datepicker ) {
@@ -405,6 +435,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		setup_dashboard_widgets();
 		setup_campaign_end_date_field();
 		setup_actions_form();
+		setup_currency_inputs();
 
 		$('[data-charitable-add-row]').on( 'click', function() {
 			var type = $( this ).data( 'charitable-add-row' );

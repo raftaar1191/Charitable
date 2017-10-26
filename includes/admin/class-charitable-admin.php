@@ -77,55 +77,13 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * @return void
 		 */
 		private function load_dependencies() {
-			$includes_dir = charitable()->get_path( 'includes' );
-			$admin_dir    = $includes_dir . 'admin/';
+			$admin_dir = charitable()->get_path( 'includes' ) . 'admin/';
 
-			/* Interfaces */
-			require_once( $includes_dir . 'interfaces/interface-charitable-admin-actions.php' );
-
-			/* Abstracts */
-			require_once( $includes_dir . 'abstracts/abstract-class-charitable-admin-actions.php' );
-
-			/* Core */
 			require_once( $admin_dir . 'charitable-core-admin-functions.php' );
-			require_once( $admin_dir . 'class-charitable-meta-box-helper.php' );
-			require_once( $admin_dir . 'class-charitable-admin-pages.php' );
-			require_once( $admin_dir . 'class-charitable-admin-notices.php' );
-
-			/* Admin Actions */			
-			require_once( $admin_dir . 'actions/class-charitable-donation-admin-actions.php' );
-
-			/* Campaigns */
-			require_once( $admin_dir . 'campaigns/class-charitable-campaign-meta-boxes.php' );
-			require_once( $admin_dir . 'campaigns/class-charitable-campaign-list-table.php' );
-			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );//
-
-			/* Dashboard widgets */
-			require_once( $admin_dir . 'dashboard-widgets/class-charitable-donations-dashboard-widget.php' );
+			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );
 			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
-
-			/* Donations */
-			require_once( $admin_dir . 'donations/class-charitable-donation-meta-boxes.php' );
-			require_once( $admin_dir . 'donations/class-charitable-donation-list-table.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
-
-			/* Forms */
-			require_once( $admin_dir . 'forms/views/class-charitable-admin-form-view.php' );
-			require_once( $admin_dir . 'forms/class-charitable-admin-form.php' );
-			require_once( $admin_dir . 'forms/class-charitable-admin-donation-form.php' );
-
-			/* Settings */
-			require_once( $admin_dir . 'settings/class-charitable-settings.php' );
-			require_once( $admin_dir . 'settings/class-charitable-general-settings.php' );
-			require_once( $admin_dir . 'settings/class-charitable-email-settings.php' );
-			require_once( $admin_dir . 'settings/class-charitable-gateway-settings.php' );
-			require_once( $admin_dir . 'settings/class-charitable-licenses-settings.php' );
-			require_once( $admin_dir . 'settings/class-charitable-advanced-settings.php' );
 			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );
-
-			/* Upgrades */
-			require_once( $admin_dir . 'upgrades/class-charitable-upgrade.php' );
-			require_once( $admin_dir . 'upgrades/class-charitable-upgrade-page.php' );
 			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );			
 		}
 
@@ -183,12 +141,12 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				$version = charitable()->get_version();
 			}
 
-			$assets_path = charitable()->get_path( 'assets', false );
+			$assets_dir = charitable()->get_path( 'assets', false );
 
 			/* Menu styles are loaded everywhere in the WordPress dashboard. */
 			wp_register_style(
 				'charitable-admin-menu',
-				$assets_path . 'css/charitable-admin-menu' . $suffix . '.css',
+				$assets_dir . 'css/charitable-admin-menu' . $suffix . '.css',
 				array(),
 				$version
 			);
@@ -198,7 +156,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			/* Admin page styles are registered but only enqueued when necessary. */
 			wp_register_style(
 				'charitable-admin-pages',
-				$assets_path . 'css/charitable-admin-pages' . $suffix . '.css',
+				$assets_dir . 'css/charitable-admin-pages' . $suffix . '.css',
 				array(),
 				$version
 			);
@@ -210,27 +168,55 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 				wp_register_style(
 					'charitable-admin',
-					$assets_path . 'css/charitable-admin' . $suffix . '.css',
+					$assets_dir . 'css/charitable-admin' . $suffix . '.css',
 					array(),
 					$version
 				);
 
 				wp_enqueue_style( 'charitable-admin' );
 
+				$dependencies   = array( 'jquery-ui-datepicker', 'jquery-ui-tabs', 'jquery-ui-sortable' );
+				$localized_vars = array(
+					'suggested_amount_description_placeholder' => __( 'Optional Description', 'charitable' ),
+					'suggested_amount_placeholder'             => __( 'Amount', 'charitable' ),
+				);
+
+				if ( 'donation' == $screen->id ) {
+					wp_register_script(
+						'accounting',
+						$assets_dir . 'js/libraries/accounting'. $suffix . '.js',
+						array( 'jquery-core' ),
+						$version,
+						true
+					);
+
+					$dependencies[] = 'accounting';
+					$localized_vars = array_merge( $localized_vars, array(
+						'currency_format_num_decimals' => esc_attr( charitable_get_option( 'decimal_count', 2 ) ),
+						'currency_format_decimal_sep'  => esc_attr( charitable_get_option( 'decimal_separator', '.' ) ),
+						'currency_format_thousand_sep' => esc_attr( charitable_get_option( 'thousands_separator', ',' ) ),
+						'currency_format'              => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ),
+					) );
+				}
+
 				wp_register_script(
 					'charitable-admin',
-					$assets_path . 'js/charitable-admin' . $suffix . '.js',
-					array( 'jquery-ui-datepicker', 'jquery-ui-tabs', 'jquery-ui-sortable' ),
+					$assets_dir . 'js/charitable-admin' . $suffix . '.js',
+					$dependencies,
 					$version,
 					false
 				);
 
 				wp_enqueue_script( 'charitable-admin' );
 
-				$localized_vars = apply_filters( 'charitable_localized_javascript_vars', array(
-					'suggested_amount_description_placeholder' => __( 'Optional Description', 'charitable' ),
-					'suggested_amount_placeholder'             => __( 'Amount', 'charitable' ),
-				) );
+				/**
+				 * Filter the admin Javascript vars.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $localized_vars The vars.
+				 */
+				$localized_vars = apply_filters( 'charitable_localized_javascript_vars', $localized_vars );
 
 				wp_localize_script( 'charitable-admin', 'CHARITABLE', $localized_vars );
 
@@ -238,7 +224,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			wp_register_script(
 				'charitable-admin-notice',
-				$assets_path . 'js/charitable-admin-notice' . $suffix . '.js',
+				$assets_dir . 'js/charitable-admin-notice' . $suffix . '.js',
 				array( 'jquery-core' ),
 				$version,
 				false
@@ -246,7 +232,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			wp_register_script(
 				'charitable-admin-media',
-				$assets_path . 'js/charitable-admin-media' . $suffix . '.js',
+				$assets_dir . 'js/charitable-admin-media' . $suffix . '.js',
 				array( 'jquery-core' ),
 				$version,
 				false

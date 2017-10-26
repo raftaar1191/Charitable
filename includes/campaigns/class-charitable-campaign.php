@@ -2,11 +2,11 @@
 /**
  * Campaign model
  *
- * @version     1.0.0
- * @package     Charitable/Classes/Charitable_Campaign
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Campaign
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @version   1.0.0
  */
 
 // Exit if accessed directly.
