@@ -107,12 +107,15 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		public function get_template( $template ) {
 			$result = $this->get_verification_check_result();
 
-			/* After successful verification, redirect to the redirect page. */
-			if ( is_a( $result, 'WP_User' ) && array_key_exists( 'redirect_to', $_GET ) ) {
+			/* After successful verification, set a notice and redirect. */
+			if ( is_a( $result, 'WP_User' ) ) {
 				charitable_get_notices()->add_success( __( 'Your email address has been verified.', 'charitable' ) );
 				charitable_get_session()->add_notices();
-				wp_safe_redirect( $_GET['redirect_to'] );
-				exit();
+
+				if ( array_key_exists( 'redirect_to', $_GET ) ) {
+					wp_safe_redirect( $_GET['redirect_to'] );
+					exit();
+				}				
 			}
 
 			$profile = charitable_get_option( 'profile_page', false );

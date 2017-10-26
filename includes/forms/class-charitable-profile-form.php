@@ -2,11 +2,12 @@
 /**
  * Class that manages the display and processing of the profile form.
  *
- * @package     Charitable/Classes/Charitable_Profile_Form
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Profile_Form
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -17,7 +18,7 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 	/**
 	 * Charitable_Profile_Form
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Profile_Form extends Charitable_Form {
 
@@ -404,6 +405,8 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 			if ( $valid ) {
 				$user->update_profile( $submitted, array_keys( $fields ) );
 
+				charitable_get_notices()->add_success( __( 'Your profile has been updated.', 'charitable' ) );
+
 				do_action( 'charitable_profile_updated', $submitted, $fields, $form );
 			}
 		}
@@ -435,7 +438,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * @return boolean
 		 */
 		public function validate_password_change() {
-
 			/* The current password must be correct. */
 			if ( false == wp_check_password( $_POST['current_pass'], $this->get_user()->user_pass ) ) {
 

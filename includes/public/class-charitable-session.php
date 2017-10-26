@@ -74,7 +74,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 			add_filter( 'wp_session_expiration', array( $this, 'set_session_length' ), 99999 );
 			add_filter( 'wp_session_expiration_variant', array( $this, 'set_session_expiration_variant_length' ), 99999 );
 
-			add_action( 'init', array( $this, 'init' ), -1 );
+			$this->init();
 		}
 
 		/**

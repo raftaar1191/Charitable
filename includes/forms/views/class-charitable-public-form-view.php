@@ -89,9 +89,9 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @return string
          */
         public function render_notices() {
-            charitable_template_from_session( 'form-fields/errors.php', array(
-                'errors' => charitable_get_notices()->get_errors(),
-            ), 'errors' );
+            charitable_template_from_session( 'form-fields/notices.php', array(
+                'notices' => charitable_get_notices()->get_notices(),
+            ), 'notices' );
         }
 
         /**

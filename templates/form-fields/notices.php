@@ -18,13 +18,16 @@ if ( empty( $notices ) ) {
 	return;
 }
 
-?>
-<div class="charitable-notice">
-<?php foreach ( $notices as $type => $messages ) : ?>
-	<ul class="charitable-notice-<?php echo esc_attr( $type ) ?>">
-		<?php foreach ( $messages as $message ) : ?>
-			<li><?php echo $message ?></li>
-		<?php endforeach ?>
-	</ul><!-- charitable-notice-<?php esc_attr( $type ) ?> -->
+foreach ( $notices as $type => $messages ) :
+	if ( 'error' == $type ) :
+		$type = 'errors';
+	endif;
+	?>
+	<div class="charitable-notice charitable-form-<?php echo esc_attr( $type ) ?>">
+		<ul class="charitable-notice-<?php echo esc_attr( $type ) ?> <?php echo esc_attr( $type ) ?>">
+			<?php foreach ( $messages as $message ) : ?>
+				<li><?php echo $message ?></li>
+			<?php endforeach ?>
+		</ul><!-- charitable-notice-<?php esc_attr( $type ) ?> -->
+	</div><!-- .charitable-notices -->
 <?php endforeach ?>
-</div><!-- .charitable-notices -->

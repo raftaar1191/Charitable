@@ -237,10 +237,10 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		 */
 		public function clear() {
 			$clear = array(
-				'error'		=> array(),
-				'warning'	=> array(),
-				'success'	=> array(),
-				'info'		=> array(),
+				'error'   => array(),
+				'warning' => array(),
+				'success' => array(),
+				'info'    => array(),
 			);
 
 			$this->notices = $clear;
