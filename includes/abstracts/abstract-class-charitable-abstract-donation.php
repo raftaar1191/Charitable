@@ -815,6 +815,27 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 			$this->update_donation_log( $message );
 
+			/**
+             * Handle specific Charitable status transition.
+             *
+             * @since 1.5.0
+             */ 
+			do_action( 'charitable_donation_status_from_' . $old_status . '_to_' . $new_status, $this );
+
+			/**
+             * Handle specific Charitable status change.
+             *
+             * @since 1.5.0
+             */ 
+			do_action( 'charitable_donation_status_' . $new_status, $this );
+
+			/**
+             * Handle all Charitable status changes.
+             *
+             * @since 1.5.0
+             */
+			do_action( 'charitable_donation_status_changed', $this );
+
 			return $donation_id;
 		}
 
