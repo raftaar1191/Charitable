@@ -31,15 +31,26 @@ class Charitable_Profile_Shortcode {
      * @param   array $atts User-defined shortcode attributes.
      * @return  string
      */
-    public static function display( $atts ) {                
-        if ( ! is_user_logged_in() ) {
-            return Charitable_Login_Shortcode::display( $atts );
-        }
+    public static function display( $atts ) {
+        $defaults = array( 'hide_login' => false );
 
-        $args = shortcode_atts( array(), $atts, 'charitable_profile' );
+        $args = shortcode_atts( $defaults, $atts, 'charitable_profile' );
 
         ob_start();
 
+        /* If the user is logged out, show the login form. */
+        if ( ! is_user_logged_in() ) {
+
+            if( $args['hide_login'] === false ) {
+                echo Charitable_Login_Shortcode::display( array(
+                    'redirect' => charitable_get_current_url(),
+                ) );
+            }
+
+            return ob_get_clean();
+        }
+
+        /* If the user is logged in, show the profile template. */
         charitable_template( 'shortcodes/profile.php', array( 
             'form' => new Charitable_Profile_Form( $args ) 
         ) );

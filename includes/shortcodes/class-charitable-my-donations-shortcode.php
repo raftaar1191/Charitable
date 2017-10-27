@@ -31,22 +31,25 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 		 * @return  string
 		 */
 		public static function display( $atts ) {
-			$defaults = array();
+			$defaults = array( 'hide_login' => false );
 
 			$args = shortcode_atts( $defaults, $atts, 'charitable_my_donations' );
 
 			ob_start();
 
-			/* If the user is logged out, redirect to login/registration page. */
+			/* If the user is logged out, show the login form. */
 			if ( ! is_user_logged_in() ) {
 
-				echo Charitable_Login_Shortcode::display( array(
-					'redirect' => charitable_get_current_url(),
-				) );
+				if( $args['hide_login'] === false ) {
+					echo Charitable_Login_Shortcode::display( array(
+						'redirect' => charitable_get_current_url(),
+					) );
+				}
 
-				return;
+				return ob_get_clean();
 			}
 
+			/* If the user is logged in, show the my donations template. */
 			$user     = charitable_get_user( get_current_user_id() );
 			$donor_id = $user->get_donor_id();
 
