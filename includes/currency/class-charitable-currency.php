@@ -86,7 +86,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @return 	string|WP_Error
 		 */
 		public function get_monetary_amount( $amount, $decimal_count = false, $db_format = false ) {
-
 			if ( false === $decimal_count ) {
 				$decimal_count = charitable_get_option( 'decimal_count', 2 );
 			}
@@ -103,7 +102,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			$formatted = sprintf( $this->get_currency_format(), $this->get_currency_symbol(), $amount );
 
 			return apply_filters( 'charitable_monetary_amount', $formatted, $amount );
-
 		}
 
 		/**
@@ -118,7 +116,6 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @return 	float|WP_Error
 		 */
 		public function sanitize_monetary_amount( $amount, $db_format = false ) {
-
 			/* Sending anything other than a string can cause unexpected returns, so we require strings. */
 			if ( ! is_string( $amount ) ) {
 
