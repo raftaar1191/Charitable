@@ -412,7 +412,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @param  string $format Time format.
 		 * @return string
 		 */
-		public function get_time( $format = 'H:i A' ) {
+		public function get_time( $format = '' ) {
+			if ( empty( $format ) ) {
+				$format = get_option( 'time_format' );
+			}
+
 			return mysql2date( $format, $this->donation_data->post_date );
 		}
 

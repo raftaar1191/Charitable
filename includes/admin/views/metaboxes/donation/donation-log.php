@@ -23,7 +23,7 @@ $date_time_format = get_option( 'date_format' ) . ' - ' . get_option( 'time_form
 		</thead>
 		<?php foreach ( $logs as $log ) : ?>
 		<tr>
-			<td><?php echo date_i18n( $date_time_format, $log['time'] ) ?></td>
+			<td><?php echo get_date_from_gmt( date( 'Y-m-d H:i:s', $log['time'] ), $date_time_format ) ?></td>
 			<td><?php echo $log['message'] ?></td>
 		</tr>
 		<?php endforeach ?>
