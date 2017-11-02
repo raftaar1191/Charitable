@@ -304,7 +304,7 @@ if ( ! function_exists( 'charitable_template_donate_button' ) ) :
 	 * @return  boolean     True if the template was displayed. False otherwise.
 	 */
 	function charitable_template_donate_button( $campaign ) {
-		if ( $campaign->has_ended() ) {
+		if ( ! $campaign->can_receive_donations() ) {
 			return false;
 		}
 
@@ -400,19 +400,20 @@ if ( ! function_exists( 'charitable_template_campaign_donation_form_in_page' ) )
 	/**
 	 * Add the donation form straight into the campaign page.
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
+	 * @since  1.5.0 Function now returns true/false depending
+	 *               on whether the template is rendered.
 	 *
-	 * @param   Charitable_Campaign $campaign The campaign object.
-	 * @return  void
+	 * @param  Charitable_Campaign $campaign The campaign object.
+	 * @return boolean
 	 */
 	function charitable_template_campaign_donation_form_in_page( Charitable_Campaign $campaign ) {
-		if ( $campaign->has_ended() ) {
-			return;
+		if ( $campaign->can_receive_donations() && 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
+			charitable_get_current_donation_form()->render();
+			return true;
 		}
 
-		if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
-			charitable_get_current_donation_form()->render();
-		}
+		return false;
 	}
 
 endif;
@@ -422,32 +423,32 @@ if ( ! function_exists( 'charitable_template_campaign_modal_donation_window' ) )
 	/**
 	 * Adds the modal donation window to a campaign page.
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
+	 * @since  1.5.0 Function now returns true/false depending
+	 *               on whether the template is rendered.
 	 *
-	 * @return  void
+	 * @global WP_Query $wp_query
+	 * @return boolean
 	 */
 	function charitable_template_campaign_modal_donation_window() {
-
 		global $wp_query;
 
 		if ( Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
-			return;
+			return false;
 		}
 
 		if ( isset( $wp_query->query_vars['donate'] ) ) {
-			return;
+			return false;
 		}
 
 		$campaign = charitable_get_current_campaign();
 
-		if ( $campaign->has_ended() ) {
-			return;
-		}
-
-		if ( 'modal' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
+		if ( $campaign->can_receive_donations() && 'modal' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
 			charitable_template( 'campaign/donate-modal-window.php', array( 'campaign' => $campaign ) );
+			return true;
 		}
 
+		return false;
 	}
 
 endif;

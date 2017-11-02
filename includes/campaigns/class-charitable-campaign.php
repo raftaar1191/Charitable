@@ -310,6 +310,27 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
+		 * Returns whether a campaign is currently able to receive donations.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return boolean
+		 */
+		public function can_receive_donations() {
+			$can = ! $this->has_ended();
+
+			/**
+			 * Filter whether the campaign can receive donations.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param boolean             $can      Whether the campaign can receive donations.
+			 * @param Charitable_Campaign $campaign This instance of `Charitable_Campaign`.
+			 */
+			return apply_filters( 'charitable_campaign_can_receive_donations', $can, $this );
+		}
+
+		/**
 		 * Return a text notice to say that a campaign has finished.
 		 *
 		 * @since   1.0.0
@@ -719,7 +740,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return  void
 		 */
 		public function donate_button_template() {
-			if ( $this->has_ended() ) {
+			if ( ! $this->can_receive_donations() ) {
 				return;
 			}
 
@@ -753,7 +774,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return  void
 		 */
 		public function donate_button_loop_template() {
-			if ( $this->has_ended() ) {
+			if ( ! $this->can_receive_donations() ) {
 				return;
 			}
 

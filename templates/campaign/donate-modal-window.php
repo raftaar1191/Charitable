@@ -6,11 +6,12 @@
  *
  * @author  Studio 164a
  * @since   1.0.0
+ * @version 1.5.0
  */
 
 $campaign = $view_args['campaign'];
 
-if ( $campaign->has_ended() ) :
+if ( ! $campaign->can_receive_donations() ) :
 	return;
 endif;
 

@@ -6,7 +6,7 @@
  *
  * @author  Studio 164a
  * @since   1.0.0
- * @version 1.3.2
+ * @version 1.5.0
  */
 
 // Exit if accessed directly.
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 $campaign = $view_args['campaign'];
 
-if ( $campaign->has_ended() ) :
+if ( ! $campaign->can_receive_donations() ) :
 	return;
 endif;
 

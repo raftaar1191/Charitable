@@ -126,10 +126,13 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 				}
 			}
 
-			/* If the campaign has exired, redirect the user to the campaign page. */
+			/**
+			 * If the campaign doesn't exist or can no longer receive donations,
+			 * redirect the user to the campaign page.
+			 */
 			$campaign = charitable_get_current_campaign();
 
-			if ( ! $campaign || $campaign->has_ended() ) {
+			if ( ! $campaign || ! $campaign->can_receive_donations() ) {
 
 				wp_safe_redirect( get_permalink( $campaign->ID ) );
 				exit();

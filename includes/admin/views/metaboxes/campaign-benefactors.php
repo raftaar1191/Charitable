@@ -19,9 +19,9 @@ if ( ! isset( $view_args['extension'] ) ) {
 	return;
 }
 
-$extension = $view_args['extension'];
+$extension   = $view_args['extension'];
 $benefactors = charitable_get_table( 'benefactors' )->get_campaign_benefactors_by_extension( $post->ID, $extension );
-$ended = charitable_get_campaign( $post->ID )->has_ended();
+$ended       = charitable_get_campaign( $post->ID )->has_ended();
 
 ?>
 <div class="charitable-metabox charitable-metabox-wrap">

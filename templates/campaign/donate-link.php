@@ -6,6 +6,7 @@
  *
  * @author  Studio 164a
  * @since   1.0.0
+ * @version 1.5.0
  */
 
 if ( ! array_key_exists( 'campaign', $view_args ) || ! is_a( $view_args['campaign'], 'Charitable_Campaign' ) ) :
@@ -14,7 +15,7 @@ endif;
 
 $campaign = $view_args['campaign'];
 
-if ( $campaign->has_ended() ) :
+if ( ! $campaign->can_receive_donations() ) :
 	return;
 endif;
 
