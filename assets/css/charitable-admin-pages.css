@@ -3,7 +3,8 @@
 .charitable-wrap h1, .charitable-wrap h2, .charitable-wrap h3 {
   margin: 0 0 21px; }
 .charitable-wrap h3 {
-  font-size: 1.1em; }
+  text-align: center;
+  font-size: 21px; }
 .charitable-wrap .version {
   padding: 4px 8px;
   font-size: 14px;
@@ -63,28 +64,23 @@
   background-color: #fff; }
 .charitable-wrap .column-inside {
   padding: 21px; }
-.charitable-wrap .upgrade {
+.charitable-wrap .bundle-promo {
   padding: 21px;
-  border-top: 3px solid #f99d33;
-  background: #fef4e8; }
+  background-color: #fef4e8;
+  border: 3px solid #fff; }
+  .charitable-wrap .bundle-promo p {
+    font-size: 18px; }
+  .charitable-wrap .bundle-promo strong {
+    color: #f99d33; }
 .charitable-wrap .extensions {
-  float: left;
-  width: 100%;
-  clear: both;
-  list-style: none;
-  padding-bottom: 21px; }
+  list-style: none; }
   .charitable-wrap .extensions li {
-    width: 48%;
-    float: left;
     margin-bottom: 21px;
     text-align: center; }
-    .charitable-wrap .extensions li:nth-child(2n+1) {
-      margin-right: 4%;
-      clear: left; }
   .charitable-wrap .extensions a {
     text-decoration: none;
     color: #444; }
   .charitable-wrap .extensions img {
-    margin-bottom: 10px; }
+    margin-bottom: 4px; }
 
 /*# sourceMappingURL=charitable-admin-pages.css.map */

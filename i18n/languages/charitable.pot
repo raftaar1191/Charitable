@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-beta.3\n"
+"Project-Id-Version: Charitable 1.5.0-beta.4\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-10-26 05:16:49+00:00\n"
+"POT-Creation-Date: 2017-11-02 05:04:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4675,51 +4675,51 @@ msgstr ""
 msgid "Western Cape"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:507
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:511
 msgid ""
 "The $label argument is deprecated. Use "
 "Charitable_Donation::get_status_label() instead."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:646
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:650
 #: includes/admin/customizer/class-charitable-customizer.php:119
 msgid "Yes"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:646
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:650
 #: includes/admin/customizer/class-charitable-customizer.php:120
 msgid "No"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:719
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:723
 msgid ""
 "$donation_id is no longer required as get_donation_log() is used in object "
 "context. Use $donation->get_donation_log() instead."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:811
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:815
 msgid "Donation status updated from %s to %s."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:840
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:874
 msgid ""
 "$donation_id is no longer required as update_donation_log() is used in "
 "object context. Use $donation->update_donation_log($message)"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:981
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:1015
 msgid "%s was sent successfully."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:984
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:1018
 msgid "Resend it now"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:987
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:1021
 msgid "%s failed to send."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-abstract-donation.php:990
+#: includes/abstracts/abstract-class-charitable-abstract-donation.php:1024
 msgid "Retry email send"
 msgstr ""
 
@@ -5937,28 +5937,42 @@ msgstr ""
 msgid "There are no emails available in your system."
 msgstr ""
 
-#: includes/admin/views/settings/gateways.php:37
-msgid "Default gateway"
-msgstr ""
-
-#: includes/admin/views/settings/gateways.php:41
-msgid "Make default gateway"
-msgstr ""
-
-#: includes/admin/views/settings/gateways.php:51
-msgid "Gateway Settings"
-msgstr ""
-
-#: includes/admin/views/settings/gateways.php:57
+#: includes/admin/views/settings/gateways.php:26
 msgid "Disable Gateway"
 msgstr ""
 
-#: includes/admin/views/settings/gateways.php:61
+#: includes/admin/views/settings/gateways.php:33
 msgid "Enable Gateway"
 msgstr ""
 
-#: includes/admin/views/settings/gateways.php:68
-msgid "There are no gateways available in your system."
+#: includes/admin/views/settings/gateways.php:53
+msgid "Default gateway"
+msgstr ""
+
+#: includes/admin/views/settings/gateways.php:57
+msgid "Make default gateway"
+msgstr ""
+
+#: includes/admin/views/settings/gateways.php:67
+msgid "Gateway Settings"
+msgstr ""
+
+#: includes/admin/views/settings/gateways.php:76
+msgid ""
+"<strong>Tip</strong>: Accept donations in South African Rand with <a "
+"href=\"%s\" target=\"_blank\">PayFast</a>."
+msgstr ""
+
+#: includes/admin/views/settings/gateways.php:81
+msgid ""
+"<strong>Tip</strong>: Accept donations in Indian Rupee with <a href=\"%s\" "
+"target=\"_blank\">PayUMoney</a>."
+msgstr ""
+
+#: includes/admin/views/settings/gateways.php:85
+msgid ""
+"<strong>Need more options?</strong> <a href=\"%s\" target=\"_blank\">Click "
+"here to browse our payment gateway extensions</a>, including %3$s and %2$s."
 msgstr ""
 
 #: includes/admin/views/settings/licenses.php:32
@@ -6140,44 +6154,34 @@ msgid ""
 "href=\"%s\">our support page</a>."
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:129
-msgid "Popular Upgrades"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:138
-msgid "Upgrade for a price you can afford"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:139
-msgid ""
-"With our Pay What You Want packages, <strong>you choose how much you "
-"pay</strong> to upgrade. Why? Because we think that every great "
-"organization deserves awesome fundraising software, regardless of the size "
-"of its budget."
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:140
-msgid "Unlock more features"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:147
+#: includes/admin/views/welcome-page/page.php:130
 msgid ""
 "You can help us translate Charitable into %s by <a "
 "href=\"https://translate.wordpress.org/projects/wp-plugins/charitable\">"
 "contributing to the translation project</a>."
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:152
+#: includes/admin/views/welcome-page/page.php:135
+msgid "Developer? Contribute to Charitable"
+msgstr ""
+
+#: includes/admin/views/welcome-page/page.php:137
+msgid ""
+"Found a bug? Want to contribute a patch or create a new feature? <a "
+"href=\"%s\">GitHub is the place to go!</a>"
+msgstr ""
+
+#: includes/admin/views/welcome-page/page.php:141
+msgid "Try Reach, a free theme designed for fundraising"
+msgstr ""
+
+#: includes/admin/views/welcome-page/page.php:142
 msgid ""
 "Screenshot of Reach, a WordPress fundraising theme designed to complement "
 "Charitable"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:153
-msgid "Try Reach, a free theme designed for fundraising"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:154
+#: includes/admin/views/welcome-page/page.php:143
 msgid ""
 "We built Reach to help non-profits &amp; social entrepreneurs run beautiful "
 "online fundraising campaigns. Whether you’re creating a website for your "
@@ -6185,22 +6189,30 @@ msgid ""
 "crowdfunding platform, Reach is the perfect starting point."
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:155
+#: includes/admin/views/welcome-page/page.php:144
 msgid "Download it free"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:155
+#: includes/admin/views/welcome-page/page.php:144
 msgid "View demo"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:157
-msgid "Developer? Contribute to Charitable"
+#: includes/admin/views/welcome-page/page.php:149
+msgid "Bundle & Save"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:159
+#: includes/admin/views/welcome-page/page.php:150
 msgid ""
-"Found a bug? Want to contribute a patch or create a new feature? <a "
-"href=\"%s\">GitHub is the place to go!</a>"
+"Choose one of our popular extension packages and <strong>save over "
+"50%</strong>."
+msgstr ""
+
+#: includes/admin/views/welcome-page/page.php:151
+msgid "View Pricing"
+msgstr ""
+
+#: includes/admin/views/welcome-page/page.php:154
+msgid "Recommended Extensions"
 msgstr ""
 
 #: includes/ajax/charitable-ajax-functions.php:122
@@ -6234,37 +6246,37 @@ msgid_plural "%s Days Left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/campaigns/class-charitable-campaign.php:325
+#: includes/campaigns/class-charitable-campaign.php:346
 msgid "This campaign ended %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:327
+#: includes/campaigns/class-charitable-campaign.php:348
 msgid "This campaign successfully reached its funding goal and ended %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:329
+#: includes/campaigns/class-charitable-campaign.php:350
 msgid "This campaign failed to reach its funding goal %s ago"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:485
-#: includes/campaigns/class-charitable-campaign.php:489
-#: includes/campaigns/class-charitable-campaign.php:493
+#: includes/campaigns/class-charitable-campaign.php:506
+#: includes/campaigns/class-charitable-campaign.php:510
+#: includes/campaigns/class-charitable-campaign.php:514
 msgid "Ended"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:489
+#: includes/campaigns/class-charitable-campaign.php:510
 msgid "Successful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:493
+#: includes/campaigns/class-charitable-campaign.php:514
 msgid "Unsuccessful"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:497
+#: includes/campaigns/class-charitable-campaign.php:518
 msgid "Ending Soon"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:501
+#: includes/campaigns/class-charitable-campaign.php:522
 msgid "Active"
 msgstr ""
 
@@ -6492,179 +6504,179 @@ msgstr ""
 msgid "Search Campaign Tags"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:127
+#: includes/currency/class-charitable-currency.php:124
 msgid "Amount must be passed as a string."
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:246
+#: includes/currency/class-charitable-currency.php:231
 msgid "Emirati Dirham (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:247
+#: includes/currency/class-charitable-currency.php:232
 msgid "Australian Dollars (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:248
+#: includes/currency/class-charitable-currency.php:233
 msgid "Argentine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:249
+#: includes/currency/class-charitable-currency.php:234
 msgid "Bangladeshi Taka (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:250
+#: includes/currency/class-charitable-currency.php:235
 msgid "Bolivian Bolíviano (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:251
+#: includes/currency/class-charitable-currency.php:236
 msgid "Brazilian Real (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:252
+#: includes/currency/class-charitable-currency.php:237
 msgid "Bulgarian Lev (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:253
+#: includes/currency/class-charitable-currency.php:238
 msgid "Canadian Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:254
+#: includes/currency/class-charitable-currency.php:239
 msgid "Swiss Franc (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:255
+#: includes/currency/class-charitable-currency.php:240
 msgid "Chilean Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:256
+#: includes/currency/class-charitable-currency.php:241
 msgid "Chinese Yuan Renminbi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:257
+#: includes/currency/class-charitable-currency.php:242
 msgid "Czech Koruna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:258
+#: includes/currency/class-charitable-currency.php:243
 msgid "Danish Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:259
+#: includes/currency/class-charitable-currency.php:244
 msgid "Egyptian Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:260
+#: includes/currency/class-charitable-currency.php:245
 msgid "Euro (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:261
+#: includes/currency/class-charitable-currency.php:246
 msgid "British Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:262
+#: includes/currency/class-charitable-currency.php:247
 msgid "Ghanaian Cedi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:263
+#: includes/currency/class-charitable-currency.php:248
 msgid "Hong Kong Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:264
+#: includes/currency/class-charitable-currency.php:249
 msgid "Croatian Kuna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:265
+#: includes/currency/class-charitable-currency.php:250
 msgid "Hungarian Forint (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:266
+#: includes/currency/class-charitable-currency.php:251
 msgid "Indonesian Rupiah (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:267
+#: includes/currency/class-charitable-currency.php:252
 msgid "Israeli Shekel (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:268
+#: includes/currency/class-charitable-currency.php:253
 msgid "Indian Rupee (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:269
+#: includes/currency/class-charitable-currency.php:254
 msgid "Icelandic Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:270
+#: includes/currency/class-charitable-currency.php:255
 msgid "Japanese Yen (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:271
+#: includes/currency/class-charitable-currency.php:256
 msgid "South Korean Won (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:272
+#: includes/currency/class-charitable-currency.php:257
 msgid "Mexican Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:273
+#: includes/currency/class-charitable-currency.php:258
 msgid "Malaysian Ringgit (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:274
+#: includes/currency/class-charitable-currency.php:259
 msgid "Nigerian Naira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:275
+#: includes/currency/class-charitable-currency.php:260
 msgid "Norwegian Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:276
+#: includes/currency/class-charitable-currency.php:261
 msgid "New Zealand Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:277
+#: includes/currency/class-charitable-currency.php:262
 msgid "Philippine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:278
+#: includes/currency/class-charitable-currency.php:263
 msgid "Polish Zloty (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:279
+#: includes/currency/class-charitable-currency.php:264
 msgid "Romanian New Leu (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:280
+#: includes/currency/class-charitable-currency.php:265
 msgid "Russian Ruble (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:281
+#: includes/currency/class-charitable-currency.php:266
 msgid "Swedish Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:282
+#: includes/currency/class-charitable-currency.php:267
 msgid "Singapore Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:283
+#: includes/currency/class-charitable-currency.php:268
 msgid "Thai Baht (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:284
+#: includes/currency/class-charitable-currency.php:269
 msgid "Turkish Lira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:285
+#: includes/currency/class-charitable-currency.php:270
 msgid "Taiwan New Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:286
+#: includes/currency/class-charitable-currency.php:271
 msgid "US Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:287
+#: includes/currency/class-charitable-currency.php:272
 msgid "Vietnamese Dong (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:288
+#: includes/currency/class-charitable-currency.php:273
 msgid "South African Rand (%s)"
 msgstr ""
 
@@ -6706,30 +6718,24 @@ msgstr ""
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:32
-msgid ""
-"charitable_get_donation should not be called before the charitable_start "
-"action."
-msgstr ""
-
-#: includes/donations/charitable-donation-functions.php:283
+#: includes/donations/charitable-donation-functions.php:271
 #: includes/fields/default-fields/donation-fields.php:349
 msgid "Paid"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:284
+#: includes/donations/charitable-donation-functions.php:272
 msgid "Pending"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:285
+#: includes/donations/charitable-donation-functions.php:273
 msgid "Failed"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:286
+#: includes/donations/charitable-donation-functions.php:274
 msgid "Cancelled"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:287
+#: includes/donations/charitable-donation-functions.php:275
 msgid "Refunded"
 msgstr ""
 
@@ -7663,14 +7669,30 @@ msgid "Invalid gateway."
 msgstr ""
 
 #: includes/gateways/class-charitable-gateways.php:358
+msgid "Payfast"
+msgstr ""
+
+#: includes/gateways/class-charitable-gateways.php:359
+msgid "PayUMoney"
+msgstr ""
+
+#: includes/gateways/class-charitable-gateways.php:360
+msgid "Stripe"
+msgstr ""
+
+#: includes/gateways/class-charitable-gateways.php:361
+msgid "Authorize.Net"
+msgstr ""
+
+#: includes/gateways/class-charitable-gateways.php:399
 msgid "Default Gateway Updated"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:385
+#: includes/gateways/class-charitable-gateways.php:426
 msgid "Gateway enabled"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:416
+#: includes/gateways/class-charitable-gateways.php:457
 msgid "Gateway disabled"
 msgstr ""
 
@@ -7729,11 +7751,11 @@ msgstr ""
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: includes/public/charitable-template-functions.php:897
+#: includes/public/charitable-template-functions.php:898
 msgid "Your Donation Amount: <strong>%s</strong>."
 msgstr ""
 
-#: includes/public/charitable-template-functions.php:898
+#: includes/public/charitable-template-functions.php:899
 msgid "Change"
 msgstr ""
 
@@ -7741,35 +7763,35 @@ msgstr ""
 msgid "You must donate at least %s."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:115
+#: includes/public/class-charitable-public.php:122
 msgid "Please fill out all required fields."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:116
+#: includes/public/class-charitable-public.php:123
 msgid "Your donation could not be processed. Please reload the page and try again."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:117
+#: includes/public/class-charitable-public.php:124
 msgid "The credit card passed is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:118
+#: includes/public/class-charitable-public.php:125
 msgid "The credit card expiry date is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:198
+#: includes/public/class-charitable-public.php:205
 msgid "You can only upload %d file"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:199
+#: includes/public/class-charitable-public.php:206
 msgid "You can only upload a maximum of %d files"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:200
+#: includes/public/class-charitable-public.php:207
 msgid "%1$s exceeds the max upload size of %2$s"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:201
+#: includes/public/class-charitable-public.php:208
 msgid "%s failed to upload. Please try again."
 msgstr ""
 
@@ -7796,11 +7818,11 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: includes/shortcodes/class-charitable-my-donations-shortcode.php:68
+#: includes/shortcodes/class-charitable-my-donations-shortcode.php:73
 msgid "We have sent you an email to confirm your email address."
 msgstr ""
 
-#: includes/shortcodes/class-charitable-my-donations-shortcode.php:71
+#: includes/shortcodes/class-charitable-my-donations-shortcode.php:76
 msgid ""
 "<a href=\"%s\">Confirm your email address</a> to access your full donation "
 "history."
@@ -7990,7 +8012,7 @@ msgid "Return home"
 msgstr ""
 
 #: templates/campaign/donate-button.php:18
-#: templates/campaign/donate-link.php:23 templates/campaign/donate-modal.php:18
+#: templates/campaign/donate-link.php:24 templates/campaign/donate-modal.php:18
 #: templates/campaign-loop/donate-link.php:26
 #: templates/campaign-loop/donate-modal.php:21
 #: templates/donation-form/form-donation.php:43
@@ -8157,22 +8179,22 @@ msgctxt "You have activated x and y. Change email settings."
 msgid "You have turned on the %s. <a href=\"%s\">Change settings</a>"
 msgstr ""
 
-#: includes/admin/views/welcome-page/page.php:133
-msgctxt "extension banner"
-msgid "%s banner"
-msgstr ""
-
-#: includes/admin/views/welcome-page/page.php:146
+#: includes/admin/views/welcome-page/page.php:129
 msgctxt "translate Charitable into language"
 msgid "Translate Charitable into %s"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:589
+#: includes/admin/views/welcome-page/page.php:158
+msgctxt "extension banner"
+msgid "%s banner"
+msgstr ""
+
+#: includes/campaigns/class-charitable-campaign.php:610
 msgctxt "amount donated of goal"
 msgid "%s donated of %s goal"
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign.php:594
+#: includes/campaigns/class-charitable-campaign.php:615
 msgctxt "amount donated"
 msgid "%s donated"
 msgstr ""
@@ -8242,7 +8264,7 @@ msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:197
+#: includes/public/class-charitable-public.php:204
 msgctxt "remove image button text"
 msgid "Remove"
 msgstr ""
@@ -8253,7 +8275,7 @@ msgctxt "x and y"
 msgid "%s and %s"
 msgstr ""
 
-#: templates/campaign/donate-link.php:23 templates/campaign/donate-modal.php:17
+#: templates/campaign/donate-link.php:24 templates/campaign/donate-modal.php:17
 #: templates/campaign-loop/donate-link.php:26
 msgctxt "make a donation to campaign"
 msgid "Make a donation to %s"

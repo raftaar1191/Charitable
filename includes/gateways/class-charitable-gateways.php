@@ -342,6 +342,47 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		}
 
 		/**
+		 * Return an array of recommended gateways for the current site.
+		 *
+		 * Note that this will only return gateways that are not already
+		 * available on the site. i.e. If you have Stripe installed, it
+		 * will not suggest that.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return array
+		 */
+		public function get_recommended_gateways() {
+			$available = $this->get_available_gateways();
+			$gateways  = array(
+				'payfast'       => __( 'Payfast', 'charitable' ),
+				'payumoney'     => __( 'PayUMoney', 'charitable' ),
+				'stripe'        => __( 'Stripe', 'charitable'  ),
+				'authorize_net' => __( 'Authorize.Net', 'charitable' ),
+			);
+
+			/* If the user has already enabled one of these, leave them alone. :) */
+			foreach ( $gateways as $gateway_id => $gateway ) {
+				if ( array_key_exists( $gateway_id, $available ) ) {
+					return array();
+				}
+			}
+
+			$currency = charitable_get_option( 'currency', 'AUD' );
+			$locale   = get_locale();
+
+			if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
+				return charitable_array_subset( $gateways, array( 'payfast' ) );
+			}
+
+			if ( 'hi_IN' == $locale || 'INR' == $currency ) {
+				return charitable_array_subset( $gateways, array( 'payumoney' ) );
+			}
+
+			return charitable_array_subset( $gateways, array( 'stripe', 'authorize_net' ) );
+		}
+
+		/**
 		 * Sets the default gateway.
 		 *
 		 * @since   1.0.0

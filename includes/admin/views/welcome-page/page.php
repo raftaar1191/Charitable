@@ -81,7 +81,7 @@ if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
             <p><?php _e( 'Charitable is everything you need to start accepting donations today. PayPal and offline donations work right out of the box, and when your organization is ready to grow, our extensions give you the tools you need to move forward.', 'charitable' ) ?></p>
             <?php if ( current_user_can( 'manage_charitable_settings' ) ) : ?>
                 <hr />
-                <h2><?php _e( 'Getting Started', 'charitable' ) ?></h2>
+                <h3><?php _e( 'Getting Started', 'charitable' ) ?></h3>
                 <ul class="checklist">
                     <?php if ( count( $gateways ) > 0 ) : ?>
                         <li class="done"><?php
@@ -124,43 +124,42 @@ if ( 'en_ZA' == $locale || 'ZAR' == $currency ) {
                     ) ?>
                 </p>
             <?php endif ?>
+            <hr />
+            <?php if ( strpos( $locale, 'en' ) !== 0 ) : ?>
+                <h3><?php printf( _x( 'Translate Charitable into %s', 'translate Charitable into language', 'charitable' ), $language ) ?></h3>
+                <p><?php printf( __( 'You can help us translate Charitable into %s by <a href="https://translate.wordpress.org/projects/wp-plugins/charitable">contributing to the translation project</a>.', 'charitable' ),
+                    $language
+                ) ?></p>
+                <hr />
+            <?php endif ?>                     
+            <h3><?php _e( 'Developer? Contribute to Charitable', 'charitable' ) ?></h3>
+            <p><?php printf(
+                __( 'Found a bug? Want to contribute a patch or create a new feature? <a href="%s">GitHub is the place to go!</a>', 'charitable' ),
+                'https://github.com/Charitable/Charitable'
+            ) ?></p>
+            <hr />
+            <h3><?php _e( 'Try Reach, a free theme designed for fundraising', 'charitable' ) ?></h3>
+            <img src="<?php echo charitable()->get_path( 'assets', false ) ?>images/reach-mockup.png" alt="<?php _e( 'Screenshot of Reach, a WordPress fundraising theme designed to complement Charitable', 'charitable' ) ?>" style="margin-bottom: 21px; float: right; margin-left: 20px;" width="336" height="166" />
+            <p><?php _e( 'We built Reach to help non-profits &amp; social entrepreneurs run beautiful online fundraising campaigns. Whether you’re creating a website for your organization’s peer-to-peer fundraising event or building an online crowdfunding platform, Reach is the perfect starting point.', 'charitable' ) ?></p>
+            <p><a href="https://www.wpcharitable.com/download-reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-primary" style="margin-right: 8px;" target="_blank"><?php _e( 'Download it free', 'charitable' ) ?></a><a href="http://demo.wpcharitable.com/reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-secondary" target="_blank"><?php _e( 'View demo', 'charitable' ) ?></a></p>
         </div>
-        <div class="upgrade">
-            <h2><?php _e( 'Popular Upgrades', 'charitable' ) ?></h2>
+    </div>
+    <div class="column-right">
+        <div class="bundle-promo">
+            <h2><?php _e( 'Bundle & Save', 'charitable' ) ?></h2>
+            <p><?php _e( 'Choose one of our popular extension packages and <strong>save over 50%</strong>.', 'charitable' ) ?></p>
+            <p style="text-align: center;"><a href="https://www.wpcharitable.com/packages/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=pwyw-packages" class="button-primary"><?php _e( 'View Pricing', 'charitable' ) ?></a></p>
+        </div>
+        <div class="column-inside">
+            <h3><?php _e( 'Recommended Extensions', 'charitable' ) ?></h3>
             <ul class="extensions">
                 <?php foreach ( $extensions as $extension => $description ) : ?>
                     <li class="<?php echo $extension ?>">
                         <a href="https://www.wpcharitable.com/extensions/charitable-<?php echo $extension ?>/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=<?php echo $extension ?>"><img src="<?php echo charitable()->get_path( 'assets', false ) ?>images/extensions/<?php echo $extension ?>.png" width="615" height="289" alt="<?php echo esc_attr( sprintf( _x( '%s banner', 'extension banner', 'charitable' ), $extension ) ) ?>" /><?php echo $description ?></a>
                     </li>
                 <?php endforeach ?>
-            </ul>   
-            <hr />
-            <h2><?php _e( 'Upgrade for a price you can afford', 'charitable' ) ?></h2>
-            <p><?php _e( 'With our Pay What You Want packages, <strong>you choose how much you pay</strong> to upgrade. Why? Because we think that every great organization deserves awesome fundraising software, regardless of the size of its budget.', 'charitable' ) ?></p>
-            <p style="text-align: center;"><a href="https://www.wpcharitable.com/packages/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=pwyw-packages" class="button-primary"><?php _e( 'Unlock more features', 'charitable' ) ?></a></p>
+            </ul>
         </div>
-    </div>
-    <div class="column-right">
-        <div class="column-inside">   
-            <?php if ( strpos( $locale, 'en' ) !== 0 ) : ?>
-                <h2><?php printf( _x( 'Translate Charitable into %s', 'translate Charitable into language', 'charitable' ), $language ) ?></h2>
-                <p><?php printf( __( 'You can help us translate Charitable into %s by <a href="https://translate.wordpress.org/projects/wp-plugins/charitable">contributing to the translation project</a>.', 'charitable' ),
-                    $language
-                ) ?></p>
-                <hr />
-            <?php endif ?>         
-            <img src="<?php echo charitable()->get_path( 'assets', false ) ?>images/reach-mockup.png" alt="<?php _e( 'Screenshot of Reach, a WordPress fundraising theme designed to complement Charitable', 'charitable' ) ?>" style="margin-bottom: 21px;" width="336" height="166" />
-            <h2><?php _e( 'Try Reach, a free theme designed for fundraising', 'charitable' ) ?></h2>
-            <p><?php _e( 'We built Reach to help non-profits &amp; social entrepreneurs run beautiful online fundraising campaigns. Whether you’re creating a website for your organization’s peer-to-peer fundraising event or building an online crowdfunding platform, Reach is the perfect starting point.', 'charitable' ) ?></p>
-            <p><a href="https://www.wpcharitable.com/download-reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-primary" style="margin-right: 8px;" target="_blank"><?php _e( 'Download it free', 'charitable' ) ?></a><a href="http://demo.wpcharitable.com/reach/?utm_source=welcome-page&amp;utm_medium=wordpress-dashboard&amp;utm_campaign=reach" class="button-secondary" target="_blank"><?php _e( 'View demo', 'charitable' ) ?></a></p>
-            <hr />          
-            <h2><?php _e( 'Developer? Contribute to Charitable', 'charitable' ) ?></h2>
-            <p><?php printf(
-                __( 'Found a bug? Want to contribute a patch or create a new feature? <a href="%s">GitHub is the place to go!</a>', 'charitable' ),
-                'https://github.com/Charitable/Charitable'
-            ) ?>
-            </p>
-        </div>    
     </div>
 </div>
  
