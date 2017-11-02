@@ -95,8 +95,8 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			$amount = number_format(
 				$amount,
 				(int) $decimal_count,
-				charitable_get_option( 'decimal_separator', '.' ),
-				charitable_get_option( 'thousands_separator', ',' )
+				$this->get_decimal_separator(),
+				$this->get_thousands_separator()
 			);
 
 			$formatted = sprintf( $this->get_currency_format(), $this->get_currency_symbol(), $amount );
@@ -172,19 +172,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @return 	boolean
 		 */
 		public function is_comma_decimal() {
-			return ( ',' == charitable_get_option( 'decimal_separator', '.' ) );
-		}
-
-		/**
-		 * Return the number of decimals to use.
-		 *
-		 * @uses 	charitable_currency_decimal_count
-		 * @since   1.0.0
-		 *
-		 * @return 	int
-		 */
-		public function get_decimals() {
-			return charitable_get_option( 'decimal_count', 2 );
+			return ( ',' == $this->get_decimal_separator() );
 		}
 
 		/**
@@ -378,6 +366,46 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			}//end switch
 
 			return apply_filters( 'charitable_currency_symbol', $currency_symbol, $currency );
+		}
+
+		/**
+		 * Return the thousands separator.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public function get_thousands_separator() {
+			$separator = charitable_get_option( 'thousands_separator', ',' );
+
+			if ( 'none' == $separator ) {
+				$separator = '';
+			}
+
+			return $separator;
+		}
+
+		/**
+		 * Return the decimal separator.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
+		public function get_decimal_separator() {
+			return charitable_get_option( 'decimal_separator', '.' );
+		}
+
+
+		/**
+		 * Return the number of decimals to use.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return int
+		 */
+		public function get_decimals() {
+			return charitable_get_option( 'decimal_count', 2 );
 		}
 	}
 

@@ -13,50 +13,51 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 
-/**
- * Charitable_Profile_Shortcode class.
- *
- * @since   1.0.0
- */
-class Charitable_Profile_Shortcode {
+	/**
+	 * Charitable_Profile_Shortcode class.
+	 *
+	 * @since   1.0.0
+	 */
+	class Charitable_Profile_Shortcode {
 
-    /**
-     * The callback method for the campaigns shortcode.
-     *
-     * This receives the user-defined attributes and passes the logic off to the class.
+		/**
+		 * The callback method for the campaigns shortcode.
+		 *
+		 * This receives the user-defined attributes and passes the logic off to the class.
+		 *
+		 * @since   1.0.0
+		 *
+		 * @param   array $atts User-defined shortcode attributes.
+		 * @return  string
+		 */
+		public static function display( $atts ) {
+			$defaults = array(
+				'hide_login' => false,
+			);
 
-     *
-     * @since   1.0.0
-     *
-     * @param   array $atts User-defined shortcode attributes.
-     * @return  string
-     */
-    public static function display( $atts ) {
-        $defaults = array( 'hide_login' => false );
+			$args = shortcode_atts( $defaults, $atts, 'charitable_profile' );
 
-        $args = shortcode_atts( $defaults, $atts, 'charitable_profile' );
+			ob_start();
 
-        ob_start();
+			/* If the user is logged out, show the login form. */
+			if ( ! is_user_logged_in() ) {
 
-        /* If the user is logged out, show the login form. */
-        if ( ! is_user_logged_in() ) {
+				if ( false == $args['hide_login'] ) {
+					echo Charitable_Login_Shortcode::display( array(
+						'redirect' => charitable_get_current_url(),
+					) );
+				}
 
-            if( $args['hide_login'] === false ) {
-                echo Charitable_Login_Shortcode::display( array(
-                    'redirect' => charitable_get_current_url(),
-                ) );
-            }
+				return ob_get_clean();
+			}
 
-            return ob_get_clean();
-        }
+			/* If the user is logged in, show the profile template. */
+			charitable_template( 'shortcodes/profile.php', array( 
+				'form' => new Charitable_Profile_Form( $args ) 
+			) );
 
-        /* If the user is logged in, show the profile template. */
-        charitable_template( 'shortcodes/profile.php', array( 
-            'form' => new Charitable_Profile_Form( $args ) 
-        ) );
-
-        return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );      
-    }
-}
+			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );      
+		}
+	}
 
 endif;

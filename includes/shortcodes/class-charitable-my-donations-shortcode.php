@@ -31,7 +31,9 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 		 * @return  string
 		 */
 		public static function display( $atts ) {
-			$defaults = array( 'hide_login' => false );
+			$defaults = array(
+				'hide_login' => false,
+			);
 
 			$args = shortcode_atts( $defaults, $atts, 'charitable_my_donations' );
 
@@ -40,7 +42,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			/* If the user is logged out, show the login form. */
 			if ( ! is_user_logged_in() ) {
 
-				if( $args['hide_login'] === false ) {
+				if ( false == $args['hide_login'] ) {
 					echo Charitable_Login_Shortcode::display( array(
 						'redirect' => charitable_get_current_url(),
 					) );

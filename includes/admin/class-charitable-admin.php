@@ -192,9 +192,9 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 					$dependencies[] = 'accounting';
 					$localized_vars = array_merge( $localized_vars, array(
-						'currency_format_num_decimals' => esc_attr( charitable_get_option( 'decimal_count', 2 ) ),
-						'currency_format_decimal_sep'  => esc_attr( charitable_get_option( 'decimal_separator', '.' ) ),
-						'currency_format_thousand_sep' => esc_attr( charitable_get_option( 'thousands_separator', ',' ) ),
+						'currency_format_num_decimals' => esc_attr( charitable_get_currency_helper()->get_decimals() ),
+						'currency_format_decimal_sep'  => esc_attr( charitable_get_currency_helper()->get_decimal_separator() ),
+						'currency_format_thousand_sep' => esc_attr( charitable_get_currency_helper()->get_thousands_separator() ),
 						'currency_format'              => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ),
 					) );
 				}

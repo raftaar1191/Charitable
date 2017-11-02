@@ -43,33 +43,24 @@ function charitable_get_option( $key, $default = false, $settings = array() ) {
 		$settings = get_option( 'charitable_settings' );
 	}
 
-	if ( is_array( $key ) ) {
-		$current_key = current( $key );
-
-		/* Key does not exist */
-		if ( ! isset( $settings[ $current_key ] ) ) {
-
-			return $default;
-
-		} else {
-
-			array_shift( $key );
-
-			if ( empty( $key ) ) {
-
-				return $settings[ $current_key ];
-
-			} else {
-
-				return charitable_get_option( $key, $default, $settings[ $current_key ] );
-
-			}
-		}
-	} else {
-
-		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
-
+	if ( ! is_array( $key ) ) {
+		$key = array( $key );
 	}
+
+	$current_key = current( $key );
+
+	/* Key does not exist */
+	if ( ! isset( $settings[ $current_key ] ) ) {
+		return $default;
+	}
+
+	array_shift( $key );
+
+	if ( ! empty( $key ) ) {
+		return charitable_get_option( $key, $default, $settings[ $current_key ] );	
+	}
+
+	return $settings[ $current_key ];
 }
 
 /**

@@ -122,7 +122,7 @@ if ( ! class_exists( 'Charitable_General_Settings' ) ) :
 						',' => __( 'Comma (10,000)', 'charitable' ),
 						'.' => __( 'Period (10.000)', 'charitable' ),
 						' ' => __( 'Space (10 000)', 'charitable' ),
-						''  => __( 'None', 'charitable' ),
+						'none'  => __( 'None', 'charitable' ),
 					),
 				),
 				'decimal_count'         => array(

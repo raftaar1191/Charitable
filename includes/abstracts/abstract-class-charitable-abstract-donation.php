@@ -342,10 +342,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		public function get_campaign_categories_list() {
 			$categories = $this->get_campaign_categories_donated_to( 'campaign_category', array(
-                'fields' => 'names',
-            ) );
+				'fields' => 'names',
+			) );
 
-            return implode( ', ', $categories );
+			return implode( ', ', $categories );
 		}
 
 		/**
@@ -370,10 +370,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 */
 		protected function get_donation_summary_line( $campaign_donation ) {
 			$line_item = sprintf( '%s: %s%s',
-                $campaign_donation->campaign_name,
-                charitable_format_money( $campaign_donation->amount ),
-                PHP_EOL
-            );
+				$campaign_donation->campaign_name,
+				charitable_format_money( $campaign_donation->amount ),
+				PHP_EOL
+			);
 
 			/**
 			 * Filter the line item.
@@ -506,9 +506,9 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 			if ( $label ) {
 				charitable_get_deprecated()->deprecated_argument(
-				    __METHOD__,
-				    '1.5.0',
-				    __( 'The $label argument is deprecated. Use Charitable_Donation::get_status_label() instead.', 'charitable' )
+					__METHOD__,
+					'1.5.0',
+					__( 'The $label argument is deprecated. Use Charitable_Donation::get_status_label() instead.', 'charitable' )
 				);
 				return $this->get_status_label( $status );
 			}
@@ -820,25 +820,34 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$this->update_donation_log( $message );
 
 			/**
-             * Handle specific Charitable status transition.
-             *
-             * @since 1.5.0
-             */ 
+			 * Handle specific Charitable status transitions.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Donation $donation This instance of `Charitable_Donation`.
+			 */
 			do_action( 'charitable_donation_status_from_' . $old_status . '_to_' . $new_status, $this );
 
 			/**
-             * Handle specific Charitable status change.
-             *
-             * @since 1.5.0
-             */ 
-			do_action( 'charitable_donation_status_' . $new_status, $this );
+			 * Handle specific Charitable status change.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Donation $donation   This instance of `Charitable_Donation`.
+			 * @param string              $old_status The previous donation status.
+			 */
+			do_action( 'charitable_donation_status_' . $new_status, $this, $old_status );
 
 			/**
-             * Handle all Charitable status changes.
-             *
-             * @since 1.5.0
-             */
-			do_action( 'charitable_donation_status_changed', $this );
+			 * Handle all Charitable status changes.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param Charitable_Donation $donation   This instance of `Charitable_Donation`.
+			 * @param string              $new_status The new donation status.
+			 * @param string              $old_status The previous donation status.
+			 */
+			do_action( 'charitable_donation_status_changed', $this, $new_status, $old_status );
 
 			return $donation_id;
 		}
@@ -879,39 +888,39 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-	     * Return the parent donation, if exists
-	     *
-	     * @since  1.4.5
-	     *
-	     * @return int
-	     */
-	    public function get_donation_plan_id() {
-	        return $this->donation_data->post_parent;
-	    }
+		 * Return the parent donation, if exists
+		 *
+		 * @since  1.4.5
+		 *
+		 * @return int
+		 */
+		public function get_donation_plan_id() {
+			return $this->donation_data->post_parent;
+		}
 
-	    /**
-	     * Return the parent donation, if exists
-	     *
-	     * @since  1.4.5
-	     *
-	     * @return false|Charitable_Donation
-	     */
-	    public function get_donation_plan() {
-	    	if ( ! isset( $this->parent_donation ) ) {
+		/**
+		 * Return the parent donation, if exists
+		 *
+		 * @since  1.4.5
+		 *
+		 * @return false|Charitable_Donation
+		 */
+		public function get_donation_plan() {
+			if ( ! isset( $this->parent_donation ) ) {
 
-	    		if ( $this->donation_data->post_parent > 0 ) {
+				if ( $this->donation_data->post_parent > 0 ) {
 
-		            $this->parent_donation = charitable_get_donation( $this->donation_data->post_parent );
+					$this->parent_donation = charitable_get_donation( $this->donation_data->post_parent );
 
-		        } else {
+				} else {
 
-		            $this->parent_donation = false;
+					$this->parent_donation = false;
 
-		        }
-	    	}
+				}
+			}
 
-	        return $this->parent_donation;
-	    }
+			return $this->parent_donation;
+		}
 
 		/**
 		 * Save the gateway's transaction ID
