@@ -38,13 +38,12 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 * @var   array $args  {
 		 *     Array of field arguments.
 		 *
-		 *     @type string         $label           The label to display in the donation form.
-		 *                                           If an admin_label is not provided, the label is also used in the admin form,
-		 *                                           meta and export. If an admin_label is not provided and the email tag is enabled
-		 *                                           without a set description, the label is used as the tag description too.
-		 *     @type string         $admin_label     Optional. The label to use in the admin area. If set, this will be used for the
-		 *                                           admin form, meta and export. It will also be used for the email tag description
-		 *                                           if the email tag is enabled without a set description.
+		 *     @type string         $label           The label to use in the export, meta, donation form (unless overridden), admin
+		 *                                           form (unless overriden) and email tag (unless overridden).
+		 *                                           If no `label` is provided in the donation_form args, this label will be used in
+		 *                                           the donation form. If no `label` is provided in the admin_form args, this label
+		 *                                           will also be used in the admin form. Unless a `description` is set in the `email_tag`
+		 *                                           args, this label will also be used there as the tag description.
 		 *     @type string         $data_type       How the data should be saved. This may be set to 'meta', 'user' or 'core',
 		 *                                           through 'core' is designed stricly for core Charitable use.
 		 *     @type false|callable $value_callback  A callback function to retrieve the value of the field for a donation.		 
@@ -58,6 +57,7 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 *         in the form (not even as a hidden input), set to false. For control over how the field should be
 		 *         shown in the form, an array can be passed with any of these keys:
 		 *
+		 *         @type string   $label       The field label. This will override the `label` set above.
 		 *         @type string   $type        The type of field. Options include (but may not be limited to):
 		 *                                     text, email, password, date, datepicker, checkbox, multi-checkbox, select,
 		 *                                     radio, file, fieldset, editor (uses WP Editor), textarea, number, picture,
@@ -98,8 +98,8 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 *         Automatically create an email tag for this field. Set to false to prevent the field being available as an
 		 *         email tag. For control over the email tag options, an array can be passed with the following keys:
 		 *
-		 *         @type string $description The description shown for the email tag. If no description is set, the `admin_label`
-		 *                                   will be used, or the label, if `admin_label` is not set.
+		 *         @type string $description The description shown for the email tag. If no description is set, the `label`
+		 *                                   will be used.
 		 *         @type string $tag         The email tag. If this is not provided, the field key will be used.
 		 *         @type string $preview     A value to use in email previews for this field.
 		 *     }
@@ -117,7 +117,6 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		protected function get_defaults() {
 			return array(
 				'label'          => '',
-				'admin_label'    => '',				
 				'data_type'      => 'meta',
 				'donation_form'  => true,
 				'admin_form'     => true,
