@@ -227,8 +227,8 @@ module.exports = function(grunt) {
 
         //loop through all files in logo directory
         grunt.file.recurse("includes", function (abspath, rootdir, subdir, filename) {
-            
             var classname = filename.replace('.php', '');
+            var filepath = typeof subdir === 'undefined' ? filename : subdir + '/' + filename;
 
             if( filename.includes('interface') ) {
                 classname = classname.replace('interface-', '') + '_Interface';
@@ -245,6 +245,10 @@ module.exports = function(grunt) {
             // Ignore function files.
             if( classname != '' ) {
 
+                if ( grunt.file.read(abspath).includes('/* CLASSMAP: IGNORE */') ) {
+                    return;
+                }
+
                 // Replace the hyphens - with underderscores and capitalize.
                 classname = classname.replace(/-/g, '_' ).replace(/^\w|\_[a-z]/g, function(letter) {
                     return letter.toUpperCase();
@@ -253,15 +257,8 @@ module.exports = function(grunt) {
                 // A few gotchas.
                 classname = classname.replace('_Db', '_DB');
                 classname = classname.replace('_I18n', '_i18n');
-                
-                // Get the path relative to the /includes/ folder.
-                if( typeof subdir != 'undefined' ) {
-                    filename = subdir + '/' + filename;
-                }
 
-            
-                map = map.concat( '"' + classname + '"  =>  "' + filename + '",\n' );
-             
+                map = map.concat( '"' + classname + '" => "' + filepath + '",\n' );
             }     
         });
 

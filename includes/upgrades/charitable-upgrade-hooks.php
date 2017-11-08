@@ -27,7 +27,7 @@ add_action( 'admin_notices', array( Charitable_Upgrade::get_instance(), 'add_upg
  *
  * @see Charitable_Upgrade::do_immediate_upgrades()
  */
-add_action( 'init', array( Charitable_Upgrade::get_instance(), 'do_immediate_upgrades' ) );
+add_action( 'init', array( Charitable_Upgrade::get_instance(), 'do_immediate_upgrades' ), 5 );
 
 /**
  * Register the admin page.

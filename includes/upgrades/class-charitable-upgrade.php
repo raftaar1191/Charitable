@@ -161,11 +161,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
 					'prompt'  => true,
 				),
-				'flush_permalinks_150_beta_2' => array(
+				'flush_permalinks_150' => array(
 					'version'  => '1.5.0',
 					'message'  => '',
 					'prompt'   => false,
-					'callback' => 'flush_rewrite_rules',
+					'callback' => array( $this, 'flush_permalinks' ),
 				),
 			);
 		}
@@ -272,6 +272,10 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @return boolean
 		 */
 		public function show_upgrade_notice( $action, $upgrade ) {
+			if ( $this->do_upgrade_immediately( $upgrade ) ) {
+				return;
+			}
+
 			/* Check if we're just setting a transient to display a notice. */
 			if ( array_key_exists( 'notice', $upgrade ) ) {
 				return $this->set_update_notice_transient( $upgrade, $action );
@@ -307,7 +311,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @return void
 		 */
 		public function perform_immediate_upgrade( $action, $upgrade ) {
-			if ( $this->do_upgrade_immediately( $upgrade ) ) {
+			if ( $this->do_upgrade_immediately( $upgrade ) ) {				
 				$ret = call_user_func( $upgrade['callback'], $action );
 
 				/* If the upgrade succeeded, update the log. */
