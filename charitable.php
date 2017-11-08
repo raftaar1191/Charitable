@@ -7,7 +7,7 @@
  * Author:            WP Charitable
  * Author URI:        https://wpcharitable.com
  * Requires at least: 4.1
- * Tested up to:      4.8.2
+ * Tested up to:      4.8.3
  *
  * Text Domain:       charitable
  * Domain Path:       /i18n/languages/
@@ -200,6 +200,7 @@ if ( ! class_exists( 'Charitable' ) ) :
             require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
             require_once( $includes_path . 'public/charitable-template-helpers.php' );        
             require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
+            require_once( $includes_path . 'upgrades/charitable-upgrade-hooks.php' );
 			require_once( $includes_path . 'users/charitable-user-functions.php' );
             require_once( $includes_path . 'user-management/charitable-user-management-hooks.php' );            
             require_once( $includes_path . 'utilities/charitable-utility-functions.php' );

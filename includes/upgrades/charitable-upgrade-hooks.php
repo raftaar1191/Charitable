@@ -4,11 +4,12 @@
  *
  * Action/filter hooks used for Charitable Upgrades.
  *
- * @package     Charitable/Functions/Upgrades
- * @version     1.3.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Upgrades 
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.3.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -22,11 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 add_action( 'admin_notices', array( Charitable_Upgrade::get_instance(), 'add_upgrade_notice' ) );
 
 /**
- * Trigger an upgrade via AJAX.
+ * Perform upgrades that don't require a prompt.
  *
- * @see Charitable_Upgrade::trigger_ajax_upgrade()
+ * @see Charitable_Upgrade::do_immediate_upgrades()
  */
-// add_action( 'wp_ajax_trigger_ajax_upgrade', array( 'Charitable_Upgrade', 'trigger_ajax_upgrade' ) );
+add_action( 'init', array( Charitable_Upgrade::get_instance(), 'do_immediate_upgrades' ) );
 
 /**
  * Register the admin page.

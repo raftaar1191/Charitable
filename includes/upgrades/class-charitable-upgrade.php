@@ -7,7 +7,7 @@
  * @package	  Charitable/Classes/Charitable_Upgrade
  * @copyright Copyright (c) 2017, Eric Daams
  * @license   http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
- * @since    1.0.0
+ * @since     1.0.0
  * @version   1.5.0
  */
 
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 	/**
 	 * Charitable_EDD_Upgrade
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Upgrade {
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param false|string $db_version   The previous/existing version.
+		 * @param false|string $db_version   The version we are upgrading from.
 		 * @param string       $edge_version The new version.
 		 */
 		protected function __construct( $db_version = '', $edge_version = '' ) {
@@ -106,83 +106,87 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			 * extensions that extend Charitable_Upgrade.
 			 */
 			if ( strlen( $db_version ) && strlen( $edge_version ) ) {
+				return $this->legacy_upgrade_mode( $db_mode, $edge_version );				
+			}
 
-				$this->db_version = $db_version;
-				$this->edge_version = $edge_version;
+			$this->upgrade_actions = array(
+				'update_upgrade_system' => array(
+					'version' => '1.3.0',
+					'message' => __( 'Charitable needs to update the database.', 'charitable' ),
+					'prompt'  => true,
+				),
+				'fix_donation_dates' => array(
+					'version' => '1.3.0',
+					'message' => __( 'Charitable needs to fix incorrect donation dates.', 'charitable' ),
+					'prompt'  => true,
+				),
+				'trigger_cron' => array(
+					'version'  => '1.3.4',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'trigger_cron' ),
+				),
+				'flush_permalinks_140' => array(
+					'version'  => '1.4.0',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'flush_permalinks' ),
+				),
+				'remove_campaign_manager_cap' => array(
+					'version'  => '1.4.5',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'remove_campaign_manager_cap' ),
+				),
+				'fix_empty_campaign_end_date_meta' => array(
+					'version'  => '1.4.11',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'fix_empty_campaign_end_date_meta' ),
+				),
+				'clear_campaign_amount_donated_transient' => array(
+					'version'  => '1.4.18',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'clear_campaign_amount_donated_transient' ),
+				),
+				'trim_upgrade_log' => array(
+					'version'  => '1.4.18',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'trim_upgrade_log' ),
+				),
+				'remove_duplicate_donors' => array(
+					'version' => '1.5.0',
+					'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
+					'prompt'  => true,
+				),
+				'flush_permalinks_150_beta_2' => array(
+					'version'  => '1.5.0',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => 'flush_rewrite_rules',
+				),
+			);
+		}
 
-				/**
-				 * Perform version upgrades.
-				 */
-				$this->do_upgrades();
+		/**
+		 * Use the old upgrade mode.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function legacy_upgrade_mode( $db_version, $edge_version ) {
+			$this->db_version   = $db_version;
+			$this->edge_version = $edge_version;
 
-				/**
-				 * Log the upgrade and update the database version.
-				 */
-				$this->save_upgrade_log();
-				$this->update_db_version();
+			/* Perform version upgrades. */
+			$this->do_upgrades();
 
-			} else {
-
-				$this->upgrade_actions = array(
-					'update_upgrade_system' => array(
-						'version' => '1.3.0',
-						'message' => __( 'Charitable needs to update the database.', 'charitable' ),
-						'prompt'  => true,
-					),
-					'fix_donation_dates' => array(
-						'version' => '1.3.0',
-						'message' => __( 'Charitable needs to fix incorrect donation dates.', 'charitable' ),
-						'prompt'  => true,
-					),
-					'trigger_cron' => array(
-						'version'  => '1.3.4',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'trigger_cron' ),
-					),
-					'flush_permalinks_140' => array(
-						'version'  => '1.4.0',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'flush_permalinks' ),
-					),
-					'remove_campaign_manager_cap' => array(
-						'version'  => '1.4.5',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'remove_campaign_manager_cap' ),
-					),
-					'fix_empty_campaign_end_date_meta' => array(
-						'version'  => '1.4.11',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'fix_empty_campaign_end_date_meta' ),
-					),
-					'clear_campaign_amount_donated_transient' => array(
-						'version'  => '1.4.18',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'clear_campaign_amount_donated_transient' ),
-					),
-					'trim_upgrade_log' => array(
-						'version'  => '1.4.18',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => array( $this, 'trim_upgrade_log' ),
-					),
-					'remove_duplicate_donors' => array(
-						'version' => '1.5.0',
-						'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
-						'prompt'  => true,
-					),
-					'flush_permalinks_150_beta_2' => array(
-						'version'  => '1.5.0',
-						'message'  => '',
-						'prompt'   => false,
-						'callback' => 'flush_rewrite_rules',
-					),
-				);
-			}//end if
+			/* Log the upgrade and update the database version. */
+			$this->save_upgrade_log();
+			$this->update_db_version();
 		}
 
 		/**
@@ -252,46 +256,88 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					</p>
 				</div>
 <?php
-			} else {
-				foreach ( $this->upgrade_actions as $action => $upgrade ) {
+				return;
+			}
 
-					/**
-					 * If we've already done this upgrade, continue.
-					 */
-					if ( $this->upgrade_has_been_completed( $action ) ) {
-						continue;
-					}
-
-					/**
-					 * Check if we're just setting a transient to display a notice.
-					 */
-					if ( array_key_exists( 'notice', $upgrade ) ) {
-						$this->set_update_notice_transient( $upgrade, $action );
-						continue;
-					}
-
-					/**
-					 * If the upgrade does not need a prompt, just do it straight away.
-					 */
-					if ( $this->do_upgrade_immediately( $upgrade ) ) {
-						$ret = call_user_func( $upgrade['callback'], $action );
-
-						/* If the upgrade succeeded, update the log. */
-						if ( $ret ) {
-							$this->update_upgrade_log( $action );
-						}
-
-						continue;
-					}
-?>
-					<div class="updated">
-						<p><?php printf( '%s %s', $upgrade['message'], sprintf( __( 'Click <a href="%s">here</a> to start the upgrade.', 'charitable' ), esc_url( admin_url( 'index.php?page=charitable-upgrades&charitable-upgrade=' . $action ) ) ) ) ?>
-						</p>
-					</div>
-<?php
-				}//end foreach
-			}//end if
+			$this->walk_upgrade_actions( array( $this, 'show_upgrade_notice' ) );
 		}
+
+		/**
+		 * Show upgrade notice for a particular upgrade notice.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $action  The upgrade action key.
+		 * @param  array  $upgrade Upgrade args.
+		 * @return boolean
+		 */
+		public function show_upgrade_notice( $action, $upgrade ) {
+			/* Check if we're just setting a transient to display a notice. */
+			if ( array_key_exists( 'notice', $upgrade ) ) {
+				return $this->set_update_notice_transient( $upgrade, $action );
+			}
+?>
+			<div class="updated">
+				<p><?php printf( '%s %s', $upgrade['message'], sprintf( __( 'Click <a href="%s">here</a> to start the upgrade.', 'charitable' ), esc_url( admin_url( 'index.php?page=charitable-upgrades&charitable-upgrade=' . $action ) ) ) ) ?>
+				</p>
+			</div>
+<?php
+		}
+
+		/**
+		 * Perform any immediate upgrades.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function do_immediate_upgrades() {
+			if ( is_admin() && isset( $_GET['page'] ) && 'charitable-upgrades' == $_GET['page'] ) {
+				return;
+			}
+
+			$this->walk_upgrade_actions( array( $this, 'perform_immediate_upgrade' ) );
+		}
+
+		/**
+		 * Perform an immediate upgrade and log the result.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return void
+		 */
+		public function perform_immediate_upgrade( $action, $upgrade ) {
+			if ( $this->do_upgrade_immediately( $upgrade ) ) {
+				$ret = call_user_func( $upgrade['callback'], $action );
+
+				/* If the upgrade succeeded, update the log. */
+				if ( $ret ) {
+					$this->update_upgrade_log( $action );
+				}
+			}
+		}
+
+		/**
+		 * Walk over the array of upgrade actions, performing the callback
+		 * for any upgrades that have not been completed yet.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  callback $callback Callback method to perform if the
+		 *                            upgrade has not been completed.
+		 * @return void
+		 */
+		protected function walk_upgrade_actions( $callback ) {
+			if ( ! is_callable( $callback ) ) {
+				return;
+			}
+
+			foreach ( $this->upgrade_actions as $action => $upgrade ) {
+				if ( ! $this->upgrade_has_been_completed( $action ) ) {
+					call_user_func( $callback, $action, $upgrade );
+				}
+			}
+		}		
 
 		/**
 		 * Evaluates two version numbers and determines whether an upgrade is

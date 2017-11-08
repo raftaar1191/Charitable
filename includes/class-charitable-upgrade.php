@@ -11,4 +11,4 @@ if ( class_exists( 'Charitable_Upgrade' ) ) {
     return;
 }
 
-require_once( charitable()->get_path( 'admin' ) . 'upgrades/class-charitable-upgrade.php' );
+require_once( charitable()->get_path( 'includes' ) . 'upgrades/class-charitable-upgrade.php' );

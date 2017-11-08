@@ -83,8 +83,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );
 			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
-			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );
-			require_once( $admin_dir . 'upgrades/charitable-upgrade-hooks.php' );			
+			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );			
 		}
 
 		/**
@@ -265,7 +264,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 * @return void
 		 */
 		public function add_notices() {
-
 			/* Get any version update notices first. */
 			$this->add_version_update_notices();
 
@@ -274,7 +272,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			/* Render notices. */
 			charitable_get_admin_notices()->render();
-
 		}
 
 		/**
