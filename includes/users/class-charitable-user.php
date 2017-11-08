@@ -56,12 +56,12 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int|string|stdClass|WP_User $id      User's ID, a WP_User object, or a user object from the DB.
-		 * @param   string                      $name    Optional. User's username.
-		 * @param   int                         $blog_id Optional Blog ID, defaults to current blog.
-		 * @return  void
+		 * @param  int|string|stdClass|WP_User $id      User's ID, a WP_User object, or a user object from the DB.
+		 * @param  string                      $name    Optional. User's username.
+		 * @param  int                         $blog_id Optional Blog ID, defaults to current blog.
+		 * @return void
 		 */
 		public function __construct( $id = 0, $name = '', $blog_id = '' ) {
 			parent::__construct( $id, $name, $blog_id );
@@ -70,14 +70,14 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Create object using a donor ID.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int $donor_id The donor ID.
-		 * @return  Charitable_user
+		 * @param  int $donor_id The donor ID.
+		 * @return Charitable_user
 		 */
 		public static function init_with_donor( $donor_id ) {
 			$user_id = charitable_get_table( 'donors' )->get_user_id( $donor_id );
-			$user = charitable_get_user( $user_id );
+			$user    = charitable_get_user( $user_id );
 			$user->set_donor_id( $donor_id );
 			return $user;
 		}
@@ -85,19 +85,13 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		/**
 		 * Magic getter method. Looks for the specified key in the mapped keys before using WP_User's __get method.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $key The key to retrieve.
-		 * @return  mixed
+		 * @param  string $key The key to retrieve.
+		 * @return mixed
 		 */
 		public function __get( $key ) {
-			$mapped_keys = $this->get_mapped_keys();
-
-			if ( array_key_exists( $key, $mapped_keys ) ) {
-				$key = $mapped_keys[ $key ];
-			}
-
-			return parent::__get( $key );
+			return parent::__get( $this->map_key( $key ) );
 		}
 
 		/**
@@ -109,6 +103,20 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 */
 		public function __toString() {
 			return $this->get_name();
+		}
+
+		/**
+		 * Determine whether a property or meta key is set
+		 *
+		 * Consults the users and usermeta tables.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $key Property
+		 * @return bool
+		 */
+		public function has_prop( $key ) {
+			return parent::has_prop( $this->map_key( $key ) );
 		}
 
 		/**
@@ -803,22 +811,18 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 */
 		public function update_user_meta( $submitted, $keys ) {
 			/* Exclude the core keys */
-			$mapped_keys    = $this->get_mapped_keys();
-			$meta_fields    = array_diff( $keys, $this->get_core_keys() );
-			$updated        = 0;
+			$meta_fields = array_diff( $keys, $this->get_core_keys() );
+			$updated     = 0;
 
 			foreach ( $meta_fields as $field ) {
 
 				if ( isset( $submitted[ $field ] ) ) {
-
-					$meta_key = array_key_exists( $field, $mapped_keys ) ? $mapped_keys[ $field ] : $field;
-
+					$meta_key   = $this->map_key( $field );
 					$meta_value = sanitize_meta( $meta_key, $submitted[ $field ], 'user' );
 
 					update_user_meta( $this->ID, $meta_key, $meta_value );
 
 					$updated++;
-
 				}
 			}
 
@@ -865,6 +869,20 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			}
 
 			return $this->mapped_keys;
+		}
+
+		/**
+		 * Given a key, returns the mapped key or itself if it is not mapped.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $key The key to map.
+		 * @return string
+		 */
+		public function map_key( $key ) {
+			$mapped_keys = $this->get_mapped_keys();
+
+			return array_key_exists( $key, $mapped_keys ) ? $mapped_keys[ $key ] : $key;
 		}
 
 		/**

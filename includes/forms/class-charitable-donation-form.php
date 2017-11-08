@@ -499,7 +499,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function validate_submission() {
-
 			/* If we have already validated the submission, return the value. */
 			if ( $this->validated ) {
 				return $this->valid;
@@ -524,7 +523,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$this->valid = apply_filters( 'charitable_validate_donation_form_submission', $this->valid, $this );
 
 			return $this->valid;
-
 		}
 
 		/**
@@ -564,19 +562,16 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function validate_email() {
-
 			$ret = true;
 
 			/* Don't process donations with dummy emails. */
 			if ( array_key_exists( 'email', $_POST ) && ! is_email( $_POST['email'] ) ) {
-
 				charitable_get_notices()->add_error( sprintf(
 					__( '%s is not a valid email address.', 'charitable' ),
 					$_POST['email']
 				) );
 
 				$ret = false;
-
 			}
 
 			/**
@@ -588,7 +583,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
 			 */
 			return apply_filters( 'charitable_validate_donation_form_submission_email_check', $ret, $this );
-
 		}
 
 		/**
