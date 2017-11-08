@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.0-beta.4\n"
+"Project-Id-Version: Charitable 1.5.0\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-02 05:04:46+00:00\n"
+"POT-Creation-Date: 2017-11-08 05:09:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: charitable.php:753 charitable.php:768
+#: charitable.php:754 charitable.php:769
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -4954,7 +4954,7 @@ msgstr ""
 
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:244
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:245
-#: includes/admin/class-charitable-admin.php:181
+#: includes/admin/class-charitable-admin.php:180
 #: includes/admin/views/metaboxes/field-types/campaign-donations.php:36
 #: templates/shortcodes/my-donations.php:55
 msgid "Amount"
@@ -4965,7 +4965,7 @@ msgid "Description (optional)"
 msgstr ""
 
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:249
-#: includes/admin/class-charitable-admin.php:180
+#: includes/admin/class-charitable-admin.php:179
 msgid "Optional Description"
 msgstr ""
 
@@ -5057,7 +5057,7 @@ msgid "Charitable Settings"
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:158
-#: includes/admin/class-charitable-admin.php:353
+#: includes/admin/class-charitable-admin.php:350
 msgid "Settings"
 msgstr ""
 
@@ -5067,19 +5067,19 @@ msgid ""
 "manage_edit-donation_columns"
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:114
+#: includes/admin/class-charitable-admin.php:113
 msgid "Action could not be executed."
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:118
+#: includes/admin/class-charitable-admin.php:117
 msgid "Action could not be executed. Nonce check failed."
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:122
+#: includes/admin/class-charitable-admin.php:121
 msgid "Action from an unknown action type executed."
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:379
+#: includes/admin/class-charitable-admin.php:376
 #: includes/admin/settings/class-charitable-settings.php:104
 msgid "Extensions"
 msgstr ""
@@ -5641,50 +5641,6 @@ msgstr ""
 
 #: includes/admin/settings/class-charitable-settings.php:198
 msgid "Settings saved"
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade-page.php:62
-#: includes/admin/upgrades/class-charitable-upgrade-page.php:63
-msgid "Upgrade Charitable"
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:129
-msgid "Charitable needs to update the database."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:134
-msgid "Charitable needs to fix incorrect donation dates."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:175
-msgid "Charitable needs to remove duplicate donor records."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:207
-msgid "Charitable was installed."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:251
-msgid ""
-"Charitable needs to complete an upgrade that was started earlier. Click <a "
-"href=\"%s\">here</a> to continue the upgrade."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:288
-msgid "Click <a href=\"%s\">here</a> to start the upgrade."
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:364
-#: includes/admin/upgrades/class-charitable-upgrade.php:399
-#: includes/admin/upgrades/class-charitable-upgrade.php:501
-msgid "You do not have permission to do Charitable upgrades"
-msgstr ""
-
-#: includes/admin/upgrades/class-charitable-upgrade.php:364
-#: includes/admin/upgrades/class-charitable-upgrade.php:399
-#: includes/admin/upgrades/class-charitable-upgrade.php:501
-#: includes/licensing/class-charitable-plugin-updater.php:170
-msgid "Error"
 msgstr ""
 
 #: includes/admin/views/dashboard-widgets/donations-widget.php:30
@@ -7214,7 +7170,7 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:542
+#: includes/forms/class-charitable-donation-form.php:540
 #: includes/forms/class-charitable-forgot-password-form.php:94
 #: includes/forms/class-charitable-profile-form.php:378
 #: includes/forms/class-charitable-registration-form.php:159
@@ -7224,34 +7180,34 @@ msgid ""
 "page and try again."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:574
+#: includes/forms/class-charitable-donation-form.php:570
 #: includes/forms/class-charitable-registration-form.php:176
 msgid "%s is not a valid email address."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:608
+#: includes/forms/class-charitable-donation-form.php:602
 msgid "The gateway submitted is not valid."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:642
-#: includes/forms/class-charitable-donation-form.php:649
+#: includes/forms/class-charitable-donation-form.php:636
+#: includes/forms/class-charitable-donation-form.php:643
 #: includes/public/class-charitable-public.php:104
 msgid "You must donate more than %s."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:898
+#: includes/forms/class-charitable-donation-form.php:892
 msgid "There are no active payment gateways."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:930
+#: includes/forms/class-charitable-donation-form.php:924
 msgid "Test mode is active."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:933
+#: includes/forms/class-charitable-donation-form.php:927
 msgid "Disable Test Mode"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:998
+#: includes/forms/class-charitable-donation-form.php:992
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
@@ -7751,6 +7707,13 @@ msgstr ""
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
+#: includes/licensing/class-charitable-plugin-updater.php:170
+#: includes/upgrades/class-charitable-upgrade.php:414
+#: includes/upgrades/class-charitable-upgrade.php:449
+#: includes/upgrades/class-charitable-upgrade.php:551
+msgid "Error"
+msgstr ""
+
 #: includes/public/charitable-template-functions.php:898
 msgid "Your Donation Amount: <strong>%s</strong>."
 msgstr ""
@@ -7832,6 +7795,43 @@ msgstr ""
 msgid "Signed up already? Login instead."
 msgstr ""
 
+#: includes/upgrades/class-charitable-upgrade-page.php:63
+#: includes/upgrades/class-charitable-upgrade-page.php:64
+msgid "Upgrade Charitable"
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:115
+msgid "Charitable needs to update the database."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:120
+msgid "Charitable needs to fix incorrect donation dates."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:161
+msgid "Charitable needs to remove duplicate donor records."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:211
+msgid "Charitable was installed."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:255
+msgid ""
+"Charitable needs to complete an upgrade that was started earlier. Click <a "
+"href=\"%s\">here</a> to continue the upgrade."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:285
+msgid "Click <a href=\"%s\">here</a> to start the upgrade."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:414
+#: includes/upgrades/class-charitable-upgrade.php:449
+#: includes/upgrades/class-charitable-upgrade.php:551
+msgid "You do not have permission to do Charitable upgrades"
+msgstr ""
+
 #: includes/user-management/class-charitable-user-management.php:141
 msgid "<strong>ERROR</strong>: Invalid email address."
 msgstr ""
@@ -7850,7 +7850,7 @@ msgstr ""
 msgid "Campaign Manager"
 msgstr ""
 
-#: includes/users/class-charitable-user.php:643
+#: includes/users/class-charitable-user.php:651
 msgid "Unable to add donor. Email not set for logged out user."
 msgstr ""
 
@@ -8259,7 +8259,7 @@ msgctxt "Taxonomy Singular Name"
 msgid "Campaign Tag"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:899
+#: includes/forms/class-charitable-donation-form.php:893
 msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
