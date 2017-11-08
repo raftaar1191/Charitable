@@ -106,7 +106,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			 * extensions that extend Charitable_Upgrade.
 			 */
 			if ( strlen( $db_version ) && strlen( $edge_version ) ) {
-				return $this->legacy_upgrade_mode( $db_mode, $edge_version );				
+				return $this->legacy_upgrade_mode( $db_version, $edge_version );				
 			}
 
 			$this->upgrade_actions = array(
