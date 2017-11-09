@@ -200,7 +200,9 @@ module.exports = function(grunt) {
                     '!**/package.json',
                     '!**/README.md',
                     '!**/*~', 
-                    '!assets/css/scss/**'
+                    '!assets/css/scss/**',
+                    '!CHANGELOG.md',
+                    '!phpdoc.xml'
                 ],
                 'dest' : 'build/<%= pkg.name %>/'
             }
