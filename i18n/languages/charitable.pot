@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.0\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-08 05:09:54+00:00\n"
+"POT-Creation-Date: 2017-11-09 06:19:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4727,69 +4727,69 @@ msgstr ""
 msgid "Action \"%s\" is not registered."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:289
+#: includes/abstracts/abstract-class-charitable-email.php:297
 msgid "The `$settings` parameter is no longer used."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:301
+#: includes/abstracts/abstract-class-charitable-email.php:309
 msgid "Email Subject Line"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:302
+#: includes/abstracts/abstract-class-charitable-email.php:310
 msgid "The email subject line when it is delivered to recipients."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:309
+#: includes/abstracts/abstract-class-charitable-email.php:317
 msgid "Email Headline"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:310
+#: includes/abstracts/abstract-class-charitable-email.php:318
 msgid "The headline displayed at the top of the email."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:317
+#: includes/abstracts/abstract-class-charitable-email.php:325
 msgid "Email Body"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:319
+#: includes/abstracts/abstract-class-charitable-email.php:327
 msgid ""
 "The content of the email that will be delivered to recipients. HTML is "
 "accepted."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:327
+#: includes/abstracts/abstract-class-charitable-email.php:335
 msgid "Preview"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:335
+#: includes/abstracts/abstract-class-charitable-email.php:343
 msgid "Preview email"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:377
+#: includes/abstracts/abstract-class-charitable-email.php:385
 msgid "Recipients"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:378
+#: includes/abstracts/abstract-class-charitable-email.php:386
 msgid "A comma-separated list of email address that will receive this email."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:421
+#: includes/abstracts/abstract-class-charitable-email.php:429
 msgid "A `resend` method has not been defined for this class."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:440
+#: includes/abstracts/abstract-class-charitable-email.php:448
 msgid "A `can_be_resent` method has not been defined for this class."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:589
+#: includes/abstracts/abstract-class-charitable-email.php:597
 msgid "You cannot send this email without a donation!"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:609
+#: includes/abstracts/abstract-class-charitable-email.php:617
 msgid "You cannot send this email without a campaign!"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-email.php:727
+#: includes/abstracts/abstract-class-charitable-email.php:735
 msgid ""
 "The following options are available with the "
 "<code>[charitable_email]</code> shortcode:"
@@ -6746,12 +6746,12 @@ msgstr ""
 
 #: includes/emails/class-charitable-email-campaign-end.php:165
 #: includes/emails/fields/class-charitable-email-fields-campaign.php:74
-#: includes/emails/fields/class-charitable-email-fields-campaign.php:193
+#: includes/emails/fields/class-charitable-email-fields-campaign.php:191
 msgid "The campaign achieved its fundraising goal."
 msgstr ""
 
 #: includes/emails/class-charitable-email-campaign-end.php:165
-#: includes/emails/fields/class-charitable-email-fields-campaign.php:194
+#: includes/emails/fields/class-charitable-email-fields-campaign.php:192
 msgid "The campaign did not reach its fundraising goal."
 msgstr ""
 

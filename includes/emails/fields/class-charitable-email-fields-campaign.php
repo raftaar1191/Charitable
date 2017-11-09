@@ -108,8 +108,6 @@ if ( ! class_exists( 'Charitable_Email_Fields_Campaign' ) ) :
                     'campaign_url'            => array( 'callback' => array( $this, 'get_campaign_url' ) ),
                     'campaign_dashboard_url'  => array( 'callback' => array( $this, 'get_campaign_dashboard_url' ) ),
                 ) );
-
-                error_log( var_export( $fields, true ) );
             }      
 
             /**

@@ -233,6 +233,14 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @return string
 		 */
 		public function get_content_type() {
+			/**
+			 * Filter the content type for the email.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string           $content_type The content type. Defaults to 'text/html'.
+			 * @param Charitable_Email $email        This instance of `Charitable_Email`.
+			 */
 			return apply_filters( 'charitable_email_content_type', 'text/html', $this );
 		}
 
@@ -734,6 +742,14 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 <?php
 			$html = ob_get_clean();
 
+			/**
+			 * Filter the shortcode options block.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string           $html  The content.
+			 * @param Charitable_Email $email This instance of `Charitable_Email`.
+			 */
 			return apply_filters( 'charitable_email_shortcode_options_text', $html, $this );
 		}
 

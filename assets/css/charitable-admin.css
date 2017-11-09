@@ -25,67 +25,69 @@
   .charitable-media-block .charitable-media-body {
     overflow: hidden; }
 
-.charitable-datepicker-table.ui-datepicker {
-  background-color: #fff;
-  padding: 0;
-  border: 1px solid #dedede;
-  width: auto;
-  z-index: 100000 !important; }
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-header {
-    padding: 10px 20px;
-    background: #f5f5f5;
-    text-align: center;
-    border: 0;
-    border-bottom: 1px solid #dfdfdf;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0; }
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-prev,
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-next {
-    position: absolute;
-    top: 10px;
+.ui-datepicker {
+  display: none; }
+  .ui-datepicker.charitable-datepicker-table {
+    background-color: #fff;
+    padding: 0;
+    border: 1px solid #dedede;
     width: auto;
-    height: auto;
-    color: #0073AA;
-    cursor: pointer; }
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-prev .ui-icon,
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-next .ui-icon {
-      position: static;
-      top: 0;
-      left: 0;
+    z-index: 100000 !important; }
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-header {
+      padding: 10px 20px;
+      background: #f5f5f5;
+      text-align: center;
+      border: 0;
+      border-bottom: 1px solid #dfdfdf;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0; }
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-prev,
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-next {
+      position: absolute;
+      top: 10px;
       width: auto;
       height: auto;
-      margin: 0;
-      background-image: none;
-      text-indent: 0;
-      font-weight: 400; }
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-prev {
-    left: 10px; }
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-next {
-    right: 10px; }
-  .charitable-datepicker-table.ui-datepicker .ui-state-hover {
-    border: none;
-    background: none; }
-  .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-    text-align: center; }
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar td {
-      border: 1px solid #dedede; }
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar a {
-      display: block;
-      padding: 6px;
+      color: #0073AA;
+      cursor: pointer; }
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-prev .ui-icon,
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-next .ui-icon {
+        position: static;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        margin: 0;
+        background-image: none;
+        text-indent: 0;
+        font-weight: 400; }
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-prev {
+      left: 10px; }
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-next {
+      right: 10px; }
+    .ui-datepicker.charitable-datepicker-table .ui-state-hover {
       border: none;
-      color: #747474;
-      background: none;
-      text-decoration: none;
+      background: none; }
+    .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar {
+      width: 100%;
+      padding: 10px;
+      margin: 0;
       text-align: center; }
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar td:first-child {
-      border-left: 0; }
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar td:hover,
-    .charitable-datepicker-table.ui-datepicker .ui-datepicker-calendar .ui-datepicker-unselectable {
-      background-color: #f5f5f5; }
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar td {
+        border: 1px solid #dedede; }
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar a {
+        display: block;
+        padding: 6px;
+        border: none;
+        color: #747474;
+        background: none;
+        text-decoration: none;
+        text-align: center; }
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar td:first-child {
+        border-left: 0; }
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar td:hover,
+      .ui-datepicker.charitable-datepicker-table .ui-datepicker-calendar .ui-datepicker-unselectable {
+        background-color: #f5f5f5; }
 
 .charitable-metabox.postbox {
   min-width: 0;

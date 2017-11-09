@@ -3,11 +3,9 @@
 
 Charitable is a powerful, extendable fundraising plugin created to help non-profits accept donations on their own website.
 
-
 ## Description
 
 [Charitable](http://wpcharitable.com/) is the WordPress fundraising alternative for non-profits, built to help non-profits raise money on their own website.
-
 
 You can accept PayPal or offline donations right out of the box, with support for other gateways available as extensions.
 

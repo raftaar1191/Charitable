@@ -167,6 +167,22 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'   => false,
 					'callback' => array( $this, 'flush_permalinks' ),
 				),
+				'flush_permalinks_150' => array(
+					'version'  => '1.5.0',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'flush_permalinks' ),
+				),
+				'flush_permalinks_150' => array(
+					'version'  => '1.5.0',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'flush_permalinks' ),
+				),
+				'release_notes_150' => array(
+					'version'  => '1.5.0',
+					'notice'   => __( 'Hello?', 'charitable' ),
+				),
 			);
 		}
 
