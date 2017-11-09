@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.0\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-09 06:19:21+00:00\n"
+"POT-Creation-Date: 2017-11-09 06:28:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5057,7 +5057,7 @@ msgid "Charitable Settings"
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:158
-#: includes/admin/class-charitable-admin.php:350
+#: includes/admin/class-charitable-admin.php:354
 msgid "Settings"
 msgstr ""
 
@@ -5079,7 +5079,13 @@ msgstr ""
 msgid "Action from an unknown action type executed."
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:376
+#: includes/admin/class-charitable-admin.php:290
+msgid ""
+"Charitable 1.5 is packed with new features and improvements. <a href='%s' "
+"target='_blank'>Find out what's new</a>."
+msgstr ""
+
+#: includes/admin/class-charitable-admin.php:380
 #: includes/admin/settings/class-charitable-settings.php:104
 msgid "Extensions"
 msgstr ""
@@ -7708,9 +7714,9 @@ msgid "You do not have permission to install plugin updates"
 msgstr ""
 
 #: includes/licensing/class-charitable-plugin-updater.php:170
-#: includes/upgrades/class-charitable-upgrade.php:414
-#: includes/upgrades/class-charitable-upgrade.php:449
-#: includes/upgrades/class-charitable-upgrade.php:551
+#: includes/upgrades/class-charitable-upgrade.php:430
+#: includes/upgrades/class-charitable-upgrade.php:465
+#: includes/upgrades/class-charitable-upgrade.php:567
 msgid "Error"
 msgstr ""
 
@@ -7812,23 +7818,23 @@ msgstr ""
 msgid "Charitable needs to remove duplicate donor records."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:211
+#: includes/upgrades/class-charitable-upgrade.php:227
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:255
+#: includes/upgrades/class-charitable-upgrade.php:271
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:285
+#: includes/upgrades/class-charitable-upgrade.php:301
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:414
-#: includes/upgrades/class-charitable-upgrade.php:449
-#: includes/upgrades/class-charitable-upgrade.php:551
+#: includes/upgrades/class-charitable-upgrade.php:430
+#: includes/upgrades/class-charitable-upgrade.php:465
+#: includes/upgrades/class-charitable-upgrade.php:567
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
