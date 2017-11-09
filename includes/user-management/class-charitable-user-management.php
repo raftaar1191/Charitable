@@ -291,7 +291,10 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 			/**
 			 * Specify a custom URL that users should be redirected to.
 			 *
-			 * @hook 	charitable_admin_redirect_url
+			 * @since 1.4.0
+			 *
+			 * @param false|string Return false to use the default. Otherwise this
+			 *                     must return a URL on the same domain.
 			 */
 			$redirect_url = apply_filters( 'charitable_admin_redirect_url', false );
 
