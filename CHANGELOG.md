@@ -1,3 +1,7 @@
+## 1.5.1
+
+* FIX: Resolves a backwards compatibility problem that we had not accounted for. This specifically affected users of certain themes, including (but probably not limited to) Charity Home and Giving Hand.
+
 ## 1.5.0
 * NEW: Added a `[charitable_donation_form]` shortcode. Display a campaign's donation form anywhere like this: [charitable_donation_form campaign_id=123]. [#136](https://github.com/Charitable/Charitable/issues/136)
 * NEW: Added a `[charitable_donors]` shortcode. [#129](https://github.com/Charitable/Charitable/issues/129)

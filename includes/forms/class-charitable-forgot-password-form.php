@@ -2,11 +2,12 @@
 /**
  * Class that manages the display and processing of the forgot password form.
  *
- * @package   Charitable/Classes/Charitable_Forgot_Password_Form
- * @version   1.5.0
+ * @package   Charitable/Classes/Charitable_Forgot_Password_Form 
  * @author    Rafe Colton, Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.0
+ * @version   1.5.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -56,6 +57,9 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Form' ) ) :
 		 */
 		public function __construct() {
 			$this->id = uniqid();
+
+			/* For backwards-compatibility */
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 		}
 
 		/**

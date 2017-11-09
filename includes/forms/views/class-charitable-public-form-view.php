@@ -33,6 +33,15 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         protected $form;
 
         /**
+         * Whether the form is currently rendering.
+         *
+         * @since 1.5.1
+         *
+         * @var   boolean
+         */
+        protected $rendering;
+
+        /**
          * List of custom field templates.
          *
          * @since 1.5.0
@@ -50,6 +59,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          */
         public function __construct( Charitable_Form $form ) {
             $this->form                   = $form;
+            $this->rendering              = false;
             $this->custom_field_templates = $this->init_custom_field_templates();
         }
 
@@ -68,6 +78,17 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         }
 
         /**
+         * Returns whether the form is currently rendering.
+         *
+         * @since  1.5.1
+         *
+         * @return boolean
+         */
+        public function rendering() {
+            return isset( $this->rendering ) ? $this->rendering : false;
+        }
+
+        /**
          * Render a form.
          *
          * @since  1.5.0
@@ -75,10 +96,12 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          * @return void
          */
         public function render() {
+            $this->rendering = true;
             $this->render_notices();
             $this->render_honeypot();
             $this->render_hidden_fields();
             $this->render_fields();
+            $this->rendering = false;
         }
 
         /**

@@ -3,7 +3,7 @@
  * Class that manages the display and processing of the registration form.
  *
  * @package     Charitable/Classes/Charitable_Registration_Form
- * @version     1.0.0
+ * @version     1.5.1
  * @author      Eric Daams
  * @copyright   Copyright (c) 2017, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -76,6 +76,9 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		public function __construct( $args = array() ) {
 			$this->id             = uniqid();
 			$this->shortcode_args = $args;
+
+			/* For backwards-compatibility */
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 		}
 
 		/**

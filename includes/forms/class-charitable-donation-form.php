@@ -1,12 +1,13 @@
 <?php
 /**
  * Donation form model class.
- *
- * @version   1.5.0
+ * 
  * @package   Charitable/Classes/Charitable_Donation_Form
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.1
  */
 
 // Exit if accessed directly.
@@ -113,10 +114,13 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function __construct( Charitable_Campaign $campaign = null ) {
 			$this->campaign = $campaign;
-			$this->id       = uniqid();
+			$this->id       = uniqid();			
 
 			$this->setup_payment_fields();
 			$this->check_test_mode();
+
+			/* For backwards-compatibility */
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 		}
 
 		/**

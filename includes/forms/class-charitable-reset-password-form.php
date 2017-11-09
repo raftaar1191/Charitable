@@ -3,7 +3,7 @@
  * Class that manages the display and processing of the reset password form.
  *
  * @package   Charitable/Classes/Charitable_Reset_Password_Form
- * @version   1.5.0
+ * @version   1.5.1
  * @author    Rafe Colton, Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -79,6 +79,9 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 		public function __construct( $args = array() ) {
 			$this->id      = uniqid();
 			$this->has_key = $this->parse_reset_key();
+
+			/* For backwards-compatibility */
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 		}
 
 		/**

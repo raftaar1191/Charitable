@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.0
+ * @version   1.5.1
  */
 
 // Exit if accessed directly.
@@ -63,6 +63,9 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		public function __construct( $args = array() ) {
 			$this->id             = uniqid();
 			$this->shortcode_args = $args;
+
+			/* For backwards-compatibility */
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 		}
 
 		/**

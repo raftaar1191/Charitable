@@ -604,6 +604,42 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
+		 * For backwards-compatibility purposes, we need to call this
+		 * on the charitable_form_field hook to make sure that any
+		 * 3rd party themes that use the old method of rendering form
+		 * fields (a loop over $form->get_fields(), calling the
+		 * charitable_form_field hook for each one) will still work.
+		 *
+		 * @since  1.5.1
+		 *
+		 * @param  array           $field     Field definition.
+		 * @param  string          $key       Field key.
+		 * @param  Charitable_Form $form      The form object.
+		 * @param  int             $index     The current index.
+		 * @param  string          $namespace Namespace for the form field's name attribute.
+		 * @return boolean False if the field was not rendered. True otherwise.
+		 */
+		public function maybe_render_field( $field, $key, $form, $index = 0, $namespace = null ) {
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
+			}
+
+			/* If this was evoked by the form view, no need to do anymore. */
+			if ( $this->view()->rendering() ) {
+				return;
+			}
+
+			/* Temporarily disable this hook to prevent endless recursion. */
+			remove_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
+
+			$ret = $this->render_field( $field, $key, $form, $index, $namespace );
+
+			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
+
+			return $ret;
+		}
+
+		/**
 		 * Render a form field.
 		 *
 		 * @deprecated 1.8.0
