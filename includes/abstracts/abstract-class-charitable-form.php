@@ -625,8 +625,25 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			}
 
 			/* If this was evoked by the form view, no need to do anymore. */
-			if ( $this->view()->rendering() ) {
+			if ( $this->view()->rendering ) {
+				remove_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
 				return;
+			}
+
+			/**
+			 * This was not evoked by the form view so it's likely that notices,
+			 * hidden fields and the honeypot also haven't been rendered.
+			 */
+			if ( ! $this->view()->rendered_notices ) {
+				$this->view()->render_notices();
+			}
+
+			if ( ! $this->view()->rendered_honeypot ) {
+				$this->view()->render_honeypot();
+			}
+
+			if ( ! $this->view()->rendered_hidden_fields ) {
+				$this->view()->render_hidden_fields();
 			}
 
 			/* Temporarily disable this hook to prevent endless recursion. */

@@ -42,6 +42,33 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         protected $rendering;
 
         /**
+         * Whether the notices have been rendered.
+         *
+         * @since 1.5.2
+         *
+         * @var   boolean
+         */
+        protected $rendered_notices;
+
+        /**
+         * Whether the hidden fields have been rendered.
+         *
+         * @since 1.5.2
+         *
+         * @var   boolean
+         */
+        protected $rendered_hidden_fields;
+
+        /**
+         * Whether the honeypot has been rendered.
+         *
+         * @since 1.5.2
+         *
+         * @var   boolean
+         */
+        protected $rendered_honeypot;
+
+        /**
          * List of custom field templates.
          *
          * @since 1.5.0
@@ -60,7 +87,25 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
         public function __construct( Charitable_Form $form ) {
             $this->form                   = $form;
             $this->rendering              = false;
+            $this->rendered_honeypot      = false;
+            $this->rendered_notices       = false;
+            $this->rendered_hidden_fields = false;
             $this->custom_field_templates = $this->init_custom_field_templates();
+        }
+
+        /**
+         * Return value of a protected class property.
+         *
+         * @since  1.5.2
+         *
+         * @return mixed
+         */
+        public function __get( $prop ) {
+            if ( ! property_exists( $this, $prop ) ) {
+                return null;
+            }
+
+            return $this->$prop;
         }
 
         /**
@@ -75,17 +120,6 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          */
         public function register_custom_field_template( $field_type, $class, $path ) {
             $this->custom_field_templates[ $field_type ] = array( 'class' => $class, 'path' => $path );
-        }
-
-        /**
-         * Returns whether the form is currently rendering.
-         *
-         * @since  1.5.1
-         *
-         * @return boolean
-         */
-        public function rendering() {
-            return isset( $this->rendering ) ? $this->rendering : false;
         }
 
         /**
@@ -115,6 +149,8 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             charitable_template_from_session( 'form-fields/notices.php', array(
                 'notices' => charitable_get_notices()->get_notices(),
             ), 'notices' );
+
+            $this->rendered_notices = true;
         }
 
         /**
@@ -126,6 +162,8 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
          */
         public function render_honeypot() {
             printf( '<input type="hidden" name="charitable_form_id" value="%1$s" autocomplete="off" /><input type="text" name="%1$s" class="charitable-hidden" value="" autocomplete="off" />', esc_attr( $this->form->get_form_identifier() ) );
+
+            $this->rendered_honeypot = true;
         }
 
         /**
@@ -143,6 +181,8 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
             }
 
             array_walk( $fields, array( $this, 'render_hidden_field' ) );
+
+            $this->rendered_hidden_fields = true;
         }
 
         /**

@@ -23,7 +23,28 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 	/**
 	 * Charitable_User
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
+	 *
+	 * @property string $nickname
+	 * @property string $description
+	 * @property string $user_description
+	 * @property string $first_name
+	 * @property string $user_firstname
+	 * @property string $last_name
+	 * @property string $user_lastname
+	 * @property string $user_login
+	 * @property string $user_pass
+	 * @property string $user_nicename
+	 * @property string $user_email
+	 * @property string $user_url
+	 * @property string $user_registered
+	 * @property string $user_activation_key
+	 * @property string $user_status
+	 * @property int    $user_level
+	 * @property string $display_name
+	 * @property string $spam
+	 * @property string $deleted
+	 * @property string $locale
 	 */
 	class Charitable_User extends WP_User {
 
@@ -742,6 +763,13 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$values[ $field ] = $submitted[ $field ];
 			}
 
+			/* Set the user's display name based on their name. */
+			$display_name = $this->sanitize_display_name( $values );
+
+			if ( $display_name ) {
+				$values['display_name'] = $display_name;
+			}
+
 			/* Insert the user */
 			if ( 0 == $this->ID ) {
 
@@ -854,6 +882,27 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			);
 
 			return wp_signon( $creds, false );
+		}
+
+		/**
+		 * Return a display name for the user.
+		 *
+		 * @since  1.5.2
+		 *
+		 * @param  array $values Submitted values.
+		 * @return string|false String if we received a display_name
+		 *                      or had a first name or last name.
+		 */
+		public function sanitize_display_name( $values ) {
+			if ( array_key_exists( 'display_name', $values ) ) {
+				return $values['display_name'];
+			}
+
+			$first_name = array_key_exists( 'first_name', $values ) ? $values['first_name'] : $this->first_name;
+			$last_name  = array_key_exists( 'last_name', $values ) ? $values['last_name'] : $this->last_name;
+			$display    = trim( sprintf( '%s %s', $first_name, $last_name ) );
+
+			return strlen( $display ) ? $display : false;
 		}
 
 		/**
