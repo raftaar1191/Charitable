@@ -181,7 +181,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 				),
 				'release_notes_150' => array(
 					'version'  => '1.5.0',
-					'notice'   => __( 'Hello?', 'charitable' ),
+					'notice'   => 'release-150',
 				),
 			);
 		}
