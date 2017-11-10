@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.1\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-09 13:18:10+00:00\n"
+"POT-Creation-Date: 2017-11-10 00:19:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5352,7 +5352,7 @@ msgid "Existing Donors"
 msgstr ""
 
 #: includes/admin/forms/views/class-charitable-admin-form-view.php:133
-#: includes/forms/views/class-charitable-public-form-view.php:166
+#: includes/forms/views/class-charitable-public-form-view.php:206
 msgid "There are no fields to render."
 msgstr ""
 
@@ -7856,7 +7856,7 @@ msgstr ""
 msgid "Campaign Manager"
 msgstr ""
 
-#: includes/users/class-charitable-user.php:651
+#: includes/users/class-charitable-user.php:672
 msgid "Unable to add donor. Email not set for logged out user."
 msgstr ""
 

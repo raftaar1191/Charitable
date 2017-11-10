@@ -1,5 +1,10 @@
-## 1.5.1
+## 1.5.2
+* NEW: Automatically set a user's display name to their name when they update their profile through Charitable. [#437](https://github.com/Charitable/Charitable/issues/437)
+* NEW: Adds a third parameter to the `charitable_template` function allowing extension developers to leverage this function. [#451](https://github.com/Charitable/Charitable/issues/451)
+* FIX: Cleans up problems with themes like Charity Home and Giving Hand that yesterday's fix didn't quite solve.
+* FIX: You can now specify a comma-separated list of categories or tags in the `[campaigns]` shortcode to include campaigns from multiple categories/tags. [#452](https://github.com/Charitable/Charitable/issues/452)
 
+## 1.5.1
 * FIX: Resolves a backwards compatibility problem that we had not accounted for. This specifically affected users of certain themes, including (but probably not limited to) Charity Home and Giving Hand.
 
 ## 1.5.0

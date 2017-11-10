@@ -20,6 +20,10 @@
     margin-bottom: 1em;    
     border: 1px solid #e6e6e6;
 
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
     .campaign-summary-item {
     	float: left;
         width: 50%;
