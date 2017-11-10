@@ -2,9 +2,10 @@
 /**
  * Campaigns shortcode class.
  *
- * @version  1.0.0
- * @package  Charitable/Shortcodes/Campaigns
- * @author   Eric Daams
+ * @package Charitable/Shortcodes/Campaigns
+ * @author  Eric Daams
+ * @since   1.0.0
+ * @version 1.0.0
  */
 
 // Exit if accessed directly.
@@ -126,7 +127,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 					array(
 						'taxonomy' => 'campaign_category',
 						'field'    => 'slug',
-						'terms'    => $args['category'],
+						'terms'    => explode( ',', $args['category'] ),
 					),
 				);
 			}
@@ -140,7 +141,7 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 				$query_args['tax_query'][] = array(
 					'taxonomy' => 'campaign_tag',
 					'field'    => 'slug',
-					'terms'    => $args['tag'],
+					'terms'    => explode( ',', $args['tag'] ),
 				);
 			}
 
