@@ -27,7 +27,7 @@ if ( ! class_exists( 'Charitable' ) ) :
      * Main Charitable class
      *
      * @class       Charitable
-     * @version     1.5.0
+     * @version     1.5.2
      */
     class Charitable {
 

@@ -57,15 +57,28 @@ if ( ! class_exists( 'Charitable_Email_Fields_User' ) ) :
 					'description' => __( 'The user login', 'charitable' ),
 					'preview'     => 'adam123',
 				),
+				'first_name' => array(
+					'description' => __( 'The user\'s first name', 'charitable' ),
+					'preview'     => 'Adam',
+				),
+				'last_name' => array(
+					'description' => __( 'The user\'s last name', 'charitable' ),
+					'preview'     => 'Jones',
+				),
+				'display_name' => array(
+					'description' => __( 'The user\'s display name', 'charitable' ),
+					'preview'     => 'Adam Jones',
+				),
 			);
 			
 			if ( $this->has_valid_user() ) {
 				$fields = array_merge_recursive( $fields, array(
-					'user_login' => array( 'value' => $this->user->user_login ),
+					'user_login'   => array( 'value' => $this->user->user_login ),
+					'first_name'   => array( 'value' => $this->user->first_name ),
+					'last_name'    => array( 'value' => $this->user->last_name ),
+					'display_name' => array( 'value' => $this->user->display_name ),
 				) );
 			}
-
-			$fields = array();
 
 			/**
 			 * Filter the user email fields.

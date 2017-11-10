@@ -17,16 +17,20 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Displays a template.
  *
- * @since   1.0.0
+ * @since  1.0.0
+ * @since  1.5.2 Added $classname parameter.
  *
- * @param 	string|string[] $template_name A single template name or an ordered array of template.
- * @param 	mixed[] $args 				   Optional array of arguments to pass to the view.
- * @param   string $classname			   Template class name. Allows for extensions to use charitable_template().
- * @return 	Charitable_Template
+ * @param  string|string[] $template_name A single template name or an ordered array of template.
+ * @param  mixed[]         $args          Optional array of arguments to pass to the view.
+ * @param  string          $classname     Template class name. Allows for extensions to use charitable_template().
+ * @return Charitable_Template
  */
 function charitable_template( $template_name, array $args = array(), $classname = 'Charitable_Template' ) {
-
 	$classname = apply_filters( 'charitable_template_class_name', $classname, $template_name, $args );
+
+	if ( ! class_exists( $classname ) ) {
+		$classname = 'Charitable_Template';
+	}
 
 	$class = class_exists( $classname ) ? $classname : 'Charitable_Template';
 	if ( empty( $args ) ) {

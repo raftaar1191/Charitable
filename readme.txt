@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 4.8.3
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -117,12 +117,18 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
-= 1.5.1 =
+= 1.5.2 =
+* NEW: Automatically set a user's display name to their name when they update their profile through Charitable. [#437](https://github.com/Charitable/Charitable/issues/437)
+* NEW: Adds a third parameter to the `charitable_template` function allowing extension developers to leverage this function. [#451](https://github.com/Charitable/Charitable/issues/451)
+* NEW: Allow email send logs to be saved in user meta as well as post meta.
+* FIX: Cleans up problems with themes like Charity Home and Giving Hand that yesterday's fix didn't quite solve.
+* FIX: You can now specify a comma-separated list of categories or tags in the `[campaigns]` shortcode to include campaigns from multiple categories/tags. [#452](https://github.com/Charitable/Charitable/issues/452)
+* FIX: Improves the layout of the campaign summary block on mobile. Kudos to [@kkoppenhaver](https://github.com/kkoppenhaver) for his contribution. [#315](https://github.com/Charitable/Charitable/issues/315)
 
+= 1.5.1 =
 * FIX: Resolves a backwards compatibility problem that we had not accounted for. This specifically affected users of certain themes, including (but probably not limited to) Charity Home and Giving Hand.
 
 = 1.5.0 =
-
 * NEW: Added a `[charitable_donation_form]` shortcode. Display a campaign's donation form anywhere like this: [charitable_donation_form campaign_id=123]. [#136](https://github.com/Charitable/Charitable/issues/136)
 * NEW: Added a `[charitable_donors]` shortcode. [#129](https://github.com/Charitable/Charitable/issues/129)
 * NEW: Create and edit donations in the WordPress dashboard. No more adding mock donations through the Offline payment method. You can easily change donor details, add notes or change the amount/campaign of the donation. [#18](https://github.com/Charitable/Charitable/issues/18), [#241](https://github.com/Charitable/Charitable/issues/241), [#172](https://github.com/Charitable/Charitable/issues/172)

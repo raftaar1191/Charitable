@@ -456,12 +456,14 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Checks whether the email has already been sent.
 		 *
 		 * @since  1.3.2
+		 * @since  1.5.2 Added the $data_type parameter.
 		 *
-		 * @param  int $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
+		 * @param  int    $object_id The ID of the object related to this email. May be a campaign ID, a donation ID or a user ID.
+		 * @param  string $data_type Optional. The type of meta we are saving. Defaults to 'post'.
 		 * @return boolean
 		 */
-		public function is_sent_already( $post_id ) {
-			$log = get_post_meta( $post_id, $this->get_log_key(), true );
+		public function is_sent_already( $object_id, $data_type = 'post' ) {
+			$log = get_metadata( $data_type, $object_id, $this->get_log_key(), true );
 
 			if ( is_array( $log ) ) {
 				foreach ( $log as $time => $sent ) {
@@ -478,13 +480,15 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * Log that the email was sent.
 		 *
 		 * @since  1.3.2
+		 * @since  1.5.2 Added the $data_type parameter.
 		 *
-		 * @param  int     $post_id The ID of the object related to this email. May be a campaign ID or a donation ID.
-		 * @param  boolean $sent    Whether the email was sent.
+		 * @param  int     $object_id The ID of the object related to this email. May be a campaign ID, a donation ID, or a user ID.
+		 * @param  boolean $sent      Whether the email was sent.
+		 * @param  string  $data_type Optional. The type of meta we are saving. Defaults to 'post'.
 		 * @return void
 		 */
-		public function log( $post_id, $sent ) {
-			$log = get_post_meta( $post_id, $this->get_log_key(), true );
+		public function log( $object_id, $sent, $data_type = 'post' ) {
+			$log = get_metadata( $data_type, $object_id, $this->get_log_key(), true );
 
 			if ( ! $log ) {
 				$log = array();
@@ -492,7 +496,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 
 			$log[ time() ] = $sent;
 
-			update_post_meta( $post_id, $this->get_log_key(), $log );
+			update_metadata( $data_type, $object_id, $this->get_log_key(), $log );
 		}
 
 		/**
