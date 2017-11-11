@@ -80,6 +80,9 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 	         */
 			$view_args = apply_filters( 'charitable_campaigns_shortcode_view_args', charitable_array_subset( $args, array( 'campaigns', 'columns', 'button', 'responsive' ) ), $args );
 
+			// Add the shortcode atts to $view_args.
+			$view_args = array_merge( $view_args, array( 'atts' => $args ) );
+
 			$template->set_view_args( $view_args );
 
 			ob_start();

@@ -91,6 +91,9 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 					'hide_if_no_donors',
 			) ), $args );
 
+			// Add the shortcode atts to $view_args.
+			$view_args = array_merge( $view_args, array( 'atts' => $args ) );
+
 			$template->set_view_args( $view_args );
 
 			ob_start();

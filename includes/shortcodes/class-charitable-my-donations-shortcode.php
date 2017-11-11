@@ -58,7 +58,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			if ( false === $donor_id ) {
 				$donations = array();
 			} else {
-				$args = array(
+				$query_args = array(
 					'output'   => 'posts',
 					'orderby'  => 'date',
 					'order'    => 'DESC',
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 				);
 
 				if ( ! $user->is_verified() ) {
-					$args['user_id'] = $user->ID;
+					$query_args['user_id'] = $user->ID;
 
 					if ( array_key_exists( 'charitable_action', $_GET ) && 'verify_email' == $_GET['charitable_action'] ) {
 						$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
@@ -81,12 +81,13 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 					charitable_get_notices()->add_error( $message );
 				}
 
-				$donations = new Charitable_Donations_Query( $args );
+				$donations = new Charitable_Donations_Query( $query_args );
 			}
 
 			$view_args = array(
 				'donations' => $donations,
 				'user'      => $user,
+				'atts'		=> $args
 			);
 
 			charitable_template( 'shortcodes/my-donations.php', $view_args );
@@ -100,7 +101,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			 * @param array  $view_args The view arguments.
 			 * @param array  $args      The query arguments.
 			 */
-			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $view_args, $args );
+			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $view_args, $query_args );
 		}
 	}
 

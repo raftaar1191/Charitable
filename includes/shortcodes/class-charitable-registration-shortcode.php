@@ -44,7 +44,10 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 
 			if ( is_user_logged_in() ) {
 
-				charitable_template( 'shortcodes/logged-in.php', $args );
+				// Add the shortcode atts to $view_args.
+				$view_args = array_merge( $args, array( 'atts' => $args ) );
+
+				charitable_template( 'shortcodes/logged-in.php', $view_args );
 
 				return ob_get_clean();
 
@@ -52,6 +55,8 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 
 			charitable_template( 'shortcodes/registration.php', array(
 				'form' => new Charitable_Registration_Form( $args ),
+				'atts' => $args
+
 			) );
 
 			return apply_filters( 'charitable_registration_shortcode', ob_get_clean() );
