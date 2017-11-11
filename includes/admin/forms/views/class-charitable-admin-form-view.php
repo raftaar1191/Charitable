@@ -4,7 +4,7 @@
  *
  * This is responsible for rendering the output of forms in the WordPress dashboard.
  *
- * @version   1.5.0
+ * @version   1.5.3
  * @package   Charitable/Forms/Charitable_Admin_Form_View
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
@@ -168,7 +168,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             $field['view']       = $this->get_field_view( $field );
             $field['type']       = $this->get_field_type( $field );
             $field['key']        = $this->get_field_key( $field, $key );            
-            $field['id']         = str_replace( '_', '-', ltrim( $field['key'] ) );
+            $field['id']         = $this->get_field_id( $field );            
             $field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
             $field['tabindex']   = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
 
@@ -273,6 +273,22 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             }
 
             return $default;
+        }
+
+        /**
+         * Return the ID for a particular field.
+         *
+         * @since  1.5.3
+         *
+         * @param  array  $field   Field definition.
+         * @param  string $default The key of the form field. This is the fallback option.
+         * @return string
+         */
+        protected function get_field_id( $field ) {
+            if ( array_key_exists( 'id', $field ) ) {
+                return $field['id'];
+            }
+            return str_replace( '_', '-', trim( preg_replace( "![^a-z0-9]+!i", "-", $field['key'] ), '-') );
         }
 
         /**
