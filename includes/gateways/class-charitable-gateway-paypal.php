@@ -184,7 +184,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return  void
 		 */
 		public static function process_ipn() {
-
 			/* We only accept POST requests */
 			if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' != $_SERVER['REQUEST_METHOD'] ) {
 				die( __( 'Invalid Request', 'charitable' ) );
@@ -205,10 +204,10 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				die( __( 'IPN Verification Failure', 'charitable' ) );
 			}
 
-			$defaults = array(
-				'txn_type'       => '',
+			$defaults = array(				
 				'payment_status' => '',
 				'custom' 		 => 0,
+				'txn_type'       => '',
 			);
 
 			$data        = wp_parse_args( $data, $defaults );
@@ -231,13 +230,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$txn_type = strlen( $data['txn_type'] ) ? $data['txn_type'] : 'web_accept';
 
 			if ( has_action( 'charitable_paypal_' . $txn_type ) ) {
-
 				do_action( 'charitable_paypal_' . $txn_type, $data, $donation_id );
-
 			} else {
-
 				do_action( 'charitable_paypal_web_accept', $data, $donation_id );
-
 			}
 
 			exit;
@@ -440,7 +435,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return  boolean
 		 */
 		public function paypal_ipn_verification( $data ) {
-
 			$remote_post_vars = array(
 				'method'           => 'POST',
 				'timeout'          => 45,
