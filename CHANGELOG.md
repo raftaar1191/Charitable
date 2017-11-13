@@ -1,3 +1,6 @@
+## 1.5.3
+* FIX: Properly handles differing site date formats when editing donations. [#461](https://github.com/Charitable/Charitable/issues/461)
+
 ## 1.5.2
 * NEW: Automatically set a user's display name to their name when they update their profile through Charitable. [#437](https://github.com/Charitable/Charitable/issues/437)
 * NEW: Adds a third parameter to the `charitable_template` function allowing extension developers to leverage this function. [#451](https://github.com/Charitable/Charitable/issues/451)
