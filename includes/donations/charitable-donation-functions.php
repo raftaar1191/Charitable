@@ -62,6 +62,18 @@ function charitable_get_donation_meta_value( Charitable_Donation $donation, $key
 }
 
 /**
+ * Return the date formatted for a form field value.
+ *
+ * @since  1.5.3
+ *
+ * @param  Charitable_Donation $donation The donation ID.
+ * @return string
+ */
+function charitable_get_donation_date_for_form_value( Charitable_Donation $donation ) {
+	return $donation->get_date( 'F j, Y' );
+}
+
+/**
  * Returns the donation for the current request.
  *
  * @since  1.0.0

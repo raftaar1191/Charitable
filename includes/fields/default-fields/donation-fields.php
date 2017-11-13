@@ -297,11 +297,12 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'value_callback' => false, // Will use Charitable_Donation::get_date()
 		'donation_form'  => false,
 		'admin_form'     => array(
-			'type'     => 'datepicker',
-			'priority' => 4,			
-			'required' => true,
-			'section'  => 'meta',
-			'default'  => date_i18n( 'F d, Y', time() ),
+			'type'           => 'datepicker',
+			'priority'       => 4,			
+			'required'       => true,
+			'section'        => 'meta',
+			'default'        => date_i18n( 'F d, Y', time() ),
+			'value_callback' => 'charitable_get_donation_date_for_form_value',
 		),
 		'email_tag'      => array(
 			'tag'         => 'donation_date',

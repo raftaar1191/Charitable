@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 	 * Charitable_Donation_List_Table class.
 	 *
 	 * @final
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	final class Charitable_Donation_List_Table {
 

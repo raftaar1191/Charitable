@@ -130,7 +130,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return  array
 		 */
 		public static function process_donation( $return, $donation_id, $processor ) {
-
 			$gateway          = new Charitable_Gateway_Paypal();
 			$user_data 		  = $processor->get_donation_data_value( 'user' );
 			$donation 		  = charitable_get_donation( $donation_id );
@@ -254,15 +253,14 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return  void
 		 */
 		public static function process_web_accept( $data, $donation_id ) {
-
-			$gateway        = new Charitable_Gateway_Paypal();
-			$donation       = charitable_get_donation( $donation_id );
+			$gateway  = new Charitable_Gateway_Paypal();
+			$donation = charitable_get_donation( $donation_id );
 
 			if ( 'paypal' != $donation->get_gateway() ) {
 				die( __( 'Incorrect Gateway', 'charitable' ) );
 			}
 
-			$custom         = json_decode( $data['custom'], true );
+			$custom = json_decode( $data['custom'], true );
 
 			if ( array_key_exists( 'invoice', $data ) ) {
 				$donation_key = $data['invoice'];
