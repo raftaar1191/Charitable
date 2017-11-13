@@ -41,7 +41,7 @@ function charitable_get_donation( $donation_id, $force = false ) {
  * @since  1.5.0
  *
  * @param  Charitable_Abstract_Donation $donation The donation ID.
- * @param  string              $key      The meta key.
+ * @param  string                       $key      The meta key.
  * @return mixed
  */
 function charitable_get_donor_meta_value( Charitable_Abstract_Donation $donation, $key ) {
@@ -54,7 +54,7 @@ function charitable_get_donor_meta_value( Charitable_Abstract_Donation $donation
  * @since  1.5.0
  *
  * @param  Charitable_Abstract_Donation $donation The donation ID.
- * @param  string              $key      The meta key.
+ * @param  string                       $key      The meta key.
  * @return mixed
  */
 function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donation, $key ) {
@@ -66,10 +66,10 @@ function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donat
  *
  * @since  1.5.3
  *
- * @param  Charitable_Donation $donation The donation ID.
+ * @param  Charitable_Abstract_Donation $donation The donation instance.
  * @return string
  */
-function charitable_get_donation_date_for_form_value( Charitable_Donation $donation ) {
+function charitable_get_donation_date_for_form_value( Charitable_Abstract_Donation $donation ) {
 	return $donation->get_date( 'F j, Y' );
 }
 
