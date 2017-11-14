@@ -25,8 +25,8 @@ wp plugin activate charitable
 
 ### Key Branches
 
-* `#master` is the primary development branch. We do not recommend using this on production sites.
-* `#stable` is the latest stable branch, corresponding to the most recent public release.
+* `master` is the primary development branch. We do not recommend using this on production sites.
+* `stable` is the latest stable branch, corresponding to the most recent public release.
 
 Past releases can be checked out via `git checkout 1.5.0` (replace `1.5.0` with the release you would like to check out). View the full set of releases at [https://github.com/Charitable/Charitable/releases](https://github.com/Charitable/Charitable/releases)
 

@@ -8,11 +8,17 @@ Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Charitable is a powerful, extendable fundraising plugin that gives you full control over your website donations.
+Charitable is the WordPress donation plugin that grows with you. We created Charitable because we found that other WordPress donation plugins had limited functionality, had not been updated in a long time, or were just plain ugly. Meanwhile, non-profits who were serious about scaling their online fundraising ended up choosing hosted fundraising platforms charging hefty fees, while stripping non-profits of their ability to brand their fundraising.
+
+So we created & launched Charitable in 2015. It helps you accept donations on your WordPress website, giving you complete control over their fundraising experience. Unlike other WordPress plugins, Charitable was created with a core focus on being extendable and feature-rich. That means that when you are ready to scale up your fundraising, Charitable offers paid extensions that will allow you to start accepting recurring donations, launch peer to peer fundraising campaigns or handle credit card donations on your website — just to name a few upgrades you can take advantage of.
+
 
 == Description ==
 
-**[Charitable](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)** is the WordPress Fundraising Toolkit. It's a robust, developer-friendly plugin that gives you complete control over your online fundraising.
+**[Charitable](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)** is the WordPress donation plugin that grows with you. We created Charitable because we found that other WordPress donation plugins had limited functionality, had not been updated in a long time, or were just plain ugly. Meanwhile, non-profits who were serious about scaling their online fundraising ended up choosing hosted fundraising platforms charging hefty fees, while stripping non-profits of their ability to brand their fundraising.
+
+So we created & launched Charitable in 2015. It helps you accept donations on your WordPress website, giving you complete control over their fundraising experience. Unlike other WordPress plugins, Charitable was created with a core focus on being extendable and feature-rich. That means that when you are ready to scale up your fundraising, Charitable offers paid extensions that will allow you to start accepting recurring donations, launch peer to peer fundraising campaigns or handle credit card donations on your website — just to name a few upgrades you can take advantage of.
+
 
 = Easy to use =
 

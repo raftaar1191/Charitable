@@ -1,11 +1,12 @@
 <?php
 /**
  * Donation Form shortcode class.
- *
- * @version     1.6.0
- * @package     Charitable/Shortcodes/Donation Form
- * @category    Class
- * @author      Eric Daams
+ * 
+ * @package  Charitable/Shortcodes/Donation Form
+ * @category Class
+ * @author   Eric Daams
+ * @since    1.5.0
+ * @version  1.5.0
  */
 
 // Exit if accessed directly.
@@ -16,7 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 	/**
 	 * Charitable_Donation_Form_Shortcode class.
 	 *
-	 * @since   1.2.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Donation_Form_Shortcode {
 
@@ -25,13 +26,12 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		 *
 		 * This receives the user-defined attributes and passes the logic off to the class.
 		 *
-		 * @since   1.6.0
+		 * @since  1.5.0
 		 *
-		 * @param   array   $atts   User-defined shortcode attributes.
-		 * @return  string
+		 * @param  array $atts User-defined shortcode attributes.
+		 * @return string
 		 */
 		public static function display( $atts ) {
-
 			$defaults = array (
 		 		'campaign_id' => 0
 			);
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		    
 		    charitable_template( 'donation-form/form-donation.php', array(
 				'campaign' => $form->get_campaign(),
-				'form' => $form
+				'form'     => $form,
 			) );
 		    
 		    do_action( 'charitable_donation_form_after', $form );
