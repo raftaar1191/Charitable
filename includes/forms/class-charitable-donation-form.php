@@ -304,17 +304,17 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_donation_form_fields', array(
 				'donation_fields' => array(
-					'legend'        => __( 'Your Donation', 'charitable' ),
-					'type'          => 'donation-amount-wrapper',
-					'fields'        => $this->get_donation_fields(),
-					'priority'      => 20,
+					'legend'   => __( 'Your Donation', 'charitable' ),
+					'type'     => 'donation-amount-wrapper',
+					'fields'   => $this->get_donation_fields(),
+					'priority' => 20,
 				),
 				'user_fields' => array(
-					'legend'        => __( 'Your Details', 'charitable' ),
-					'type'          => 'donor-fields',
-					'fields'        => $this->get_user_fields(),
-					'class'         => 'fieldset',
-					'priority'      => 40,
+					'legend'   => __( 'Your Details', 'charitable' ),
+					'type'     => 'donor-fields',
+					'fields'   => $this->get_user_fields(),
+					'class'    => 'fieldset',
+					'priority' => 40,
 				),
 			), $this );
 

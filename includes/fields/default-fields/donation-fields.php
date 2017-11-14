@@ -213,6 +213,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'required' => false,
 			'type'     => 'select',
 			'options'  => charitable_get_location_helper()->get_countries(),
+			'default'  => charitable_get_option( 'country' ),
 		),
 		'admin_form'     => true,
 		'email_tag'      => false,
