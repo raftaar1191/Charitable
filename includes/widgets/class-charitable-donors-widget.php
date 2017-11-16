@@ -15,14 +15,14 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 	/**
 	 * Charitable_Donors_Widget class.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donors_Widget extends WP_Widget {
 
 		/**
 		 * Instantiate the widget and set up basic configuration.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		public function __construct() {
 			parent::__construct(
@@ -205,7 +205,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  Charitable_Donor_Query
 		 */
 		protected function get_widget_donors( $instance ) {
-
 			$query_args = charitable_array_subset( $instance, array( 'number', 'campaign' ) );
 
 			if ( 'amount' == $instance['order'] ) {
@@ -217,11 +216,11 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			/**
 			 * Filter the arguments passed to Charitable_Donor_Query.
 			 *
-			 * @since   1.0.0
+			 * @since  1.0.0
 			 *
-			 * @param 	array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
-			 * @param 	array $args       All the parsed arguments.
-	         * @return 	array
+			 * @param  array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
+			 * @param  array $args       All the parsed arguments.
+	         * @return array
 	         */
 			$query_args = apply_filters( 'charitable_donors_widget_donor_query_args', $query_args, $instance );
 

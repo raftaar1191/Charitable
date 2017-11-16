@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return  Charitable_Campaign
  */
 function charitable_get_campaign( $campaign_id ) {
-	return new Charitable_Campaign( $campaign_id ); // @todo FILTER this
+	return new Charitable_Campaign( $campaign_id );
 }
 
 /**

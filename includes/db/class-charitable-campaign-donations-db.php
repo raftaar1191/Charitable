@@ -403,6 +403,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
                     WHERE cd.campaign_id IN ( $campaigns_in )
                     $status_clause;";
 
+//            echo '<pre>'; echo $wpdb->prepare( $sql, $parameters ); echo '</pre>';
+
 			$total = $wpdb->get_var( $wpdb->prepare( $sql, $parameters ) );
 
 			if ( $this->is_comma_decimal() && $sanitize ) {
@@ -637,6 +639,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 			if ( ! empty( $parameters ) ) {
 				$sql = $wpdb->prepare( $sql, $parameters );
 			}
+
+			echo '<pre>'; echo $sql; echo '</pre>';
 
 			$results = $wpdb->get_results( $sql );
 

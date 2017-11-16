@@ -174,6 +174,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 
 			$sql = "SELECT {$this->select_count()} {$this->from()} {$this->join()} {$this->where()};";
 
+
+			//echo '<pre>'; print( $this->get_prepared_sql( $sql ) ); echo '</pre>';
+
 			return array( $wpdb->get_var( $this->get_prepared_sql( $sql ) ) );
 		}
 

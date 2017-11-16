@@ -80,12 +80,11 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * Returns a WP_Query that will return campaigns, ordered by the amount they raised.
 		 *
-		 * @global 	$wpdb
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $args     Additional arguments to pass to WP_Query
-		 * @return 	WP_Query
-		 * @todo
+		 * @global $wpdb
+		 * @param  array $args Additional arguments to pass to WP_Query.
+		 * @return WP_Query
 		 */
 		public static function ordered_by_amount( $args = array() ) {
 			global $wpdb;
@@ -114,10 +113,10 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 		/**
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $join_statement
-		 * @return  string
+		 * @param  string $join_statement The join statement.
+		 * @return string
 		 */
 		public static function join_campaign_donations_table( $join_statement ) {
 			global $wpdb;

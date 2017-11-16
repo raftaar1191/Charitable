@@ -216,7 +216,6 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 				$update_cache = get_site_transient( 'update_plugins' );
 			}			
 
-			/* @todo Fetch it now? */
 			if ( ! is_object( $update_cache ) || empty( $update_cache->response ) || ! array_key_exists( $slug, $update_cache->response ) ) {
 				return false;
 			}

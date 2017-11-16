@@ -24,9 +24,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Create new query object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   array $args Query arguments.
+		 * @param array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
 			/**
