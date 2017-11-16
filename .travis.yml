@@ -1,7 +1,7 @@
-sudo: required
-dist: trusty
-
 language: php
+
+sudo: false
+dist: trusty
 
 notifications:
   email:
@@ -29,23 +29,25 @@ env:
 
 matrix:
   include:
+    - php: 7
+      env: WP_VERSION=latest WP_MULTISITE=1
     - php: 5.2
-      env: WP_VERSION=latest WP_MULTISITE=1
+      env: WP_VERSION=latest WP_MULTISITE=0
       dist: precise
     - php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=1
+      env: WP_VERSION=latest WP_MULTISITE=0
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.8 WP_MULTISITE=1
+      env: WP_VERSION=4.8 WP_MULTISITE=0
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.7 WP_MULTISITE=1
+      env: WP_VERSION=4.7 WP_MULTISITE=0
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.6 WP_MULTISITE=1
+      env: WP_VERSION=4.6 WP_MULTISITE=0
       dist: precise
     - php: 5.3
-      env: WP_VERSION=4.5 WP_MULTISITE=1
+      env: WP_VERSION=4.5 WP_MULTISITE=0
       dist: precise
 
 before_script:
