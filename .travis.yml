@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 dist: trusty
 
 language: php
@@ -26,14 +26,11 @@ env:
   - WP_VERSION=4.7 WP_MULTISITE=0
   - WP_VERSION=4.6 WP_MULTISITE=0
   - WP_VERSION=4.5 WP_MULTISITE=0
-  - WP_VERSION=4.4 WP_MULTISITE=0
-  - WP_VERSION=4.3 WP_MULTISITE=0
-  - WP_VERSION=4.2 WP_MULTISITE=0
-  - WP_VERSION=4.1 WP_MULTISITE=0
 
 matrix:
   include:
     - php: 5.2
+      env: WP_VERSION=latest WP_MULTISITE=1
       dist: precise
     - php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=1
