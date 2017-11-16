@@ -90,6 +90,17 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		}
 
 		/**
+		 * When retrieving the donor count, get distinct donor IDs.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return string
+		 */
+		public function select_donor_count() {
+			return "COUNT(DISTINCT d.donor_id)";
+		}
+
+		/**
 		 * Set up fields query argument.
 		 *
 		 * @since   1.0.0
@@ -182,24 +193,25 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @return  void
 		 */
 		public function unhook_callbacks() {
-			remove_action( 'charitable_pre_query',     array( $this, 'setup_fields' ) );
-			remove_action( 'charitable_pre_query',     array( $this, 'setup_orderby' ) );
-			remove_action( 'charitable_pre_query',     array( $this, 'setup_grouping' ) );
-			remove_filter( 'charitable_query_fields',  array( $this, 'donation_fields' ), 4 );
-			remove_filter( 'charitable_query_fields',  array( $this, 'donation_calc_fields' ), 5 );
-			remove_filter( 'charitable_query_fields',  array( $this, 'donor_fields' ), 6 );
-			remove_filter( 'charitable_query_fields',  array( $this, 'donation_amount_sum_field' ), 6 );
-			remove_filter( 'charitable_query_join',    array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
-			remove_filter( 'charitable_query_join',    array( $this, 'join_donors_table' ), 6 );
-			remove_filter( 'charitable_query_where',   array( $this, 'where_status_is_in' ), 5 );
-			remove_filter( 'charitable_query_where',   array( $this, 'where_campaign_is_in' ), 6 );
-			remove_filter( 'charitable_query_where',   array( $this, 'where_donor_id_is_in' ), 7 );
+			remove_action( 'charitable_pre_query', array( $this, 'setup_fields' ) );
+			remove_action( 'charitable_pre_query', array( $this, 'setup_orderby' ) );
+			remove_action( 'charitable_pre_query', array( $this, 'setup_grouping' ) );
+			remove_filter( 'charitable_select_count_fields', array( $this, 'select_donor_count' ) );
+			remove_filter( 'charitable_query_fields', array( $this, 'donation_fields' ), 4 );
+			remove_filter( 'charitable_query_fields', array( $this, 'donation_calc_fields' ), 5 );
+			remove_filter( 'charitable_query_fields', array( $this, 'donor_fields' ), 6 );
+			remove_filter( 'charitable_query_fields', array( $this, 'donation_amount_sum_field' ), 6 );
+			remove_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
+			remove_filter( 'charitable_query_join', array( $this, 'join_donors_table' ), 6 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_name' ) );
-			remove_action( 'charitable_post_query',    array( $this, 'unhook_callbacks' ) );
+			remove_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 
 		/**
@@ -210,15 +222,16 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @return  void
 		 */
 		protected function prepare_query() {
-			add_action( 'charitable_pre_query',   array( $this, 'setup_fields' ) );
-			add_action( 'charitable_pre_query',   array( $this, 'setup_orderby' ) );
-			add_action( 'charitable_pre_query',   array( $this, 'setup_grouping' ) );
-			add_filter( 'charitable_query_join',  array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
-			add_filter( 'charitable_query_join',  array( $this, 'join_donors_table' ), 6 );
+			add_action( 'charitable_pre_query', array( $this, 'setup_fields' ) );
+			add_action( 'charitable_pre_query', array( $this, 'setup_orderby' ) );
+			add_action( 'charitable_pre_query', array( $this, 'setup_grouping' ) );
+			add_filter( 'charitable_select_count_fields', array( $this, 'select_donor_count' ) );
+			add_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
+			add_filter( 'charitable_query_join', array( $this, 'join_donors_table' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
-			add_action( 'charitable_post_query',  array( $this, 'unhook_callbacks' ) );
+			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 
 		/**

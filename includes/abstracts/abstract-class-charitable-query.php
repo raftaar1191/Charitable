@@ -174,9 +174,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 
 			$sql = "SELECT {$this->select_count()} {$this->from()} {$this->join()} {$this->where()};";
 
-
-			//echo '<pre>'; print( $this->get_prepared_sql( $sql ) ); echo '</pre>';
-
 			return array( $wpdb->get_var( $this->get_prepared_sql( $sql ) ) );
 		}
 
@@ -255,7 +252,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			/**
 			 * Filter the `SELECT COUNT` statement.
 			 *
-			 * @since 1.0.0
+			 * @since 1.5.0
 			 *
 			 * @param string           $sql   The `SELECT COUNT` statement.
 			 * @param Charitable_Query $query The `Charitable_Query` instance.
