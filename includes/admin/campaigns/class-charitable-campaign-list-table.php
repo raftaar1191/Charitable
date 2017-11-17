@@ -52,7 +52,6 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  array $column_names The columns to show for campaigns.
 		 * @return array
 		 */
 		public function dashboard_columns() {

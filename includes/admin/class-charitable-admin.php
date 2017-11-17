@@ -417,7 +417,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				'end_date'    => $_GET['end_date'],
 				'status'      => $_GET['post_status'],
 				'campaign_id' => $_GET['campaign_id'],
-				'report_type' => $report_type,
+				'report_type' => $_GET['report_type'],
 			) );
 
 			/**
