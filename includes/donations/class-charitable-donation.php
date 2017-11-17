@@ -1,12 +1,13 @@
 <?php
 /**
- * Donation model
+ * Donation model.
  *
- * @version     1.0.0
- * @package     Charitable/Classes/Charitable_Donation
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Donation
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.4.0
  */
 
 // Exit if accessed directly.
@@ -15,33 +16,33 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( ! class_exists( 'Charitable_Donation' ) ) :
 
 	/**
-	 * Donation Model
+	 * Donation Model.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donation extends Charitable_Abstract_Donation {
 
 		/**
-		 * @var     string
-		 * @since   1.4.0
+		 * The type of donation.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @var   string
 		 */
 		public $donation_type = 'simple';
 
 		/**
 		 * Process a refund.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   float $refund_amount
-		 * @param   string $message
-		 * @return  void
+		 * @param  float  $refund_amount The amount to be refunded.
+		 * @param  string $message       The message to add to the donation log.
+		 * @return void
 		 */
 		public function process_refund( $refund_amount, $message = '' ) {
-			$campaign_donations = $this->get_campaign_donations();
-
-			$refund_log = get_post_meta( $this->ID, 'donation_refund', true );
-
-			$total_refund = isset( $refund_log['total_refund'] ) ? $refund_log['total_refund'] : 0;
+			$refund_log           = get_post_meta( $this->ID, 'donation_refund', true );
+			$total_refund         = isset( $refund_log['total_refund'] ) ? $refund_log['total_refund'] : 0;
 			$refunds_per_campaign = isset( $refund_log['campaign_refunds'] ) ? $refund_log['campaign_refunds'] : array();
 
 			foreach ( $this->get_campaign_donations() as $campaign_donation ) {

@@ -245,11 +245,17 @@ function charitable_get_approval_statuses() {
 	/**
 	 * Filter the list of donation statuses that we consider "approved".
 	 *
+	 * All statuses must already be listed as valid donation statuses.
+	 *
+	 * @see   charitable_get_valid_donation_statuses
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param string[] $statuses List of statuses.
 	 */
-	return apply_filters( 'charitable_approval_donation_statuses', array( 'charitable-completed' ) );
+	$statuses = apply_filters( 'charitable_approval_donation_statuses', array( 'charitable-completed' ) );
+
+	return array_filter( $statuses, 'charitable_is_valid_donation_status' );
 }
 
 /**

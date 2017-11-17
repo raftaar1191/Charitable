@@ -2,11 +2,12 @@
 /**
  * Returns an array of all the default donation fields.
  *
- * @since     1.5.0
- * @package   Charitable/i18n
+ * @package   Charitable/Donation Fields
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 /**
@@ -264,21 +265,6 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	// 'donation_amount' => array(
-	// 	'label'          => __( 'Amount', 'charitable' ),
-	// 	'donation_form'  => array(
-	// 		'donation_amount' => array(
-	// 			'type'     => 'donation-amount',
-	// 			'priority' => 4,
-	// 			'required' => false,
-	// 			'section'  => 'donation_fields',
-	// 		),
-	// 	),
-	// 	'admin_form'     => false,
-	// 	'email_tag'      => false,
-	// 	'show_in_meta'   => false,
-	// 	'show_in_export' => false,
-	// ),
 	'amount_formatted' => array(
 		'label'          => __( 'Donation Amount', 'charitable' ),
 		'data_type'      => 'core',

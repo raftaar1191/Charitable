@@ -2,11 +2,12 @@
 /**
  * Class used to provide information about the current request.
  *
- * @version		1.0.0
- * @package		Charitable/Classes/Charitable_Request
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Request
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -16,7 +17,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 	/**
 	 * Charitable_Request.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 * @final
 	 */
 	final class Charitable_Request {
@@ -24,35 +25,28 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Request|null
+		 * @var Charitable_Request|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * Campaign object.
 		 *
-		 * @var 	Charitable_Campaign|false
+		 * @var Charitable_Campaign|false
 		 */
 		private $campaign;
 
 		/**
 		 * Campaign ID.
 		 *
-		 * @var 	int
+		 * @var int
 		 */
 		private $campaign_id;
 
 		/**
-		 * Donor object.
-		 *
-		 * @var 	Charitable_Donor
-		 */
-		private $donor;
-
-		/**
 		 * Donation object.
 		 *
-		 * @var 	Charitable_Donation
+		 * @var Charitable_Donation
 		 */
 		private $donation;
 
@@ -63,7 +57,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'the_post', array( $this, 'set_current_campaign' ) );
@@ -72,9 +66,9 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_Request
+		 * @return Charitable_Request
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -87,10 +81,10 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * When the_post is set, sets the current campaign to the current post if it is a campaign.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	WP_Post $post The Post object.
-		 * @return 	void
+		 * @param  WP_Post $post The Post object.
+		 * @return void
 		 */
 		public function set_current_campaign( $post ) {
 			if ( 'campaign' == $post->post_type ) {
@@ -103,21 +97,16 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current campaign. If there is no current campaign, return false.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	Charitable_Campaign|false Campaign object if we're viewing a campaign within a loop. False otherwise.
+		 * @return Charitable_Campaign|false Campaign object if we're viewing a campaign within a loop. False otherwise.
 		 */
 		public function get_current_campaign() {
 			if ( ! isset( $this->campaign ) ) {
-
 				if ( $this->get_current_campaign_id() > 0 ) {
-
 					$this->campaign = new Charitable_Campaign( $this->get_current_campaign_id() );
-
 				} else {
-
 					$this->campaign = false;
-
 				}
 			}
 
@@ -127,39 +116,29 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current campaign ID. If there is no current campaign, return 0.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	int
+		 * @return int
 		 */
 		public function get_current_campaign_id() {
 			if ( isset( $this->campaign ) && $this->campaign ) {
-
 				$this->campaign_id = $this->campaign->ID;
-
 			} else {
-
 				$this->campaign_id = 0;
 
 				if ( get_post_type() == Charitable::CAMPAIGN_POST_TYPE ) {
-
 					$this->campaign_id = get_the_ID();
-
 				} elseif ( get_query_var( 'donate', false ) ) {
-
 					$session_donation = charitable_get_session()->get( 'donation' );
 
 					if ( false !== $session_donation ) {
-
 						$this->campaign_id = $session_donation->get( 'campaign_id' );
-
 					}
 				}
 			}//end if
 
 			if ( ! $this->campaign_id ) {
-
 				$this->campaign_id = $this->get_campaign_id_from_submission();
-
 			}
 
 			return $this->campaign_id;
@@ -168,9 +147,9 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the campaign ID from a form submission.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int
+		 * @return int
 		 */
 		public function get_campaign_id_from_submission() {
 			if ( ! isset( $_POST['campaign_id'] ) ) {
@@ -189,16 +168,14 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current donation object. If there is no current donation, return false.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  Charitable_Donation|false
+		 * @return Charitable_Donation|false
 		 */
 		public function get_current_donation() {
 			if ( ! isset( $this->donation ) ) {
-
 				$donation_id    = $this->get_current_donation_id();
 				$this->donation = $donation_id ? charitable_get_donation( $donation_id ) : false;
-
 			}
 
 			return $this->donation;
@@ -207,9 +184,9 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * Returns the current donation ID. If there is no current donation, return 0.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int
+		 * @return int
 		 */
 		public function get_current_donation_id() {
 			$donation_id = get_query_var( 'donation_id', 0 );

@@ -2,11 +2,12 @@
 /**
  * Charitable Email Settings UI.
  *
- * @package     Charitable/Classes/Charitable_Email_Settings
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Email_Settings
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.0.0
  */
 
 // Exit if accessed directly.
@@ -18,7 +19,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 	 * Charitable_Email_Settings
 	 *
 	 * @final
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Email_Settings {
 
@@ -105,10 +106,11 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		}
 
 		/**
-		 * Add settings for each individual payment email.
+		 * Add settings for each individual email.
 		 *
 		 * @since  1.0.0
 		 *
+		 * @param  array $fields Array of settings fields.
 		 * @return array[]
 		 */
 		public function add_individual_email_fields( $fields ) {
@@ -142,7 +144,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string[] $groups
+		 * @param  string[] $groups Array of settings groups.
 		 * @return string[]
 		 */
 		public function add_email_settings_dynamic_groups( $groups ) {
@@ -166,30 +168,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		 */
 		public function render_emails_table( $args ) {
 			charitable_admin_view( 'settings/emails', $args );
-		}
-
-		/**
-		 * Checks whether we're looking at an individual email's settings page.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return boolean
-		 */
-		private function is_individual_email_settings_page() {
-			return isset( $_GET['edit_email'] );
-		}
-
-		/**
-		 * Returns the helper class of the email we're editing.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return Charitable_Email|false
-		 */
-		private function get_current_email_class() {
-			$email = charitable_get_helper( 'emails' )->get_email( $_GET['edit_email'] );
-
-			return $email ? new $email : false;
 		}
 	}
 

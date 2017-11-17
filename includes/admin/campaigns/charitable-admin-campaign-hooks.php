@@ -62,7 +62,7 @@ add_filter( 'post_updated_messages', array( Charitable_Campaign_Meta_Boxes::get_
  *
  * @see Charitable_Campaign_List_Table::dashboard_columns()
  */
-add_filter( 'manage_edit-campaign_columns', array( Charitable_Campaign_List_Table::get_instance(), 'dashboard_columns' ), 11, 1 );
+add_filter( 'manage_edit-campaign_columns', array( Charitable_Campaign_List_Table::get_instance(), 'dashboard_columns' ), 11 );
 
 /**
  * Set the content of each column item.

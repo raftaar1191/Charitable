@@ -3,10 +3,11 @@
  * Register and retrieve donation fields.
  *
  * @package   Charitable/Classes/Charitable_Donation_Field_Registry
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -271,7 +272,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
             }
 
             if ( $after ) {
-                $priority = $after->donation_form['priority'] + 0.5;
+                return $after->donation_form['priority'] + 0.5;
             }
 
             if ( $before ) {

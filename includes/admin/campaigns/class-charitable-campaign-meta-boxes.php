@@ -2,11 +2,12 @@
 /**
  * The class that defines how campaigns are managed on the admin side.
  *
- * @package     Charitable/Admin/Charitable_Campaign_Meta_Boxes
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Admin/Charitable_Campaign_Meta_Boxes
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -190,10 +191,9 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  WP_Post $post Current post object.
 		 * @return void
 		 */
-		public function advanced_campaign_settings( $post ) {
+		public function advanced_campaign_settings() {
 			charitable_admin_view( 'metaboxes/campaign-advanced-settings', array( 'meta_boxes' => $this->get_advanced_meta_boxes() ) );
 		}
 

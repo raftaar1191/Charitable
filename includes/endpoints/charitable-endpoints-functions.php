@@ -2,11 +2,11 @@
 /**
  * Charitable Endpoint Functions.
  *
- * @package     Charitable/Functions/Endpoints
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Endpoints
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -86,7 +86,8 @@ function charitable_is_campaign_page() {
  *
  * We keep both for backwards compatibility (pre 1.5).
  *
- * @uses    Charitable_Endpoints::get_page_url()
+ * @uses   Charitable_Endpoints::get_page_url()
+ *
  * @since  1.0.0
  *
  * @param  string $url Deprecated argument.
@@ -110,7 +111,8 @@ function charitable_get_campaign_donation_page_permalink( $url = null, $args = a
  * Pass `'strict' => true` in `$args` to only return true when the `donate`
  * query var is set.
  *
- * @uses    Charitable_Endpoints::is_page()
+ * @uses   Charitable_Endpoints::is_page()
+ *
  * @since  1.0.0
  *
  * @param  boolean $ret Unused argument.
@@ -255,7 +257,7 @@ function charitable_is_campaign_widget_page() {
  * @return string
  */
 function charitable_get_forgot_password_page_permalink( $url = null, $args = array() ) {
-	return charitable()->endpoints()->get_page_url( 'forgot_password' );
+	return charitable()->endpoints()->get_page_url( 'forgot_password', $args );
 }
 
 /**
