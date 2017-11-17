@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 			$filepath = $this->get_validated_addon_filepath( $addon );
 
 			/* If we cannot read the file, bounce back with an error. */
-			if ( ! $filepath ) {
+			if ( false === $filepath ) {
 				charitable_get_deprecated()->doing_it_wrong(
 					__METHOD__,
 					sprintf( 'File %s does not exist or is not readable', $filepath ),
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 				$filepath = $this->get_validated_addon_filepath( $addon );
 
 				/* If we cannot read the file, bounce back with an error. */
-				if ( ! $filepath ) {
+				if ( false === $filepath ) {
 					charitable_get_deprecated()->doing_it_wrong(
 						__METHOD__,
 						sprintf( 'File %s does not exist or is not readable', $filepath ),
@@ -139,18 +139,6 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		}
 
 		/**
-		 * Return the filepath to the given addon.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  string $addon The addon slug.
-		 * @return string
-		 */
-		private function get_addon_filepath( $addon ) {
-			return charitable()->get_path( 'includes' ) . "addons/{$addon}/class-{$addon}.php";
-		}
-
-		/**
 		 * Return the validated filepath, or false if the file path could
 		 * not be validated.
 		 *
@@ -159,7 +147,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 * @param  string $addon The addon slug.
 		 * @return string|false
 		 */
-		private function get_validated_addon_filepath() {
+		private function get_validated_addon_filepath( $addon ) {
 			$filepath = charitable()->get_path( 'includes' ) . "addons/{$addon}/class-{$addon}.php";
 			$valid    = file_exists( $filepath ) && is_readable( $filepath );
 			return $valid ? $filepath : false;
