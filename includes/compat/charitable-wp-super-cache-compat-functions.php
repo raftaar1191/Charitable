@@ -3,10 +3,11 @@
  * Functions to improve compatibility with WP Super Cache.
  *
  * @package   Charitable/Functions/Compatibility
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.18
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -46,3 +47,20 @@ function charitable_compat_wp_super_cache_clear_campaign_cache( $campaign_id ) {
 }
 
 add_action( 'charitable_flush_campaign_cache', 'charitable_compat_wp_super_cache_clear_campaign_cache' );
+
+/**
+ * Prevent caching on certain Charitable pages.
+ *
+ * @since  1.5.4
+ *
+ * @return void
+ */
+function charitable_compat_wp_super_cache_disable_cache() {
+	$endpoints = charitable()->endpoints();
+
+	if ( in_array( $endpoints->get_current_endpoint(), $endpoints->get_non_cacheable_endpoints() ) ) {
+		define( 'DONOTCACHEPAGE', true );
+	}
+}
+
+add_action( 'wp', 'charitable_compat_wp_super_cache_disable_cache' );

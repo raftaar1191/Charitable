@@ -1,12 +1,13 @@
 <?php
 /**
- * donate endpoint.
+ * Donation processing endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Donation_Processing_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Donation_Processing_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -16,20 +17,26 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 	/**
 	 * Charitable_Donation_Processing_Endpoint
 	 *
-	 * @abstract
-	 * @since   1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Donation_Processing_Endpoint extends Charitable_Endpoint {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'donation_processing';
+
+		/**
+		 * Object instantiation.
+		 *
+		 * @since 1.5.4
+		 */
+		public function __construct() {
+			$this->cacheable = false;
+		}
 
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
 		 * @return 	string
 		 */
@@ -40,7 +47,7 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 */
 		public function setup_rewrite_rules() {
 			add_rewrite_endpoint( 'donation_processing', EP_ROOT );
@@ -50,14 +57,13 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @global 	WP_Rewrite $wp_rewrite
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	array      $args
-		 * @return  string
+		 * @global WP_Rewrite $wp_rewrite
+		 * @param  array $args Mixed args.
+		 * @return string
 		 */
 		public function get_page_url( $args = array() ) {
-
 			global $wp_rewrite;
 
 			$donation_id = array_key_exists( 'donation_id', $args ) ? $args['donation_id'] : get_the_ID();
@@ -72,56 +78,50 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 			}
 
 			return $url;
-
 		}
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @global  WP_Query $wp_query
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return  boolean
+		 * @global WP_Query $wp_query
+		 * @return boolean
 		 */
 		public function is_page() {
-
 			global $wp_query;
 
 			return is_main_query()
 				&& array_key_exists( 'donation_processing', $wp_query->query_vars )
 				&& array_key_exists( 'donation_id', $wp_query->query_vars );
-
 		}
 
 		/**
 		 * Return the template to display for this endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $template The default template.
-		 * @return  string
+		 * @param  string $template The default template.
+		 * @return string
 		 */
 		public function get_template( $template ) {
-
 			new Charitable_Ghost_Page( 'donation-processing-page', array(
 				'title'     => __( 'Thank you for your donation', 'charitable' ),
 				'content'   => sprintf( '<p>%s</p>', __( 'You will shortly be redirected to the payment gateway to complete your donation.', 'charitable' ) ),
 			) );
 
 			return array( 'donation-processing-page.php', 'page.php', 'index.php' );
-
 		}
 
 		/**
 		 * Get the content to display for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $content
-		 * @return  string
+		 * @param  string $content
+		 * @return string
 		 */
 		public function get_content( $content ) {
-
 			$donation = charitable_get_current_donation();
 
 			if ( ! $donation ) {
@@ -129,20 +129,17 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 			}
 
 			return apply_filters( 'charitable_processing_donation_' . $donation->get_gateway(), $content, $donation );
-
 		}
 
 		/**
 		 * Return the body class to add for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
 		 * @return 	string
 		 */
 		public function get_body_class() {
-
 			return 'campaign-donation-processing';
-
 		}
 	}
 

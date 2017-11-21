@@ -281,13 +281,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			if ( ! isset( $this->current_endpoint ) ) {
 
 				foreach ( $this->endpoints as $endpoint_id => $endpoint ) {
-
 					if ( $endpoint->is_page( array( 'strict' => true ) ) ) {
-
 						$this->current_endpoint = $endpoint_id;
 
 						return $this->current_endpoint;
-
 					}
 				}
 
@@ -295,6 +292,25 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			return $this->current_endpoint;
+		}
+
+		/**
+		 * Return a list of all endpoints that should not be cached.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return array
+		 */
+		public function get_non_cacheable_endpoints() {
+			$endpoints = array();
+
+			foreach ( $this->endpoints as $endpoint_id => $endpoint ) {
+				if ( ! $endpoint->is_cacheable() ) {
+					$endpoints[] = $endpoint_id;
+				}
+			}
+
+			return $endpoints;
 		}
 
 		/**

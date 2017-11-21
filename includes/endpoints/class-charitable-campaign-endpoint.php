@@ -1,12 +1,13 @@
 <?php
 /**
- * campaign endpoint.
+ * Campaign endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Campaign_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Campaign_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -16,22 +17,19 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 	/**
 	 * Charitable_Campaign_Endpoint
 	 *
-	 * @abstract
-	 * @since   1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Campaign_Endpoint extends Charitable_Endpoint {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'campaign';
 
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -40,31 +38,28 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @global 	WP_Rewrite $wp_rewrite
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	array      $args
-		 * @return  string
+		 * @global WP_Rewrite $wp_rewrite
+		 * @param  array $args Mixed args.
+		 * @return string
 		 */
 		public function get_page_url( $args = array() ) {
-
 			$campaign_id  = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
 
 			return get_permalink( $campaign_id );
-
 		}
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @global  WP_Query $wp_query
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	array    $args
-		 * @return  boolean
+		 * @global WP_Query $wp_query
+		 * @param  array $args Mixed arguments.
+		 * @return boolean
 		 */
 		public function is_page( $args = array() ) {
-
 			global $wp_query;
 
 			if ( ! $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE ) ) {
@@ -72,19 +67,17 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			}
 
 			return ! array_key_exists( 'donate', $wp_query->query_vars );
-
 		}
 
 		/**
 		 * Get the content to display for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $content
-		 * @return  string
+		 * @param  string $content Default content.
+		 * @return string
 		 */
 		public function get_content( $content ) {
-
 			if ( ! charitable_is_main_loop() ) {
 				return $content;
 			}
@@ -93,7 +86,6 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			 * If this is the donation form, and it's showing on a separate page, return the content.
 			 */
 			if ( charitable_is_page( 'campaign_donation_page' ) ) {
-
 				if ( 'separate_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
 					return $content;
 				}
@@ -106,7 +98,7 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			/**
 			 * If you do not want to use the default campaign template, use this filter and return false.
 			 *
-			 * @uses    charitable_use_campaign_template
+			 * @uses charitable_use_campaign_template
 			 */
 			if ( ! apply_filters( 'charitable_use_campaign_template', true ) ) {
 				return $content;
@@ -127,20 +119,17 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			add_filter( 'the_content', 'charitable_template_campaign_content' );
 
 			return $content;
-
 		}
 
 		/**
 		 * Return the body class to add for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public function get_body_class() {
-
 			return 'campaign-donation-page';
-
 		}
 	}
 
