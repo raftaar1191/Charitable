@@ -392,7 +392,8 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 			}
 
 			$ret = current_user_can( 'edit_posts' )
-				|| current_user_can( 'manage_charitable_settings' );
+				|| current_user_can( 'manage_charitable_settings' )
+				|| current_user_can( 'edit_products' );
 
 			return apply_filters( 'charitable_user_has_admin_access', $ret );
 
