@@ -1,3 +1,7 @@
+## 1.5.4
+* NEW: Added `Charitable_Donation_Log` class as a single purpose class designed to interact with all log entries related to a donation.
+* FIX: Improved backwards compatibility. The solution added in 1.5.1/1.5.2 did not work in all cases. [#469](https://github.com/Charitable/Charitable/issues/469)
+
 ## 1.5.3
 * FIX: Properly handles differing site date formats when editing donations. [#461](https://github.com/Charitable/Charitable/issues/461)
 

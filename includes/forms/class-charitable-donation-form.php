@@ -120,7 +120,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$this->check_test_mode();
 
 			/* For backwards-compatibility */
-			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 6 );
 		}
 
 		/**
