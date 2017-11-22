@@ -186,7 +186,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 */
 		public static function process_ipn() {
 			/* We only accept POST requests */
-			if ( ! $this->is_valid_request() ) {
+			if ( ! self::is_valid_request() ) {
 				die( __( 'Invalid Request', 'charitable' ) );
 			}
 
@@ -712,8 +712,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 *
 		 * @return boolean
 		 */
-		private function is_valid_request() {
-			return isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' != $_SERVER['REQUEST_METHOD'];
+		private static function is_valid_request() {
+			return ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' == $_SERVER['REQUEST_METHOD'];
 		}
 	}
 
