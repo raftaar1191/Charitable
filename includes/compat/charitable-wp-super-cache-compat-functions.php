@@ -56,6 +56,10 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_wp_super_cache
  * @return void
  */
 function charitable_compat_wp_super_cache_disable_cache() {
+	if ( defined( 'DONOTCACHEPAGE' ) ) {
+		return;
+	}
+
 	$endpoints = charitable()->endpoints();
 
 	if ( in_array( $endpoints->get_current_endpoint(), $endpoints->get_non_cacheable_endpoints() ) ) {

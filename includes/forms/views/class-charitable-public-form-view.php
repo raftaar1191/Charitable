@@ -78,7 +78,6 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 */
 		public function __construct( Charitable_Form $form ) {
 			$this->form                   = $form;
-			$this->rendering              = false;
 			$this->rendered_honeypot      = false;
 			$this->rendered_notices       = false;
 			$this->rendered_hidden_fields = false;
