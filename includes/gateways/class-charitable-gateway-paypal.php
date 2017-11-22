@@ -1,12 +1,13 @@
 <?php
 /**
- * Paypal Payment Gateway class
+ * Paypal Payment Gateway class.
  *
- * @version		1.0.0
- * @package		Charitable/Classes/Charitable_Gateway_Paypal
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package	  Charitable/Classes/Charitable_Gateway_Paypal
+ * @author 	  Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -185,7 +186,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 */
 		public static function process_ipn() {
 			/* We only accept POST requests */
-			if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' != $_SERVER['REQUEST_METHOD'] ) {
+			if ( ! $this->is_valid_request() ) {
 				die( __( 'Invalid Request', 'charitable' ) );
 			}
 
@@ -200,7 +201,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				die( __( 'Empty Data', 'charitable' ) );
 			}
 
-			if ( ! $gateway->get_value( 'disable_ipn_verification' ) && ! $gateway->paypal_ipn_verification( $data ) ) {
+			if ( ! $gateway->paypal_ipn_verification( $data ) ) {
 				die( __( 'IPN Verification Failure', 'charitable' ) );
 			}
 
@@ -429,35 +430,45 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Validates an IPN request with PayPal.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   mixed[] $data
-		 * @return  boolean
+		 * @param  mixed[] $data Data received from PayPal.
+		 * @return boolean
 		 */
 		public function paypal_ipn_verification( $data ) {
+			if ( $this->get_value( 'disable_ipn_verification' ) ) {
+				return true;
+			}
+
 			$remote_post_vars = array(
-				'method'           => 'POST',
-				'timeout'          => 45,
-				'redirection'      => 5,
-				'httpversion'      => '1.1',
-				'blocking'         => true,
-				'headers'          => array(
+				'method'      => 'POST',
+				'timeout'     => 45,
+				'redirection' => 5,
+				'httpversion' => '1.1',
+				'blocking'    => true,
+				'headers'     => array(
 					'host'         => 'www.paypal.com',
 					'connection'   => 'close',
 					'content-type' => 'application/x-www-form-urlencoded',
 					'post'         => '/cgi-bin/webscr HTTP/1.1',
 
 				),
-				'sslverify'        => false,
-				'body'             => $data,
+				'sslverify' => false,
+				'body'      => $data,
 			);
 
 			/* Get response */
-			$api_response = wp_remote_post( $this->get_redirect_url(), $remote_post_vars );
+			$api_response = wp_remote_post( $this->get_redirect_url( true, true ), $remote_post_vars );
 
-			$is_valid = ! is_wp_error( $api_response ) && 'VERIFIED' == $api_response['body'];
-
-			return apply_filters( 'charitable_paypal_ipn_verification', $is_valid, $api_response );
+			/**
+			 * Filter whether the PayPal IPN was verified.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean        $valid        Whether it has been verified.
+			 * @param array|WP_Error $api_response Array in case of successful request. WP_Error otherwise.
+			 */
+			return apply_filters( 'charitable_paypal_ipn_verification', $this->is_valid_api_response( $api_response ), $api_response );
 		}
 
 		/**
@@ -511,27 +522,36 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		}
 
 		/**
-		 * Return the base of the PayPal
+		 * Return the base of the PayPal request.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
+		 * @since  1.5.4 Added $ipn_check parameter.
 		 *
-		 * @param   bool $ssl_check
-		 * @return  string
+		 * @param  boolean $ssl_check Whether to check SSL.
+		 * @param  boolean $ipn_check Whether this is for an IPN request.
+		 * @return string
 		 */
-		public function get_redirect_url( $ssl_check = false ) {
-			$protocol = is_ssl() || ! $ssl_check ? 'https://' : 'http://';
-
-			if ( charitable_get_option( 'test_mode' ) ) {
-
-				$paypal_uri = $protocol . 'www.sandbox.paypal.com/cgi-bin/webscr';
-
-			} else {
-
-				$paypal_uri = $protocol . 'www.paypal.com/cgi-bin/webscr';
-
+		public function get_redirect_url( $ssl_check = false, $ipn_check = false ) {
+			$paypal_uri = $this->use_ssl( $ssl_check, $ipn_check ) ? 'https://' : 'http://';
+			
+			if ( $ipn_check ) {
+				$paypal_uri .= 'ipnpb.';
 			}
 
-			return apply_filters( 'charitable_paypal_uri', $paypal_uri );
+			$paypal_uri .= charitable_get_option( 'test_mode' ) ? 'sandbox.' : 'www.';
+			$paypal_uri .= 'paypal.com/cgi-bin/webscr';
+
+			/**
+			 * Filter the PayPal URI.
+			 *
+			 * @since 1.0.0
+			 * @since 1.5.4 Added $ssl_check and $ipn_check parameters.
+			 *
+			 * @param string  $paypal_uri The URL.
+			 * @param boolean $ssl_check Whether to check SSL.
+			 * @param boolean $ipn_check Whether this is for an IPN request.
+			 */
+			return apply_filters( 'charitable_paypal_uri', $paypal_uri, $ssl_check, $ipn_check );
 		}
 
 		/**
@@ -658,6 +678,42 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				$headers
 			);
 
+		}
+
+		/**
+		 * Return whether to use SSL.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @param  boolean $ssl_check Whether to check SSL.
+		 * @param  boolean $ipn_check Whether this is for an IPN request.
+		 * @return boolean
+		 */
+		private function use_ssl( $ssl_check = false, $ipn_check = false ) {
+			return $ipn_check || ! $ssl_check || is_ssl();
+		}
+
+		/**
+		 * Returns whether the API response we received is valid.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @param  array|WP_Error $api_response Array in case of successful request. WP_Error otherwise.
+		 * @return boolean
+		 */
+		private function is_valid_api_response( $api_response ) {
+			return ! is_wp_error( $api_response ) && 'VERIFIED' == $api_response['body'];
+		}
+
+		/**
+		 * Returns whether the IPN request is valid.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return boolean
+		 */
+		private function is_valid_request() {
+			return isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' != $_SERVER['REQUEST_METHOD'];
 		}
 	}
 
