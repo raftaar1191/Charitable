@@ -351,10 +351,11 @@ function charitable_load_donation_form_script() {
  * @since  1.0.0
  *
  * @param  string $message
- * @return void
+ * @return int|bool Meta ID if the key didn't exist, true on successful update,
+ *                  false on failure.
  */
 function charitable_update_donation_log( $donation_id, $message ) {
-	charitable_get_donation( $donation_id )->update_donation_log( $message );
+	return charitable_get_donation( $donation_id )->log()->add( $message );
 }
 
 /**
@@ -365,7 +366,7 @@ function charitable_update_donation_log( $donation_id, $message ) {
  * @return array
  */
 function charitable_get_donation_log( $donation_id ) {
-	charitable_get_donation( $donation_id )->get_donation_log();
+	charitable_get_donation( $donation_id )->log()->get_meta_log();
 }
 
 /**

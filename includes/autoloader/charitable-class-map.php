@@ -55,6 +55,7 @@ return array(
 "Charitable_Deprecated" => "deprecated/class-charitable-deprecated.php",
 "Charitable_Templates" => "deprecated/deprecated-class-charitable-templates.php",
 "Charitable_Donation_Factory" => "donations/class-charitable-donation-factory.php",
+"Charitable_Donation_Log" => "donations/class-charitable-donation-log.php",
 "Charitable_Donation_Processor" => "donations/class-charitable-donation-processor.php",
 "Charitable_Donation" => "donations/class-charitable-donation.php",
 "Charitable_Donations" => "donations/class-charitable-donations.php",
