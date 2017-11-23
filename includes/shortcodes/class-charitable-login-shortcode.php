@@ -31,15 +31,13 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		 * @return  string
 		 */
 		public static function display( $atts = array() ) {
-
 			$defaults = array(
 				'logged_in_message'      => __( 'You are already logged in!', 'charitable' ),
 				'redirect'               => esc_url( charitable_get_login_redirect_url() ),
 				'registration_link_text' => __( 'Register', 'charitable' ),
 			);
 
-			$args = shortcode_atts( $defaults, $atts, 'charitable_login' );
-
+			$args                    = shortcode_atts( $defaults, $atts, 'charitable_login' );
 			$args['login_form_args'] = self::get_login_form_args( $args );
 
 			if ( is_user_logged_in() ) {

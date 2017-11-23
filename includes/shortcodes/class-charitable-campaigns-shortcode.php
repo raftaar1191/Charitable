@@ -52,12 +52,11 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			 *
 			 * If you replace the template with your own, it needs to be an instance of Charitable_Template.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
-			 * @param 	array $args               All the parsed arguments.
-	         * @return 	false|Charitable_Template
-	         */
+			 * @param false|Charitable_Template The template. If false (the default), we will use our own template.
+			 * @param array $args               All the parsed arguments.
+			 */
 			$template = apply_filters( 'charitable_campaigns_shortcode_template', false, $args );
 
 			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
@@ -72,12 +71,11 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			/**
 			 * Modify the view arguments that are passed to the campaigns shortcode template.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	array $view_args The arguments to pass.
-			 * @param 	array $args      All the parsed arguments.
-	         * @return 	array
-	         */
+			 * @param array $view_args The arguments to pass.
+			 * @param array $args      All the parsed arguments.
+			 */
 			$view_args = apply_filters( 'charitable_campaigns_shortcode_view_args', charitable_array_subset( $args, array( 'campaigns', 'columns', 'button', 'responsive' ) ), $args );
 
 			$template->set_view_args( $view_args );

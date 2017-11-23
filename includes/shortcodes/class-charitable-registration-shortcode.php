@@ -2,10 +2,11 @@
 /**
  * Registration shortcode class.
  *
- * @version     1.0.0
- * @package     Charitable/Shortcodes/Registration
- * @category    Class
- * @author      Eric Daams
+ * @package  Charitable/Shortcodes/Registration
+ * @category Class
+ * @author   Eric Daams
+ * @since    1.0.0
+ * @version  1.0.0
  */
 
 // Exit if accessed directly.
@@ -16,7 +17,7 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 	/**
 	 * Charitable_Registration_Shortcode class.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Registration_Shortcode {
 
@@ -25,13 +26,12 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 		 *
 		 * This receives the user-defined attributes and passes the logic off to the class.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array   $atts   User-defined shortcode attributes.
-		 * @return  string
+		 * @param  array $atts User-defined shortcode attributes.
+		 * @return string
 		 */
 		public static function display( $atts = array() ) {
-
 			$defaults = array(
 				'logged_in_message' => __( 'You are already logged in!', 'charitable' ),
 				'redirect'          => false,
@@ -43,11 +43,8 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 			ob_start();
 
 			if ( is_user_logged_in() ) {
-
 				charitable_template( 'shortcodes/logged-in.php', $args );
-
 				return ob_get_clean();
-
 			}
 
 			charitable_template( 'shortcodes/registration.php', array(
@@ -55,7 +52,6 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 			) );
 
 			return apply_filters( 'charitable_registration_shortcode', ob_get_clean() );
-
 		}
 	}
 

@@ -68,16 +68,12 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		public function get_donations() {
 			$records = $this->query();
 
-			/**
-			 * Return array with the count.
-			 */
+			/* Return array with the count. */
 			if ( 'count' == $this->get( 'output' ) ) {
 				return $records;
 			}
 
-			/**
-			 * Return Donations objects.
-			 */
+			/* Return Donations objects. */
 			if ( 'donations' == $this->get( 'output' ) ) {
 				return array_map( 'charitable_get_donation', wp_list_pluck( $records, 'ID' ) );
 			}
@@ -91,9 +87,7 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			if ( $currency_helper->is_comma_decimal() ) {
 
 				foreach ( $records as $i => $row ) {
-
 					$records[ $i ]->amount = $currency_helper->sanitize_database_amount( $row->amount );
-
 				}
 			}
 
