@@ -6,8 +6,8 @@
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since    1.0.0
- * @version   1.0.0
+ * @since     1.0.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 *
 		 * @var   string
 		 */
-		public $version = '1.0.0';
+		public $version = '1.5.4';
 
 		/**
 		 * The name of the primary column
@@ -75,15 +75,16 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE {$this->table_name} (
-                    campaign_donation_id bigint(20) NOT NULL AUTO_INCREMENT,
-                    donation_id bigint(20) NOT NULL,
-                    donor_id bigint(20) NOT NULL,
-                    campaign_id bigint(20) NOT NULL,
+                    campaign_donation_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+                    donation_id bigint(20) unsigned NOT NULL,
+                    donor_id bigint(20) unsigned NOT NULL,
+                    campaign_id bigint(20) unsigned NOT NULL,
                     campaign_name text NOT NULL,
                     amount decimal(13, 4) NOT NULL,
                     PRIMARY KEY  (campaign_donation_id),
                     KEY donation (donation_id),
-                    KEY campaign (campaign_id)
+                    KEY campaign (campaign_id),
+                    KEY donor (donor_id)
                     ) $charset_collate;";
 
 			$this->_create_table( $sql );
