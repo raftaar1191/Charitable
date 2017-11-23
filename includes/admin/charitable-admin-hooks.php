@@ -101,4 +101,4 @@ add_action( 'charitable_install', array( Charitable_Admin_Pages::get_instance(),
  *
  * @see Charitable_Admin_Notices::shutdown()
  */
-add_action( 'shutdown', array( Charitable_Admin_Notices::get_instance(), 'shutdown' ) );
+add_action( 'shutdown', array( charitable_get_admin_notices(), 'shutdown' ) );

@@ -180,10 +180,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something before any donation form processing takes place.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	Charitable_Donation_Processor $processor The Donation Processor object.
-			 * @param 	Charitable_Donation_Form      $form 	 The Donation Form object.
+			 * @param Charitable_Donation_Processor $processor The Donation Processor object.
+			 * @param Charitable_Donation_Form      $form 	 The Donation Form object.
 			 */
 			do_action( 'charitable_before_process_donation_form', $processor, $form );
 
@@ -197,11 +197,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Validate the gateway values.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	boolean $valid   Whether the submission passes validation.
-			 * @param 	string  $gateway The gateway ID.
-			 * @param 	array   $values  The values submitted by the user.
+			 * @param boolean $valid   Whether the submission passes validation.
+			 * @param string  $gateway The gateway ID.
+			 * @param array   $values  The values submitted by the user.
 			 */
 			if ( ! apply_filters( 'charitable_validate_donation_form_submission_gateway', true, $gateway, $values ) ) {
 				return false;

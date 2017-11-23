@@ -2,11 +2,12 @@
 /**
  * Contains the class that is used to register and retrieve notices in the admin like errors, warnings, success messages, etc.
  *
- * @version     1.4.6
- * @package     Charitable/Classes/Charitable_Admin_Notices
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Admin_Notices
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.6
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -22,42 +23,32 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 	class Charitable_Admin_Notices extends Charitable_Notices {
 
 		/**
-		 * The single instance of this class.
-		 *
-		 * @var 	Charitable_Admin_Notices|null
-		 */
-		private static $instance = null;
-
-		/**
 		 * Whether the script has been enqueued.
 		 *
-		 * @var 	boolean
+		 * @since 1.4.6
+		 *
+		 * @var   boolean
 		 */
 		private $script_enqueued;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.4.6
+		 * @since  1.4.6
 		 *
-		 * @return  Charitable_Admin_Notices
+		 * @return Charitable_Admin_Notices
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
+			return charitable()->registry()->get( 'admin_notices' );
 		}
 
 		/**
 		 * Create class object. A private constructor, so this is used in a singleton context.
 		 *
-		 * @since   1.4.6
-		 *
-		 * @return  void
+		 * @since 1.4.6
+		 * @since 1.5.4 Access changed to public.
 		 */
-		private function __construct() {
+		public function __construct() {
 			$this->load_notices();
 		}
 
