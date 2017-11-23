@@ -1,6 +1,8 @@
 ## 1.5.4
 * NEW: Added `Charitable_Donation_Log` class as a single purpose class designed to interact with all log entries related to a donation.
 * NEW: Users with the `edit_products` capability can now access the WordPress dashboard. This improves compatibility with Easy Digital Downloads and WooCommerce. [#468](https://github.com/Charitable/Charitable/issues/468)
+* NEW: Added index to the `donor_id` column in the `charitable_campaign_donations` table. Prevents a sub-optimal query using a full table scan. [#465](https://github.com/Charitable/Charitable/issues/465)
+* NEW: Added `unsigned` to columns in both the `charitable_campaign_donations` and `charitable_donors` tables.
 * FIX: Set site base country as default for Country field in Donation Form. [#463](https://github.com/Charitable/Charitable/issues/463)
 * FIX: Fixed SQL error in donor count queries. [#467](https://github.com/Charitable/Charitable/issues/467)
 * FIX: Avoid fatal error when adding certain shortcodes to pages while Yoast SEO is installed. [#387](https://github.com/Charitable/Charitable/issues/387)

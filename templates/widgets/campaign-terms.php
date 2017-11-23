@@ -24,8 +24,8 @@ endif;
 ?>
 <ul class="charitable-terms-widget">
 	<?php wp_list_categories( array(
-		'title_li' => '',
-		'taxonomy' => $taxonomy,
+		'title_li'   => '',
+		'taxonomy'   => $taxonomy,
 		'show_count' => $show_count,
 		'hide_empty' => $hide_empty,
 	) ) ?>
