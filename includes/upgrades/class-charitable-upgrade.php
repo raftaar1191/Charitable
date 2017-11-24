@@ -939,7 +939,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			} catch ( Exception $e ) {
 				return false;
 			}
-
 		}
 
 		/**

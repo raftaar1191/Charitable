@@ -1,5 +1,6 @@
 ## 1.5.4
 * NEW: You can now display campaign categories or tags in a dropdown through the Campaign Categories / Tags widget. [#408](https://github.com/Charitable/Charitable/issues/408)
+* NEW: The donation status is now shown in the output of `[charitable_my_donations]`. [#287](https://github.com/Charitable/Charitable/issues/287)
 * NEW: Added `Charitable_Donation_Log` class as a single purpose class designed to interact with all log entries related to a donation.
 * NEW: Users with the `edit_products` capability can now access the WordPress dashboard. This improves compatibility with Easy Digital Downloads and WooCommerce. [#468](https://github.com/Charitable/Charitable/issues/468)
 * NEW: Added index to the `donor_id` column in the `charitable_campaign_donations` table. Prevents a sub-optimal query using a full table scan. [#465](https://github.com/Charitable/Charitable/issues/465)
@@ -8,6 +9,7 @@
 * FIX: Set site base country as default for Country field in Donation Form. [#463](https://github.com/Charitable/Charitable/issues/463)
 * FIX: Fixed SQL error in donor count queries. [#467](https://github.com/Charitable/Charitable/issues/467)
 * FIX: Avoid fatal error when adding certain shortcodes to pages while Yoast SEO is installed. [#387](https://github.com/Charitable/Charitable/issues/387)
+* FIX: Also avoided similar fatal errors when running the Relevanssi build index. [#397](https://github.com/Charitable/Charitable/issues/397)
 * FIX: Improved backwards compatibility. The solution added in 1.5.1/1.5.2 did not work in all cases. [#469](https://github.com/Charitable/Charitable/issues/469)
 * FIX: Prevent WP Super Cache caching pages that should not be cached (login, donation form, forgot password, etc.). [#398](https://github.com/Charitable/Charitable/issues/398)
 
