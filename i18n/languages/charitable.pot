@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.4\n"
+"Project-Id-Version: Charitable 1.5.5\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-23 06:10:58+00:00\n"
+"POT-Creation-Date: 2017-11-24 14:05:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4779,17 +4779,17 @@ msgid ""
 "<code>[charitable_email]</code> shortcode:"
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-form.php:98
+#: includes/abstracts/abstract-class-charitable-form.php:97
 msgid ""
 "None of the callbacks are required as of Charitable 1.5; use "
 "`Charitable_Public_Form_View` instead. Issue encountered in %s class."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-form.php:225
+#: includes/abstracts/abstract-class-charitable-form.php:224
 msgid "Unable to submit form. Please try again."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-form.php:331
+#: includes/abstracts/abstract-class-charitable-form.php:330
 msgid ""
 "There were problems with your form submission. The following required "
 "fields were not filled out:"

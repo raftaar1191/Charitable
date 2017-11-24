@@ -1,3 +1,6 @@
+## 1.5.5
+* FIX: Fixes fatal error in the campaign submission form in Ambassadors. [#471](https://github.com/Charitable/Charitable/issues/471)
+
 ## 1.5.4
 * NEW: You can now display campaign categories or tags in a dropdown through the Campaign Categories / Tags widget. [#408](https://github.com/Charitable/Charitable/issues/408)
 * NEW: The donation status is now shown in the output of `[charitable_my_donations]`. [#287](https://github.com/Charitable/Charitable/issues/287)
