@@ -37,7 +37,8 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 			);
 	
 			// Parse incoming $atts into an array and merge it with $defaults
-			$args = wp_parse_args( $atts, $defaults );
+			$args = shortcode_atts( $defaults, $atts, 'charitable_donation_form' );
+
 
 		    if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $args['campaign_id'] ) ) {
 		        return '';
