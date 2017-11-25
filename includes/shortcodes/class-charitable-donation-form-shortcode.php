@@ -52,12 +52,11 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		    $form = charitable_get_campaign( $args['campaign_id'] )->get_donation_form();
 
 		    do_action( 'charitable_donation_form_before', $form );
+
+		    $args['form'] = $form;
+		    $args['campaign'] = $form->get_campaign();
 		    
-		    charitable_template( 'donation-form/form-donation.php', array(
-				'campaign' => $form->get_campaign(),
-				'form' => $form,
-				'atts' => $args
-			) );
+		    charitable_template( 'donation-form/form-donation.php', $args );
 		    
 		    do_action( 'charitable_donation_form_after', $form );
 		    

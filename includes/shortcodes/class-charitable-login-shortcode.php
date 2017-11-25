@@ -46,10 +46,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 
 				ob_start();
 
-				// Add the shortcode atts to $view_args.
-				$view_args = array_merge( $args, array( 'atts' => $args ) );
-
-				charitable_template( 'shortcodes/logged-in.php', $view_args );
+				charitable_template( 'shortcodes/logged-in.php', $args );
 
 				return ob_get_clean();
 			}
@@ -81,10 +78,7 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 
 			ob_start();
 
-			// Add the shortcode atts to $view_args.
-			$view_args = array_merge( $args, array( 'atts' => $view_args ) );
-
-			charitable_template( 'shortcodes/login.php', $view_args );
+			charitable_template( 'shortcodes/login.php', $args );
 
 			return apply_filters( 'charitable_login_shortcode', ob_get_clean() );
 

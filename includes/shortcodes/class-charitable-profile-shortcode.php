@@ -43,20 +43,17 @@ if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 			if ( ! is_user_logged_in() ) {
 
 				if ( false == $args['hide_login'] ) {
-					echo Charitable_Login_Shortcode::display( array(
-						'redirect' => charitable_get_current_url(),
-						'atts'	   => $args
-					) );
+					$args['redirect'] = charitable_get_current_url();
+					echo Charitable_Login_Shortcode::display( $args );
 				}
 
 				return ob_get_clean();
 			}
 
+			$args['form'] = new Charitable_Profile_Form( $args );
+
 			/* If the user is logged in, show the profile template. */
-			charitable_template( 'shortcodes/profile.php', array( 
-				'form' => new Charitable_Profile_Form( $args ),
-				'atts' => $args 
-			) );
+			charitable_template( 'shortcodes/profile.php', $args );
 
 			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );      
 		}

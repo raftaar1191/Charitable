@@ -42,10 +42,7 @@ if ( ! class_exists( 'Charitable_Logout_Shortcode' ) ) :
 
 			$args = shortcode_atts( $defaults, $atts, 'charitable_logout' );
 
-			// Add the shortcode atts to $view_args.
-			$view_args = array_merge( $args, array( 'atts' => $args ) );
-
-			charitable_template( 'shortcodes/logout.php', $view_args );
+			charitable_template( 'shortcodes/logout.php', $args );
 
 			/**
 			 * Filter the output of the login shortcode.

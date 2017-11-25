@@ -43,9 +43,8 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			if ( ! is_user_logged_in() ) {
 
 				if ( false == $args['hide_login'] ) {
-					echo Charitable_Login_Shortcode::display( array(
-						'redirect' => charitable_get_current_url(),
-					) );
+					$args['redirect'] = charitable_get_current_url();
+					echo Charitable_Login_Shortcode::display( $args );
 				}
 
 				return ob_get_clean();
@@ -84,13 +83,10 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 				$donations = new Charitable_Donations_Query( $query_args );
 			}
 
-			$view_args = array(
-				'donations' => $donations,
-				'user'      => $user,
-				'atts'		=> $args
-			);
+			$args['donations'] = $donations;
+			$args['user'] = $user;
 
-			charitable_template( 'shortcodes/my-donations.php', $view_args );
+			charitable_template( 'shortcodes/my-donations.php', $args );
 
 			/**
 			 * Filter the output of the shortcode.
@@ -98,10 +94,10 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			 * @since 1.4.0
 			 *
 			 * @param string $output    The default output.
-			 * @param array  $view_args The view arguments.
+			 * @param array  $args The view arguments.
 			 * @param array  $args      The query arguments.
 			 */
-			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $view_args, $query_args );
+			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $args, $query_args );
 		}
 	}
 
