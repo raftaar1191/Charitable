@@ -2,7 +2,7 @@
 /**
  * My Donations shortcode class.
  *
- * @version     1.4.0
+ * @version     1.5.5
  * @package     Charitable/Shortcodes/My Donations
  * @category    Class
  * @author      Eric Daams

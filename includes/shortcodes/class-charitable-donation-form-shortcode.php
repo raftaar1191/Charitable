@@ -2,7 +2,7 @@
 /**
  * Donation Form shortcode class.
  *
- * @version     1.6.0
+ * @version     1.5.5
  * @package     Charitable/Shortcodes/Donation Form
  * @category    Class
  * @author      Eric Daams

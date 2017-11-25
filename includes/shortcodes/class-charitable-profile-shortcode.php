@@ -2,7 +2,7 @@
 /**
  * Profile shortcode class.
  *
- * @version     1.0.0
+ * @version     1.5.5
  * @package     Charitable/Shortcodes/Profile
  * @category    Class
  * @author      Eric Daams
