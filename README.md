@@ -41,7 +41,7 @@ bin/setup.sh
 
 **Example**
 
-This automatically sets up all pages with shortcodes, updates settings, then creates ten campaigns and 500 donations.
+This automatically sets up all pages with shortcodes, updates settings, then creates 10 campaigns and 500 donations.
 
 ```
 bin/setup.sh --campaigns=10 --donations=500
