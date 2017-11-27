@@ -23,6 +23,30 @@ wp plugin activate charitable
 
 **Note:** If you are not a developer, please install Charitable via your WordPress dashboard.
 
+### Pre-populate pages, campaigns & donations
+
+If you would like to pre-populate a test site site with pages, campaigns and donations, you can use the provided setup script.
+
+```
+bin/setup.sh
+```
+
+**Optional Parameters**
+
+| Parameter                 | Description                                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--campaigns=<campaigns>` | The number of campaigns to be created. Defaults to `0`.                                         |
+| `--donations=<donations>` | The number of donations to be created automatically. Defaults to `0`.                           |
+| `--allow-root`            | Run the command as `root` user. This passes the `--allow-root` argument to the WP CLI commands. |
+
+**Example**
+
+This automatically sets up all pages with shortcodes, updates settings, then creates ten campaigns and 500 donations.
+
+```
+bin/setup.sh --campaigns=10 --donations=500
+```
+
 ### Key Branches
 
 * `master` is the primary development branch. We do not recommend using this on production sites.
