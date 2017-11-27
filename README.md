@@ -33,11 +33,11 @@ bin/setup.sh
 
 **Optional Parameters**
 
-| Parameter               | Description                                                                                     |
-| ----------------------- | ----------------------------------------------------------------------------------------------- |
-| --campaigns=<campaigns> | The number of campaigns to be created. Defaults to `0`.                                         |
-| --donations=<donations> | The number of donations to be created automatically. Defaults to `0`.                           |
-| --allow-root            | Run the command as `root` user. This passes the `--allow-root` argument to the WP CLI commands. |
+| Parameter                 | Description                                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--campaigns=<campaigns>` | The number of campaigns to be created. Defaults to `0`.                                         |
+| `--donations=<donations>` | The number of donations to be created automatically. Defaults to `0`.                           |
+| `--allow-root`            | Run the command as `root` user. This passes the `--allow-root` argument to the WP CLI commands. |
 
 **Example**
 
