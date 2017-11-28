@@ -35,7 +35,7 @@ if ( empty( $suggested ) && ! $custom ) {
 <div class="charitable-donation-options">
 	<?php if ( count( $suggested ) ) :
 
-		$amount_is_suggestion = false; 
+		$amount_is_suggestion = false;
 		?>
 		<ul class="donation-amounts">
 			<?php foreach ( $suggested as $suggestion ) :
@@ -66,7 +66,7 @@ if ( empty( $suggested ) && ! $custom ) {
 			<?php endforeach;
 			if ( $custom ) :
 
-				$has_custom_donation_amount = ! $amount_is_suggestion && $amount; 
+				$has_custom_donation_amount = ! $amount_is_suggestion && $amount;
 			?>
 				<li class="donation-amount custom-donation-amount">
 					<span class="custom-donation-amount-wrapper">
@@ -82,7 +82,7 @@ if ( empty( $suggested ) && ! $custom ) {
 							type="text"
 							class="custom-donation-input"
 							name="custom_donation_amount"
-							value="<?php if ( $has_custom_donation_amount ) { echo $amount; } ?>" 
+							value="<?php if ( $has_custom_donation_amount ) { echo $amount; } ?>"
 						/>
 					</span>
 				</li>
@@ -95,7 +95,7 @@ if ( empty( $suggested ) && ! $custom ) {
 				class="custom-donation-input"
 				name="custom_donation_amount"
 				placeholder="<?php esc_attr_e( 'Enter donation amount', 'charitable' ) ?>"
-				value="<?php if ( $amount ) { echo esc_attr( $amount ); } ?>" 
+				value="<?php if ( $amount ) { echo esc_attr( $amount ); } ?>"
 			/>
 		</div><!-- #custom-donation-amount-field -->
 	<?php endif ?>
