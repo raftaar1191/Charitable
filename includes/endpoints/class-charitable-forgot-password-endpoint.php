@@ -95,9 +95,10 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 			global $wp_query;
 
 			$login_page = charitable_get_option( 'login_page', 'wp' );
+			$strict     = ! array_key_exists( 'strict', $args ) || $args['strict'];
 
 			if ( 'wp' == $login_page ) {
-				return wp_lostpassword_url() == charitable_get_current_url();
+				return $strict ? false : wp_lostpassword_url() == charitable_get_current_url();
 			}
 
 			return $wp_query->is_main_query()

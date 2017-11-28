@@ -78,10 +78,11 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		public function is_page( $args = array() ) {
 			global $post, $wp_query;
 
-			$page = charitable_get_option( 'login_page', 'wp' );
+			$page   = charitable_get_option( 'login_page', 'wp' );
+			$strict = ! array_key_exists( 'strict', $args ) || $args['strict'];
 
 			if ( 'wp' == $page ) {
-				return wp_login_url() == charitable_get_current_url();
+				return $strict ? false : wp_login_url() == charitable_get_current_url();
 			}
 
 			if ( is_object( $post ) ) {
