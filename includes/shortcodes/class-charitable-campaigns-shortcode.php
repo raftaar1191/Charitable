@@ -5,7 +5,7 @@
  * @package Charitable/Shortcodes/Campaigns
  * @author  Eric Daams
  * @since   1.0.0
- * @version 1.5.5
+ * @version 1.5.6
  */
 
 // Exit if accessed directly.

@@ -2,7 +2,7 @@
 /**
  * Donors shortcode class.
  *
- * @version  1.5.5
+ * @version  1.5.6
  * @package  Charitable/Shortcodes/Donors
  * @author   Eric Daams
  */
