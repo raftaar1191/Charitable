@@ -256,8 +256,17 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 		 */
 		private function get_email_log_email_id( $log ) {
 			$found = preg_match( '/^_email_(.*)_log$/', $log->meta_key, $matches );
+			$email = $found ? $matches[1] : false;
 
-			return $found ? $matches[1] : false;
+			/**
+			 * Filter the email id we've guessed from the log.
+			 *
+			 * @since 1.5.6
+			 *
+			 * @param string $email    The email id we've come up with.
+			 * @param string $meta_key The email log's meta key.
+			 */
+			return apply_filters( 'charitable_email_id_from_log', $email, $log->meta_key );
 		}
 
 		/**
