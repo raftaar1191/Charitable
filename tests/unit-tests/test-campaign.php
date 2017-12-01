@@ -1,391 +1,524 @@
 <?php
 
-class Test_Charitable_Campaign extends Charitable_UnitTestCase {	
+class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 
-	/**
-	 * There are two campaigns.
-	 *
-	 * Campaign 1: Goal of $40,000. Expiry 300 days from now.
-	 * Campaign 2: No goal. No end date.
-	 */
-	private $post_1;
-	private $campaign_1;
-	private $end_date_1;
-	private $end_time_1;
+	private $campaigns;
 
-	private $post_2;
-	private $campaign_2;		
-
-	function setUp() {
+	public function setUp() {
 		parent::setUp();
 
-		/* Campaign 1: Goal of $40,000. Expiry 300 days from now. */
-		$this->end_date_1   = date( 'Y-m-d 00:00:00', strtotime( '+7201 hours') );
-		$this->end_time_1 	= strtotime( $this->end_date_1 );
-		$campaign_1_id 		= Charitable_Campaign_Helper::create_campaign( array( 
-			'_campaign_goal' 					=> 40000.00,
-			'_campaign_end_date' 				=> $this->end_date_1, 
-			'_campaign_suggested_donations' 	=> array( 
-				array( 'amount' => 5 ), 
-				array( 'amount' => 20 ), 
-				array( 'amount' => 50 ), 
-				array( 'amount' => 100 ), 
-				array( 'amount' => 250 ) 
-			)
-		) );
-
-		$this->post_1 		= get_post( $campaign_1_id );
-		$this->campaign_1 	= new Charitable_Campaign( $this->post_1 );
-
-		/* Campaign 2: No goal. No end date. */
-
-		$campaign_2_id 		= Charitable_Campaign_Helper::create_campaign( array(
-			'_campaign_suggested_donations' 	=> '5|50|150|500'
-		) );
-
-		$this->post_2 		= get_post( $campaign_2_id );
-		$this->campaign_2 	= new Charitable_Campaign( $this->post_2 );
-
-		/* Create a few users and donations */
-
-		$user_id_1 = $this->factory->user->create( array( 'display_name' => 'John Henry' ) );
-		$user_id_2 = $this->factory->user->create( array( 'display_name' => 'Mike Myers' ) );
-		$user_id_3 = $this->factory->user->create( array( 'display_name' => 'Fritz Bolton' ) );
-
-		$donations = array(
+		$args = array(
 			array(
-				'user_id' 				=> $user_id_1,
-				'campaigns'				=> array(
-					array(
-						'campaign_id'	=> $campaign_1_id,
-						'amount' 		=> 10,
-					),
+				'_campaign_goal'                => 40000.00,
+				'_campaign_end_date'            => date( 'Y-m-d 00:00:00', strtotime( '+7201 hours') ),
+				'_campaign_suggested_donations' => array(
+					array( 'amount' => 5 ),
+					array( 'amount' => 20 ),
+					array( 'amount' => 50 ),
+					array( 'amount' => 100 ),
+					array( 'amount' => 250 ),
 				),
-				'status'				=> 'charitable-completed',
-				'gateway' 				=> 'paypal',
-				'note'					=> 'This is a note',
 			),
-			array( 
-				'user_id' 				=> $user_id_2, 
-				'campaigns'				=> array(
-					array(
-						'campaign_id'	=> $campaign_1_id,
-						'amount' 		=> 20
-					)
-				),
-				'status'				=> 'charitable-completed', 
-				'gateway' 				=> 'paypal', 
-				'note'					=> ''
-			),
-			array( 
-				'user_id' 				=> $user_id_3, 
-				'campaigns'				=> array(
-					array(
-						'campaign_id'	=> $campaign_1_id,
-						'amount' 		=> 30
-					)
-				),
-				'status'				=> 'charitable-completed', 
-				'gateway' 				=> 'manual', 
-				'note'					=> ''
-			), 
 			array(
-				'user_id'				=> $user_id_1, 
-				'campaigns'				=> array(
-					array( 
-						'campaign_id' 	=> $campaign_2_id,
-						'amount'		=> 25
-					)
-				), 
-				'status'				=> 'charitable-completed', 
-				'gateway'				=> 'paypal'
-			)
+				'_campaign_suggested_donations' => array(
+					array( 'amount' => 5 ),
+					array( 'amount' => 50 ),
+					array( 'amount' => 150 ),
+					array( 'amount' => 500 ),
+				),
+			),
 		);
 
-		foreach ( $donations as $donation ) {
-			Charitable_Donation_Helper::create_donation( $donation );		
-		}		
-	}	
+		$this->campaigns = array_reduce( $args, array( $this, 'map_campaign_args' ) );
+	}
+
+	// public function tearDown() {
+	// 	$this->add_stub( 'posts', $this->post_stubs );
+	// 	$this->add_stub( 'users', $this->user_stubs );
+
+	// 	parent::tearDown();
+	// }
+
+	// public static function tearDownAfterClass() {
+	// 	// global $wpdb;
+	// 	// $wpdb->query( "TRUNCATE {$wpdb->prefix}charitable_donors" );
+	// 	// $wpdb->query( "TRUNCATE {$wpdb->prefix}charitable_campaign_donations" );
+
+	// 	parent::tearDownAfterClass();
+	// }
 
 	/**
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_goal_using_get() {
-		$this->assertEquals( 40000.00, $this->campaign_1->get('goal') );
+		foreach ( $this->campaigns as $stub ) {		
+			$this->assertEquals(
+				$stub['expected']['goal'],
+				$stub['campaign']->get('goal')
+			);	
+		}
 	}
 
-	/**
+	/**	 
+	 * @covers Charitable_Campaign::get_goal
+	 * @depends test_get_goal_using_get
+	 */
+	function test_get_goal_using_get_goal() {
+		foreach ( $this->campaigns as $args ) {
+			$args['expected'] = 0 === $args['expected']['goal'] ? false : $args['expected']['goal'];
+
+			$this->assertEquals(
+				$args['expected'],
+				$args['campaign']->get_goal()
+			);
+		}
+	}
+
+	/**	 
+	 * @covers Charitable_Campaign::has_goal
+	 * @depends test_get_goal_using_get
+	 */
+	function test_has_goal() {
+		foreach ( $this->campaigns as $args ) {
+			if ( 0 === $args['expected']['goal'] ) {
+				$this->assertFalse(
+					$args['campaign']->has_goal()
+				);
+			} else {
+				$this->assertTrue(
+					$args['campaign']->has_goal()
+				);
+			}
+		}		
+	}
+
+	/**	 
+	 * @covers Charitable_Campaign::get_monetary_goal
+	 * @depends test_get_goal_using_get
+	 */
+	function test_get_monetary_goal_with_goal() {
+		foreach ( $this->campaigns as $args ) {
+			$args['expected'] = 0 === $args['expected']['goal'] ? '' : '&#36;' . number_format( $args['expected']['goal'], 2 );
+
+			$this->assertEquals(
+				$args['expected'],
+				$args['campaign']->get_monetary_goal()
+			);
+		}
+	}
+
+	/**	 
 	 * @covers Charitable_Campaign::get
 	 */
-	function test_get_end_date_using_get() {
-		$this->assertEquals( date( 'Y-m-d 00:00:00', $this->end_time_1 ), $this->campaign_1->get('end_date') );
+	function test_get_end_date_using_get() {		
+		foreach ( $this->campaigns as $args ) {
+			$this->assertEquals(
+				$args['expected']['end_date'],
+				$args['campaign']->get('end_date')
+			);
+		}
 	}
 
-	/**
-	 * @covers Charitable_Campaign::get
-	 */
-	function test_get_no_goal_using_get() {
-		$this->assertEquals( 0, $this->campaign_2->get('goal') );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get
-	 */
-	function test_get_no_end_date_using_get() {
-		$this->assertEquals( 0, $this->campaign_2->get('end_date') );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::is_endless
-	 */
-	function test_is_endless_for_finite_campaign() {
-		$this->assertFalse( $this->campaign_1->is_endless() );		
-	}
-
-	/**
-	 * @covers Charitable_Campaign::is_endless
-	 */
-	function test_is_endless_for_endless_campaign() {
-		$this->assertTrue( $this->campaign_2->is_endless() );		
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_end_time
-	 */
-	function test_get_end_time_for_finite_campaign() {
-		$this->assertEquals( $this->end_time_1, $this->campaign_1->get_end_time() );		
-	}
-
-	/**
-	 * @depends test_is_endless_for_endless_campaign
-	 * @covers Charitable_Campaign::get_end_time
-	 * @covers Charitable_Campaign::is_endless
-	 */
-	function test_get_end_time_for_endless_campaign() {
-		$this->assertFalse( $this->campaign_2->get_end_time() );
-	}
-
-	/**
+	/**	 
 	 * @covers Charitable_Campaign::get_end_date
+	 * @depends test_get_end_date_using_get
 	 */
-	function test_get_end_date_for_finite_campaign() {
-		$this->assertEquals( date( 'Y-m-d', $this->end_time_1 ), $this->campaign_1->get_end_date( 'Y-m-d' ) );
+	function test_get_end_date_using_get_end_date() {
+		foreach ( $this->campaigns as $args ) {
+			$args['expected'] = 0 === $args['expected']['end_date'] ? 0 : substr( $args['expected']['end_date'], 0, 10 );
+
+			$this->assertEquals(
+				$args['expected'],
+				$args['campaign']->get_end_date( 'Y-m-d' )
+			);
+		}		
 	}
 
-	/**
-	 * @depends test_is_endless_for_endless_campaign
-	 * @covers Charitable_Campaign::get_end_date
+	/**	 
+	 * @covers Charitable_Campaign::is_endless
+	 * @depends test_get_end_date_using_get
+	 */
+	function test_is_endless() {
+		foreach ( $this->campaigns as $args ) {
+			$this->assertEquals(
+				$args['expected']['is_endless'],
+				$args['campaign']->is_endless()
+			);
+		}		
+	}
+
+	/**	 
+	 * @covers Charitable_Campaign::get_end_time
+	 * @covers Charitable_Campaign::is_endless
+	 * @depends test_get_end_date_using_get
+	 */
+	function test_get_end_time() {
+		foreach ( $this->campaigns as $args ) {
+			$this->assertEquals(
+				$args['expected']['end_time'], 
+				$args['campaign']->get_end_time()
+			);
+		}
+	}
+
+	/**	 
+	 * @covers Charitable_Campaign::get_seconds_left
 	 * @covers Charitable_Campaign::is_endless
 	 */
-	function test_get_end_date_for_endless_campaign() {
-		$this->assertFalse( $this->campaign_2->get_end_date() );
+	function test_get_seconds_left() {
+		foreach ( $this->campaigns as $args ) {
+			if ( 0 === $args['expected']['end_time'] ) {
+				return $this->assertFalse( $args['campaign']->get_seconds_left() );
+			}
+
+			$diff = $args['campaign']->get_seconds_left() - ( $args['expected']['end_time'] - current_time( 'timestamp' ) );
+
+			$this->assertFalse(
+				$diff > 4 // The difference should not be greater than 4 seconds.
+			);
+		}		
 	}
 
-	/**
-	 * @covers Charitable_Campaign::get_seconds_left
-	 */
-	function test_get_seconds_left_for_finite_campaign() {
-		$seconds_left = $this->end_time_1 - current_time( 'timestamp' );
-		$diff = $this->campaign_1->get_seconds_left() - $seconds_left;
-		$this->assertFalse( $diff > 4 ); // The different should not be greater than 4 seconds.
-	}
-
-	/**
-	 * @depends test_is_endless_for_endless_campaign
-	 * @covers Charitable_Campaign::get_seconds_left
-	 * @covers Charitable_Campaign::is_endless
-	 */
-	function test_get_seconds_left_for_endless_campaign() {
-		$this->assertFalse( $this->campaign_2->get_seconds_left() );
-	}
-
-	/**
+	/**	 
 	 * @depends test_get_seconds_left_for_finite_campaign
 	 * @covers Charitable_Campaign::get_time_left
 	 * @covers Charitable_Campaign::get_seconds_left
 	 */
-	function test_get_time_left_with_end_date() {
-		$this->assertEquals( '<span class="amount time-left days-left">299</span> Days Left', $this->campaign_1->get_time_left() );		
-	}
+	function test_get_time_left() {
+		foreach ( $this->campaigns as $args ) {
+			if ( 0 === $args['expected']['end_time'] ) {
+				$args['expected'] = '';
+			} else {
+				$days_left = floor( ( $args['expected']['end_time'] - current_time( 'timestamp' ) ) / 86400 );
+				$args['expected'] = '<span class="amount time-left days-left">' . $days_left . '</span> Days Left';
+			}
 
-	/**
-	 * @depends test_is_endless_for_endless_campaign
-	 * @covers Charitable_Campaign::get_time_left
-	 * @covers Charitable_Campaign::is_endless
-	 */
-	function test_get_time_left_with_no_end_date() {
-		$this->assertEquals( '', $this->campaign_2->get_time_left() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_goal
-	 */
-	function test_get_goal_with_goal() {
-		$this->assertEquals( 40000.00, $this->campaign_1->get_goal() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_goal
-	 */
-	function test_get_goal_with_no_goal() {
-		$this->assertFalse( $this->campaign_2->get_goal() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::has_goal
-	 */
-	function test_has_goal_with_goal() {
-		$this->assertTrue( $this->campaign_1->has_goal() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::has_goal
-	 */
-	function test_has_goal_with_no_goal() {
-		$this->assertFalse( $this->campaign_2->has_goal() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_monetary_goal
-	 */
-	function test_get_monetary_goal_with_goal() {
-		$this->assertEquals( '&#36;40,000.00', $this->campaign_1->get_monetary_goal() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_monetary_goal
-	 */
-	function test_get_monetary_goal_with_no_goal() {
-		$this->assertEquals( '', $this->campaign_2->get_monetary_goal() );
+			$this->assertEquals(
+				$args['expected'],
+				$args['campaign']->get_time_left()
+			);
+		}	
 	}
 
 	/**
 	 * @covers Charitable_Campaign_Donations_DB::get_donations_on_campaign
 	 */
 	function test_get_donations_db_call() {
-		$count = charitable_get_table('campaign_donations')->get_donations_on_campaign( $this->campaign_1->ID );
-		$this->assertCount( 3, $count, 'Testing call to campaign_donations table to retrieve campaign donations.' );
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$this->assertCount(
+				$args['expected']['count'], 
+				charitable_get_table( 'campaign_donations' )->get_donations_on_campaign( $args['campaign']->ID ),
+				'Testing call to campaign_donations table to retrieve campaign donations.'
+			);
+		}		
 	}
 
 	/**
 	 * @depends test_get_donations_db_call
 	 * @covers Charitable_Campaign::get_donations
 	 */
-	function test_get_donations_correct_count() {
-		$this->assertCount( 3, $this->campaign_1->get_donations(), 'Testing Campaign model\'s get_donations method.' );
+	function test_get_donations_count() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$this->assertCount(
+				$args['expected']['count'], 
+				$args['campaign']->get_donations(),
+				'Testing Campaign model\'s get_donations method.'
+			);
+		}
 	}
 
 	/**
+	 * @depends test_get_donations_count
 	 * @covers Charitable_Campaign::get_donated_amount
 	 */
 	function test_get_donated_amount() {
-		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_donated_amount
-	 */
-	function test_get_donated_amount_sanitized() {
-		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount( true ) );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_donated_amount
-	 */
-	function test_get_donated_amount_with_comma_decimal() {
-		Charitable_Campaign::flush_donations_cache( $this->campaign_1_id );
-
-		$this->set_charitable_option( 'decimal_separator', ',' );
-		$this->set_charitable_option( 'thousands_separator', '.' );
-
-		$this->assertEquals( '60,0000', $this->campaign_1->get_donated_amount() );
-	}
-
-	/**
-	 * @covers Charitable_Campaign::get_donated_amount
-	 */
-	function test_get_donated_amount_with_comma_decimal_sanitized() {
-		Charitable_Campaign::flush_donations_cache( $this->campaign_1_id );
-
-		$this->set_charitable_option( 'decimal_separator', ',' );
-		$this->set_charitable_option( 'thousands_separator', '.' );
-
-		$this->assertEquals( '60.00', $this->campaign_1->get_donated_amount( true ) );
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$this->assertEquals(
+				number_format( $args['expected']['amount'], 2 ),
+				$args['campaign']->get_donated_amount()
+			);
+		}
 	}
 
 	/**
 	 * @depends test_get_donated_amount
-	 * @depends test_get_goal_with_goal
-	 * @covers Charitable_Campaign::get_percent_donated
+	 * @covers Charitable_Campaign::get_donated_amount
 	 */
-	function test_get_percent_donated_with_goal() {
-		$this->assertEquals( '0.15%', $this->campaign_1->get_percent_donated() );
+	function test_get_donated_amount_sanitized() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$this->assertEquals(
+				number_format( $args['expected']['amount'], 2 ),
+				$args['campaign']->get_donated_amount( true )
+			);
+		}
 	}
 
 	/**
-   	 * @depends test_get_donated_amount
-	 * @depends test_get_goal_with_no_goal
+	 * @depends test_get_donated_amount
+	 * @covers Charitable_Campaign::get_donated_amount
+	 */
+	function test_get_donated_amount_with_comma_decimal() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			Charitable_Campaign::flush_donations_cache( $args['campaign']->ID );
+
+			$this->set_charitable_option( 'decimal_separator', ',' );
+			$this->set_charitable_option( 'thousands_separator', '.' );
+
+			$expected = number_format( $args['expected']['amount'], 4, ',', '.' );
+
+			$this->assertEquals(
+				$expected, 
+				$args['campaign']->get_donated_amount()
+			);
+		}
+	}
+
+	/**
+	 * @depends test_get_donated_amount
+	 * @depends test_get_donated_amount_with_comma_decimal
+	 * @covers Charitable_Campaign::get_donated_amount
+	 */
+	function test_get_donated_amount_with_comma_decimal_sanitized() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			Charitable_Campaign::flush_donations_cache( $args['campaign']->ID );
+
+			$this->set_charitable_option( 'decimal_separator', ',' );
+			$this->set_charitable_option( 'thousands_separator', '.' );
+
+			$expected = number_format( $args['expected']['amount'], 4, '.', ',' );
+
+			$this->assertEquals(
+				$expected, 
+				$args['campaign']->get_donated_amount( true )
+			);
+		}
+	}
+
+	/**
+	 * @depends test_get_donated_amount
+	 * @depends test_get_goal_using_get
+	 * @covers Charitable_Campaign::get_percent_donated_raw
+	 */
+	function test_get_percent_donated_raw() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$expected = 0 === $args['expected']['goal'] ? false : ( 60 / $args['expected']['goal'] ) * 100;
+
+			$this->assertEquals(
+				$expected,
+				$args['campaign']->get_percent_donated_raw()
+			);
+		}
+	}
+
+	/**
+	 * @depends test_get_percent_donated_raw
+	 * @depends test_get_donated_amount
+	 * @depends test_get_goal_using_get
 	 * @covers Charitable_Campaign::get_percent_donated
 	 */
-	function test_get_percent_donated_with_no_goal() {
-		$this->assertFalse( $this->campaign_2->get_percent_donated() );
+	function test_get_percent_donated() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$expected = 0 === $args['expected']['goal'] ? false : number_format( ( 60 / $args['expected']['goal'] ) * 100, 2 ) . '%';
+
+			$this->assertEquals(
+				$expected,
+				$args['campaign']->get_percent_donated()
+			);
+		}
 	}
 
 	/**
 	 * @covers Charitable_Campaign::flush_donations_cache
 	 * @covers Charitable_Campaign::get_donations
 	 * @covers Charitable_Campaign_Donations_DB::insert
-	 * @depends test_get_donations_correct_count
+	 * @depends test_get_donations_count
 	 */
 	function test_flush_donations_cache() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$u = $this->factory->user->create( array( 'display_name' => 'Abraham Lincoln' ) );
+			$d = Charitable_Donation_Helper::create_donation( array(
+				'user_id'   => $u, 
+				'gateway'   => 'paypal',
+				'status'    => 'charitable-completed',
+				'campaigns' => array(
+					array(
+						'campaign_id'   => $args['campaign']->ID, 
+						'campaign_name' => 'Test Campaign',
+						'amount'        => 100,
+					),
+				),
+			) );
 
-		// At the start the count of donations is 3. See test_get_donations_correct_count
+			$this->add_stub( 'users', $u );
+			$this->add_stub( 'posts', $d );
 
-		// Create a new donation
-		Charitable_Donation_Helper::create_donation( array(
-			'user_id'			=> $this->factory->user->create( array( 'display_name' => 'Abraham Lincoln' ) ), 
-			'campaigns'			=> array(
-				array(
-					'campaign_id' 		=> $this->campaign_1->ID, 
-					'campaign_name'		=> 'Test Campaign',
-					'amount'			=> 100
-				)				
-			),		
-			'gateway'			=> 'paypal',
-			'status'			=> 'charitable-completed'
-		) );
-
-		// Test count of donations again, before flush caching
-		$this->assertCount( 4, $this->campaign_1->get_donations() );
+			// Test count of donations again, before flush caching
+			$this->assertCount(
+				$args['expected']['count'] + 1,
+				$args['campaign']->get_donations()
+			);
+		}
 	}
 
 	/**
 	 * @covers Charitable_Campaign::get_donor_count
-	 * @depends test_get_donations_correct_count
+	 * @depends test_get_donations_count
 	 */
-	function test_get_donor_count_with_multiple_donations() {
-		$this->assertEquals( 3, $this->campaign_1->get_donor_count() );
+	function test_get_donor_count() {
+		foreach ( $this->campaigns_with_donations() as $args ) {
+			$this->assertEquals(
+				$args['expected']['donors'], 
+				$args['campaign']->get_donor_count()
+			);
+		}
 	}
 
-	/**
-	 * @covers Charitable_Campaign::get_donor_count
-	 * @depends test_get_donations_correct_count
-	 */
-	function test_get_donor_count_with_single_donation() {
-		$this->assertEquals( 1, $this->campaign_2->get_donor_count() );
-	}
-
-	/**
+	/**	 
 	 * @covers Charitable_Campaign::get_suggested_donations
 	 */
-	function test_suggested_amounts() {	
-		$this->assertCount( 5, $this->campaign_1->get_suggested_donations() );
+	public function test_get_suggested_amounts() {	
+		foreach ( $this->campaigns as $args ) {
+			$this->assertCount(
+				$args['expected']['suggested'],
+				$args['campaign']->get_suggested_donations()
+			);
+		}
 	}
 
 	/**
 	 * @covers Charitable_Campaign::get_donation_form
 	 */
-	function test_get_donation_form() {
-		$this->assertInstanceOf( 'Charitable_Donation_Form', $this->campaign_1->get_donation_form() );
+	public function test_get_donation_form() {
+		$campaign = current( $this->campaigns );
+
+		$this->assertInstanceOf(
+			'Charitable_Donation_Form',
+			$campaign['campaign']->get_donation_form()
+		);
 	}
+
+	/**
+	 * Campaigns data provider.
+	 */
+	public function campaigns_with_donations() {
+		$campaigns    = $this->campaigns;
+		$campaign_ids = array_keys( $campaigns );
+
+		/* Create a few users */
+		$user_id_1 = $this->factory->user->create( array( 'display_name' => 'John Henry' ) );
+		$user_id_2 = $this->factory->user->create( array( 'display_name' => 'Mike Myers' ) );
+		$user_id_3 = $this->factory->user->create( array( 'display_name' => 'Fritz Bolton' ) );
+
+		$this->add_stub( 'users', array( $user_id_1, $user_id_2, $user_id_3 ) );
+
+		$donations = array(
+			array(
+				'user_id'   => $user_id_1,
+				'status'    => 'charitable-completed',
+				'gateway'   => 'paypal',
+				'campaigns' => array(
+					array(
+						'campaign_id' => $campaign_ids[0],
+						'amount'      => 10,
+					),
+				),
+			),
+			array(
+				'user_id'   => $user_id_1,
+				'status'    => 'charitable-completed',
+				'gateway'   => 'paypal',
+				'campaigns' => array(
+					array(
+						'campaign_id' => $campaign_ids[0],
+						'amount'      => 20,
+					),
+				),
+			),
+			array(
+				'status'    => 'charitable-completed',
+				'gateway'   => 'manual',
+				'user_id'   => $user_id_3,
+				'campaigns' => array(
+					array(
+						'campaign_id' => $campaign_ids[0],
+						'amount'      => 30,
+					)
+				),
+			), 
+			array(
+				'status'    => 'charitable-completed',
+				'gateway'   => 'paypal',
+				'user_id'   => $user_id_1, 
+				'campaigns' => array(
+					array(
+						'campaign_id' => $campaign_ids[1],
+						'amount'      => 25,
+					),
+				),
+			),
+		);
+
+		foreach ( $donations as $donation ) {
+			$this->add_stub( 'posts', Charitable_Donation_Helper::create_donation( $donation ) );
+		}
+
+		$campaigns[ $campaign_ids[0] ]['expected'] = array_merge(
+			array(
+				'count'  => 3,
+				'amount' => 60,
+				'donors' => 3,
+			),
+			$campaigns[ $campaign_ids[0] ]['expected']
+		);
+
+		$campaigns[ $campaign_ids[1] ]['expected'] = array_merge( 
+			array(
+				'count'  => 1,
+				'amount' => 25,
+				'donors' => 1,
+			),
+			$campaigns[ $campaign_ids[1] ]['expected']
+		);
+
+		return $campaigns;
+	}
+
+	/**
+	 * Receives campaign args and returns an array
+	 * containing the Charitable_Campaign object,
+	 * and expected results for different tests.
+	 *
+	 * @param  array|null|0 $ret
+	 * @param  array        $args
+	 * @return array
+	 */
+	private function map_campaign_args( $ret, $args ) {
+		if ( ! is_array( $ret ) ) {
+			$ret = array();
+		}
+
+		$defaults = array(
+			'_campaign_goal'                   => 0,
+			'_campaign_end_date'               => 0,
+			'_campaign_suggested_donations'    => '',
+			'_campaign_allow_custom_donations' => 1,
+		);
+
+		$args                = array_merge( $defaults, $args );
+		$campaign_id         = Charitable_Campaign_Helper::create_campaign( $args );
+		$ret[ $campaign_id ] = array(
+			'campaign'     => charitable_get_campaign( $campaign_id ),
+			'expected'   => array(
+				'goal'       => $args['_campaign_goal'],
+				'end_date'   => 0 === $args['_campaign_end_date'] ? 0 : date( 'Y-m-d 00:00:00', strtotime( $args['_campaign_end_date'] ) ),
+				'end_time'   => 0 === $args['_campaign_end_date'] ? 0 : strtotime( $args['_campaign_end_date'] ),
+				'is_endless' => 0 === $args['_campaign_end_date'],
+				'suggested'  => count( $args['_campaign_suggested_donations'] ),
+			),
+		);		
+
+		$this->add_stub( 'posts', $campaign_id );
+
+		return $ret;
+	} 
 }

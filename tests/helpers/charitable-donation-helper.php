@@ -26,6 +26,7 @@ class Charitable_Donation_Helper extends WP_UnitTestCase {
 	 * @return 	int 		$donation_id
 	 */
 	public static function create_donation( $args = array() ) {
+
 		$defaults = array(
 			'user_id'		=> 1, 
 			'campaigns'		=> array(), 

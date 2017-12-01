@@ -37,7 +37,11 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 
 			$args = wp_parse_args( $args, $defaults );
 
-			return new WP_Query( $args );
+			$q = new WP_Query( $args );
+
+			// print_r( $q );
+
+			return $q;
 		}
 
 		/**

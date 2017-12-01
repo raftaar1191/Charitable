@@ -3,6 +3,59 @@
 class Charitable_UnitTestCase extends WP_UnitTestCase {
 
 	/**
+	 * On set up, create an empty stubs array.
+	 *
+	 * @since  1.5.6
+	 *
+	 * @return void
+	 */
+	public function setUp() {
+		$this->stubs = array(
+			'posts'  => array(),
+			'donors' => array(),
+			'users'  => array(),
+		);
+	}
+
+	/**
+	 * Add a stub to be deleted on test tear down.
+	 *
+	 * @since  1.5.6
+	 *
+	 * @return void
+	 */
+	public function add_stub( $type, $stub ) {
+		if ( ! is_array( $stub ) ) {
+			$stub = array( $stub );
+		}
+
+		$this->stubs[ $type ] = array_merge( $this->stubs[ $type ], $stub );
+	}
+
+	/**
+	 * Delete stubs.
+	 *
+	 * @since  1.5.6
+	 *
+	 * @return void
+	 */
+	public function tearDown() {
+		foreach ( $this->stubs['posts'] as $stub ) {
+			wp_delete_post( $stub );
+		}
+
+		foreach ( $this->stubs['donors'] as $stub ) {
+			charitable_get_table( 'donors' )->delete( $stub );
+		}
+
+		foreach ( $this->stubs['users'] as $stub ) {
+			wp_delete_user( $stub );
+		}
+
+		parent::tearDown();
+	}
+
+	/**
 	 * Set a Charitable setting.
 	 *
 	 * @since   1.4.0

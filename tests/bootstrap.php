@@ -1,4 +1,6 @@
 <?php
+require dirname( __FILE__ ) . '/../vendor/autoload.php';
+
 $_tests_dir = getenv('WP_TESTS_DIR');
 
 // Look for a wordpress-tests-lib directory on the same level as the WordPress installation.
