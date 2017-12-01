@@ -194,7 +194,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data    = $gateway->get_encoded_ipn_data();
 
 			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
-			    error_log( var_export( $data, true ) );
+				error_log( var_export( $data, true ) );
 			}
 
 			if ( empty( $data ) ) {
@@ -534,11 +534,12 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		public function get_redirect_url( $ssl_check = false, $ipn_check = false ) {
 			$paypal_uri = $this->use_ssl( $ssl_check, $ipn_check ) ? 'https://' : 'http://';
 			
-			if ( $ipn_check ) {
-				$paypal_uri .= 'ipnpb.';
+			if ( charitable_get_option( 'test_mode' ) ) { 
+				$paypal_uri .= $ipn_check ? 'ipnpb.sandbox.' : 'sandbox.';
+			} else {
+				$paypal_uri .= $ipn_check ? 'ipnpb.' : 'www.';
 			}
 
-			$paypal_uri .= charitable_get_option( 'test_mode' ) ? 'sandbox.' : 'www.';
 			$paypal_uri .= 'paypal.com/cgi-bin/webscr';
 
 			/**
