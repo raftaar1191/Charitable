@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.9
-Stable tag: 1.5.5
+Tested up to: 4.9.1
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,6 +90,7 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 
 * MailChimp
 * Campaign Monitor
+* Mailerlite
 * MailPoet
 * Mailster
 
@@ -156,6 +157,13 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.5.6 =
+* NEW: Allow a default donation amount to be set via the `charitable_default_donation_amount` filter. [#470](https://github.com/Charitable/Charitable/issues/470)
+* NEW: Made the list of resendable donation emails a filterable list, using the `charitable_resendable_donation_emails` filter. [#476](https://github.com/Charitable/Charitable/issues/476)
+* FIX: Fixed an incorrect PayPal URL that prevented IPNs from working correctly.
+* FIX: Prevents Charitable from co-opting the forgot password page in WooCommerce. [#473](https://github.com/Charitable/Charitable/issues/473)
+* FIX: Minor styling update to improve theme compatibility for [campaigns] display. [#475](https://github.com/Charitable/Charitable/issues/475)
 
 = 1.5.5 = 
 * FIX: Fixes fatal error in the campaign submission form in Ambassadors. [#471](https://github.com/Charitable/Charitable/issues/471)

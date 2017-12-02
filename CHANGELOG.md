@@ -1,3 +1,10 @@
+## 1.5.6
+* NEW: Allow a default donation amount to be set via the `charitable_default_donation_amount` filter. [#470](https://github.com/Charitable/Charitable/issues/470)
+* NEW: Made the list of resendable donation emails a filterable list, using the `charitable_resendable_donation_emails` filter. [#476](https://github.com/Charitable/Charitable/issues/476)
+* FIX: Fixed an incorrect PayPal URL that prevented IPNs from working correctly.
+* FIX: Prevents Charitable from co-opting the forgot password page in WooCommerce. [#473](https://github.com/Charitable/Charitable/issues/473)
+* FIX: Minor styling update to improve theme compatibility for [campaigns] display. [#475](https://github.com/Charitable/Charitable/issues/475)
+
 ## 1.5.5
 * FIX: Fixes fatal error in the campaign submission form in Ambassadors. [#471](https://github.com/Charitable/Charitable/issues/471)
 

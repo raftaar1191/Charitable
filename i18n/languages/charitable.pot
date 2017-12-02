@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.5\n"
+"Project-Id-Version: Charitable 1.5.6\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2017-11-24 14:05:59+00:00\n"
+"POT-Creation-Date: 2017-12-02 02:25:23+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -6686,19 +6686,19 @@ msgstr ""
 msgid "Refunded"
 msgstr ""
 
-#: includes/donations/class-charitable-donation-log.php:334
+#: includes/donations/class-charitable-donation-log.php:343
 msgid "%s was sent successfully."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-log.php:337
+#: includes/donations/class-charitable-donation-log.php:346
 msgid "Resend it now"
 msgstr ""
 
-#: includes/donations/class-charitable-donation-log.php:353
+#: includes/donations/class-charitable-donation-log.php:362
 msgid "%s failed to send."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-log.php:356
+#: includes/donations/class-charitable-donation-log.php:365
 msgid "Retry email send"
 msgstr ""
 
@@ -7062,7 +7062,7 @@ msgstr ""
 msgid "Endpoint %s has not been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-forgot-password-endpoint.php:123
+#: includes/endpoints/class-charitable-forgot-password-endpoint.php:124
 #: templates/shortcodes/login.php:35
 msgid "Forgot Password"
 msgstr ""
@@ -7974,11 +7974,11 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: templates/donation-form/donation-amount-list.php:72
+#: templates/donation-form/donation-amount-list.php:84
 msgid "Custom amount"
 msgstr ""
 
-#: templates/donation-form/donation-amount-list.php:90
+#: templates/donation-form/donation-amount-list.php:102
 msgid "Enter donation amount"
 msgstr ""
 
