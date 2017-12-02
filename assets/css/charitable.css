@@ -353,13 +353,17 @@
 .campaign-grid-2 .campaign.hentry:nth-child(2n+2) {
   margin-right: 0; }
 
+.campaign-grid-3 li.campaign,
 .campaign-grid-3 .campaign.hentry {
   width: 32%; }
+.campaign-grid-3 li.campaign,
 .campaign-grid-3 .campaign.hentry:nth-child(3n+3) {
   margin-right: 0; }
 
+.campaign-grid-4 li.campaign,
 .campaign-grid-4 .campaign.hentry {
   width: 23.5%; }
+.campaign-grid-4 li.campaign,
 .campaign-grid-4 .campaign.hentry:nth-child(4n+4) {
   margin-right: 0; }
 
