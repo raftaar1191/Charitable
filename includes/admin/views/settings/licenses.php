@@ -34,7 +34,11 @@ foreach ( $products as $key => $product ) :
 			<div class="license-meta">
 				<?php if ( $is_active ) : ?>
 					<a href="<?php echo $helper->get_license_deactivation_url( $key ) ?>" class="button-secondary license-deactivation"><?php _e( 'Deactivate License' ) ?></a>
-					<span class="license-expiration-date"><?php printf( '%s %s.', __( 'Expiring in', 'charitable' ), human_time_diff( strtotime( $license['expiration_date'] ), time() ) ) ?></span>
+					<?php if ( 'lifetime' == $license['expiration_date'] ) : ?>
+						<span class="license-expiration-date"><?php _e( 'Lifetime license', 'charitable' ) ?></span>
+					<?php else : ?>
+						<span class="license-expiration-date"><?php printf( '%s %s.', __( 'Expiring in', 'charitable' ), human_time_diff( strtotime( $license['expiration_date'] ), time() ) ) ?></span>
+					<?php endif ?>
 				<?php elseif ( is_array( $license ) ) : ?>
 					<span class="license-invalid"><?php _e( 'This license is not valid', 'charitable' ) ?></span>
 				<?php else : ?>
