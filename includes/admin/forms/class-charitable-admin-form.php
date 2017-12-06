@@ -59,7 +59,7 @@ if ( ! class_exists( 'Charitable_Admin_Form' ) ) :
                 $fields['_wp_http_referer'],
                 $fields[$this->nonce_name]
             );
-            
+
             return $fields;
         }
 
