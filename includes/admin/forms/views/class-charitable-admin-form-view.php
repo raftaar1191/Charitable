@@ -4,7 +4,7 @@
  *
  * This is responsible for rendering the output of forms in the WordPress dashboard.
  *
- * @version   1.5.3
+ * @version   1.5.7
  * @package   Charitable/Forms/Charitable_Admin_Form_View
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
         /**
          * Return the field wrapper class.
          *
-         * @since  1.5.3
+         * @since  1.5.7
          *
          * @param  array $field Field definition.
          * @return string
