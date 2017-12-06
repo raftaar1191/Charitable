@@ -2,7 +2,7 @@
 /**
  * Registration shortcode class.
  *
- * @version     1.5.6
+ * @version     1.5.7
  * @package     Charitable/Shortcodes/Registration
  * @category    Class
  * @author      Eric Daams

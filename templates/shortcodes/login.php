@@ -8,7 +8,7 @@
  * @author  Eric Daams
  * @package Charitable/Templates/Account
  * @since   1.0.0
- * @version 1.5.6
+ * @version 1.5.7
  */
 
 // Exit if accessed directly.

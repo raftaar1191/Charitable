@@ -2,7 +2,7 @@
 /**
  * Login shortcode class.
  *
- * @version     1.5.6
+ * @version     1.5.7
  * @package     Charitable/Shortcodes/Login
  * @category    Class
  * @author      Eric Daams
