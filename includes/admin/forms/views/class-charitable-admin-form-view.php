@@ -117,7 +117,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  array $fields Optional. A set of fields to display. If not set, 
+         * @param  array $fields Optional. A set of fields to display. If not set,
          *                       we will look for fields in the form's `get_fields()`
          *                       method (if it has one).
          * @return boolean       True if any fields were rendered. False otherwsie.
@@ -167,8 +167,8 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
             $field['form_view']  = $this;
             $field['view']       = $this->get_field_view( $field );
             $field['type']       = $this->get_field_type( $field );
-            $field['key']        = $this->get_field_key( $field, $key );            
-            $field['id']         = $this->get_field_id( $field );            
+            $field['key']        = $this->get_field_key( $field, $key );
+            $field['id']         = $this->get_field_id( $field );
             $field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
             $field['wrapper_class'] = $this->get_field_class( $field );
             $field['tabindex']   = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
@@ -267,9 +267,9 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          */
         protected function get_field_class( $field ) {
 
-            $classes = array( 
-                'charitable-metabox-wrap', 
-                'charitable-'. $this->get_field_type( $field ) . '-wrap' 
+            $classes = array(
+                'charitable-metabox-wrap',
+                'charitable-'. $this->get_field_type( $field ) . '-wrap'
             );
             if ( array_key_exists( 'wrapper_class', $field ) ) {
                 $classes = array_merge( $classes, $field['wrapper_class'] );
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
         }
 
-        
+
 
         /**
          * Return the key for a particular field.
@@ -429,7 +429,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
          * @return boolean
          */
         protected function field_needs_options( $field_type ) {
-            return in_array( $field_type, array( 'select', 'multi-checkbox', 'radio' ) );        
+            return in_array( $field_type, array( 'select', 'multi-checkbox', 'radio' ) );
         }
     }
 
