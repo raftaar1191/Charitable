@@ -37,14 +37,14 @@ if ( empty( $campaign_donations ) ) {
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ( $campaign_donations as $i => $campaign_donation ) : ?>			
+		<?php foreach ( $campaign_donations as $i => $campaign_donation ) : ?>
 			<tr>
 				<td>
 					<select name="<?php echo esc_attr( sprintf( '%s[%d][campaign_id]', $view_args['key'], $i ) ) ?>" labelledby="<?php echo esc_attr( $view_args['id'] ) ?>-campaign-label" tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>">
 						<option value=""><?php _e( 'Select a campaign', 'charitable' ) ?></option>
 						<?php foreach ( $campaigns as $campaign_id ) : ?>
 							<option value="<?php echo $campaign_id ?>" <?php selected( $campaign_id, $campaign_donation->campaign_id ) ?>><?php echo get_the_title( $campaign_id ) ?></option>
-						<?php endforeach ?>	
+						<?php endforeach ?>
 					</select>
 				</td>
 				<td>
