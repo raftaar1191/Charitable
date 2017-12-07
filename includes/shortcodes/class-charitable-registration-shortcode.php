@@ -6,7 +6,7 @@
  * @category Class
  * @author   Eric Daams
  * @since    1.0.0
- * @version  1.0.0
+ * @version  1.5.7
  */
 
 // Exit if accessed directly.
@@ -47,9 +47,9 @@ if ( ! class_exists( 'Charitable_Registration_Shortcode' ) ) :
 				return ob_get_clean();
 			}
 
-			charitable_template( 'shortcodes/registration.php', array(
-				'form' => new Charitable_Registration_Form( $args ),
-			) );
+			$args['form'] = new Charitable_Registration_Form( $args );
+
+			charitable_template( 'shortcodes/registration.php', $args );
 
 			return apply_filters( 'charitable_registration_shortcode', ob_get_clean() );
 		}

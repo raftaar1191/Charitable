@@ -2,7 +2,7 @@
 /**
  * My Donations shortcode class.
  *
- * @version     1.4.0
+ * @version     1.5.7
  * @package     Charitable/Shortcodes/My Donations
  * @category    Class
  * @author      Eric Daams
@@ -43,9 +43,8 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			if ( ! is_user_logged_in() ) {
 
 				if ( false == $args['hide_login'] ) {
-					echo Charitable_Login_Shortcode::display( array(
-						'redirect' => charitable_get_current_url(),
-					) );
+					$args['redirect'] = charitable_get_current_url();
+					echo Charitable_Login_Shortcode::display( $args );
 				}
 
 				return ob_get_clean();
@@ -58,7 +57,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			if ( false === $donor_id ) {
 				$donations = array();
 			} else {
-				$args = array(
+				$query_args = array(
 					'output'   => 'posts',
 					'orderby'  => 'date',
 					'order'    => 'DESC',
@@ -67,7 +66,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 				);
 
 				if ( ! $user->is_verified() ) {
-					$args['user_id'] = $user->ID;
+					$query_args['user_id'] = $user->ID;
 
 					if ( array_key_exists( 'charitable_action', $_GET ) && 'verify_email' == $_GET['charitable_action'] ) {
 						$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
@@ -81,15 +80,13 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 					charitable_get_notices()->add_error( $message );
 				}
 
-				$donations = new Charitable_Donations_Query( $args );
+				$donations = new Charitable_Donations_Query( $query_args );
 			}
 
-			$view_args = array(
-				'donations' => $donations,
-				'user'      => $user,
-			);
+			$args['donations'] = $donations;
+			$args['user'] = $user;
 
-			charitable_template( 'shortcodes/my-donations.php', $view_args );
+			charitable_template( 'shortcodes/my-donations.php', $args );
 
 			/**
 			 * Filter the output of the shortcode.
@@ -97,10 +94,10 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			 * @since 1.4.0
 			 *
 			 * @param string $output    The default output.
-			 * @param array  $view_args The view arguments.
+			 * @param array  $args The view arguments.
 			 * @param array  $args      The query arguments.
 			 */
-			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $view_args, $args );
+			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $args, $query_args );
 		}
 	}
 

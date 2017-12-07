@@ -1,12 +1,11 @@
 <?php
 /**
  * Donation Form shortcode class.
- * 
  * @package  Charitable/Shortcodes/Donation Form
  * @category Class
  * @author   Eric Daams
  * @since    1.5.0
- * @version  1.5.0
+ * @version  1.5.7
  */
 
 // Exit if accessed directly.
@@ -37,9 +36,10 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 			);
 	
 			// Parse incoming $atts into an array and merge it with $defaults
-			$atts = wp_parse_args( $atts, $defaults );
+			$args = shortcode_atts( $defaults, $atts, 'charitable_donation_form' );
 
-		    if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $atts['campaign_id'] ) ) {
+
+		    if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $args['campaign_id'] ) ) {
 		        return '';
 		    }
 
@@ -49,14 +49,14 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		        Charitable_Public::get_instance()->enqueue_donation_form_scripts();
 		    }
 		    
-		    $form = charitable_get_campaign( $atts['campaign_id'] )->get_donation_form();
+		    $form = charitable_get_campaign( $args['campaign_id'] )->get_donation_form();
 
 		    do_action( 'charitable_donation_form_before', $form );
+
+		    $args['form'] = $form;
+		    $args['campaign'] = $form->get_campaign();
 		    
-		    charitable_template( 'donation-form/form-donation.php', array(
-				'campaign' => $form->get_campaign(),
-				'form'     => $form,
-			) );
+		    charitable_template( 'donation-form/form-donation.php', $args );
 		    
 		    do_action( 'charitable_donation_form_after', $form );
 		    

@@ -5,7 +5,7 @@
  * @package Charitable/Shortcodes/Logout
  * @author  Eric Daams
  * @since   1.5.0
- * @version 1.5.0
+ * @version 1.5.7
  */
 
 // Exit if accessed directly.

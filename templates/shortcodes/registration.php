@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Account
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.5.7
  */
 
 // Exit if accessed directly.
@@ -15,16 +15,20 @@ $form = $view_args['form'];
 
 /**
  * @hook    charitable_user_registration_before
+ * @param  obj $form
+ * @param  array $view_args All args passed to template.
  */
-do_action( 'charitable_user_registration_before', $form );
+do_action( 'charitable_user_registration_before', $form, $view_args );
 
 ?>
 <form method="post" id="charitable-registration-form" class="charitable-form">
 	<?php
 	/**
 	 * @hook    charitable_form_before_fields
+	 * @param  obj $form
+	 * @param  array $view_args All args passed to template.
 	 */
-	do_action( 'charitable_form_before_fields', $form );
+	do_action( 'charitable_form_before_fields', $form, $view_args );
 
 	?>
 	<div class="charitable-form-fields cf">
@@ -34,8 +38,10 @@ do_action( 'charitable_user_registration_before', $form );
 
 	/**
 	 * @hook    charitable_form_after_fields
+	 * @param  obj $form
+	 * @param  array $view_args All args passed to template.
 	 */
-	do_action( 'charitable_form_after_fields', $form );
+	do_action( 'charitable_form_after_fields', $form, $view_args );
 
 	?>
 	<div class="charitable-form-field charitable-submit-field">
@@ -46,5 +52,7 @@ do_action( 'charitable_user_registration_before', $form );
 
 /**
  * @hook    charitable_user_registration_after
+ * @param  obj $form
+ * @param  array $view_args All args passed to template.
  */
-do_action( 'charitable_user_registration_after', $form );
+do_action( 'charitable_user_registration_after', $form, $view_args );
