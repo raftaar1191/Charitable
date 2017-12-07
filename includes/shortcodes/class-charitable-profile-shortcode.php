@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 			/* If the user is logged in, show the profile template. */
 			charitable_template( 'shortcodes/profile.php', $args );
 
-			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );      
+			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );
 		}
 	}
 
