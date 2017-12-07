@@ -91,8 +91,8 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			 *
 			 * @param 	string $content The content to be displayed.
 			 * @param 	array  $args    All the parsed arguments.
-	         * @return 	string
-	         */
+			 * @return 	string
+			 */
 			return apply_filters( 'charitable_campaigns_shortcode', ob_get_clean(), $args );
 		}
 
