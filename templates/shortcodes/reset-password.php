@@ -25,8 +25,8 @@ $form = $view_args['form'];
 
 	?>
 	<form id="resetpassform" class="charitable-form" action="<?php echo site_url( 'wp-login.php?action=resetpass' ); ?>" method="post" autocomplete="off">
-		<?php 
-		/* 
+		<?php
+		/**
 		 * @hook charitable_form_before_fields
 		 * @param obj $form
 		 * @param array $view_args - Shortcode attributes.
@@ -39,13 +39,13 @@ $form = $view_args['form'];
 			<?php $form->view()->render() ?>
 			<p class="description"><?php echo wp_get_password_hint(); ?></p>
 		</div><!-- .charitable-form-fields -->
-		<?php 
-		/* 
+		<?php
+		/**
 		 * @hook charitable_form_before_fields
 		 * @param obj $form
 		 * @param array $view_args - Shortcode attributes.
 		 */
-		
+
 		do_action( 'charitable_form_after_fields', $form, $view_args );
 		?>
 		<div class="charitable-form-field charitable-submit-field resetpass-submit">
@@ -58,7 +58,6 @@ $form = $view_args['form'];
 	/**
 	 * @hook charitable_reset_password_after
 	 * @param array $view_args - Shortcode attributes
-	 * 
 	 */
 	do_action( 'charitable_reset_password_after', $view_args );
 	?>
