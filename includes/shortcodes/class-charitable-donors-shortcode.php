@@ -54,8 +54,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
 			 * @param 	array $args               All the parsed arguments.
-	         * @return 	false|Charitable_Template
-	         */
+			 * @return 	false|Charitable_Template
+			 */
 			$template = apply_filters( 'charitable_donors_shortcode_template', false, $args );
 
 			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
@@ -74,8 +74,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  array $view_args The arguments to pass.
 			 * @param  array $args      All the parsed arguments.
-	         * @return array
-	         */
+			 * @return array
+			 */
 			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
 					'donors',
 					'number',
@@ -104,8 +104,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  string $content The content to be displayed.
 			 * @param  array  $args    All the parsed arguments.
-	         * @return string
-	         */
+			 * @return string
+			 */
 			return apply_filters( 'charitable_donors_shortcode', ob_get_clean(), $args );
 		}
 
@@ -125,8 +125,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param  array $args       All the parsed arguments.
-	         * @return array
-	         */
+			 * @return array
+			 */
 			$query_args = apply_filters( 'charitable_donors_shortcode_donor_query_args',
 				charitable_array_subset( $args, array( 'number', 'orderby', 'order', 'campaign', 'distinct_donors' ) ),
 				$args
