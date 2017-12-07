@@ -139,7 +139,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  array
 		 */
 		public function update( $new_instance, $old_instance ) {
-
 			$instance = $new_instance;
 
 			foreach ( array( 'show_distinct', 'show_avatar', 'show_location', 'show_amount', 'show_name', 'hide_if_no_donors' ) as $key ) {
@@ -170,7 +169,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  mixed[]
 		 */
 		protected function get_parsed_args( $instance ) {
-
 			/**
 			 * Filter the default widget arguments.
 			 *

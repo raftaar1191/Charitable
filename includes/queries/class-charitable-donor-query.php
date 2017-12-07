@@ -86,7 +86,20 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 */
 		public function get_donor_object( $record ) {
 			$donation_id = isset( $record->donation_id ) ? $record->donation_id : false;
-			return new Charitable_Donor( $record->donor_id, $donation_id );
+			$donor       = new Charitable_Donor( $record->donor_id, $donation_id );
+
+			/**
+			 * Filter the returned object.
+			 *
+			 * Note that this should always return a Charitable_Donor object.
+			 *
+			 * @since 1.5.7
+			 *
+			 * @param Charitable_Donor       $donor  The instance of `Charitable_Donor`.
+			 * @param object                 $record Database record for the donor.
+			 * @param Charitable_Donor_Query $query  This query object.
+			 */
+			return apply_filters( 'charitable_donor_query_donor_object', $donor, $record, $this );
 		}
 
 		/**
