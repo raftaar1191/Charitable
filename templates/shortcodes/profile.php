@@ -27,7 +27,7 @@ do_action( 'charitable_user_profile_before', $view_args );
 	 * @hook 	charitable_form_before_fields
 	 * @param   array $view_args Shortcode attributes.
 	 */
-	do_action( 'charitable_form_before_fields', $form, $view_args ); 
+	do_action( 'charitable_form_before_fields', $form, $view_args );
 
 	?>
 	<div class="charitable-form-fields cf">
