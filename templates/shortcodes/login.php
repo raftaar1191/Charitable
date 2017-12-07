@@ -21,8 +21,9 @@ $login_form_args = array_key_exists( 'login_form_args', $view_args ) ? $view_arg
 	<?php
 
 	/**
-	 * @hook    charitable_login_form_before
-	 * @param  array $view_args All args passed to template.
+	 * Do something before the login form.
+	 *
+	 * @param array $view_args All args passed to template.
 	 */
 	do_action( 'charitable_login_form_before', $view_args );
 
@@ -38,8 +39,9 @@ $login_form_args = array_key_exists( 'login_form_args', $view_args ) ? $view_arg
 	<?php
 
 	/**
-	 * @hook    charitable_login_form_after
-	 * @param  array $view_args All args passed to template.
+	 * Do something after showing the login form.
+	 *
+	 * @param array $view_args All args passed to template.
 	 */
 	do_action( 'charitable_login_form_after', $view_args )
 

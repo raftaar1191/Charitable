@@ -44,6 +44,7 @@ if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 
 				if ( false == $args['hide_login'] ) {
 					$args['redirect'] = charitable_get_current_url();
+
 					echo Charitable_Login_Shortcode::display( $args );
 				}
 

@@ -17,9 +17,10 @@ $user      = array_key_exists( 'user', $view_args ) ? $view_args['user'] : chari
 $donations = $view_args['donations'];
 
 /**
- * @hook   charitable_my_donations_before
+ * Do something before rendering the donations.
+ *
  * @param  object[] $donations An array of donations as a simple object.
- * @param  array $view_args All args passed to template.
+ * @param  array    $view_args All args passed to template.
  */
 do_action( 'charitable_my_donations_before', $donations, $view_args );
 
@@ -40,7 +41,7 @@ if ( empty( $donations ) ) : ?>
 					 * @since 1.5.0
 					 *
 					 * @param object[] $donations An array of donations as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param array    $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_header_after_date', $donations, $view_args );
 				?>
@@ -52,7 +53,7 @@ if ( empty( $donations ) ) : ?>
 					 * @since 1.5.0
 					 *
 					 * @param object[] $donations An array of donations as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param array    $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_header_after_campaigns', $donations, $view_args );
 				?>
@@ -64,7 +65,7 @@ if ( empty( $donations ) ) : ?>
 					 * @since 1.5.0
 					 *
 					 * @param object[] $donations An array of donations as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param array    $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_header_after_amount', $donations, $view_args );
 				?>
@@ -87,7 +88,7 @@ if ( empty( $donations ) ) : ?>
 					 * @since 1.5.0
 					 *
 					 * @param object[] $donations An array of donations as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param array    $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_header_after_receipt', $donations, $view_args );
 				?>
@@ -103,8 +104,8 @@ if ( empty( $donations ) ) : ?>
 					 *
 					 * @since 1.5.0
 					 *
-					 * @param object $donation The donation as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param object $donation  The donation as a simple object.
+					 * @param array  $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_after_date', $donation );
 				?>
@@ -115,8 +116,8 @@ if ( empty( $donations ) ) : ?>
 					 *
 					 * @since 1.5.0
 					 *
-					 * @param object $donation The donation as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param object $donation  The donation as a simple object.
+					 * @param array  $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_after_campaigns', $donation );
 				?>
@@ -127,8 +128,8 @@ if ( empty( $donations ) ) : ?>
 					 *
 					 * @since 1.5.0
 					 *
-					 * @param object $donation The donation as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param object $donation  The donation as a simple object.
+					 * @param array  $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_after_amount', $donation );
 				?>
@@ -150,8 +151,8 @@ if ( empty( $donations ) ) : ?>
 					 *
 					 * @since 1.5.0
 					 *
-					 * @param object $donation The donation as a simple object.
-					 * @param  array $view_args All args passed to template.
+					 * @param object $donation  The donation as a simple object.
+					 * @param array  $view_args All args passed to template.
 					 */
 					do_action( 'charitable_my_donations_table_after_receipt', $donation, $view_args );
 				?>
@@ -163,8 +164,9 @@ if ( empty( $donations ) ) : ?>
 <?php endif;
 
 /**
- * @hook    charitable_my_donations_after
- * @param object[] $donations An array of donations as a simple object.
- * @param  array $view_args All args passed to template.
+ * Do something after rendering the donations.
+ *
+ * @param  object[] $donations An array of donations as a simple object.
+ * @param  array    $view_args All args passed to template.
  */
 do_action( 'charitable_my_donations_after', $donations, $view_args );

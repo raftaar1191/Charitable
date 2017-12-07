@@ -15,8 +15,9 @@ $form  = $view_args['form'];
 $donor = charitable_get_user( wp_get_current_user() );
 
 /**
- * @hook 	charitable_user_profile_before
- * @param   array $view_args Shortcode attributes.
+ * Do something before rendering the user profile form.=
+ *
+ * @param array $view_args All args passed to template.
  */
 do_action( 'charitable_user_profile_before', $view_args );
 
@@ -24,8 +25,10 @@ do_action( 'charitable_user_profile_before', $view_args );
 <form method="post" id="charitable-profile-form" class="charitable-form" enctype="multipart/form-data">
 	<?php
 	/**
-	 * @hook 	charitable_form_before_fields
-	 * @param   array $view_args Shortcode attributes.
+	 * Do something before rendering the form fields.
+	 *
+	 * @param Charitable_Form $form      The form object.
+	 * @param array           $view_args All args passed to template.
 	 */
 	do_action( 'charitable_form_before_fields', $form, $view_args ); 
 
@@ -36,8 +39,10 @@ do_action( 'charitable_user_profile_before', $view_args );
 	<?php
 
 	/**
-	 * @hook 	charitable_form_after_fields
-	 * @param   array $view_args Shortcode attributes.
+	 * Do something after rendering the form fields.
+	 *
+	 * @param Charitable_Form $form      The form object.
+	 * @param array           $view_args All args passed to template.
 	 */
 	do_action( 'charitable_form_after_fields', $form, $view_args );
 
@@ -47,9 +52,9 @@ do_action( 'charitable_user_profile_before', $view_args );
 	</div>
 </form><!-- #charitable-profile-form -->
 <?php
-
 /**
- * @hook 	charitable_user_profile_after
- * @param   array $view_args Shortcode attributes.
+ * Do something after rendering the user profile form.
+ *
+ * @param array $view_args All args passed to template.
  */
 do_action( 'charitable_user_profile_after', $view_args );
