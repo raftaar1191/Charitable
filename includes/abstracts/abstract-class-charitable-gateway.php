@@ -72,12 +72,11 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Provide default gateway settings fields.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array   $settings
-		 * @return  array
+		 * @return array
 		 */
-		public function default_gateway_settings( $settings ) {
+		public function default_gateway_settings() {
 			return array(
 				'section_gateway' => array(
 					'type'      => 'heading',
@@ -196,19 +195,18 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Redirect the donation to the processing page.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   mixed $result
-		 * @param   int $donation_id
-		 * @return  array
+		 * @param  mixed $result      The result to be returned to the AJAX process.
+		 * @param  int   $donation_id The donation ID.
+		 * @return array
 		 */
 		public static function redirect_to_processing( $result, $donation_id ) {
 			return array(
+				'safe'     => true,
 				'redirect' => charitable_get_permalink( 'donation_processing_page', array(
 					'donation_id' => $donation_id,
-					)
-				),
-				'safe' => true,
+				) ),
 			);
 		}
 

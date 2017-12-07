@@ -2,11 +2,12 @@
 /**
  * Contains the class that is used to register and retrieve notices like errors, warnings, success messages, etc.
  *
- * @version		1.0.0
- * @package		Charitable/Classes/Charitable_Notices
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Notices
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -17,18 +18,9 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 	/**
 	 * Charitable_Notices
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Notices {
-
-		/**
-		 * The single instance of this class.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @var   Charitable_Notices|null
-		 */
-		private static $instance = null;
 
 		/**
 		 * The array of notices.
@@ -40,33 +32,28 @@ if ( ! class_exists( 'Charitable_Notices' ) ) :
 		protected $notices;
 
 		/**
-		 * Returns and/or create the single instance of this class.
+		 * Create class object.
+		 *
+		 * @since 1.0.0
+		 * @since 1.5.4 Access changed to public.
+		 */
+		public function __construct() {
+			/* Retrieve the notices from the session */
+			$this->notices = charitable_get_session()->get_notices();
+
+			/* Remove the notices from the session. */
+			charitable_get_session()->remove( 'notices' );
+		}
+
+		/**
+		 * Returns the single instance of this class.
 		 *
 		 * @since  1.0.0
 		 *
 		 * @return Charitable_Notices
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
-		}
-
-		/**
-		 * Create class object. A private constructor, so this is used in a singleton context.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return void
-		 */
-		private function __construct() {
-			/* Retrieve the notices from the session */
-			$this->notices = charitable_get_session()->get_notices();
-
-			/* Remove the notices from the session. */
-			charitable_get_session()->remove( 'notices' );
+			return charitable()->registry()->get( 'notices' );
 		}
 
 		/**

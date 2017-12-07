@@ -52,10 +52,9 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  array $column_names The columns to show for campaigns.
 		 * @return array
 		 */
-		public function dashboard_columns( $column_names ) {
+		public function dashboard_columns() {
 			/**
 			 * Filter the columns shown in the campaigns list table.
 			 *
@@ -64,17 +63,15 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 			 * @param array $columns The list of columns.
 			 */
 			return apply_filters( 'charitable_campaign_dashboard_column_names', array(
-				'cb'        => '<input type="checkbox"/>',
-				'ID'        => __( '#', 'charitable' ),				
-				'title'     => __( 'Title', 'charitable' ),				
-				'author'    => __( 'Creator', 'charitable' ),
-				'donated'   => __( 'Donations', 'charitable' ),
-				'end_date'  => __( 'End Date', 'charitable' ),				
-				'status'    => __( 'Status', 'charitable' ),
-				'date'      => __( 'Date Created', 'charitable' ),
+				'cb'       => '<input type="checkbox"/>',
+				'ID'       => __( '#', 'charitable' ),
+				'title'    => __( 'Title', 'charitable' ),
+				'author'   => __( 'Creator', 'charitable' ),
+				'donated'  => __( 'Donations', 'charitable' ),
+				'end_date' => __( 'End Date', 'charitable' ),
+				'status'   => __( 'Status', 'charitable' ),
+				'date'     => __( 'Date Created', 'charitable' ),
 			) );
-
-			return $column_names;
 		}
 
 		/**

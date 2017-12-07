@@ -120,7 +120,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$this->check_test_mode();
 
 			/* For backwards-compatibility */
-			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 6 );
 		}
 
 		/**
@@ -304,17 +304,17 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_donation_form_fields', array(
 				'donation_fields' => array(
-					'legend'        => __( 'Your Donation', 'charitable' ),
-					'type'          => 'donation-amount-wrapper',
-					'fields'        => $this->get_donation_fields(),
-					'priority'      => 20,
+					'legend'   => __( 'Your Donation', 'charitable' ),
+					'type'     => 'donation-amount-wrapper',
+					'fields'   => $this->get_donation_fields(),
+					'priority' => 20,
 				),
 				'user_fields' => array(
-					'legend'        => __( 'Your Details', 'charitable' ),
-					'type'          => 'donor-fields',
-					'fields'        => $this->get_user_fields(),
-					'class'         => 'fieldset',
-					'priority'      => 40,
+					'legend'   => __( 'Your Details', 'charitable' ),
+					'type'     => 'donor-fields',
+					'fields'   => $this->get_user_fields(),
+					'class'    => 'fieldset',
+					'priority' => 40,
 				),
 			), $this );
 
@@ -808,7 +808,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				$amount = isset( $_POST['custom_donation_amount'] ) ? $_POST['custom_donation_amount'] : 0;
 			}
 
-			$amount = charitable_get_currency_helper()->sanitize_monetary_amount( $amount );
+			$amount = charitable_get_currency_helper()->sanitize_monetary_amount( (string) $amount );
 
 			return apply_filters( 'charitable_donation_form_amount', $amount );
 		}

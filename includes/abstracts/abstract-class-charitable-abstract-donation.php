@@ -103,6 +103,15 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		protected $donor;
 
 		/**
+		 * The Charitable_Donation_Log object for this donation.
+		 *
+		 * @since 1.5.4
+		 *
+		 * @var   Charitable_Donation_Log
+		 */
+		protected $log;
+
+		/**
 		 * Instantiate a new donation object based off the ID.
 		 *
 		 * @since 1.0.0
@@ -707,6 +716,21 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}		
 
 		/**
+		 * Return the donation log object for this donation.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return Charitable_Donation_Log
+		 */
+		public function log() {
+			if ( ! isset( $this->log ) ) {
+				$this->log = new Charitable_Donation_Log( $this->ID );
+			}
+
+			return $this->log;
+		}
+
+		/**
 		 * Get a donation's log.
 		 *
 		 * @since  1.0.0
@@ -720,57 +744,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				charitable_get_deprecated()->deprecated_argument(
 					__METHOD__,
 					'1.3.0',
-					sprintf( __( '$donation_id is no longer required as get_donation_log() is used in object context. Use $donation->get_donation_log() instead.' ) )
+					sprintf( __( '$donation_id is no longer required as get_donation_log() is used in object context. Use $donation->log()->get_meta_log() instead.' ) )
 				);
 			}
 
-			$log = get_post_meta( $this->donation_id, '_donation_log', true );;
-
-			return is_array( $log ) ? $log : array();
-		}
-
-		/**
-		 * Returns the main donation log with other logs (such as the email log) merged in.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @global WPDB $wpdb
-		 * @return array
-		 */
-		public function get_merged_logs() {
-			global $wpdb;
-
-			$logs   = $this->get_donation_log();
-			$emails = $wpdb->get_results( $wpdb->prepare(
-				"SELECT meta_key, meta_value
-				FROM $wpdb->postmeta
-				WHERE meta_key LIKE '_email_%_log'
-				AND post_id = %d", $this->ID ) );
-
-			if ( ! is_null( $emails ) ) {
-				foreach ( $emails as $email_log ) {
-					$log = $this->parse_email_log( $email_log );
-
-					if ( ! empty( $log ) ) {
-						$logs = array_merge( $logs, $this->parse_email_log( $email_log ) );
-					}
-				}
-			}
-
-			/**
-			 * Filter the list of donation logs.
-			 *
-			 * @since 1.5.0
-			 *
-			 * @param array               $logs     All of the logs.
-			 * @param Charitable_Donation $donation Instance of `Charitable_Donation`.
-			 */
-			$logs = apply_filters( 'charitable_donation_logs', $logs, $this );
-
-			/* Order the logs by time. */
-			usort( $logs, 'charitable_timestamp_sort' );
-
-			return $logs;
+			return $this->log()->get_meta_log();
 		}
 
 		/**
@@ -817,7 +795,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				isset( $statuses[ $new_status ] ) ? $statuses[ $new_status ] : $new_status
 			);
 
-			$this->update_donation_log( $message );
+			$this->log()->add( $message );
 
 			/**
 			 * Handle specific Charitable status transitions.
@@ -858,16 +836,16 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @since  1.0.0
 		 * @since  1.3.0 First parameter changed from $donation_id to $message, as function is now expected
 		 *               to be used in an object context. i.e.: $donation->update_donation_log( 'my message' )
-		 * @since  1.5.0 Removed $deprecated_message, which was only used for backwards compatibility. We now
-		 *               use func_get_arg() instead to get the second passed argument.
+		 * @since  1.5.0 Removed second parameter ($deprecated_message), which was only used for backwards
+		 *               compatibility. We now use func_get_arg() instead to get the second passed argument.
+		 * @since  1.5.4 Now uses Charitable_Donation_Log::add() and returns a result.
 		 *
 		 * @param  string $message
-		 * @param  string $deprecated_message
-		 * @return void
+		 * @return int|bool Meta ID if the key didn't exist, true on successful update,
+		 *                  false on failure.
 		 */
 		public function update_donation_log( $message ) {
 			if ( is_int( $message ) ) {
-
 				charitable_get_deprecated()->deprecated_argument(
 					__METHOD__,
 					'1.3.0',
@@ -877,14 +855,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				$message = func_get_arg( 1 );
 			}
 
-			$log = $this->get_donation_log();
-
-			$log[] = array(
-				'time'    => time(),
-				'message' => $message,
-			);
-
-			update_post_meta( $this->donation_id, '_donation_log', $log );
+			return $this->log()->add( $message );
 		}
 
 		/**
@@ -969,69 +940,6 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 				'label' => $field->label,
 				'value' => $value,
 			);
-		}
-
-		/**
-		 * Receives an email log record as an object and returns an array
-		 * with the time and message to show in the log.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  object $email_log The email log record. Should include
-		 *                           meta_key and meta_value fields.
-		 * @return array
-		 */
-		protected function parse_email_log( $email_log ) {
-			if ( ! isset( $email_log->meta_key ) || ! isset( $email_log->meta_value ) ) {
-				return array();
-			}
-
-			$log = maybe_unserialize( $email_log->meta_value );
-
-			if ( ! $log || ! is_array( $log ) ) {
-				return array();
-			}
-
-			$matches = array();
-
-			if ( ! preg_match( '/^_email_(.*)_log$/', $email_log->meta_key, $matches ) ) {
-				return array();
-			}
-
-			$logs  = array();
-			$class = Charitable_Emails::get_instance()->get_email( $matches[1] );
-
-			if ( false === $class ) {
-				$email_name = ucwords( str_replace( '_', ' ', $matches[1] ) );
-			} else {
-				$email      = new $class;
-				$email_name = $email->get_name();
-			}
-
-			foreach ( $log as $time => $sent ) {
-				$action = Charitable_Admin::get_instance()->get_donation_actions()->get_action_link( 'resend_' . $matches[1], $this->ID );
-
-				if ( $sent ) {
-					$message = sprintf( __( '%s was sent successfully.', 'charitable' ), $email_name );
-
-					if ( false !== $class ) {
-						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Resend it now', 'charitable' ) );
-					}
-				} else {
-					$message = sprintf( __( '%s failed to send.', 'charitable' ), $email_name );
-
-					if ( false !== $class ) {
-						$message .= sprintf( '&nbsp;<a href="%s">%s</a>', $action, __( 'Retry email send', 'charitable' ) );
-					}
-				}
-
-				$logs[] = array(
-					'time'    => $time,
-					'message' => $message,
-				);
-			}
-
-			return $logs;
 		}
 
 		/**

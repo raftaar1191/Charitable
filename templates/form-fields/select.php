@@ -16,8 +16,8 @@ $form 		 = $view_args['form'];
 $field 		 = $view_args['field'];
 $classes 	 = $view_args['classes'];
 $is_required = isset( $field['required'] ) ? $field['required'] : false;
-$options	 = isset( $field['options'] )  ? $field['options']  : array();
-$value		 = isset( $field['value'] ) 	 ? $field['value'] 	: '';
+$options	 = isset( $field['options'] ) ? $field['options'] : array();
+$value		 = isset( $field['value'] ) ? $field['value'] : '';
 
 if ( is_array( $value ) ) {
 	$value = current( $value );

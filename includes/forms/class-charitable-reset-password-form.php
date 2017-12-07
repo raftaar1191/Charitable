@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Form' ) ) :
 			$this->has_key = $this->parse_reset_key();
 
 			/* For backwards-compatibility */
-			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 6 );
 		}
 
 		/**

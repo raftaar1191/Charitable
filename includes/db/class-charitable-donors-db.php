@@ -2,11 +2,12 @@
 /**
  * Charitable Donors DB class.
  *
- * @package     Charitable/Classes/Charitable_Donors_DB
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Donors_DB
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -17,32 +18,34 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 	/**
 	 * Charitable_Donors_DB
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Donors_DB extends Charitable_DB {
 
 		/**
 		 * The version of our database table
 		 *
-		 * @var 	string
-		 * @since   1.0.0
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
-		public $version = '1.0.0';
+		public $version = '1.5.4';
 
 		/**
 		 * The name of the primary column
 		 *
-		 * @var 	string
-		 * @since   1.0.0
+		 * @since 1.0.0
+		 *
+		 * @var   string
 		 */
 		public $primary_key = 'donor_id';
 
 		/**
 		 * Set up the database table name.
 		 *
-		 * @since   1.0.0
-	 	 *
-		 * @return  void
+		 * @since 1.0.0
+		 *
+		 * @global WPDB $wpdb
 		 */
 		public function __construct() {
 			global $wpdb;
@@ -53,8 +56,9 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Create the table.
 		 *
-		 * @global  $wpdb
-		 * @since   1.0.0
+		 * @since 1.0.0
+		 *
+		 * @global WPDB $wpdb
 		 */
 		public function create_table() {
 			global $wpdb;
@@ -62,16 +66,16 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			$charset_collate = $wpdb->get_charset_collate();
 
 			$sql = "CREATE TABLE {$this->table_name} (
-                donor_id bigint(20) NOT NULL AUTO_INCREMENT,
-                user_id bigint(20) NOT NULL,              
-                email varchar(100) NOT NULL,
-                first_name varchar(255) default '',
-                last_name varchar(255) default '',
-                date_joined datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-                PRIMARY KEY  (donor_id),
-                KEY user_id (user_id),                     
-                KEY email (email)
-                ) $charset_collate;";
+				donor_id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				user_id bigint(20) unsigned NOT NULL,
+				email varchar(100) NOT NULL,
+				first_name varchar(255) default '',
+				last_name varchar(255) default '',
+				date_joined datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				PRIMARY KEY  (donor_id),
+				KEY user_id (user_id),                     
+				KEY email (email)
+				) $charset_collate;";
 
 			$this->_create_table( $sql );
 		}
@@ -79,47 +83,47 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_columns() {
 			return array(
-				'donor_id'      => '%d',
-				'user_id'       => '%d',
-				'email'         => '%s',
-				'first_name'    => '%s',
-				'last_name'     => '%s',
-				'date_joined'   => '%s',
+				'donor_id'    => '%d',
+				'user_id'     => '%d',
+				'email'       => '%s',
+				'first_name'  => '%s',
+				'last_name'   => '%s',
+				'date_joined' => '%s',
 			);
 		}
 
 		/**
 		 * Default column values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function get_column_defaults() {
 			return array(
-				'donor_id'      => '',
-				'user_id'       => 0,
-				'email'         => '',
-				'first_name'    => '',
-				'last_name'     => '',
-				'date_joined'   => date( 'Y-m-d H:i:s' ),
+				'donor_id'    => '',
+				'user_id'     => 0,
+				'email'       => '',
+				'first_name'  => '',
+				'last_name'   => '',
+				'date_joined' => date( 'Y-m-d H:i:s' ),
 			);
 		}
 
 		/**
 		 * Add a new campaign donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array  $data Donor data to insert.
-		 * @param 	string $type Should always be 'donors'.
-		 * @return  int The ID of the inserted donor.
+		 * @param  array  $data Donor data to insert.
+		 * @param  string $type Should always be 'donors'.
+		 * @return int The ID of the inserted donor.
 		 */
 		public function insert( $data, $type = 'donors' ) {
 			return parent::insert( $data, $type );
@@ -128,10 +132,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a user's ID, based on their donor ID.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int $donor_id The Donor ID.
-		 * @return  int
+		 * @param  int $donor_id The Donor ID.
+		 * @return int
 		 */
 		public function get_user_id( $donor_id ) {
 			$user_id = $this->get_column_by( 'user_id', 'donor_id', $donor_id );
@@ -142,10 +146,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their user ID.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   int     $user_id
-		 * @return  int
+		 * @param  int $user_id Donor User ID.
+		 * @return int
 		 */
 		public function get_donor_id( $user_id ) {
 			$donor_id = $this->get_column_by( 'donor_id', 'user_id', $user_id );
@@ -156,10 +160,10 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Return a donor ID, based on their email address.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string  $email
-		 * @return  int
+		 * @param  string $email Donor email address.
+		 * @return int
 		 */
 		public function get_donor_id_by_email( $email ) {
 			$donor_id = $this->get_column_by( 'donor_id', 'email', $email );
@@ -170,9 +174,11 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		/**
 		 * Count the number of donors with donations.
 		 *
-		 * @since   1.3.4
-	 	*
-		 * @return  int
+		 * @since  1.3.4
+		 *
+		 * @global WPDB $wpdb
+		 * @param  string|array $statuses One or more donation statuses.
+		 * @return int
 		 */
 		public function count_donors_with_donations( $statuses = array( 'charitable-completed' ) ) {
 			global $wpdb;
@@ -191,11 +197,11 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			}
 
 			$sql = "SELECT COUNT( DISTINCT(d.donor_id) )
-                FROM {$wpdb->prefix}charitable_donors d
-                INNER JOIN {$wpdb->prefix}charitable_campaign_donations cd ON cd.donor_id = d.donor_id
-                INNER JOIN $wpdb->posts p ON cd.donation_id = p.ID
-                WHERE 1 = 1
-                $status_clause;";
+				FROM {$wpdb->prefix}charitable_donors d
+				INNER JOIN {$wpdb->prefix}charitable_campaign_donations cd ON cd.donor_id = d.donor_id
+				INNER JOIN $wpdb->posts p ON cd.donation_id = p.ID
+				WHERE 1 = 1
+				$status_clause;";
 
 			return $wpdb->get_var( $wpdb->prepare( $sql, $statuses ) );
 		}

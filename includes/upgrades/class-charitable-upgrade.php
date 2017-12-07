@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017, Eric Daams
  * @license   http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -167,21 +167,15 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'   => false,
 					'callback' => array( $this, 'flush_permalinks' ),
 				),
-				'flush_permalinks_150' => array(
-					'version'  => '1.5.0',
-					'message'  => '',
-					'prompt'   => false,
-					'callback' => array( $this, 'flush_permalinks' ),
-				),
-				'flush_permalinks_150' => array(
-					'version'  => '1.5.0',
-					'message'  => '',
-					'prompt'   => false,
-					'callback' => array( $this, 'flush_permalinks' ),
-				),
 				'release_notes_150' => array(
 					'version'  => '1.5.0',
 					'notice'   => 'release-150',
+				),
+				'update_tables_154' => array(
+					'version'  => '1.5.4',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'update_tables' ),
 				),
 			);
 		}
@@ -487,7 +481,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 				'post_type' => Charitable::DONATION_POST_TYPE,
 				'posts_per_page' => $number,
 				'paged' => $step,
-				'post_status' => array_keys( Charitable_Donation::get_valid_donation_statuses() ),
+				'post_status' => array_keys( charitable_get_valid_donation_statuses() ),
 			) );
 
 			if ( count( $donations ) ) {
@@ -917,7 +911,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @since  1.3.0
 		 *
 		 * @param  string $upgrade The upgrade action.
-		 * @return False if value was not updated and true if value was updated.
+		 * @return boolean False if value was not updated and true if value was updated.
 		 */
 		protected function update_upgrade_log( $upgrade ) {
 			$log = get_option( $this->upgrade_log_key );
@@ -928,6 +922,23 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			);
 
 			return update_option( $this->upgrade_log_key, $log );
+		}
+
+		/**
+		 * Update the campaign donations and donors tables.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return boolean Whether tables were successfully updated.
+		 */
+		protected function update_tables() {
+			try {
+				charitable_get_table( 'campaign_donations' )->create_table();
+				charitable_get_table( 'donors' )->create_table();
+				return true;
+			} catch ( Exception $e ) {
+				return false;
+			}
 		}
 
 		/**

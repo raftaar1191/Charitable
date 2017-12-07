@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.5.0
- * @version 1.5.0
+ * @version 1.5.6
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -20,6 +20,18 @@ $form_id   = $view_args['form_id'];
 $suggested = $campaign->get_suggested_donations();
 $custom    = $campaign->get( 'allow_custom_donations' );
 $amount    = $campaign->get_donation_amount_in_session();
+
+if ( 0 === $amount ) {
+	/**
+	 * Filter the default donation amount.
+	 *
+	 * @since 1.5.6
+	 *
+	 * @param float|int           $amount   The amount to be filtered. $0 by default.
+	 * @param Charitable_Campaign $campaign The instance of `Charitable_Campaign`.
+	 */	
+	$amount = apply_filters( 'charitable_default_donation_amount', $amount, $campaign );
+}
 
 if ( empty( $suggested ) && ! $custom ) {
 	return;

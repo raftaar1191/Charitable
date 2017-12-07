@@ -129,7 +129,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 				return false;
 			}
 
-			$email = new Charitable_Email_New_Donation( array(
+			$email = new Charitable_Email_Offline_Donation_Notification( array(
 				'donation' => $donation,
 			) );
 

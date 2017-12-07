@@ -21,7 +21,15 @@
         margin-left: 0;
     }
 
+    &.odd {
+        clear: left;
+    }
+
     &.charitable-form-field-checkbox {
+        input[type=checkbox] {
+            display: inline;
+            height: auto;
+        }
         label {
             display: inline;
             padding-left: 4px;
@@ -195,6 +203,15 @@
                 margin-right: 0;
             }
         }
+    }
+}
+
+#charitable-donor-fields {
+    // Fixes common issue with themes that float form fields,
+    // resulting in weird placement of anonymous donations and
+    // newsletter fields.
+    > .charitable-form-field {
+        clear: both;
     }
 }
 

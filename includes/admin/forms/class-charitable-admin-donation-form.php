@@ -2,11 +2,12 @@
 /**
  * Admin donation form model class.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Admin_Donation_Form
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
@@ -17,7 +18,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 	/**
 	 * Charitable_Admin_Donation_Form
 	 *
-	 * @since  1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Admin_Donation_Form extends Charitable_Admin_Form {
 
@@ -132,7 +133,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'data-trigger-key'   => '#donor-id',
 					'data-trigger-value' => 'new',
 				);
-			}			
+			}
 
 			/**
 			 * Filter the admin donation form fields.
@@ -335,8 +336,6 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			$values = $this->sanitize_submitted_log_note( $values );
 			$values = $this->sanitize_submitted_donor( $values );
 
-			$fields = $this->get_merged_fields();
-
 			foreach ( $this->get_merged_fields() as $key => $field ) {
 				if ( array_key_exists( 'data_type', $field ) && 'core' != $field['data_type'] ) {
 					if ( array_key_exists( 'type', $field ) ) {
@@ -526,7 +525,11 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				return $field;
 			}
 
-			$value = $this->donation->get( $key );
+			if ( array_key_exists( 'value_callback', $field ) ) {
+				$value = call_user_func( $field['value_callback'], $this->get_donation(), $key );
+			} else {
+				$value = $this->donation->get( $key );
+			}
 
 			if ( $value ) {
 				$field['value'] = $value;

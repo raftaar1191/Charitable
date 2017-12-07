@@ -40,11 +40,11 @@ function charitable_get_donation( $donation_id, $force = false ) {
  *
  * @since  1.5.0
  *
- * @param  Charitable_Donation $donation The donation ID.
- * @param  string              $key      The meta key.
+ * @param  Charitable_Abstract_Donation $donation The donation ID.
+ * @param  string                       $key      The meta key.
  * @return mixed
  */
-function charitable_get_donor_meta_value( Charitable_Donation $donation, $key ) {
+function charitable_get_donor_meta_value( Charitable_Abstract_Donation $donation, $key ) {
     return $donation->get_donor()->get_donor_meta( $key );
 }
 
@@ -53,12 +53,24 @@ function charitable_get_donor_meta_value( Charitable_Donation $donation, $key ) 
  *
  * @since  1.5.0
  *
- * @param  Charitable_Donation $donation The donation ID.
- * @param  string              $key      The meta key.
+ * @param  Charitable_Abstract_Donation $donation The donation ID.
+ * @param  string                       $key      The meta key.
  * @return mixed
  */
-function charitable_get_donation_meta_value( Charitable_Donation $donation, $key ) {
+function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donation, $key ) {
     return get_post_meta( $donation->ID, $key, true );
+}
+
+/**
+ * Return the date formatted for a form field value.
+ *
+ * @since  1.5.3
+ *
+ * @param  Charitable_Abstract_Donation $donation The donation instance.
+ * @return string
+ */
+function charitable_get_donation_date_for_form_value( Charitable_Abstract_Donation $donation ) {
+	return $donation->get_date( 'F j, Y' );
 }
 
 /**
@@ -233,11 +245,17 @@ function charitable_get_approval_statuses() {
 	/**
 	 * Filter the list of donation statuses that we consider "approved".
 	 *
+	 * All statuses must already be listed as valid donation statuses.
+	 *
+	 * @see   charitable_get_valid_donation_statuses
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param string[] $statuses List of statuses.
 	 */
-	return apply_filters( 'charitable_approval_donation_statuses', array( 'charitable-completed' ) );
+	$statuses = apply_filters( 'charitable_approval_donation_statuses', array( 'charitable-completed' ) );
+
+	return array_filter( $statuses, 'charitable_is_valid_donation_status' );
 }
 
 /**
@@ -333,10 +351,11 @@ function charitable_load_donation_form_script() {
  * @since  1.0.0
  *
  * @param  string $message
- * @return void
+ * @return int|bool Meta ID if the key didn't exist, true on successful update,
+ *                  false on failure.
  */
 function charitable_update_donation_log( $donation_id, $message ) {
-	charitable_get_donation( $donation_id )->update_donation_log( $message );
+	return charitable_get_donation( $donation_id )->log()->add( $message );
 }
 
 /**
@@ -347,7 +366,7 @@ function charitable_update_donation_log( $donation_id, $message ) {
  * @return array
  */
 function charitable_get_donation_log( $donation_id ) {
-	charitable_get_donation( $donation_id )->get_donation_log();
+	charitable_get_donation( $donation_id )->log()->get_meta_log();
 }
 
 /**

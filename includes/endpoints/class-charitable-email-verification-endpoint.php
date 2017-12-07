@@ -2,11 +2,12 @@
 /**
  * email_verification endpoint.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Email_Verification_Endpoint
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -31,6 +32,15 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		 * @var   false|WP_User|WP_Error
 		 */
 		protected $verification_result;
+
+		/**
+		 * Object instantiation.
+		 *
+		 * @since 1.5.4
+		 */
+		public function __construct() {
+			$this->cacheable = false;
+		}
 
 		/**
 		 * Return the endpoint ID.
@@ -62,7 +72,6 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @global WP_Rewrite $wp_rewrite
-		 *
 		 * @param  array $args Mixed arguments.
 		 * @return string
 		 */
@@ -85,7 +94,6 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @global WP_Query $wp_query
-		 *
 		 * @param  array $args Mixed set of arguments.
 		 * @return boolean
 		 */

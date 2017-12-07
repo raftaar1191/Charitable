@@ -2,11 +2,12 @@
 /**
  * donation_receipt endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Donation_Receipt_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Donation_Receipt_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -16,8 +17,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 	/**
 	 * Charitable_Donation_Receipt_Endpoint
 	 *
-	 * @abstract
-	 * @since   1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Donation_Receipt_Endpoint extends Charitable_Endpoint {
 
@@ -87,7 +87,6 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		 * @return boolean
 		 */
 		public function is_page( $args = array() ) {
-
 			global $wp_query;
 
 			$receipt_page = charitable_get_option( 'donation_receipt_page', 'auto' );
@@ -99,7 +98,6 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 			return is_main_query()
 				&& isset( $wp_query->query_vars['donation_receipt'] )
 				&& isset( $wp_query->query_vars['donation_id'] );
-
 		}
 
 		/**
@@ -135,10 +133,10 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		/**
 		 * Get the content to display for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $content
-		 * @return  string
+		 * @param  string $content
+		 * @return string
 		 */
 		public function get_content( $content ) {
 			if ( ! in_the_loop() ) {

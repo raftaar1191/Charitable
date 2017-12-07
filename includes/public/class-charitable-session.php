@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2017, Eric Daams
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.0
+ * @version   1.5.4
  */
 
 // Exit if accessed directly.
@@ -22,15 +22,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 	class Charitable_Session {
 
 		/**
-		 * The single instance of this class.
-		 *
-		 * @since 1.0.0
-		 *
-		 * @var   Charitable_Session|null
-		 */
-		private static $instance = null;
-
-		/**
 		 * Holds our session data
 		 *
 		 * @since 1.0.0
@@ -40,11 +31,12 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		private $session;
 
 		/**
-		 * Instantiate session object. Private constructor.
+		 * Instantiate session object.
 		 *
 		 * @since 1.0.0
+		 * @since 1.5.4 Access changed to public.
 		 */
-		private function __construct() {
+		public function __construct() {
 			if ( ! $this->should_start_session() ) {
 				return;
 			}
@@ -150,11 +142,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @return Charitable_Session
 		 */
 		public static function get_instance() {
-			if ( is_null( self::$instance ) ) {
-				self::$instance = new self();
-			}
-
-			return self::$instance;
+			return charitable()->registry()->get( 'session' );
 		}
 
 		/**
@@ -264,7 +252,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  int $campaign_id Campaign ID.
-		 * @param  int $amount 	 Donation amount.
+		 * @param  int $amount 	    Donation amount.
 		 * @return void
 		 */
 		public function add_donation( $campaign_id, $amount ) {

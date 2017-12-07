@@ -2,10 +2,10 @@
 /**
  * Email Fields Donation class.
  *
- * @since   1.5.0
- * @version 1.5.0
  * @package Charitable/Classes/Charitable_Email_Fields_Donation
  * @author  Eric Daams
+ * @since   1.5.0
+ * @version 1.5.0
  */
 
 // Exit if accessed directly.

@@ -202,7 +202,8 @@ module.exports = function(grunt) {
                     '!**/*~', 
                     '!assets/css/scss/**',
                     '!CHANGELOG.md',
-                    '!phpdoc.xml'
+                    '!phpdoc.xml',
+                    '!vendor/**'
                 ],
                 'dest' : 'build/<%= pkg.name %>/'
             }

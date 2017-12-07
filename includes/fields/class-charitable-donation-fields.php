@@ -45,9 +45,9 @@ if ( ! class_exists( 'Charitable_Donation_Fields' ) ) :
          * @since 1.5.0
          *
          * @param Charitable_Fields_Registry $registry An instance of `Charitable_Field_Registry_Interface`.
-         * @param Charitable_Donation        $donation A `Charitable_Donation` instance.
+         * @param Charitable_Abstract_Donation        $donation A `Charitable_Abstract_Donation` instance.
          */
-        public function __construct( Charitable_Field_Registry_Interface $registry, Charitable_Donation $donation ) {
+        public function __construct( Charitable_Field_Registry_Interface $registry, Charitable_Abstract_Donation $donation ) {
             $this->registry = $registry;
             $this->donation = $donation;
         }

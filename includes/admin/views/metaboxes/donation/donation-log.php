@@ -9,7 +9,7 @@
 
 global $post;
 
-$logs             = charitable_get_donation( $post->ID )->get_merged_logs();
+$logs             = charitable_get_donation( $post->ID )->log()->get_log();
 $date_time_format = get_option( 'date_format' ) . ' - ' . get_option( 'time_format' );
 
 ?>

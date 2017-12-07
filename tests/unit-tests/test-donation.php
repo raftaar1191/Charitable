@@ -326,7 +326,7 @@ class Test_Charitable_Donation extends Charitable_UnitTestCase {
 
 		$donation->update_status( 'charitable-completed' );
 
-		$log = $donation->get_donation_log();
+		$log  = $donation->get_donation_log();
 		$last = array_pop( $log );
 
 		$this->assertEquals( 'Donation status updated from Pending to Paid.', $last['message'] );

@@ -52,7 +52,6 @@ if ( ! class_exists( 'Charitable_Logout_Shortcode' ) ) :
 			 * @param string $content Shortcode output.
 			 */
 			return apply_filters( 'charitable_logout_shortcode', ob_get_clean() );
-
 		}
 	}
 

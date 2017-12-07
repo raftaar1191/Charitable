@@ -17,8 +17,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 	/**
 	 * Charitable_Form
 	 *
-	 * @abstract
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	abstract class Charitable_Form {
 
@@ -101,7 +100,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 
 			add_action( 'charitable_form_before_fields', array( $this, 'render_error_notices' ) );
 			add_action( 'charitable_form_before_fields', array( $this, 'add_hidden_fields' ) );
-			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
+			add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 6 );
 			add_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 		}
 
@@ -604,30 +603,32 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		}
 
 		/**
-		 * For backwards-compatibility purposes, we need to call this
-		 * on the charitable_form_field hook to make sure that any
-		 * 3rd party themes that use the old method of rendering form
-		 * fields (a loop over $form->get_fields(), calling the
-		 * charitable_form_field hook for each one) will still work.
+		 * Render a form field.
 		 *
-		 * @since  1.5.1
+		 * @deprecated 1.8.0
 		 *
-		 * @param  array           $field     Field definition.
-		 * @param  string          $key       Field key.
-		 * @param  Charitable_Form $form      The form object.
-		 * @param  int             $index     The current index.
-		 * @param  string          $namespace Namespace for the form field's name attribute.
+		 * @since  1.0.0
+		 * @since  1.5.0 Deprecated. Use `Charitable_Public_Form_View` instead.
+		 * @since  1.5.4 Added $from_template parameter for backwards compatibility purposes.
+		 *               Anytime this hook is called from a template using the pre-Charitable 1.5
+		 *               approach of rendering fields (i.e. do_action( 'charitable_form_field' )),
+		 *               there will not be a sixth parameter, so this will default to true.
+		 *
+		 * @param  array           $field         Field definition.
+		 * @param  string          $key           Field key.
+		 * @param  Charitable_Form $form          The form object.
+		 * @param  int             $index         The current index.
+		 * @param  string          $namespace     Namespace for the form field's name attribute.
+		 * @param  boolean         $from_template Whether the method was called from a template file.
 		 * @return boolean False if the field was not rendered. True otherwise.
 		 */
-		public function maybe_render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
+		public function render_field( $field, $key, $form, $index = 0, $namespace = null, $from_template = true ) {
+			if ( ! $from_template ) {
 				return false;
 			}
 
-			/* If this was evoked by the form view, no need to do anymore. */
-			if ( $this->view()->rendering ) {
-				remove_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
-				return;
+			if ( ! $form->is_current_form( $this->id ) ) {
+				return false;
 			}
 
 			/**
@@ -645,58 +646,6 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			if ( ! $this->view()->rendered_hidden_fields ) {
 				$this->view()->render_hidden_fields();
 			}
-
-			/* Temporarily disable this hook to prevent endless recursion. */
-			remove_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
-
-			$ret = $this->render_field( $field, $key, $form, $index, $namespace );
-
-			add_action( 'charitable_form_field', array( $this, 'maybe_render_field' ), 10, 5 );
-
-			return $ret;
-		}
-
-		/**
-		 * Render a form field.
-		 *
-		 * @deprecated 1.8.0
-		 *
-		 * @since  1.0.0
-		 * @since  1.5.0 Deprecated. Use `Charitable_Public_Form_View` instead.
-		 *
-		 * @param  array           $field     Field definition.
-		 * @param  string          $key       Field key.
-		 * @param  Charitable_Form $form      The form object.
-		 * @param  int             $index     The current index.
-		 * @param  string          $namespace Namespace for the form field's name attribute.
-		 * @return boolean False if the field was not rendered. True otherwise.
-		 */
-		public function render_field( $field, $key, $form, $index = 0, $namespace = null ) {
-			if ( ! $form->is_current_form( $this->id ) ) {
-				return false;
-			}
-
-			/**
-			 * Remove form's hooked action.
-			 *
-			 * Before 1.5, forms used the filter to set the increment level. For
-			 * backwards-compatibility purposes, we still provide this method in the
-			 * form class, but it calls the Form View. This method should
-			 * default in the form abstract, but remove it when this function
-			 * is called directly.
-			 */
-			if ( has_action( 'charitable_form_field', array( $this, 'render_field' ) ) ) {
-				remove_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-
-				$rendered = $form->view()->render_field( $field, $key, array(
-					'index'     => $index,
-					'namespace' => $namespace,
-				) );
-
-				add_action( 'charitable_form_field', array( $this, 'render_field' ), 10, 5 );
-
-				return $rendered;
-			} 
 
 			return $form->view()->render_field( $field, $key, array(
 				'index'     => $index,

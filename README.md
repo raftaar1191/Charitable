@@ -1,61 +1,74 @@
-# Charitable — WordPress Fundraising Plugin
-[![Build Status](https://travis-ci.org/Charitable/Charitable.svg?branch=master)](https://travis-ci.org/Charitable/Charitable) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Charitable/Charitable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Charitable/Charitable/?branch=master)
+# Charitable — WordPress Donation Plugin
+[![Plugin Version](https://img.shields.io/wordpress/plugin/v/charitable.svg?maxAge=2592000)](https://wordpress.org/plugins/charitable/) [![Total Downloads](https://img.shields.io/wordpress/plugin/dt/charitable.svg)](https://wordpress.org/plugins/charitable/) [![Plugin Rating](https://img.shields.io/wordpress/plugin/r/charitable.svg)](https://wordpress.org/support/plugin/charitable/reviews/) [![WordPress Compatibility](https://img.shields.io/wordpress/v/charitable.svg?maxAge=2592000)](https://wordpress.org/plugins/charitable/) [![Build Status](https://travis-ci.org/Charitable/Charitable.svg?branch=master)](https://travis-ci.org/Charitable/Charitable) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Charitable/Charitable/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Charitable/Charitable/?branch=master) [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/Charitable/Charitable/blob/master/license.txt)
 
-Charitable is a powerful, extendable fundraising plugin created to help non-profits accept donations on their own website.
+This is the GitHub repository for Charitable, the WordPress donation plugin that grows with you. Charitable helps you accept donations on your WordPress website, giving you complete control over their fundraising experience. Unlike other WordPress plugins, Charitable was created with a core focus on being extendable and feature-rich.
 
-## Description
-
-[Charitable](http://wpcharitable.com/) is the WordPress fundraising alternative for non-profits, built to help non-profits raise money on their own website.
-
-You can accept PayPal or offline donations right out of the box, with support for other gateways available as extensions.
-
-### Easy to use
-
-Install, activate and create your first fundraising campaign in less than 5 minutes. With Charitable, adding campaigns is a straightforward, intuitive process. Less time setting up campaigns means more time for you to raise awareness for your campaign.
-
-### Unlimited fundraising campaigns 
-
-You can set up as many campaigns as you'd like with Charitable, and you can tailor them to your needs. You can set up suggested donation amounts, allow them to donate as much as they want, or do both.
-
-Need to set a fundraising goal? No problem.
-
-
-Running a time-sensitive campaign? Set an end date for your campaign and give it a sense of urgency.
-
-### Skip the transaction fees 
-
-Other fundraising software charges you for every donation you receive.
-
-
-Charitable is different. We won't charge you any transaction fees and you can use Charitable for free.
-
-### Works with any theme 
-
-Charitable has been designed to work with any well-coded theme, including the default WordPress themes.
-
-### Extensions 
-
-One size does *not* fit all. That's why we made Charitable an extendable platform.
-
-
-* **Anonymous Donations** - Allow people to make donations anonymously.
-* **User Avatars** - Let your donors upload their own profile photo to your site, instead of using their Gravatar profile.
-* **Simple Updates** - Add updates about your fundraising campaigns.
-
-Looking for more? 
-
-[View all extensions](http://wpcharitable.com).
-
-
-Stop sending your supporters to someone else's website to make donations. With Charitable, you can start accepting donations on your own WordPress-powered website.
+If you are not a developer or you want to find out more about Charitable's features and extensions, visit [wpcharitable.com](https://www.wpcharitable.com/).
 
 ## Installation
 
-1. Upload `charitable.php` to the `/wp-content/plugins/` directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Go to Charitable > Add Campaign to create your first campaign!
+If you would like to test/develop with Charitable, you can clone it into your WordPress installation via the command line:
 
-## Get Involved
+```
+cd /path/to/wordpress/
+cd wp-content/plugins
+git clone git@github.com:Charitable/Charitable.git charitable
+```
 
-Developers can contribute to Charitable on our [Github repository](https://github.com/Charitable/Charitable).
+After that, you can activate Charitable via your WordPress dashboard or with WP CLI:
 
+```
+wp plugin activate charitable
+```
+
+**Note:** If you are not a developer, please install Charitable via your WordPress dashboard.
+
+### Pre-populate pages, campaigns & donations
+
+If you would like to pre-populate a test site site with pages, campaigns and donations, you can use the provided setup script.
+
+```
+bin/setup.sh
+```
+
+**Optional Parameters**
+
+| Parameter                 | Description                                                                                     |
+| ------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--campaigns=<campaigns>` | The number of campaigns to be created. Defaults to `0`.                                         |
+| `--donations=<donations>` | The number of donations to be created automatically. Defaults to `0`.                           |
+| `--allow-root`            | Run the command as `root` user. This passes the `--allow-root` argument to the WP CLI commands. |
+
+**Example**
+
+This automatically sets up all pages with shortcodes, updates settings, then creates 10 campaigns and 500 donations.
+
+```
+bin/setup.sh --campaigns=10 --donations=500
+```
+
+### Key Branches
+
+* `master` is the primary development branch. We do not recommend using this on production sites.
+* `stable` is the latest stable branch, corresponding to the most recent public release.
+
+Past releases can be checked out via `git checkout 1.5.0` (replace `1.5.0` with the release you would like to check out). View the full set of releases at [https://github.com/Charitable/Charitable/releases](https://github.com/Charitable/Charitable/releases)
+
+## How to Report Bugs
+
+If you find a bug you can report it [right here on GitHub](https://github.com/Charitable/Charitable/issues/new). To disclose a security issue, please [submit a private report](https://www.wpcharitable.com/support/).
+
+## Support
+
+This repository is specifically for developers; it is not a place to get general Charitable support. If you have anything you need help with with Charitable, please get in touch via [our Support page](https://www.wpcharitable.com/support/).
+
+## Contributions
+
+Patches, bug reports and other contributions are always welcome! 
+
+Charitable has active translation projects in many languages, and we are always looking for new translation contributors and editors. [Read more](https://www.wpcharitable.com/documentation/translating-charitable/).
+
+## Related Tools / Projects
+
+- [Code snippets library](https://github.com/Charitable/library) - A collection of 130+ code snippets to customize Charitable.
+- [Extension boilerplate](https://github.com/Charitable/charitable-extension-boilerplate/) - Rapidly scaffold a Charitable extension using a one-line Grunt command.

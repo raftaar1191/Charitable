@@ -1,12 +1,13 @@
 <?php
 /**
- * donate endpoint.
+ * Donate endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Campaign_Donation_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Campaign_Donation_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -17,7 +18,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 	 * Charitable_Campaign_Donation_Endpoint
 	 *
 	 * @abstract
-	 * @since   1.5.0
+	 * @since  1.5.0
 	 */
 	class Charitable_Campaign_Donation_Endpoint extends Charitable_Endpoint {
 
@@ -27,11 +28,20 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		const ID = 'campaign_donation';
 
 		/**
+		 * Object instantiation.
+		 *
+		 * @since 1.5.4
+		 */
+		public function __construct() {
+			$this->cacheable = false;
+		}
+
+		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -40,7 +50,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 */
 		public function setup_rewrite_rules() {
 			add_rewrite_endpoint( 'donate', EP_PERMALINK );
@@ -49,11 +59,11 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *		 
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @global  WP_Rewrite $wp_rewrite
-		 * @param   array $args Mixed args.
-		 * @return  string
+		 * @global WP_Rewrite $wp_rewrite
+		 * @param  array $args Mixed args.
+		 * @return string
 		 */
 		public function get_page_url( $args = array() ) {
 			global $wp_rewrite;
@@ -95,7 +105,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			}
 
 			/* If 'strict' is set to `true`, this will only return true if this has the /donate/ endpoint. */
-			if ( array_key_exists( 'strict', $args ) && $args['strict'] ) {
+			if ( $this->is_strict_check( $args ) ) {
 				return false;
 			}
 
@@ -110,33 +120,22 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * @param  string $template The default template.
 		 * @return string
 		 */
-		public function get_template( $template ) {
-			/* If a donation ID is included, make sure it belongs to the current user. */
+		public function get_template( $template ) {			
 			$donation_id = get_query_var( 'donation_id', false );
 
-			if ( $donation_id ) {
-
-				$donation = charitable_get_donation( $donation_id );
-
-				if ( ! $donation || ! $donation->is_from_current_user() ) {
-
-					wp_safe_redirect( charitable_get_permalink( 'campaign_donation' ) );
-					exit();
-
-				}
+			/* If a donation ID is included, make sure it belongs to the current user. */
+			if ( $donation_id && $this->is_invalid_donation( $donation_id ) ) {
+				wp_safe_redirect( charitable_get_permalink( 'campaign_donation' ) );
+				exit();
 			}
 
 			/**
 			 * If the campaign doesn't exist or can no longer receive donations,
 			 * redirect the user to the campaign page.
 			 */
-			$campaign = charitable_get_current_campaign();
-
-			if ( ! $campaign || ! $campaign->can_receive_donations() ) {
-
-				wp_safe_redirect( get_permalink( $campaign->ID ) );
+			if ( ! $this->is_donation_ready_campaign() ) {
+				wp_safe_redirect( get_permalink( charitable_get_current_campaign_id() ) );
 				exit();
-
 			}
 
 			do_action( 'charitable_is_donate_page' );
@@ -147,10 +146,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		/**
 		 * Get the content to display for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $content
-		 * @return  string
+		 * @param  string $content
+		 * @return string
 		 */
 		public function get_content( $content ) {
 			if ( ! charitable_is_main_loop() ) {
@@ -167,6 +166,45 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			charitable_template( 'content-donation-form.php', array() );
 
 			return ob_get_clean();
+		}
+
+		/**
+		 * Returns whether the current request is for a campaign that can receive donations.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @return boolean
+		 */
+		protected function is_donation_ready_campaign() {
+			$campaign = charitable_get_current_campaign();
+
+			return $campaign && $campaign->can_receive_donations();
+		}
+
+		/**
+		 * Returns whether the passed donation is valid for the current user.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @param  int $donation_id The donation ID in query vars.
+		 * @return boolean
+		 */
+		protected function is_invalid_donation( $donation_id ) {
+			$donation = charitable_get_donation( $donation_id );
+
+			return ! $donation || ! $donation->is_from_current_user();
+		}
+
+		/**
+		 * Returns whether this is a strict check.
+		 *
+		 * @since  1.5.4
+		 *
+		 * @param  array $args Mixed args.
+		 * @return boolean
+		 */
+		protected function is_strict_check( $args ) {
+			return array_key_exists( 'strict', $args ) && $args['strict'];
 		}
 	}
 

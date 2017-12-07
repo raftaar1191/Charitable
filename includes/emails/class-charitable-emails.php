@@ -102,12 +102,12 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 			 *
 			 * @param string[] $emails The list of emails and their label.
 			 */
-			$emails = array(
+			$emails = apply_filters( 'charitable_resendable_donation_emails', array(
 				'donation_receipt',
 				'new_donation',
 				'offline_donation_receipt',
 				'offline_donation_notification',
-			);
+			) );
 
 			foreach ( $emails as $email )  {
 				$class  = $this->get_email( $email );

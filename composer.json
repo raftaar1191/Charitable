@@ -1,5 +1,16 @@
 {
+    "name": "charitable/charitable",
+    "type": "wordpress-plugin",
+    "description": "The most powerful WordPress donation plugin.",
+    "keywords": ["charitable", "wpcharitable", "donations", "fundraising", "donation"],
+    "homepage": "https://www.wpcharitable.com/",
+    "license": "GPL-2.0+",
+    "support": {
+        "issues": "https://www.wpcharitable.com/support/"
+    },
     "require-dev": {
-        "phpunit/phpunit": "5.7.*"
-    }
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/phpunit": "3.7.*"
+    },
+    "minimum-stability": "dev"
 }

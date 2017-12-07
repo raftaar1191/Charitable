@@ -1,12 +1,13 @@
 <?php
 /**
- * donate endpoint.
+ * Donate endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Campaign_Widget_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Campaign_Widget_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -16,22 +17,19 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 	/**
 	 * Charitable_Campaign_Widget_Endpoint
 	 *
-	 * @abstract
-	 * @since   1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Campaign_Widget_Endpoint extends Charitable_Endpoint {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'campaign_widget';
 
 		/**
 		 * Return the endpoint ID.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return 	string
+		 * @return string
 		 */
 		public static function get_endpoint_id() {
 			return self::ID;
@@ -40,7 +38,7 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 		/**
 		 * Add rewrite rules for the endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since 1.5.0
 		 */
 		public function setup_rewrite_rules() {
 			add_rewrite_endpoint( 'widget', EP_PERMALINK );
@@ -49,14 +47,13 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 		/**
 		 * Return the endpoint URL.
 		 *
-		 * @global  WP_Rewrite $wp_rewrite
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	array      $args
-		 * @return  string
+		 * @global WP_Rewrite $wp_rewrite
+		 * @param  array $args Mixed args.
+		 * @return string
 		 */
 		public function get_page_url( $args = array() ) {
-
 			global $wp_rewrite;
 
 			$campaign_id = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
@@ -68,44 +65,39 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 			}
 
 			return $url;
-
 		}
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
-		 * @global  WP_Query $wp_query
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return  boolean
+		 * @global WP_Query $wp_query
+		 * @return boolean
 		 */
 		public function is_page() {
-
 			global $wp_query;
 
 			return $wp_query->is_main_query()
 				&& array_key_exists( 'widget', $wp_query->query_vars )
 				&& $wp_query->is_singular( Charitable::CAMPAIGN_POST_TYPE );
-
 		}
 
 		/**
 		 * Return the template to display for this endpoint.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	string $template The default template.
-		 * @return  string
+		 * @param  string $template The default template.
+		 * @return string
 		 */
 		public function get_template( $template ) {
-
 			do_action( 'charitable_is_widget' );
 
 			add_filter( 'show_admin_bar', '__return_false' );
 			add_action( 'wp_head', 'charitable_hide_admin_bar' );
 
 			return apply_filters( 'charitable_widget_page_template', 'campaign-widget.php' );
-
 		}
 	}
 

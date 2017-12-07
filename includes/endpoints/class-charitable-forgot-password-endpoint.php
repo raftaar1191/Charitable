@@ -2,11 +2,12 @@
 /**
  * forgot_password endpoint.
  *
- * @version     1.5.0
- * @package     Charitable/Classes/Charitable_Forgot_Password_Endpoint
- * @author      Eric Daams
- * @copyright   Copyright (c) 2017, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Forgot_Password_Endpoint
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2017, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
@@ -16,13 +17,21 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 	/**
 	 * Charitable_Forgot_Password_Endpoint
 	 *
-	 * @abstract
-	 * @since   1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Forgot_Password_Endpoint extends Charitable_Endpoint {
 
 		/* @var string */
 		const ID = 'forgot_password';
+
+		/**
+		 * Object instantiation.
+		 *
+		 * @since 1.5.4
+		 */
+		public function __construct() {
+			$this->cacheable = false;
+		}
 
 		/**
 		 * Return the endpoint ID.
@@ -53,7 +62,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @global WP_Rewrite $wp_rewrite
-		 *
 		 * @param  array $args Mixed arguments.
 		 * @return string
 		 */
@@ -80,7 +88,6 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @global WP_Query $wp_query
-		 *
 		 * @param  array $args Mixed arguments.
 		 * @return boolean
 		 */
@@ -88,9 +95,10 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 			global $wp_query;
 
 			$login_page = charitable_get_option( 'login_page', 'wp' );
+			$strict     = ! array_key_exists( 'strict', $args ) || $args['strict'];
 
 			if ( 'wp' == $login_page ) {
-				return wp_lostpassword_url() == charitable_get_current_url();
+				return $strict ? false : wp_lostpassword_url() == charitable_get_current_url();
 			}
 
 			return $wp_query->is_main_query()
@@ -125,7 +133,7 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $content
+		 * @param  string $content Default content.
 		 * @return string
 		 */
 		public function get_content( $content ) {

@@ -267,9 +267,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			/* Get any version update notices first. */
 			$this->add_version_update_notices();
 
-			/* Also pick up any settings notices. */
-			// $this->add_settings_update_notices();
-
 			/* Render notices. */
 			charitable_get_admin_notices()->render();
 		}
@@ -399,7 +396,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 *
 		 * @since  1.3.0
 		 *
-		 * @return void
+		 * @return false|void Returns false if the export failed. Exits otherwise.
 		 */
 		public function export_donations() {
 			if ( ! wp_verify_nonce( $_GET['_charitable_export_nonce'], 'charitable_export_donations' ) ) {
@@ -408,17 +405,30 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			require_once( charitable()->get_path( 'admin' ) . 'reports/class-charitable-export-donations.php' );
 
-			$report_type = $_GET['report_type'];
-
+			/**
+			 * Filter the donation export arguments.
+			 *
+			 * @since 1.3.0
+			 *
+			 * @param array $args Export arguments.
+			 */
 			$export_args = apply_filters( 'charitable_donations_export_args', array(
-				'start_date'    => $_GET['start_date'],
-				'end_date'      => $_GET['end_date'],
-				'status'        => $_GET['post_status'],
-				'campaign_id'   => $_GET['campaign_id'],
-				'report_type'   => $report_type,
+				'start_date'  => $_GET['start_date'],
+				'end_date'    => $_GET['end_date'],
+				'status'      => $_GET['post_status'],
+				'campaign_id' => $_GET['campaign_id'],
+				'report_type' => $_GET['report_type'],
 			) );
 
-			$export_class = apply_filters( 'charitable_donations_export_class', 'Charitable_Export_Donations', $report_type, $export_args );
+			/**
+			 * Filter the export class name.
+			 *
+			 * @since 1.3.0
+			 *
+			 * @param string $report_type The type of report.
+			 * @param array  $args        Export arguments.
+			 */
+			$export_class = apply_filters( 'charitable_donations_export_class', 'Charitable_Export_Donations', $_GET['report_type'], $export_args );
 
 			new $export_class( $export_args );
 

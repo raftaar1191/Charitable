@@ -79,7 +79,7 @@ function charitable_get_admin_settings() {
  * @return Charitable_Admin_Notices
  */
 function charitable_get_admin_notices() {
-	return Charitable_Admin_Notices::get_instance();
+	return charitable()->registry()->get( 'admin_notices' );
 }
 
 /**

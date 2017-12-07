@@ -3,10 +3,11 @@
  * Sets up the donations list table in the admin.
  *
  * @package   Charitable/Classes/Charitable_Donation_List_Table
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -17,7 +18,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 	 * Charitable_Donation_List_Table class.
 	 *
 	 * @final
-	 * @since       1.5.0
+	 * @since 1.5.0
 	 */
 	final class Charitable_Donation_List_Table {
 
@@ -65,7 +66,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 		 *
 		 * @return  array
 		 */
-		public function dashboard_columns( $column_names ) {
+		public function dashboard_columns() {
 			/**
 			 * Filter the columns shown in the donations list table.
 			 *

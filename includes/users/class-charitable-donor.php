@@ -239,6 +239,14 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 
 			$name = trim( sprintf( '%s %s', $first_name, $last_name ) );
 
+			/**
+			 * Filter the donor name.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string           $name  The donor's name.
+			 * @param Charitable_Donor $donor This instance of `Charitable_Donor`.
+			 */
 			return apply_filters( 'charitable_donor_name', $name, $this );
 		}
 
