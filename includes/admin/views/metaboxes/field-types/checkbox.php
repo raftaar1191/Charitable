@@ -14,7 +14,7 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 }
 
 ?>
-<div id="<?php echo esc_attr( $view_args['wrapper_id'] ) ?>" class="charitable-metabox-wrap charitable-checkbox-wrap">
+<div id="<?php echo esc_attr( $view_args['wrapper_id'] ) ?>" class="<?php echo esc_attr( $view_args['wrapper_class'] );?>">
     <input type="checkbox" id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>"  tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" <?php checked( $view_args['checked'] ) ?> />
     <?php if ( isset( $view_args['label'] ) ) : ?>
         <label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label'] ?></label>

@@ -72,7 +72,7 @@ if ( ! class_exists( 'Charitable_Admin_Form' ) ) :
          * @return void
          */
         public function set_fields( array $fields ) {
-            usort( $fields, 'charitable_priority_sort' );
+            uasort( $fields, 'charitable_priority_sort' );
             $this->fields = $fields;
         }
 
