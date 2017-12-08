@@ -210,6 +210,8 @@
         float: none;
         width: 100%;
         margin-right: 0; } }
+  .charitable-donation-form .custom-donation-input {
+    max-width: 100%; }
 
 #charitable-donor-fields > .charitable-form-field {
   clear: both; }
