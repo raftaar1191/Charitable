@@ -28,7 +28,7 @@ if ( empty( $campaign_donations ) ) {
 }
 
 ?>
-<div id="charitable-campaign-donations-metabox-wrap" class="charitable-metabox-wrap charitable-repeatable-field-wrapper">
+<div id="charitable-campaign-donations-metabox-wrap" class="<?php echo esc_attr( $view_args['wrapper_class'] );?>">
 	<table id="charitable-campaign-donations" class="widefat">
 		<thead>
 			<tr class="table-header">
