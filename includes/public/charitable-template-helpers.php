@@ -97,10 +97,10 @@ function charitable_template_from_session_content( $template_key, $wrapper_args 
 /**
  * Return the template path if the template exists. Otherwise, return default.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
  * @param 	string|string[] $template
- * @return  string The template path if the template exists. Otherwise, return default.
+ * @return string The template path if the template exists. Otherwise, return default.
  */
 function charitable_get_template_path( $template, $default = '' ) {
 	$t = new Charitable_Template( $template, false );
@@ -140,10 +140,10 @@ function charitable_splice_template( $template, $templates, $index = 1 ) {
  *
  * Based on http://manas.tungare.name/software/css-compression-in-php/
  *
- * @since   1.2.0
+ * @since  1.2.0
  *
- * @param   string $css The block of CSS to be compressed.
- * @return  string The compressed CSS
+ * @param  string $css The block of CSS to be compressed.
+ * @return string The compressed CSS
  */
 function charitable_compress_css( $css ) {
 	/* 1. Remove comments */
@@ -161,10 +161,10 @@ function charitable_compress_css( $css ) {
 /**
  * Provides arguments passed to campaigns within the loop.
  *
- * @since   1.2.3
+ * @since  1.2.3
  *
- * @param   mixed[] $view_args Optional. If called by the shortcode, this will contain the arguments passed to the shortcode.
- * @return  mixed[]
+ * @param  mixed[] $view_args Optional. If called by the shortcode, this will contain the arguments passed to the shortcode.
+ * @return mixed[]
  */
 function charitable_campaign_loop_args( $view_args = array() ) {
 	$defaults = array(
@@ -177,12 +177,45 @@ function charitable_campaign_loop_args( $view_args = array() ) {
 }
 
 /**
+ * Provides arguments passed to campaigns within the loop.
+ *
+ * @since  1.5.7
+ *
+ * @param  mixed[] $view_args Optional. If called by the shortcode, this will contain the arguments passed to the shortcode.
+ * @return mixed[]
+ */
+function charitable_campaign_loop_class( $view_args = array() ) {
+	$classes = array( 'campaign-loop' );
+
+	if ( $view_args['columns'] > 1 ) {
+		$classes = array_merge( $classes, array( 'campaign-grid campaign-grid-' . $view_args['columns'] ) );
+
+		if ( $view_args['masonry'] ) {
+			$classes[] = 'masonry';
+		}
+	} else {
+		$classes[] = 'campaign-list';
+	}
+
+	/**
+	 * Filter the classes to be applied to the campaign loop.
+	 *
+	 * @since 1.5.7
+	 *
+	 * @param array $classes Array of classes.
+	 */
+	$classes = apply_filters( 'charitable_campaign_loop_classes', $classes, $view_args );
+
+	return implode( ' ', $classes );
+}
+
+/**
  * Processes arbitrary form attributes into HTML-safe key/value pairs
  *
- * @since   1.3.0
+ * @since  1.3.0
  *
- * @param   array $field Array defining the form field attributes.
- * @return  string       The formatted HTML-safe attributes
+ * @param  array $field Array defining the form field attributes.
+ * @return string       The formatted HTML-safe attributes
  * @see     Charitable_Form::render_field()
  */
 function charitable_get_arbitrary_attributes( $field ) {
@@ -214,7 +247,7 @@ function charitable_get_arbitrary_attributes( $field ) {
  * Charitable's filters touching other the_content instances outside the main
  * loop.
  *
- * @since   1.4.11
+ * @since  1.4.11
  *
  * @return 	boolean
  */
@@ -227,9 +260,9 @@ function charitable_is_main_loop() {
  *
  * @see 	https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
  * @global 	WP 		$wp
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return  string
+ * @return string
  */
 function charitable_get_current_url() {
 	return home_url( add_query_arg( null, null ) );
@@ -238,9 +271,9 @@ function charitable_get_current_url() {
 /**
  * Returns the URL to which the user should be redirected after signing on or registering an account.
  *
- * @since   1.0.0
+ * @since  1.0.0
  *
- * @return  string
+ * @return string
  */
 function charitable_get_login_redirect_url() {
 	if ( isset( $_REQUEST['redirect_to'] ) ) {

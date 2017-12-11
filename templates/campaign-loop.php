@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign
  * @since   1.0.0
- * @version 1.2.3
+ * @version 1.5.7
  */
 
 // Exit if accessed directly.
@@ -19,13 +19,8 @@ if ( ! $campaigns->have_posts() ) :
 	return;
 endif;
 
-if ( $view_args['columns'] > 1 ) :
-	$loop_class = sprintf( 'campaign-loop campaign-grid campaign-grid-%d', $view_args['columns'] );
-else :
-	$loop_class = 'campaign-loop campaign-list';
-endif;
-
-$args = charitable_campaign_loop_args( $view_args );
+$loop_class = charitable_campaign_loop_class( $view_args );
+$args       = charitable_campaign_loop_args( $view_args );
 
 /**
  * Add something before the campaign loop.
@@ -38,7 +33,7 @@ $args = charitable_campaign_loop_args( $view_args );
 do_action( 'charitable_campaign_loop_before', $campaigns, $args );
 
 ?>
-<ol class="<?php echo $loop_class ?>">
+<ol class="<?php echo esc_attr( $loop_class ) ?>">
 
 <?php
 while ( $campaigns->have_posts() ) :

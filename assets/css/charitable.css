@@ -348,12 +348,27 @@
   .campaign-loop.campaign-grid .campaign-donation {
     text-align: center; }
 
+.campaign-grid.masonry {
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 1em;
+  column-gap: 1em; }
+  .campaign-grid.masonry li.campaign,
+  .campaign-grid.masonry .campaign.hentry {
+    display: inline-block;
+    margin: 0 0 1em;
+    width: 100%;
+    float: none; }
+
 .campaign-grid-2 li.campaign,
 .campaign-grid-2 .campaign.hentry {
   width: 49%; }
 .campaign-grid-2 li.campaign:nth-child(2n+2),
 .campaign-grid-2 .campaign.hentry:nth-child(2n+2) {
   margin-right: 0; }
+.campaign-grid-2.masonry {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2; }
 
 .campaign-grid-3 li.campaign,
 .campaign-grid-3 .campaign.hentry {
@@ -361,6 +376,10 @@
 .campaign-grid-3 li.campaign,
 .campaign-grid-3 .campaign.hentry:nth-child(3n+3) {
   margin-right: 0; }
+.campaign-grid-3.masonry {
+  -moz-column-count: 3;
+  -webkit-column-count: 3;
+  column-count: 3; }
 
 .campaign-grid-4 li.campaign,
 .campaign-grid-4 .campaign.hentry {
@@ -368,6 +387,10 @@
 .campaign-grid-4 li.campaign,
 .campaign-grid-4 .campaign.hentry:nth-child(4n+4) {
   margin-right: 0; }
+.campaign-grid-4.masonry {
+  -moz-column-count: 4;
+  -webkit-column-count: 4;
+  column-count: 4; }
 
 /* Donors */
 .donors-list {
