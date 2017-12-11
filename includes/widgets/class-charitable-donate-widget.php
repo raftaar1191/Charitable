@@ -50,7 +50,6 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		 * @return  void
 		 */
 		public function widget( $args, $instance ) {
-
 			if ( ! array_key_exists( 'campaign_id', $instance ) || '' == $instance['campaign_id'] ) {
 				return;
 			}

@@ -65,8 +65,8 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 		 * @return  void
 		 */
 		public function form( $instance ) {
-			$args = $this->get_parsed_args( $instance );
-
+			$args      = $this->get_parsed_args( $instance );
+			$campaigns = Charitable_Campaigns::query( array( 'posts_per_page' => -1 ) );
 			?>
 			<p>
 				<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ) ?>"><?php _e( 'Title', 'charitable' ) ?>:</label>
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 					<option value="all" <?php selected( 'all', $args['campaign_id'] ) ?>><?php _e( 'Include all campaigns' ) ?></option>
 					<option value="current" <?php selected( 'current', $args['campaign_id'] ) ?>><?php _e( 'Campaign currently viewed', 'charitable' ) ?></option>
 					<optgroup label="<?php _e( 'Specific campaign', 'charitable' ) ?>">
-						<?php foreach ( Charitable_Campaigns::query()->posts as $campaign ) : ?>
+						<?php foreach ( $campaigns->posts as $campaign ) : ?>
 							<option value="<?php echo intval( $campaign->ID ) ?>" <?php selected( $campaign->ID, $args['campaign_id'] ) ?>><?php echo $campaign->post_title ?></option>
 						<?php endforeach ?>
 					</optgroup>
