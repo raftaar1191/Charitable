@@ -88,6 +88,8 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
 
+			add_filter( 'charitable_settings_fields_emails_email_' . self::ID, array( $this, 'add_email_settings' ), 1 );
+
 			/**
 			 * Filter the default email name.
 			 *
@@ -120,6 +122,31 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		*/
 		public function get_recipient() {
 			return $this->has_valid_user() ? $this->user->user_email : '';
+		}
+
+		/**
+		 * Add extra email settings.
+		 *
+		 * @since  1.5.7
+		 *
+		 * @param  array $settings Email settings.
+		 * @return array
+		 */
+		public function add_email_settings( $settings ) {
+			return array_merge( $settings, array(
+				'send_after_registration' => array(
+					'type'     => 'radio',
+					'title'    => __( 'Send after Registration', 'charitable' ),
+					'help'     => __( 'Whether to send an email verification message immediately after registration. If this is not set, users are only prompted to verify their email when they try to access their donation history.', 'charitable' ),
+					'priority' => 22,
+					'class'    => 'wide',
+					'default'  => 1,
+					'options'  => array(
+						'1' => __( 'Yes', 'charitable' ),
+						'0' => __( 'No', 'charitable' ),
+					),
+				),
+			) );
 		}
 
 		/**

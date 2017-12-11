@@ -321,7 +321,6 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * @return  void
 		 */
 		public function maybe_redirect_to_charitable_login() {
-
 			if ( ! apply_filters( 'charitable_disable_wp_login', false ) ) {
 				return;
 			}
@@ -346,8 +345,7 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @param  WP_User $user         An instance of `WP_User`.
-		 * @param  string  $redirect_url Where the user should be redirected
-		 *                               to after verifying their email.
+		 * @param  string  $redirect_url Where the user should be redirected to after verifying their email.
 		 * @return boolean True if the email is sent. False otherwise.
 		 */
 		public function send_verification_email( $user = '', $redirect_url = '' ) {

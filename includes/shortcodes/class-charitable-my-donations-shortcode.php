@@ -53,10 +53,11 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 
 			/* If the user is logged in, show the my donations template. */
 			$user     = charitable_get_user( get_current_user_id() );
-			$donor_id = $user->get_donor_id();
+			$donor_id = $user->get_donor_id();			
 
 			if ( false === $donor_id ) {
-				$donations = array();
+				$donations  = array();
+				$query_args = array();
 			} else {
 				$query_args = array(
 					'output'   => 'posts',
@@ -94,9 +95,9 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			 *
 			 * @since 1.4.0
 			 *
-			 * @param string $output    The default output.
-			 * @param array  $args The view arguments.
-			 * @param array  $args      The query arguments.
+			 * @param string $output The default output.
+			 * @param array  $args   The view arguments.
+			 * @param array  $args   The query arguments.
 			 */
 			return apply_filters( 'charitable_my_donations_shortcode', ob_get_clean(), $args, $query_args );
 		}

@@ -31,6 +31,15 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		private static $instance = null;
 
 		/**
+		 * Dynamic groups.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @var   array
+		 */
+		private $dynamic_groups;
+
+		/**
 		 * Create object instance.
 		 *
 		 * @since 1.0.0
@@ -161,9 +170,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 				/* Add the individual fields within the section */
 				foreach ( $section_fields as $key => $field ) {
-
 					$this->register_field( $field, array( $section_key, $key ) );
-
 				}
 			}
 		}
@@ -522,7 +529,18 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @return string[]
 		 */
 		private function get_dynamic_groups() {
-			return apply_filters( 'charitable_dynamic_groups', array() );
+			if ( ! isset( $this->dynamic_groups ) ) {
+				/**
+				 * Filter the list of dynamic groups.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $groups The dynamic groups.
+				 */
+				$this->dynamic_groups = apply_filters( 'charitable_dynamic_groups', array() );
+			}
+
+			return $this->dynamic_groups;
 		}
 
 		/**
@@ -540,31 +558,9 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/* DEPRECATED FUNCTIONS */
 
 		/**
-		 * Returns a composite key, given a section and submitted values.
+		 * @deprecated 1.7.0
 		 *
-		 * @since   1.0.0
-		 *
-		 * @param   string $section
-		 * @param   array  $submitted
-		 * @return  string
-		 *
-		 * @deprecated 1.5.0
-		 */
-		private function get_composite_key( $section, $submitted ) {
-			charitable_get_deprecated()->deprecated_function(
-				__METHOD__,
-				'1.5.0'
-			);
-
-			if ( ! is_array( current( $submitted ) ) ) {
-				return false;
-			}
-
-			return sprintf( '%s_%s', $section, key( $submitted ) );
-		}
-
-		/**
-		 * @deprecated 1.4.13
+		 * @since 1.4.13 Deprecated.
 		 */
 		public function get_update_messages() {
 			charitable_get_deprecated()->deprecated_function(

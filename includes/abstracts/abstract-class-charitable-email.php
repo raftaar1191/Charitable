@@ -285,12 +285,13 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 *
 		 * @since  1.0.0
 		 * @since  1.5.0 $settings argument is now deprecated.
+		 * @since  1.5.7 $settings argument removed from function definition.
 		 *
 		 * @param  array $settings Deprecated argument.
 		 * @return array
 		 */
-		public function email_settings( $settings = array() ) {
-			if ( ! empty( $settings ) ) {
+		public function email_settings() {
+			if ( func_num_args() ) {
 				charitable_get_deprecated()->deprecated_argument(
 					__METHOD__,
 					'1.5.0',

@@ -193,12 +193,16 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			 */
 			if ( $user_id ) {
 
-				/* If the confirmation link is generated corretly and the email is sent, set a notice. */
-				if ( Charitable_User_Management::get_instance()->send_verification_email( $user ) ) {
-					charitable_get_notices()->add_success(__( 'Thank you for registering. We have sent you an email to confirm your email address.', 'charitable' ) );
-					charitable_get_session()->add_notices();
-				}
+				/* Maybe send an email verification email. */
+				if ( charitable_get_option( array( 'emails_email_verification', 'send_after_registration' ), 1 ) ) {
 
+					/* If the confirmation link is generated correctly and the email is sent, set a notice. */
+					if ( Charitable_User_Management::get_instance()->send_verification_email( $user ) ) {
+						charitable_get_notices()->add_success(__( 'Thank you for registering. We have sent you an email to confirm your email address.', 'charitable' ) );
+						charitable_get_session()->add_notices();
+					}
+				}
+				
 				wp_safe_redirect( charitable_get_login_redirect_url() );
 				exit();
 			}

@@ -140,26 +140,6 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		}
 
 		/**
-		 * Add email keys to the settings groups.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @param  string[] $groups Array of settings groups.
-		 * @return string[]
-		 */
-		public function add_email_settings_dynamic_groups( $groups ) {
-			foreach ( charitable_get_helper( 'emails' )->get_available_emails() as $email_key => $email_class ) {
-				if ( ! class_exists( $email_class ) ) {
-					continue;
-				}
-
-				$groups[ 'emails_' . $email_key ] = apply_filters( 'charitable_settings_fields_emails_email', array(), new $email_class );
-			}
-
-			return $groups;
-		}
-
-		/**
 		 * Display table with emails.
 		 *
 		 * @since  1.0.0
@@ -169,6 +149,27 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 		public function render_emails_table( $args ) {
 			charitable_admin_view( 'settings/emails', $args );
 		}
+
+		/**
+		 * Add email keys to the settings groups.
+		 *
+		 * @deprecated 1.8.0
+		 *
+		 * @since  1.0.0
+		 * @since  1.5.7 Deprecated.
+		 *
+		 * @param  string[] $groups Array of settings groups.
+		 * @return string[]
+		 */
+		public function add_email_settings_dynamic_groups( $groups ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.7',
+				'Charitable_Email_Settings::add_individual_email_fields()'
+			);
+
+			return $this->add_individual_email_fields( $groups );
+		}		
 	}
 
 endif;

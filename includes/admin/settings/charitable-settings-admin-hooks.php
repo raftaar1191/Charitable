@@ -50,7 +50,7 @@ add_filter( 'charitable_save_settings', array( Charitable_Licenses_Settings::get
  * @see Charitable_Email_Settings::add_licenses_group()
  */
 add_filter( 'charitable_dynamic_groups', array( Charitable_Gateway_Settings::get_instance(), 'add_gateway_settings_dynamic_groups' ) );
-add_filter( 'charitable_dynamic_groups', array( Charitable_Email_Settings::get_instance(), 'add_email_settings_dynamic_groups' ) );
+add_filter( 'charitable_dynamic_groups', array( Charitable_Email_Settings::get_instance(), 'add_individual_email_fields' ) );
 add_filter( 'charitable_dynamic_groups', array( Charitable_Licenses_Settings::get_instance(), 'add_licenses_group' ) );
 
 /**
