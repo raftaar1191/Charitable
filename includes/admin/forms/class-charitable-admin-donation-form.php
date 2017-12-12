@@ -319,7 +319,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_donation_values() {
-			$values   = array(
+			$values = array(
 				'ID'        => $this->get_submitted_value( 'ID' ),
 				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),				
 				'status'    => $this->get_submitted_value( 'status' ),
