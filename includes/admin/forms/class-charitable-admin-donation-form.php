@@ -338,7 +338,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			foreach ( $this->get_merged_fields() as $key => $field ) {
 				if ( $this->should_field_be_added( $field, $key, $values ) ) {
-					$values[ $field['data_type'] ][ $key ] = $this->get_field_value_from_submission( $field, $key, $values );
+					$values[ $field['data_type'] ][ $key ] = $this->get_field_value_from_submission( $field, $key );
 				}
 			}
 
@@ -358,14 +358,12 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *
 		 * @since  1.5.7
 		 *
-		 * @param  array  $field  The field definition.
-		 * @param  string $key    The key of the field.
-		 * @param  array  $values The sanitized values so far.
+		 * @param  array  $field The field definition.
+		 * @param  string $key   The key of the field.
 		 * @return mixed
 		 */
-		protected function get_field_value_from_submission( $field, $key, $values ) {
-			$default   = 'checkbox' == $field['type'] ? false : '';
-			$submitted = $this->get_submitted_value( $key );
+		protected function get_field_value_from_submission( $field, $key ) {
+			$default = 'checkbox' == $field['type'] ? false : '';
 
 			return $this->get_submitted_value( $key, $default );
 		}
@@ -432,7 +430,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			$donor = new Charitable_Donor( $values['donor_id'] );
 
 			/* Populate the 'user' and 'user_id' args with this donor's stored details. */
-			$values['user'] = array(
+			$values['user_id'] = $donor->get_user()->ID;
+			$values['user']    = array(
 				'email'      => $donor->get_donor_meta( 'email' ),
 				'first_name' => $donor->get_donor_meta( 'first_name' ),
 				'last_name'  => $donor->get_donor_meta( 'last_name' ),
@@ -443,8 +442,6 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				'country'    => $donor->get_donor_meta( 'country' ),
 				'phone'      => $donor->get_donor_meta( 'phone' ),
 			);
-
-			$values['user_id'] = $donor->user_id;
 
 			return $values;
 		}
