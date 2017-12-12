@@ -379,11 +379,11 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		protected function should_field_be_added( $field, $key, $values ) {
-			if ( $this->should_data_type_be_added( $field ) && array_key_exists( 'type', $field ) ) {
+			if ( ! $this->should_data_type_be_added( $field ) || ! array_key_exists( 'type', $field ) ) {
 				return false;
 			}
 
-			if ( ! isset( $values[ $field['data_type'] ][ $key ] ) ) {
+			if ( isset( $values[ $field['data_type'] ][ $key ] ) ) {
 				return false;
 			}
 
@@ -403,7 +403,10 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		}
 
 		/**
-		 * Should a particular user field be added.
+		 * Returns whether users fields should be added.
+		 *
+		 * This will return true if no donor_id is set, or if this is an edit
+		 * of an existing donation.
 		 *
 		 * @since  1.5.7
 		 *
@@ -411,7 +414,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		protected function should_user_field_be_added( $values ) {
-			return ! $values['donor_id'];
+			return ! $values['donor_id'] || $values['ID'];
 		}
 
 		/**
@@ -423,7 +426,12 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		protected function sanitize_submitted_donor( $values ) {
+			/* Shortcircuit for new donations. */
 			if ( ! $values['donor_id'] ) {
+				if ( $values['ID'] ) {
+					$values['donor_id'] = charitable_get_donation( $values['ID'] )->get_donor_id();
+				}
+
 				return $values;
 			}
 
