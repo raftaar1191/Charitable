@@ -57,6 +57,15 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		protected $donation = null;
 
 		/**
+		 * The donation object for the most recently made donation.
+		 *
+		 * @since 1.5.7
+		 *
+		 * @var   Charitable_Donor
+		 */
+		protected $last_donation;
+
+		/**
 		 * Donor meta.
 		 *
 		 * @var     mixed[]
@@ -90,7 +99,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param 	string $key Key to search for.
+		 * @param  string $key Key to search for.
 		 * @return mixed
 		 */
 		public function __get( $key ) {
@@ -187,17 +196,64 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  string $key Optional key passed to return a particular meta field.
-		 * @return array|false
+		 * @return array|mixed|false
 		 */
 		public function get_donor_meta( $key = '' ) {
 			if ( ! $this->get_donation() ) {
-				return false;
+				return $this->get_donor_meta_from_profile( $key );
 			}
 
 			if ( ! isset( $this->donor_meta ) ) {
 				$this->donor_meta = get_post_meta( $this->donation_id, 'donor', true );
 			}
 
+			return $this->get_donor_meta_from_set_meta( $key );
+		}
+
+		/**
+		 * Return a donor's meta details from their profile, or their most recent donation.
+		 *
+		 * @since  1.5.7
+		 *
+		 * @param  string $key Optional key passed to return a particular meta field.
+		 * @return array|mixed|false
+		 */
+		protected function get_donor_meta_from_profile( $key ) {
+			if ( isset( $this->data->$key ) ) {
+				return $this->data->$key;
+			}
+
+			/* If the donor has a profile, return the values from that. */
+			if ( $this->get_user()->ID ) {
+				return $this->get_user()->get( $key );
+			}
+
+			/**
+			 * If we still don't have any data about them, return the
+			 * data from the last donation.
+			 */
+			$last_donation = $this->get_last_donation();
+
+			if ( is_null( $last_donation ) ) {
+				return false;
+			}
+
+			if ( ! isset( $this->donor_meta ) ) {
+				$this->donor_meta = $last_donation->get_donor_data();
+			}
+
+			return $this->get_donor_meta_from_set_meta( $key );
+		}
+
+		/**
+		 * Return a specific key or the entire array of data from a set of donor data.
+		 *
+		 * @since  1.5.7
+		 *
+		 * @param  string $key Optional key passed to return a particular meta field.
+		 * @return array|mixed
+		 */
+		protected function get_donor_meta_from_set_meta( $key ) {
 			if ( empty( $key ) ) {
 				return $this->donor_meta;
 			}
@@ -220,6 +276,26 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		}
 
 		/**
+		 * Return the most recently made donation.
+		 *
+		 * @since  1.5.7
+		 *
+		 * @return Charitable_Donation|null Null if no donation was found. A `Charitable_Donation` instance otherwise.
+		 */
+		public function get_last_donation() {
+			if ( ! isset( $this->last_donation ) ) {
+				$donation = new Charitable_Donations_Query( array(
+					'number'   => 1,
+					'donor_id' => $this->donor_id,
+				) );
+
+				$this->last_donation = $donation->count() ? $donation->current() : null;
+			}
+
+			return $this->last_donation;
+		}
+
+		/**
 		 * Return the donor's name stored for the particular donation.
 		 *
 		 * @since  1.0.0
@@ -227,17 +303,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * @return string
 		 */
 		public function get_name() {
-			$meta = $this->get_donor_meta();
-
-			if ( $meta ) {
-				$first_name = isset( $meta['first_name'] ) ? $meta['first_name'] : '';
-				$last_name  = isset( $meta['last_name'] ) ? $meta['last_name'] : '';
-			} else {
-				$first_name = $this->data->first_name;
-				$last_name  = $this->data->last_name;
-			}
-
-			$name = trim( sprintf( '%s %s', $first_name, $last_name ) );
+			$name = trim( sprintf( '%s %s', $this->get_donor_meta( 'first_name' ), $this->get_donor_meta( 'last_name' ) ) );
 
 			/**
 			 * Filter the donor name.
@@ -258,9 +324,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 * @return string
 		 */
 		public function get_email() {
-			$email = $this->get_donor_meta( 'email' );
-
-			return $email ? $email : $this->data->email;
+			return $this->get_donor_meta( 'email' );
 		}
 
 		/**

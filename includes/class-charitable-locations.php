@@ -231,13 +231,12 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Return the address format to use for the given address.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $address_fields Address fields.
-		 * @return 	string
+		 * @param  array $address_fields Address fields.
+		 * @return string
 		 */
 		private function get_address_format( $address_fields ) {
-
 			$formats = $this->get_address_formats();
 			$country = $address_fields['country'];
 
@@ -247,9 +246,14 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 			$format = isset( $formats[ $country ] ) ? $formats[ $country ] : $formats['default'];
 
 			/**
-			 * For local addresses, leave the country field blank (unless explicitly forced).
+			 * By default, the country field is left out for local addresses.
 			 *
-			 * @hook 	charitable_formatted_address_force_country_display
+			 * Use the `charitable_formatted_address_force_country_display` filter
+			 * to force the country to always be printed.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $force_country Whether the country is always shown. False by default.
 			 */
 			if ( $country == $this->get_base_country() && false === apply_filters( 'charitable_formatted_address_force_country_display', false ) ) {
 				$format = str_replace( '{country}', '', $format );
@@ -262,13 +266,12 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		/**
 		 * Process an array of address fields, trimming whitespace and adding full country and full state names.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $address_fields Address fields.
-		 * @return 	string[]
+		 * @param  array $address_fields Address fields.
+		 * @return string[]
 		 */
 		private function sanitize_address_fields( $address_fields ) {
-
 			if ( ! is_array( $address_fields ) ) {
 				return $address_fields;
 			}
@@ -335,7 +338,6 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 		 * @return 	string
 		 */
 		public function get_formatted_address( $address_fields = array() ) {
-
 			$address_fields    = $this->sanitize_address_fields( $address_fields );
 			$formatted_address = '';
 

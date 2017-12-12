@@ -666,7 +666,6 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			 * to this party right now then.
 			 */
 			if ( ! $email ) {
-
 				charitable_get_deprecated()->doing_it_wrong(
 					__METHOD__,
 					__( 'Unable to add donor. Email not set for logged out user.', 'charitable' ),
@@ -674,17 +673,32 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				);
 
 				return 0;
-
 			}
 
+			/**
+			 * Filter the donor values.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array           $donor_values The donor values.
+			 * @param Charitable_User $user         This instance of `Charitable_User`.
+			 * @param array           $submitted    Submitted values.
+			 */
 			$donor_values = apply_filters( 'charitable_donor_values', array(
-				'user_id' => $this->ID,
-				'email' => $email,
+				'user_id'    => $this->ID,
+				'email'      => $email,
 				'first_name' => isset( $submitted['first_name'] ) ? $submitted['first_name'] : $this->first_name,
-				'last_name' => isset( $submitted['last_name'] ) ? $submitted['last_name'] : $this->last_name,
+				'last_name'  => isset( $submitted['last_name'] ) ? $submitted['last_name'] : $this->last_name,
 			), $this, $submitted );
 
 			$donor_id = charitable_get_table( 'donors' )->insert( $donor_values );
+
+			/**
+			 * If the user is logged in, add the "Donor" role to their account.
+			 */
+			if ( $this->is_logged_in() ) {
+				$this->add_role( 'donor' );
+			}
 
 			do_action( 'charitable_after_insert_donor', $donor_id, $this );
 

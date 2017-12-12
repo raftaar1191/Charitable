@@ -97,23 +97,32 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 				return $_POST[ $key ];
 			}
 
-			$user = $this->get_user();
-			$value = $default;
+			$value = $this->get_user_prop_or_default( $key, $default );
+			
+			/**
+			 * Deprecated filter. Use the filter below instead.
+			 *
+			 * @deprecated 1.8.0
+			 *
+			 * @since 1.0.0
+			 * @since 1.5.7 Deprecated.
+			 *
+			 * @param string          $value The value.
+			 * @param string          $key   The key of the value.
+			 * @param Charitable_User $user  Instance of `Charitable_User`.
+			 */
+			$value = apply_filters( 'charitable_campaign_submission_user_value', $value, $key, $this->get_user() );
 
-			if ( $user ) {
-				switch ( $key ) {
-					case 'user_description' :
-						$value = $user->description;
-						break;
-
-					default :
-						if ( $user->has_prop( $key ) ) {
-							$value = $user->get( $key );
-						}
-				}
-			}
-
-			return apply_filters( 'charitable_campaign_submission_user_value', $value, $key, $user );
+			/**
+			 * Filter the set value for a particular key.
+			 *
+			 * @since 1.5.7
+			 *
+			 * @param string          $value The value.
+			 * @param string          $key   The key of the value.
+			 * @param Charitable_User $user  Instance of `Charitable_User`.
+			 */
+			return apply_filters( 'charitable_profile_value', $value, $key, $this->get_user() );
 		}
 
 		/**
@@ -125,6 +134,11 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 */
 		public function get_user_fields() {
 			$user_fields = apply_filters( 'charitable_user_fields', array(
+				'username' => array(
+					'type'      => 'paragraph',
+					'priority'  => '',
+					'content'   => sprintf( __( 'Username: %s.', 'charitable' ), $this->get_user()->user_login ),
+				),
 				'first_name' => array(
 					'label'     => __( 'First name', 'charitable' ),
 					'type'      => 'text',
@@ -460,6 +474,21 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 			}
 
 			return true;
+		}
+
+		/**
+		 * Return a user's set value for a particular value, or return the default value.
+		 *
+		 * @since  1.5.7
+		 *
+		 * @param  string $key     The property we're getting the value for.
+		 * @param  string $default The fallback value.
+		 * @return string
+		 */
+		protected function get_user_prop_or_default( $key, $default ) {
+			$user = $this->get_user();
+
+			return $user && $user->has_prop( $key ) ? $user->get( $key ) : $default;
 		}
 
 		/**

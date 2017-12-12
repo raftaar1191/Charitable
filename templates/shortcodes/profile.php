@@ -15,7 +15,7 @@ $form  = $view_args['form'];
 $donor = charitable_get_user( wp_get_current_user() );
 
 /**
- * Do something before rendering the user profile form.=
+ * Do something before rendering the user profile form.
  *
  * @param array $view_args All args passed to template.
  */

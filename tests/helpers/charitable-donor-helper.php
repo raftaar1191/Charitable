@@ -26,7 +26,6 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 	 * @return 	int 		$donor_id
 	 */
 	public static function create_donor( $args = array() ) {
-
 		$defaults = array(
 			'user_email'	=> 'johndoe@example.com', 
 			'user_login'	=> 'johndoe',
@@ -37,8 +36,9 @@ class Charitable_Donor_Helper extends WP_UnitTestCase {
 			'city'			=> 'Melbourne',
 			'state'			=> 'VIC',		
 			'postcode'		=> '3000',
-			'country'		=> 'Australia',
-			'phone'			=> '0390009000'
+			'country'		=> 'AU',
+			'phone'			=> '0390009000',
+			'user_pass'     => 'apple',
 		);	
 
 		$args = array_merge( $defaults, $args );
