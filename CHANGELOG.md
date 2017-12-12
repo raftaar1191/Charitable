@@ -1,3 +1,16 @@
+## 1.5.7
+* NEW: Added a new optional masonry layout for the `[campaigns]` shortcode. To use it, just add `masonry=1` to the shortcode. [#326](https://github.com/Charitable/Charitable/issues/326)
+* NEW: Additional donor meta like their address and phone number are automatically populated when a new manual donation is created for someone who donated previously. [#472](https://github.com/Charitable/Charitable/issues/472)
+* NEW: Allowed email verification to be disabled for registrations. With this off, the email verification process can still be initiated by the donor from the My Donations page (i.e. the output of `[charitable_my_donations]`). [#482](https://github.com/Charitable/Charitable/issues/482)
+* NEW: Added the username in the output of [charitable_profile]. [#325](https://github.com/Charitable/Charitable/issues/325)
+* FIX: Resending the offline donation notification for admins previously sent the regular donation notification instead of the offline one. Bug squashed. [#481](https://github.com/Charitable/Charitable/issues/481)
+* FIX: When custom donations are turned off, donors could proceed through the donation form without selecting a suggested amount. This is fixed now. [#478](https://github.com/Charitable/Charitable/issues/478)
+* FIX: Prevented errors when overriding template functions. [#488](https://github.com/Charitable/Charitable/issues/488)
+* FIX: For Charitable customers, correctly show lifetime licenses as having no expiry. [#479](https://github.com/Charitable/Charitable/issues/479)
+* FIX: The Donors widget only showed the 10 most recent campaigns. It now correctly shows all. [#480](https://github.com/Charitable/Charitable/issues/480)
+* FIX: Improved inconsistencies in the way shortcodes are set up under the hood. [#454](https://github.com/Charitable/Charitable/issues/454)
+* FIX: Fixed an issue with the custom donation amount input extending outside the edge of the donate widget in the Storefront theme (and possibly other themes). [#488](https://github.com/Charitable/Charitable/issues/488)
+
 ## 1.5.6
 * NEW: Allow a default donation amount to be set via the `charitable_default_donation_amount` filter. [#470](https://github.com/Charitable/Charitable/issues/470)
 * NEW: Made the list of resendable donation emails a filterable list, using the `charitable_resendable_donation_emails` filter. [#476](https://github.com/Charitable/Charitable/issues/476)
