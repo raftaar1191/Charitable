@@ -1,3 +1,6 @@
+## 1.5.8
+* FIX: Updated the data that is sent to PayPal to provide better compatibility with IPNs.
+
 ## 1.5.7
 * NEW: Added a new optional masonry layout for the `[campaigns]` shortcode. To use it, just add `masonry=1` to the shortcode. [#326](https://github.com/Charitable/Charitable/issues/326)
 * NEW: Additional donor meta like their address and phone number are automatically populated when a new manual donation is created for someone who donated previously. [#472](https://github.com/Charitable/Charitable/issues/472)
