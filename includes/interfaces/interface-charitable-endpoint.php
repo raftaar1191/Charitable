@@ -36,18 +36,20 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
+		 * @param  array $args Mixed args.
 		 * @return string
 		 */
-		public function get_page_url();
+		public function get_page_url( $args );
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
 		 *
 		 * @since  1.5.0
 		 *
+		 * @param  array $args Mixed args.
 		 * @return boolean
 		 */
-		public function is_page();
+		public function is_page( $args );
 	}
 
 endif;
