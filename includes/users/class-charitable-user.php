@@ -693,13 +693,6 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 			$donor_id = charitable_get_table( 'donors' )->insert( $donor_values );
 
-			/**
-			 * If the user is logged in, add the "Donor" role to their account.
-			 */
-			if ( $this->is_logged_in() ) {
-				$this->add_role( 'donor' );
-			}
-
 			do_action( 'charitable_after_insert_donor', $donor_id, $this );
 
 			return $donor_id;

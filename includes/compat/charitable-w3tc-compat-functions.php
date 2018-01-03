@@ -21,7 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return  void
  */
 function charitable_compat_w3tc_clear_campaign_cache( $campaign_id ) {
-	w3tc_flush_post( $campaign_id );
+	if ( function_exists( 'w3tc_flush_post' ) ) {
+        w3tc_flush_post( $campaign_id );
+    }
 }
 
 add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_campaign_cache' );

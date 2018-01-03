@@ -281,7 +281,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			if ( ! isset( $this->current_endpoint ) ) {
 
 				foreach ( $this->endpoints as $endpoint_id => $endpoint ) {
-					if ( $endpoint->is_page( array( 'strict' => true ) ) ) {
+					if ( $this->is_page( $endpoint_id, array( 'strict' => true ) ) ) {
 						$this->current_endpoint = $endpoint_id;
 
 						return $this->current_endpoint;
