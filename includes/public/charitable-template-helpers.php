@@ -258,8 +258,8 @@ function charitable_is_main_loop() {
 /**
  * Returns the current URL.
  *
- * @see 	https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
- * @global 	WP 		$wp
+ * @see    https://gist.github.com/leereamsnyder/fac3b9ccb6b99ab14f36
+ *
  * @since  1.0.0
  *
  * @return string

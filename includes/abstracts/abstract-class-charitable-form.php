@@ -346,7 +346,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @param  string $key   Key of the field to sort.
 		 * @param  array  $field Field definition.
 		 * @param  array  $ret   Return value that we're carrying.
-		 * @return  array[]
+		 * @return array[]
 		 */
 		public function sort_field_by_data_type( $key, $field, $ret ) {
 			/* Filter out paragraphs and fields without a type. */
