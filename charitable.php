@@ -592,9 +592,9 @@ if ( ! class_exists( 'Charitable' ) ) :
 				$endpoints->register( new Charitable_Donation_Receipt_Endpoint );
 				$endpoints->register( new Charitable_Email_Preview_Endpoint );
 				$endpoints->register( new Charitable_Email_Verification_Endpoint );
-				$endpoints->register( new Charitable_Registration_Endpoint );
 				$endpoints->register( new Charitable_Forgot_Password_Endpoint );
 				$endpoints->register( new Charitable_Reset_Password_Endpoint );
+				$endpoints->register( new Charitable_Registration_Endpoint );
 				$endpoints->register( new Charitable_Login_Endpoint );
 				$endpoints->register( new Charitable_Profile_Endpoint );
 
