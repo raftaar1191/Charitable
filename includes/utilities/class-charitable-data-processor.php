@@ -57,11 +57,23 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 * @param array $fields The map of fields.
 		 */
 		public function __construct( $data, $fields ) {
-			$this->data   = $data;
-			$this->fields = $fields;
-			$this->output = array();
+			$this->data    = $data;
+			$this->fields  = $fields;
+			$this->output  = array();
+			$this->invalid = false;
 
 			$this->process_data( $this->fields );
+		}
+
+		/**
+		 * Returns whether the data is valid.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @return boolean
+		 */
+		public function is_valid() {
+			return false == $this->invalid;
 		}
 
 		/**
@@ -76,7 +88,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		public function get( $key, $data_type = false ) {
 			if ( $data_type ) {
 				return $this->get_from_data_type( $key, $data_type );
-			} 
+			}
 
 			return isset( $this->output[ $key ] ) ? $this->output[ $key ] : null;
 		}
@@ -128,7 +140,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 
 			if ( ! empty( $data ) ) {
 				$this->set_output( $data, $data_type );
-			}			
+			}
 		}
 
 		/**
@@ -224,6 +236,36 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		}
 
 		/**
+		 * Process a picture field.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @param  string $key
+		 * @return int|false
+		 */
+		protected function process_picture( $key ) {
+			$value = array_key_exists( $key, $this->data ) ? $this->data[ $key ] : '';
+
+			/**
+			 * If Javascript is enabled, we do not expect to have a $_FILES array with the
+			 * picture, as the upload was already handled client-side.
+			 */
+			if ( ! $this->picture_file_exists( $key ) ) {
+				return $value;
+			}
+
+			$value = $this->upload_attachment( $key );
+
+			if ( is_wp_error( $value ) ) {
+				charitable_get_notices()->add_errors_from_wp_error( $value );
+				$value         = '';
+				$this->invalid = true;
+			}
+
+			return $value;
+		}
+
+		/**
 		 * Sanitize a number.
 		 *
 		 * @since  1.5.9
@@ -233,6 +275,85 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 */
 		protected function sanitize_number( $value ) {
 			return intval( $value );
+		}
+
+		/**
+		 * Sanitize a value received from a datepicker.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @param  string $value The datepicker value.
+		 * @return string|int If a date was chosen, returns the date in YYYY-MM-DD format.
+		 *                    Otherwise, returns 0.
+		 */
+		protected function sanitize_datepicker( $value ) {
+			if ( empty( $value ) ) {
+				return 0;
+			}
+
+			return charitable_sanitize_date( $value, 'Y-m-d' );
+		}
+
+		/**
+		 * Returns true if a file was found for the picture in the $_FILES array.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @param  string $key The picture file key.
+		 * @return boolean
+		 */
+		protected function picture_file_exists( $key ) {
+			return isset( $_FILES ) && isset( $_FILES[ $key ] );
+		}
+
+		/**
+		 * Uploads a file and attaches it to the given post.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @param  string $file_key  Key of the file input.
+		 * @param  int    $post_id   Post ID.
+		 * @return int|WP_Error ID of the attachment or a WP_Error object on failure.
+		 */
+		public function upload_attachment( $file_key, $post_id = 0 ) {
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+			require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			require_once( ABSPATH . 'wp-admin/includes/media.php' );
+
+			$overrides = $this->get_file_overrides( $file_key, $overrides );
+
+			return media_handle_upload( $file_key, $post_id, array(), $overrides );
+		}
+
+		/**
+		 * Return overrides array for use with upload_attachment() methods.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
+		 * 							 function once for each uploaded file.
+		 * @param  array  $overrides Optional. An associative array of names=>values to
+		 * 							 override default variables. Default false.
+		 * @return array
+		 */
+		protected function get_file_overrides( $file_key, $overrides = array() ) {
+			$allowed_mimes = array(
+				'jpg|jpeg|jpe' => 'image/jpeg',
+				'gif'          => 'image/gif',
+				'png'          => 'image/png',
+				'bmp'          => 'image/bmp',
+				'tif|tiff'     => 'image/tiff',
+				'ico'          => 'image/x-icon',
+			);
+
+			$defaults = array(
+				'test_form' => false,
+				'mimes'     => apply_filters( 'charitable_file_' . $file_key . '_allowed_mimes', $allowed_mimes ),
+			);
+
+			$overrides = wp_parse_args( $overrides, $defaults );
+
+			return $overrides;
 		}
 	}
 

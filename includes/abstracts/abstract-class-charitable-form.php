@@ -472,7 +472,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			$overrides = wp_parse_args( $overrides, $defaults );
 
 			return $overrides;
-		}		
+		}
 
 		/**
 		 * Return the template name used for this field.
@@ -492,7 +492,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 				'Charitable_Public_Form_View::get_template_name()'
 			);
 
-			return $form->view()->get_template_name( $field );			
+			return $form->view()->get_template_name( $field );
 		}
 
 		/**
@@ -561,7 +561,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			 */
 			remove_filter( 'charitable_form_field_increment', array( $this, 'increment_index' ), 10, 2 );
 
-			return $this->view()->increment_index( $field );			
+			return $this->view()->increment_index( $field );
 		}
 
 		/**
