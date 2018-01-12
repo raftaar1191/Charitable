@@ -97,7 +97,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @param mixed $post The post ID or WP_Post object for this this campaign.
 		 */
 		public function __construct( $post ) {
-			if ( ! is_a( $post, 'WP_Post' ) ) {
+			if ( ! $post instanceof WP_Post ) {
 				$post = get_post( $post );
 			}
 
@@ -867,7 +867,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			foreach ( $value as $key => $suggestion ) {
-				$value[ $key ]['amount'] = charitable_sanitize_amount( $suggestion['amount'] );
+				$value[ $key ]['amount'] = charitable_sanitize_amount( (string) $suggestion['amount'] );
 			}
 
 			return $value;
@@ -898,7 +898,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public static function sanitize_checkbox( $value ) {
-			return intval( true == $value || 'on' == $value );
+			return intval( true == $value || 'on' === $value );
 		}
 
 		/**

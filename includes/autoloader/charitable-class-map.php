@@ -40,6 +40,7 @@ return array(
 "Charitable_Settings" => "admin/settings/class-charitable-settings.php",
 "Charitable_Map" => "autoloader/charitable-class-map.php",
 "Charitable_Registry" => "autoloader/class-charitable-registry.php",
+"Charitable_Campaign_Processor" => "campaigns/class-charitable-campaign-processor.php",
 "Charitable_Campaign" => "campaigns/class-charitable-campaign.php",
 "Charitable_Campaigns" => "campaigns/class-charitable-campaigns.php",
 "Charitable_Cron" => "class-charitable-cron.php",
