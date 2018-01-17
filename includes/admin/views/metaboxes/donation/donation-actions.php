@@ -8,7 +8,7 @@
 
 global $post;
 
-$helper  = charitable_get_donation_actions();
+$helper  = array_key_exists( 'actions', $view_args ) ? $view_args['actions'] : charitable_get_donation_actions();
 $actions = $helper->get_available_actions( $post->ID );
 $groups  = $helper->get_available_groups( $post->ID );
 

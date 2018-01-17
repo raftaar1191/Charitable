@@ -2,10 +2,11 @@
 /**
  * My Donations shortcode class.
  *
- * @version     1.5.7
- * @package     Charitable/Shortcodes/My Donations
- * @category    Class
- * @author      Eric Daams
+ * @package  Charitable/Shortcodes/My Donations
+ * @category Class
+ * @author   Eric Daams
+ * @since    1.4.0
+ * @version  1.5.7
  */
 
 // Exit if accessed directly.
@@ -53,7 +54,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 
 			/* If the user is logged in, show the my donations template. */
 			$user     = charitable_get_user( get_current_user_id() );
-			$donor_id = $user->get_donor_id();			
+			$donor_id = $user->get_donor_id();
 
 			if ( false === $donor_id ) {
 				$donations  = array();

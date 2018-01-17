@@ -193,6 +193,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'context'  => 'side',
 					'priority' => 'high',
 					'view'     => 'metaboxes/donation/donation-actions',
+					'actions'  => charitable_get_donation_actions(),
 				),
 				'donation-details' => array(
 					'title'    => __( 'Donation Details', 'charitable' ),

@@ -109,7 +109,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 				'offline_donation_notification',
 			) );
 
-			foreach ( $emails as $email )  {
+			foreach ( $emails as $email ) {
 				$class  = $this->get_email( $email );
 				$object = new $class;
 
