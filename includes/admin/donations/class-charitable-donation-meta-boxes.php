@@ -142,7 +142,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		 */
 		public function get_form_meta_box() {
 			global $post;
-			
+
 			$form       = new Charitable_Admin_Donation_Form( charitable_get_donation( $post->ID ) );
 			$meta_boxes = array(
 				'donation-form' => array(
@@ -192,7 +192,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'title'    => __( 'Donation Actions', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
-					'view'     => 'metaboxes/donation/donation-actions',
+					'view'     => 'metaboxes/actions',
 					'actions'  => charitable_get_donation_actions(),
 				),
 				'donation-details' => array(

@@ -197,7 +197,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			require_once( $includes_path . 'donations/charitable-donation-functions.php' );
 			require_once( $includes_path . 'emails/charitable-email-hooks.php' );
 			require_once( $includes_path . 'endpoints/charitable-endpoints-functions.php' );
-			require_once( $includes_path . 'public/charitable-template-helpers.php' );        
+			require_once( $includes_path . 'public/charitable-template-helpers.php' );
 			require_once( $includes_path . 'shortcodes/charitable-shortcodes-hooks.php' );
 			require_once( $includes_path . 'upgrades/charitable-upgrade-hooks.php' );
 			require_once( $includes_path . 'users/charitable-user-functions.php' );
