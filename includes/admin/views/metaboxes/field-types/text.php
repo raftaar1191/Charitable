@@ -18,8 +18,8 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	<?php if ( isset( $view_args['label'] ) ) : ?>
 		<label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php esc_html_e( $view_args['label'] )  ?></label>
 	<?php endif ?>
-	<input type="text" 
-		id="<?php echo esc_attr( $view_args['id'] ) ?>" 
+	<input type="text"
+		id="<?php echo esc_attr( $view_args['id'] ) ?>"
 		name="<?php echo esc_attr( $view_args['key'] ) ?>"
 		value="<?php echo esc_attr( $view_args['value'] ) ?>"
         tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" />
