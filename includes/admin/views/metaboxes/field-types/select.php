@@ -36,4 +36,7 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	endforeach;
 	?>
 	</select>
+	<?php if ( isset( $view_args['description'] ) ) : ?>
+		<span class="charitable-helper"><?php esc_html_e( $view_args['description'] )  ?></span>
+	<?php endif ?>
 </div><!-- #<?php echo $view_args['wrapper_id'] ?> -->

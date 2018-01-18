@@ -20,5 +20,7 @@ $date = array_key_exists( 'value', $view_args ) ? 'data-date="' . esc_attr( $vie
         <label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label'] ?></label>
     <?php endif ?>
     <input type="text" id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>" class="charitable-datepicker"  tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" <?php echo $date ?> />
-    <!-- <span class="charitable-helper"><?php //echo $description ?></span> -->
+    <?php if ( isset( $view_args['description'] ) ) : ?>
+		<span class="charitable-helper"><?php esc_html_e( $view_args['description'] )  ?></span>
+	<?php endif ?>
 </div><!-- #<?php echo $view_args['wrapper_id'] ?> -->

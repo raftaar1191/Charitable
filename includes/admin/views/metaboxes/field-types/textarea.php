@@ -18,4 +18,7 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
         <label for="<?php echo esc_attr( $view_args['id'] ) ?>"><?php echo $view_args['label'] ?></label>
     <?php endif ?>
 	<textarea id="<?php echo esc_attr( $view_args['id'] ) ?>" name="<?php echo esc_attr( $view_args['key'] ) ?>" tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>"><?php echo esc_textarea( $view_args['value'] ) ?></textarea>
+	<?php if ( isset( $view_args['description'] ) ) : ?>
+		<span class="charitable-helper"><?php esc_html_e( $view_args['description'] )  ?></span>
+	<?php endif ?>
 </div><!-- #<?php echo $view_args['wrapper_id'] ?> -->
