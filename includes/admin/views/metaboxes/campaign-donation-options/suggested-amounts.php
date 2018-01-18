@@ -30,15 +30,15 @@ array_push( $suggested_donations, $default );
 			<tr class="table-header">
 				<th colspan="<?php echo count( $fields ) + 2 ?>"><label for="campaign_suggested_donations"><?php echo $title ?></label></th>
 			</tr>
-			<tr>                
+			<tr>
 				<?php $i = 1; ?>
 				<?php foreach ( $fields as $key => $field ) : ?>
 					<th <?php echo $i == 1 ? 'colspan="2"' : ''; ?> class="<?php echo $key ?>-col"><?php echo $field['column_header'] ?></th>
 					<?php $i++; ?>
-				<?php endforeach ?>    
-				<th class="remove-col"></th>        
+				<?php endforeach ?>
+				<th class="remove-col"></th>
 			</tr>
-		</thead>        
+		</thead>
 		<tbody>
 			<tr class="no-suggested-amounts <?php echo ( count( $suggested_donations ) > 1 )? 'hidden' : '';?>">
 				<td colspan="<?php echo count( $fields ) + 2 ?>"><?php _e( 'No suggested amounts have been created yet.', 'charitable' ) ?></td>
@@ -62,22 +62,22 @@ array_push( $suggested_donations, $default );
 						$value = charitable_format_money( $value, false, true );
 					}
 				?>
-					<td class="<?php echo $key ?>-col"><input 
-						type="text" 
-						class="campaign_suggested_donations" 
-						name="_campaign_suggested_donations[<?php echo $i ?>][<?php echo $key ?>]" 
-						value="<?php echo esc_attr( $value ) ?>" 
+					<td class="<?php echo $key ?>-col"><input
+						type="text"
+						class="campaign_suggested_donations"
+						name="_campaign_suggested_donations[<?php echo $i ?>][<?php echo $key ?>]"
+						value="<?php echo esc_attr( $value ) ?>"
 						placeholder="<?php echo esc_attr( $field['placeholder'] ) ?>" />
 					</td>
-				<?php endforeach ?> 
+				<?php endforeach ?>
 				<td class="remove-col"><span class="dashicons-before dashicons-dismiss charitable-delete-row"></span></td>
 			</tr>
 			<?php endforeach ?>
 		</tbody>
 		<tfoot>
-			<tr>                
-				<td colspan="<?php echo count( $fields ) + 2 ?>"><a class="button" href="#" data-charitable-add-row="suggested-amount"><?php _e( '+ Add a Suggested Amount', 'charitable' ) ?></a></td>                
+			<tr>
+				<td colspan="<?php echo count( $fields ) + 2 ?>"><a class="button" href="#" data-charitable-add-row="suggested-amount"><?php _e( '+ Add a Suggested Amount', 'charitable' ) ?></a></td>
 			</tr>
 		</tfoot>
-	</table>    
+	</table>
 </div>
