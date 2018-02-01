@@ -57,12 +57,13 @@ function charitable_template( $template_name, array $args = array(), $classname 
  *                                        as one of the arguments in the AJAX request.
  * @param  array           $wrapper_args  A mixed set of arguments that need to be passed along
  *                                        in the AJAX request.
+ * @param  string          $classname     Template class name. Allows for extensions to use charitable_template().
  * @return void Content is echoed.
  */
-function charitable_template_from_session( $template_name, array $args, $template_key, $wrapper_args = array() ) {
+function charitable_template_from_session( $template_name, array $args, $template_key, $wrapper_args = array(), $classname = 'Charitable_Template' ) {
 	ob_start();
 
-	charitable_template( $template_name, $args );
+	charitable_template( $template_name, $args, $classname );
 
 	echo charitable_template_from_session_content( $template_key, $wrapper_args, ob_get_clean() );
 }
