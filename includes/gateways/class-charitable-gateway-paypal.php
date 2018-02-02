@@ -22,7 +22,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	 *
 	 * @since  1.0.0
 	 */
-	class Charitable_Gateway_Paypal extends Charitable_Gateway {
+	class Charitable_Gateway_Paypal extends Charitable_Gateway
+		implements Charitable_Gateway_Cancellable_Subscriptions_Interface {
 
 		/**
 		 * Gateway ID.
@@ -655,6 +656,19 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 */
 		public static function get_gateway_id() {
 			return self::ID;
+		}
+
+		/**
+		 * Cancel a subscription in the payment gateway.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @param  int $subscription_id The ID of the subscription/recurring donation.
+		 * @return boolean True if the subscription was successfully cancelled. False otherwise.
+		 */
+		public function cancel_subscription( $subscription_id ) {
+			/* @todo Handle subscription cancellation. */
+			return true;
 		}
 
 		/**
