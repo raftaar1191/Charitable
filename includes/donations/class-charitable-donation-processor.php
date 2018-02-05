@@ -359,7 +359,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				do_action( 'charitable_after_process_donation_amount_form', $processor, $submitted );
 			}
 
-			$redirect_url = charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $submitted['campaign_id'] ) );
+			$redirect_url = charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign->ID ) );
 
 			if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
 				$redirect_url .= '#charitable-donation-form';
