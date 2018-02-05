@@ -1,7 +1,7 @@
 <?php
 /**
  * Donation amount form model class.
- * 
+ *
  * @package   Charitable/Classes/Charitable_Donation_Amount_Form
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a

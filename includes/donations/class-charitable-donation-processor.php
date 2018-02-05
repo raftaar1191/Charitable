@@ -329,7 +329,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return  void
 		 */
 		public static function make_donation_streamlined() {
-
 			$processor = self::get_instance();
 			$campaign  = $processor->get_campaign();
 
@@ -345,22 +344,21 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 */
 			do_action( 'charitable_before_process_donation_amount_form', $processor, $form );
 
-			if ( ! $form->validate_submission() ) {
-				return;
+			/**
+			 * Form validated, so add the donation to session.
+			 */
+			if ( $form->validate_submission() ) {
+
+				$submitted = $form->get_donation_values();
+
+				charitable_get_session()->add_donation( $submitted['campaign_id'], $submitted['amount'] );
+
+				/**
+				 * @hook charitable_after_process_donation_amount_form
+				 */
+				do_action( 'charitable_after_process_donation_amount_form', $processor, $submitted );
 			}
 
-			$submitted = $form->get_donation_values();
-
-			charitable_get_session()->add_donation( $submitted['campaign_id'], $submitted['amount'] );
-
-			/**
-			 * @hook charitable_after_process_donation_amount_form
-			 */
-			do_action( 'charitable_after_process_donation_amount_form', $processor, $submitted );
-
-			/**
-			 * If we get this far, forward the user through to the donation page.
-			 */
 			$redirect_url = charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $submitted['campaign_id'] ) );
 
 			if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
