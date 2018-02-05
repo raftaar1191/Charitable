@@ -9,7 +9,7 @@
  */
 
 if ( class_exists( 'Charitable_Upgrade' ) ) {
-    return;
+	return;
 }
 
 require_once( charitable()->get_path( 'includes' ) . 'upgrades/class-charitable-upgrade.php' );

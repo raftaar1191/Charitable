@@ -177,6 +177,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'   => false,
 					'callback' => array( $this, 'update_tables' ),
 				),
+				'fix_donor_role_caps' => array(
+					'version'  => '1.5.9',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'fix_donor_role_caps' ),
+				),
 			);
 		}
 
@@ -939,6 +945,23 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			} catch ( Exception $e ) {
 				return false;
 			}
+		}
+
+		/**
+		 * Fix the donor role caps.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @return true
+		 */
+		public function fix_donor_role_caps() {
+			remove_role( 'donor' );
+
+			add_role( 'donor', __( 'Donor', 'charitable' ), array(
+				'read' => true,
+			) );
+
+			return true;
 		}
 
 		/**
