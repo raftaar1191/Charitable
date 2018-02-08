@@ -1,4 +1,4 @@
-.edit-php.post-type-charitable  {
+.edit-php.post-type-charitable {
    .tablenav {
         .actions { 
             padding-right: 0; 
@@ -139,80 +139,80 @@
             }
         } 
     }
-}
-
-.charitable-donations-modal {
-    max-width: 400px;
-    background-color: #f1f1f1;
-
-    .modal-close {
-        position: absolute;
-        top: 2px;
-        right: 2px;
-        z-index: 10;
-        cursor: pointer;
-
-        &::before {
-            content: "\f158";
-            display: block !important;
-            font: normal 20px/1 dashicons;
-            speak: none;
-            height: 22px;
-            margin: 2px 0;
+    
+    .charitable-modal {
+        max-width: 400px;
+        background-color: #f1f1f1;
+    
+        .modal-close {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            z-index: 10;
+            cursor: pointer;
+    
+            &::before {
+                content: "\f158";
+                display: block !important;
+                font: normal 20px/1 dashicons;
+                speak: none;
+                height: 22px;
+                margin: 2px 0;
+                text-align: center;
+                width: 22px;
+                color: #777;
+                -webkit-font-smoothing: antialiased !important;
+                -moz-osx-font-smoothing: grayscale;
+            }    
+        }
+    
+        h3 {
+            margin: 0 0 0.5em;
+            font-size: 23px; 
+            line-height: 29px;
+            font-weight: 400;
             text-align: center;
-            width: 22px;
-            color: #777;
-            -webkit-font-smoothing: antialiased !important;
-            -moz-osx-font-smoothing: grayscale;
-        }    
-    }
-
-    h3 {
-        margin: 0 0 0.5em;
-        font-size: 23px; 
-        line-height: 29px;
-        font-weight: 400;
-        text-align: center;
-    }
-
-    .charitable-donations-modal-form {
-        padding: 22px;
-        font-size: 14px;
-        background-color: #fff;   
-
-        legend, 
-        label,
-        input[type=text], 
-        select, 
-        button {
-            display: block;
         }
-
-        input[type=text] {
-            width: 320px;
-            max-width: 100%;
+    
+        .charitable-modal-form {
+            padding: 22px;
+            font-size: 14px;
+            background-color: #fff;   
+    
+            legend, 
+            label,
+            input[type=text], 
+            select, 
+            button {
+                display: block;
+            }
+    
+            input[type=text] {
+                width: 320px;
+                max-width: 100%;
+            }
+    
+            input[type=text], 
+            select {
+                max-width: 100%;
+                margin-bottom: 22px;
+            }
+    
+            input[type=text] {
+                padding-top: 11px;
+                padding-bottom: 11px;
+            } 
+    
+            legend, 
+            label, 
+            #charitable-export-start-date {
+                margin-bottom: 6px;
+            }
+    
+            input.charitable-datepicker {
+                width: 48%;
+                display: inline-block;
+            }
         }
-
-        input[type=text], 
-        select {
-            max-width: 100%;
-            margin-bottom: 22px;
-        }
-
-        input[type=text] {
-            padding-top: 11px;
-            padding-bottom: 11px;
-        } 
-
-        legend, 
-        label, 
-        #charitable-export-start-date {
-            margin-bottom: 6px;
-        }
-
-        input.charitable-datepicker {
-            width: 48%;
-            display: inline-block;
-        }
-    }
+    }    
 }

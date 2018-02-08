@@ -332,7 +332,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		public function add_admin_body_class( $classes ) {
 			$screen = get_current_screen();
 
-			if ( Charitable::DONATION_POST_TYPE == $screen->post_type ) {
+			if ( in_array( $screen->post_type, array( Charitable::DONATION_POST_TYPE, Charitable::CAMPAIGN_POST_TYPE ) ) ) {
 				$classes .= ' post-type-charitable';
 			}
 

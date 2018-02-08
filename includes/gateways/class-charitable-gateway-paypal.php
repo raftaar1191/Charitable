@@ -532,8 +532,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 */
 		public function get_redirect_url( $ssl_check = false, $ipn_check = false ) {
 			$paypal_uri = $this->use_ssl( $ssl_check, $ipn_check ) ? 'https://' : 'http://';
-			
-			if ( charitable_get_option( 'test_mode' ) ) { 
+
+			if ( charitable_get_option( 'test_mode' ) ) {
 				$paypal_uri .= $ipn_check ? 'ipnpb.sandbox.' : 'sandbox.';
 			} else {
 				$paypal_uri .= $ipn_check ? 'ipnpb.' : 'www.';
