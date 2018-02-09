@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.5.9
  */
 
 // Exit if accessed directly.
@@ -73,7 +73,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function has_donation() {
-			return $this->donation && 'auto-draft' != $this->donation->get_status();
+			return $this->donation && ! in_array( $this->donation->get_status(), array( 'auto-draft', 'draft' ) );
 		}
 
 		/**
@@ -95,8 +95,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'type'     => 'heading',
 					'level'    => 'h3',
 					'title'    => __( 'Donor', 'charitable' ),
-					'priority' => 40,					
-				),				
+					'priority' => 40,
+				),
 				'user_fields' => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'user' ),
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *
 		 * @return array
 		 */
-		public function get_donation_fields() {			
+		public function get_donation_fields() {
 			if ( ! $this->donation ) {
 				$value = array();
 			} else {
@@ -187,7 +187,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_section_fields( $section ) {
-			$fields = charitable()->donation_fields()->get_admin_form_fields( $section );			
+			$fields = charitable()->donation_fields()->get_admin_form_fields( $section );
 			$keys   = array_keys( $fields );
 			$fields = array_combine(
 				$keys,
@@ -202,7 +202,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'required' => false,
 				);
 
-				if ( ! $this->has_donation() ) {
+				if ( $this->should_add_donation_receipt_checkbox() ) {
 					$fields['send_donation_receipt'] = array(
 						'type'     => 'checkbox',
 						'label'    => __( 'Send an email receipt to the donor.', 'charitable' ),
@@ -215,7 +215,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			uasort( $fields, 'charitable_priority_sort' );
 
-			return $fields;		
+			return $fields;
 		}
 
 		/**
@@ -279,7 +279,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			if ( isset( $this->validated ) ) {
 				return $this->valid;
 			}
-			
+
 			$this->valid = $this->check_required_fields( $this->get_merged_fields() );
 
 			$campaign_donations          = array_key_exists( 'campaign_donations', $_POST ) ? $_POST['campaign_donations'] : array();
@@ -320,11 +320,11 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		public function get_donation_values() {
 			$values = array(
-				'ID'        => $this->get_submitted_value( 'ID' ),
-				'donor_id'  => abs( $this->get_submitted_value( 'donor_id' ) ),				
-				'status'    => $this->get_submitted_value( 'status' ),
-				'log_note'  => $this->get_submitted_value( 'log_note' ),
-				'user_id'   => 0,
+				'ID'       => $this->get_submitted_value( 'ID' ),
+				'donor_id' => abs( $this->get_submitted_value( 'donor_id' ) ),
+				'status'   => $this->get_submitted_value( 'status' ),
+				'log_note' => $this->get_submitted_value( 'log_note' ),
+				'user_id'  => 0,
 			);
 
 			if ( 'add_donation' == $this->get_submitted_value( 'charitable_action' ) ) {
@@ -428,7 +428,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		protected function sanitize_submitted_donor( $values ) {
 			/* Shortcircuit for new donations. */
 			if ( ! $values['donor_id'] ) {
-				if ( $values['ID'] ) {
+				if ( $values['ID'] && $this->has_donation() ) {
 					$values['donor_id'] = charitable_get_donation( $values['ID'] )->get_donor_id();
 				}
 
@@ -591,11 +591,28 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				$value = $this->donation->get( $key );
 			}
 
-			if ( $value ) {
+			if ( ! $value ) {
+				return $field;
+			}
+
+			if ( 'checkbox' == $field['type'] ) {
+				$field['checked'] = $value;
+			} else {
 				$field['value'] = $value;
 			}
 
 			return $field;
+		}
+
+		/**
+		 * Returns whether a checkbox should be included for sending the donation receipt.
+		 *
+		 * @since  1.5.9
+		 *
+		 * @return boolean
+		 */
+		protected function should_add_donation_receipt_checkbox() {
+			return ! $this->has_donation() && charitable_get_helper( 'emails' )->is_enabled_email( 'donation_receipt' );
 		}
 	}
 

@@ -270,7 +270,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 			}
 
 			$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
-			
+
 			if ( $form->validate_submission() ) {
 				$this->disable_automatic_emails();
 

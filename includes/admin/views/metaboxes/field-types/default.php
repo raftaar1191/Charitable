@@ -10,7 +10,7 @@
  */
 
 if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']->field_has_required_args( $view_args ) ) {
-    return;
+	return;
 }
 
 ?>
@@ -22,5 +22,6 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 		id="<?php echo esc_attr( $view_args['id'] ) ?>" 
 		name="<?php echo esc_attr( $view_args['key'] ) ?>"
 		value="<?php echo esc_attr( $view_args['value'] ) ?>"
-        tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>" />
+		tabindex="<?php echo esc_attr( $view_args['tabindex'] ) ?>"
+		/>
 </div><!-- #<?php echo $view_args['wrapper_id'] ?> -->

@@ -2,7 +2,7 @@
 /**
  * Responsible for holding instances of Charitable helper objects.
  *
- * @package   Charitable/Classes/Charitable_Registry 
+ * @package   Charitable/Classes/Charitable_Registry
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Registry' ) ) :
 			if ( ! array_key_exists( $class_key, $this->objects ) ) {
 				$this->objects[ $class_key ] = $this->get_class_instance( $this->get_class_name( $class ) );
 			}
-			
+
 			return $this->objects[ $class_key ];
 		}
 
