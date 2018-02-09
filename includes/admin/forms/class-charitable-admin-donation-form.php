@@ -123,10 +123,11 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 				);
 			} else {
 				$fields['donor_id'] = array(
-					'type'     => 'select',
-					'options'  => $this->get_all_donors(),
-					'priority' => 41,
-					'value'    => '',
+					'type'        => 'select',
+					'options'     => $this->get_all_donors(),
+					'priority'    => 41,
+					'value'       => '',
+					'description' => __( 'Select an existing donor or choose "Add a New Donor" to create a new donor.', 'charitable' ),
 				);
 
 				$fields['user_fields']['attrs'] = array(

@@ -44,15 +44,8 @@
         margin-top: 0;
         margin-bottom: 6px;
     }
-    
-    .charitable-helper {        
-        display: block;
-        padding-top: 6px;
-        font-style: italic;
-    }
 
     .charitable-metabox {
-
         .charitable-metabox-wrap {
             margin-bottom: 24px;
         }
@@ -139,6 +132,12 @@
     width: 100%;
     float: left;
     margin-bottom: 12px;
+    
+    .charitable-helper {        
+        display: block;
+        padding-top: 6px;
+        font-style: italic;
+    }
 
     label {
         display: block;
