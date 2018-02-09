@@ -821,7 +821,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 		 * @return string[]
 		 */
 		protected function get_parsed_date( $date ) {
-			$time = strtotime( $date );
+			$time = charitable_sanitize_date( $date );
 
 			return array(
 				'year'  => date( 'Y', $time ),

@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		private $meta_box_helper;
 
 		/**
-		 * Create object instance.		 
+		 * Create object instance.
 		 *
 		 * @since 1.5.0
 		 *
