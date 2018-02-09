@@ -2,7 +2,7 @@
 /**
  * Charitable Donation Functions.
  *
- * @package   Charitable/Functions/Donation 
+ * @package   Charitable/Functions/Donation
  * @author    Eric Daams
  * @copyright Copyright (c) 2017, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
@@ -45,7 +45,7 @@ function charitable_get_donation( $donation_id, $force = false ) {
  * @return mixed
  */
 function charitable_get_donor_meta_value( Charitable_Abstract_Donation $donation, $key ) {
-    return $donation->get_donor()->get_donor_meta( $key );
+	return $donation->get_donor()->get_donor_meta( $key );
 }
 
 /**
@@ -58,7 +58,7 @@ function charitable_get_donor_meta_value( Charitable_Abstract_Donation $donation
  * @return mixed
  */
 function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donation, $key ) {
-    return get_post_meta( $donation->ID, $key, true );
+	return get_post_meta( $donation->ID, $key, true );
 }
 
 /**
