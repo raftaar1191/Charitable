@@ -123,11 +123,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		protected $log;
 
 		/**
-		 * The Charitable_Fields object for this donation.
+		 * The Charitable_Donation_Fields object for this donation.
 		 *
 		 * @since 1.5.0
 		 *
-		 * @var   Charitable_Fields
+		 * @var   Charitable_Donation_Fields
 		 */
 		protected $fields;
 
@@ -187,11 +187,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Return the Charitable_Fields instance.
+		 * Return the Charitable_Donation_Fields instance.
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return Charitable_Fields
+		 * @return Charitable_Donation_Fields
 		 */
 		public function fields() {
 			if ( ! isset( $this->fields ) ) {
@@ -240,13 +240,13 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  boolean $sanitize Whether the value should be sanitized as a monetary amount.
-		 * @return float|WP_Error
+		 * @return float
 		 */
 		public function get_total_donation_amount( $sanitize = false ) {
 			$amount = $this->get_campaign_donations_db()->get_donation_total_amount( $this->donation_id );
 
 			if ( $sanitize ) {
-				$amount = Charitable_Currency::get_instance()->sanitize_monetary_amount( $amount );
+				$amount = Charitable_Currency::get_instance()->sanitize_monetary_amount( (string) $amount );
 			}
 
 			return $amount;
