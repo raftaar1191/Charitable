@@ -19,6 +19,8 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 	 * Charitable_Field
 	 *
 	 * @since 1.5.0
+	 *
+	 * @property string $field
 	 */
 	abstract class Charitable_Field implements Charitable_Field_Interface {
 

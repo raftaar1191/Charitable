@@ -214,7 +214,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @param  string $class_name The fully-qualified name of the class to load.
 		 * @return boolean
 		 */
-		public function autoloader( $class_name ) {            
+		public function autoloader( $class_name ) {
 			/* If the specified $class_name already exists, bail. */
 			if ( class_exists( $class_name ) ) {
 				return false;
@@ -232,7 +232,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 			$file_path = isset( $this->classmap[ $class_name ] ) ? $this->get_path( 'includes' ) . $this->classmap[ $class_name ] : false;
 
-			if ( $file_path && file_exists( $file_path ) && is_file( $file_path ) ) {
+			if ( false !== $file_path && file_exists( $file_path ) && is_file( $file_path ) ) {
 				require_once( $file_path );
 				return true;
 			}

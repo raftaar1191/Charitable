@@ -79,7 +79,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 				'campaign_id' => 'all',
 				'status'      => 'all',
 			);
-			
+
 			$this->statuses = charitable_get_valid_donation_statuses();
 			$this->fields   = array_map( array( $this, 'get_field_label' ), charitable()->donation_fields()->get_export_fields() );
 

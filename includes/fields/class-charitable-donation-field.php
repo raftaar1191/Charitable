@@ -19,6 +19,16 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 	 * Charitable_Donation_Field
 	 *
 	 * @since 1.5.0
+	 *
+	 * @property string         $field
+	 * @property string         $label
+	 * @property string         $data_type
+	 * @property false|callable $value_callback
+	 * @property boolean|array  $donation_form
+	 * @property boolean|array  $admin_form
+	 * @property boolean        $show_in_meta
+	 * @property boolean        $show_in_export
+	 * @property boolean|array  $email_tag
 	 */
 	class Charitable_Donation_Field extends Charitable_Field implements Charitable_Field_Interface {
 
