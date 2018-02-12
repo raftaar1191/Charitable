@@ -2,11 +2,12 @@
 /**
  * Login shortcode class.
  *
- * @package  Charitable/Shortcodes/Login
- * @category Class
- * @author   Eric Daams
- * @since    1.0.0
- * @version  1.5.7
+ * @package   Charitable/Shortcodes/Login
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.7
  */
 
 // Exit if accessed directly.
@@ -40,7 +41,6 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 
 			$args                    = shortcode_atts( $defaults, $atts, 'charitable_login' );
 			$args['login_form_args'] = self::get_login_form_args( $args );
-
 
 			if ( is_user_logged_in() ) {
 				ob_start();

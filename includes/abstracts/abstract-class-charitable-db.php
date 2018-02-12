@@ -5,10 +5,14 @@
  * Credit: This is based on Easy Digital Downloads' EDD_DB class. Major props to Pippin Williamson.
  * https://github.com/easydigitaldownloads/Easy-Digital-Downloads/blob/master/includes/class-edd-db.php
  *
- * @package     Charitable/Classes/Charitable_DB
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @version 	1.0.0
-*/
+ * @package   Charitable/Classes/Charitable_DB
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.0.0
+ */
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 

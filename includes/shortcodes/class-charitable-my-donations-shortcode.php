@@ -2,11 +2,12 @@
 /**
  * My Donations shortcode class.
  *
- * @package  Charitable/Shortcodes/My Donations
- * @category Class
- * @author   Eric Daams
- * @since    1.4.0
- * @version  1.5.7
+ * @package   Charitable/Shortcodes/My Donations
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.0
+ * @version   1.5.7
  */
 
 // Exit if accessed directly.

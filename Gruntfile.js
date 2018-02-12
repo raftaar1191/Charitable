@@ -226,7 +226,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask( 'classmap', 'Generate class to file array" task.', function() {
-        var map = "<?php \nreturn array( \n";
+        var map = "<?php\nreturn array(\n";
 
         //loop through all files in logo directory
         grunt.file.recurse("includes", function (abspath, rootdir, subdir, filename) {
@@ -261,11 +261,11 @@ module.exports = function(grunt) {
                 classname = classname.replace('_Db', '_DB');
                 classname = classname.replace('_I18n', '_i18n');
 
-                map = map.concat( '"' + classname + '" => "' + filepath + '",\n' );
+                map = map.concat( "\t'" + classname + "' => '" + filepath + "',\n" );
             }     
         });
 
-        map = map.concat( ");");
+        map = map.concat( ");\n" );
 
         grunt.file.write('includes/autoloader/charitable-class-map.php', map );
 
@@ -279,7 +279,4 @@ module.exports = function(grunt) {
     grunt.registerTask( 'build-scripts', [ 'uglify' ] );
     grunt.registerTask( 'build-styles', [ 'cssmin' ] );
     grunt.registerTask( 'build', [ 'classmap', 'uglify', 'cssmin', 'makepot', 'clean', 'copy', 'compress' ] );
-
-    // grunt.registerTask('default', ['watch']);
-    // grunt.registerTask('build', ['sync', 'jshint', 'uglify', 'makepot']);
 };
