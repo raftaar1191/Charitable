@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.9
- * @version   1.5.9
+ * @version   1.5.10
  */
 
 // Exit if accessed directly.
@@ -466,7 +466,7 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 		 */
 		protected function sanitize_end_date( $value ) {
 			if ( 0 == $value ) {
-				return;
+				return 0;
 			}
 
 			if ( ! $this->is_mysql_date_format( $value ) ) {
@@ -476,7 +476,7 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 					null
 				);
 
-				$value = '';
+				return 0;
 			}
 
 			if ( false === strpos( $value, ' ' ) ) {
