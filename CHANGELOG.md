@@ -1,3 +1,6 @@
+# 1.5.10
+* FIX: Ensure that campaigns without end dates are saved with the correct value of 0 for the end date meta field. [#524](https://github.com/Charitable/Charitable/issues/524)
+
 # 1.5.9
 * NEW: Added `Charitable_Campaign_Processor` class in preparation for new version of Charitable Ambassadors.
 * NEW: Added `Charitable_Data_Processor` class in preparation for new version of Charitable Ambassadors. This will also be used eventually by other forms in Charitable core.
