@@ -430,7 +430,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			/* Shortcircuit for new donations. */
 			if ( ! $values['donor_id'] ) {
 				if ( $values['ID'] && $this->has_donation() ) {
-					$values['donor_id'] = charitable_get_donation( $values['ID'] )->get_donor_id();
+					$values['donor_id'] = $this->donation->get_donor_id();
+					$values['user']     = $this->donation->get_donor_data();
 				}
 
 				return $values;
