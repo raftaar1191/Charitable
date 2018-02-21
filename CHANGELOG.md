@@ -1,3 +1,7 @@
+# 1.5.11
+* FIX: Preserve pre-existing donor data when editing donations. [#526](https://github.com/Charitable/Charitable/issues/526)
+* FIX: Improved the way the Javascript is structured to ensure better compatibility with pages containing multiple doantion forms. In one specific scenario (using Stripe with Stripe Checkout enabled) this could prevent donation forms from processing on these pages.
+
 # 1.5.10
 * FIX: Ensure that campaigns without end dates are saved with the correct value of 0 for the end date meta field. [#524](https://github.com/Charitable/Charitable/issues/524)
 
