@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.5.9\n"
+"Project-Id-Version: Charitable 1.5.11\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2018-02-12 02:08:54+00:00\n"
+"POT-Creation-Date: 2018-02-23 03:37:20+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5301,52 +5301,52 @@ msgstr ""
 msgid "Email could not be resent."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:97
+#: includes/admin/forms/class-charitable-admin-donation-form.php:106
 #: includes/fields/default-fields/donation-fields.php:77
 #: includes/upgrades/class-charitable-upgrade.php:960
 #: includes/users/class-charitable-roles.php:64
 msgid "Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:130
+#: includes/admin/forms/class-charitable-admin-donation-form.php:139
 msgid ""
 "Select an existing donor or choose \"Add a New Donor\" to create a new "
 "donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:200
+#: includes/admin/forms/class-charitable-admin-donation-form.php:209
 msgid "Donation Note"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:209
+#: includes/admin/forms/class-charitable-admin-donation-form.php:218
 msgid "Send an email receipt to the donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:290
+#: includes/admin/forms/class-charitable-admin-donation-form.php:301
 msgid "You must provide both a campaign and amount."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:296
+#: includes/admin/forms/class-charitable-admin-donation-form.php:307
 msgid "Please choose an existing donor or provide an email address for a new donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:332
+#: includes/admin/forms/class-charitable-admin-donation-form.php:343
 msgid "Manual"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:468
+#: includes/admin/forms/class-charitable-admin-donation-form.php:511
 msgid "Donation updated manually by <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:554
+#: includes/admin/forms/class-charitable-admin-donation-form.php:607
 msgid "Select a Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:555
+#: includes/admin/forms/class-charitable-admin-donation-form.php:608
 msgid "Add a New Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:557
+#: includes/admin/forms/class-charitable-admin-donation-form.php:610
 msgid "Existing Donors"
 msgstr ""
 
@@ -6654,7 +6654,7 @@ msgstr ""
 msgid "South African Rand (%s)"
 msgstr ""
 
-#: includes/db/class-charitable-campaign-donations-db.php:846
+#: includes/db/class-charitable-campaign-donations-db.php:844
 msgid ""
 "Field expected to be `campaign`, `campaign_id`, `donation`, `donation_id`, "
 "`donor` or `donor_id`."
@@ -6759,7 +6759,7 @@ msgstr ""
 msgid "Donation created."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:723
+#: includes/donations/class-charitable-donation-processor.php:722
 msgid "Payment failed with errors: %s"
 msgstr ""
 
