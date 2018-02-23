@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Registry' ) ) :
 
@@ -129,7 +131,8 @@ if ( ! class_exists( 'Charitable_Registry' ) ) :
 		 */
 		protected function get_class_instance( $class ) {
 			if ( ! class_exists( $class ) ) {
-				wp_die( sprintf( __( 'Class %s does not exists.', 'charitable' ), $class ) );
+				/* translators: %s: class name */
+				wp_die( sprintf( _x( 'Class %s does not exists.', 'error message when non-existent class is called', 'charitable' ), $class ) );
 			}
 
 			return new $class;

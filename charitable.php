@@ -19,7 +19,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable' ) ) :
 
@@ -99,7 +101,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 *
 		 * @since 1.0.0
 		 * @since 1.5.0 Changed to Charitable_Registry object. Previously it was an array.
-		 * 
+		 *
 		 * @var   Charitable_Registry
 		 */
 		private $registry;
@@ -480,31 +482,31 @@ if ( ! class_exists( 'Charitable' ) ) :
 			$base = $absolute_path ? $this->directory_path : $this->directory_url;
 
 			switch ( $type ) {
-				case 'includes' :
+				case 'includes':
 					$path = $base . 'includes/';
 					break;
 
-				case 'admin' :
+				case 'admin':
 					$path = $base . 'includes/admin/';
 					break;
 
-				case 'public' :
+				case 'public':
 					$path = $base . 'includes/public/';
 					break;
 
-				case 'assets' :
+				case 'assets':
 					$path = $base . 'assets/';
 					break;
 
-				case 'templates' :
+				case 'templates':
 					$path = $base . 'templates/';
 					break;
 
-				case 'directory' :
+				case 'directory':
 					$path = $base;
 					break;
 
-				default :
+				default:
 					$path = __FILE__;
 
 			}//end switch
@@ -614,7 +616,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 */
 		public function get_registered_object( $class ) {
 			return $this->registry->get( $class );
-		}        
+		}
 
 		/**
 		 * Returns the model for one of Charitable's database tables.
@@ -666,7 +668,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		 * @since  1.4.6
 		 *
 		 * @param  int $blog_id The blog to activate Charitable on.
-		 * @return boolean
+		 * @return void
 		 */
 		public function maybe_activate_charitable_on_new_site( $blog_id ) {
 			if ( is_plugin_active_for_network( basename( $this->directory_path ) . '/charitable.php' ) ) {
@@ -812,7 +814,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 				'charitable()->registry()->register_object()'
 			);
 
-			return $this->registry->register_object( $object );
+			$this->registry->register_object( $object );
 		}
 
 		/**
@@ -876,6 +878,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Returns the instance of Charitable_Currency.
+		 *
 		 * @deprecated 1.7.0
 		 *
 		 * @since 1.4.0 Deprecated.
@@ -886,6 +890,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Returns the instance of Charitable_Locations.
+		 *
 		 * @deprecated 1.6.0
 		 *
 		 * @since 1.2.0 Deprecated.
