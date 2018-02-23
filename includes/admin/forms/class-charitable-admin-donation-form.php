@@ -41,6 +41,15 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		protected $form_action;
 
 		/**
+		 * Merged fields.
+		 *
+		 * @since 1.5.11
+		 *
+		 * @var   array
+		 */
+		protected $merged_fields;
+
+		/**
 		 * Create a donation form object.
 		 *
 		 * @since 1.5.0
@@ -227,17 +236,19 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_merged_fields() {
-			$fields = array();
+			if ( ! isset( $this->merged_fields ) ) {
+				$this->merged_fields = array();
 
-			foreach ( $this->get_fields() as $section_id => $section ) {
-				if ( array_key_exists( 'fields', $section ) ) {
-					$fields = array_merge( $fields, $section['fields'] );
-				} else {
-					$fields[ $section_id ] = $section;
+				foreach ( $this->get_fields() as $section_id => $section ) {
+					if ( array_key_exists( 'fields', $section ) ) {
+						$this->merged_fields = array_merge( $this->merged_fields, $section['fields'] );
+					} else {
+						$this->merged_fields[ $section_id ] = $section;
+					}
 				}
 			}
 
-			return $fields;
+			return $this->merged_fields;
 		}
 
 		/**
@@ -430,8 +441,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			/* Shortcircuit for new donations. */
 			if ( ! $values['donor_id'] ) {
 				if ( $values['ID'] && $this->has_donation() ) {
-					$values['donor_id'] = $this->donation->get_donor_id();
-					$values['user']     = $this->donation->get_donor_data();
+					$values['user'] = $this->get_donor_data_to_preserve();
 				}
 
 				return $values;
@@ -454,6 +464,38 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			);
 
 			return $values;
+		}
+
+		/**
+		 * Returns any of the current donor data that should be preserved
+		 * after saving. This is any data that exists that doesn't have a
+		 * field in the admin donation form.
+		 *
+		 * @since  1.5.11
+		 *
+		 * @return array
+		 */
+		protected function get_donor_data_to_preserve() {
+			$data = $this->donation->get_donor_data();
+
+			foreach ( $this->get_merged_fields() as $key => $field ) {
+				if ( ! array_key_exists( 'data_type', $field ) || 'user' != $field['data_type'] ) {
+					continue;
+				}
+
+				if ( ! array_key_exists( $key, $data ) ) {
+					continue;
+				}
+
+				unset( $data[ $key ] );
+
+				/* There is no data left to preserve, so return an empty array. */
+				if ( empty( $data ) ) {
+					return $data;
+				}
+			}
+
+			return $data;
 		}
 
 		/**
@@ -497,6 +539,16 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			}
 
 			$values['campaigns'] = $campaigns;
+
+			if ( $this->has_donation() ) {
+				$old_campaign_ids = wp_list_pluck( $this->donation->get_campaign_donations(), 'campaign_id' );
+
+				foreach ( $campaigns as $campaign_donation ) {
+					if ( ! in_array( $campaign_donation['campaign_id'], $old_campaign_ids ) ) {
+						Charitable_Campaign::flush_donations_cache( $campaign_donation['campaign_id'] );
+					}
+				}
+			}
 
 			return $values;
 		}

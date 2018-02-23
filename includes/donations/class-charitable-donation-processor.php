@@ -386,9 +386,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Filter the donation values to be saved.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	array $values The donation values to be saved.
+			 * @param array $values The donation values to be saved.
 			 */
 			$this->donation_data = apply_filters( 'charitable_donation_values', $values );
 
@@ -413,9 +413,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something right before the donation is inserted into the database.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	Charitable_Donation_Processor $this The Processor instance.
+			 * @param Charitable_Donation_Processor $this The Processor instance.
 			 */
 			do_action( 'charitable_before_save_donation', $this );
 
@@ -520,7 +520,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					if ( count( array_diff( $args, $campaign_donation ) ) ) {
 						charitable_get_table( 'campaign_donations' )->update( $campaign_donation_id, $args, 'campaign_donation_id' );
 					}
-
 				} else {
 
 					/* Add a new donation */
