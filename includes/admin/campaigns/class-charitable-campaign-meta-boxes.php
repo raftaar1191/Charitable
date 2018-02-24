@@ -10,7 +10,9 @@
  * @version   1.5.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 
@@ -61,6 +63,17 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		}
 
 		/**
+		 * Return the instance of the meta box helper.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return Charitable_Meta_Box_Helper
+		 */
+		public function get_meta_box_helper() {
+			return $this->meta_box_helper;
+		}
+
+		/**
 		 * Add meta boxes.
 		 *
 		 * @see     add_meta_boxes hook
@@ -72,48 +85,34 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		public function add_meta_boxes() {
 			$meta_boxes = array(
 				array(
-					'id'            => 'campaign-description',
-					'title'         => __( 'Campaign Description', 'charitable' ),
-					'context'       => 'campaign-top',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-description',
+					'id'       => 'campaign-description',
+					'title'    => __( 'Campaign Description', 'charitable' ),
+					'context'  => 'campaign-top',
+					'priority' => 'high',
+					'view'     => 'metaboxes/campaign-description',
 				),
 				array(
-					'id'            => 'campaign-goal',
-					'title'         => __( 'Fundraising Goal ($)', 'charitable' ),
-					'context'       => 'campaign-top',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-goal',
-					'description'   => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
+					'id'          => 'campaign-goal',
+					'title'       => __( 'Fundraising Goal ($)', 'charitable' ),
+					'context'     => 'campaign-top',
+					'priority'    => 'high',
+					'view'        => 'metaboxes/campaign-goal',
+					'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
 				),
 				array(
-					'id'            => 'campaign-end-date',
-					'title'         => __( 'End Date', 'charitable' ),
-					'context'       => 'campaign-top',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-end-date',
-					'description'   => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
+					'id'          => 'campaign-end-date',
+					'title'       => __( 'End Date', 'charitable' ),
+					'context'     => 'campaign-top',
+					'priority'    => 'high',
+					'view'        => 'metaboxes/campaign-end-date',
+					'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
 				),
 				array(
-					'id'            => 'campaign-donation-options',
-					'title'         => __( 'Donation Options', 'charitable' ),
-					'context'       => 'campaign-advanced',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-donation-options',
-				),
-				array(
-					'id'            => 'campaign-extended-description',
-					'title'         => __( 'Extended Description', 'charitable' ),
-					'context'       => 'campaign-advanced',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-extended-description',
-				),
-				array(
-					'id'            => 'campaign-creator',
-					'title'         => __( 'Campaign Creator', 'charitable' ),
-					'context'       => 'campaign-advanced',
-					'priority'      => 'high',
-					'view'          => 'metaboxes/campaign-creator',
+					'id'       => 'campaign-settings',
+					'title'    => __( 'Campaign Settings', 'charitable' ),
+					'context'  => 'normal',
+					'priority' => 'high',
+					'view'     => 'metaboxes/campaign-settings',
 				),
 			);
 
@@ -154,110 +153,81 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		}
 
 		/**
-		 * Wrap elements around the main editor.
+		 * Return campaign settings panels.
 		 *
-		 * @since  1.0.0
+		 * @since  1.6.0
 		 *
-		 * @return void
-		 */
-		public function wrap_editor() {
-			add_filter( 'edit_form_after_title', array( $this, 'advanced_campaign_settings' ), 20 );
-		}
-
-		/**
-		 * Wrap editor (and other advanced settings).
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return void
-		 */
-		public function editor_wrap_before() {
-			charitable_admin_view( 'metaboxes/campaign-advanced-wrap-before', array( 'meta_boxes' => $this->get_advanced_meta_boxes() ) );
-		}
-
-		/**
-		 * End wrapper around editor and other advanced settings.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return void
-		 */
-		public function editor_wrap_after() {
-			charitable_admin_view( 'metaboxes/campaign-advanced-wrap-after' );
-		}
-
-		/**
-		 * Display advanced campaign fields.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return void
-		 */
-		public function advanced_campaign_settings() {
-			charitable_admin_view( 'metaboxes/campaign-advanced-settings', array( 'meta_boxes' => $this->get_advanced_meta_boxes() ) );
-		}
-
-		/**
-		 * Return flat array of meta boxes, ordered by priority.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @global array $wp_meta_boxes
 		 * @return array
 		 */
-		private function get_advanced_meta_boxes() {
-			global $wp_meta_boxes;
-
-			$meta_boxes = array();
-
-			if ( ! isset( $wp_meta_boxes['campaign']['campaign-advanced'] ) ) {
-				return $meta_boxes;
-			}
-
-			foreach ( array( 'high', 'sorted', 'core', 'default', 'low' ) as $priority ) {
-				if ( isset( $wp_meta_boxes['campaign']['campaign-advanced'][ $priority ] ) ) {
-					foreach ( (array) $wp_meta_boxes['campaign']['campaign-advanced'][ $priority ] as $box ) {
-						$meta_boxes[] = $box;
-					}
-				}
-			}
-
-			return $meta_boxes;
-		}
-
-		/**
-		 * Adds fields to the campaign donation options metabox.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return void
-		 */
-		public function campaign_donation_options_metabox() {
-			/* Get the array of fields to be displayed within the campaign donations metabox. */
-			$fields = array(
-				'donations'     => array(
-					'priority'  => 4,
-					'view'      => 'metaboxes/campaign-donation-options/suggested-amounts',
-					'label'     => __( 'Suggested Donation Amounts', 'charitable' ),
-					'fields'    => apply_filters( 'charitable_campaign_donation_suggested_amounts_fields', array(
-						'amount'    => array(
-							'column_header' => __( 'Amount', 'charitable' ),
-							'placeholder'   => __( 'Amount', 'charitable' ),
+		public function get_campaign_settings_panels() {
+			$panels = array(
+				'campaign-donation-options' => array(
+					'title'  => __( 'Donation Options', 'charitable' ),
+					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', array(
+						'donations'     => array(
+							'priority' => 4,
+							'view'     => 'metaboxes/campaign-donation-options/suggested-amounts',
+							'label'    => __( 'Suggested Donation Amounts', 'charitable' ),
+							'fields'   => apply_filters( 'charitable_campaign_donation_suggested_amounts_fields', array(
+								'amount'      => array(
+									'column_header' => __( 'Amount', 'charitable' ),
+									'placeholder'   => __( 'Amount', 'charitable' ),
+								),
+								'description' => array(
+									'column_header' => __( 'Description (optional)', 'charitable' ),
+									'placeholder'   => __( 'Optional Description', 'charitable' ),
+								),
+							) ),
 						),
-						'description'   => array(
-							'column_header' => __( 'Description (optional)', 'charitable' ),
-							'placeholder'   => __( 'Optional Description', 'charitable' ),
+						'_campaign_allow_custom_donations' => array(
+							'priority' => 6,
+							'type'     => 'checkbox',
+							'label'    => __( 'Allow Custom Donations', 'charitable' ),
+							'value'    => 1,
 						),
 					) ),
 				),
-				'permit_custom' => array(
-					'priority'  => 6,
-					'view'      => 'metaboxes/campaign-donation-options/permit-custom',
-					'label'     => __( 'Allow Custom Donations', 'charitable' ),
+				'campaign-extended-settings' => array(
+					'title'  => __( 'Extended Settings', 'charitable' ),
+					'fields' => array(),
 				),
 			);
 
-			$this->meta_box_helper->display_fields( apply_filters( 'charitable_campaign_donation_options_fields', $fields ) );
+			$panels = $this->add_legacy_meta_boxes( $panels );
+
+			/**
+			 * Filter the array of settings panels.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param $panels array Set of panels.
+			 */
+			return apply_filters( 'charitable_campaign_settings_panels', $panels );
+		}
+
+		/**
+		 * Add panels for any meta boxes previously added to the campaign-advanced section
+		 * using the `charitable_campaign_meta_boxes` filter.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $panels Core registered panels.
+		 * @return array
+		 */
+		public function add_legacy_meta_boxes( $panels ) {
+			foreach ( apply_filters( 'charitable_campaign_meta_boxes', array() ) as $panel ) {
+				if ( 'campaign-advanced' != $panel['context'] ) {
+					continue;
+				}
+
+				$id = $panel['id'];
+
+				unset( $panel['id'] );
+
+				$panels[ $id ] = $panel;
+			}
+
+			return $panels;
 		}
 
 		/**

@@ -422,85 +422,81 @@ body.post-type-campaign .postbox-container .empty-container {
         padding-bottom: 13px; } }
 
 /* --- Advanced Metabox --- */
-#charitable-campaign-advanced-metabox.ui-tabs {
+#campaign-settings .postbox-title {
+  border-bottom-color: #dedede; }
+#campaign-settings .inside {
+  margin: 0;
+  padding: 0; }
+#campaign-settings .ui-tabs {
   *zoom: 1;
   clear: both;
   padding: 0;
   background-color: #f5f5f5;
-  border-radius: 4px;
-  border: 1px solid #dedede;
+  border-radius: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 13px; }
-  #charitable-campaign-advanced-metabox.ui-tabs:before, #charitable-campaign-advanced-metabox.ui-tabs:after {
+  #campaign-settings .ui-tabs:before, #campaign-settings .ui-tabs:after {
     content: " ";
     display: table; }
-  #charitable-campaign-advanced-metabox.ui-tabs:after {
+  #campaign-settings .ui-tabs:after {
     clear: both; }
-  #charitable-campaign-advanced-metabox.ui-tabs .wp-editor-expand #wp-content-editor-tools {
+  #campaign-settings .ui-tabs .wp-editor-expand #wp-content-editor-tools {
     background-color: transparent; }
-  #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav {
-    float: left;
-    width: 20%;
-    margin: 0;
-    padding: 0;
-    border: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
+#campaign-settings .ui-tabs-nav {
+  float: left;
+  width: 20%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  line-height: 1em;
+  height: auto; }
+  #campaign-settings .ui-tabs-nav li {
+    position: relative;
+    top: 0;
+    display: block;
+    width: 100%;
+    float: none;
     background: none;
-    line-height: 1em;
-    height: auto; }
-    #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li {
-      position: relative;
-      top: 0;
-      display: block;
-      width: 100%;
-      float: none;
-      background: none;
-      margin: 0;
-      padding: 0 1px 0 0;
-      border: 0;
-      border-radius: 0;
-      white-space: normal; }
-    #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav a {
-      display: block;
-      float: none;
-      padding: 10px;
-      color: #747474;
-      text-decoration: none;
-      border: none;
-      text-shadow: none;
-      margin: 0;
-      border-radius: 0;
-      font-weight: normal; }
-    #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li.ui-tabs-active {
-      z-index: 2;
-      margin-right: -2px;
-      border-top: 1px solid #dedede;
-      border-bottom: 1px solid #dedede !important;
-      background-color: #fff; }
-    #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li:first-child {
-      border-radius: 4px 0 0 0;
-      border-top-color: transparent; }
-    #charitable-campaign-advanced-metabox.ui-tabs .charitable-tabs.ui-tabs-nav li:last-child {
-      margin-bottom: 10px;
-      border-bottom-color: transparent; }
-  #charitable-campaign-advanced-metabox.ui-tabs .ui-tabs-panel {
-    clear: none;
-    box-sizing: border-box;
-    float: right;
-    width: 80%;
-    padding: 20px;
     margin: 0;
-    border-left: 1px solid #dedede;
-    border-top: 0;
-    border-radius: 0 4px 4px 0;
+    padding: 0 1px 0 0;
+    border: 0;
+    white-space: normal; }
+  #campaign-settings .ui-tabs-nav a {
+    display: block;
+    float: none;
+    padding: 10px;
+    color: #747474;
+    text-decoration: none;
+    border: none;
+    text-shadow: none;
+    margin: 0;
+    font-weight: normal; }
+  #campaign-settings .ui-tabs-nav li.ui-tabs-active {
+    z-index: 2;
+    margin-right: -2px;
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede !important;
     background-color: #fff; }
-    #charitable-campaign-advanced-metabox.ui-tabs .ui-tabs-panel .inside {
-      padding: 0;
-      margin: 0; }
-  #charitable-campaign-advanced-metabox.ui-tabs #wp-content-editor-tools {
-    padding-top: 0; }
+  #campaign-settings .ui-tabs-nav li:first-child {
+    border-top-color: 1px solid #dedede; }
+  #campaign-settings .ui-tabs-nav li.ui-tabs-active:first-child {
+    border-top-color: transparent; }
+  #campaign-settings .ui-tabs-nav li:last-child {
+    margin-bottom: 10px;
+    border-bottom-color: transparent; }
+#campaign-settings .ui-tabs-panel {
+  clear: none;
+  box-sizing: border-box;
+  float: right;
+  width: 80%;
+  padding: 20px;
+  margin: 0;
+  border-left: 1px solid #dedede;
+  border-top: 0;
+  background-color: #fff; }
+#campaign-settings #wp-content-editor-tools {
+  padding-top: 0; }
 
 /* --- Suggested Donations --- */
 #charitable-campaign-suggested-donations .amount-col {
