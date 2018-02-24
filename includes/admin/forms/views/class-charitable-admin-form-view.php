@@ -161,18 +161,18 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 		 *
 		 * @param  array  $field Field definition.
 		 * @param  string $key   Field key.
-		 * @param  array $args   Unused. Mixed array of arguments.
+		 * @param  array  $args  Unused. Mixed array of arguments.
 		 * @return boolean False if the field was not rendered. True otherwise.
 		 */
 		public function render_field( $field, $key, $args = array() ) {
-			$field['form_view']  = $this;
-			$field['view']       = $this->get_field_view( $field );
-			$field['type']       = $this->get_field_type( $field );
-			$field['key']        = $this->get_field_key( $field, $key );
-			$field['id']         = $this->get_field_id( $field );
-			$field['wrapper_id'] = 'charitable-' . $field['id'] . '-wrap';
+			$field['form_view']     = $this;
+			$field['view']          = $this->get_field_view( $field );
+			$field['type']          = $this->get_field_type( $field );
+			$field['key']           = $this->get_field_key( $field, $key );
+			$field['id']            = $this->get_field_id( $field );
+			$field['wrapper_id']    = 'charitable-' . $field['id'] . '-wrap';
 			$field['wrapper_class'] = $this->get_field_class( $field );
-			$field['tabindex']   = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
+			$field['tabindex']      = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
 
 			if ( 'checkbox' == $field['type'] ) {
 				$field['checked'] = $this->is_field_checked( $field );
@@ -182,6 +182,8 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
 			/* Increment the tabindex. */
 			$this->tabindex = $field['tabindex'] + 1;
+			
+			error_log( var_export( $field, true ) );
 
 			return charitable_admin_view( $field['view'], $field );
 		}
@@ -237,8 +239,12 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 			}
 
 			switch ( $field['type'] ) {
-				case 'charitable-fieldset' : return 'metaboxes/field-types/fieldset';
-				default                    : return 'metaboxes/field-types/' . $field['type'];
+				case 'charitable-fieldset':
+					return 'metaboxes/field-types/fieldset';
+					break;
+
+				default:
+					return 'metaboxes/field-types/' . $field['type'];
 			}
 		}
 
@@ -269,7 +275,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 		protected function get_field_class( $field ) {
 			$classes = array(
 				'charitable-metabox-wrap',
-				'charitable-'. $this->get_field_type( $field ) . '-wrap',
+				'charitable-' . $this->get_field_type( $field ) . '-wrap',
 			);
 
 			if ( array_key_exists( 'wrapper_class', $field ) ) {
@@ -304,8 +310,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 		 *
 		 * @since  1.5.3
 		 *
-		 * @param  array  $field   Field definition.
-		 * @param  string $default The key of the form field. This is the fallback option.
+		 * @param  array $field Field definition.
 		 * @return string
 		 */
 		protected function get_field_id( $field ) {

@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return boolean True if the view exists and was rendered. False otherwise.
  */
 function charitable_admin_view( $view, $view_args = array() ) {
-	$base_path = array_key_exists( 'base_path', $view_args ) ? $view_args['base_path'] : charitable()->get_path( 'admin' ) . 'views/';	
+	$base_path = array_key_exists( 'base_path', $view_args ) ? $view_args['base_path'] : charitable()->get_path( 'admin' ) . 'views/';
 
 	/**
 	 * Filter the path to the view.
