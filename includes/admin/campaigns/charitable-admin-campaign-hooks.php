@@ -4,29 +4,35 @@
  *
  * Action/filter hooks used for setting up donations in the admin.
  *
- * @package     Charitable/Functions/Admin
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Admin
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$registry = charitable()->registry();
+$registry->register_object( Charitable_Campaign_Meta_Boxes::get_instance() );
 
 /**
  * Sets the placeholder text of the campaign title field.
  *
  * @see Charitable_Campaign_Meta_Boxes::campaign_enter_title()
  */
-add_filter( 'enter_title_here', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'campaign_enter_title' ), 10, 2 );
+add_filter( 'enter_title_here', array( $registry->get( 'campaign_meta_boxes' ), 'campaign_enter_title' ), 10, 2 );
 
 /**
  * Display fields at the very top of the page.
  *
  * @see Charitable_Campaign_Meta_Boxes::campaign_form_top()
  */
-add_action( 'edit_form_after_title', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'campaign_form_top' ) );
+add_action( 'edit_form_after_title', array( $registry->get( 'campaign_meta_boxes' ), 'campaign_form_top' ) );
 
 /**
  * Campaign Metaboxes.
@@ -35,10 +41,8 @@ add_action( 'edit_form_after_title', array( Charitable_Campaign_Meta_Boxes::get_
  * @see Charitable_Campaign_Meta_Boxes::campaign_donation_options_metabox()
  * @see Charitable_Campaign_Meta_Boxes::wrap_editor()
  */
-add_action( 'add_meta_boxes', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'add_meta_boxes' ) );
-add_action( 'charitable_campaign_donation_options_metabox', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'campaign_donation_options_metabox' ) );
-add_action( 'add_meta_boxes_campaign', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'wrap_editor' ) );
-add_filter( 'get_user_option_meta-box-order_campaign', '__return_false' );
+add_action( 'add_meta_boxes', array( $registry->get( 'campaign_meta_boxes' ), 'add_meta_boxes' ) );
+// add_filter( 'get_user_option_meta-box-order_campaign', '__return_false' );
 
 /**
  * Save the campaign.
@@ -46,8 +50,8 @@ add_filter( 'get_user_option_meta-box-order_campaign', '__return_false' );
  * @see Charitable_Campaign_Meta_Boxes::save_campaign()
  * @see Charitable_Campaign_Meta_Boxes::set_default_post_content()
  */
-add_action( 'save_post_' . Charitable::CAMPAIGN_POST_TYPE,  array( Charitable_Campaign_Meta_Boxes::get_instance(), 'save_campaign' ), 10, 2 );
-add_filter( 'wp_insert_post_data', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'set_default_post_content' ) );
+add_action( 'save_post_' . Charitable::CAMPAIGN_POST_TYPE, array( $registry->get( 'campaign_meta_boxes' ), 'save_campaign' ), 10, 2 );
+add_filter( 'wp_insert_post_data', array( $registry->get( 'campaign_meta_boxes' ), 'set_default_post_content' ) );
 
 /**
  * Set up admin messages & notifications displayed based on actions taken.
@@ -55,7 +59,7 @@ add_filter( 'wp_insert_post_data', array( Charitable_Campaign_Meta_Boxes::get_in
  * @see Charitable_Campaign_Meta_Boxes::post_messages()
  * @see Charitable_Campaign_Meta_Boxes::bulk_messages()
  */
-add_filter( 'post_updated_messages', array( Charitable_Campaign_Meta_Boxes::get_instance(), 'post_messages' ) );
+add_filter( 'post_updated_messages', array( $registry->get( 'campaign_meta_boxes' ), 'post_messages' ) );
 
 /**
  * Set the table columns for campaigns.
