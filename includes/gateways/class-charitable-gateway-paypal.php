@@ -85,6 +85,61 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'help' 	   => __( 'If you are having problems with donations not getting marked as Paid, disabling IPN verification might fix the problem. However, it is important to be aware that this is a <strong>less secure</strong> method for verifying donations.', 'charitable' ),
 			);
 
+			if( $this->supports( 'recurring_cancellation' ) ) {
+
+				$settings['api'] = array(
+					'type'      => 'heading',
+					'title'     => __( 'API Settings', 'charitable-recurring' ),
+					'priority'  => 20,
+					'description' => sprintf( __( 'API credentials are necessary to process PayPal cancellations from inside WordPress. These can be obtained from <a target="_blank" href="%s/us/cgi-bin/webscr?cmd=_login-api-run">this tool</a>.', 'charitable-recurring' ), charitable_get_option( 'test_mode' ) ? 'https://www.sandbox.paypal.com' : 'https://www.paypal.com' ),
+				);
+
+				$settings['api_username'] = array(
+	                'title' => __( 'Live API Username', 'charitable-recurring' ),
+	                'type' => 'text',
+	                'priority' => 30,
+	                'default' => ''
+	            );
+
+	            $settings['api_password'] = array(
+	                'title' => __( 'Live API Password', 'charitable-recurring' ),
+	                'type' => 'password',
+	                'priority' => 40,
+	                'default' => ''
+	            );
+	            
+	            $settings['api_signature'] = array(
+	                'title' => __( 'Live API Signature', 'charitable-recurring' ),
+	                'type' => 'password',
+	                'priority' => 50,
+	                'default' => ''
+	            );
+
+				$settings['sandbox_api_username'] = array(
+	                'title' => __( 'Sandbox API Username', 'charitable-recurring' ),
+	                'type' => 'text',
+	                'description' => __( 'Create sandbox accounts and obtain API credentials from within your
+										<a href="http://developer.paypal.com">PayPal developer account</a> or read more about it in the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">documentation</a>.', 'charitable-recurring' ),
+	                'priority' => 60,
+	                'default' => ''
+	            );
+	            
+	            $settings['sandbox_api_password'] = array(
+	                'title' => __( 'Sandbox API Password', 'charitable-recurring' ),
+	                'type' => 'password',
+	                'priority' => 70,
+	                'default' => ''
+	            );
+	            
+	            $settings['sandbox_api_signature'] = array(
+	                'title' => __( 'Sandbox API Signature', 'charitable-recurring' ),
+	                'type' => 'password',
+	                'priority' => 80,
+	                'default' => ''
+	            );
+
+	    	}            
+
 			return $settings;
 		}
 
