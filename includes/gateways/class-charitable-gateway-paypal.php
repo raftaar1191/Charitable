@@ -207,7 +207,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				die( __( 'IPN Verification Failure', 'charitable' ) );
 			}
 
-			$defaults = array(				
+			$defaults = array(
 				'payment_status' => '',
 				'custom' 		 => 0,
 				'txn_type'       => '',
@@ -424,7 +424,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data = array(
 				'cmd' => '_notify-validate',
 			);
-			
+
 			return array_merge( $data, $_POST );
 
 		}
@@ -581,7 +581,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
 			/**
 			 * Filter the PayPal Email.
-			 * 
+			 *
 			 * @since 1.6.0
 			 *
 			 * @param string  $paypal_email The email address.
