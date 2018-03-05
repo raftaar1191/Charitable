@@ -7,4 +7,10 @@
  * @since   1.0.0
  */
 ?>
+<?php if ( isset( $view_args['description'] ) ) : ?>
+
+	<div class="charitable-description"><?php echo $view_args['description']  ?></div>
+
+<?php else: ?>
 <hr />
+<?php endif; ?>
