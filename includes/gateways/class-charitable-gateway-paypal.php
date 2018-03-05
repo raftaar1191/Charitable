@@ -61,6 +61,13 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'help'      => __( 'Enter the email address for the PayPal account that should receive donations.', 'charitable' ),
 			);
 
+			$settings['sandbox_paypal_email'] = array(
+				'type'      => 'email',
+				'title'     => __( 'Sandbox PayPal Email Address', 'charitable' ),
+				'priority'  => 7,
+				'help'      => __( 'Enter the email address for the Sandbox PayPal account that should receive test donations.', 'charitable' ),
+			);
+
 			$settings['transaction_mode'] = array(
 				'type'      => 'radio',
 				'title'     => __( 'PayPal Transaction Type', 'charitable' ),
@@ -103,11 +110,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				return $valid;
 			}
 
-			$settings = charitable_get_option( 'gateways_paypal', array() );
-
-			if ( array_key_exists( 'paypal_email', $settings ) ) {
-				$email = trim( $settings['paypal_email'] );
-			}
+			$email = self::get_paypal_email();
 
 			/* Make sure that the email is set. */
 			if ( ! isset( $email ) || empty( $email ) ) {
@@ -138,7 +141,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$donation_key 	  = $processor->get_donation_data_value( 'donation_key' );
 
 			$paypal_args = apply_filters( 'charitable_paypal_redirect_args', array(
-				'business'      => $gateway->get_value( 'paypal_email' ),
+				'business'      => Charitable_Gateway_Paypal::get_paypal_email(),
 				'email'         => isset( $user_data['email'] ) ? $user_data['email'] : '',
 				'first_name'    => isset( $user_data['first_name'] ) ? $user_data['first_name'] : '',
 				'last_name'     => isset( $user_data['last_name'] ) ? $user_data['last_name'] : '',
@@ -552,6 +555,38 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			 * @param boolean $ipn_check Whether this is for an IPN request.
 			 */
 			return apply_filters( 'charitable_paypal_uri', $paypal_uri, $ssl_check, $ipn_check );
+		}
+
+
+
+		/**
+		 * Return the PayPal business email.
+		 *
+		 * @since  1.5.12
+		 *
+		 * @param  boolean $ssl_check Whether to check SSL.
+		 * @param  boolean $ipn_check Whether this is for an IPN request.
+		 * @return string
+		 */
+		public static function get_paypal_email() {
+			$paypal_email = '';
+
+			$settings = charitable_get_option( 'gateways_paypal', array() );
+
+			$email_option = charitable_get_option( 'test_mode' ) ? 'sandbox_paypal_email' : 'paypal_email';
+
+			if ( array_key_exists( $email_option, $settings ) ) {
+				$paypal_email = trim( $settings[$email_option] );
+			}
+
+			/**
+			 * Filter the PayPal Email.
+			 * 
+			 * @since 1.6.0
+			 *
+			 * @param string  $paypal_email The email address.
+			 */
+			return apply_filters( 'charitable_paypal_email', $paypal_email );
 		}
 
 		/**
