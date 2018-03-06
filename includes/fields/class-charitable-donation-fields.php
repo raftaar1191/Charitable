@@ -3,14 +3,17 @@
  * Charitable Donation Fields model.
  *
  * @package   Charitable/Classes/Charitable_Donation_Fields
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Fields' ) ) :
 
@@ -44,7 +47,7 @@ if ( ! class_exists( 'Charitable_Donation_Fields' ) ) :
 		 *
 		 * @since 1.5.0
 		 *
-		 * @param Charitable_Fields_Registry $registry An instance of `Charitable_Field_Registry_Interface`.
+		 * @param Charitable_Field_Registry_Interface $registry An instance of `Charitable_Field_Registry_Interface`.
 		 * @param Charitable_Abstract_Donation        $donation A `Charitable_Abstract_Donation` instance.
 		 */
 		public function __construct( Charitable_Field_Registry_Interface $registry, Charitable_Abstract_Donation $donation ) {
