@@ -704,7 +704,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			 * @param Charitable_Donation $donation This instance of `Charitable_Donation`.
 			 */
 			return apply_filters( 'charitable_donation_admin_meta', $meta, $this );
-		}		
+		}
 
 		/**
 		 * Checks whether the donation is from the current user.

@@ -160,32 +160,17 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @return array
 		 */
 		public function get_campaign_settings_panels() {
+			$fields = charitable()->campaign_fields()->get_admin_form_fields();
+			$keys   = array_keys( $fields );
+			$fields = array_combine(
+				$keys,
+				array_map( array( $this, 'maybe_set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
+			);
+
 			$panels = array(
-				'campaign-donation-options' => array(
+				'campaign-donation-options'  => array(
 					'title'  => __( 'Donation Options', 'charitable' ),
-					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', array(
-						'donations'     => array(
-							'priority' => 4,
-							'view'     => 'metaboxes/campaign-donation-options/suggested-amounts',
-							'label'    => __( 'Suggested Donation Amounts', 'charitable' ),
-							'fields'   => apply_filters( 'charitable_campaign_donation_suggested_amounts_fields', array(
-								'amount'      => array(
-									'column_header' => __( 'Amount', 'charitable' ),
-									'placeholder'   => __( 'Amount', 'charitable' ),
-								),
-								'description' => array(
-									'column_header' => __( 'Description (optional)', 'charitable' ),
-									'placeholder'   => __( 'Optional Description', 'charitable' ),
-								),
-							) ),
-						),
-						'_campaign_allow_custom_donations' => array(
-							'priority' => 6,
-							'type'     => 'checkbox',
-							'label'    => __( 'Allow Custom Donations', 'charitable' ),
-							'value'    => 1,
-						),
-					) ),
+					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', $fields ),
 				),
 				'campaign-extended-settings' => array(
 					'title'  => __( 'Extended Settings', 'charitable' ),
@@ -386,6 +371,55 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 			);
 
 			return $messages;
+		}
+
+		/**
+		 * Set a field's initial value.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array  $field Field definition.
+		 * @param  string $key   The key of the field.
+		 * @return array
+		 */
+		protected function maybe_set_field_value( $field, $key ) {
+			if ( array_key_exists( $key, $_POST ) ) {
+				$field['value'] = $_POST[ $key ];
+				return $field;
+			}
+
+			/* Checkboxes don't need a value set. */
+			if ( 'checkbox' != $field['type'] ) {
+				$field['value'] = array_key_exists( 'default', $field ) ? $field['default'] : '';
+			}
+
+			if ( ! array_key_exists( 'post', $_GET ) ) {
+				return $field;
+			}
+
+			$campaign = charitable_get_campaign( $_GET['post'] );
+
+			if ( in_array( $campaign->post_status, array( 'auto-draft', 'draft' ) ) ) {
+				return $field;
+			}
+
+			if ( array_key_exists( 'value_callback', $field ) ) {
+				$value = call_user_func( $field['value_callback'], $campaign, $key );
+			} else {
+				$value = $campaign->get( $key );
+			}
+
+			if ( ! $value ) {
+				return $field;
+			}
+
+			if ( 'checkbox' == $field['type'] ) {
+				$field['checked'] = $value;
+			} else {
+				$field['value'] = $value;
+			}
+
+			return $field;
 		}
 	}
 
