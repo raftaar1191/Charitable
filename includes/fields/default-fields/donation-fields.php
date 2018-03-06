@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Filter the set of default donation fields.
@@ -28,7 +30,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'donation_id' => array(
 		'label'          => __( 'Donation ID', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Charitable_Donation::get_donation_id()
+		'value_callback' => false, // Charitable_Donation::get_donation_id().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'show_in_meta'   => false,
@@ -44,20 +46,20 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'donation_form'  => array(
 			'label'    => __( 'First name', 'charitable' ),
 			'priority' => 4,
-			'required' => true,            
+			'required' => true,
 		),
 		'admin_form'     => array(
-			'required' => false,            
+			'required' => false,
 		),
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 		'email_tag'      => array(
 			'tag'         => 'donor_first_name',
-			'description' => __( 'The first name of the donor', 'charitable' ),                    
+			'description' => __( 'The first name of the donor', 'charitable' ),
 			'preview'     => 'John',
 		),
 	),
-	'last_name' => array(        
+	'last_name' => array(
 		'label'          => __( 'Donor Last Name', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -92,23 +94,23 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'value_callback' => 'charitable_get_donor_meta_value',
 		'donation_form'  => array(
 			'type'     => 'email',
-			'label'    => __( 'Email', 'charitable' ),            
+			'label'    => __( 'Email', 'charitable' ),
 			'priority' => 8,
-			'required' => true,            
+			'required' => true,
 		),
 		'admin_form'     => array(
 			'required' => false,
 		),
 		'email_tag'      => array(
 			'tag'         => 'donor_email',
-			'description' => __( 'The email address of the donor', 'charitable' ),                    
+			'description' => __( 'The email address of the donor', 'charitable' ),
 			'preview'     => 'john@example.com',
 		),
 	),
 	'donor_address' => array(
 		'label'          => __( 'Address', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_donor_address()
+		'value_callback' => false, // Will use Charitable_Donation::get_donor_address().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => array(
@@ -228,7 +230,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'campaigns' => array(
 		'label'          => __( 'Campaigns', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_campaigns()
+		'value_callback' => false, // Will use Charitable_Donation::get_campaigns().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => array(
@@ -241,7 +243,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'campaign_categories_list' => array(
 		'label'          => __( 'Campaign Categories', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_campaign_categories_list()
+		'value_callback' => false, // Will use Charitable_Donation::get_campaign_categories_list().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => array(
@@ -268,7 +270,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'date' => array(
 		'label'          => __( 'Date of Donation', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_date()
+		'value_callback' => false, // Will use Charitable_Donation::get_date().
 		'donation_form'  => false,
 		'admin_form'     => array(
 			'type'           => 'datepicker',
@@ -289,7 +291,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'time' => array(
 		'label'          => __( 'Time of Donation', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_time()
+		'value_callback' => false, // Will use Charitable_Donation::get_time().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => false,
@@ -299,7 +301,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'status' => array(
 		'label'          => __( 'Donation Status', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_status()
+		'value_callback' => false, // Will use Charitable_Donation::get_status().
 		'donation_form'  => false,
 		'admin_form'     => array(
 			'type'     => 'select',
@@ -315,7 +317,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'status_label' => array(
 		'label'          => __( 'Donation Status', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_status_label()
+		'value_callback' => false, // Will use Charitable_Donation::get_status_label().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => array(
@@ -342,7 +344,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'gateway_label' => array(
 		'label'          => __( 'Payment Method', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_gateway_label()
+		'value_callback' => false, // Will use Charitable_Donation::get_gateway_label().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => false,
@@ -352,7 +354,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'donation_key' => array(
 		'label'          => __( 'Donation Key', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_donation_key()
+		'value_callback' => false, // Will use Charitable_Donation::get_donation_key().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => false,
@@ -362,7 +364,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'test_mode' => array(
 		'label'          => __( 'Donation made in test mode?', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_test_mode_text()
+		'value_callback' => false, // Will use Charitable_Donation::get_test_mode_text().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => false,
@@ -372,7 +374,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 	'donation_summary' => array(
 		'label'          => __( 'Summary', 'charitable' ),
 		'data_type'      => 'core',
-		'value_callback' => false, // Will use Charitable_Donation::get_donation_summary()
+		'value_callback' => false, // Will use Charitable_Donation::get_donation_summary().
 		'donation_form'  => false,
 		'admin_form'     => false,
 		'email_tag'      => array(
