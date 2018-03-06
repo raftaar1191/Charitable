@@ -58,7 +58,7 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 
 		/**
 		 * Return the endpoint URL.
-		 *		 
+		 *
 		 * @since  1.5.0
 		 *
 		 * @global WP_Rewrite $wp_rewrite
