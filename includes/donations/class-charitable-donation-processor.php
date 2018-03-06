@@ -469,10 +469,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			/**
 			 * Do something after the donation has been saved in the database.
 			 *
-			 * @since   1.0.0
+			 * @since 1.0.0
 			 *
-			 * @param 	int 						  $donation_id The donation ID.
-			 * @param 	Charitable_Donation_Processor $this        The Processor instance.
+			 * @param int                           $donation_id The donation ID.
+			 * @param Charitable_Donation_Processor $this        The Processor instance.
 			 */
 			do_action( 'charitable_after_save_donation', $donation_id, $this );
 

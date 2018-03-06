@@ -533,6 +533,36 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Get the campaign fields registry
+		 *
+		 * If the registry has not been set up yet, this will also
+		 * perform the task of setting it up initially.
+		 *
+		 * This method is called on the plugins_loaded hook.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return Charitable_Campaign_Field_Registry
+		 */
+		public function campaign_fields() {
+			if ( ! $this->registry->has( 'campaign_field_registry' ) ) {
+				$campaign_fields = new Charitable_Campaign_Field_Registry();
+				// $campaign_fields->set_default_section( 'user', 'public' );
+				// $campaign_fields->set_default_section( 'user', 'admin' );
+
+				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
+
+				foreach ( $fields as $key => $args ) {
+					$campaign_fields->register_field( new Charitable_Campaign_Field( $key, $args ) );
+				}
+
+				$this->registry->register_object( $campaign_fields );
+			}
+
+			return $this->registry->get( 'campaign_field_registry' );
+		}
+
+		/**
 		 * Get the donation fields registry
 		 *
 		 * If the registry has not been set up yet, this will also
