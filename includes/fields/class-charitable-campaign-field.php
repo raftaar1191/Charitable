@@ -1,13 +1,13 @@
 <?php
 /**
- * Charitable_Donation_Field model.
+ * Charitable_Campaign_Field model.
  *
- * @package   Charitable/Classes/Charitable_Donation_Field
+ * @package   Charitable/Classes/Charitable_Campaign_Field
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.5.0
- * @version   1.5.3
+ * @since     1.6.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
@@ -15,29 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
+if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 
 	/**
-	 * Charitable_Donation_Field
+	 * Charitable_Campaign_Field
 	 *
-	 * @since 1.5.0
+	 * @since 1.6.0
 	 *
 	 * @property string         $field
 	 * @property string         $label
 	 * @property string         $data_type
 	 * @property false|callable $value_callback
-	 * @property boolean|array  $donation_form
 	 * @property boolean|array  $admin_form
-	 * @property boolean        $show_in_meta
+	 * @property boolean|array  $ambassadors_form
 	 * @property boolean        $show_in_export
 	 * @property boolean|array  $email_tag
 	 */
-	class Charitable_Donation_Field extends Charitable_Field implements Charitable_Field_Interface {
+	class Charitable_Campaign_Field extends Charitable_Field implements Charitable_Field_Interface {
 
 		/**
 		 * Field identifier.
 		 *
-		 * @since 1.5.0
+		 * @since 1.6.0
 		 *
 		 * @var   string
 		 */
@@ -46,28 +45,27 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		/**
 		 * Field arguments.
 		 *
-		 * @since 1.5.0
-		 * @since 1.5.3 Added optional `value_callback` parameter to `donation_form` and `admin_form` args.
+		 * @since 1.6.0
 		 *
 		 * @var   array $args  {
 		 *     Array of field arguments.
 		 *
-		 *     @type string         $label           The label to use in the export, meta, donation form (unless overridden), admin
+		 *     @type string         $label           The label to use in the export, meta, Ambassadors form (unless overridden), admin
 		 *                                           form (unless overriden) and email tag (unless overridden).
-		 *                                           If no `label` is provided in the donation_form args, this label will be used in
-		 *                                           the donation form. If no `label` is provided in the admin_form args, this label
+		 *                                           If no `label` is provided in the ambassadors_form args, this label will be used in
+		 *                                           the Ambassadors form. If no `label` is provided in the admin_form args, this label
 		 *                                           will also be used in the admin form. Unless a `description` is set in the `email_tag`
 		 *                                           args, this label will also be used there as the tag description.
-		 *     @type string         $data_type       How the data should be saved. This may be set to 'meta', 'user' or 'core',
-		 *                                           through 'core' is designed stricly for core Charitable use.
-		 *     @type false|callable $value_callback  A callback function to retrieve the value of the field for a donation.
-		 *                                           The callback function receives up to two arguments: a `Charitable_Donation` object
+		 *     @type string         $data_type       How the data should be saved. This may be set to 'meta' or 'core', through 'core'
+		 *                                           is designed stricly for core Charitable use.
+		 *     @type false|callable $value_callback  A callback function to retrieve the value of the field for a campaign.
+		 *                                           The callback function receives up to two arguments: a `Charitable_Campaign` object
 		 *                                           and the field key.
 		 *                                           Note that this should only be set to false if either of the following is true:
-		 *                                           `Charitable_Donation` has a getter named `get_$key` where `$key` is the field of
+		 *                                           `Charitable_Campaign` has a getter named `get_$key` where `$key` is the field of
 		 *                                           this key; or $key is a member variable of `WP_Post`.
-		 *     @type boolean|array  $donation_form   {
-		 *         Sets whether the field should be shown in the donation form. To prevent the field being available
+		 *     @type boolean|array  $admin_form   {
+		 *         Sets whether the field should be shown in the admin form. To prevent the field being available
 		 *         in the form (not even as a hidden input), set to false. For control over how the field should be
 		 *         shown in the form, an array can be passed with any of these keys:
 		 *
@@ -86,6 +84,7 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 *         @type boolean        $fullwidth      Whether to show the field as a full-width field.
 		 *         @type array          $attrs          Arbitrary set of form field attributes. These should be provided in a simple
 		 *                                              key=>value array, which will be parsed as key="value" attributes in the field.
+		 *         @type string         $section        The section or panel that the field should be included in.
 		 *         @type int            $priority       Set the position of the field within the form. This overrides `show_after`
 		 *                                              and `show_before`. If `priority`, `show_after` and `show_before` are not set,
 		 *                                              the field will be shown after the most recently registered form field.
@@ -99,17 +98,16 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 *                                              are set to show before the same field, it may not appear immediately before
 		 *                                              the other field. Use in combination with `show_after` or use `priority`
 		 *                                              instead for fine-grained control.
-		 *         @type false|callable $value_callback A callback function to retrieve the value of the field for a donation.
+		 *         @type false|callable $value_callback A callback function to retrieve the value of the field for a campaign.
 		 *                                              This will override the `value_callback` setting for the field.
 		 *     }
-		 *     @type boolean|array  $admin_form      {
-		 *         Sets whether the field should be shown in the admin donation form. To prevent the field being available
+		 *     @type boolean|array  $ambassadors_form   {
+		 *         Sets whether the field should be shown in the Ambassadors form. To prevent the field being available
 		 *         in the form (not even as a hidden input), set to false. If set to true, the form field will inherit arguments
-		 *         from the `donation_form` (if provided), or use default arguments. For control over how the field should be
-		 *         shown in the form, an array can be passed with the same keys as described for `donation_form` above.
+		 *         from the `admin_form` (if provided), or use default arguments. For control over how the field should be
+		 *         shown in the form, an array can be passed with the same keys as described for `admin_form` above.
 		 *     }
-		 *     @type boolean        $show_in_meta    Whether the field should be shown in the Donation Details meta box in the admin.
-		 *     @type boolean        $show_in_export  Whether the field should be shown in donation exports.
+		 *     @type boolean        $show_in_export  Whether the field should be shown in campaign exports.
 		 *     @type boolean|array  $email_tag       {
 		 *         Automatically create an email tag for this field. Set to false to prevent the field being available as an
 		 *         email tag. For control over the email tag options, an array can be passed with the following keys:
@@ -126,26 +124,26 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		/**
 		 * Return the default arguments for this field type.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @return array
 		 */
 		protected function get_defaults() {
 			return array(
-				'label'          => '',
-				'data_type'      => 'meta',
-				'donation_form'  => true,
-				'admin_form'     => true,
-				'show_in_meta'   => true,
-				'show_in_export' => true,
-				'email_tag'      => true,
+				'label'            => '',
+				'data_type'        => 'meta',
+				'ambassadors_form' => true,
+				'admin_form'       => true,
+				'show_in_meta'     => true,
+				'show_in_export'   => true,
+				'email_tag'        => true,
 			);
 		}
 
 		/**
 		 * Sanitize the argument.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @param  string $key   The argument's key.
 		 * @param  mixed  $value The argument's value.
@@ -154,7 +152,7 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		protected function sanitize_arg( $key, $value ) {
 			$value = parent::sanitize_arg( $key, $value );
 
-			if ( in_array( $key, array( 'show_in_meta', 'show_in_export' ) ) ) {
+			if ( in_array( $key, array( 'show_in_export' ) ) ) {
 				return (bool) $value;
 			}
 
@@ -162,20 +160,39 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		}
 
 		/**
-		 * Sanitize the donation_form setting.
+		 * Sanitize the ambassadors_form setting.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @param  mixed $value The argument setting.
 		 * @return boolean|array
 		 */
-		protected function sanitize_donation_form( $value ) {
+		protected function sanitize_ambassadors_form( $value ) {
 			return $this->sanitize_form_arg( $value, array(
 				'type'      => 'text',
 				'required'  => false,
 				'fullwidth' => false,
 				'default'   => '',
 				'attrs'     => array(),
+			) );
+		}
+
+		/**
+		 * Sanitize the admin_form setting.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  mixed $value The argument setting.
+		 * @return boolean|array
+		 */
+		public function sanitize_admin_form( $value ) {
+			return $this->sanitize_form_arg( $value, array(
+				'type'      => 'text',
+				'required'  => false,
+				'fullwidth' => false,
+				'default'   => '',
+				'attrs'     => array(),
+				'section'   => 'campaign-extended-settings',
 			) );
 		}
 	}

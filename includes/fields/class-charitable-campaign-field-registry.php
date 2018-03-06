@@ -2,11 +2,11 @@
 /**
  * Register and retrieve donation fields.
  *
- * @package   Charitable/Classes/Charitable_Donation_Field_Registry
+ * @package   Charitable/Classes/Charitable_Campaign_Field_Registry
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.5.0
+ * @since     1.6.0
  * @version   1.6.0
  */
 
@@ -15,41 +15,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
+if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 
 	/**
-	 * Charitable_Donation_Field_Registry
+	 * Charitable_Campaign_Field_Registry
 	 *
-	 * @since 1.5.0
+	 * @since 1.6.0
 	 */
-	class Charitable_Donation_Field_Registry extends Charitable_Field_Registry implements Charitable_Field_Registry_Interface {
+	class Charitable_Campaign_Field_Registry extends Charitable_Field_Registry implements Charitable_Field_Registry_Interface {
 
 		/**
 		 * Admin form fields.
 		 *
-		 * @since 1.5.0
+		 * @since 1.6.0
 		 *
 		 * @var   array
 		 */
 		protected $admin_form_fields;
 
 		/**
-		 * Return the donation form fields.
+		 * Ambassador form fields.
 		 *
-		 * @since  1.5.0
+		 * @since 1.6.0
 		 *
-		 * @return array
+		 * @var   array
 		 */
-		public function get_donation_form_fields() {
-			return array_filter( $this->fields, array( new Charitable_Field_Filter( 'donation_form' ), 'is_not_false' ) );
-		}
+		protected $ambassador_form_fields;
 
 		/**
-		 * Return the donation form fields.
+		 * Return the ambassadors form fields.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
-		 * @param  string $section Optional. If set, this will only return fields within this section.
+		 * @param  string $section The section of fields to get.
 		 * @return array
 		 */
 		public function get_admin_form_fields( $section = '' ) {
@@ -61,23 +59,33 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 				return $this->admin_form_fields;
 			}
 
-			$fields = array();
-
-			foreach ( $this->admin_form_fields as $key => $field ) {
-				if ( $section != $field->admin_form['section'] ) {
-					continue;
-				}
-
-				$fields[ $key ] = $field;
-			}
-
-			return $fields;
+			return $this->get_form_fields_in_section( $section, $this->admin_form_fields, 'admin_form' );
 		}
 
 		/**
-		 * Return the donation form fields.
+		 * Return the Ambassadors form fields.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
+		 *
+		 * @param  string $section The section of fields to get within the form.
+		 * @return array
+		 */
+		public function get_ambassadors_form_fields( $section = '' ) {
+			if ( ! isset( $this->ambassador_fields ) ) {
+				$this->ambassador_fields = array_filter( $this->fields, array( new Charitable_Field_Filter( 'ambassadors_form' ), 'is_not_false' ) );
+			}
+
+			if ( empty( $section ) ) {
+				return $this->ambassador_fields;
+			}
+
+			return $this->get_form_fields_in_section( $section, $this->ambassadors_fields, 'ambassadors_form' );
+		}
+
+		/**
+		 * Return the email tag fields.
+		 *
+		 * @since  1.6.0
 		 *
 		 * @return array
 		 */
@@ -88,7 +96,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		/**
 		 * Return the fields to be included in the export.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @return array
 		 */
@@ -97,20 +105,9 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		}
 
 		/**
-		 * Return the fields to be included in the donation meta.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @return array
-		 */
-		public function get_meta_fields() {
-			return array_filter( $this->fields, array( new Charitable_Field_Filter( 'show_in_meta' ), 'is_true' ) );
-		}
-
-		/**
 		 * Set the default form section.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @param  string $section Section to register.
 		 * @param  string $form    Which form we're registering the section in.
@@ -123,19 +120,19 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		/**
 		 * Register a field.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
 		 * @param  Charitable_Field_Interface $field Instance of `Charitable_Field_Interface`.
 		 * @return void
 		 */
 		public function register_field( Charitable_Field_Interface $field ) {
-			if ( ! is_a( $field, 'Charitable_Donation_Field' ) ) {
+			if ( ! is_a( $field, 'Charitable_Campaign_Field' ) ) {
 				return;
 			}
 
 			$field->value_callback         = $this->get_field_value_callback( $field );
-			$field->donation_form          = $this->get_field_donation_form( $field );
 			$field->admin_form             = $this->get_field_admin_form( $field );
+			$field->ambassadors_form       = $this->get_field_ambassadors_form( $field );
 			$field->email_tag              = $this->get_field_email_tag( $field );
 			$this->fields[ $field->field ] = $field;
 		}
@@ -143,9 +140,9 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		/**
 		 * Return a callback for the field.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
-		 * @param  Charitable_Donation_Field $field Instance of `Charitable_Donation_Field`.
+		 * @param  Charitable_Campaign_Field $field Instance of `Charitable_Campaign_Field`.
 		 * @return false|string|callable            Returns a callable function or false if none is set and
 		 *                                          we don't have a default one for the data type.
 		 */
@@ -168,15 +165,15 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 
 		/**
 		 * Return a parsed array of settings for the field, or false if it should not appear
-		 * in the donation form.
+		 * in the admin form.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
-		 * @param  Charitable_Donation_Field $field Instance of `Charitable_Donation_Field`.
+		 * @param  Charitable_Campaign_Field $field Instance of `Charitable_Campaign_Field`.
 		 * @return array|false
 		 */
-		protected function get_field_donation_form( Charitable_Donation_Field $field ) {
-			$settings = $field->donation_form;
+		protected function get_field_admin_form( Charitable_Campaign_Field $field ) {
+			$settings = $field->admin_form;
 
 			if ( false === $settings ) {
 				return $settings;
@@ -193,25 +190,25 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 * Return a parsed array of settings for the field, or false if it should not appear
 		 * in the donation form.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.0
 		 *
-		 * @param  Charitable_Donation_Field $field Instance of `Charitable_Donation_Field`.
+		 * @param  Charitable_Campaign_Field $field Instance of `Charitable_Campaign_Field`.
 		 * @return array
 		 */
-		protected function get_field_admin_form( Charitable_Donation_Field $field ) {
-			$settings = $field->admin_form;
+		protected function get_field_ambassadors_form( Charitable_Campaign_Field $field ) {
+			$settings = $field->ambassadors_form;
 
 			if ( false === $settings ) {
 				return $settings;
 			}
 
-			/* If the value is true, we use the same args as for the donation_form setting. */
+			/* If the value is true, we use the same args as for the ambassadors_form setting. */
 			if ( true === $settings ) {
-				return $field->donation_form;
+				return $field->ambassadors_form;
 			}
 
-			if ( is_array( $field->donation_form ) ) {
-				$settings = array_merge( $field->donation_form, $settings );
+			if ( is_array( $field->ambassadors_form ) ) {
+				$settings = array_merge( $field->ambassadors_form, $settings );
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
@@ -230,8 +227,8 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 */
 		protected function set_forms() {
 			return array(
-				'donation_form',
 				'admin_form',
+				'ambassadors_form',
 			);
 		}
 	}

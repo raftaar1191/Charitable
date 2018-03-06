@@ -3,7 +3,7 @@
  * Public form view.
  *
  * This is responsible for rendering the output of forms.
- * 
+ *
  * @package   Charitable/Forms/Charitable_Public_Form_View
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a

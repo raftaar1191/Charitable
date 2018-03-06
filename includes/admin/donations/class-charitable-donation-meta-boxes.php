@@ -188,20 +188,20 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'priority' => 'high',
 					'view'     => 'metaboxes/donation/donation-overview',
 				),
-				'donation-actions' => array(
+				'donation-actions'  => array(
 					'title'    => __( 'Donation Actions', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
 					'view'     => 'metaboxes/actions',
 					'actions'  => charitable_get_donation_actions(),
 				),
-				'donation-details' => array(
+				'donation-details'  => array(
 					'title'    => __( 'Donation Details', 'charitable' ),
 					'context'  => 'side',
 					'priority' => 'high',
 					'view'     => 'metaboxes/donation/donation-details',
 				),
-				'donation-log' => array(
+				'donation-log'      => array(
 					'title'    => __( 'Donation Log', 'charitable' ),
 					'context'  => 'normal',
 					'priority' => 'low',
