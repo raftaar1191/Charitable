@@ -12,7 +12,9 @@
  * @version   1.5.9
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 
@@ -40,7 +42,7 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		 * @param  array $args Mixed args.
 		 * @return string
 		 */
-		public function get_page_url( $args );
+		public function get_page_url( $args = array() );
 
 		/**
 		 * Return whether we are currently viewing the endpoint.
@@ -50,7 +52,7 @@ if ( ! interface_exists( 'Charitable_Endpoint_Interface' ) ) :
 		 * @param  array $args Mixed args.
 		 * @return boolean
 		 */
-		public function is_page( $args );
+		public function is_page( $args = array() );
 	}
 
 endif;

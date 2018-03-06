@@ -158,6 +158,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
+= 1.5.12 =
+* FIX: Prevent a fatal error related to the Endpoint interface in certain environments. [#534](https://github.com/Charitable/Charitable/issues/534)
+
 = 1.5.11 =
 * FIX: Preserve pre-existing donor data when editing donations. [#526](https://github.com/Charitable/Charitable/issues/526)
 * FIX: Flush donation cache when transferring a donation from one campaign to another campaign. The stats of both the old and new campaigns should be updated automatically. [#527](https://github.com/Charitable/Charitable/issues/527)
