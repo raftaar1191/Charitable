@@ -1,6 +1,6 @@
 {
   "name": "charitable",
-  "version": "1.5.11",
+  "version": "1.5.12-beta1",
   "private": true,
   "devDependencies": {
     "grunt": "~0.4.5",
