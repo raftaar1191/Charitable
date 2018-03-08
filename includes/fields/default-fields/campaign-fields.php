@@ -27,6 +27,41 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $fields The multi-dimensional array of keys in $key => $args format.
  */
 return apply_filters( 'charitable_default_campaign_fields', array(
+	'description'            => array(
+		'label'          => __( 'Campaign Description', 'charitable' ),
+		'data_type'      => 'meta',
+		'admin_form'     => array(
+			'section'  => 'campaign-top',
+			'type'     => 'textarea',
+			'view'     => 'metaboxes/campaign-description',
+			'priority' => 4,
+		),
+		'show_in_export' => true,
+	),
+	'goal'                   => array(
+		'label'          => __( 'Campaign Description', 'charitable' ),
+		'data_type'      => 'meta',
+		'admin_form'     => array(
+			'section'     => 'campaign-top',
+			'type'        => 'number',
+			'view'        => 'metaboxes/campaign-goal',
+			'priority'    => 6,
+			'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
+		),
+		'show_in_export' => true,
+	),
+	'end_date'               => array(
+		'label'          => __( 'Campaign Description', 'charitable' ),
+		'data_type'      => 'meta',
+		'admin_form'     => array(
+			'section'     => 'campaign-top',
+			'type'        => 'date',
+			'view'        => 'metaboxes/campaign-end-date',
+			'priority'    => 8,
+			'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
+		),
+		'show_in_export' => true,
+	),
 	'suggested_donations'    => array(
 		'label'          => __( 'Suggested Donation Amounts', 'charitable' ),
 		'data_type'      => 'meta',

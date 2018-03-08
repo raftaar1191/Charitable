@@ -547,8 +547,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function campaign_fields() {
 			if ( ! $this->registry->has( 'campaign_field_registry' ) ) {
 				$campaign_fields = new Charitable_Campaign_Field_Registry();
-				// $campaign_fields->set_default_section( 'user', 'public' );
-				// $campaign_fields->set_default_section( 'user', 'admin' );
+				$campaign_fields->set_default_section( 'campaign', 'public' );
+				$campaign_fields->set_default_section( 'campaign-extended-settings', 'admin' );
 
 				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
 

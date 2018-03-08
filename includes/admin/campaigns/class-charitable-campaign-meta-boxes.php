@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -83,37 +83,17 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @return void
 		 */
 		public function add_meta_boxes() {
-			$meta_boxes = array(
+			$meta_boxes = array_merge(
+				$this->get_campaign_top_meta_boxes(),
 				array(
-					'id'       => 'campaign-description',
-					'title'    => __( 'Campaign Description', 'charitable' ),
-					'context'  => 'campaign-top',
-					'priority' => 'high',
-					'view'     => 'metaboxes/campaign-description',
-				),
-				array(
-					'id'          => 'campaign-goal',
-					'title'       => __( 'Fundraising Goal ($)', 'charitable' ),
-					'context'     => 'campaign-top',
-					'priority'    => 'high',
-					'view'        => 'metaboxes/campaign-goal',
-					'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
-				),
-				array(
-					'id'          => 'campaign-end-date',
-					'title'       => __( 'End Date', 'charitable' ),
-					'context'     => 'campaign-top',
-					'priority'    => 'high',
-					'view'        => 'metaboxes/campaign-end-date',
-					'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
-				),
-				array(
-					'id'       => 'campaign-settings',
-					'title'    => __( 'Campaign Settings', 'charitable' ),
-					'context'  => 'normal',
-					'priority' => 'high',
-					'view'     => 'metaboxes/campaign-settings',
-				),
+					array(
+						'id'       => 'campaign-settings',
+						'title'    => __( 'Campaign Settings', 'charitable' ),
+						'context'  => 'normal',
+						'priority' => 'high',
+						'view'     => 'metaboxes/campaign-settings',
+					),
+				)
 			);
 
 			/**
@@ -160,25 +140,23 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @return array
 		 */
 		public function get_campaign_settings_panels() {
-			$fields = charitable()->campaign_fields()->get_admin_form_fields();
-			$keys   = array_keys( $fields );
-			$fields = array_combine(
-				$keys,
-				array_map( array( $this, 'maybe_set_field_value' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
-			);
-
 			$panels = array(
 				'campaign-donation-options'  => array(
 					'title'  => __( 'Donation Options', 'charitable' ),
-					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', $fields ),
+					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', $this->get_section_fields( 'campaign-donation-options' ) ),
 				),
 				'campaign-extended-settings' => array(
 					'title'  => __( 'Extended Settings', 'charitable' ),
-					'fields' => array(),
+					'fields' => $this->get_section_fields( 'campaign-extended-settings' ),
 				),
 			);
 
 			$panels = $this->add_legacy_meta_boxes( $panels );
+
+			/**
+			 * Filter out empty panels.
+			 */
+			$panels = array_filter( $panels, array( $this, 'panel_has_fields' ) );
 
 			/**
 			 * Filter the array of settings panels.
@@ -188,31 +166,6 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 			 * @param $panels array Set of panels.
 			 */
 			return apply_filters( 'charitable_campaign_settings_panels', $panels );
-		}
-
-		/**
-		 * Add panels for any meta boxes previously added to the campaign-advanced section
-		 * using the `charitable_campaign_meta_boxes` filter.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  array $panels Core registered panels.
-		 * @return array
-		 */
-		public function add_legacy_meta_boxes( $panels ) {
-			foreach ( apply_filters( 'charitable_campaign_meta_boxes', array() ) as $panel ) {
-				if ( 'campaign-advanced' != $panel['context'] ) {
-					continue;
-				}
-
-				$id = $panel['id'];
-
-				unset( $panel['id'] );
-
-				$panels[ $id ] = $panel;
-			}
-
-			return $panels;
 		}
 
 		/**
@@ -229,21 +182,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 				return;
 			}
 
-			/**
-			 * Filter the set of meta keys to be saved.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string[] $meta_keys An array of strings representing meta keys.
-			 */
-			$meta_keys = apply_filters( 'charitable_campaign_meta_keys', array(
-				'_campaign_end_date',
-				'_campaign_goal',
-				'_campaign_suggested_donations',
-				'_campaign_allow_custom_donations',
-				'_campaign_description',
-			) );
-
+			$meta_keys = $this->get_campaign_meta_keys();
 			$submitted = $_POST;
 			$data      = array(
 				'ID' => $campaign_id,
@@ -374,6 +313,73 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		}
 
 		/**
+		 * Return the set of meta boxes to be shown in the "campaign-top" section of the campaign editor.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return array
+		 */
+		private function get_campaign_top_meta_boxes() {
+			$boxes = $this->get_section_fields( 'campaign-top' );
+
+			foreach ( $boxes as $key => $box ) {
+				$box['id']       = str_replace( '_', '-', substr( $key, 1 ) );
+				$box['title']    = $box['label'];
+				$box['context']  = 'campaign-top';
+				$box['priority'] = 'high';
+				$boxes[ $key ]   = $box;
+			}
+
+			return $boxes;
+		}
+
+		/**
+		 * Add panels for any meta boxes previously added to the campaign-advanced section
+		 * using the `charitable_campaign_meta_boxes` filter.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $panels Core registered panels.
+		 * @return array
+		 */
+		private function add_legacy_meta_boxes( $panels ) {
+			foreach ( apply_filters( 'charitable_campaign_meta_boxes', array() ) as $panel ) {
+				if ( 'campaign-advanced' != $panel['context'] ) {
+					continue;
+				}
+
+				$id = $panel['id'];
+
+				unset( $panel['id'] );
+
+				$panels[ $id ] = $panel;
+			}
+
+			return $panels;
+		}
+
+		/**
+		 * Return the campaign meta keys to save.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return array
+		 */
+		public function get_campaign_meta_keys() {
+			$registry = charitable()->campaign_fields();
+			$keys     = $registry->get_sanitized_keys( $registry->get_admin_form_fields() );
+
+			/**
+			 * Filter the set of meta keys to be saved.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[] $keys An array of strings representing meta keys.
+			 */
+			return apply_filters( 'charitable_campaign_meta_keys', $keys );
+		}
+
+		/**
 		 * Set a field's initial value.
 		 *
 		 * @since  1.6.0
@@ -382,7 +388,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @param  string $key   The key of the field.
 		 * @return array
 		 */
-		protected function maybe_set_field_value( $field, $key ) {
+		private function sanitize_campaign_field( $field, $key ) {
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
 				return $field;
@@ -420,6 +426,37 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 			}
 
 			return $field;
+		}
+
+		/**
+		 * Return the fields in a particular section.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $section The section.
+		 * @return array
+		 */
+		private function get_section_fields( $section ) {
+			$registry = charitable()->campaign_fields();
+			$fields   = $registry->get_admin_form_fields( $section );
+			$keys     = $registry->get_sanitized_keys( $fields, false );
+
+			return array_combine(
+				$keys,
+				array_map( array( $this, 'sanitize_campaign_field' ), wp_list_pluck( $fields, 'admin_form' ), $keys )
+			);
+		}
+
+		/**
+		 * Returns whether a particular panel has fields.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $panel The panel definition.
+		 * @return boolean
+		 */
+		public function panel_has_fields( $panel ) {
+			return array_key_exists( 'view', $panel ) || count( $panel['fields'] );
 		}
 	}
 

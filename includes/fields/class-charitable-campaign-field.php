@@ -195,6 +195,32 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 				'section'   => 'campaign-extended-settings',
 			) );
 		}
+
+		/**
+		 * Sanitize the email tag.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  mixed $value The argument setting.
+		 * @return false|array
+		 */
+		public function sanitize_email_tag( $value ) {
+			if ( false === $value ) {
+				return $value;
+			}
+
+			$defaults = array(
+				'description' => $this->label,
+				'preview'     => $this->label,
+				'tag'         => $this->field,
+			);
+
+			if ( ! is_array( $value ) ) {
+				return $defaults;
+			}
+
+			return array_merge( $defaults, $value );
+		}
 	}
 
 endif;
