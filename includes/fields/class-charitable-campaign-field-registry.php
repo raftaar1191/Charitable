@@ -43,7 +43,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		protected $ambassador_form_fields;
 
 		/**
-		 * Return the ambassadors form fields.
+		 * Return the admin form fields.
 		 *
 		 * @since  1.6.0
 		 *
@@ -105,6 +105,29 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		}
 
 		/**
+		 * Return the sanitized meta keys for a set of fields.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array   $fields    The fields to return meta keys for.
+		 * @param  boolean $meta_only Whether to only return keys for meta fields. Core fields will be skipped.
+		 * @return array
+		 */
+		public function get_sanitized_keys( $fields, $meta_only = true ) {
+			$keys = array();
+
+			foreach ( $fields as $key => $field ) {
+				if ( ! $meta_only && 'core' == $field->data_type ) {
+					$keys[] = $key;
+				} elseif ( 'meta' == $field->data_type ) {
+					$keys[] = '_campaign_' . $key;
+				}
+			}
+
+			return $keys;
+		}
+
+		/**
 		 * Set the default form section.
 		 *
 		 * @since  1.6.0
@@ -133,7 +156,6 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 			$field->value_callback         = $this->get_field_value_callback( $field );
 			$field->admin_form             = $this->get_field_admin_form( $field );
 			$field->ambassadors_form       = $this->get_field_ambassadors_form( $field );
-			$field->email_tag              = $this->get_field_email_tag( $field );
 			$this->fields[ $field->field ] = $field;
 		}
 
