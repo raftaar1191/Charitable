@@ -169,20 +169,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		 *                                          we don't have a default one for the data type.
 		 */
 		public function get_field_value_callback( $field ) {
-			if ( isset( $field->value_callback ) ) {
-				return $field->value_callback;
-			}
-
-			switch ( $field->data_type ) {
-				case 'user':
-					return 'charitable_get_donor_meta_value';
-
-				case 'meta':
-					return 'charitable_get_donation_meta_value';
-
-				default:
-					return false;
-			}
+			return isset( $field->value_callback ) && is_callable( $field->value_callback ) ? $field->value_callback : false;
 		}
 
 		/**

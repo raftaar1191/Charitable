@@ -123,11 +123,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		protected $log;
 
 		/**
-		 * The Charitable_Donation_Fields object for this donation.
+		 * The Charitable_Object_Fields object for this donation.
 		 *
 		 * @since 1.5.0
 		 *
-		 * @var   Charitable_Donation_Fields
+		 * @var   Charitable_Object_Fields
 		 */
 		protected $fields;
 
@@ -187,15 +187,15 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Return the Charitable_Donation_Fields instance.
+		 * Return the Charitable_Object_Fields instance.
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return Charitable_Donation_Fields
+		 * @return Charitable_Object_Fields
 		 */
 		public function fields() {
 			if ( ! isset( $this->fields ) ) {
-				$this->fields = new Charitable_Donation_Fields( charitable()->donation_fields(), $this );
+				$this->fields = new Charitable_Object_Fields( charitable()->donation_fields(), $this );
 			}
 
 			return $this->fields;
@@ -684,7 +684,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 		/**
 		 * Return an array of meta relating to the donation.
-		 * 
+		 *
 		 * @since  1.2.0
 		 *
 		 * @return mixed[]

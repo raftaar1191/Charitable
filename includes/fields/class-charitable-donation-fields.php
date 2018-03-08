@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
@@ -20,82 +20,32 @@ if ( ! class_exists( 'Charitable_Donation_Fields' ) ) :
 	/**
 	 * Charitable_Donation_Fields
 	 *
+	 * @deprecated 1.9.0
+	 *
 	 * @since 1.5.0
+	 * @since 1.6.0 Deprecated. Use Charitable_Object_Fields instead.
 	 */
-	class Charitable_Donation_Fields implements Charitable_Fields_Interface {
-
-		/**
-		 * The `Charitable_Field_Registry` instance for this object.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   Charitable_Field_Registry
-		 */
-		private $registry;
-
-		/**
-		 * Instance of `Charitable_Donation`.
-		 *
-		 * @since 1.5.0
-		 *
-		 * @var   Charitable_Donation
-		 */
-		private $donation;
+	class Charitable_Donation_Fields extends Charitable_Object_Fields {
 
 		/**
 		 * Create class object.
 		 *
+		 * @deprecated 1.9.0
+		 *
 		 * @since 1.5.0
+		 * @since 1.6.0 Deprecated. Use Charitable_Object_Fields instead.
 		 *
-		 * @param Charitable_Field_Registry_Interface $registry An instance of `Charitable_Field_Registry_Interface`.
-		 * @param Charitable_Abstract_Donation        $donation A `Charitable_Abstract_Donation` instance.
+		 * @param Charitable_Field_Registry $registry An instance of `Charitable_Field_Registry`.
+		 * @param mixed                     $object   The object that will be passed to the value callback.
 		 */
-		public function __construct( Charitable_Field_Registry_Interface $registry, Charitable_Abstract_Donation $donation ) {
-			$this->registry = $registry;
-			$this->donation = $donation;
-		}
+		public function __construct( Charitable_Field_Registry $registry, $object ) {
+			parent::__construct( $registry, $object );
 
-		/**
-		 * Get the set value for a particular field.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  string $field_key The field to get a value for.
-		 * @return mixed
-		 */
-		public function get( $field_key ) {
-			$field = $this->registry->get_field( $field_key );
-
-			if ( ! $field ) {
-				return null;
-			}
-
-			return call_user_func( $field->value_callback, $this->donation, $field_key );
-		}
-
-		/**
-		 * Check whether a particular field is registered.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  string $field_key The field to check for.
-		 * @return boolean
-		 */
-		public function has( $field_key ) {
-			return false !== $this->registry->get_field( $field_key );
-		}
-
-		/**
-		 * Check whether a particular field has a callback for getting the value.
-		 *
-		 * @since  1.5.0
-		 *
-		 * @param  string $field_key The field to check for.
-		 * @return boolean
-		 */
-		public function has_value_callback( $field_key ) {
-			$field = $this->registry->get_field( $field_key );
-			return $field && false !== $field->value_callback;
+			charitable_get_deprecated()->doing_it_wrong(
+				'Charitable_Donation_Class',
+				__( 'Charitable_Donation_Fields is deprecated as of Charitable 1.6.0. Use Charitable_Object_Fields instead.', 'charitable' ),
+				'1.6.0'
+			);
 		}
 	}
 
