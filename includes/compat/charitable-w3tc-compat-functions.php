@@ -10,7 +10,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Clear the campaign page cache after a donation is received.
@@ -22,8 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function charitable_compat_w3tc_clear_campaign_cache( $campaign_id ) {
 	if ( function_exists( 'w3tc_flush_post' ) ) {
-        w3tc_flush_post( $campaign_id );
-    }
+		w3tc_flush_post( $campaign_id );
+	}
 }
 
 add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_campaign_cache' );
@@ -35,11 +37,11 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_cam
  * DONOTCACHEDB is a constant which will, by default, prevent
  * database caching.
  *
- * @see 	https://github.com/Charitable/Charitable/issues/347
+ * @see    https://github.com/Charitable/Charitable/issues/347
  *
- * @since   1.4.18
+ * @since  1.4.18
  *
- * @return 	void
+ * @return void
  */
 function charitable_compat_w3tc_turn_off_donation_cache() {
 	if ( ! defined( 'DONOTCACHEDB' ) ) {

@@ -90,6 +90,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		private $donation_form;
 
 		/**
+		 * The Charitable_Object_Fields object for this campaign.
+		 *
+		 * @since 1.6.0
+		 *
+		 * @var   Charitable_Object_Fields
+		 */
+		protected $fields;
+
+		/**
 		 * Class constructor.
 		 *
 		 * @since 1.0.0
@@ -127,14 +136,62 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string  $meta_name The meta name to search for.
+		 * @param  string  $key    The field key.
+		 * @param  boolean $single Whether to return a single value or an array.
+		 * @return mixed This will return an array if single is false. If it's true, the value of the
+		 *               meta_value field will be returned.
+		 */
+		public function get( $key, $single = true ) {
+			if ( $this->fields()->has_value_callback( $key ) ) {
+				return $this->fields()->get( $key );
+			}
+
+			/* Look for a local method. */
+			if ( method_exists( $this, 'get_' . $key ) ) {
+				$method = 'get_' . $key;
+				return $this->$method();
+			}
+
+			return $this->get_meta( '_campaign_' . $key, $single );
+		}
+
+		/**
+		 * Return the campaign's post_meta values.
+		 *
+		 * @since  since
+		 *
+		 * @param  string  $meta_name The meta key.
 		 * @param  boolean $single    Whether to return a single value or an array.
 		 * @return mixed This will return an array if single is false. If it's true, the value of the
 		 *               meta_value field will be returned.
 		 */
-		public function get( $meta_name, $single = true ) {
-			$meta_name = '_campaign_' . $meta_name;
+		public function get_meta( $meta_name, $single = true ) {
+			/**
+			 * Filter the meta value of a particular campaign field.
+			 *
+			 * @since  1.0.0
+			 *
+			 * @param  mixed               $value     The meta value.
+			 * @param  string              $meta_name The name of the meta field.
+			 * @param  boolean             $single    Whether we're returning a single result.
+			 * @param  Charitable_Campaign $campaign  This instance of `Charitable_Campaign`.
+			 */
 			return apply_filters( 'charitable_campaign_get_meta_value', get_post_meta( $this->post->ID, $meta_name, $single ), $meta_name, $single, $this );
+		}
+
+		/**
+		 * Return the Charitable_Object_Fields instance.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return Charitable_Object_Fields
+		 */
+		public function fields() {
+			if ( ! isset( $this->fields ) ) {
+				$this->fields = new Charitable_Object_Fields( charitable()->campaign_fields(), $this );
+			}
+
+			return $this->fields;
 		}
 
 		/**
@@ -145,7 +202,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public function is_endless() {
-			return 0 == $this->end_date;
+			return 0 == $this->get_meta( '_campaign_end_date' );
 		}
 
 		/**
@@ -189,7 +246,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
 			/* This is how the end date is stored in the database, so just return that directly. */
 			if ( 'Y-m-d H:i:s' == $date_format ) {
-				return $this->end_date;
+				return $this->get_meta( '_campaign_end_date' );
 			}
 
 			return date_i18n( $date_format, $this->get_end_time() );
@@ -210,7 +267,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				}
 
 				/* The date is stored in the format of Y-m-d H:i:s. */
-				$date_time  = explode( ' ', $this->end_date );
+				$date_time  = explode( ' ', $this->get_meta( '_campaign_end_date' ) );
 				$date       = explode( '-', $date_time[0] );
 				$time       = explode( ':', $date_time[1] );
 				$this->end_time = mktime( $time[0], $time[1], $time[2], $date[1], $date[2], $date[0] );
@@ -379,7 +436,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function get_goal() {
 			if ( ! isset( $this->goal ) ) {
-				$this->goal = $this->has_goal() ? $this->get( 'goal' ) : false;
+				$this->goal = $this->has_goal() ? $this->get_meta( 'goal' ) : false;
 			}
 
 			return $this->goal;
@@ -393,7 +450,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public function has_goal() {
-			return 0 < $this->get( 'goal' );
+			return 0 < $this->get_meta( 'goal' );
 		}
 
 		/**
@@ -408,7 +465,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return '';
 			}
 
-			return charitable_format_money( $this->get( 'goal' ) );
+			return charitable_format_money( $this->get_meta( 'goal' ) );
 		}
 
 		/**
@@ -606,7 +663,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public function get_donation_summary() {
 			$currency_helper = charitable_get_currency_helper();
 			$amount          = $this->get_donated_amount();
-			$goal            = $this->get( 'goal' );
+			$goal            = $this->get_meta( 'goal' );
 
 			if ( $goal ) {
 				$ret = sprintf( _x( '%s donated of %s goal', 'amount donated of goal', 'charitable' ),

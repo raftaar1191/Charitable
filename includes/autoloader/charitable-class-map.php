@@ -94,6 +94,7 @@ return array(
 	'Charitable_Donation_Fields' => 'fields/class-charitable-donation-fields.php',
 	'Charitable_Field_Filter' => 'fields/class-charitable-field-filter.php',
 	'Charitable_Field_Sorter' => 'fields/class-charitable-field-sorter.php',
+	'Charitable_Object_Fields' => 'fields/class-charitable-object-fields.php',
 	'Charitable_Donation_Amount_Form' => 'forms/class-charitable-donation-amount-form.php',
 	'Charitable_Donation_Form' => 'forms/class-charitable-donation-form.php',
 	'Charitable_Forgot_Password_Form' => 'forms/class-charitable-forgot-password-form.php',

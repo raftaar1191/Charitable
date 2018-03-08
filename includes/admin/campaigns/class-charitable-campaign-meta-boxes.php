@@ -389,6 +389,8 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @return array
 		 */
 		private function sanitize_campaign_field( $field, $key ) {
+			$field_name = preg_replace( '/^_campaign_/', '', $key );
+
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
 				return $field;
@@ -409,11 +411,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 				return $field;
 			}
 
-			if ( array_key_exists( 'value_callback', $field ) ) {
-				$value = call_user_func( $field['value_callback'], $campaign, $key );
-			} else {
-				$value = $campaign->get( $key );
-			}
+			$value = $campaign->get( $field_name );
 
 			if ( ! $value ) {
 				return $field;
