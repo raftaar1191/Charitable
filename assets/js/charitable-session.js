@@ -35,7 +35,7 @@ CHARITABLE = window.CHARITABLE || {};
             var data = 'action=charitable_get_session_content';
             var element, template, args, key, value, i;
 
-            if (!elements.length) {                
+            if ( ! elements.length ) {
                 return;
             }
 

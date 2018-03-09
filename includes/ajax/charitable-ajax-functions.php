@@ -52,7 +52,7 @@ if ( ! function_exists( 'charitable_plupload_image_upload' ) ) :
 	/**
 	 * Upload an image via plupload.
 	 *
-	 * @return
+	 * @return void
 	 */
 	function charitable_plupload_image_upload() {
 		$post_id  = (int) filter_input( INPUT_POST, 'post_id', FILTER_SANITIZE_NUMBER_INT );
