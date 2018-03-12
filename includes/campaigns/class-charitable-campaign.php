@@ -436,7 +436,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function get_goal() {
 			if ( ! isset( $this->goal ) ) {
-				$this->goal = $this->has_goal() ? $this->get_meta( 'goal' ) : false;
+				$this->goal = $this->has_goal() ? $this->get_meta( '_campaign_goal' ) : false;
 			}
 
 			return $this->goal;
@@ -450,7 +450,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public function has_goal() {
-			return 0 < $this->get_meta( 'goal' );
+			return 0 < $this->get_meta( '_campaign_goal' );
 		}
 
 		/**
@@ -465,7 +465,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return '';
 			}
 
-			return charitable_format_money( $this->get_meta( 'goal' ) );
+			return charitable_format_money( $this->get_meta( '_campaign_goal' ) );
 		}
 
 		/**
@@ -477,6 +477,48 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function has_achieved_goal() {
 			return $this->get_donated_amount( true ) >= $this->get_goal();
+		}
+
+		/**
+		 * Return a message to say whether the campaign has achieved its goal.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $success Optional. The success message.
+		 * @param  string $failure Optional. The failure message.
+		 * @return string
+		 */
+		public function get_goal_achieved_message( $success = '', $failure = '' ) {
+			if ( $this->has_achieved_goal() ) {
+
+				if ( strlen( $success ) ) {
+					return $success;
+				}
+
+				/**
+				 * Filter the default message to show when a campaign has achieved its goal.
+				 *
+				 * @since 1.6.0
+				 *
+				 * @param string              $message  The success message.
+				 * @param Charitable_Campaign $campaign This instance of `Charitable_Campaign`.
+				 */
+				return apply_filters( 'charitable_campaign_goal_achievement_success_message', __( 'The campaign achieved its fundraising goal.', 'charitable' ), $this );
+			}
+
+			if ( strlen( $failure ) ) {
+				return $failure;
+			}
+
+			/**
+			 * Filter the default message to show when a campaign has not achieved its goal.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string              $message  The failure message.
+			 * @param Charitable_Campaign $campaign This instance of `Charitable_Campaign`.
+			 */
+			return apply_filters( 'charitable_campaign_goal_achievement_failure_message', __( 'The campaign did not reach its fundraising goal.', 'charitable' ), $this );
 		}
 
 		/**
@@ -561,27 +603,27 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$show_active_tag  = apply_filters( 'charitable_campaign_show_active_status_tag', false );
 
 			switch ( $key ) {
-				case 'ended' :
+				case 'ended':
 					$tag = __( 'Ended', 'charitable' );
 					break;
 
-				case 'successful' :
+				case 'successful':
 					$tag = $show_achievement ? __( 'Successful', 'charitable' ) : __( 'Ended', 'charitable' );
 					break;
 
-				case 'unsucessful' :
+				case 'unsucessful':
 					$tag = $show_achievement ? __( 'Unsuccessful', 'charitable' ) : __( 'Ended', 'charitable' );
 					break;
 
-				case 'ending' :
+				case 'ending':
 					$tag = __( 'Ending Soon', 'charitable' );
 					break;
 
-				case 'active' :
+				case 'active':
 					$tag = $show_active_tag ? __( 'Active', 'charitable' ) : '';
 					break;
 
-				default :
+				default:
 					$tag = '';
 
 			}//end switch
@@ -596,6 +638,36 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			 * @param Charitable_Campaign $this This campaign object.
 			 */
 			return apply_filters( 'charitable_campaign_status_tag', $tag, $key, $this );
+		}
+
+		/**
+		 * Return the permalink for this campaign.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return string
+		 */
+		public function get_permalink() {
+			return get_permalink( $this->ID );
+		}
+
+		/**
+		 * Return the admin edit link for this campaign.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return strin
+		 */
+		public function get_admin_edit_link() {
+			$post_type_object = get_post_type_object( Charitable::CAMPAIGN_POST_TYPE );
+
+			if ( $post_type_object->_edit_link ) {
+				$link = admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=edit', $this->ID ) );
+			} else {
+				$link = '';
+			}
+
+			return $link;
 		}
 
 		/**
@@ -654,6 +726,17 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
+		 * Return the currency formatted donation amount.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return string
+		 */
+		public function get_donated_amount_formatted() {
+			return charitable_format_money( $this->get_donated_amount() );
+		}
+
+		/**
 		 * Return a string describing the campaign's donation summary.
 		 *
 		 * @since  1.0.0
@@ -663,7 +746,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public function get_donation_summary() {
 			$currency_helper = charitable_get_currency_helper();
 			$amount          = $this->get_donated_amount();
-			$goal            = $this->get_meta( 'goal' );
+			$goal            = $this->get_meta( '_campaign_goal' );
 
 			if ( $goal ) {
 				$ret = sprintf( _x( '%s donated of %s goal', 'amount donated of goal', 'charitable' ),
@@ -806,19 +889,19 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$display_option = charitable_get_option( 'donation_form_display', 'separate_page' );
 
 			switch ( $display_option ) {
-				case 'separate_page' :
+				case 'separate_page':
 					$template_name = 'campaign/donate-button.php';
 					break;
 
-				case 'same_page' :
+				case 'same_page':
 					$template_name = 'campaign/donate-link.php';
 					break;
 
-				case 'modal' :
+				case 'modal':
 					$template_name = 'campaign/donate-modal.php';
 					break;
 
-				default :
+				default:
 					$template_name = apply_filters( 'charitable_donate_button_template', 'campaign/donate-button.php', $this );
 			}
 
@@ -862,6 +945,28 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 */
 		public function get_campaign_creator() {
 			return apply_filters( 'charitable_campaign_creator', $this->post->post_author, $this );
+		}
+
+		/**
+		 * Return the campaign creator's name.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return string
+		 */
+		public function get_campaign_creator_name() {
+			return get_the_author_meta( 'display_name', $this->get_campaign_creator() );
+		}
+
+		/**
+		 * Return the campaign creator's email address.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return string
+		 */
+		public function get_campaign_creator_email() {
+			return get_the_author_meta( 'user_email', $this->get_campaign_creator() );
 		}
 
 		/**
