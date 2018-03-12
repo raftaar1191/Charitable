@@ -93,4 +93,16 @@ function charitable_campaign_can_receive_donations( $campaign_id ) {
 	$campaign = charitable_get_campaign( $campaign_id );
 
 	return $campaign && $campaign->can_receive_donations();
+
+/**
+ * Given a campaign ID and a key, return the post field.
+ *
+ * @since  1.6.0
+ *
+ * @param  Charitable_Campaign $campaign The campaign ID.
+ * @param  string              $key      The meta key.
+ * @return mixed
+ */
+function charitable_get_campaign_post_field( Charitable_Campaign $campaign, $key ) {
+	return get_post_field( $key, $campaign->ID );
 }

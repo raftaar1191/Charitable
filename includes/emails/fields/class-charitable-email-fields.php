@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 
@@ -128,8 +130,8 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 			 */
 			$fields = apply_filters( 'charitable_email_content_fields', $fields, $this->email );
 
-			/** 
-			 * Finally, if we are previewing the email, parse any preview fields added 
+			/**
+			 * Finally, if we are previewing the email, parse any preview fields added
 			 * through the `charitable_email_preview_content_fields` filter, which is
 			 * deprecated as of 1.5.0.
 			 */

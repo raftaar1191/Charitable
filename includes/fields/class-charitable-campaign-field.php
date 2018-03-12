@@ -132,9 +132,9 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 			return array(
 				'label'            => '',
 				'data_type'        => 'meta',
+				'value_callback'   => false,
 				'ambassadors_form' => true,
 				'admin_form'       => true,
-				'show_in_meta'     => true,
 				'show_in_export'   => true,
 				'email_tag'        => true,
 			);
@@ -209,9 +209,10 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 				return $value;
 			}
 
+			$label    = array_key_exists( 'label', $this->raw_args ) ? $this->raw_args['label'] : '';
 			$defaults = array(
-				'description' => $this->label,
-				'preview'     => $this->label,
+				'description' => $label,
+				'preview'     => $label,
 				'tag'         => $this->field,
 			);
 

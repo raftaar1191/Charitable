@@ -45,6 +45,15 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		protected $args;
 
 		/**
+		 * Raw field arguments. These are the arguments that were passed when instantiating the field.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var   array
+		 */
+		protected $raw_args;
+
+		/**
 		 * Create class object.
 		 *
 		 * @since 1.5.0
@@ -53,8 +62,9 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		 * @param array  $args  Mixed arguments.
 		 */
 		public function __construct( $field, array $args = array() ) {
-			$this->field = $field;
-			$this->args  = $this->parse_args( $args );
+			$this->field    = $field;
+			$this->raw_args = $args;
+			$this->args     = $this->parse_args( $args );
 		}
 
 		/**
@@ -119,6 +129,18 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		 */
 		public function __get( $key ) {
 			return 'field' == $key ? $this->field : $this->args[ $key ];
+		}
+
+		/**
+		 * Checks whether a particular argument is set.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $key The field's key.
+		 * @return boolean
+		 */
+		public function __isset( $key ) {
+			return 'field' == $key || array_key_exists( $key, $this->args );
 		}
 
 		/**
