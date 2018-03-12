@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
 
@@ -101,6 +103,7 @@ if ( ! class_exists( 'Charitable_Email_Shortcode' ) ) :
 		public static function display( $atts ) {
 			if ( ! isset( self::$instance ) ) {
 				charitable_get_deprecated()->doing_it_wrong(
+					__METHOD__,
 					__( '[charitable_email] cannot be called until a class instance has been created.', 'charitable' ),
 					'1.5.0'
 				);

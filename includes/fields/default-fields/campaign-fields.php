@@ -22,13 +22,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * extensions, as it allows us to add to the registered campaign fields
  * as soon as possible.
  *
- * @since 1.5.0
+ * @since 1.6.0
  *
  * @param array $fields The multi-dimensional array of keys in $key => $args format.
  */
 return apply_filters( 'charitable_default_campaign_fields', array(
-	'description'            => array(
-		'label'          => __( 'Campaign Description', 'charitable' ),
+	'description'              => array(
+		'label'          => __( 'Description', 'charitable' ),
 		'data_type'      => 'meta',
 		'admin_form'     => array(
 			'section'  => 'campaign-top',
@@ -36,10 +36,11 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'view'     => 'metaboxes/campaign-description',
 			'priority' => 4,
 		),
+		'email_tag'      => false,
 		'show_in_export' => true,
 	),
-	'goal'                   => array(
-		'label'          => __( 'Campaign Description', 'charitable' ),
+	'goal'                     => array(
+		'label'          => __( 'Goal', 'charitable' ),
 		'data_type'      => 'meta',
 		'admin_form'     => array(
 			'section'     => 'campaign-top',
@@ -48,10 +49,23 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'priority'    => 6,
 			'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
 		),
+		'email_tag'      => false,
 		'show_in_export' => true,
 	),
-	'end_date'               => array(
-		'label'          => __( 'Campaign Description', 'charitable' ),
+	'monetary_goal'            => array(
+		'label'          => __( 'Goal ($)', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_goal',
+			'description' => __( 'Display the campaign\'s fundraising goal', 'charitable' ),
+			'preview'     => '$15,000',
+		),
+		'show_in_export' => false,
+	),
+	'end_date'                 => array(
+		'label'          => __( 'End Date', 'charitable' ),
 		'data_type'      => 'meta',
 		'admin_form'     => array(
 			'section'     => 'campaign-top',
@@ -60,9 +74,14 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'priority'    => 8,
 			'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
 		),
+		'email_tag'      => array(
+			'tag'         => 'campaign_end_date',
+			'description' => __( 'The end date of the campaign', 'charitable' ),
+			'preview'     => date( get_option( 'date_format', 'd/m/Y' ) ),
+		),
 		'show_in_export' => true,
 	),
-	'suggested_donations'    => array(
+	'suggested_donations'      => array(
 		'label'          => __( 'Suggested Donation Amounts', 'charitable' ),
 		'data_type'      => 'meta',
 		'admin_form'     => array(
@@ -71,9 +90,10 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'view'     => 'metaboxes/campaign-donation-options/suggested-amounts',
 			'priority' => 4,
 		),
-		'show_in_export' => true,
+		'email_tag'      => false,
+		'show_in_export' => false,
 	),
-	'allow_custom_donations' => array(
+	'allow_custom_donations'   => array(
 		'label'          => __( 'Allow Custom Donations', 'charitable' ),
 		'data_type'      => 'meta',
 		'admin_form'     => array(
@@ -81,6 +101,102 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'type'     => 'checkbox',
 			'priority' => 6,
 		),
+		'email_tag'      => false,
+		'show_in_export' => false,
+	),
+	'post_title'               => array(
+		'label'          => __( 'Title', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => 'charitable_get_campaign_post_field',
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_title',
+			'description' => __( 'The title of the campaign', 'charitable' ),
+			'preview'     => __( 'Fake Campaign', 'charitable' ),
+		),
 		'show_in_export' => true,
+	),
+	'campaign_creator_name'    => array(
+		'label'          => __( 'Campaign Creator', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_creator',
+			'description' => __( 'The name of the campaign creator', 'charitable' ),
+			'preview'     => 'Harry Ferguson',
+		),
+		'show_in_export' => true,
+	),
+	'campaign_creator_email'   => array(
+		'label'          => __( 'Campaign Creator Email', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'description' => __( 'The email address of the campaign creator', 'charitable' ),
+			'preview'     => 'harry@example.com',
+		),
+		'show_in_export' => true,
+	),
+	'goal_achieved_message'    => array(
+		'label'          => __( 'Achieved Goal?', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_achieved_goal',
+			'description' => __( 'Display whether the campaign reached its goal. Add a `success` parameter as the message when the campaign was successful, and a `failure` parameter as the message when the campaign is not successful', 'charitable' ),                    
+			'preview'     => __( 'The campaign achieved its fundraising goal.', 'charitable' ),
+		),
+		'show_in_export' => false,
+	),
+	'donated_amount_formatted' => array(
+		'label'          => __( 'Amount Donated', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_donated_amount',
+			'description' => __( 'Display the total amount donated to the campaign', 'charitable' ),
+			'preview'     => '$16,523',
+		),
+		'show_in_export' => true,
+	),
+	'donor_count'              => array(
+		'label'          => __( 'Number of Donors', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_donor_count',
+			'description' => __( 'Display the number of campaign donors', 'charitable' ),
+			'preview'     => 23,
+		),
+		'show_in_export' => true,
+	),
+	'permalink'                => array(
+		'label'          => __( 'Campaign Permalink', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_url',
+			'description' => __( 'Display the campaign\'s URL', 'charitable' ),
+			'preview'     => 'http://www.example.com/campaigns/fake-campaign',
+		),
+		'show_in_export' => true,
+	),
+	'admin_edit_link'          => array(
+		'label'          => __( 'Campaign Edit Link', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_dashboard_url',
+			'description' => __( 'Display a link to the campaign in the dashboard', 'charitable' ),
+			'preview'     => get_edit_post_link( 1 ),
+		),
+		'show_in_export' => false,
 	),
 ) );
