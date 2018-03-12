@@ -111,7 +111,8 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  array $field Email tag definition.
+		 * @param  string $value The content to display in place of the shortcode.
+		 * @param  array  $args  Optional set of arguments.
 		 * @return string
 		 */
 		public function get_value_from_donation_field( $value, $args ) {
