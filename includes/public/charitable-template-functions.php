@@ -120,66 +120,6 @@ endif;
 /* SINGLE CAMPAIGN CONTENT
 /**********************************************/
 
-if ( ! function_exists( 'charitable_template_campaign_content' ) ) :
-
-	/**
-	 * Display the campaign content.
-	 *
-	 * This is used on the_content filter.
-	 *
-	 * @since   1.0.0
-	 *
-	 * @param   string $content Page content.
-	 * @return  string
-	 */
-	function charitable_template_campaign_content( $content ) {
-
-		if ( ! charitable_is_main_loop() || Charitable::CAMPAIGN_POST_TYPE != get_post_type() ) {
-			return $content;
-		}
-
-		/**
-		 * If this is the donation form, and it's showing on a separate page, return the content.
-		 */
-		if ( charitable_is_page( 'campaign_donation_page' ) ) {
-
-			if ( 'separate_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
-				return $content;
-			}
-
-			if ( false !== get_query_var( 'donate', false ) ) {
-				return $content;
-			}
-		}
-
-		/**
-		 * If you do not want to use the default campaign template, use this filter and return false.
-		 *
-		 * @uses    charitable_use_campaign_template
-		 */
-		if ( ! apply_filters( 'charitable_use_campaign_template', true ) ) {
-			return $content;
-		}
-
-		/**
-		 * Remove ourselves as a filter to prevent eternal recursion if apply_filters('the_content')
-		 * is called by one of the templates.
-		 */
-		remove_filter( 'the_content', 'charitable_template_campaign_content' );
-
-		ob_start();
-
-		charitable_template( 'content-campaign.php', array( 'content' => $content, 'campaign' => charitable_get_current_campaign() ) );
-
-		$content = ob_get_clean();
-
-		add_filter( 'the_content', 'charitable_template_campaign_content' );
-
-		return $content;
-	}
-
-endif;
-
 if ( ! function_exists( 'charitable_template_campaign_description' ) ) :
 
 	/**

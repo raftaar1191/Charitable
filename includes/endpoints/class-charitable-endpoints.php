@@ -224,7 +224,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				return $template_options;
 			}
 
-			$template_options = apply_filters( 'charitable_' . $current_endpoint. '_page_template', $template_options );
+			$template_options = apply_filters( 'charitable_' . $current_endpoint . '_page_template', $template_options );
 
 			return charitable_get_template_path( $template_options, $template );
 		}

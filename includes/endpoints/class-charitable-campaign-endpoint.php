@@ -108,15 +108,18 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			 * Remove ourselves as a filter to prevent eternal recursion if apply_filters( 'the_content' )
 			 * is called by one of the templates.
 			 */
-			remove_filter( 'the_content', 'charitable_template_campaign_content' );
+			remove_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
 
 			ob_start();
 
-			charitable_template( 'content-campaign.php', array( 'content' => $content, 'campaign' => charitable_get_current_campaign() ) );
+			charitable_template( 'content-campaign.php', array(
+				'content'  => $content,
+				'campaign' => charitable_get_current_campaign(),
+			) );
 
 			$content = ob_get_clean();
 
-			add_filter( 'the_content', 'charitable_template_campaign_content' );
+			add_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
 
 			return $content;
 		}

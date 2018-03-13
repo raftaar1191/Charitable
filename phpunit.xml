@@ -18,6 +18,7 @@
 			<exclude>
 				<directory>./includes/admin/views/</directory>
 				<directory>./includes/libraries/</directory>
+				<directory>./includes/interfaces/</directory>
 			</exclude>
 		</whitelist>
 	</filter>
