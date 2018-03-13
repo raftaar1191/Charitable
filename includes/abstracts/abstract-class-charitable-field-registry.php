@@ -183,32 +183,6 @@ if ( ! class_exists( 'Charitable_Field_Registry' ) ) :
 		}
 
 		/**
-		 * Return a parsed array of email tag settings for the field, or false if no email
-		 * tag should be created.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  Charitable_Field $field Instance of `Charitable_Field`.
-		 * @return array|false False for fields without an email tag. Array of
-		 *                     tag settings otherwise.
-		 */
-		protected function get_field_email_tag( Charitable_Field $field ) {
-			$settings = $field->email_tag;
-
-			if ( false === $settings ) {
-				return $settings;
-			}
-
-			$defaults = array(
-				'description' => $field->label,
-				'preview'     => $field->label,
-				'tag'         => $field->field,
-			);
-
-			return array_merge( $defaults, $settings );
-		}
-
-		/**
 		 * Return an array containing the keys of the form properties.
 		 *
 		 * @since  1.6.0

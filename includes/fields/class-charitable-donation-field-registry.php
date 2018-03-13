@@ -34,6 +34,22 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		protected $admin_form_fields;
 
 		/**
+		 * Instantiate registry.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return void
+		 */
+		public function __construct() {
+			parent::__construct();
+
+			$this->default_sections = array(
+				'public' => 'user',
+				'admin'  => 'user',
+			);
+		}
+
+		/**
 		 * Return the donation form fields.
 		 *
 		 * @since  1.5.0
@@ -126,18 +142,19 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @param  Charitable_Field_Interface $field Instance of `Charitable_Field_Interface`.
-		 * @return void
+		 * @return boolean
 		 */
 		public function register_field( Charitable_Field_Interface $field ) {
 			if ( ! is_a( $field, 'Charitable_Donation_Field' ) ) {
-				return;
+				return false;
 			}
 
 			$field->value_callback         = $this->get_field_value_callback( $field );
 			$field->donation_form          = $this->get_field_donation_form( $field );
 			$field->admin_form             = $this->get_field_admin_form( $field );
-			$field->email_tag              = $this->get_field_email_tag( $field );
 			$this->fields[ $field->field ] = $field;
+
+			return true;
 		}
 
 		/**

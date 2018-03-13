@@ -111,28 +111,28 @@ class Test_Charitable_Campaign extends Charitable_UnitTestCase {
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_goal_using_get() {
-		$this->assertEquals( 40000.00, $this->campaign_1->get('goal') );
+		$this->assertEquals( 40000.00, $this->campaign_1->get( 'goal' ) );
 	}
 
 	/**
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_end_date_using_get() {
-		$this->assertEquals( date( 'Y-m-d 00:00:00', $this->end_time_1 ), $this->campaign_1->get('end_date') );
+		$this->assertEquals( date( get_option( 'date_format', 'd/m/Y' ), $this->end_time_1 ), $this->campaign_1->get( 'end_date' ) );
 	}
 
 	/**
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_no_goal_using_get() {
-		$this->assertEquals( 0, $this->campaign_2->get('goal') );
+		$this->assertEquals( 0, $this->campaign_2->get( 'goal' ) );
 	}
 
 	/**
 	 * @covers Charitable_Campaign::get
 	 */
 	function test_get_no_end_date_using_get() {
-		$this->assertEquals( 0, $this->campaign_2->get('end_date') );
+		$this->assertEquals( 0, $this->campaign_2->get( 'end_date' ) );
 	}
 
 	/**
