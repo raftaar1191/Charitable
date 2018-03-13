@@ -110,7 +110,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::setup_endpoints()
+     * @covers Charitable::endpoints()
      */
     public function test_is_donate_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -118,7 +118,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::setup_endpoints()
+     * @covers Charitable::endpoints()
      */
     public function test_is_widget_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -126,7 +126,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::setup_endpoints()
+     * @covers Charitable::endpoints()
      */
     public function test_is_donation_receipt_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -134,7 +134,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::setup_endpoints()
+     * @covers Charitable::endpoints()
      */
     public function test_is_donation_processing_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();

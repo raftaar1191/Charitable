@@ -21,6 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @return  void
  */
 function charitable_compat_wp_rocket_clear_campaign_cache( $campaign_id ) {
+	if ( ! function_exists( 'rocket_clean_post' ) ) {
+		return;
+	}
+
 	rocket_clean_post( $campaign_id );
 }
 

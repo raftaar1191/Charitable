@@ -45,7 +45,7 @@ class Test_Charitable_Campaign_Processor_Class extends Charitable_UnitTestCase {
 
     /**
      * @depends test_save
-     * @covers charitable_create_campaign
+     * @covers ::charitable_create_campaign
      */
     function test_charitable_create_campaign() {
         $campaign_id = charitable_create_campaign( array(

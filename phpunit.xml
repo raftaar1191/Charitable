@@ -11,4 +11,14 @@
 			<directory suffix=".php">./tests/unit-tests/</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">./includes</directory>
+			<file>charitable.php</file>
+			<exclude>
+				<directory>./includes/admin/views/</directory>
+				<directory>./includes/libraries/</directory>
+			</exclude>
+		</whitelist>
+	</filter>
 </phpunit>

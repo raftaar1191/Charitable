@@ -11,7 +11,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_create_donation
+	 * @covers ::charitable_create_donation
 	 */
 	public function test_create_donation() {
 
@@ -22,7 +22,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_create_donation
+	 * @covers ::charitable_create_donation
 	 * @depends test_create_donation
 	 */
 	public function test_create_donation_correct_gateway() {
@@ -34,7 +34,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_create_donation
+	 * @covers ::charitable_create_donation
 	 * @depends test_create_donation
 	 */
 	public function test_create_donation_correct_amount() {
@@ -46,7 +46,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_create_donation
+	 * @covers ::charitable_create_donation
 	 * @depends test_create_donation
 	 */
 	public function test_create_donation_correct_user() {
@@ -58,7 +58,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_cancel_donation
+	 * @covers ::charitable_cancel_donation
 	 * @depends test_create_donation
 	 */
 	public function test_cancel_donation() {
@@ -80,7 +80,7 @@ class Test_Charitable_Donation_Functions extends Charitable_UnitTestCase {
 	}
 
 	/**
-	 * @covers charitable_cancel_donation
+	 * @covers ::charitable_cancel_donation
 	 * @depends test_cancel_donation
 	 */
 	public function test_do_not_cancel_donation() {

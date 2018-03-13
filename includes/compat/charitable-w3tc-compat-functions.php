@@ -42,7 +42,9 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_w3tc_clear_cam
  * @return 	void
  */
 function charitable_compat_w3tc_turn_off_donation_cache() {
-	define( 'DONOTCACHEDB', true );
+	if ( ! defined( 'DONOTCACHEDB' ) ) {
+		define( 'DONOTCACHEDB', true );
+	}
 }
 
 add_action( 'charitable_before_save_donation', 'charitable_compat_w3tc_turn_off_donation_cache' );
