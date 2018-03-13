@@ -6,23 +6,31 @@ class Test_Charitable extends Charitable_UnitTestCase {
         parent::setUp();
         $this->charitable = charitable();
         $this->directory_path = $this->charitable->get_path( 'directory' );
-        $this->directory_url = $this->charitable->get_path( 'directory', false );
+        $this->directory_url  = $this->charitable->get_path( 'directory', false );
     }
 
+    /**
+     * @covers Charitable::__construct
+     * @covers Charitable::start()
+     */
     function test_static_instance() {
-        $this->assertClassHasStaticAttribute( 'instance', get_class( $this->charitable ) );
+        $charitable = new Charitable();
+        $charitable->start();
+        $this->assertClassHasStaticAttribute( 'instance', $charitable );
     }
 
     /**
      * @dataProvider files
-     * @covers Charitable::load_dependencies()
+     * @covers Charitable::__construct
+     * @covers Charitable::load_dependencies
      */
     function test_load_dependencies( $file ) {
-        $this->assertFileExists( $file );        
+        new Charitable();
+        $this->assertFileExists( $file );
     }
 
     /**
-     * @covers Charitable::autoloader()
+     * @covers Charitable::autoloader
      */
     public function test_autoloader_with_valid_class() {
         // We don't call autoloader directly because it will return
@@ -31,14 +39,14 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::autoloader()
+     * @covers Charitable::autoloader
      */
     public function test_autoloader_with_invalid_class() {
         $this->assertFalse( charitable()->autoloader( 'Charitable_Not_A_Valid_Class' ) );
     }
 
     /**
-     * @covers Charitable::registry()
+     * @covers Charitable::registry
      */
     public function test_registry() {
         $this->assertInstanceOf( 'Charitable_Registry', charitable()->registry() );
@@ -46,14 +54,14 @@ class Test_Charitable extends Charitable_UnitTestCase {
 
     /**
      * @dataProvider init_classes
-     * @covers Charitable::registry()
+     * @covers Charitable::registry
      */
     public function test_registry_init_classes( $class ) {
         $this->assertTrue( charitable()->registry()->has( $class ) );
     }
 
     /**
-     * @covers Charitable::attach_hooks_and_filters()
+     * @covers Charitable::attach_hooks_and_filters
      */
     function test_attach_hooks_and_filters() {
         $this->assertEquals( 10, has_action( 'wpmu_new_blog', array( charitable(), 'maybe_activate_charitable_on_new_site' ) ) );
@@ -69,28 +77,28 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::is_start()
+     * @covers Charitable::is_start
      */
     function test_is_start() {
         $this->assertFalse( $this->charitable->is_start() );
     }
 
     /**
-     * @covers Charitable::started()
+     * @covers Charitable::started
      */
     function test_started() {
         $this->assertTrue( $this->charitable->started() );
     }   
 
     /**
-     * @covers Charitable::donation_fields()
+     * @covers Charitable::donation_fields
      */
     public function test_donation_fields() {
         $this->assertInstanceOf( 'Charitable_Donation_Field_Registry', $this->charitable->donation_fields() );
     }
 
     /**
-     * @covers Charitable::donation_fields()
+     * @covers Charitable::donation_fields
      * @depends test_donation_fields
      * @dataProvider donation_fields
      */
@@ -99,14 +107,14 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::campaign_fields()
+     * @covers Charitable::campaign_fields
      */
     public function test_campaign_fields() {
         $this->assertInstanceOf( 'Charitable_Campaign_Field_Registry', $this->charitable->campaign_fields() );
     }
 
     /**
-     * @covers Charitable::campaign_fields()
+     * @covers Charitable::campaign_fields
      * @depends test_campaign_fields
      * @dataProvider campaign_fields
      */
@@ -115,7 +123,8 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::get_path()
+     * @covers Charitable::__construct
+     * @covers Charitable::get_path
      */
     function test_get_path() {
         $this->assertEquals( $this->directory_path . 'charitable.php', $this->charitable->get_path() ); // __FILE__
@@ -129,21 +138,21 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::is_activation()
+     * @covers Charitable::is_activation
      */
     function test_is_activation() {
         $this->assertFalse( $this->charitable->is_activation() );
     }
 
     /**
-     * @covers Charitable::is_deactivation()
+     * @covers Charitable::is_deactivation
      */
     function test_is_deactivation() {
         $this->assertFalse( $this->charitable->is_deactivation() );
     }
 
     /**
-     * @covers Charitable::endpoints()
+     * @covers Charitable::endpoints
      */
     public function test_is_donate_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -151,7 +160,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::endpoints()
+     * @covers Charitable::endpoints
      */
     public function test_is_widget_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -159,7 +168,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::endpoints()
+     * @covers Charitable::endpoints
      */
     public function test_is_donation_receipt_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
@@ -167,7 +176,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
     }
 
     /**
-     * @covers Charitable::endpoints()
+     * @covers Charitable::endpoints
      */
     public function test_is_donation_processing_endpoint_added() {
         charitable()->endpoints()->setup_rewrite_rules();
