@@ -61,6 +61,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
         $this->assertEquals( 100, has_action( 'plugins_loaded', array( charitable(), 'charitable_start' ) ) );
         $this->assertEquals( 100, has_action( 'plugins_loaded', array( charitable(), 'endpoints' ) ) );
         $this->assertEquals( 100, has_action( 'plugins_loaded', array( charitable(), 'donation_fields' ) ) );
+        $this->assertEquals( 100, has_action( 'plugins_loaded', array( charitable(), 'campaign_fields' ) ) );
         $this->assertEquals( 10, has_action( 'plugins_loaded', 'charitable_load_compat_functions' ) );
         $this->assertEquals( 10, has_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) ) );
         $this->assertEquals( 100, has_action( 'wp_enqueue_scripts', array( charitable(), 'maybe_start_qunit' ) ) );
@@ -80,6 +81,38 @@ class Test_Charitable extends Charitable_UnitTestCase {
     function test_started() {
         $this->assertTrue( $this->charitable->started() );
     }   
+
+    /**
+     * @covers Charitable::donation_fields()
+     */
+    public function test_donation_fields() {
+        $this->assertInstanceOf( 'Charitable_Donation_Field_Registry', $this->charitable->donation_fields() );
+    }
+
+    /**
+     * @covers Charitable::donation_fields()
+     * @depends test_donation_fields
+     * @dataProvider donation_fields
+     */
+    public function test_donation_fields_has_registered_fields( $field ) {
+        $this->assertInstanceOf( 'Charitable_Field', $this->charitable->donation_fields()->get_field( $field ) );
+    }
+
+    /**
+     * @covers Charitable::campaign_fields()
+     */
+    public function test_campaign_fields() {
+        $this->assertInstanceOf( 'Charitable_Campaign_Field_Registry', $this->charitable->campaign_fields() );
+    }
+
+    /**
+     * @covers Charitable::campaign_fields()
+     * @depends test_campaign_fields
+     * @dataProvider campaign_fields
+     */
+    public function test_campaign_fields_has_registered_fields( $field ) {
+        $this->assertInstanceOf( 'Charitable_Field', $this->charitable->campaign_fields()->get_field( $field ) );
+    }
 
     /**
      * @covers Charitable::get_path()
@@ -183,5 +216,27 @@ class Test_Charitable extends Charitable_UnitTestCase {
             array( 'Charitable_User_Dashboard' ),
             array( 'Charitable_Locations' ),
         );
+    }
+
+    /**
+     * Donation fields.
+     */
+    public function donation_fields() {
+        $fields = include( charitable()->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+
+        return array_map( function( $field ) {
+            return array( $field );
+        }, array_keys( $fields ) );
+    }
+
+    /**
+     * Campaign fields.
+     */
+    public function campaign_fields() {
+        $fields = include( charitable()->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
+
+        return array_map( function( $field ) {
+            return array( $field );
+        }, array_keys( $fields ) );
     }
 }

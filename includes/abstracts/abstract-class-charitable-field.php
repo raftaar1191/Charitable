@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		/**
 		 * Raw field arguments. These are the arguments that were passed when instantiating the field.
 		 *
-		 * @since 1.5.0
+		 * @since 1.6.0
 		 *
 		 * @var   array
 		 */
@@ -201,6 +201,33 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 			if ( ! $value ) {
 				return false;
 			}
+
+			if ( ! is_array( $value ) ) {
+				return $defaults;
+			}
+
+			return array_merge( $defaults, $value );
+		}
+
+		/**
+		 * Sanitize the email tag.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  mixed $value The argument setting.
+		 * @return false|array
+		 */
+		public function sanitize_email_tag( $value ) {
+			if ( false === $value ) {
+				return $value;
+			}
+
+			$label    = array_key_exists( 'label', $this->raw_args ) ? $this->raw_args['label'] : '';
+			$defaults = array(
+				'description' => $label,
+				'preview'     => $label,
+				'tag'         => $this->field,
+			);
 
 			if ( ! is_array( $value ) ) {
 				return $defaults;
