@@ -49,7 +49,7 @@ if ( ! interface_exists( 'Charitable_Field_Registry_Interface' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @param  Charitable_Field_Interface $field Object of type `Charitable_Field_Interface`.
-		 * @return void
+		 * @return boolean
 		 */
 		public function register_field( Charitable_Field_Interface $field );
 	}

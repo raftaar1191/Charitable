@@ -280,6 +280,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'charitable_start' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'endpoints' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'donation_fields' ), 100 );
+			add_action( 'plugins_loaded', array( $this, 'campaign_fields' ), 100 );
 			add_action( 'plugins_loaded', 'charitable_load_compat_functions' );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
@@ -547,10 +548,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function campaign_fields() {
 			if ( ! $this->registry->has( 'campaign_field_registry' ) ) {
 				$campaign_fields = new Charitable_Campaign_Field_Registry();
-				$campaign_fields->set_default_section( 'campaign', 'public' );
-				$campaign_fields->set_default_section( 'campaign-extended-settings', 'admin' );
-
-				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
+				$fields          = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
 
 				foreach ( $fields as $key => $args ) {
 					$campaign_fields->register_field( new Charitable_Campaign_Field( $key, $args ) );
@@ -577,10 +575,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function donation_fields() {
 			if ( ! $this->registry->has( 'donation_field_registry' ) ) {
 				$donation_fields = new Charitable_Donation_Field_Registry();
-				$donation_fields->set_default_section( 'user', 'public' );
-				$donation_fields->set_default_section( 'user', 'admin' );
-
-				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+				$fields          = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
 
 				foreach ( $fields as $key => $args ) {
 					$donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );
