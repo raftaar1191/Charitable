@@ -149,13 +149,14 @@
     }
 
     input,
-    select,
     textarea {
         width: 100%;
         padding: 14px 10px;
     }
 
     select {
+        width: 100%;
+        padding: 0 10px;
         height: 46px;
         line-height: 46px;
     }

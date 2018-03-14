@@ -179,11 +179,12 @@
   .charitable-metabox-wrap th label {
     margin-bottom: 0; }
   .charitable-metabox-wrap input,
-  .charitable-metabox-wrap select,
   .charitable-metabox-wrap textarea {
     width: 100%;
     padding: 14px 10px; }
   .charitable-metabox-wrap select {
+    width: 100%;
+    padding: 0 10px;
     height: 46px;
     line-height: 46px; }
   .charitable-metabox-wrap input[type=checkbox],

@@ -5,3 +5,4 @@ node_modules
 build/
 phpdoc.xml
 coverage.xml
+package-lock.json
