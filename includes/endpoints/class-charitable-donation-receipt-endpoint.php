@@ -123,8 +123,8 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 			$donation_receipt_page_title = apply_filters( 'charitable_donation_receipt_page_title', __( 'Your Receipt', 'charitable' ) );
 
 			new Charitable_Ghost_Page( 'donation-receipt-page', array(
-				'title'     => $donation_receipt_page_title,
-				'content'   => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
+				'title'   => $donation_receipt_page_title,
+				'content' => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
 			) );
 
 			return array( 'donation-receipt-page.php', 'page.php', 'index.php' );

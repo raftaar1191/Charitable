@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Returns the given donation.
@@ -20,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *
  * @since  1.0.0
  *
- * @param  int     $donation_id
- * @param  boolean $force
+ * @param  int     $donation_id The donation ID.
+ * @param  boolean $force       Whether to force a non-cached donation object to be retrieved.
  * @return Charitable_Donation|false
  */
 function charitable_get_donation( $donation_id, $force = false ) {
