@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Include useful functions
+. "$(dirname "$0")/includes.sh"
+echo -e $(status_message "Present...")
 if [ $# -lt 3 ]; then
     echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version] [force download]"
     exit 1
@@ -14,14 +17,6 @@ FORCE=${6-false}
 
 WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib}
 WP_CORE_DIR=${WP_CORE_DIR-/tmp/wordpress/}
-
-download() {
-    if [ `which curl` ]; then
-        curl -s "$1" > "$2";
-    elif [ `which wget` ]; then
-        wget -nv -O "$2" "$1"
-    fi
-}
 
 if [[ $WP_VERSION =~ [0-9]+\.[0-9]+(\.[0-9]+)? ]]; then
     WP_TESTS_TAG="tags/$WP_VERSION"
