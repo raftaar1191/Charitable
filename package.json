@@ -22,6 +22,8 @@
     "cypress": "^2.1.0"
   },
   "scripts": {
+    "test-unit-php": "docker-compose run --rm wordpress_phpunit phpunit",
+    "test-unit-php-multisite": "docker-compose run -e WP_MULTISITE=1 --rm wordpress_phpunit phpunit",
     "test-e2e": "cypress run --browser chrome",
     "test-e2e:watch": "cypress open"
   }

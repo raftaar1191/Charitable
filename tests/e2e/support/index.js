@@ -20,8 +20,8 @@ Cypress.Commands.add( 'login', ( username = Cypress.env( 'username' ), password 
 			cy.visit( '/wp-login.php' );
 		}
 	} );
-	cy.get( '#user_login' ).type( username );
-	cy.get( '#user_pass' ).type( password );
+	cy.get( '#user_login' ).clear().type( username );
+	cy.get( '#user_pass' ).clear().type( password );
 	cy.get( '#wp-submit' ).click();
 } );
 
