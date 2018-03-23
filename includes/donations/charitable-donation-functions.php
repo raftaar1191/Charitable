@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since  1.0.0
  *
- * @param  int     $donation_id The donation ID.
- * @param  boolean $force       Whether to force a non-cached donation object to be retrieved.
+ * @param  int                       $donation_id The donation ID.
+ * @param  boolean                   $force       Whether to force a non-cached donation object to be retrieved.
  * @return Charitable_Donation|false
  */
 function charitable_get_donation( $donation_id, $force = false ) {
@@ -107,15 +107,15 @@ function charitable_create_donation( array $args ) {
  *
  * @since  1.4.0
  *
- * @param  string $donation_key
+ * @param  string   $donation_key
  * @return int|null
  */
 function charitable_get_donation_by_key( $donation_key ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = 'donation_key' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = 'donation_key'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $donation_key ) );
@@ -126,15 +126,15 @@ function charitable_get_donation_by_key( $donation_key ) {
  *
  * @since  1.4.7
  *
- * @param  string $transaction_id
+ * @param  string   $transaction_id
  * @return int|null
  */
 function charitable_get_donation_by_transaction_id( $transaction_id ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = '_gateway_transaction_id' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = '_gateway_transaction_id'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $transaction_id ) );
@@ -147,7 +147,7 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param 	string $gateway
+ * @param  string $gateway
  * @return string
  */
 function charitable_get_ipn_url( $gateway ) {
@@ -219,7 +219,6 @@ function charitable_is_after_donation() {
 	delete_transient( 'charitable_donation_' . charitable_get_session()->get_session_id() );
 
 	return true;
-
 }
 
 /**
@@ -265,7 +264,7 @@ function charitable_get_approval_statuses() {
  *
  * @since  1.4.0
  *
- * @param  string $key
+ * @param  string  $key
  * @return boolean
  */
 function charitable_is_approved_status( $status ) {
@@ -288,11 +287,11 @@ function charitable_get_valid_donation_statuses() {
 	 * @param array $statuses The list of status as a key=>value array.
 	 */
 	return apply_filters( 'charitable_donation_statuses', array(
-		'charitable-completed'  => __( 'Paid', 'charitable' ),
-		'charitable-pending'    => __( 'Pending', 'charitable' ),
-		'charitable-failed'     => __( 'Failed', 'charitable' ),
-		'charitable-cancelled'  => __( 'Cancelled', 'charitable' ),
-		'charitable-refunded'   => __( 'Refunded', 'charitable' ),
+		'charitable-completed' => __( 'Paid', 'charitable' ),
+		'charitable-pending'   => __( 'Pending', 'charitable' ),
+		'charitable-failed'    => __( 'Failed', 'charitable' ),
+		'charitable-cancelled' => __( 'Cancelled', 'charitable' ),
+		'charitable-refunded'  => __( 'Refunded', 'charitable' ),
 	) );
 }
 
@@ -352,8 +351,8 @@ function charitable_load_donation_form_script() {
  *
  * @since  1.0.0
  *
- * @param  string $message
- * @return int|bool Meta ID if the key didn't exist, true on successful update,
+ * @param  string   $message
+ * @return int|bool          Meta ID if the key didn't exist, true on successful update,
  *                  false on failure.
  */
 function charitable_update_donation_log( $donation_id, $message ) {
@@ -376,7 +375,7 @@ function charitable_get_donation_log( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  int $donation_id
+ * @param  int    $donation_id
  * @return string
  */
 function charitable_get_donation_gateway( $donation_id ) {
@@ -429,7 +428,7 @@ function charitable_sanitize_donation_meta( $value, $key ) {
  *
  * @since  1.0.0
  *
- * @param  int $donation_id The donation ID.
+ * @param  int  $donation_id The donation ID.
  * @return void
  */
 function charitable_flush_campaigns_donation_cache( $donation_id ) {
