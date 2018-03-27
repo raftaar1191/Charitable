@@ -292,7 +292,7 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 			foreach ( $this->get_required_fields( $fields ) as $key => $field ) {
 
 				/* We already have a value for this field. */
-				if ( ! empty( $field['value'] ) ) {
+				if ( ! empty( $field['value'] ) && 'checkbox' != $field['type'] ) {
 					continue;
 				}
 

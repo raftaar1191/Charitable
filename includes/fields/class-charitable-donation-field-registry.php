@@ -298,13 +298,13 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 			}
 
 			switch ( $field->data_type ) {
-				case 'user' :
+				case 'user':
 					return 'charitable_get_donor_meta_value';
 
-				case 'meta' :
+				case 'meta':
 					return 'charitable_get_donation_meta_value';
 
-				default :
+				default:
 					return false;
 			}
 		}

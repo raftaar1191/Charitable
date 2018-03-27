@@ -273,9 +273,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		public function get_donation_fields() {
 			$fields = array(
 				'donation_amount' => array(
-					'type'      => 'donation-amount',
-					'priority'  => 4,
-					'required'  => false,
+					'type'     => 'donation-amount',
+					'priority' => 4,
+					'required' => false,
 				),
 			);
 

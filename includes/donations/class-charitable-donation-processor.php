@@ -546,10 +546,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 */
 		public function save_donation_meta( $donation_id ) {
 			$meta = array(
-				'donation_gateway'  => $this->get_donation_data_value( 'gateway' ),
-				'donor'             => $this->get_donation_data_value( 'user' ),
-				'test_mode'         => charitable_get_option( 'test_mode', 0 ),
-				'donation_key'      => $this->get_donation_data_value( 'donation_key' ),
+				'donation_gateway' => $this->get_donation_data_value( 'gateway' ),
+				'donor'            => $this->get_donation_data_value( 'user' ),
+				'test_mode'        => charitable_get_option( 'test_mode', 0 ),
+				'donation_key'     => $this->get_donation_data_value( 'donation_key' ),
 			);
 
 			if ( $this->get_donation_data_value( 'meta' ) ) {
