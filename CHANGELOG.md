@@ -1,3 +1,7 @@
+# 1.5.13
+* FIX: In some cases, when a custom donation field is registered, it was left blank in donation receipts & other donation emails. This occurred with regular PayPal donations as well as recurring donations through Stripe, and most probably with other payment gateways as well. [#540](https://github.com/Charitable/Charitable/issues/540)
+* FIX: A previous update broke the way required checkboxes in donation forms and other forms worked. When a required checkbox is not checked, the form should not submit. This was broken, but is now fixed. [#539](https://github.com/Charitable/Charitable/issues/539)
+
 # 1.5.12
 * FIX: In some themes, campaign pages displayed the campaign description and summary block twice. This has been fixed. [#536](https://github.com/Charitable/Charitable/issues/536)
 * FIX: Prevent a fatal error related to the Endpoint interface in certain environments. [#534](https://github.com/Charitable/Charitable/issues/534)

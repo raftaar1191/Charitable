@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 4.9.4
-Stable tag: 1.5.12
+Stable tag: 1.5.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -157,6 +157,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.5.13 =
+* FIX: In some cases, when a custom donation field is registered, it was left blank in donation receipts & other donation emails. This occurred with regular PayPal donations as well as recurring donations through Stripe, and most probably with other payment gateways as well. [#540](https://github.com/Charitable/Charitable/issues/540)
+* FIX: A previous update broke the way required checkboxes in donation forms and other forms worked. When a required checkbox is not checked, the form should not submit. This was broken, but is now fixed. [#539](https://github.com/Charitable/Charitable/issues/539)
 
 = 1.5.12 =
 * FIX: In some themes, campaign pages displayed the campaign description and summary block twice. This has been fixed. [#536](https://github.com/Charitable/Charitable/issues/536)
