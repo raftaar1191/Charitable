@@ -26,7 +26,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 
 		/**
 		 * Descriptive name of the email.
-		 *		 
+		 *
 		 * @since 1.0.0
 		 *
 		 * @var   string
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 
 		/**
 		 * Array of supported object types (campaigns, donations, donors, etc).
-		 *		 
+		 *
 		 * @since 1.0.0
 		 *
 		 * @var   string[]

@@ -79,14 +79,14 @@ add_action( 'deleted_post', array( 'Charitable_Campaign_Donations_DB', 'delete_d
  *
  * @see charitable_ipn_listener()
  */
-add_action( 'init', 'charitable_ipn_listener' );
+add_action( 'init', 'charitable_ipn_listener', 20 );
 
 /**
  * Post donation hook.
  *
  * @see charitable_is_after_donation()
  */
-add_action( 'init', 'charitable_is_after_donation' );
+add_action( 'init', 'charitable_is_after_donation', 20 );
 
 /**
  * Cancel donation.

@@ -113,9 +113,9 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 			 *
 			 * This will be removed in or after Charitable 1.8.
 			 */
-			add_filter( 'charitable_email_content_fields',         array( $this->email, 'add_donation_content_fields' ), 10, 2 );
+			add_filter( 'charitable_email_content_fields', array( $this->email, 'add_donation_content_fields' ), 10, 2 );
 			add_filter( 'charitable_email_preview_content_fields', array( $this->email, 'add_preview_donation_content_fields' ), 10, 2 );
-			add_filter( 'charitable_email_content_fields',         array( $this->email, 'add_campaign_content_fields' ), 10, 2 );
+			add_filter( 'charitable_email_content_fields', array( $this->email, 'add_campaign_content_fields' ), 10, 2 );
 			add_filter( 'charitable_email_preview_content_fields', array( $this->email, 'add_preview_campaign_content_fields' ), 10, 2 );
 
 			/**
