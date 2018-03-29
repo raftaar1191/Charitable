@@ -10,7 +10,8 @@
     },
     "require-dev": {
         "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "phpunit/php-timer": "^1.0"
     },
     "minimum-stability": "dev"
 }
