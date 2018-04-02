@@ -147,7 +147,7 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param 	strign $gateway
+ * @param 	string $gateway
  * @return string
  */
 function charitable_get_ipn_url( $gateway ) {
