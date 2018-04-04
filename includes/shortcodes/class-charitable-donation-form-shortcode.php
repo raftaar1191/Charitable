@@ -34,7 +34,7 @@ if ( ! class_exists( 'Charitable_Donation_Form_Shortcode' ) ) :
 		 */
 		public static function display( $atts ) {
 			$defaults = array(
-		 		'campaign_id' => 0,
+				'campaign_id' => 0,
 			);
 
 			/* Parse incoming $atts into an array and merge it with $defaults. */
