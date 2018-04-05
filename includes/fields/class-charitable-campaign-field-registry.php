@@ -52,10 +52,26 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		public function __construct() {
 			parent::__construct();
 
-			$this->default_sections = array(
-				'public' => 'campaign',
-				'admin'  => 'campaign-extended-settings',
-			);
+			$this->sections = $this->get_core_sections();
+		}
+
+		/**
+		 * Returns the core sections.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return array
+		 */
+		private function get_core_sections() {
+			return apply_filters( 'charitable_default_campaign_sections', array(
+				'defaults' => array(
+					'admin' => 'campaign-extended-settings',
+				),
+				'admin'    => array(
+					'campaign-donation-options'  => __( 'Donation Options', 'charitable' ),
+					'campaign-extended-settings' => __( 'Extended Settings', 'charitable' ),
+				),
+			) );
 		}
 
 		/**
@@ -153,7 +169,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		 * @return void
 		 */
 		public function set_default_section( $section, $form = 'public' ) {
-			$this->default_sections[ $form ] = $section;
+			$this->sections['defaults'][ $form ] = $section;
 		}
 
 		/**
@@ -207,7 +223,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
-				$settings['section'] = $this->default_sections['public'];
+				$settings['section'] = $this->get_default_section( 'public' );
 			}
 
 			return $this->parse_form_settings( $settings, $field );
@@ -239,7 +255,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
-				$settings['section'] = $this->default_sections['admin'];
+				$settings['section'] = $this->get_default_section( 'admin' );
 			}
 
 			return $this->parse_form_settings( $settings, $field );

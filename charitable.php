@@ -548,13 +548,15 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function campaign_fields() {
 			if ( ! $this->registry->has( 'campaign_field_registry' ) ) {
 				$campaign_fields = new Charitable_Campaign_Field_Registry();
-				$fields          = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
+
+				/* Register it immediately to avoid endless recursion. */
+				$this->registry->register_object( $campaign_fields );
+
+				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/campaign-fields.php' );
 
 				foreach ( $fields as $key => $args ) {
 					$campaign_fields->register_field( new Charitable_Campaign_Field( $key, $args ) );
 				}
-
-				$this->registry->register_object( $campaign_fields );
 			}
 
 			return $this->registry->get( 'campaign_field_registry' );
@@ -575,13 +577,15 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function donation_fields() {
 			if ( ! $this->registry->has( 'donation_field_registry' ) ) {
 				$donation_fields = new Charitable_Donation_Field_Registry();
-				$fields          = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
+
+				/* Register it immediately to avoid endless recursion. */
+				$this->registry->register_object( $donation_fields );
+
+				$fields = include( $this->get_path( 'includes' ) . 'fields/default-fields/donation-fields.php' );
 
 				foreach ( $fields as $key => $args ) {
 					$donation_fields->register_field( new Charitable_Donation_Field( $key, $args ) );
 				}
-
-				$this->registry->register_object( $donation_fields );
 			}
 
 			return $this->registry->get( 'donation_field_registry' );

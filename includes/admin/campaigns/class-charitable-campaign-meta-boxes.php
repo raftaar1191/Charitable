@@ -76,7 +76,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		/**
 		 * Add meta boxes.
 		 *
-		 * @see     add_meta_boxes hook
+		 * @see add_meta_boxes hook
 		 *
 		 * @since  1.0.0
 		 *
@@ -140,16 +140,25 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @return array
 		 */
 		public function get_campaign_settings_panels() {
-			$panels = array(
-				'campaign-donation-options'  => array(
-					'title'  => __( 'Donation Options', 'charitable' ),
-					'fields' => apply_filters( 'charitable_campaign_donation_options_fields', $this->get_section_fields( 'campaign-donation-options' ) ),
-				),
-				'campaign-extended-settings' => array(
-					'title'  => __( 'Extended Settings', 'charitable' ),
-					'fields' => $this->get_section_fields( 'campaign-extended-settings' ),
-				),
-			);
+			$panels = charitable()->campaign_fields()->get_sections( 'admin' );
+
+			foreach ( $panels as $section => $label ) {
+				$panels[ $section ] = array(
+					'title'  => $label,
+					'fields' => $this->get_section_fields( $section ),
+				);
+
+				if ( 'campaign-donation-options' == $section ) {
+					/**
+					 * Filter the fields in the Donation Options panel.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param array $fields The array of fields.
+					 */
+					$panels[ $section ]['fields'] = apply_filters( 'charitable_campaign_donation_options_fields', $panels[ $section ]['fields'] );
+				}
+			}
 
 			$panels = $this->add_legacy_meta_boxes( $panels );
 
@@ -453,7 +462,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 * @param  array $panel The panel definition.
 		 * @return boolean
 		 */
-		public function panel_has_fields( $panel ) {
+		private function panel_has_fields( $panel ) {
 			return array_key_exists( 'view', $panel ) || count( $panel['fields'] );
 		}
 	}
