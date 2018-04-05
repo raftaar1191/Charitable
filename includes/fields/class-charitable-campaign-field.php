@@ -192,7 +192,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 				'fullwidth' => false,
 				'default'   => '',
 				'attrs'     => array(),
-				'section'   => 'campaign-extended-settings',
+				'section'   => charitable()->campaign_fields()->get_default_section( 'admin' ),
 			) );
 		}
 	}

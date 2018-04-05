@@ -34,13 +34,13 @@ if ( ! class_exists( 'Charitable_Field_Registry' ) ) :
 		protected $fields;
 
 		/**
-		 * Default sections.
+		 * Form sections.
 		 *
 		 * @since 1.6.0
 		 *
 		 * @var   array
 		 */
-		protected $default_sections;
+		protected $sections;
 
 		/**
 		 * The keys of the form properties.
@@ -57,11 +57,63 @@ if ( ! class_exists( 'Charitable_Field_Registry' ) ) :
 		 * @since 1.6.0
 		 */
 		public function __construct() {
-			$this->fields           = array();
-			$this->default_sections = array();
-			$this->forms            = $this->set_forms();
+			$this->fields   = array();
+			$this->sections = array();
+			$this->forms    = $this->set_forms();
 
 			add_action( 'init', array( $this, 'order_fields' ), 9999 );
+		}
+
+		/**
+		 * Register a new section.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $form    The form that the section is registered to.
+		 * @param  string $section The key of the section.
+		 * @param  string $label   Optional. The section label.
+		 * @return void
+		 */
+		public function register_section( $form, $section, $label = '' ) {
+			$this->sections[ $form ][ $section ] = $label;
+		}
+
+		/**
+		 * Return the sections in a particular form.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $form The form to retrieve sections for.
+		 * @return array
+		 */
+		public function get_sections( $form ) {
+			return array_key_exists( $form, $this->sections ) ? $this->sections[ $form ] : array();
+		}
+
+		/**
+		 * Return the default section for a particular form.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $form The form to retrieve sections for.
+		 * @return string
+		 */
+		public function get_default_section( $form ) {
+			$sections = $this->get_sections( $form );
+
+			if ( empty( $sections ) ) {
+				return '';
+			}
+
+			/* If we're missing a registered default section, we'll use the first one in the list. */
+			$fallback = key( $sections );
+			$defaults = array_key_exists( 'defaults', $this->sections ) ? $this->sections['defaults'] : false;
+
+			if ( ! $defaults ) {
+				return $fallback;
+			}
+
+			return array_key_exists( $form, $defaults ) ? $defaults[ $form ] : $fallback;
 		}
 
 		/**
