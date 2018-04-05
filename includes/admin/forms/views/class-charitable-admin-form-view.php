@@ -13,7 +13,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 
@@ -108,9 +110,10 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string
+		 * @return boolean True if any fields were rendered. False otherwise.
 		 */
 		public function render_notices() {
+			return false;
 		}
 
 		/**
@@ -173,6 +176,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 			$field['wrapper_id']    = 'charitable-' . $field['id'] . '-wrap';
 			$field['wrapper_class'] = $this->get_field_class( $field );
 			$field['tabindex']      = array_key_exists( 'tabindex', $field ) ? (int) $field['tabindex'] : $this->tabindex;
+			$field['placeholder']   = array_key_exists( 'placeholder', $field ) ? $field['placeholder'] : '';
 
 			if ( 'checkbox' == $field['type'] ) {
 				$field['checked'] = $this->is_field_checked( $field );
