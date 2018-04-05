@@ -43,10 +43,37 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		public function __construct() {
 			parent::__construct();
 
-			$this->default_sections = array(
-				'public' => 'user',
-				'admin'  => 'user',
-			);
+			$this->sections = $this->get_core_sections();
+		}
+
+		/**
+		 * Returns the core sections.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return array
+		 */
+		private function get_core_sections() {
+			/**
+			 * Filter the default donation sections.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array $sections The full array of sections for all forms, including defaults.
+			 */
+			return apply_filters( 'charitable_default_donation_sections', array(
+				'defaults' => array(
+					'public' => 'user',
+					'admin'  => 'user',
+				),
+				'public'   => array(
+					'user' => __( 'Your Details', 'charitable' ),
+				),
+				'admin'    => array(
+					'user' => '',
+					'meta' => '',
+				),
+			) );
 		}
 
 		/**
@@ -133,7 +160,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 * @return void
 		 */
 		public function set_default_section( $section, $form = 'public' ) {
-			$this->default_sections[ $form ] = $section;
+			$this->sections['defaults'][ $form ] = $section;
 		}
 
 		/**
@@ -200,7 +227,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
-				$settings['section'] = $this->default_sections['public'];
+				$settings['section'] = $this->get_default_section( 'public' );
 			}
 
 			return $this->parse_form_settings( $settings, $field );
@@ -232,7 +259,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
-				$settings['section'] = $this->default_sections['admin'];
+				$settings['section'] = $this->get_default_sections( 'admin' );
 			}
 
 			return $this->parse_form_settings( $settings, $field );
