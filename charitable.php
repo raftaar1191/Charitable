@@ -190,6 +190,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 
 			/* Load files with hooks & functions. Classes are autoloaded. */
 			require_once( $includes_path . 'charitable-core-functions.php' );
+			require_once( $includes_path . 'api/charitable-api-functions.php' );
 			require_once( $includes_path . 'campaigns/charitable-campaign-functions.php' );
 			require_once( $includes_path . 'campaigns/charitable-campaign-hooks.php' );
 			require_once( $includes_path . 'compat/charitable-compat-functions.php' );
@@ -284,6 +285,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', 'charitable_load_compat_functions' );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
+			add_action( 'rest_api_init', 'charitable_register_api_routes' );
 
 			/**
 			 * We do this on priority 20 so that any functionality that is loaded on init (such
