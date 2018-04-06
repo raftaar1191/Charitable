@@ -2,6 +2,7 @@
 return array(
 	'Charitable_Abstract_Donation' => 'abstracts/abstract-class-charitable-abstract-donation.php',
 	'Charitable_Admin_Actions' => 'abstracts/abstract-class-charitable-admin-actions.php',
+	'Charitable_API_Route' => 'abstracts/abstract-class-charitable-api-route.php',
 	'Charitable_DB' => 'abstracts/abstract-class-charitable-db.php',
 	'Charitable_Email' => 'abstracts/abstract-class-charitable-email.php',
 	'Charitable_Endpoint' => 'abstracts/abstract-class-charitable-endpoint.php',
@@ -39,6 +40,7 @@ return array(
 	'Charitable_General_Settings' => 'admin/settings/class-charitable-general-settings.php',
 	'Charitable_Licenses_Settings' => 'admin/settings/class-charitable-licenses-settings.php',
 	'Charitable_Settings' => 'admin/settings/class-charitable-settings.php',
+	'Charitable_API_Route_Reports' => 'api/class-charitable-api-route-reports.php',
 	'Charitable_Map' => 'autoloader/charitable-class-map.php',
 	'Charitable_Registry' => 'autoloader/class-charitable-registry.php',
 	'Charitable_Campaign_Processor' => 'campaigns/class-charitable-campaign-processor.php',

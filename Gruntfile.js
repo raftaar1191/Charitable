@@ -260,8 +260,9 @@ module.exports = function(grunt) {
                 });
 
                 // A few gotchas.
-                classname = classname.replace('_Db', '_DB');
-                classname = classname.replace('_I18n', '_i18n');
+                classname = classname.replace( '_Api', '_API' );
+                classname = classname.replace( '_Db', '_DB' );
+                classname = classname.replace( '_I18n', '_i18n' );
 
                 map = map.concat( "\t'" + classname + "' => '" + filepath + "',\n" );
             }     
