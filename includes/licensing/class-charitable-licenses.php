@@ -472,14 +472,15 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string $item The item to verify.
-		 * @param  string $license The license key for the item.
+		 * @param  string  $item    The item to verify.
+		 * @param  string  $license The license key for the item.
+		 * @param  boolean $force   Whether to force the verification check.
 		 * @return mixed[]
 		 */
-		public function verify_license( $item, $license ) {
+		public function verify_license( $item, $license, $force = false ) {
 			$license = trim( $license );
 
-			if ( $license === $this->get_license( $item ) ) {
+			if ( $license === $this->get_license( $item ) && ! $force ) {
 				return $this->get_license_details( $item );
 			}
 
