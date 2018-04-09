@@ -35,7 +35,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			 * @since 1.0.0
 			 *
 			 * @param array $args The default arguments.
-	         */
+			 */
 			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
 				'output'          => 'donors',
 				'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
@@ -51,7 +51,6 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 
 			$this->args             = wp_parse_args( $args, $defaults );
 			$this->args['campaign'] = $this->sanitize_campaign();
-
 			$this->position         = 0;
 
 			$this->prepare_query();
