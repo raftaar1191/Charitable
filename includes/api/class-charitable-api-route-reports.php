@@ -56,11 +56,9 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 				$this->namespace,
 				'/' . $this->base,
 				array(
-					array(
-						'methods'              => WP_REST_Server::READABLE,
-						'callback'             => array( $this, 'get_reports' ),
-						'permissions_callback' => array( $this, 'user_can_get_charitable_reports' ),
-					),
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_reports' ),
+					'permission_callback' => array( $this, 'user_can_get_charitable_reports' ),
 				)
 			);
 
@@ -68,11 +66,9 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 				$this->namespace,
 				'/' . $this->base . '/donations/',
 				array(
-					array(
-						'methods'              => WP_REST_Server::READABLE,
-						'callback'             => array( $this, 'get_donations_report' ),
-						'permissions_callback' => array( $this, 'user_can_get_charitable_reports' ),
-					),
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_donations_report' ),
+					'permission_callback' => array( $this, 'user_can_get_charitable_reports' ),
 				)
 			);
 		}
@@ -82,10 +78,12 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return WP_REST_Response
+		 * @return WP_REST_Response|mixed If response generated an error, WP_Error, if response
+		 *                                is already an instance, WP_HTTP_Response, otherwise
+		 *                                returns a new WP_REST_Response instance.
 		 */
 		public function get_reports() {
-			return new WP_REST_Response( array(
+			return rest_ensure_response( array(
 				'slug'        => 'donations',
 				'description' => __( 'List of donation reports.', 'charitable' ),
 				'_links'      => array(
@@ -93,7 +91,7 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 						'href' => get_site_url( null, '/wp-json/' . $this->namespace . '/' . $this->base . '/donations/' ),
 					),
 				),
-			), 200 );
+			) );
 		}
 
 		/**
@@ -101,14 +99,14 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return WP_REST_Response
+		 * @return WP_REST_Response|mixed If response generated an error, WP_Error, if response
+		 *                                is already an instance, WP_HTTP_Response, otherwise
+		 *                                returns a new WP_REST_Response instance.
 		 */
 		public function get_donations_report() {
-			return new WP_REST_Response( array(
-				'amount'    => '',
-				'donations' => '',
-				'donors'    => '',
-			), 200 );
+			$report = new Charitable_Donation_Report();
+
+			return rest_ensure_response( $report->get_reports() );
 		}
 	}
 
