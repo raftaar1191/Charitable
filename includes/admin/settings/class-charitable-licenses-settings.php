@@ -94,25 +94,25 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 			}
 
 			$fields = array(
-				'section' => array(
-					'title'     => '',
-					'type'      => 'hidden',
-					'priority'  => 10000,
-					'value'     => 'licenses',
-					'save'      => false,
+				'section'  => array(
+					'title'    => '',
+					'type'     => 'hidden',
+					'priority' => 10000,
+					'value'    => 'licenses',
+					'save'     => false,
 				),
 				'licenses' => array(
-					'title'     => false,
-					'callback'  => array( $this, 'render_licenses_table' ),
-					'priority'  => 4,
+					'title'    => false,
+					'callback' => array( $this, 'render_licenses_table' ),
+					'priority' => 4,
 				),
 			);
 
 			foreach ( charitable_get_helper( 'licenses' )->get_products() as $key => $product ) {
 				$fields[ $key ] = array(
-					'type'      => 'text',
-					'render'    => false,
-					'priority'  => 6,
+					'type'     => 'text',
+					'render'   => false,
+					'priority' => 6,
 				);
 			}
 
@@ -144,6 +144,28 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 		}
 
 		/**
+		 * Add an extra button to the Licenses tab to re-check licenses.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $button The button HTML.
+		 * @return string
+		 */
+		public function add_license_recheck_button( $button ) {
+			$licenses = array_filter( charitable_get_helper( 'licenses' )->get_licenses(), 'is_array' );
+
+			if ( empty( $licenses ) ) {
+				return $button;
+			}
+
+			return str_replace(
+				'</p>',
+				'<input style="margin-left:8px;height:29px;" type="submit" class="button button-secondary" name="recheck" value="' . esc_attr__( 'Save & Re-check All Licenses', 'charitable' ) . '" /></p>',
+				$button
+			);
+		}
+
+		/**
 		 * Checks for updated license and invalidates status field if not set.
 		 *
 		 * @since   1.0.0
@@ -158,6 +180,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 				return $values;
 			}
 
+			$re_check = array_key_exists( 'recheck', $_POST );
 			$licenses = $new_values['licenses'];
 
 			foreach ( $licenses as $product_key => $license ) {
@@ -168,7 +191,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 					continue;
 				}
 
-				$license_data = charitable_get_helper( 'licenses' )->verify_license( $product_key, $license );
+				$license_data = charitable_get_helper( 'licenses' )->verify_license( $product_key, $license, $re_check );
 
 				if ( empty( $license_data ) ) {
 					continue;
