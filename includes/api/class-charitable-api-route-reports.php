@@ -69,6 +69,13 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 					'methods'             => WP_REST_Server::READABLE,
 					'callback'            => array( $this, 'get_donations_report' ),
 					'permission_callback' => array( $this, 'user_can_get_charitable_reports' ),
+					'args'                => array(
+						'campaigns' => array(
+							'default'           => 'all',
+							'validate_callback' => array( $this, 'validate_campaigns_arg' ),
+							'sanitize_callback' => array( $this, 'sanitize_campaigns_arg' ),
+						),
+					),
 				)
 			);
 		}
@@ -99,14 +106,45 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
+		 * @param  WP_REST_Request $request The API request object.
 		 * @return WP_REST_Response|mixed If response generated an error, WP_Error, if response
 		 *                                is already an instance, WP_HTTP_Response, otherwise
 		 *                                returns a new WP_REST_Response instance.
 		 */
-		public function get_donations_report() {
-			$report = new Charitable_Donation_Report();
+		public function get_donations_report( $request ) {
+			$report = new Charitable_Donation_Report( array(
+				'campaigns' => $request->get_param( 'campaigns' ),
+			) );
 
 			return rest_ensure_response( $report->get_reports() );
+		}
+
+		/**
+		 * Validate the 'campaigns' argument.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  mixed $param The parameter value.
+		 * @return boolean
+		 */
+		public function validate_campaigns_arg( $param ) {
+			return 'all' == $param || is_numeric( $param ) || is_array( $param );
+		}
+
+		/**
+		 * Sanitize the 'campaigns' argument, ensuring either 'all' or an array is returned.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  mixed $param The parameter value.
+		 * @return string|array
+		 */
+		public function sanitize_campaigns_arg( $param ) {
+			if ( 'all' == $param || is_array( $param ) ) {
+				return $param;
+			}
+
+			return array( $param );
 		}
 	}
 
