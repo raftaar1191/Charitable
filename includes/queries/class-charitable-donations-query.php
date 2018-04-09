@@ -126,11 +126,11 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			}
 
 			switch ( $orderby ) {
-				case 'date' :
+				case 'date':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 					break;
 
-				case 'amount' :
+				case 'amount':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
 					break;
 			}

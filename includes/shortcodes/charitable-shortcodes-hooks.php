@@ -37,6 +37,7 @@ add_shortcode( 'charitable_login', array( 'Charitable_Login_Shortcode', 'display
 add_shortcode( 'charitable_logout', array( 'Charitable_Logout_Shortcode', 'display' ) );
 add_shortcode( 'charitable_registration', array( 'Charitable_Registration_Shortcode', 'display' ) );
 add_shortcode( 'charitable_profile', array( 'Charitable_Profile_Shortcode', 'display' ) );
+add_shortcode( 'charitable_stat', array( 'Charitable_Stat_Shortcode', 'display' ) );
 add_shortcode( 'charitable_email', array( 'Charitable_Email_Shortcode', 'display' ) );
 
 /**
