@@ -57,104 +57,93 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return array
 		 */
 		public function gateway_settings( $settings ) {
-			$settings['paypal_email'] = array(
-				'type'     => 'email',
-				'title'    => __( 'PayPal Email Address', 'charitable' ),
-				'priority' => 6,
-				'help'     => __( 'Enter the email address for the PayPal account that should receive donations.', 'charitable' ),
-			);
-
-			$settings['sandbox_paypal_email'] = array(
-				'type'     => 'email',
-				'title'    => __( 'Sandbox PayPal Email Address', 'charitable' ),
-				'priority' => 7,
-				'help'     => __( 'Enter the email address for the Sandbox PayPal account that should receive test donations.', 'charitable' ),
-			);
-
-			$settings['transaction_mode'] = array(
-				'type'     => 'radio',
-				'title'    => __( 'PayPal Transaction Type', 'charitable' ),
-				'priority' => 8,
-				'options'  => array(
-					'donations' => __( 'Donations', 'charitable' ),
-					'standard'  => __( 'Standard Transaction', 'charitable' ),
+			return array_merge( $settings, array(
+				'paypal_email'             => array(
+					'type'     => 'email',
+					'title'    => __( 'PayPal Email Address', 'charitable' ),
+					'priority' => 6,
+					'help'     => __( 'Enter the email address for the PayPal account that should receive donations.', 'charitable' ),
 				),
-				'default'  => 'donations',
-				'help'     => sprintf( '%s<br /><a href="%s" target="_blank">%s</a>',
-					__( 'PayPal offers discounted fees to registered non-profit organizations. You must create a PayPal Business account to apply.', 'charitable' ),
-					'https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=merchant%2Fdonations',
-					__( 'Find out more.', 'charitable' )
+				'sandbox_paypal_email'     => array(
+					'type'     => 'email',
+					'title'    => __( 'Sandbox PayPal Email Address', 'charitable' ),
+					'priority' => 7,
+					'help'     => __( 'Enter the email address for the Sandbox PayPal account that should receive test donations.', 'charitable' ),
 				),
-			);
-
-			$settings['disable_ipn_verification'] = array(
-				'type'     => 'checkbox',
-				'title'    => __( 'Disable IPN Verification', 'charitable' ),
-				'priority' => 10,
-				'default'  => 0,
-				'help'     => __( 'If you are having problems with donations not getting marked as Paid, disabling IPN verification might fix the problem. However, it is important to be aware that this is a <strong>less secure</strong> method for verifying donations.', 'charitable' ),
-			);
-
-			$settings['api'] = array(
-				'type'     => 'heading',
-				'title'    => __( 'API Settings', 'charitable' ),
-				'priority' => 20,
-			);
-
-			$settings['api_description'] = array(
-				'type'     => 'content',
-				'content'  => sprintf(
-					/* translators: %s: PayPal domain */
-					__( 'API credentials are necessary to process PayPal refunds and subscription cancellations from inside WordPress. These can be obtained from <a target="_blank" href="%s/us/cgi-bin/webscr?cmd=_login-api-run">this tool</a>.', 'charitable' ),
-					charitable_get_option( 'test_mode' ) ? 'https://www.sandbox.paypal.com' : 'https://www.paypal.com'
+				'transaction_mode'         => array(
+					'type'     => 'radio',
+					'title'    => __( 'PayPal Transaction Type', 'charitable' ),
+					'priority' => 8,
+					'options'  => array(
+						'donations' => __( 'Donations', 'charitable' ),
+						'standard'  => __( 'Standard Transaction', 'charitable' ),
+					),
+					'default'  => 'donations',
+					'help'     => sprintf( '%s<br /><a href="%s" target="_blank">%s</a>',
+						__( 'PayPal offers discounted fees to registered non-profit organizations. You must create a PayPal Business account to apply.', 'charitable' ),
+						'https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=merchant%2Fdonations',
+						__( 'Find out more.', 'charitable' )
+					),
 				),
-				'priority' => 21,
-			);
-
-			$settings['api_username'] = array(
-				'title'    => __( 'Live API Username', 'charitable' ),
-				'type'     => 'text',
-				'priority' => 30,
-				'default'  => '',
-			);
-
-			$settings['api_password'] = array(
-				'title'    => __( 'Live API Password', 'charitable' ),
-				'type'     => 'password',
-				'priority' => 40,
-				'default'  => '',
-			);
-
-			$settings['api_signature'] = array(
-				'title'    => __( 'Live API Signature', 'charitable' ),
-				'type'     => 'password',
-				'priority' => 50,
-				'default'  => '',
-			);
-
-			$settings['sandbox_api_username'] = array(
-				'title'       => __( 'Sandbox API Username', 'charitable' ),
-				'type'        => 'text',
-				'description' => __( 'Create sandbox accounts and obtain API credentials from within your <a href="http://developer.paypal.com">PayPal developer account</a> or read more about it in the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">documentation</a>.', 'charitable' ),
-				'priority'    => 60,
-				'default'     => '',
-			);
-
-			$settings['sandbox_api_password'] = array(
-				'title'    => __( 'Sandbox API Password', 'charitable' ),
-				'type'     => 'password',
-				'priority' => 70,
-				'default'  => '',
-			);
-
-			$settings['sandbox_api_signature'] = array(
-				'title'    => __( 'Sandbox API Signature', 'charitable' ),
-				'type'     => 'password',
-				'priority' => 80,
-				'default'  => '',
-			);
-
-			return $settings;
+				'disable_ipn_verification' => array(
+					'type'     => 'checkbox',
+					'title'    => __( 'Disable IPN Verification', 'charitable' ),
+					'priority' => 10,
+					'default'  => 0,
+					'help'     => __( 'If you are having problems with donations not getting marked as Paid, disabling IPN verification might fix the problem. However, it is important to be aware that this is a <strong>less secure</strong> method for verifying donations.', 'charitable' ),
+				),
+				'api'                      => array(
+					'type'     => 'heading',
+					'title'    => __( 'API Settings', 'charitable' ),
+					'priority' => 20,
+				),
+				'api_description'          => array(
+					'type'     => 'content',
+					'content'  => sprintf(
+						/* translators: %s: PayPal domain */
+						__( 'API credentials are necessary to process PayPal refunds and subscription cancellations from inside WordPress. These can be obtained from <a target="_blank" href="%s/us/cgi-bin/webscr?cmd=_login-api-run">this tool</a>.', 'charitable' ),
+						charitable_get_option( 'test_mode' ) ? 'https://www.sandbox.paypal.com' : 'https://www.paypal.com'
+					),
+					'priority' => 21,
+				),
+				'api_username'             => array(
+					'title'    => __( 'Live API Username', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 30,
+					'default'  => '',
+				),
+				'api_password'             => array(
+					'title'    => __( 'Live API Password', 'charitable' ),
+					'type'     => 'password',
+					'priority' => 40,
+					'default'  => '',
+				),
+				'api_signature'            => array(
+					'title'    => __( 'Live API Signature', 'charitable' ),
+					'type'     => 'password',
+					'priority' => 50,
+					'default'  => '',
+				),
+				'sandbox_api_username'     => array(
+					'title'       => __( 'Sandbox API Username', 'charitable' ),
+					'type'        => 'text',
+					'description' => __( 'Create sandbox accounts and obtain API credentials from within your <a href="http://developer.paypal.com">PayPal developer account</a> or read more about it in the <a href="https://developer.paypal.com/docs/classic/api/apiCredentials/#creating-an-api-signature" target="_blank">documentation</a>.', 'charitable' ),
+					'priority'    => 60,
+					'default'     => '',
+				),
+				'sandbox_api_password'     => array(
+					'title'    => __( 'Sandbox API Password', 'charitable' ),
+					'type'     => 'password',
+					'priority' => 70,
+					'default'  => '',
+				),
+				'sandbox_api_signature'    => array(
+					'title'    => __( 'Sandbox API Signature', 'charitable' ),
+					'type'     => 'password',
+					'priority' => 80,
+					'default'  => '',
+				),
+			) );
 		}
 
 		/**

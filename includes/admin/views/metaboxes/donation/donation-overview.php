@@ -19,18 +19,18 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">
 	<div class="donation-banner-wrapper">
 		<div class="donation-banner">
-			<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ) ?></h3>
+			<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ); ?></h3>
 			<span class="donation-date"><?php echo $date ?></span>
-			<a href="<?php echo esc_url( add_query_arg( 'show_form', true ) ) ?>" class="donation-edit-link"><?php _e( 'Edit Donation', 'charitable' ) ?></a>
+			<a href="<?php echo esc_url( add_query_arg( 'show_form', true ) ); ?>" class="donation-edit-link"><?php _e( 'Edit Donation', 'charitable' ); ?></a>
 		</div>
 	</div>
 	<div id="donor" class="charitable-media-block">
 		<div class="donor-avatar charitable-media-image">
-			<?php echo $donor->get_avatar( 80 ) ?>
+			<?php echo $donor->get_avatar( 80 ); ?>
 		</div>
 		<div class="donor-facts charitable-media-body">
-			<h3 class="donor-name"><?php echo $donor->get_name() ?></h3>
-			<span class="donor-email"><?php echo $donor->get_email() ?></span>
+			<h3 class="donor-name"><?php echo $donor->get_name(); ?></h3>
+			<span class="donor-email"><?php echo $donor->get_email(); ?></span>
 			<?php
 			/**
 			 * Display additional details about the donor.
@@ -45,7 +45,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 		</div>
 	</div>
 	<div id="donation-summary">		
-		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status_label() ) ?></span>
+		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status_label() ); ?></span>
 	</div>
 	<?php
 		/**
@@ -61,8 +61,8 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 	<table id="overview">
 		<thead>
 			<tr>
-				<th class="col-campaign-name"><?php _e( 'Campaign', 'charitable' ) ?></th>
-				<th class="col-campaign-donation-amount"><?php _e( 'Total', 'charitable' ) ?></th>
+				<th class="col-campaign-name"><?php _e( 'Campaign', 'charitable' ); ?></th>
+				<th class="col-campaign-donation-amount"><?php _e( 'Total', 'charitable' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -111,7 +111,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 				do_action( 'charitable_donation_details_table_before_total', $donation );
 			?>
 			<tr>
-				<th><?php _e( 'Total', 'charitable' ) ?></th>
+				<th><?php _e( 'Total', 'charitable' ); ?></th>
 				<td><?php
 					/**
 					 * Filter the total donation amount.
@@ -136,8 +136,8 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 				do_action( 'charitable_donation_details_table_before_payment_method', $donation );
 			?>
 			<tr>
-				<th><?php _e( 'Payment Method', 'charitable' ) ?></th>
-				<td><?php echo $donation->get_gateway_label() ?></td>
+				<th><?php _e( 'Payment Method', 'charitable' ); ?></th>
+				<td><?php echo $donation->get_gateway_label(); ?></td>
 			</tr>
 			<?php
 				/**
@@ -150,11 +150,11 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 				do_action( 'charitable_donation_details_table_before_status', $donation );
 			?>
 			<tr>
-				<th><?php _e( 'Change Status', 'charitable' ) ?></th>
+				<th><?php _e( 'Change Status', 'charitable' ); ?></th>
 				<td>
 					<select id="change-donation-status" name="post_status">
 					<?php foreach ( charitable_get_valid_donation_statuses() as $status => $label ) : ?>
-						<option value="<?php echo $status ?>" <?php selected( $status, $donation->get_status() ) ?>><?php echo $label ?></option>
+						<option value="<?php echo $status ?>" <?php selected( $status, $donation->get_status() ); ?>><?php echo $label ?></option>
 					<?php endforeach ?>
 					</select>
 				</td>
@@ -171,7 +171,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 			?>
 			<tr class="hide-if-js">
 				<td colspan="2">
-					<input type="submit" name="update" class="button button-primary" value="<?php _e( 'Update Status', 'charitable' ) ?>" />
+					<input type="submit" name="update" class="button button-primary" value="<?php _e( 'Update Status', 'charitable' ); ?>" />
 				</td>
 			</tr>
 		</tfoot>
