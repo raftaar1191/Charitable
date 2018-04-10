@@ -81,3 +81,24 @@ add_filter( 'manage_campaign_posts_custom_column', array( Charitable_Campaign_Li
  * @see Charitable_Campaign_List_Table::bulk_messages()
  */
 add_filter( 'bulk_post_updated_messages', array( Charitable_Campaign_List_Table::get_instance(), 'bulk_messages' ), 10, 2 );
+
+/**
+ * Add the export button above the campaigns table.
+ *
+ * @see Charitable_Campaign_List_Table::add_export()
+ */
+add_action( 'manage_posts_extra_tablenav', array( Charitable_Campaign_List_Table::get_instance(), 'add_export' ) );
+
+/**
+ * Insert modal forms in the footer.
+ *
+ * @see Charitable_Campaign_List_Table::modal_forms()
+ */
+add_action( 'admin_footer', array( Charitable_Campaign_List_Table::get_instance(), 'modal_forms' ) );
+
+/**
+ * Load scripts to include on the campaigns table.
+ *
+ * @see Charitable_Campaign_List_Table::load_scripts()
+ */
+add_action( 'admin_enqueue_scripts', array( Charitable_Campaign_List_Table::get_instance(), 'load_scripts' ), 11 );

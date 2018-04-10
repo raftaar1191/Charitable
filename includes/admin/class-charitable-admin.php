@@ -236,6 +236,29 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				$version,
 				false
 			);
+
+			wp_register_script(
+				'lean-modal',
+				$assets_dir . 'js/libraries/leanModal' . $suffix . '.js',
+				array( 'jquery-core' ),
+				$version,
+				true
+			);
+
+			wp_register_style(
+				'lean-modal-css',
+				$assets_dir . 'css/modal' . $suffix . '.css',
+				array(),
+				$version
+			);
+
+			wp_register_script(
+				'charitable-admin-tables',
+				$assets_dir . 'js/charitable-admin-tables' . $suffix . '.js',
+				array( 'jquery-core', 'lean-modal' ),
+				$version,
+				true
+			);
 		}
 
 		/**
