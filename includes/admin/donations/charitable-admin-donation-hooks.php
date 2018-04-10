@@ -119,7 +119,7 @@ add_filter( 'bulk_post_updated_messages', array( Charitable_Donation_List_Table:
 add_filter( 'disable_months_dropdown', array( Charitable_Donation_List_Table::get_instance(), 'disable_months_dropdown' ), 10, 2 );
 
 /**
- * Add date-based filters above the donations table. 
+ * Add date-based filters above the donations table.
  *
  * @see Charitable_Donation_List_Table::add_filters()
  */
@@ -144,7 +144,7 @@ add_action( 'admin_footer', array( Charitable_Donation_List_Table::get_instance(
  *
  * @see Charitable_Donation_List_Table::load_scripts()
  */
-add_action( 'admin_enqueue_scripts', array( Charitable_Donation_List_Table::get_instance(), 'load_scripts' ) );
+add_action( 'admin_enqueue_scripts', array( Charitable_Donation_List_Table::get_instance(), 'load_scripts' ), 11 );
 
 /**
  * Add custom filters to the query that returns the donations to be displayed.

@@ -149,6 +149,72 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 
 			return $bulk_messages;
 		}
+
+		/**
+		 * Add extra buttons after filters
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $which The context where this is being called.
+		 * @return void
+		 */
+		public function add_export( $which ) {
+			if ( 'top' == $which && $this->is_campaigns_page() ) {
+				charitable_admin_view( 'campaigns-page/export' );
+			}
+		}
+
+		/**
+		 * Add modal template to footer.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return void
+		 */
+		public function modal_forms() {
+			if ( $this->is_campaigns_page() ) {
+				charitable_admin_view( 'donations-page/export-form' );
+				charitable_admin_view( 'donations-page/filter-form' );
+			}
+		}
+
+		/**
+		 * Admin scripts and styles.
+		 *
+		 * Set up the scripts & styles used for the modal.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $hook The current page hook/slug.
+		 * @return void
+		 */
+		public function load_scripts( $hook ) {
+			if ( 'edit.php' != $hook ) {
+				return;
+			}
+
+			if ( $this->is_campaigns_page() ) {
+				wp_enqueue_style( 'lean-modal-css' );
+				wp_enqueue_script( 'jquery-core' );
+				wp_enqueue_script( 'lean-modal' );
+				wp_enqueue_script( 'charitable-admin-tables' );
+			}
+		}
+
+		/**
+		 * Checks whether this is the campaigns page.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @global string $typenow The current post type.
+		 * @return boolean
+		 */
+		private function is_campaigns_page() {
+			global $typenow;
+
+			return in_array( $typenow, array( Charitable::CAMPAIGN_POST_TYPE ) );
+		}
+
 	}
 
 endif;
