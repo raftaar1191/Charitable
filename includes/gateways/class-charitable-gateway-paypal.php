@@ -107,7 +107,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	                'priority' => 40,
 	                'default' => ''
 	            );
-	            
+
 	            $settings['api_signature'] = array(
 	                'title' => __( 'Live API Signature', 'charitable-recurring' ),
 	                'type' => 'password',
@@ -123,14 +123,14 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	                'priority' => 60,
 	                'default' => ''
 	            );
-	            
+
 	            $settings['sandbox_api_password'] = array(
 	                'title' => __( 'Sandbox API Password', 'charitable-recurring' ),
 	                'type' => 'password',
 	                'priority' => 70,
 	                'default' => ''
 	            );
-	            
+
 	            $settings['sandbox_api_signature'] = array(
 	                'title' => __( 'Sandbox API Signature', 'charitable-recurring' ),
 	                'type' => 'password',
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	                'default' => ''
 	            );
 
-	    	}            
+	    	}
 
 			return $settings;
 		}
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				die( __( 'IPN Verification Failure', 'charitable' ) );
 			}
 
-			$defaults = array(				
+			$defaults = array(
 				'payment_status' => '',
 				'custom' 		 => 0,
 				'txn_type'       => '',
@@ -476,7 +476,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data = array(
 				'cmd' => '_notify-validate',
 			);
-			
+
 			return array_merge( $data, $_POST );
 
 		}
