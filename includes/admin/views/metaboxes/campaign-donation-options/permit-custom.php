@@ -18,6 +18,6 @@ if ( ! strlen( $is_allowed ) ) {
 }
 ?>
 <div id="charitable-campaign-allow-custom-donations-metabox-wrap" class="charitable-metabox-wrap charitable-checkbox-wrap">
-	<input type="checkbox" id="campaign_allow_custom_donations" name="_campaign_allow_custom_donations" <?php checked( $is_allowed ) ?> />
+	<input type="checkbox" id="campaign_allow_custom_donations" name="_campaign_allow_custom_donations" <?php checked( $is_allowed ); ?> />
 	<label for="campaign_allow_custom_donations"><?php echo $title ?></label>	
 </div>
