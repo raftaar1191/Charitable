@@ -2,23 +2,25 @@
 /**
  * Paypal Payment Gateway class.
  *
- * @package	  Charitable/Classes/Charitable_Gateway_Paypal
- * @author 	  Eric Daams
+ * @package   Charitable/Classes/Charitable_Gateway_Paypal
+ * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
- * @version   1.5.4
+ * @since    1.0.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
 	/**
 	 * Paypal Payment Gateway
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Gateway_Paypal extends Charitable_Gateway {
 
@@ -30,7 +32,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Instantiate the gateway class, defining its key values.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		public function __construct() {
 			$this->name = apply_filters( 'charitable_gateway_paypal_name', __( 'PayPal', 'charitable' ) );
@@ -48,36 +50,36 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Register gateway settings.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array   $settings
-		 * @return  array
+		 * @param  array $settings List of settings. Empty by default.
+		 * @return array
 		 */
 		public function gateway_settings( $settings ) {
 			$settings['paypal_email'] = array(
-				'type'      => 'email',
-				'title'     => __( 'PayPal Email Address', 'charitable' ),
-				'priority'  => 6,
-				'help'      => __( 'Enter the email address for the PayPal account that should receive donations.', 'charitable' ),
+				'type'     => 'email',
+				'title'    => __( 'PayPal Email Address', 'charitable' ),
+				'priority' => 6,
+				'help'     => __( 'Enter the email address for the PayPal account that should receive donations.', 'charitable' ),
 			);
 
 			$settings['sandbox_paypal_email'] = array(
-				'type'      => 'email',
-				'title'     => __( 'Sandbox PayPal Email Address', 'charitable' ),
-				'priority'  => 7,
-				'help'      => __( 'Enter the email address for the Sandbox PayPal account that should receive test donations.', 'charitable' ),
+				'type'     => 'email',
+				'title'    => __( 'Sandbox PayPal Email Address', 'charitable' ),
+				'priority' => 7,
+				'help'     => __( 'Enter the email address for the Sandbox PayPal account that should receive test donations.', 'charitable' ),
 			);
 
 			$settings['transaction_mode'] = array(
-				'type'      => 'radio',
-				'title'     => __( 'PayPal Transaction Type', 'charitable' ),
-				'priority'  => 8,
-				'options'   => array(
+				'type'     => 'radio',
+				'title'    => __( 'PayPal Transaction Type', 'charitable' ),
+				'priority' => 8,
+				'options'  => array(
 					'donations' => __( 'Donations', 'charitable' ),
 					'standard'  => __( 'Standard Transaction', 'charitable' ),
 				),
-				'default'   => 'donations',
-				'help'      => sprintf( '%s<br /><a href="%s" target="_blank">%s</a>',
+				'default'  => 'donations',
+				'help'     => sprintf( '%s<br /><a href="%s" target="_blank">%s</a>',
 					__( 'PayPal offers discounted fees to registered non-profit organizations. You must create a PayPal Business account to apply.', 'charitable' ),
 					'https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=merchant%2Fdonations',
 					__( 'Find out more.', 'charitable' )
@@ -85,11 +87,11 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			);
 
 			$settings['disable_ipn_verification'] = array(
-				'type' 	   => 'checkbox',
-				'title'	   => __( 'Disable IPN Verification', 'charitable' ),
+				'type'     => 'checkbox',
+				'title'    => __( 'Disable IPN Verification', 'charitable' ),
 				'priority' => 10,
 				'default'  => 0,
-				'help' 	   => __( 'If you are having problems with donations not getting marked as Paid, disabling IPN verification might fix the problem. However, it is important to be aware that this is a <strong>less secure</strong> method for verifying donations.', 'charitable' ),
+				'help'     => __( 'If you are having problems with donations not getting marked as Paid, disabling IPN verification might fix the problem. However, it is important to be aware that this is a <strong>less secure</strong> method for verifying donations.', 'charitable' ),
 			);
 
 			return $settings;
@@ -98,12 +100,12 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Validate the submitted credit card details.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   boolean $valid
-		 * @param   string $gateway
-		 * @param   mixed[] $values
-		 * @return  boolean
+		 * @param  boolean $valid   Boolean value to be returned indicating whether the donation is valid.
+		 * @param  string  $gateway The donation gateway.
+		 * @param  mixed[] $values  Set of donation values.
+		 * @return boolean
 		 */
 		public static function validate_donation( $valid, $gateway, $values ) {
 			if ( 'paypal' != $gateway ) {
@@ -126,22 +128,31 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Process the donation with PayPal.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   boolean|array $return
-		 * @param   int $donation_id
-		 * @param   Charitable_Donation_Processor $processor The Donation Processor object.
-		 * @return  array
+		 * @param  boolean|array                 $return      The value to be returned.
+		 * @param  int                           $donation_id The donation ID.
+		 * @param  Charitable_Donation_Processor $processor   The Donation Processor object.
+		 * @return array
 		 */
 		public static function process_donation( $return, $donation_id, $processor ) {
 			$gateway          = new Charitable_Gateway_Paypal();
-			$user_data 		  = $processor->get_donation_data_value( 'user' );
-			$donation 		  = charitable_get_donation( $donation_id );
+			$user_data        = $processor->get_donation_data_value( 'user' );
+			$donation         = charitable_get_donation( $donation_id );
 			$transaction_mode = $gateway->get_value( 'transaction_mode' );
-			$donation_key 	  = $processor->get_donation_data_value( 'donation_key' );
+			$donation_key     = $processor->get_donation_data_value( 'donation_key' );
 
+			/**
+			 * Filter the arguments that are passed to PayPal for the payment.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                         $args        The arguments.
+			 * @param int                           $donation_id The donation ID.
+			 * @param Charitable_Donation_Processor $processor   The Donation Processor object.
+			 */
 			$paypal_args = apply_filters( 'charitable_paypal_redirect_args', array(
-				'business'      => Charitable_Gateway_Paypal::get_paypal_email(),
+				'business'      => self::get_paypal_email(),
 				'email'         => isset( $user_data['email'] ) ? $user_data['email'] : '',
 				'first_name'    => isset( $user_data['first_name'] ) ? $user_data['first_name'] : '',
 				'last_name'     => isset( $user_data['last_name'] ) ? $user_data['last_name'] : '',
@@ -167,14 +178,14 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			), $donation_id, $processor );
 
 			/* Set up the PayPal redirect URL. */
-			$paypal_redirect = trailingslashit( $gateway->get_redirect_url() ) . '?';
+			$paypal_redirect  = trailingslashit( $gateway->get_redirect_url() ) . '?';
 			$paypal_redirect .= http_build_query( $paypal_args );
-			$paypal_redirect = str_replace( '&amp;', '&', $paypal_redirect );
+			$paypal_redirect  = str_replace( '&amp;', '&', $paypal_redirect );
 
 			/* Redirect to PayPal */
 			return array(
 				'redirect' => $paypal_redirect,
-				'safe' => false,
+				'safe'     => false,
 			);
 
 		}
@@ -182,9 +193,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Handle a call to our IPN listener.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public static function process_ipn() {
 			/* We only accept POST requests */
@@ -207,9 +218,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				die( __( 'IPN Verification Failure', 'charitable' ) );
 			}
 
-			$defaults = array(				
+			$defaults = array(
 				'payment_status' => '',
-				'custom' 		 => 0,
+				'custom'         => 0,
 				'txn_type'       => '',
 			);
 
@@ -244,11 +255,11 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Receives verified IPN data from PayPal and processes the donation.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	array $data        The data received in the IPN from PayPal.
-		 * @param 	int   $donation_id The donation ID received from PayPal.
-		 * @return  void
+		 * @param  array $data        The data received in the IPN from PayPal.
+		 * @param  int   $donation_id The donation ID received from PayPal.
+		 * @return void
 		 */
 		public static function process_web_accept( $data, $donation_id ) {
 			$gateway  = new Charitable_Gateway_Paypal();
@@ -262,7 +273,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
 			if ( array_key_exists( 'invoice', $data ) ) {
 				$donation_key = $data['invoice'];
-			} elseif( is_array( $custom ) && array_key_exists( 'donation_key', $custom ) ) {
+			} elseif ( is_array( $custom ) && array_key_exists( 'donation_key', $custom ) ) {
 				$donation_key = $custom['donation_key'];
 			} else {
 				die( __( 'Missing Donation Key', 'charitable' ) );
@@ -392,9 +403,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Return the posted IPN data.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  mixed[]
+		 * @return mixed[]
 		 */
 		public function get_encoded_ipn_data() {
 			$post_data = '';
@@ -408,7 +419,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
 			if ( strlen( $post_data ) ) {
 				$arg_separator = ini_get( 'arg_separator.output' );
-				$data_string = 'cmd=_notify-validate' . $arg_separator . $post_data;
+				$data_string   = 'cmd=_notify-validate' . $arg_separator . $post_data;
 
 				/* Convert collected post data to an array */
 				parse_str( $data_string, $data );
@@ -424,7 +435,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$data = array(
 				'cmd' => '_notify-validate',
 			);
-			
+
 			return array_merge( $data, $_POST );
 
 		}
@@ -455,8 +466,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 					'post'         => '/cgi-bin/webscr HTTP/1.1',
 
 				),
-				'sslverify' => false,
-				'body'      => $data,
+				'sslverify'   => false,
+				'body'        => $data,
 			);
 
 			/* Get response */
@@ -476,50 +487,59 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		/**
 		 * Return a note to log for a pending payment.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $reason_code
-		 * @return  string
+		 * @param  string $reason_code The reason code received from PayPal.
+		 * @return string
 		 */
 		public function get_pending_reason_note( $reason_code ) {
 			switch ( $reason_code ) {
-				case 'echeck' :
+				case 'echeck':
 					$note = __( 'Payment made via eCheck and will clear automatically in 5-8 days', 'charitable' );
 					break;
 
-				case 'address' :
+				case 'address':
 					$note = __( 'Payment requires a confirmed customer address and must be accepted manually through PayPal', 'charitable' );
 					break;
 
-				case 'intl' :
+				case 'intl':
 					$note = __( 'Payment must be accepted manually through PayPal due to international account regulations', 'charitable' );
 					break;
 
-				case 'multi-currency' :
+				case 'multi-currency':
 					$note = __( 'Payment received in non-shop currency and must be accepted manually through PayPal', 'charitable' );
 					break;
 
-				case 'paymentreview' :
-				case 'regulatory_review' :
+				case 'paymentreview':
+				case 'regulatory_review':
 					$note = __( 'Payment is being reviewed by PayPal staff as high-risk or in possible violation of government regulations', 'charitable' );
 					break;
 
-				case 'unilateral' :
+				case 'unilateral':
 					$note = __( 'Payment was sent to non-confirmed or non-registered email address.', 'charitable' );
 					break;
 
-				case 'upgrade' :
+				case 'upgrade':
 					$note = __( 'PayPal account must be upgraded before this payment can be accepted', 'charitable' );
 					break;
 
-				case 'verify' :
+				case 'verify':
 					$note = __( 'PayPal account is not verified. Verify account in order to accept this payment', 'charitable' );
 					break;
 
-				default :
+				default:
+					/* translators: %s: reason code given by PayPal */
 					$note = sprintf( __( 'Payment is pending for unknown reasons. Contact PayPal support for assistance. Reason code: %s', 'charitable' ), $reason_code );
 			}
 
+			/**
+			 * Filter the donation log note added about the reason for the pending donation.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $note        The note.
+			 * @param string $reason_code The reason code received from PayPal.
+			 */
 			return apply_filters( 'charitable_paypal_gateway_pending_reason_note', $note, $reason_code );
 		}
 
@@ -557,44 +577,32 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			return apply_filters( 'charitable_paypal_uri', $paypal_uri, $ssl_check, $ipn_check );
 		}
 
-
-
 		/**
 		 * Return the PayPal business email.
 		 *
-		 * @since  1.5.12
+		 * @since  1.6.0
 		 *
-		 * @param  boolean $ssl_check Whether to check SSL.
-		 * @param  boolean $ipn_check Whether this is for an IPN request.
 		 * @return string
 		 */
 		public static function get_paypal_email() {
-			$paypal_email = '';
-
-			$settings = charitable_get_option( 'gateways_paypal', array() );
-
-			$email_option = charitable_get_option( 'test_mode' ) ? 'sandbox_paypal_email' : 'paypal_email';
-
-			if ( array_key_exists( $email_option, $settings ) ) {
-				$paypal_email = trim( $settings[$email_option] );
-			}
+			$option = charitable_get_option( 'test_mode' ) ? 'sandbox_paypal_email' : 'paypal_email';
 
 			/**
 			 * Filter the PayPal Email.
-			 * 
+			 *
 			 * @since 1.6.0
 			 *
-			 * @param string  $paypal_email The email address.
+			 * @param string $paypal_email The email address.
 			 */
-			return apply_filters( 'charitable_paypal_email', $paypal_email );
+			return apply_filters( 'charitable_paypal_email', charitable_get_option( array( 'gateways_paypal', $option ) ) );
 		}
 
 		/**
 		 * Returns the current gateway's ID.
 		 *
-		 * @since   1.0.3
+		 * @since  1.0.3
 		 *
-		 * @return  string
+		 * @return string
 		 */
 		public static function get_gateway_id() {
 			return self::ID;
