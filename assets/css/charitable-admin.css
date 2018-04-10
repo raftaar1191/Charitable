@@ -899,8 +899,8 @@ select.charitable-settings-field {
   display: none; }
 .edit-php.post-type-charitable .tablenav #delete_all {
   margin-top: 3px; }
-.edit-php.post-type-charitable .tablenav .charitable-donations-filter:before,
-.edit-php.post-type-charitable .tablenav .charitable-donations-export:before {
+.edit-php.post-type-charitable .tablenav .charitable-filter-button:before,
+.edit-php.post-type-charitable .tablenav .charitable-export-button:before {
   vertical-align: middle;
   margin-top: -2px;
   width: 16px;

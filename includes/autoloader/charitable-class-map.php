@@ -33,6 +33,7 @@ return array(
 	'Charitable_Admin_Form' => 'admin/forms/class-charitable-admin-form.php',
 	'Charitable_Admin_Form_View' => 'admin/forms/views/class-charitable-admin-form-view.php',
 	'Charitable_Export' => 'admin/reports/abstract-class-charitable-export.php',
+	'Charitable_Export_Campaigns' => 'admin/reports/class-charitable-export-campaigns.php',
 	'Charitable_Export_Donations' => 'admin/reports/class-charitable-export-donations.php',
 	'Charitable_Advanced_Settings' => 'admin/settings/class-charitable-advanced-settings.php',
 	'Charitable_Email_Settings' => 'admin/settings/class-charitable-email-settings.php',

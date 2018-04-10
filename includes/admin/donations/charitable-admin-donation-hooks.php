@@ -103,7 +103,7 @@ if ( version_compare( get_bloginfo( 'version' ), '4.7', '>=' ) ) {
 
 /**
  * Set up admin messages & notifications displayed based on actions taken.
- * 
+ *
  * @see Charitable_Donation_List_Table::bulk_admin_notices()
  * @see Charitable_Donation_List_Table::post_messages()
  * @see Charitable_Donation_List_Table::bulk_messages()
