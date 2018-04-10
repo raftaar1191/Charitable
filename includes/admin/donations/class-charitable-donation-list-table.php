@@ -643,40 +643,6 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 				return;
 			}
 
-			if ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ) {
-				$suffix  = '';
-				$version = time();
-			} else {
-				$suffix  = '.min';
-				$version = charitable()->get_version();
-			}
-
-			$assets_path = charitable()->get_path( 'assets', false );
-
-			/* Register the appropriate scripts. */
-			wp_register_script(
-				'lean-modal',
-				$assets_path . 'js/libraries/leanModal' . $suffix . '.js',
-				array( 'jquery-core' ),
-				$version,
-				true
-			);
-
-			wp_register_style(
-				'lean-modal-css',
-				$assets_path . 'css/modal' . $suffix . '.css',
-				array(),
-				$version
-			);
-
-			wp_register_script(
-				'charitable-admin-donations',
-				$assets_path . 'js/charitable-admin-donations' . $suffix . '.js',
-				array( 'jquery-core', 'lean-modal' ),
-				$version,
-				true
-			);
-
 			global $typenow;
 
 			/* Enqueue the scripts for donation page */
@@ -684,7 +650,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 				wp_enqueue_style( 'lean-modal-css' );
 				wp_enqueue_script( 'jquery-core' );
 				wp_enqueue_script( 'lean-modal' );
-				wp_enqueue_script( 'charitable-admin-donations' );
+				wp_enqueue_script( 'charitable-admin-tables' );
 			}
 		}
 
