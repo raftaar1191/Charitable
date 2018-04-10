@@ -173,8 +173,7 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 		 */
 		public function modal_forms() {
 			if ( $this->is_campaigns_page() ) {
-				charitable_admin_view( 'donations-page/export-form' );
-				charitable_admin_view( 'donations-page/filter-form' );
+				charitable_admin_view( 'campaigns-page/export-form' );
 			}
 		}
 

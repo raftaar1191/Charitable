@@ -76,11 +76,13 @@ add_filter( 'plugin_action_links_' . plugin_basename( charitable()->get_path() )
 add_filter( 'plugin_row_meta', array( Charitable_Admin::get_instance(), 'add_plugin_row_meta' ), 10, 2 );
 
 /**
- * Export donations.
+ * Export handlers.
  *
  * @see Charitable_Admin::export_donations()
+ * @see Charitable_Admin::export_campaigns()
  */
 add_action( 'charitable_export_donations', array( Charitable_Admin::get_instance(), 'export_donations' ) );
+add_action( 'charitable_export_campaigns', array( Charitable_Admin::get_instance(), 'export_campaigns' ) );
 
 /**
  * Add Charitable menu.

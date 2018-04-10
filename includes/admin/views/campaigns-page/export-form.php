@@ -36,7 +36,7 @@
 		<input type="hidden" name="charitable_action" value="export_campaigns" />
 		<input type="hidden" name="page" value="charitable-campaigns-table" />
 		<fieldset>
-			<legend><?php _e( 'Filter by Date', 'charitable' ); ?></legend>
+			<legend><?php _e( 'Filter by Date Created', 'charitable' ); ?></legend>
 			<input type="text" id="charitable-export-start_date" name="start_date" class="charitable-datepicker" value="<?php echo $start_date; ?>" placeholder="<?php esc_attr_e( 'From:', 'charitable' ); ?>" />
 			<input type="text" id="charitable-export-end_date" name="end_date" class="charitable-datepicker" value="<?php echo $end_date; ?>" placeholder="<?php esc_attr_e( 'To:', 'charitable' ); ?>" />
 		</fieldset>
