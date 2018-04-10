@@ -13,4 +13,4 @@
 
 <?php else: ?>
 <hr />
-<?php endif; ?>
+<?php endif;
