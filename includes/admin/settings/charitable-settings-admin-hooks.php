@@ -4,15 +4,18 @@
  *
  * Action/filter hooks used for Charitable Settings API.
  *
- * @package     Charitable/Functions/Admin
- * @version     1.2.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Admin
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.2.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Register Charitable settings.
