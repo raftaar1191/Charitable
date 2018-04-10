@@ -389,13 +389,16 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				return $links;
 			}
 
-			$extensions_link = esc_url( add_query_arg( array(
-				'utm_source'   => 'plugins-page',
-				'utm_medium'   => 'plugin-row',
-				'utm_campaign' => 'admin',
-				),
-				'https://wpcharitable.com/extensions/'
-			) );
+			$extensions_link = esc_url(
+				add_query_arg(
+					array(
+						'utm_source'   => 'plugins-page',
+						'utm_medium'   => 'plugin-row',
+						'utm_campaign' => 'admin',
+					),
+					'https://wpcharitable.com/extensions/'
+				)
+			);
 
 			$links[] = '<a href="' . $extensions_link . '">' . __( 'Extensions', 'charitable' ) . '</a>';
 
@@ -407,7 +410,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		 *
 		 * @since  1.2.0
 		 *
-		 * @return void
+		 * @param  string $context Media buttons context.
+		 * @return string
 		 */
 		public function remove_jquery_ui_styles_nf( $context ) {
 			wp_dequeue_style( 'jquery-smoothness' );
@@ -425,8 +429,6 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			if ( ! wp_verify_nonce( $_GET['_charitable_export_nonce'], 'charitable_export_donations' ) ) {
 				return false;
 			}
-
-			require_once( charitable()->get_path( 'admin' ) . 'reports/class-charitable-export-donations.php' );
 
 			/**
 			 * Filter the donation export arguments.
@@ -457,6 +459,48 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			exit();
 		}
+
+		/**
+		 * Export campaigns.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return false|void Returns false if the export failed. Exits otherwise.
+		 */
+		public function export_campaigns() {
+			if ( ! wp_verify_nonce( $_GET['_charitable_export_nonce'], 'charitable_export_campaigns' ) ) {
+				return false;
+			}
+
+			/**
+			 * Filter the donation export arguments.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array $args Export arguments.
+			 */
+			$export_args = apply_filters( 'charitable_campaigns_export_args', array(
+				'start_date'  => $_GET['start_date'],
+				'end_date'    => $_GET['end_date'],
+				'status'      => $_GET['status'],
+				'report_type' => $_GET['report_type'],
+			) );
+
+			/**
+			 * Filter the export class name.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string $report_type The type of report.
+			 * @param array  $args        Export arguments.
+			 */
+			$export_class = apply_filters( 'charitable_campaigns_export_class', 'Charitable_Export_Campaigns', $_GET['report_type'], $export_args );
+
+			new $export_class( $export_args );
+
+			exit();
+		}
+
 
 		/**
 		 * Returns an array of screen IDs where the Charitable scripts should be loaded.
