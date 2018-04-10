@@ -20,10 +20,11 @@ ob_start();
 	<h1 class="screen-reader-text"><?php echo get_admin_page_title(); ?></ha>
 	<h2 class="nav-tab-wrapper">
 		<?php foreach ( $sections as $tab => $name ) : ?>
-			<a href="<?php echo esc_url( add_query_arg( array( 'tab' => $tab ), admin_url( 'admin.php?page=charitable-settings' ) ) ); ?>" class="nav-tab <?php echo $active_tab == $tab ? 'nav-tab-active' : '' ?>"><?php echo $name ?></a>
+			<a href="<?php echo esc_url( add_query_arg( array( 'tab' => $tab ), admin_url( 'admin.php?page=charitable-settings' ) ) ); ?>" class="nav-tab <?php echo $active_tab == $tab ? 'nav-tab-active' : ''; ?>"><?php echo $name; ?></a>
 		<?php endforeach ?>
 	</h2>
 	<?php if ( $group != $active_tab ) : ?>
+		<?php /* translators: %s: active settings tab label */ ?>
 		<p><a href="<?php echo esc_url( add_query_arg( array( 'tab' => $active_tab ), admin_url( 'admin.php?page=charitable-settings' ) ) ); ?>"><?php printf( __( '&#8592; Return to %s', 'charitable' ), $sections[ $active_tab ] ); ?></a></p>
 	<?php endif ?>
 	<?php
