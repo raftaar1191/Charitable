@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Settings' ) ) :
 
@@ -101,7 +103,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @since  1.3.0
 		 *
-		 * @param  string[] $tabs
+		 * @param  string[] $tabs The existing set of tabs.
 		 * @return string[]
 		 */
 		public function maybe_add_extensions_tab( $tabs ) {
@@ -189,7 +191,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  array $values
+		 * @param  array $values The submitted values.
 		 * @return string
 		 */
 		public function sanitize_settings( $values ) {
@@ -442,19 +444,19 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 
 			switch ( $field_type ) {
 
-				case 'checkbox' :
+				case 'checkbox':
 					$value = intval( array_key_exists( $key, $submitted ) && 'on' == $submitted[ $key ] );
 					break;
 
-				case 'multi-checkbox' :
+				case 'multi-checkbox':
 					$value = isset( $submitted[ $key ] ) ? $submitted[ $key ] : array();
 					break;
 
-				case '' :
-				case 'heading' :
+				case '':
+				case 'heading':
 					return $value;
 
-				default :
+				default:
 					if ( ! array_key_exists( $key, $submitted ) ) {
 						return $value;
 					}
@@ -501,7 +503,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 * @return array
 		 */
 		private function get_section_submitted_values( $section, $submitted ) {
-			$values = array();
+			$values      = array();
 			$form_fields = $this->get_fields();
 
 			if ( ! isset( $form_fields[ $section ] ) ) {
@@ -563,6 +565,8 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/* DEPRECATED FUNCTIONS */
 
 		/**
+		 * Get the update messages.
+		 *
 		 * @deprecated 1.7.0
 		 *
 		 * @since 1.4.13 Deprecated.

@@ -20,9 +20,9 @@ endif;
 
 ?>
 <div class="charitable-form-fields secondary">
-    <?php $form->view()->render_field( $fields['meta_fields'], 'meta_fields' ) ?>
+    <?php $form->view()->render_field( $fields['meta_fields'], 'meta_fields' ); ?>
 </div>
 <div class="charitable-form-field charitable-submit-field">
-    <a href="<?php echo esc_url( $cancel_url ) ?>" class="alignright" title="<?php esc_attr_e( 'Return to donation page', 'charitable' ) ?>" tabindex="401"><?php _e( 'Cancel', 'charitable' ) ?></a>
+    <a href="<?php echo esc_url( $cancel_url ); ?>" class="alignright" title="<?php esc_attr_e( 'Return to donation page', 'charitable' ); ?>" tabindex="401"><?php _e( 'Cancel', 'charitable' ); ?></a>
     <button class="button button-primary" type="submit" name="donate" tabindex="400"><?php echo $button_text ?></button>
 </div><!-- .charitable-submit-field -->

@@ -27,20 +27,15 @@ $ended       = charitable_get_campaign( $post->ID )->has_ended();
 <div class="charitable-metabox charitable-metabox-wrap">
 	<?php
 	if ( empty( $benefactors ) ) :
-
-		if ( $ended ) : ?>
-
-			<p><?php _e( 'You did not add any contribution rules.', 'charitable' ) ?></p>
-
+		if ( $ended ) :
+		?>
+			<p><?php _e( 'You did not add any contribution rules.', 'charitable' ); ?></p>
 		<?php else : ?>
-
-			<p><?php _e( 'You have not added any contribution rules yet.', 'charitable' ) ?></p>
-
+			<p><?php _e( 'You have not added any contribution rules yet.', 'charitable' ); ?></p>
 		<?php
 		endif;
 	else :
 		foreach ( $benefactors as $benefactor ) :
-
 			$benefactor_object = Charitable_Benefactor::get_object( $benefactor, $extension );
 
 			if ( $benefactor_object->is_active() ) {
@@ -50,22 +45,24 @@ $ended       = charitable_get_campaign( $post->ID )->has_ended();
 			} else {
 				$active_class = 'charitable-benefactor-inactive';
 			}
-
 			?>
-			<div class="charitable-metabox-block charitable-benefactor <?php echo $active_class ?>">
-				<?php do_action( 'charitable_campaign_benefactor_meta_box', $benefactor_object, $extension ) ?>
+			<div class="charitable-metabox-block charitable-benefactor <?php echo $active_class; ?>">
+				<?php do_action( 'charitable_campaign_benefactor_meta_box', $benefactor_object, $extension ); ?>
 			</div>
 			<?php
 
 		endforeach;
 	endif;
 
-	charitable_admin_view( 'metaboxes/campaign-benefactors/form', array( 'benefactor' => null, 'extension' => $extension ) ); 
+	charitable_admin_view( 'metaboxes/campaign-benefactors/form', array(
+		'benefactor' => null,
+		'extension'  => $extension,
+	) );
 
 	if ( ! $ended ) :
 	?>
-		<p><a href="#" class="button" data-charitable-toggle="campaign_benefactor__0"><?php _e( '+ Add New Contribution Rule', 'charitable' ) ?></a></p> 
+		<p><a href="#" class="button" data-charitable-toggle="campaign_benefactor__0"><?php _e( '+ Add New Contribution Rule', 'charitable' ); ?></a></p>
 	<?php
 	endif;
-	?>    
+	?>
 </div>

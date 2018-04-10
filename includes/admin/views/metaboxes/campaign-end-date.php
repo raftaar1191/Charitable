@@ -20,8 +20,8 @@ $description 		= array_key_exists( 'description', $view_args ) ? $view_args['des
 	<label for="campaign_end_date"><?php echo $title ?></label>
 	<input type="text" id="campaign_end_date" name="_campaign_end_date" placeholder="&#8734;" class="charitable-datepicker" data-date="<?php echo $end_date_formatted ?>" />
 	<?php if ( $end_date ) : ?>
-		<span class="charitable-end-time"><?php echo date_i18n( '@ G:i A', $end_time ) ?></span>
-		<input type="hidden" id="campaign_end_time" name="_campaign_end_time" value="<?php echo esc_attr( date_i18n( 'H:i:s', $end_time ) ) ?>" />
+		<span class="charitable-end-time"><?php echo date_i18n( '@ G:i A', $end_time ); ?></span>
+		<input type="hidden" id="campaign_end_time" name="_campaign_end_time" value="<?php echo esc_attr( date_i18n( 'H:i:s', $end_time ) ); ?>" />
 	<?php else : ?>
 		<span class="charitable-end-time" style="display: none;">=</span>
 		<input type="hidden" id="campaign_end_time" name="_campaign_end_time" value="0" />
