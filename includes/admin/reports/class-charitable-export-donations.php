@@ -10,7 +10,9 @@
  */
 
 /* Exit if accessed directly */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 
@@ -116,8 +118,13 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 * @return string[]
 		 */
 		protected function get_csv_columns() {
-			$non_field_columns = array( 'campaign_id' => '', 'campaign_name' => '', 'amount' => '' );
-			$default_columns   = array(
+			$non_field_columns = array(
+				'campaign_id'   => '',
+				'campaign_name' => '',
+				'amount'        => '',
+			);
+
+			$default_columns = array(
 				'donation_id'   => __( 'Donation ID', 'charitable' ),
 				'campaign_id'   => __( 'Campaign ID', 'charitable' ),
 				'campaign_name' => __( 'Campaign Title', 'charitable' ),
@@ -143,8 +150,8 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 			/**
 			 * Filter the list of columns in the export.
 			 *
-			 * As of Charitable 1.5, the recommended way to add or remove columns to the 
-			 * donation export is through the Donation Fields API. This filter is primarily 
+			 * As of Charitable 1.5, the recommended way to add or remove columns to the
+			 * donation export is through the Donation Fields API. This filter is primarily
 			 * provided for backwards compatibility and also provides a way to change export
 			 * column headers without changing the label for the Donation Field.
 			 *
@@ -205,7 +212,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 			}
 
 			if ( strlen( $this->args['end_date'] ) ) {
-				$query_args['end_date'] = charitable_sanitize_date( $this->args['end_date'], 'Y-m-d 00:00:00' );
+				$query_args['end_date'] = charitable_sanitize_date( $this->args['end_date'], 'Y-m-d 23:59:59' );
 			}
 
 			if ( 'all' != $this->args['campaign_id'] ) {
@@ -216,8 +223,23 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 				$query_args['status'] = $this->args['status'];
 			}
 
-			/**@deprecated filter name with misspelling */
+			/**
+			 * Filter name with misspelling.
+			 *
+			 * @deprecated 1.7.0
+			 *
+			 * @since 1.3.5
+			 */
 			$query_args = apply_filters( 'chairtable_export_donations_query_args', $query_args, $this->args );
+
+			/**
+			 * Filter donations query arguments.
+			 *
+			 * @since 1.3.5
+			 *
+			 * @param array $query_args The query arguments.
+			 * @param array $args       The export arguments.
+			 */
 			$query_args = apply_filters( 'charitable_export_donations_query_args', $query_args, $this->args );
 
 			return charitable_get_table( 'campaign_donations' )->get_donations_report( $query_args );
