@@ -22,7 +22,13 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 	 *
 	 * @since 1.5.0
 	 *
-	 * @property string $field
+	 * @property string         $field
+	 * @property string         $label
+	 * @property string         $data_type
+	 * @property false|callable $value_callback
+	 * @property boolean|array  $admin_form
+	 * @property boolean        $show_in_export
+	 * @property boolean|array  $email_tag
 	 */
 	abstract class Charitable_Field implements Charitable_Field_Interface {
 

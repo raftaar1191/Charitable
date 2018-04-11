@@ -2,10 +2,12 @@
 /**
  * Renders the donation details meta box for the Donation post type.
  *
- * @author  Studio 164a
- * @since   1.0.0
- * @version 1.5.0
- * @package Charitable/Admin Views/Metaboxes
+ * @author    Eric Daams
+ * @package   Charitable/Admin Views/Metaboxes
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 global $post;
@@ -20,7 +22,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 	<div class="donation-banner-wrapper">
 		<div class="donation-banner">
 			<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ); ?></h3>
-			<span class="donation-date"><?php echo $date ?></span>
+			<span class="donation-date"><?php echo $date; ?></span>
 			<a href="<?php echo esc_url( add_query_arg( 'show_form', true ) ); ?>" class="donation-edit-link"><?php _e( 'Edit Donation', 'charitable' ); ?></a>
 		</div>
 	</div>
@@ -36,7 +38,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 			 * Display additional details about the donor.
 			 *
 			 * @since 1.0.0
-	 		 *
+			 *
 			 * @param Charitable_Donor    $donor    The donor object.
 			 * @param Charitable_Donation $donation The donation object.
 			 */
@@ -94,7 +96,7 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 						 * @param Charitable_Donation $donation          The Donation object.
 						 */
 						echo apply_filters( 'charitable_donation_details_table_campaign_donation_amount', charitable_format_money( $campaign_donation->amount ), $campaign_donation, $donation )
-					?>					
+					?>
 				</td>
 			</tr>
 		<?php endforeach ?>
@@ -112,18 +114,20 @@ $date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H
 			?>
 			<tr>
 				<th><?php _e( 'Total', 'charitable' ); ?></th>
-				<td><?php
-					/**
-					 * Filter the total donation amount.
-					 *
-					 * @since 1.5.0
-					 *
-					 * @param string              $total    The default amount to display.
-					 * @param float               $amount   The total, unformatted.
-					 * @param Charitable_Donation $donation The Donation object.
-					 */
-					echo apply_filters( 'charitable_donation_details_table_total', charitable_format_money( $amount ), $amount, $donation )
-				?></td>
+				<td>
+					<?php
+						/**
+						 * Filter the total donation amount.
+						 *
+						 * @since 1.5.0
+						 *
+						 * @param string              $total    The default amount to display.
+						 * @param float               $amount   The total, unformatted.
+						 * @param Charitable_Donation $donation The Donation object.
+						 */
+						echo apply_filters( 'charitable_donation_details_table_total', charitable_format_money( $amount ), $amount, $donation )
+					?>
+				</td>
 			</tr>
 			<?php
 				/**

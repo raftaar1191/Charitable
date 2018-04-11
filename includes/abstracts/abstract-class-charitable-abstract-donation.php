@@ -365,7 +365,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		/**
 		 * Return a comma separated list of categories for the campaigns that were donated to.
 		 *
-		 * @uses   Charitalbe_Donation::get_campaign_categories_donated_to
+		 * @uses   Charitable_Donation::get_campaign_categories_donated_to
 		 *
 		 * @since  1.5.0
 		 *
@@ -375,6 +375,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$categories = $this->get_campaign_categories_donated_to( 'campaign_category', array(
 				'fields' => 'names',
 			) );
+
+			if ( is_wp_error( $categories ) ) {
+				return '';
+			}
 
 			return implode( ', ', $categories );
 		}
@@ -424,7 +428,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string $format
+		 * @param  string $format The specified date format.
 		 * @return string
 		 */
 		public function get_date( $format = '' ) {

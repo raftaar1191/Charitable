@@ -42,7 +42,6 @@ add_action( 'edit_form_after_title', array( $registry->get( 'campaign_meta_boxes
  * @see Charitable_Campaign_Meta_Boxes::wrap_editor()
  */
 add_action( 'add_meta_boxes', array( $registry->get( 'campaign_meta_boxes' ), 'add_meta_boxes' ) );
-// add_filter( 'get_user_option_meta-box-order_campaign', '__return_false' );
 
 /**
  * Save the campaign.
