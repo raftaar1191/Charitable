@@ -162,23 +162,7 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 			 */
 			$filtered = apply_filters( 'charitable_export_donations_columns', $default_columns, $this->args );
 
-			/* Get all fields that were removed either by the filter or the Donation Fields API. */
-			$removed = array_merge(
-				array_diff_key( $default_columns, $this->fields, $non_field_columns ), /* Donation Fields API */
-				array_diff_key( $default_columns, $filtered ) /* Filter */
-			);
-
-			/* Get all fields that were added either by the filter or the Donation Fields API. */
-			$added = array_merge(
-				array_diff_key( $this->fields, $default_columns ), /* Donation Fields API */
-				array_diff_key( $filtered, $default_columns ) /* Filter */
-			);
-
-			/* Get all of the default columns that were not removed. */
-			$columns = array_diff_key( $default_columns, $removed );
-
-			/* Finally, merge with all added columns and return. */
-			return array_merge( $columns, $added );
+			return $this->get_merged_fields( $default_columns, $this->fields, $non_field_columns, $filtered );
 		}
 
 		/**

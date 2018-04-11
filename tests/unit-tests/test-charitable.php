@@ -14,9 +14,7 @@ class Test_Charitable extends Charitable_UnitTestCase {
      * @covers Charitable::start()
      */
     function test_static_instance() {
-        $charitable = new Charitable();
-        $charitable->start();
-        $this->assertClassHasStaticAttribute( 'instance', $charitable );
+        $this->assertClassHasStaticAttribute( 'instance', 'Charitable' );
     }
 
     /**
