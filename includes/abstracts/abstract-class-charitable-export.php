@@ -149,6 +149,37 @@ if ( ! class_exists( 'Charitable_Export' ) ) :
 		}
 
 		/**
+		 * Get merged fields.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $default_columns   The default set of columns to include in the export.
+		 * @param  array $fields            A set of fields retrieved from the Campaigns/Donations Fields API.
+		 * @param  array $non_field_columns Extra fields not include in the Fields API.
+		 * @param  array $filtered          The default columns after they have been passed through a filter.
+		 * @return array
+		 */
+		protected function get_merged_fields( $default_columns, $fields, $non_field_columns, $filtered ) {
+			/* Get all fields that were removed either by the filter or the Fields API. */
+			$removed = array_merge(
+				array_diff_key( $default_columns, $fields, $non_field_columns ), /* Fields API */
+				array_diff_key( $default_columns, $filtered ) /* Filter */
+			);
+
+			/* Get all fields that were added either by the filter or the Fields API. */
+			$added = array_merge(
+				array_diff_key( $fields, $default_columns ), /* Fields API */
+				array_diff_key( $filtered, $default_columns ) /* Filter */
+			);
+
+			/* Get all of the default columns that were not removed. */
+			$columns = array_diff_key( $default_columns, $removed );
+
+			/* Finally, merge with all added columns and return. */
+			return array_merge( $columns, $added );
+		}
+
+		/**
 		 * Return the CSV column headers.
 		 *
 		 * The columns are set as a key=>label array, where the key is used to retrieve the data for that column.

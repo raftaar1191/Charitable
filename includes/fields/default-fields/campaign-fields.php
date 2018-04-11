@@ -27,6 +27,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $fields The multi-dimensional array of keys in $key => $args format.
  */
 return apply_filters( 'charitable_default_campaign_fields', array(
+	'ID'                       => array(
+		'label'          => __( 'Campaign ID', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => 'charitable_get_campaign_post_field',
+		'admin_form'     => false,
+		'email_tag'      => false,
+		'show_in_export' => true,
+	),
 	'description'              => array(
 		'label'          => __( 'Description', 'charitable' ),
 		'data_type'      => 'meta',
@@ -116,6 +124,22 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 		),
 		'show_in_export' => true,
 	),
+	'post_date'                => array(
+		'label'          => __( 'Date Created', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => 'charitable_get_campaign_post_field',
+		'admin_form'     => false,
+		'email_tag'      => false,
+		'show_in_export' => true,
+	),
+	'post_author'              => array(
+		'label'          => __( 'Campaign Creator ID', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => 'charitable_get_campaign_post_field',
+		'admin_form'     => false,
+		'email_tag'      => false,
+		'show_in_export' => true,
+	),
 	'campaign_creator_name'    => array(
 		'label'          => __( 'Campaign Creator', 'charitable' ),
 		'data_type'      => 'core',
@@ -151,6 +175,14 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 		),
 		'show_in_export' => false,
 	),
+	'donated_amount'           => array(
+		'label'          => __( 'Amount Donated', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => false,
+		'show_in_export' => true,
+	),
 	'donated_amount_formatted' => array(
 		'label'          => __( 'Amount Donated', 'charitable' ),
 		'data_type'      => 'core',
@@ -161,6 +193,26 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'description' => __( 'Display the total amount donated to the campaign', 'charitable' ),
 			'preview'     => '$16,523',
 		),
+		'show_in_export' => false,
+	),
+	'percent_donated'          => array(
+		'label'          => __( 'Percent Donated', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'tag'         => 'campaign_percent_donated',
+			'description' => __( 'Display the percentage donated to the campaign', 'charitable' ),
+			'preview'     => '34%',
+		),
+		'show_in_export' => false,
+	),
+	'percent_donated_raw'      => array(
+		'label'          => __( 'Percent Donated', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => false,
 		'show_in_export' => true,
 	),
 	'donor_count'              => array(
@@ -173,6 +225,14 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'description' => __( 'Display the number of campaign donors', 'charitable' ),
 			'preview'     => 23,
 		),
+		'show_in_export' => true,
+	),
+	'status'                   => array(
+		'label'          => __( 'Campaign Status', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'admin_form'     => false,
+		'email_tag'      => false,
 		'show_in_export' => true,
 	),
 	'permalink'                => array(

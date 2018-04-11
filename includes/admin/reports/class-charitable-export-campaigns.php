@@ -50,7 +50,7 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 		protected $statuses;
 
 		/**
-		 * Exportable donation fields.
+		 * Exportable campaign fields.
 		 *
 		 * @since 1.6.0
 		 *
@@ -85,10 +85,12 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 		 */
 		public function __construct( $args ) {
 			$this->defaults = array(
-				'start_date'  => '',
-				'end_date'    => '',
-				'status'      => '',
+				'start_date' => '',
+				'end_date'   => '',
+				'status'     => '',
 			);
+
+			$this->fields = array_map( array( $this, 'get_field_label' ), charitable()->campaign_fields()->get_export_fields() );
 
 			add_filter( 'charitable_export_data_key_value', array( $this, 'set_custom_field_data' ), 10, 3 );
 
@@ -106,83 +108,8 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 		 * @return mixed
 		 */
 		public function set_custom_field_data( $value, $key, $campaign_id ) {
-			switch ( $key ) {
-				case 'campaign_id':
-					$value = $campaign_id;
-					break;
-
-				case 'campaign_name':
-					$value = get_the_title( $campaign_id );
-					break;
-
-				case 'post_date':
-					$value = get_post_field( 'post_date', $campaign_id );
-					break;
-
-				case 'end_date':
-					$value = $this->get_campaign( $campaign_id )->get_end_date();
-					break;
-
-				case 'goal':
-					$value = $this->get_campaign( $campaign_id )->get_goal();
-					break;
-
-				case 'amount_raised':
-					$value = $this->get_campaign( $campaign_id )->get_donated_amount();
-					break;
-
-				case 'percentage_of_goal':
-					$value = number_format( $this->get_campaign( $campaign_id )->get_percent_donated_raw(), 2 );
-					break;
-
-				case 'status':
-					$value = $this->get_campaign( $campaign_id )->get_status();
-					break;
-
-				case 'campaign_creator':
-					$value = $this->get_campaign_creator( $campaign_id )->get_name();
-					break;
-
-				case 'campaign_creator_id':
-					$value = $this->get_campaign( $campaign_id )->get_campaign_creator();
-					break;
-
-				case 'campaign_creator_email':
-					$value = $this->get_campaign_creator( $campaign_id )->get_email();
-					break;
-
-				case 'campaign_creator_address':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_address' );
-					break;
-
-				case 'campaign_creator_address_2':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_address_2' );
-					break;
-
-				case 'campaign_creator_city':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_city' );
-					break;
-
-				case 'campaign_creator_state':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_state' );
-					break;
-
-				case 'campaign_creator_postcode':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_postcode' );
-					break;
-
-				case 'campaign_creator_country':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_country' );
-					break;
-
-				case 'campaign_creator_phone':
-					$value = $this->get_campaign_creator( $campaign_id )->get( 'donor_phone' );
-					break;
-
-				case 'campaign_creator_full_address':
-					$value = str_replace( '<br/>', PHP_EOL, $this->get_campaign_creator( $campaign_id )->get_address() );
-					break;
-
+			if ( array_key_exists( $key, $this->fields ) ) {
+				$value = $this->get_campaign( $campaign_id )->get( $key );
 			}
 
 			return $value;
@@ -198,27 +125,36 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 		 * @return string[]
 		 */
 		protected function get_csv_columns() {
-			return array(
-				'campaign_id'                   => __( 'Campaign ID', 'charitable' ),
-				'campaign_name'                 => __( 'Title', 'charitable' ),
-				'post_date'                     => __( 'Date Created', 'charitable' ),
-				'end_date'                      => __( 'End Date', 'charitable' ),
-				'goal'                          => __( 'Goal', 'charitable' ),
-				'amount_raised'                 => __( 'Amount Raised', 'charitable' ),
-				'percentage_of_goal'            => __( 'Percentage of Goal Raised', 'charitable' ),
-				'status'                        => __( 'Status', 'charitable' ),
-				'campaign_creator'              => __( 'Campaign Creator', 'charitable' ),
-				'campaign_creator_id'           => __( 'Campaign Creator ID', 'charitable' ),
-				'campaign_creator_email'        => __( 'Campaign Creator Email', 'charitable' ),
-				'campaign_creator_address'      => __( 'Campaign Creator Address', 'charitable' ),
-				'campaign_creator_address_2'    => __( 'Campaign Creator Address Line 2', 'charitable' ),
-				'campaign_creator_city'         => __( 'Campaign Creator City', 'charitable' ),
-				'campaign_creator_state'        => __( 'Campaign Creator State', 'charitable' ),
-				'campaign_creator_postcode'     => __( 'Campaign Creator Postcode', 'charitable' ),
-				'campaign_creator_country'      => __( 'Campaign Creator Country', 'charitable' ),
-				'campaign_creator_phone'        => __( 'Campaign Creator Phone', 'charitable' ),
-				'campaign_creator_full_address' => __( 'Campaign Creator Full Address', 'charitable' ),
+			$default_columns = array(
+				'ID'                     => __( 'Campaign ID', 'charitable' ),
+				'post_title'             => __( 'Title', 'charitable' ),
+				'post_date'              => __( 'Date Created', 'charitable' ),
+				'end_date'               => __( 'End Date', 'charitable' ),
+				'goal'                   => __( 'Goal', 'charitable' ),
+				'donated_amount'         => __( 'Amount Donated', 'charitable' ),
+				'percent_donated_raw'    => __( 'Percentage of Goal Raised', 'charitable' ),
+				'status'                 => __( 'Status', 'charitable' ),
+				'campaign_creator_name'  => __( 'Campaign Creator', 'charitable' ),
+				'campaign_creator_id'    => __( 'Campaign Creator ID', 'charitable' ),
+				'campaign_creator_email' => __( 'Campaign Creator Email', 'charitable' ),
 			);
+
+			/**
+			 * Filter the list of columns in the export.
+			 *
+			 * The recommended way to add or remove columns to the campaign export
+			 * is through the Campaign Fields API. This filter is provided as a way
+			 * to change export column headers without changing the label for the
+			 * Campaign Field.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array $columns List of columns.
+			 * @param array $args    Export args.
+			 */
+			$filtered = apply_filters( 'charitable_export_campaigns_columns', $default_columns, $this->args );
+
+			return $this->get_merged_fields( $default_columns, $this->fields, array(), $filtered );
 		}
 
 		/**
@@ -264,7 +200,8 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 		 */
 		protected function get_data() {
 			$query_args = array(
-				'fields' => 'ids',
+				'fields'         => 'ids',
+				'posts_per_page' => -1,
 			);
 
 			if ( strlen( $this->args['start_date'] ) || strlen( $this->args['end_date'] ) ) {
@@ -351,6 +288,18 @@ if ( ! class_exists( 'Charitable_Export_Campaigns' ) ) :
 			}
 
 			return $row;
+		}
+
+		/**
+		 * Return the field label for a registered Campaign Field.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  Charitable_Campaign_Field $field Instance of `Charitable_Campaign_Field`.
+		 * @return string
+		 */
+		protected function get_field_label( Charitable_Campaign_Field $field ) {
+			return $field->label;
 		}
 	}
 

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $fields The multi-dimensional array of keys in $key => $args format.
  */
 return apply_filters( 'charitable_default_donation_fields', array(
-	'donation_id' => array(
+	'donation_id'              => array(
 		'label'          => __( 'Donation ID', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Charitable_Donation::get_donation_id().
@@ -39,7 +39,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'preview'     => 164,
 		),
 	),
-	'first_name' => array(
+	'first_name'               => array(
 		'label'          => __( 'Donor First Name', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
