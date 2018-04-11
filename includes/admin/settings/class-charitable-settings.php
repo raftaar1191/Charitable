@@ -198,6 +198,10 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			$old_values = get_option( 'charitable_settings', array() );
 			$new_values = array();
 
+			if ( ! is_array( $old_values ) ) {
+				$old_values = array();
+			}
+
 			if ( ! is_array( $values ) ) {
 				$values = array();
 			}

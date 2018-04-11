@@ -457,7 +457,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			new $export_class( $export_args );
 
-			exit();
+			die();
 		}
 
 		/**
@@ -498,7 +498,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 			new $export_class( $export_args );
 
-			exit();
+			die();
 		}
 
 

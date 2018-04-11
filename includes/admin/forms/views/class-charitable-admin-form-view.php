@@ -239,7 +239,6 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 			switch ( $field['type'] ) {
 				case 'charitable-fieldset':
 					return 'metaboxes/field-types/fieldset';
-					break;
 
 				default:
 					return 'metaboxes/field-types/' . $field['type'];

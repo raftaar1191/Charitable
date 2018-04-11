@@ -64,21 +64,21 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		/**
 		 * The fundraising goal for the campaign.
 		 *
-		 * @var decimal
+		 * @var string|false
 		 */
 		private $goal;
 
 		/**
 		 * The donations made to this campaign.
 		 *
-		 * @var WP_Query
+		 * @var WP_Query|false
 		 */
 		private $donations;
 
 		/**
 		 * The amount donated to the campaign.
 		 *
-		 * @var int
+		 * @var int|false
 		 */
 		private $donated_amount;
 
@@ -262,14 +262,17 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		public function get_end_time() {
 			if ( ! isset( $this->end_time ) ) {
 
-				if ( $this->is_endless() ) {
+				$end_date = $this->get_meta( '_campaign_end_date' );
+
+				if ( ! $end_date ) {
 					return false;
 				}
 
 				/* The date is stored in the format of Y-m-d H:i:s. */
-				$date_time  = explode( ' ', $this->get_meta( '_campaign_end_date' ) );
-				$date       = explode( '-', $date_time[0] );
-				$time       = explode( ':', $date_time[1] );
+				$date_time = explode( ' ', $end_date );
+				$date      = explode( '-', $date_time[0] );
+				$time      = explode( ':', $date_time[1] );
+
 				$this->end_time = mktime( $time[0], $time[1], $time[2], $date[1], $date[2], $date[0] );
 			}
 
@@ -450,7 +453,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public function has_goal() {
-			return 0 < $this->get_meta( '_campaign_goal' );
+			return 0 < (float) $this->get_meta( '_campaign_goal' );
 		}
 
 		/**
@@ -465,7 +468,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return '';
 			}
 
-			return charitable_format_money( $this->get_meta( '_campaign_goal' ) );
+			return charitable_format_money( (string) $this->get_meta( '_campaign_goal' ) );
 		}
 
 		/**
@@ -645,7 +648,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return string
+		 * @return string|false The permalink URL or false if post does not exist.
 		 */
 		public function get_permalink() {
 			return get_permalink( $this->ID );
@@ -656,7 +659,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return strin
+		 * @return string
 		 */
 		public function get_admin_edit_link() {
 			$post_type_object = get_post_type_object( Charitable::CAMPAIGN_POST_TYPE );
@@ -696,7 +699,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  boolean $sanitize Whether to sanitize the amount. False by default.
-		 * @return string|float|WP_Error String if $sanitize is false. If $sanitize is true, return a float or WP_Error if the amount is not a string.
+		 * @return string String if $sanitize is false. If $sanitize is true, return a float or WP_Error if the amount is not a string.
 		 */
 		public function get_donated_amount( $sanitize = false ) {
 			$this->donated_amount = get_transient( self::get_donation_amount_cache_key( $this->ID ) );
