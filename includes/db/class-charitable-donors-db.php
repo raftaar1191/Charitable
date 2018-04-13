@@ -172,6 +172,26 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		}
 
 		/**
+		 * Return a donor's personal data, given their email address.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @global $wpdb WPDB
+		 * @param  string $email Donor email address.
+		 * @return array|object|null Database query results
+		 */
+		public function get_personal_data( $email ) {
+			global $wpdb;
+
+			return $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT donor_id, email, first_name, last_name FROM $this->table_name WHERE 'email' = %s;",
+					$email
+				)
+			);
+		}
+
+		/**
 		 * Count the number of donors with donations.
 		 *
 		 * @since  1.3.4
