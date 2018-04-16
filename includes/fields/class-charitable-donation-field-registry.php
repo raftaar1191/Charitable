@@ -151,6 +151,18 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		}
 
 		/**
+		 * Return all fields for a particular data type.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $data_type The data type.
+		 * @return array
+		 */
+		public function get_data_type_fields( $data_type ) {
+			return array_filter( $this->fields, array( new Charitable_Field_Filter( 'data_type', $data_type ), 'is_equal_to' ) );
+		}
+
+		/**
 		 * Set the default form section.
 		 *
 		 * @since  1.5.0

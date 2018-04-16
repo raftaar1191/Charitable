@@ -177,7 +177,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @since  1.6.0
 		 *
 		 * @global $wpdb WPDB
-		 * @param  string $email Donor email address.
+		 * @param  string $email   Donor email address.
 		 * @return array|object|null Database query results
 		 */
 		public function get_personal_data( $email ) {
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 
 			return $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT donor_id, email, first_name, last_name FROM $this->table_name WHERE 'email' = %s;",
+					"SELECT donor_id, email, first_name, last_name FROM {$this->table_name} WHERE email = %s;",
 					$email
 				)
 			);

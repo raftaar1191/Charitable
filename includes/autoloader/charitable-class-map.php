@@ -125,6 +125,7 @@ return array(
 	'Wp_Session' => 'libraries/wp-session/class-wp-session.php',
 	'Charitable_Licenses' => 'licensing/class-charitable-licenses.php',
 	'Charitable_Plugin_Updater' => 'licensing/class-charitable-plugin-updater.php',
+	'Charitable_Privacy' => 'privacy/class-charitable-privacy.php',
 	'Charitable_Ghost_Page' => 'public/class-charitable-ghost-page.php',
 	'Charitable_Notices' => 'public/class-charitable-notices.php',
 	'Charitable_Public' => 'public/class-charitable-public.php',

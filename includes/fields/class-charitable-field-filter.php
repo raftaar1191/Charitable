@@ -39,14 +39,25 @@ if ( ! class_exists( 'Charitable_Field_Filter' ) ) :
 		protected $property;
 
 		/**
+		 * Property value to compare against.
+		 *
+		 * @since 1.6.0
+		 *
+		 * @var   mixed
+		 */
+		protected $value;
+
+		/**
 		 * Sets up the filter with the property that will be used for the filter.
 		 *
 		 * @since 1.6.0
 		 *
-		 * @param  string $property The property to be used for the filter.
+		 * @param string $property The property to be used for the filter.
+		 * @param mixed  $value   A value to compare against.
 		 */
-		public function __construct( $property ) {
+		public function __construct( $property, $value = '' ) {
 			$this->property = $property;
+			$this->value    = $value;
 		}
 
 		/**
@@ -71,6 +82,18 @@ if ( ! class_exists( 'Charitable_Field_Filter' ) ) :
 		 */
 		public function is_not_false( Charitable_Field $field ) {
 			return false !== $field->{$this->property};
+		}
+
+		/**
+		 * Returns whether the value of the property for the given field is equal to the passed value.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  Charitable_Field $field Instance of `Charitable_Field`.
+		 * @return boolean
+		 */
+		public function is_equal_to( Charitable_Field $field ) {
+			return $this->value === $field->{$this->property};
 		}
 	}
 
