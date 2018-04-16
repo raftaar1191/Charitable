@@ -848,7 +848,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 * @since   1.0.0
 		 *
 		 * @param   array $submitted The submitted values.
-		 * @param   array $keys The keys of fields that are to be updated.
+		 * @param   array $keys      The keys of fields that are to be updated.
 		 * @return  int Number of fields updated.
 		 */
 		public function update_user_meta( $submitted, $keys ) {
