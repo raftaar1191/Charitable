@@ -225,6 +225,39 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 
 			return $wpdb->get_var( $wpdb->prepare( $sql, $statuses ) );
 		}
+
+		/**
+		 * Erase personal data for given donor IDs.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int|int[] $donor_id The donor IDs.
+		 * @return ?
+		 */
+		public function erase_donor_data( $donor_id ) {
+			global $wpdb;
+
+			if ( ! is_array( $donor_id ) ) {
+				$donor_id = array( $donor_id );
+			}
+
+			/* Filter out any non absolute integers. */
+			$donor_id     = array_filter( $donor_id, 'absint' );
+			$placeholders = charitable_get_query_placeholders( count( $donor_id ), '%d' );
+			$parameters   = array_merge(
+				array( wp_privacy_anonymize_data( 'email' ) ),
+				$donor_id
+			);
+
+			return $wpdb->query(
+				$wpdb->prepare(
+					"UPDATE {$this->table_name}
+					SET email = %s, first_name = '', last_name = ''
+					WHERE donor_id IN ( $placeholders )",
+					$parameters
+				)
+			);
+		}
 	}
 
 endif;

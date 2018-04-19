@@ -279,8 +279,10 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		public function update( $row_id, $data = array(), $where = '' ) {
 			global $wpdb;
 
-			// Row ID must be positive integer
+			// Row ID must be positive integer.
 			$row_id = absint( $row_id );
+
+			error_log( var_export( $row_id, true ) );
 
 			if ( empty( $row_id ) ) {
 				return false;

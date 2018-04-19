@@ -156,7 +156,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 * @since  1.6.0
 		 *
 		 * @param  string $data_type The data type.
-		 * @return array
+		 * @return Charitable_Donation_Field[]
 		 */
 		public function get_data_type_fields( $data_type ) {
 			return array_filter( $this->fields, array( new Charitable_Field_Filter( 'data_type', $data_type ), 'is_equal_to' ) );

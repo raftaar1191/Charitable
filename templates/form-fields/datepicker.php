@@ -48,14 +48,14 @@ wp_add_inline_script( 'jquery-ui-datepicker', "jQuery(document).ready( function(
 wp_enqueue_style( 'charitable-datepicker' );
 
 ?>
-<div id="charitable_field_<?php echo $field['key'] ?>" class="<?php echo $classes ?>">
+<div id="charitable_field_<?php echo esc_attr( $field['key'] ); ?>" class="<?php echo $classes; ?>">
 	<?php if ( isset( $field['label'] ) ) : ?>
-		<label for="charitable_field_<?php echo $field['key'] ?>_element">
-			<?php echo $field['label'] ?>
+		<label for="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_element">
+			<?php echo $field['label']; ?>
 			<?php if ( $is_required ) : ?>
 				<abbr class="required" title="required">*</abbr>
 			<?php endif ?>
 		</label>
 	<?php endif ?>
-	<input type="text" class="datepicker" name="<?php echo $field['key'] ?>" value="<?php echo $value ?>" id="charitable_field_<?php echo $field['key'] ?>_element" <?php echo charitable_get_arbitrary_attributes( $field ) ?>/>
+	<input type="text" class="datepicker" name="<?php echo esc_attr( $field['key'] ); ?>" value="<?php echo esc_attr( $value ); ?>" id="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_element" <?php echo charitable_get_arbitrary_attributes( $field ); ?>/>
 </div>
