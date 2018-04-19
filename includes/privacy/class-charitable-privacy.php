@@ -39,7 +39,15 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 * @since  1.6.0
 		 */
 		public function __construct() {
-			add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_exporter' ), 10, 2 );
+			if ( ! function_exists( 'wp_privacy_anonymize_data' ) ) {
+				return;
+			}
+
+			/* Register our data exporter. */
+			add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_exporter' ) );
+
+			/* Register our data eraser. */
+			add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_eraser' ) );
 		}
 
 		/**
@@ -57,6 +65,23 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 			);
 
 			return $exporters;
+		}
+
+		/**
+		 * Register the data eraser.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $erasers The list of registered data erasers.
+		 * @return array
+		 */
+		public function register_eraser( $erasers ) {
+			return array_merge( $erasers, array(
+				array(
+					'eraser_friendly_name' => __( 'Charitable Donor Data Eraser', 'charitable' ),
+					'callback'             => array( $this, 'erase_user_data' ),
+				),
+			) );
 		}
 
 		/**
@@ -121,14 +146,51 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		}
 
 		/**
-		 * Anonymize user.
+		 * Remove a user's personal data.
 		 *
 		 * @since  1.6.0
 		 *
 		 * @param  string $email The user's email address.
+		 * @param  int    $page  The page of data to retrieve.
 		 * @return boolean
 		 */
-		public function anonymize( $email ) {
+		public function erase_user_data( $email, $page = 1 ) {
+			/* TODO: Increment this. */
+			$this->retained = 0;
+			$this->removed  = 0;
+
+			/* 1. Remove registered donor meta. */
+			$user = get_user_by( 'email', $email );
+
+			if ( $user instanceof WP_User ) {
+				$this->remove_registered_donor_personal_data( $user );
+			}
+
+			/* 2. Remove donor profile data. */
+			$profiles = charitable_get_table( 'donors' )->get_personal_data( $email );
+
+			if ( is_array( $profiles ) ) {
+				charitable_get_table( 'donors' )->erase_donor_data( wp_list_pluck( $profiles, 'donor_id' ) );
+			}
+
+			/* If there are no donor profiles, there are no donations. */
+			if ( empty( $profiles ) ) {
+				return;
+			}
+
+			/* 3. Donation donor meta */
+			if ( ! empty( $this->get_user_donation_fields() ) ) {
+				$donations = $this->get_donations_from_profiles( $profiles );
+
+				array_walk( $donations, array( $this, 'remove_donation_personal_data' ) );
+			}
+
+			return array(
+				'num_items_removed'  => 1,
+				'num_items_retained' => 0,
+				'messages'           => array(),
+				'done'               => true,
+			);
 		}
 
 		/**
@@ -171,14 +233,14 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 			}
 
 			/**
-			 * Filter the personal donor meta data for a particular registered donor.
+			 * Filter the personal donor meta data for a registered donor.
 			 *
 			 * @since 1.6.0
 			 *
 			 * @param array   $data Set of personal donor data.
 			 * @param WP_User $user An instance of `WP_User`.
 			 */
-			$data = apply_filters( 'charitable_privacy_export_personal_donor_profile_data', $data, $user );
+			$data = apply_filters( 'charitable_privacy_export_personal_registered_donor_data', $data, $user );
 
 			return array(
 				'item_id'     => 'user',
@@ -240,13 +302,15 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 			$meta = get_post_meta( $donation_id, 'donor', true );
 			$data = array();
 
-			foreach ( $this->user_donation_fields as $field_id => $field ) {
-				if ( array_key_exists( $field_id, $meta ) ) {
-					$data[] = array(
-						'name'  => $field->label,
-						'value' => $meta[ $field_id ],
-					);
+			foreach ( $this->get_user_donation_fields() as $field_id => $field ) {
+				if ( ! array_key_exists( $field_id, $meta ) ) {
+					continue;
 				}
+
+				$data[] = array(
+					'name'  => $field->label,
+					'value' => $meta[ $field_id ],
+				);
 			}
 
 			/**
@@ -269,11 +333,98 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		}
 
 		/**
+		 * Remove personal data for a registered donor.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  WP_User $user The instance of `WP_User`.
+		 * @return void
+		 */
+		protected function remove_registered_donor_personal_data( WP_User $user ) {
+			$data    = array();
+			$form    = new Charitable_Profile_Form;
+			$methods = array(
+				'get_user_fields',
+				'get_address_fields',
+				'get_social_fields',
+			);
+			$key_map = charitable_get_user_mapped_keys();
+
+			foreach ( $methods as $method ) {
+				$fields = call_user_func( array( $form, $method ) );
+
+				if ( ! is_array( $fields ) ) {
+					continue;
+				}
+
+				foreach ( $fields as $key => $field ) {
+					$key = array_key_exists( $key, $key_map ) ? $key_map[ $key ] : $key;
+
+					if ( ! $user->has_prop( $key ) ) {
+						continue;
+					}
+
+					/* Get the data type we will use for erasing this particular data field. */
+					$data_type = $this->get_field_data_type( (object) $field );
+
+					/**
+					 * Filter the placeholder data that will replace the personal data.
+					 *
+					 * @since 1.6.0
+					 *
+					 * @param string $data  The anonymous data.
+					 * @param mixed  $value The current value of the field.
+					 * @param string $key   The key of the field.
+					 * @param array  $field The field definition.
+					 */
+					$data = apply_filters( 'charitable_privacy_erasure_registered_user_data_prop_value', wp_privacy_anonymize_data( $data_type, $user->{$key} ), $user->{$key}, $key, $field );
+
+					update_user_meta( $user->ID, $key, $data );
+				}
+			}
+		}
+
+		/**
+		 * Remove personal data from a single donation.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $donation_id The donation ID.
+		 * @return void
+		 */
+		protected function remove_donation_personal_data( $donation_id ) {
+			$meta = get_post_meta( $donation_id, 'donor', true );
+
+			foreach ( $this->get_user_donation_fields() as $field_id => $field ) {
+				if ( ! array_key_exists( $field_id, $meta ) ) {
+					continue;
+				}
+
+				/* Get the data type we will use for erasing this particular data field. */
+				$data_type = $this->get_field_data_type( $field );
+
+				/**
+				 * Filter the placeholder data that will replace the personal data.
+				 *
+				 * @since 1.6.0
+				 *
+				 * @param string                    $data  The anonymous data.
+				 * @param mixed                     $value The current value of the field.
+				 * @param string                    $key   The key of the field.
+				 * @param Charitable_Donation_Field $field The field definition.
+				 */
+				$meta[ $field_id ] = apply_filters( 'charitable_privacy_erasure_donation_donor_data_prop_value', wp_privacy_anonymize_data( $data_type, $meta[ $field_id ] ), $meta[ $field_id ], $field_id, $field );
+			}
+
+			update_post_meta( $donation_id, 'donor', $meta );
+		}
+
+		/**
 		 * Get the user donation fields.
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return array
+		 * @return Charitable_Donation_Field[]
 		 */
 		protected function get_user_donation_fields() {
 			if ( ! isset( $this->user_donation_fields ) ) {
@@ -281,6 +432,63 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 			}
 
 			return $this->user_donation_fields;
+		}
+
+		/**
+		 * Return the donation IDs for one or more profiles.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  object[] $profiles The donor profiles.
+		 * @return int[]
+		 */
+		protected function get_donations_from_profiles( $profiles ) {
+			$donor_id = wp_list_pluck( $profiles, 'donor_id' );
+
+			return charitable_get_table( 'campaign_donations' )->get_distinct_ids( 'donation_id', $donor_id, 'donor_id' );
+		}
+
+		/**
+		 * Return the data type for a field.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  object $field The field attributes. This may be a Charitable_Donation_Field
+		 *                       instance, or a simple object cast from an array.
+		 * @return string
+		 */
+		protected function get_field_data_type( $field ) {
+			if ( isset( $field->type ) ) {
+				$type = $field->type;
+			} else {
+				$type = is_array( $field->donation_form ) ? $field->donation_form['type'] : $field->admin_form['type'];
+			}
+
+			switch ( $type ) {
+				case 'select':
+				case 'multi-checkbox':
+					$data_type = '';
+					break;
+
+				case 'textarea':
+				case 'editor':
+					$data_type = 'longtext';
+					break;
+
+				default:
+					$data_type = $type;
+			}
+
+			/**
+			 * Filter the data type to use for a field to be erased.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string $data_type The data type.
+			 * @param object $field     The field attributes. This may be a Charitable_Donation_Field
+			 *                          instance, or a simple object cast from an array.
+			 */
+			return apply_filters( 'charitable_privacy_erasure_field_data_type', $data_type, $field );
 		}
 	}
 

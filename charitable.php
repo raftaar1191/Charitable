@@ -263,6 +263,8 @@ if ( ! class_exists( 'Charitable' ) ) :
 				$this->registry->register_object( Charitable_Licenses::get_instance() );
 				$this->registry->register_object( Charitable_User_Dashboard::get_instance() );
 				$this->registry->register_object( Charitable_Locations::get_instance() );
+
+				$this->registry->register_object( new Charitable_Privacy );
 			}
 
 			return $this->registry;

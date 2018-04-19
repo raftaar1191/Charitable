@@ -12,11 +12,11 @@ if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form           = $view_args['form'];
-$field          = $view_args['field'];
-$classes        = esc_attr( $view_args['classes'] );
-$is_required    = isset( $field['required'] ) ? $field['required'] : false;
-$value          = isset( $field['value'] ) ? $field['value'] : '';
+$form        = $view_args['form'];
+$field       = $view_args['field'];
+$classes     = esc_attr( $view_args['classes'] );
+$is_required = isset( $field['required'] ) ? $field['required'] : false;
+$value       = isset( $field['value'] ) ? $field['value'] : '';
 
 /* Set the default pattern */
 if ( ! isset( $field['attrs']['pattern'] ) ) {
