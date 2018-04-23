@@ -29,7 +29,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 *
 		 * @since 1.6.0
 		 *
-		 * @var   string[]
+		 * @var   Charitable_Donation_Field[]
 		 */
 		protected $user_donation_fields;
 
@@ -195,7 +195,7 @@ Additionally, we may also collect the following information:
 		 *
 		 * @param  string $email The user's email address.
 		 * @param  int    $page  The page of data to retrieve.
-		 * @return boolean
+		 * @return array
 		 */
 		public function erase_user_data( $email, $page = 1 ) {
 			/* TODO: Increment this. */
@@ -218,7 +218,12 @@ Additionally, we may also collect the following information:
 
 			/* If there are no donor profiles, there are no donations. */
 			if ( empty( $profiles ) ) {
-				return;
+				return array(
+					'num_items_removed'  => 1,
+					'num_items_retained' => 0,
+					'messages'           => array(),
+					'done'               => true,
+				);
 			}
 
 			/* 3. Donation donor meta */
@@ -343,6 +348,11 @@ Additionally, we may also collect the following information:
 		 */
 		protected function get_personal_donation_meta_data( $donation_id ) {
 			$meta = get_post_meta( $donation_id, 'donor', true );
+
+			if ( ! is_array( $meta ) ) {
+				return array();
+			}
+
 			$data = array();
 
 			foreach ( $this->get_user_donation_fields() as $field_id => $field ) {
@@ -384,7 +394,6 @@ Additionally, we may also collect the following information:
 		 * @return void
 		 */
 		protected function erase_registered_donor_personal_data( WP_User $user ) {
-			$data    = array();
 			$form    = new Charitable_Profile_Form;
 			$methods = array(
 				'get_user_fields',

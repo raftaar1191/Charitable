@@ -249,8 +249,8 @@ function charitable_sanitize_date( $date, $return_format = 'U' ) {
  *
  * @since  1.5.0
  *
- * @param  int   $count       The number of placeholders to add.
- * @param  array $placeholder Type of placeholder to insert.
+ * @param  int    $count       The number of placeholders to add.
+ * @param  string $placeholder Type of placeholder to insert.
  * @return string
  */
 function charitable_get_query_placeholders( $count = 1, $placeholder = '%s' ) {
