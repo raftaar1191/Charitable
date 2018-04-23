@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			 * extensions that extend Charitable_Upgrade.
 			 */
 			if ( strlen( $db_version ) && strlen( $edge_version ) ) {
-				return $this->legacy_upgrade_mode( $db_version, $edge_version );				
+				return $this->legacy_upgrade_mode( $db_version, $edge_version );
 			}
 
 			$this->upgrade_actions = array(
@@ -199,8 +199,8 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $db_version   Current pre-update version.
-		 * @param  string $edge_version The version we're upgrading to.
+		 * @param  false|string $db_version   Current pre-update version.
+		 * @param  string       $edge_version The version we're upgrading to.
 		 * @return void
 		 */
 		public function legacy_upgrade_mode( $db_version, $edge_version ) {

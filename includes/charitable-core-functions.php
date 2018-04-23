@@ -159,7 +159,7 @@ function charitable_get_user_dashboard() {
  * @since  1.0.0
  *
  * @param  string $table The table key.
- * @return Charitable_DB|null
+ * @return mixed|null A child class of Charitable_DB if table exists. null otherwise.
  */
 function charitable_get_table( $table ) {
 	return charitable()->get_db_table( $table );
