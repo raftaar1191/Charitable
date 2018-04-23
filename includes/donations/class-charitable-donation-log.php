@@ -80,7 +80,7 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 		 */
 		public function add( $message ) {
 			$log = $this->get_meta_log();
-			
+
 			array_push( $log, array(
 				'time'    => time(),
 				'message' => $message,

@@ -206,7 +206,7 @@ Additionally, we may also collect the following information:
 			$user = get_user_by( 'email', $email );
 
 			if ( $user instanceof WP_User ) {
-				$this->remove_registered_donor_personal_data( $user );
+				$this->erase_registered_donor_personal_data( $user );
 			}
 
 			/* 2. Remove donor profile data. */
@@ -225,7 +225,7 @@ Additionally, we may also collect the following information:
 			if ( ! empty( $this->get_user_donation_fields() ) ) {
 				$donations = $this->get_donations_from_profiles( $profiles );
 
-				array_walk( $donations, array( $this, 'remove_donation_personal_data' ) );
+				array_walk( $donations, array( $this, 'erase_donation_personal_data' ) );
 			}
 
 			return array(
@@ -383,7 +383,7 @@ Additionally, we may also collect the following information:
 		 * @param  WP_User $user The instance of `WP_User`.
 		 * @return void
 		 */
-		protected function remove_registered_donor_personal_data( WP_User $user ) {
+		protected function erase_registered_donor_personal_data( WP_User $user ) {
 			$data    = array();
 			$form    = new Charitable_Profile_Form;
 			$methods = array(
@@ -435,7 +435,7 @@ Additionally, we may also collect the following information:
 		 * @param  int $donation_id The donation ID.
 		 * @return void
 		 */
-		protected function remove_donation_personal_data( $donation_id ) {
+		protected function erase_donation_personal_data( $donation_id ) {
 			$meta = get_post_meta( $donation_id, 'donor', true );
 
 			foreach ( $this->get_user_donation_fields() as $field_id => $field ) {
@@ -460,6 +460,10 @@ Additionally, we may also collect the following information:
 			}
 
 			update_post_meta( $donation_id, 'donor', $meta );
+			update_post_meta( $donation_id, 'data_erased', current_time( 'mysql', 0 ) );
+
+			$log = new Charitable_Donation_Log( $donation_id );
+			$log->add( __( 'Personal data erased.', 'charitable' ) );
 		}
 
 		/**

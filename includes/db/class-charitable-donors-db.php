@@ -7,11 +7,13 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.4
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 
@@ -29,7 +31,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 *
 		 * @var   string
 		 */
-		public $version = '1.5.4';
+		public $version = '1.6.0';
 
 		/**
 		 * The name of the primary column
@@ -71,7 +73,8 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				email varchar(100) NOT NULL,
 				first_name varchar(255) default '',
 				last_name varchar(255) default '',
-				date_joined datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+				date_joined datetime NOT NULL default '0000-00-00 00:00:00',
+				data_erased datetime default '0000-00-00 00:00:00',
 				PRIMARY KEY  (donor_id),
 				KEY user_id (user_id),                     
 				KEY email (email)
@@ -95,6 +98,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				'first_name'  => '%s',
 				'last_name'   => '%s',
 				'date_joined' => '%s',
+				'data_erased' => '%s',
 			);
 		}
 
@@ -113,6 +117,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				'first_name'  => '',
 				'last_name'   => '',
 				'date_joined' => date( 'Y-m-d H:i:s' ),
+				'data_erased' => '',
 			);
 		}
 
@@ -232,7 +237,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @since  1.6.0
 		 *
 		 * @param  int|int[] $donor_id The donor IDs.
-		 * @return ?
+		 * @return int|false Number of rows affected/selected or false on error.
 		 */
 		public function erase_donor_data( $donor_id ) {
 			global $wpdb;
@@ -245,14 +250,17 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			$donor_id     = array_filter( $donor_id, 'absint' );
 			$placeholders = charitable_get_query_placeholders( count( $donor_id ), '%d' );
 			$parameters   = array_merge(
-				array( wp_privacy_anonymize_data( 'email' ) ),
+				array(
+					wp_privacy_anonymize_data( 'email' ),
+					current_time( 'mysql', 0 ),
+				),
 				$donor_id
 			);
 
 			return $wpdb->query(
 				$wpdb->prepare(
 					"UPDATE {$this->table_name}
-					SET email = %s, first_name = '', last_name = ''
+					SET email = %s, first_name = '', last_name = '', data_erased = %s
 					WHERE donor_id IN ( $placeholders )",
 					$parameters
 				)
