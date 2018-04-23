@@ -10,14 +10,16 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 
 	/**
 	 * Charitable_Donor_Query
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_Donor_Query extends Charitable_Query {
 
@@ -47,6 +49,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				'campaign'        => 0,
 				'distinct_donors' => true,
 				'donor_id'        => 0,
+				'include_erased'  => 1,
 			) );
 
 			$this->args             = wp_parse_args( $args, $defaults );
@@ -61,9 +64,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Return list of donor IDs together with the number of donations they have made.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  object[]
+		 * @return object[]
 		 */
 		public function get_donors() {
 			$records = $this->query();
@@ -78,10 +81,10 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Returns a Charitable_Donor object for a database record.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @param 	object $record Database record for the donor.
-		 * @return  Charitable_Donor
+		 * @param  object $record Database record for the donor.
+		 * @return Charitable_Donor
 		 */
 		public function get_donor_object( $record ) {
 			$donation_id = isset( $record->donation_id ) ? $record->donation_id : false;
@@ -109,15 +112,15 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @return string
 		 */
 		public function select_donor_count() {
-			return "COUNT(DISTINCT d.donor_id)";
+			return 'COUNT(DISTINCT d.donor_id)';
 		}
 
 		/**
 		 * Set up fields query argument.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function setup_fields() {
 			if ( ! $this->get( 'distinct_donors', true ) ) {
@@ -139,9 +142,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up orderby query argument.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function setup_orderby() {
 			$orderby = $this->get( 'orderby', false );
@@ -151,19 +154,19 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			}
 
 			switch ( $orderby ) {
-				case 'date' :
+				case 'date':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 					break;
 
-				case 'donations' :
+				case 'donations':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
 					break;
 
-				case 'amount' :
+				case 'amount':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_donation_amount' ) );
 					break;
 
-				case 'name' :
+				case 'name':
 					add_filter( 'charitable_query_orderby', array( $this, 'orderby_name' ) );
 					break;
 			}
@@ -183,9 +186,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up query grouping.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function setup_grouping() {
 			if ( ! $this->get( 'distinct_donors', false ) ) {
@@ -198,11 +201,27 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		}
 
 		/**
+		 * Do not include donors that have had their data erased.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $where The WHERE SQL query part.
+		 * @return string
+		 */
+		public function where_donor_is_not_erased( $where ) {
+			if ( ! $this->get( 'include_erased' ) ) {
+				$where .= ' AND d.data_erased = "0000-00-00 00:00:00"';
+			}
+
+			return $where;
+		}
+
+		/**
 		 * Remove any hooks that have been attached by the class to prevent contaminating other queries.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function unhook_callbacks() {
 			remove_action( 'charitable_pre_query', array( $this, 'setup_fields' ) );
@@ -218,6 +237,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -229,9 +249,9 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		/**
 		 * Set up callbacks for WP_Query filters.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		protected function prepare_query() {
 			add_action( 'charitable_pre_query', array( $this, 'setup_fields' ) );
@@ -243,15 +263,16 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
+			add_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 
 		/**
 		 * Sanitize the campaign argument.
 		 *
-		 * @since   1.5.0
+		 * @since  1.5.0
 		 *
-		 * @return  int
+		 * @return int
 		 */
 		protected function sanitize_campaign() {
 			switch ( $this->args['campaign'] ) {

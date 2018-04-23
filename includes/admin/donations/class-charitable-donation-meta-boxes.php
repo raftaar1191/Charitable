@@ -271,13 +271,16 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 
 			$form = new Charitable_Admin_Donation_Form( charitable_get_donation( $donation_id ) );
 
-			if ( $form->validate_submission() ) {
-				$this->disable_automatic_emails();
-
-				charitable_create_donation( $form->get_donation_values() );
-
-				$this->reenable_automatic_emails();
+			if ( ! $form->validate_submission() ) {
+				wp_safe_redirect( admin_url( 'post-new.php?post_type=donation&show_form=1' ) );
+				exit();
 			}
+
+			$this->disable_automatic_emails();
+
+			charitable_create_donation( $form->get_donation_values() );
+
+			$this->reenable_automatic_emails();
 
 			update_post_meta( $donation_id, '_donation_manually_edited', true );
 

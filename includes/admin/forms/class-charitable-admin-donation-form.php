@@ -298,13 +298,13 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			$_POST['campaign_donations'] = array_filter( $campaign_donations, array( $this, 'filter_campaign_donation' ) );
 
 			if ( empty( $_POST['campaign_donations'] ) ) {
-				charitable_get_notices()->add_error( __( 'You must provide both a campaign and amount.', 'charitable' ) );
+				charitable_get_admin_notices()->add_error( __( 'You must provide both a campaign and amount.', 'charitable' ) );
 
 				$this->valid = false;
 			}
 
-			if ( ! $this->get_submitted_value( 'donor_id' ) && ! $this->get_submitted_value( 'email' ) ) {
-				charitable_get_notices()->add_error( __( 'Please choose an existing donor or provide an email address for a new donor.', 'charitable' ) );
+			if ( $this->donation_needs_email() ) {
+				charitable_get_admin_notices()->add_error( __( 'Please choose an existing donor or provide an email address for a new donor.', 'charitable' ) );
 
 				$this->valid = false;
 			}
@@ -590,17 +590,24 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		protected function get_all_donors() {
 			$donors = new Charitable_Donor_Query( array(
-				'number'  => -1,
-				'orderby' => 'name',
-				'order'   => 'ASC',
-				'output'  => 'raw',
-				'status'  => false, // Return any.
+				'number'         => -1,
+				'orderby'        => 'name',
+				'order'          => 'ASC',
+				'output'         => 'raw',
+				'status'         => false, // Return any.
+				'include_erased' => false,
 			) );
 
 			$donor_list = array();
 
 			foreach ( $donors as $donor ) {
-				$donor_list[ $donor->donor_id ] = trim( sprintf( '%s %s', $donor->first_name, $donor->last_name ) ) . ' - ' . $donor->email;
+				$name = trim( sprintf( '%s %s', $donor->first_name, $donor->last_name ) );
+
+				if ( charitable_is_valid_email_address( $donor->email ) ) {
+					$name .= ' - ' . $donor->email;
+				}
+
+				$donor_list[ $donor->donor_id ] = $name;
 			}
 
 			$list = array(
@@ -667,6 +674,27 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 */
 		protected function should_add_donation_receipt_checkbox() {
 			return ! $this->has_donation() && charitable_get_helper( 'emails' )->is_enabled_email( 'donation_receipt' );
+		}
+
+		/**
+		 * Return whether the donation needs an email address.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function donation_needs_email() {
+			if ( charitable_permit_donor_without_email() ) {
+				return false;
+			}
+
+			if ( strlen( $this->get_submitted_value( 'email', '' ) ) ) {
+				return false;
+			}
+
+			$donor_id = $this->get_submitted_value( 'donor_id' );
+
+			return 'new' == $donor_id || '' == $donor_id;
 		}
 	}
 
