@@ -48,6 +48,9 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 
 			/* Register our data eraser. */
 			add_filter( 'wp_privacy_personal_data_erasers', array( $this, 'register_eraser' ) );
+
+			/* Add our privacy policy content. */
+			add_action( 'admin_init', array( $this, 'add_privacy_policy_content' ) );
 		}
 
 		/**
@@ -82,6 +85,46 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 					'callback'             => array( $this, 'erase_user_data' ),
 				),
 			) );
+		}
+
+		/**
+		 * Add privacy policy content for Charitable.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return void
+		 */
+		public function add_privacy_policy_content() {
+			if ( ! function_exists( 'wp_add_privacy_policy_content' ) ) {
+				return;
+			}
+
+			/**
+			 * Filter the Charitable privacy policy content.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string $content The privacy policy content.
+			 */
+			$content = wp_kses_post( apply_filters( 'charitable_privacy_policy_content', wpautop( __( '
+We collect information about you during the donation process on our website. This information may include, but is not limited to, your name, address, phone number, credit card/payment details and any other details that might be requested from you for the purpose of processing your donations.
+
+Handling this data allows us to:
+
+- Send you important account/donation/service information.
+- Respond to your queries, refund requests or complaints.
+- Process payments and prevent fraudulent transactions. We do this on the basis of our legitimate organizational interests.
+- Set up and administer your account, provide technical and donor support, and to verify your identity.
+
+Additionally, we may also collect the following information:
+
+- Your donor comments if you choose to leave them on our website.
+- Cookies which are essential to keep track of your donation history whilst your session is active. This allows you to access your donation receipt without being a registered, logged in user.
+- Account email/password to allow access to your account, if you have one.
+- If you choose to create an account with us, your name, address, email and phone number, which will be used to populate the donation form for future donations.
+', 'charitable' ) ) ) );
+
+			wp_add_privacy_policy_content( 'Charitable', $content );
 		}
 
 		/**

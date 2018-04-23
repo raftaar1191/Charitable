@@ -16,10 +16,3 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-/**
- * Register the personal data exporter.
- *
- * @see Charitable_Privacy::register_exporter
- */
-add_filter( 'wp_privacy_personal_data_exporters', array( $this, 'register_exporter' ), 10, 2 );
