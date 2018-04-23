@@ -24,35 +24,45 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * The donor ID.
 		 *
-		 * @var     int
+		 * @since 1.0.0
+		 *
+		 * @var   int
 		 */
 		protected $donor_id;
 
 		/**
 		 * The donor data from charitable_donors table.
 		 *
-		 * @var     Object
+		 * @since 1.0.0
+		 *
+		 * @var   Object
 		 */
 		protected $data;
 
 		/**
 		 * The donation ID.
 		 *
-		 * @var     int
+		 * @since 1.0.0
+		 *
+		 * @var   int
 		 */
 		protected $donation_id;
 
 		/**
 		 * User object.
 		 *
-		 * @var     Charitable_User
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_User
 		 */
 		protected $user;
 
 		/**
 		 * Donation object.
 		 *
-		 * @var     Charitable_Donation|null
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_Donation|null
 		 */
 		protected $donation = null;
 
@@ -68,15 +78,18 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		/**
 		 * Donor meta.
 		 *
-		 * @var     mixed[]
+		 * @since 1.4.0
+		 *
+		 * @var   mixed[]
 		 */
 		protected $donor_meta;
 
 		/**
 		 * A mapping of user keys.
 		 *
-		 * @var 	string[]
-		 * @since  1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string[]
 		 */
 		protected $mapped_keys;
 
@@ -130,7 +143,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @since  1.2.4
 		 *
-		 * @param  string $key
+		 * @param  string $key The user property key.
 		 * @return mixed
 		 */
 		public function get( $key ) {
@@ -328,6 +341,17 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		}
 
 		/**
+		 * Checks whether the donor has a valid email address.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function has_valid_email() {
+			return charitable_is_valid_email_address( $this->get_donor_meta( 'email' ) );
+		}
+
+		/**
 		 * Return the donor's address.
 		 *
 		 * @since  1.2.4
@@ -343,10 +367,19 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  int $size
+		 * @param  int $size The side length to use for the avatar. The avatar is returned
+		 *                   as a square image, so this is used for both height and width.
 		 * @return string
 		 */
 		public function get_avatar( $size = 100 ) {
+			/**
+			 * Filter the donor avatar.
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param string           $avatar The avatar HTML code.
+			 * @param Charitable_Donor $donor  This instance of `Charitable_Donor`.
+			 */
 			return apply_filters( 'charitable_donor_avatar', $this->get_user()->get_avatar(), $this );
 		}
 
@@ -362,15 +395,13 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 				return $this->get_user()->get_location();
 			}
 
-			$meta = $this->get_donor_meta();
-			$city = isset( $meta['city'] ) ? $meta['city'] : '';
-			$state = isset( $meta['state'] ) ? $meta['state'] : '';
+			$meta    = $this->get_donor_meta();
+			$city    = isset( $meta['city'] ) ? $meta['city'] : '';
+			$state   = isset( $meta['state'] ) ? $meta['state'] : '';
 			$country = isset( $meta['country'] ) ? $meta['country'] : '';
-
-			$region = strlen( $city ) ? $city : $state;
+			$region  = strlen( $city ) ? $city : $state;
 
 			if ( strlen( $country ) ) {
-
 				if ( strlen( $region ) ) {
 					$location = sprintf( '%s, %s', $region, $country );
 				} else {

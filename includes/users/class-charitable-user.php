@@ -525,7 +525,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			}
 
 			return apply_filters( 'charitable_user_avatar_custom', sprintf( '<img src="%s" alt="%s" class="avatar photo" width="%s" height="%s" />',
-				$attachment_src[0] ,
+				$attachment_src[0],
 				esc_attr( $this->display_name ),
 				$attachment_src[1],
 				$attachment_src[2]
@@ -662,10 +662,23 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			}
 
 			/**
-			 * Still no email? We're going to have to call an end
-			 * to this party right now then.
+			 * Filter whether donors can be added without an email address.
+			 *
+			 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, donors
+			 * without an email address can be added by default, primarily to support manual
+			 * donations without an email address. Use this filter to disable that ability.
+			 *
+			 * NOTE: By default, the public donation form still requires an email address, so this
+			 * primarily affects programattically created donors, or donors created via manual
+			 * donations in the admin.
+			 *
+			 * @see https://github.com/Charitable/Charitable/issues/535
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param boolean $permitted Whether donors can be added without an email address.
 			 */
-			if ( ! $email ) {
+			if ( ! $email && ! charitable_permit_donor_without_email() ) {
 				charitable_get_deprecated()->doing_it_wrong(
 					__METHOD__,
 					__( 'Unable to add donor. Email not set for logged out user.', 'charitable' ),

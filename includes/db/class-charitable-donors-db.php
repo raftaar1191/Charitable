@@ -76,8 +76,9 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				date_joined datetime NOT NULL default '0000-00-00 00:00:00',
 				data_erased datetime default '0000-00-00 00:00:00',
 				PRIMARY KEY  (donor_id),
-				KEY user_id (user_id),                     
-				KEY email (email)
+				KEY user_id (user_id),
+				KEY email (email),
+				KEY data_erased (data_erased)
 				) $charset_collate;";
 
 			$this->_create_table( $sql );
