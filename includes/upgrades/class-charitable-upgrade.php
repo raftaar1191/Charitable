@@ -4,15 +4,17 @@
  *
  * The responsibility of this class is to manage migrations between versions of Charitable.
  *
- * @package	  Charitable/Classes/Charitable_Upgrade
+ * @package   Charitable/Classes/Charitable_Upgrade
  * @copyright Copyright (c) 2018, Eric Daams
  * @license   http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.4
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
@@ -110,35 +112,35 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			}
 
 			$this->upgrade_actions = array(
-				'update_upgrade_system' => array(
+				'update_upgrade_system'                   => array(
 					'version' => '1.3.0',
 					'message' => __( 'Charitable needs to update the database.', 'charitable' ),
 					'prompt'  => true,
 				),
-				'fix_donation_dates' => array(
+				'fix_donation_dates'                      => array(
 					'version' => '1.3.0',
 					'message' => __( 'Charitable needs to fix incorrect donation dates.', 'charitable' ),
 					'prompt'  => true,
 				),
-				'trigger_cron' => array(
+				'trigger_cron'                            => array(
 					'version'  => '1.3.4',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'trigger_cron' ),
 				),
-				'flush_permalinks_140' => array(
+				'flush_permalinks_140'                    => array(
 					'version'  => '1.4.0',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'flush_permalinks' ),
 				),
-				'remove_campaign_manager_cap' => array(
+				'remove_campaign_manager_cap'             => array(
 					'version'  => '1.4.5',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'remove_campaign_manager_cap' ),
 				),
-				'fix_empty_campaign_end_date_meta' => array(
+				'fix_empty_campaign_end_date_meta'        => array(
 					'version'  => '1.4.11',
 					'message'  => '',
 					'prompt'   => false,
@@ -150,38 +152,44 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'   => false,
 					'callback' => array( $this, 'clear_campaign_amount_donated_transient' ),
 				),
-				'trim_upgrade_log' => array(
+				'trim_upgrade_log'                        => array(
 					'version'  => '1.4.18',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'trim_upgrade_log' ),
 				),
-				'remove_duplicate_donors' => array(
+				'remove_duplicate_donors'                 => array(
 					'version' => '1.5.0',
 					'message' => __( 'Charitable needs to remove duplicate donor records.', 'charitable' ),
 					'prompt'  => true,
 				),
-				'flush_permalinks_150' => array(
+				'flush_permalinks_150'                    => array(
 					'version'  => '1.5.0',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'flush_permalinks' ),
 				),
-				'release_notes_150' => array(
-					'version'  => '1.5.0',
-					'notice'   => 'release-150',
+				'release_notes_150'                       => array(
+					'version' => '1.5.0',
+					'notice'  => 'release-150',
 				),
-				'update_tables_154' => array(
+				'update_tables_154'                       => array(
 					'version'  => '1.5.4',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'update_tables' ),
 				),
-				'fix_donor_role_caps' => array(
+				'fix_donor_role_caps'                     => array(
 					'version'  => '1.5.9',
 					'message'  => '',
 					'prompt'   => false,
 					'callback' => array( $this, 'fix_donor_role_caps' ),
+				),
+				'update_tables_160'                       => array(
+					'version'  => '1.6.0',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'update_donor_table' ),
 				),
 			);
 		}
@@ -191,6 +199,8 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
+		 * @param  string $db_version   Current pre-update version.
+		 * @param  string $edge_version The version we're upgrading to.
 		 * @return void
 		 */
 		public function legacy_upgrade_mode( $db_version, $edge_version ) {
@@ -940,6 +950,22 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		protected function update_tables() {
 			try {
 				charitable_get_table( 'campaign_donations' )->create_table();
+				charitable_get_table( 'donors' )->create_table();
+				return true;
+			} catch ( Exception $e ) {
+				return false;
+			}
+		}
+
+		/**
+		 * Update the donors table.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean Whether tables were successfully updated.
+		 */
+		public function update_donor_table() {
+			try {
 				charitable_get_table( 'donors' )->create_table();
 				return true;
 			} catch ( Exception $e ) {

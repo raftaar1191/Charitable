@@ -12,13 +12,24 @@
 
 global $post;
 
-$donation = charitable_get_donation( $post->ID );
-$donor    = $donation->get_donor();
-$amount   = $donation->get_total_donation_amount();
-$date     = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H:i:s', $donation->post_date_gmt ) ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
+$donation    = charitable_get_donation( $post->ID );
+$donor       = $donation->get_donor();
+$amount      = $donation->get_total_donation_amount();
+$date        = 'manual' == $donation->get_gateway() && '00:00:00' == mysql2date( 'H:i:s', $donation->post_date_gmt ) ? $donation->get_date() : $donation->get_date() . ' - ' . $donation->get_time();
+$data_erased = $donation->get_data_erasure_date();
 
 ?>
 <div id="charitable-donation-overview-metabox" class="charitable-metabox">
+	<?php if ( $data_erased ) : ?>
+		<div class="donation-erasure-notice-wrapper notice-warning notice-alt">
+			<div class="donation-erasure-notice">
+				<?php
+					/* translators: %s: erasure date */
+					printf( __( 'Personal data for this donation was erased on %s.', 'charitable' ), $data_erased );
+				?>
+			</div>
+		</div>
+	<?php endif ?>
 	<div class="donation-banner-wrapper">
 		<div class="donation-banner">
 			<h3 class="donation-number"><?php printf( '%s #%d', __( 'Donation', 'charitable' ), $donation->get_number() ); ?></h3>

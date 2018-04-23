@@ -620,6 +620,10 @@ body.post-type-donation .donation-banner {
     margin: 0;
     padding: 0;
     font-size: 1.3em; }
+body.post-type-donation .donation-erasure-notice {
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  font-style: italic; }
 @media (min-width: 70em) {
   body.post-type-donation #poststuff #post-body.columns-2 {
     margin-right: 340px; }

@@ -866,7 +866,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *               compatibility. We now use func_get_arg() instead to get the second passed argument.
 		 * @since  1.5.4 Now uses Charitable_Donation_Log::add() and returns a result.
 		 *
-		 * @param  string $message
+		 * @param  string $message The message to add to the log.
 		 * @return int|bool Meta ID if the key didn't exist, true on successful update,
 		 *                  false on failure.
 		 */
@@ -941,6 +941,28 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			}
 
 			return $this->gateway_transaction_id;
+		}
+
+		/**
+		 * Return the date that the donation data was erased.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $format The format in which to return the date of erasure.
+		 * @return false|string The date of erasure, or false if the data has not been erased.
+		 */
+		public function get_data_erasure_date( $format = null ) {
+			$date = get_post_meta( $this->donation_id, 'data_erased', true );
+
+			if ( ! $date ) {
+				return false;
+			}
+
+			if ( is_null( $format ) ) {
+				$format = get_option( 'date_format' );
+			}
+
+			return mysql2date( $format, $date );
 		}
 
 		/**

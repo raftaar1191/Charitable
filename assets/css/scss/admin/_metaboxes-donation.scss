@@ -35,6 +35,17 @@ body.post-type-donation {
         }
     }
 
+    .donation-erasure-notice-wrapper {
+        float: left;
+        width: 100%;
+    }
+
+    .donation-erasure-notice {
+        padding: 12px 20px;
+        border-bottom: 1px solid #e5e5e5;
+        font-style: italic;
+    }
+    
     @include bp(1120) {
         #poststuff #post-body.columns-2 {
             margin-right: 340px;
