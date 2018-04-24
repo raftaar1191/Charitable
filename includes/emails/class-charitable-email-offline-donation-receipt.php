@@ -102,6 +102,10 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 				return false;
 			}
 
+			if ( ! $donation->has_valid_email() ) {
+				return false;
+			}
+
 			if ( ! apply_filters( 'charitable_send_' . self::get_email_id(), true, $donation_id ) ) {
 				return false;
 			}
@@ -172,7 +176,9 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 		 * @return boolean
 		 */
 		public static function can_be_resent( $object_id, $args = array() ) {
-			return 'charitable-pending' == get_post_status( $object_id ) && 'offline' == get_post_meta( $object_id, 'donation_gateway', true );
+			return charitable_get_donation( $object_id )->has_valid_email()
+				&& 'charitable-pending' == get_post_status( $object_id )
+				&& 'offline' == get_post_meta( $object_id, 'donation_gateway', true );
 		}
 
 		/**

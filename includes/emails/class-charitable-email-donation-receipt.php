@@ -20,23 +20,24 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 	 */
 	class Charitable_Email_Donation_Receipt extends Charitable_Email {
 
-		/**
-		 * @var     string
-		 */
+		/* @var string */
 		const ID = 'donation_receipt';
 
 		/**
-		 * @var     string[] Array of supported object types (campaigns, donations, donors, etc).
-		 * @since   1.0.0
+		 * Array of supported object types (campaigns, donations, donors, etc).
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string[]
 		 */
 		protected $object_types = array( 'donation' );
 
 		/**
 		 * Instantiate the email class, defining its key values.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   array   $objects
+		 * @param array $objects an array containing a donation object.
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -75,6 +76,10 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 			$donation = charitable_get_donation( $donation_id );
 
 			if ( ! is_object( $donation ) || 0 == count( $donation->get_campaign_donations() ) ) {
+				return false;
+			}
+
+			if ( ! $donation->has_valid_email() ) {
 				return false;
 			}
 
@@ -147,7 +152,8 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * @return boolean
 		 */
 		public static function can_be_resent( $object_id, $args = array() ) {
-			return charitable_is_approved_status( get_post_status( $object_id ) );
+			return charitable_get_donation( $object_id )->has_valid_email()
+				&& charitable_is_approved_status( get_post_status( $object_id ) );
 		}
 
 		/**
@@ -197,11 +203,11 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		protected function get_default_body() {
 			ob_start();
 ?>
-<p><?php _e( 'Dear [charitable_email show=donor_first_name],', 'charitable' ) ?></p>
-<p><?php _e( 'Thank you so much for your generous donation.', 'charitable' ) ?></p>
-<p><strong><?php _e( 'Your Receipt', 'charitable' ) ?></strong><br />
+<p><?php _e( 'Dear [charitable_email show=donor_first_name],', 'charitable' ); ?></p>
+<p><?php _e( 'Thank you so much for your generous donation.', 'charitable' ); ?></p>
+<p><strong><?php _e( 'Your Receipt', 'charitable' ); ?></strong><br />
 [charitable_email show=donation_summary]</p>
-<p><?php _e( 'With thanks, [charitable_email show=site_name]', 'charitable' ) ?></p>
+<p><?php _e( 'With thanks, [charitable_email show=site_name]', 'charitable' ); ?></p>
 <?php
 			$body = ob_get_clean();
 

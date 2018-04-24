@@ -204,6 +204,17 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
+		 * Checks whether the donation has a donor's email address.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function has_valid_email() {
+			return $this->get_donor()->has_valid_email();
+		}
+
+		/**
 		 * Return the donation number. By default, this is the ID, but it can be filtered.
 		 *
 		 * @since  1.0.0
