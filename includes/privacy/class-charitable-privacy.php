@@ -234,9 +234,8 @@ Additionally, we may also collect the following information:
 		 * @return array
 		 */
 		public function erase_user_data( $email, $page = 1 ) {
-			/* TODO: Increment this. */
-			$this->retained = 0;
-			$this->removed  = 0;
+			$this->retained = false;
+			$this->removed  = false;
 
 			/* 1. Remove registered donor meta. */
 			$user = get_user_by( 'email', $email );
@@ -250,15 +249,17 @@ Additionally, we may also collect the following information:
 
 			if ( is_array( $profiles ) ) {
 				charitable_get_table( 'donors' )->erase_donor_data( wp_list_pluck( $profiles, 'donor_id' ) );
+
+				$this->removed = true;
 			}
 
 			/* If there are no donor profiles, there are no donations. */
 			if ( empty( $profiles ) ) {
 				return array(
-					'num_items_removed'  => 1,
-					'num_items_retained' => 0,
-					'messages'           => array(),
-					'done'               => true,
+					'items_removed'  => $this->removed,
+					'items_retained' => $this->retained,
+					'messages'       => array(),
+					'done'           => true,
 				);
 			}
 
@@ -270,10 +271,10 @@ Additionally, we may also collect the following information:
 			}
 
 			return array(
-				'num_items_removed'  => 1,
-				'num_items_retained' => 0,
-				'messages'           => array(),
-				'done'               => true,
+				'items_removed'  => false,
+				'items_retained' => false,
+				'messages'       => array(),
+				'done'           => true,
 			);
 		}
 
@@ -468,6 +469,8 @@ Additionally, we may also collect the following information:
 					$data = apply_filters( 'charitable_privacy_erasure_registered_user_data_prop_value', wp_privacy_anonymize_data( $data_type, $user->{$key} ), $user->{$key}, $key, $field );
 
 					update_user_meta( $user->ID, $key, $data );
+
+					$this->removed = true;
 				}
 			}
 		}
