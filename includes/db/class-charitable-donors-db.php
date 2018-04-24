@@ -248,7 +248,12 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			}
 
 			/* Filter out any non absolute integers. */
-			$donor_id     = array_filter( $donor_id, 'absint' );
+			$donor_id = array_filter( $donor_id, 'absint' );
+
+			if ( empty( $donor_id ) ) {
+				return false;
+			}
+
 			$placeholders = charitable_get_query_placeholders( count( $donor_id ), '%d' );
 			$parameters   = array_merge(
 				array(
