@@ -102,6 +102,8 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 				return false;
 			}
 
+			$donation = new Charitable_Donation( $donation_id );
+
 			if ( ! $donation->has_valid_email() ) {
 				return false;
 			}
