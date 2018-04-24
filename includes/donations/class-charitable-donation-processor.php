@@ -786,7 +786,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$ret = $this->get_donation_data_value( 'user_id' ) || $this->get_donation_data_value( 'donor_id' );
 
 			if ( ! $ret ) {
-				$user = $this->get_donation_data_value( 'user' );
+				$user = $this->get_donation_data_value( 'user', array() );
 				$ret  = array_key_exists( 'email', $user ) && strlen( $user['email'] );
 			}
 

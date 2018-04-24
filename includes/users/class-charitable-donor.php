@@ -380,7 +380,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 			 * @param string           $avatar The avatar HTML code.
 			 * @param Charitable_Donor $donor  This instance of `Charitable_Donor`.
 			 */
-			return apply_filters( 'charitable_donor_avatar', $this->get_user()->get_avatar(), $this );
+			return apply_filters( 'charitable_donor_avatar', $this->get_user()->get_avatar( $size ), $this );
 		}
 
 		/**
