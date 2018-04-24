@@ -65,22 +65,58 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 			}
 
 			return array(
-				'section'               => array(
-					'title'             => '',
-					'type'              => 'hidden',
-					'priority'          => 10000,
-					'value'             => 'advanced',
+				'section'                     => array(
+					'title'    => '',
+					'type'     => 'hidden',
+					'priority' => 10000,
+					'value'    => 'advanced',
 				),
-				'section_dangerous'     => array(
-					'title'             => __( 'Dangerous Settings', 'charitable' ),
-					'type'              => 'heading',
-					'priority'          => 100,
+				'section_privacy'             => array(
+					'title'    => __( 'Privacy', 'charitable' ),
+					'type'     => 'heading',
+					'priority' => 20,
 				),
-				'delete_data_on_uninstall'  => array(
-					'label_for'         => __( 'Reset Data', 'charitable' ),
-					'type'              => 'checkbox',
-					'help'              => __( 'DELETE ALL DATA when uninstalling the plugin.', 'charitable' ),
-					'priority'          => 105,
+				'section_privacy_description'   => array(
+					'type'      => 'content',
+					'priority'  => 21,
+					'content'   => __( 'Charitable stores personal data such as donors\' names, email addresses, addresses and phone numbers in your database. Donors may request to have their personal data erased (as of May 2018, this will be a right of European residents), but ' )
+				),
+				'minimum_data_retention_period' => array(
+					'label_for' => __( 'Minimum Data Retention Period', 'charitable' ),
+					'type'      => 'select',
+					'help'      => sprintf(
+						/* translators: %1$s: HTML strong tag. %2$s: HTML closing strong tag. %1$s: HTML break tag. */
+						__( 'Prevent personal data from being erased for donations made within a certain amount of time.%3$sChoose %1$sNone%2$s to allow the personal data of any donation to be erased.%3$sChoose %1$sForever%2$s to prevent any personal data from being erased from donations, regardless of how long ago they were made.' ),
+						'<strong>',
+						'</strong>',
+						'<br />'
+					),
+					'priority'  => 25,
+					'options'   => array(
+						0         => __( 'None', 'charitable' ),
+						1         => __( 'One year', 'charitable' ),
+						2         => __( 'Two years', 'charitable' ),
+						3         => __( 'Three years', 'charitable' ),
+						4         => __( 'Four years', 'charitable' ),
+						5         => __( 'Five years', 'charitable' ),
+						6         => __( 'Six years', 'charitable' ),
+						7         => __( 'Seven years', 'charitable' ),
+						8         => __( 'Eight years', 'charitable' ),
+						9         => __( 'Nine years', 'charitable' ),
+						10        => __( 'Ten years', 'charitable' ),
+						'endless' => __( 'Forever', 'charitable' ),
+					),
+				),
+				'section_dangerous'           => array(
+					'title'    => __( 'Dangerous Settings', 'charitable' ),
+					'type'     => 'heading',
+					'priority' => 100,
+				),
+				'delete_data_on_uninstall'    => array(
+					'label_for' => __( 'Reset Data', 'charitable' ),
+					'type'      => 'checkbox',
+					'help'      => __( 'DELETE ALL DATA when uninstalling the plugin.', 'charitable' ),
+					'priority'  => 105,
 				),
 			);
 		}
