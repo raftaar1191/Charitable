@@ -494,16 +494,16 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			/* Data to send in our API request */
 			$api_params = array(
 				'edd_action' => 'activate_license',
-				'license' => $license,
-				'item_name' => urlencode( $product_details['name'] ),
-				'url' => home_url(),
+				'license'    => $license,
+				'item_name'  => urlencode( $product_details['name'] ),
+				'url'        => home_url(),
 			);
 
 			/* Call the custom API */
 			$response = wp_remote_post( $product_details['url'], array(
-				'timeout' => 15,
+				'timeout'   => 15,
 				'sslverify' => false,
-				'body' => $api_params,
+				'body'      => $api_params,
 			) );
 
 			/* Make sure the response came back okay */
@@ -516,9 +516,9 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 
 			return array(
-				'license' => $license,
+				'license'         => $license,
 				'expiration_date' => $license_data->expires,
-				'valid' => ( 'valid' === $license_data->license ),
+				'valid'           => ( 'valid' === $license_data->license ),
 			);
 		}
 

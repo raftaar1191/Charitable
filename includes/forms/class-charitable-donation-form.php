@@ -1,7 +1,7 @@
 <?php
 /**
  * Donation form model class.
- * 
+ *
  * @package   Charitable/Classes/Charitable_Donation_Form
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function __construct( Charitable_Campaign $campaign = null ) {
 			$this->campaign = $campaign;
-			$this->id       = uniqid();			
+			$this->id       = uniqid();
 
 			$this->setup_payment_fields();
 			$this->check_test_mode();
@@ -388,7 +388,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			$amount = $this->get_campaign()->get_donation_amount_in_session();
 
-			if ( ! $amount ) {	
+			if ( ! $amount ) {
 				$content = charitable_template_from_session_content( 'donation_form_current_amount_text', array(
 					'campaign_id' => $this->get_campaign()->ID,
 					'form_id'     => $this->get_form_identifier(),
@@ -479,7 +479,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  Charitable_Donation_Form $form
+		 * @param  Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
 		 * @return void
 		 */
 		public function add_password_field( $form ) {
@@ -792,6 +792,27 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return $this->user_has_required_fields;
+		}
+
+		/**
+		 * Returns whether the form should hide the user fields.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function should_hide_user_fields() {
+			$hide_fields = $this->get_user() && $this->user_has_required_fields() && ! is_customize_preview();
+
+			/**
+			 * Filter whether the user fields should be hidden.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param boolean                  $hide_fields Whether the fields should be hidden.
+			 * @param Charitable_Donation_Form $form        The instance of `Charitable_Donation_Form`.
+			 */
+			return apply_filters( 'charitable_hide_fields_for_logged_in_users', $hide_fields, $this );
 		}
 
 		/**
