@@ -271,8 +271,8 @@ Additionally, we may also collect the following information:
 			}
 
 			return array(
-				'items_removed'  => false,
-				'items_retained' => false,
+				'items_removed'  => $this->removed,
+				'items_retained' => $this->retained,
 				'messages'       => array(),
 				'done'           => true,
 			);
@@ -509,6 +509,16 @@ Additionally, we may also collect the following information:
 
 			update_post_meta( $donation_id, 'donor', $meta );
 			update_post_meta( $donation_id, 'data_erased', current_time( 'mysql', 0 ) );
+
+			/* Change the post_title since that otherwise has the donor's name. */
+			wp_update_post( array(
+				'ID'         => $donation_id,
+				'post_title' => sprintf(
+					/* translators: %s: campaign names */
+					__( 'Anonymous &ndash; %s', 'charitable' ),
+					charitable_get_donation( $donation_id )->get_campaigns_donated_to()
+				),
+			) );
 
 			$log = new Charitable_Donation_Log( $donation_id );
 			$log->add( __( 'Personal data erased.', 'charitable' ) );

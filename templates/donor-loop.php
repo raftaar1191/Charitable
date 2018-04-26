@@ -38,14 +38,14 @@ $style       = '';
 if ( 'horizontal' == $orientation ) {
 	$width = array_key_exists( 'width', $view_args ) ? $view_args['width'] : get_option( 'thumbnail_size_w', 100 );
 	if ( 100 != $width ) {
-		$style = '<style>.donors-list.donors-list-horizontal .donor{ width:'. $width . 'px; }</style>';
+		$style = '<style>.donors-list.donors-list-horizontal .donor{ width:' . $width . 'px; }</style>';
 	}
 }
 
 if ( $donors->count() ) :
 	echo $style;
 	?>
-	<ol class="donors-list donors-list-<?php echo $orientation ?>">
+	<ol class="donors-list donors-list-<?php echo $orientation; ?>">
 		<?php
 		foreach ( $donors as $donor ) :
 
@@ -57,5 +57,6 @@ if ( $donors->count() ) :
 		?>
 	</ol>
 <?php else : ?>
-	<p><?php _e( 'No donors yet. Be the first!', 'charitable' ) ?></p>
-<?php endif;
+	<p><?php _e( 'No donors yet. Be the first!', 'charitable' ); ?></p>
+<?php
+endif;
