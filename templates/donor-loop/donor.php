@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /* Donor has to be included in the view args. */
 if ( ! array_key_exists( 'donor', $view_args ) ) {
@@ -19,7 +21,7 @@ if ( ! array_key_exists( 'donor', $view_args ) ) {
 }
 
 /* @var Charitable_Donor */
-$donor  	 = $view_args['donor'];
+$donor = $view_args['donor'];
 
 /* @var int */
 $campaign_id = $view_args['campaign'];
@@ -41,7 +43,8 @@ $campaign_id = $view_args['campaign'];
 		echo $donor->get_avatar();
 	endif;
 
-	if ( $view_args['show_name'] ) : ?>
+	if ( $view_args['show_name'] ) :
+	?>
 		<p class="donor-name">
 		<?php
 			/**
@@ -55,9 +58,11 @@ $campaign_id = $view_args['campaign'];
 			echo apply_filters( 'charitable_donor_loop_donor_name', $donor->get_name(), $view_args );
 		?>
 		</p>
-	<?php endif;
+	<?php
+	endif;
 
-	if ( $view_args['show_location'] && strlen( $donor->get_location() ) ) : ?>
+	if ( $view_args['show_location'] && strlen( $donor->get_location() ) ) :
+	?>
 		<div class="donor-location">
 		<?php
 			/**
@@ -71,9 +76,11 @@ $campaign_id = $view_args['campaign'];
 			echo apply_filters( 'charitable_donor_loop_donor_location', $donor->get_location(), $view_args );
 		?>
 		</div>
-	<?php endif;
+	<?php
+	endif;
 
-	if ( $view_args['show_amount'] ) : ?>
+	if ( $view_args['show_amount'] ) :
+	?>
 		<div class="donor-donation-amount">
 		<?php
 			/**
@@ -87,7 +94,8 @@ $campaign_id = $view_args['campaign'];
 			echo apply_filters( 'charitable_donor_loop_donor_amount', charitable_format_money( $donor->get_amount( $campaign_id ) ), $view_args );
 		?>
 		</div>
-	<?php endif;
+	<?php
+	endif;
 
 	/**
 	 * Add output after the donor's avatar, name, etc.
@@ -99,5 +107,5 @@ $campaign_id = $view_args['campaign'];
 	 */
 	do_action( 'charitable_donor_loop_after_donor', $donor, $view_args );
 	?>
-</li><!-- .donor-<?php echo $donor->donor_id ?> -->
+</li><!-- .donor-<?php echo $donor->donor_id; ?> -->
 
