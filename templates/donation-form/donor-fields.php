@@ -9,7 +9,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
@@ -26,10 +28,9 @@ if ( empty( $fields ) ) {
 ?>
 <fieldset id="charitable-donor-fields" class="charitable-fieldset">
 	<?php
-	if ( isset( $field['legend'] ) ) : ?>
-
-		<div class="charitable-form-header"><?php echo $field['legend'] ?></div>
-
+	if ( isset( $field['legend'] ) ) :
+	?>
+		<div class="charitable-form-header"><?php echo $field['legend']; ?></div>
 	<?php
 	endif;
 
@@ -40,7 +41,7 @@ if ( empty( $fields ) ) {
 
 	?>
 	<div class="charitable-form-fields cf">
-		<?php $form->view()->render_fields( $fields ) ?>
+		<?php $form->view()->render_fields( $fields ); ?>
 	</div><!-- .charitable-form-fields -->
 	<?php
 

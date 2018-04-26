@@ -2,29 +2,36 @@
 /**
  * The template used to display the donor's current details.
  *
- * @author 	Studio 164a
+ * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
  * @version 1.0.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @var Charitable_User
  */
 $user = $view_args['user'];
 
-if ( ! $user ) {
+if ( ! $user && ! is_customize_preview() ) {
 	return;
 }
 
 ?>
-<address class="donor-address"><?php echo $user->get_address() ?></address>
+<address class="donor-address"><?php echo $user->get_address(); ?></address>
 <p class="donor-contact-details">
-	<?php printf( '%s: %s', __( 'Email', 'charitable ' ), $user->user_email ) ?>
-	<?php if ( $user->__isset( 'donor_phone' ) ) :
-		printf( '<br />%s: %s', __( 'Phone number', 'charitable' ), $user->get( 'donor_phone' ) );
-	endif ?>
+	<?php
+	/* translators: %s: email address */
+	printf( __( 'Email: %s', 'charitable ' ), $user->user_email );
+
+	if ( $user->__isset( 'donor_phone' ) ) :
+		/* translators: %s: phone number */
+		echo '<br />' . sprintf( __( 'Phone number: %s', 'charitable' ), $user->get( 'donor_phone' ) );
+	endif;
+	?>
 </p>
