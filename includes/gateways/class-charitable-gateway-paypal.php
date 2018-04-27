@@ -692,6 +692,33 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		private static function is_valid_request() {
 			return ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' == $_SERVER['REQUEST_METHOD'];
 		}
+
+		/**
+		 * Retrieve PayPal API credentials
+		 *
+		 * @access      public
+		 * @since       1.6.0
+		 */
+		public static function get_api_credentials() {
+
+			$mode = charitable_get_option( 'test_mode' ) ? 'sandbox_' : '';
+
+			// Retrieve credentials from core
+			$creds = array(
+				'username'  => charitable_get_option( $mode . 'api_username' ),
+				'password'  => charitable_get_option( $mode . 'api_password' ),
+				'signature' => charitable_get_option( $mode . 'api_signature' )
+			);
+
+			/**
+			 * Filter the PayPal API Credentials.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array $creds The API credentials.
+			 */
+			return apply_filters( 'charitable_get_paypal_api_credentials', $creds );
+		}
 	}
 
 endif;
