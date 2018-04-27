@@ -4,15 +4,18 @@
  *
  * This defines a strict interface that donation forms must implement.
  *
- * @version   1.0.0
  * @package   Charitable/Interfaces/Charitable_Donation_Form_Interface
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! interface_exists( 'Charitable_Donation_Form_Interface' ) ) :
 
@@ -48,7 +51,16 @@ if ( ! interface_exists( 'Charitable_Donation_Form_Interface' ) ) :
 		 *
 		 * @return array
 		 */
-		public function get_donation_values();	
+		public function get_donation_values();
+
+		/**
+		 * Return whether user fields should be hidden.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function should_hide_user_fields();
 	}
 
-endif; // End interface_exists check.
+endif;

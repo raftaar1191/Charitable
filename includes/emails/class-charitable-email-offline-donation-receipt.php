@@ -178,9 +178,12 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 		 * @return boolean
 		 */
 		public static function can_be_resent( $object_id, $args = array() ) {
-			return charitable_get_donation( $object_id )->has_valid_email()
-				&& 'charitable-pending' == get_post_status( $object_id )
-				&& 'offline' == get_post_meta( $object_id, 'donation_gateway', true );
+			$donation = charitable_get_donation( $object_id );
+
+			return is_object( $donation )
+				&& $donation->has_valid_email()
+				&& 'charitable-pending' == $donation->get_status()
+				&& 'offline' == $donation->get_gateway();
 		}
 
 		/**

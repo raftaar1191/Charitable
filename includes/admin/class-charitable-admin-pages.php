@@ -2,15 +2,18 @@
 /**
  * This class is responsible for adding the Charitable admin pages.
  *
- * @package     Charitable/Classes/Charitable_Admin_Pages
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Admin_Pages
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 
@@ -264,7 +267,9 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 				$url = charitable_get_permalink( 'campaign_donation', array(
 					'campaign_id' => current( $campaign->posts ),
 				) );
-			} else {
+			}
+
+			if ( ! isset( $url ) || false === $url ) {
 				$url = home_url();
 			}
 

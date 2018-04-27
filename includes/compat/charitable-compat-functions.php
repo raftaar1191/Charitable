@@ -33,7 +33,7 @@ function charitable_load_compat_functions() {
 	}
 
 	/* WP Rocket */
-	if ( defined( 'WP_ROCKET_VERSION' )  ) {
+	if ( defined( 'WP_ROCKET_VERSION' ) ) {
 		require_once( $includes_path . 'compat/charitable-wp-rocket-compat-functions.php' );
 	}
 
