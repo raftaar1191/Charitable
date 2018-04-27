@@ -152,8 +152,11 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 		 * @return boolean
 		 */
 		public static function can_be_resent( $object_id, $args = array() ) {
-			return charitable_get_donation( $object_id )->has_valid_email()
-				&& charitable_is_approved_status( get_post_status( $object_id ) );
+			$donation = charitable_get_donation( $object_id );
+
+			return is_object( $donation )
+				&& $donation->has_valid_email()
+				&& charitable_is_approved_status( $donation->get_status() );
 		}
 
 		/**
