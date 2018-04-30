@@ -21,15 +21,15 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * @see Charitable_Donation_Meta_Boxes::add_meta_boxes()
  * @see Charitable_Donation_Meta_Boxes::remove_meta_boxes()
  */
-add_action( 'add_meta_boxes', array( Charitable_Donation_Meta_Boxes::get_instance(), 'add_meta_boxes' ) );
-add_action( 'add_meta_boxes', array( Charitable_Donation_Meta_Boxes::get_instance(), 'remove_meta_boxes' ), 20 );
+add_action( 'add_meta_boxes_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'add_meta_boxes' ) );
+add_action( 'add_meta_boxes_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'remove_meta_boxes' ), 20 );
 
 /**
  * Save the donation.
  *
  * @see Charitable_Donation_Meta_Boxes::save_donation()
  */
-add_action( 'save_post_' . Charitable::DONATION_POST_TYPE,  array( Charitable_Donation_Meta_Boxes::get_instance(), 'save_donation' ), 10, 2 );
+add_action( 'save_post_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'save_donation' ), 10, 2 );
 
 /**
  * Save the donation.

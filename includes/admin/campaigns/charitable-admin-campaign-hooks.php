@@ -41,7 +41,7 @@ add_action( 'edit_form_after_title', array( $registry->get( 'campaign_meta_boxes
  * @see Charitable_Campaign_Meta_Boxes::campaign_donation_options_metabox()
  * @see Charitable_Campaign_Meta_Boxes::wrap_editor()
  */
-add_action( 'add_meta_boxes', array( $registry->get( 'campaign_meta_boxes' ), 'add_meta_boxes' ) );
+add_action( 'add_meta_boxes_' . Charitable::CAMPAIGN_POST_TYPE, array( $registry->get( 'campaign_meta_boxes' ), 'add_meta_boxes' ) );
 
 /**
  * Save the campaign.
