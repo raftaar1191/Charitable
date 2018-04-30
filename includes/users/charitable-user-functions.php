@@ -110,6 +110,12 @@ function charitable_get_user_core_keys() {
  * @return boolean True if the email is valid; false if it is marked as invalid.
  */
 function charitable_is_valid_email_address( $email ) {
+	$invalid = array();
+
+	if ( function_exists( 'wp_privacy_anonymize_data' ) ) {
+		$invalid[] = wp_privacy_anonymize_data( 'email' );
+	}
+
 	/**
 	 * Filter the list of invalid email addresses used by Charitable.
 	 *
@@ -117,9 +123,7 @@ function charitable_is_valid_email_address( $email ) {
 	 *
 	 * @param string[] $addresses A list of strings that are invalid email addresses.
 	 */
-	$invalid = apply_filters( 'charitable_invalid_email_addresses', array(
-		wp_privacy_anonymize_data( 'email' ),
-	) );
+	$invalid = apply_filters( 'charitable_invalid_email_addresses', $invalid );
 
 	return strlen( $email ) && ! in_array( $email, $invalid );
 }
