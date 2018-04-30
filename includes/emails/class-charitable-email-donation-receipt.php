@@ -171,7 +171,28 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return '';
 			}
 
-			return apply_filters( 'charitable_email_donation_receipt_receipient', $this->donation->get_donor()->get_email(), $this );
+			/**
+			 * Deprecated hook. Use charitable_email_donation_receipt_recipient instead.
+			 *
+			 * @deprecated 1.9.0
+			 *
+			 * @since 1.0.0
+			 * @since 1.6.0 Deprecated
+			 *
+			 * @param string                            $email_address Recipient email address.
+			 * @param Charitable_Email_Donation_Receipt $email         Instance of `Charitable_Email_Donation_Receipt`.
+			 */
+			$email_address = apply_filters( 'charitable_email_donation_receipt_receipient', $this->donation->get_donor()->get_email(), $this );
+
+			/**
+			 * Filter the recipient for the donation receipt email.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param string                            $email_address Recipient email address.
+			 * @param Charitable_Email_Donation_Receipt $email         Instance of `Charitable_Email_Donation_Receipt`.
+			 */
+			return apply_filters( 'charitable_email_donation_receipt_recipient', $email_address, $this );
 		}
 
 		/**
