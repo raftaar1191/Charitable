@@ -42,6 +42,16 @@ CHARITABLE = window.CHARITABLE || {};
         var $body = $( 'body' );
 
         /**
+         * Handle click of terms link.
+         *
+         * @access  private
+         */
+        var on_click_terms = function() {
+            self.form.find( '.charitable-terms-text' ).addClass( 'active' );
+            return false;
+        };
+
+        /**
          * Focus event handler on custom donation amount input field.
          *
          * @access  private
@@ -230,6 +240,7 @@ CHARITABLE = window.CHARITABLE || {};
             // Init donation amount selection
             self.form.on( 'click', '.donation-amount', on_select_donation_amount );
             self.form.on( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
+            self.form.on( 'click', '.charitable-terms-link', on_click_terms );
 
             // Init currency formatting
             self.form.on( 'blur', '.custom-donation-input', on_change_custom_donation_amount );

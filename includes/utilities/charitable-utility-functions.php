@@ -257,3 +257,23 @@ function charitable_get_query_placeholders( $count = 1, $placeholder = '%s' ) {
 	$placeholders = array_fill( 0, $count, $placeholder );
 	return implode( ', ', $placeholders );
 }
+
+/**
+ * Return a list of pages in id=>title format for use in a select dropdown.
+ *
+ * @see    get_pages
+ *
+ * @since  1.6.0
+ *
+ * @param  array $args Optional arguments to be passed to get_pages.
+ * @return array
+ */
+function charitable_get_pages_options( $args = array() ) {
+	$pages = get_pages( $args );
+
+	if ( ! $pages ) {
+		return array();
+	}
+
+	return array_combine( wp_list_pluck( $pages, 'ID' ), wp_list_pluck( $pages, 'post_title' ) );
+}
