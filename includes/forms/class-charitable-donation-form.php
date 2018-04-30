@@ -7,11 +7,13 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.1
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
@@ -302,21 +304,33 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array[]
 		 */
 		public function get_fields() {
-			$fields = apply_filters( 'charitable_donation_form_fields', array(
+			$fields = array(
 				'donation_fields' => array(
 					'legend'   => __( 'Your Donation', 'charitable' ),
 					'type'     => 'donation-amount-wrapper',
 					'fields'   => $this->get_donation_fields(),
 					'priority' => 20,
 				),
-				'user_fields' => array(
+				'user_fields'    => array(
 					'legend'   => __( 'Your Details', 'charitable' ),
 					'type'     => 'donor-fields',
 					'fields'   => $this->get_user_fields(),
 					'class'    => 'fieldset',
 					'priority' => 40,
 				),
-			), $this );
+			);
+
+			$fields = $this->maybe_add_terms_conditions_fields( $fields );
+
+			/**
+			 * Filter the donation form fields.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                    $fields The donation form fields.
+			 * @param Charitable_Donation_Form $form   This instance of `Charitable_Donation_Form`.
+			 */
+			$fields = apply_filters( 'charitable_donation_form_fields', $fields, $this );
 
 			uasort( $fields, 'charitable_priority_sort' );
 
@@ -328,7 +342,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  array[] $fields
+		 * @param  array[] $fields All existing fields in the donation form.
 		 * @return array[]
 		 */
 		public function add_payment_fields( $fields ) {
@@ -792,6 +806,71 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			return $this->user_has_required_fields;
+		}
+
+		/**
+		 * Maybe add terms and conditions fields to the form.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  array $fields The registered donation form fields.
+		 * @return array
+		 */
+		public function maybe_add_terms_conditions_fields( $fields ) {
+			$terms_page = charitable_get_option( 'terms_conditions_page', '' );
+
+			if ( '' == $terms_page ) {
+				return $fields;
+			}
+
+			/**
+			 * Filter the terms and conditions fields.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array                    $terms_fields List of terms fields.
+			 * @param Charitable_Donation_Form $form         Instance of `Charitable_Donation_Form`.
+			 */
+			$terms_fields = apply_filters( 'charitable_donation_form_terms_fields', array(
+				'terms_fields' => array(
+					'legend'   => __( 'Terms and Conditions', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => array(
+						'terms_text'   => array(
+							'type'     => 'content',
+							'content'  => '<div class="charitable-terms-text">' . apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) ) . '</div>',
+							'priority' => 4,
+						),
+						'accept_terms' => array(
+							'type'      => 'checkbox',
+							'label'     => $this->get_parsed_terms_text( $terms_page ),
+							'priority'  => 8,
+							'required'  => true,
+							'data_type' => 'meta',
+						),
+					),
+					'priority' => 80,
+				),
+			), $this );
+
+			return array_merge( $fields, $terms_fields );
+		}
+
+		/**
+		 * Return the terms text, with [terms] replaced by a link to the terms and conditions.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $terms_page The ID of the terms page.
+		 * @return string
+		 */
+		public function get_parsed_terms_text( $terms_page ) {
+			$text    = charitable_get_option( 'terms_conditions', __( 'I have read and agree to the website [terms].', 'charitable' ) );
+			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-terms-link">%s</a>',
+				get_the_permalink( $terms_page ),
+				__( 'terms and conditions', 'charitable' )
+			);
+			return str_replace( '[terms]', $replace, $text );
 		}
 
 		/**

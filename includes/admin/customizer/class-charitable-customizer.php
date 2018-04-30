@@ -81,6 +81,14 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @return void
 		 */
 		public function register_customizer_fields() {
+			/* Flip arrays to preserve numeric keys. */
+			$pages = array_flip( array_merge(
+				array(
+					__( 'Select a page', 'charitable' ) => '',
+				),
+				array_flip( charitable_get_pages_options() )
+			) );
+
 			$fields = array(
 				'title'      => __( 'Charitable', 'charitable' ),
 				'priority'   => 1000,
@@ -120,6 +128,31 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 										1 => __( 'Yes', 'charitable' ),
 										0 => __( 'No', 'charitable' ),
 									),
+								),
+							),
+							'terms_conditions_page'        => array(
+								'setting' => array(
+									'transport' => 'refresh',
+									'default'   => '',
+								),
+								'control' => array(
+									'type'     => 'select',
+									'label'    => __( 'Terms and conditions page', 'charitable' ),
+									'priority' => 1028,
+									'choices'  => $pages,
+								),
+							),
+							'terms_conditions'             => array(
+								'setting' => array(
+									'transport'         => 'refresh',
+									'default'           => __( 'I have read and agree to the website [terms].', 'charitable' ),
+									'sanitize_callback' => 'sanitize_text_field',
+								),
+								'control' => array(
+									'type'        => 'text',
+									'label'       => __( 'Terms and conditions', 'charitable' ),
+									'description' => __( 'Optionally add some text for the terms and conditions checkbox that donors must accept to complete their donation.', 'charitable' ),
+									'priority'    => 1028.2,
 								),
 							),
 						),
@@ -293,7 +326,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 
 				$wp_customize->add_setting( $setting_id, $setting['setting'] );
 
-				$setting_control = $setting['control'];
+				$setting_control            = $setting['control'];
 				$setting_control['section'] = $section_id;
 
 				if ( isset( $setting_control['control_type'] ) ) {

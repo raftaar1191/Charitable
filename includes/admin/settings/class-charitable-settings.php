@@ -269,13 +269,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		 */
 		public function get_pages() {
 			if ( ! isset( $this->pages ) ) {
-				$all_pages = get_pages();
-
-				if ( ! $all_pages ) {
-					$this->pages = array();
-				} else {
-					$this->pages = array_combine( wp_list_pluck( $all_pages, 'ID' ), wp_list_pluck( $all_pages, 'post_title' ) );
-				}
+				$this->pages = charitable_get_pages_options();
 			}
 
 			return $this->pages;

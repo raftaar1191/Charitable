@@ -235,6 +235,17 @@
   margin-bottom: 0;
   padding-bottom: 0; }
 
+.charitable-terms-text {
+  border: 1px solid #ebebeb;
+  padding: 10px;
+  background-color: #f8f8f8;
+  margin-bottom: 1em;
+  max-height: 200px;
+  overflow: scroll;
+  display: none; }
+  .charitable-terms-text.active {
+    display: block; }
+
 #charitable-user-fields {
   padding-top: 1em;
   margin-top: 1em;
