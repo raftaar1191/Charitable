@@ -550,6 +550,12 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return int
 		 */
 		public function increment_index( $increment, $field ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::increment_index()'
+			);
+
 			/**
 			 * Remove form's hooked filter.
 			 *
@@ -576,6 +582,12 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean Whether the notices were rendered.
 		 */
 		public function render_error_notices( $form ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::render_notices()'
+			);
+
 			if ( ! $form->is_current_form( $this->id ) ) {
 				return false;
 			}
@@ -595,6 +607,12 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean Whether the output is added.
 		 */
 		public function add_hidden_fields( $form ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::render_hidden_fields()'
+			);
+
 			if ( ! $form->is_current_form( $this->id ) ) {
 				return false;
 			}
@@ -623,6 +641,12 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean False if the field was not rendered. True otherwise.
 		 */
 		public function render_field( $field, $key, $form, $index = 0, $namespace = null, $from_template = true ) {
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.5.0',
+				'Charitable_Public_Form_View::render_field()'
+			);
+
 			if ( ! $from_template ) {
 				return false;
 			}
