@@ -150,7 +150,7 @@
 
 .charitable-form-fields .charitable-fieldset {
   margin: 0 0 1em;
-  padding: 2em;
+  padding: 1.5em 20px 0.5em;
   border: 1px solid #ebebeb; }
 .charitable-form-fields .charitable-fieldset-field-wrapper {
   margin: 0;
@@ -226,14 +226,31 @@
   display: none !important;
   visibility: hidden; }
 
-.charitable-form-field-donor-fields .donor-address,
-.charitable-form-field-donor-fields .donor-contact-details {
-  margin-bottom: 0.5em; }
 .charitable-form-field-donor-fields .charitable-login-details {
   padding-top: 1em; }
-.charitable-form-field-donor-fields .charitable-change-user-details {
-  margin-bottom: 0;
-  padding-bottom: 0; }
+
+#charitable-donor-fields {
+  padding: 1.5em 0 0.5em; }
+  #charitable-donor-fields .charitable-form-header {
+    padding: 0 20px; }
+
+.charitable-donor-details {
+  padding: 0 20px 1em; }
+  .charitable-donor-details .donor-address,
+  .charitable-donor-details .donor-contact-details {
+    margin-bottom: 0.5em; }
+  .charitable-donor-details .charitable-change-user-details {
+    margin-bottom: 0;
+    padding-bottom: 0; }
+
+#charitable-user-fields,
+#charitable-meta-fields {
+  padding: 0 20px; }
+
+#charitable-user-fields.bordered {
+  padding-bottom: 0.5em;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #ebebeb; }
 
 .charitable-terms-text {
   border: 1px solid #ebebeb;

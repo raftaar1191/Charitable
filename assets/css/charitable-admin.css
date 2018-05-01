@@ -504,6 +504,9 @@ body.post-type-campaign .postbox-container .empty-container {
 #campaign-settings #wp-content-editor-tools {
   padding-top: 0; }
 
+.charitable-campaign-settings-panel .charitable-metabox-header:first-child {
+  margin-top: 0; }
+
 /* --- Suggested Donations --- */
 #charitable-campaign-suggested-donations .amount-col {
   width: 100px;

@@ -23,18 +23,20 @@ if ( ! $user && ! is_customize_preview() ) {
 }
 
 ?>
-<address class="donor-address"><?php echo $user->get_address(); ?></address>
-<p class="donor-contact-details">
-	<?php
-	/* translators: %s: email address */
-	printf( __( 'Email: %s', 'charitable ' ), $user->user_email );
+<div class="charitable-donor-details">
+	<address class="donor-address"><?php echo $user->get_address(); ?></address>
+	<p class="donor-contact-details">
+		<?php
+		/* translators: %s: email address */
+		printf( __( 'Email: %s', 'charitable ' ), $user->user_email );
 
-	if ( $user->__isset( 'donor_phone' ) ) :
-		/* translators: %s: phone number */
-		echo '<br />' . sprintf( __( 'Phone number: %s', 'charitable' ), $user->get( 'donor_phone' ) );
-	endif;
-	?>
-</p>
-<p class="charitable-change-user-details">
-	<a href="#" data-charitable-toggle="charitable-user-fields"><?php _e( 'Update your details', 'charitable' ); ?></a>
-</p><!-- .charitable-change-user-details -->
+		if ( $user->__isset( 'donor_phone' ) ) :
+			/* translators: %s: phone number */
+			echo '<br />' . sprintf( __( 'Phone number: %s', 'charitable' ), $user->get( 'donor_phone' ) );
+		endif;
+		?>
+	</p>
+	<p class="charitable-change-user-details">
+		<a href="#" data-charitable-toggle="charitable-user-fields"><?php _e( 'Update your details', 'charitable' ); ?></a>
+	</p><!-- .charitable-change-user-details -->
+</div><!-- .charitable-donor-details -->
