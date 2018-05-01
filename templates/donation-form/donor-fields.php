@@ -17,9 +17,20 @@ if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form   = $view_args['form'];
-$field  = $view_args['field'];
-$fields = isset( $field['fields'] ) ? $field['fields'] : array();
+$form    = $view_args['form'];
+$field   = $view_args['field'];
+$fields  = isset( $field['fields'] ) ? $field['fields'] : array();
+$classes = array();
+
+if ( $form->should_hide_user_fields() ) {
+	$classes[] = 'charitable-hidden';
+}
+
+if ( count( $form->get_meta_fields() ) ) {
+	$classes[] = 'bordered';
+}
+
+$class = empty( $classes ) ? '' : 'class="' . implode( ' ', $classes ) . '"';
 
 if ( empty( $fields ) ) {
 	return;
@@ -41,7 +52,7 @@ endif;
 do_action( 'charitable_donation_form_donor_fields_before', $form );
 
 ?>
-	<div id="charitable-user-fields" <?php echo $form->should_hide_user_fields() ? 'class="charitable-hidden"' : ''; ?>>
+	<div id="charitable-user-fields" <?php echo $class; ?>>
 		<?php $form->view()->render_fields( $fields ); ?>
 	</div><!-- #charitable-user-fields -->
 <?php

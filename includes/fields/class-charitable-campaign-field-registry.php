@@ -70,6 +70,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 				'admin'    => array(
 					'campaign-donation-options'     => __( 'Donation Options', 'charitable' ),
 					'campaign-extended-description' => __( 'Extended Description', 'charitable' ),
+					'campaign-creator'              => __( 'Campaign Creator', 'charitable' ),
 					'campaign-extended-settings'    => __( 'Extended Settings', 'charitable' ),
 				),
 			) );
