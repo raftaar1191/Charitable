@@ -883,8 +883,8 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function maybe_add_terms_conditions_fields( $fields ) {
 			$terms_fields = array();
-			$privacy_page = charitable_get_option( 'privacy_policy_page', '0' );
-			$terms_page   = charitable_get_option( 'terms_conditions_page', '0' );
+			$privacy_page = (int) charitable_get_option( 'privacy_policy_page', 0 );
+			$terms_page   = (int) charitable_get_option( 'terms_conditions_page', 0 );
 
 			if ( $privacy_page ) {
 				$terms_fields['privacy_policy_text'] = array(
@@ -943,9 +943,15 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return string
 		 */
 		public function get_parsed_terms_text( $terms_page ) {
+			$url = get_the_permalink( $terms_page );
+
+			if ( ! $url ) {
+				return '';
+			}
+
 			$text    = charitable_get_option( 'terms_conditions', __( 'I have read and agree to the website [terms].', 'charitable' ) );
 			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-terms-link">%s</a>',
-				get_the_permalink( $terms_page ),
+				$url,
 				__( 'terms and conditions', 'charitable' )
 			);
 			return str_replace( '[terms]', $replace, $text );
@@ -960,9 +966,15 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return string
 		 */
 		public function get_parsed_privacy_text( $privacy_page ) {
+			$url = get_the_permalink( $privacy_page );
+
+			if ( ! $url ) {
+				return '';
+			}
+
 			$text    = charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
 			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-privacy-policy-link">%s</a>',
-				get_the_permalink( $privacy_page ),
+				$iurl,
 				__( 'privacy policy', 'charitable' )
 			);
 			return str_replace( '[privacy_policy]', $replace, $text );
