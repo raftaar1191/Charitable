@@ -2,10 +2,10 @@
 /**
  * The template used to display the user fields.
  *
- * @author 	Studio 164a
+ * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.6.0
  */
 
 // Exit if accessed directly.
@@ -25,30 +25,32 @@ if ( empty( $fields ) ) {
 	return;
 }
 
+if ( isset( $field['legend'] ) ) :
 ?>
-<fieldset id="charitable-donor-fields" class="charitable-fieldset">
-	<?php
-	if ( isset( $field['legend'] ) ) :
-	?>
-		<div class="charitable-form-header"><?php echo $field['legend']; ?></div>
-	<?php
-	endif;
+	<div class="charitable-form-header"><?php echo $field['legend']; ?></div>
+<?php
+endif;
 
-	/**
-	 * @hook 	charitable_donation_form_donor_fields_before
-	 */
-	do_action( 'charitable_donation_form_donor_fields_before', $form );
+/**
+ * Add something before the donor fields.
+ *
+ * @since 1.0.0
+ *
+ * @param Charitable_Donation_Form $form The donation form instance.
+ */
+do_action( 'charitable_donation_form_donor_fields_before', $form );
 
-	?>
-	<div class="charitable-form-fields cf">
+?>
+	<div id="charitable-user-fields" <?php echo $form->should_hide_user_fields() ? 'class="charitable-hidden"' : ''; ?>>
 		<?php $form->view()->render_fields( $fields ); ?>
-	</div><!-- .charitable-form-fields -->
-	<?php
+	</div><!-- #charitable-user-fields -->
+<?php
 
-	/**
-	 * @hook 	charitable_donation_form_donor_fields_after
-	 */
-	do_action( 'charitable_donation_form_donor_fields_after', $form );
-
-	?>
-</fieldset><!-- .charitable-fieldset -->
+/**
+ * Add something after the donor fields.
+ *
+ * @since 1.0.0
+ *
+ * @param Charitable_Donation_Form $form The donation form instance.
+ */
+do_action( 'charitable_donation_form_donor_fields_after', $form );

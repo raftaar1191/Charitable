@@ -14,7 +14,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<p class="charitable-change-user-details">
-	<a href="#" data-charitable-toggle="charitable-user-fields"><?php _e( 'Update your details', 'charitable' ); ?></a>
-</p><!-- .charitable-change-user-details -->
-<div id="charitable-user-fields" class="charitable-hidden">
+

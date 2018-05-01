@@ -23,7 +23,7 @@ if ( ! $form ) {
 }
 
 ?>
-<form method="post" id="<?php echo esc_attr( $form_id ) ?>" class="charitable-donation-form charitable-form" data-use-ajax="<?php echo esc_attr( $use_ajax ) ?>">
+<form method="post" id="<?php echo esc_attr( $form_id ); ?>" class="charitable-donation-form charitable-form" data-use-ajax="<?php echo esc_attr( $use_ajax ); ?>">
 	<?php
 	/**
 	 * @hook    charitable_form_before_fields
@@ -32,7 +32,7 @@ if ( ! $form ) {
 
 	?>
 	<div class="charitable-form-fields cf">
-		<?php $form->view()->render() ?>
+		<?php $form->view()->render(); ?>
 	</div><!-- .charitable-form-fields -->
 	<?php
 	/**
@@ -42,9 +42,9 @@ if ( ! $form ) {
 
 	?>
 	<div class="charitable-form-field charitable-submit-field">
-		<button class="button button-primary" type="submit" name="donate"><?php _e( 'Donate', 'charitable' ) ?></button>
+		<button class="button button-primary" type="submit" name="donate"><?php _e( 'Donate', 'charitable' ); ?></button>
 		<div class="charitable-form-processing" style="display: none;">
-			<img src="<?php echo esc_url( charitable()->get_path( 'assets', false ) ) ?>/images/charitable-loading.gif" width="60" height="60" alt="<?php esc_attr_e( 'Loading&hellip;', 'charitable' ) ?>" />
+			<img src="<?php echo esc_url( charitable()->get_path( 'assets', false ) ); ?>/images/charitable-loading.gif" width="60" height="60" alt="<?php esc_attr_e( 'Loading&hellip;', 'charitable' ); ?>" />
 		</div>
 	</div>
-</form><!-- #<?php echo $form_id ?>-->
+</form><!-- #<?php echo $form_id; ?>-->

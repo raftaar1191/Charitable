@@ -35,3 +35,6 @@ if ( ! $user && ! is_customize_preview() ) {
 	endif;
 	?>
 </p>
+<p class="charitable-change-user-details">
+	<a href="#" data-charitable-toggle="charitable-user-fields"><?php _e( 'Update your details', 'charitable' ); ?></a>
+</p><!-- .charitable-change-user-details -->

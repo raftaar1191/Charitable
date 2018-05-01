@@ -68,8 +68,9 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 					'admin' => 'campaign-extended-settings',
 				),
 				'admin'    => array(
-					'campaign-donation-options'  => __( 'Donation Options', 'charitable' ),
-					'campaign-extended-settings' => __( 'Extended Settings', 'charitable' ),
+					'campaign-donation-options'     => __( 'Donation Options', 'charitable' ),
+					'campaign-extended-description' => __( 'Extended Description', 'charitable' ),
+					'campaign-extended-settings'    => __( 'Extended Settings', 'charitable' ),
 				),
 			) );
 		}
