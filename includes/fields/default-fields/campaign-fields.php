@@ -140,6 +140,18 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 		'email_tag'      => false,
 		'show_in_export' => true,
 	),
+	'post_content'             => array(
+		'label'          => __( 'Extended Description', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => 'charitable_get_campaign_post_field',
+		'admin_form'     => array(
+			'section' => 'campaign-extended-description',
+			'type'    => 'text',
+			'view'    => 'metaboxes/campaign-extended-description',
+		),
+		'email_tag'      => false,
+		'show_in_export' => false,
+	),
 	'campaign_creator_name'    => array(
 		'label'          => __( 'Campaign Creator', 'charitable' ),
 		'data_type'      => 'core',

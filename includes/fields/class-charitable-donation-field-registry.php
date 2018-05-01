@@ -34,6 +34,15 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		protected $admin_form_fields;
 
 		/**
+		 * Public donation form fields.
+		 *
+		 * @since 1.6.0
+		 *
+		 * @var   array
+		 */
+		protected $donation_form_fields;
+
+		/**
 		 * Instantiate registry.
 		 *
 		 * @since  1.6.0
@@ -80,11 +89,31 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 		 * Return the donation form fields.
 		 *
 		 * @since  1.5.0
+		 * @since  1.6.0 Added $section parameter.
 		 *
+		 * @param  string $section Optional. If set, will only return the fields within this section.
 		 * @return array
 		 */
-		public function get_donation_form_fields() {
-			return array_filter( $this->fields, array( new Charitable_Field_Filter( 'donation_form' ), 'is_not_false' ) );
+		public function get_donation_form_fields( $section = '' ) {
+			if ( ! isset( $this->donation_form_fields ) ) {
+				$this->donation_form_fields = array_filter( $this->fields, array( new Charitable_Field_Filter( 'donation_form' ), 'is_not_false' ) );
+			}
+
+			if ( empty( $section ) ) {
+				return $this->donation_form_fields;
+			}
+
+			$fields = array();
+
+			foreach ( $this->donation_form_fields as $key => $field ) {
+				if ( $section != $field->donation_form['section'] ) {
+					continue;
+				}
+
+				$fields[ $key ] = $field;
+			}
+
+			return $fields;
 		}
 
 		/**

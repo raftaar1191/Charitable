@@ -191,13 +191,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function get_user_fields() {
-			$fields = charitable()->donation_fields()->get_donation_form_fields();
-			$keys   = array_keys( $fields );
-			$fields = array_combine(
-				$keys,
-				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'donation_form' ), $keys )
-			);
-
 			/**
 			 * Filter the donor fields.
 			 *
@@ -206,8 +199,31 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			 * @param array                    $fields Set of donor fields.
 			 * @param Charitable_Donation_Form $form   Instance of `Charitable_Donation_Form`.
 			 */
-			$fields = apply_filters( 'charitable_donation_form_user_fields', $fields, $this );
+			$fields = apply_filters( 'charitable_donation_form_user_fields', $this->get_sanitized_donation_fields( 'user' ), $this );
 			$fields = $this->hide_non_required_user_fields( $fields );
+
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
+		}
+
+		/**
+		 * Returns the fields related to the person making the donation.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return array
+		 */
+		public function get_meta_fields() {
+			/**
+			 * Filter the meta fields.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array                    $fields Set of meta fields.
+			 * @param Charitable_Donation_Form $form   Instance of `Charitable_Donation_Form`.
+			 */
+			$fields = apply_filters( 'charitable_donation_form_meta_fields', $this->get_sanitized_donation_fields( 'meta' ), $this );
 
 			uasort( $fields, 'charitable_priority_sort' );
 
@@ -219,6 +235,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.2.0
 		 *
+		 * @param  array $fields The user fields.
 		 * @return array[]
 		 */
 		public function hide_non_required_user_fields( $fields ) {
@@ -311,12 +328,23 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'fields'   => $this->get_donation_fields(),
 					'priority' => 20,
 				),
-				'user_fields'    => array(
-					'legend'   => __( 'Your Details', 'charitable' ),
-					'type'     => 'donor-fields',
-					'fields'   => $this->get_user_fields(),
+				'details_fields'  => array(
+					'legend'   => __( 'Details', 'charitable' ),
+					'type'     => 'details-fields',
 					'class'    => 'fieldset',
 					'priority' => 40,
+					'fields'   => array(
+						array(
+							'type'     => 'donor-fields',
+							'fields'   => $this->get_user_fields(),
+							'priority' => 44,
+						),
+						array(
+							'type'     => 'meta-fields',
+							'fields'   => $this->get_meta_fields(),
+							'priority' => 48,
+						),
+					),
 				),
 			);
 
@@ -817,10 +845,32 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array
 		 */
 		public function maybe_add_terms_conditions_fields( $fields ) {
-			$terms_page = charitable_get_option( 'terms_conditions_page', '' );
+			$terms_fields = array();
+			$privacy_page = charitable_get_option( 'privacy_policy_page', '0' );
+			$terms_page   = charitable_get_option( 'terms_conditions_page', '0' );
 
-			if ( '' == $terms_page ) {
-				return $fields;
+			if ( $privacy_page ) {
+				$terms_fields['privacy_policy_text'] = array(
+					'type'     => 'content',
+					'content'  => '<p class="charitable-privacy-policy-text">' . $this->get_parsed_privacy_text( $privacy_page ) . '</p>',
+					'priority' => 4,
+				);
+			}
+
+			if ( $terms_page ) {
+				$terms_fields['terms_text'] = array(
+					'type'     => 'content',
+					'content'  => '<div class="charitable-terms-text">' . apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) ) . '</div>',
+					'priority' => 8,
+				);
+
+				$terms_fields['accept_terms'] = array(
+					'type'      => 'checkbox',
+					'label'     => $this->get_parsed_terms_text( $terms_page ),
+					'priority'  => 12,
+					'required'  => true,
+					'data_type' => 'meta',
+				);
 			}
 
 			/**
@@ -831,29 +881,20 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			 * @param array                    $terms_fields List of terms fields.
 			 * @param Charitable_Donation_Form $form         Instance of `Charitable_Donation_Form`.
 			 */
-			$terms_fields = apply_filters( 'charitable_donation_form_terms_fields', array(
+			$terms_fields = apply_filters( 'charitable_donation_form_terms_fields', $terms_fields, $this );
+
+			if ( empty( $terms_fields ) ) {
+				return $fields;
+			}
+
+			return array_merge( $fields, array(
 				'terms_fields' => array(
 					'legend'   => __( 'Terms and Conditions', 'charitable' ),
 					'type'     => 'fieldset',
-					'fields'   => array(
-						'terms_text'   => array(
-							'type'     => 'content',
-							'content'  => '<div class="charitable-terms-text">' . apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) ) . '</div>',
-							'priority' => 4,
-						),
-						'accept_terms' => array(
-							'type'      => 'checkbox',
-							'label'     => $this->get_parsed_terms_text( $terms_page ),
-							'priority'  => 8,
-							'required'  => true,
-							'data_type' => 'meta',
-						),
-					),
+					'fields'   => $terms_fields,
 					'priority' => 80,
 				),
-			), $this );
-
-			return array_merge( $fields, $terms_fields );
+			) );
 		}
 
 		/**
@@ -871,6 +912,23 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				__( 'terms and conditions', 'charitable' )
 			);
 			return str_replace( '[terms]', $replace, $text );
+		}
+
+		/**
+		 * Return the privacy policy text, with [privacy_policy] replaced by a link to the privacy policy page.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $privacy_page The ID of the privacy policy page.
+		 * @return string
+		 */
+		public function get_parsed_privacy_text( $privacy_page ) {
+			$text    = charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
+			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-privacy-policy-link">%s</a>',
+				get_the_permalink( $privacy_page ),
+				__( 'privacy policy', 'charitable' )
+			);
+			return str_replace( '[privacy_policy]', $replace, $text );
 		}
 
 		/**
@@ -935,6 +993,24 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			add_action( 'charitable_donation_form_fields', array( $this, 'add_payment_fields' ) );
+		}
+
+		/**
+		 * Return donation fields for a particular section.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $section The section of the donation form we need fields for.
+		 * @return array
+		 */
+		protected function get_sanitized_donation_fields( $section ) {
+			$fields = charitable()->donation_fields()->get_donation_form_fields( $section );
+			$keys   = array_keys( $fields );
+
+			return array_combine(
+				$keys,
+				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'donation_form' ), $keys )
+			);
 		}
 
 		/**

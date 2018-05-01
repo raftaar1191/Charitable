@@ -81,14 +81,6 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 		 * @return void
 		 */
 		public function register_customizer_fields() {
-			/* Flip arrays to preserve numeric keys. */
-			$pages = array_flip( array_merge(
-				array(
-					__( 'Select a page', 'charitable' ) => '',
-				),
-				array_flip( charitable_get_pages_options() )
-			) );
-
 			$fields = array(
 				'title'      => __( 'Charitable', 'charitable' ),
 				'priority'   => 1000,
@@ -130,16 +122,41 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									),
 								),
 							),
+							'privacy_policy_page'          => array(
+								'setting' => array(
+									'transport' => 'refresh',
+									'default'   => '',
+								),
+								'control' => array(
+									'type'           => 'dropdown-pages',
+									'label'          => __( 'Privacy policy page', 'charitable' ),
+									'priority'       => 1028,
+									'allow_addition' => true,
+								),
+							),
+							'privacy_policy'               => array(
+								'setting' => array(
+									'transport'         => 'refresh',
+									'default'           => __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ),
+									'sanitize_callback' => function_exists( 'sanitize_textarea_field' ) ? 'sanitize_textarea_field' : 'sanitize_text_field',
+								),
+								'control' => array(
+									'type'        => 'textarea',
+									'label'       => __( 'Privacy policy', 'charitable' ),
+									'description' => __( 'Optionally add some text about your website privacy policy for donors to see during donation.', 'charitable' ),
+									'priority'    => 1028.2,
+								),
+							),
 							'terms_conditions_page'        => array(
 								'setting' => array(
 									'transport' => 'refresh',
 									'default'   => '',
 								),
 								'control' => array(
-									'type'     => 'select',
-									'label'    => __( 'Terms and conditions page', 'charitable' ),
-									'priority' => 1028,
-									'choices'  => $pages,
+									'type'           => 'dropdown-pages',
+									'label'          => __( 'Terms and conditions page', 'charitable' ),
+									'priority'       => 1029,
+									'allow_addition' => true,
 								),
 							),
 							'terms_conditions'             => array(
@@ -152,7 +169,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'type'        => 'text',
 									'label'       => __( 'Terms and conditions', 'charitable' ),
 									'description' => __( 'Optionally add some text for the terms and conditions checkbox that donors must accept to complete their donation.', 'charitable' ),
-									'priority'    => 1028.2,
+									'priority'    => 1029.2,
 								),
 							),
 						),

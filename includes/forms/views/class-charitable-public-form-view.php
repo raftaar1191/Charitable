@@ -587,11 +587,34 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			 * @since 1.5.0
 			 */
 			$templates = apply_filters( 'charitable_public_form_view_custom_field_templates', array(
-				'donation-amount-wrapper' => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donation-amount-wrapper.php' ),
-				'donation-amount'         => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donation-amount.php' ),
-				'donor-fields'            => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/donor-fields.php' ),
-				'gateway-fields'          => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/gateway-fields.php' ),
-				'cc-expiration'           => array( 'class' => 'Charitable_Template', 'path' => 'donation-form/cc-expiration.php' ),
+				'donation-amount-wrapper' => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/donation-amount-wrapper.php',
+				),
+				'donation-amount'         => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/donation-amount.php',
+				),
+				'donor-fields'            => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/donor-fields.php',
+				),
+				'details-fields'          => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/details-fields.php',
+				),
+				'meta-fields'             => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/meta-fields.php',
+				),
+				'gateway-fields'          => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/gateway-fields.php',
+				),
+				'cc-expiration'           => array(
+					'class' => 'Charitable_Template',
+					'path'  => 'donation-form/cc-expiration.php',
+				),
 			) );
 
 			return array_filter( $templates, array( $this, 'sanitize_custom_field_template' ) );

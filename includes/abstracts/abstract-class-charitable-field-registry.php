@@ -224,7 +224,9 @@ if ( ! class_exists( 'Charitable_Field_Registry' ) ) :
 			$section_fields = array();
 
 			foreach ( $fields as $key => $field ) {
-				if ( $section != $field->$setting['section'] ) {
+				$settings = $field->$setting;
+
+				if ( $section != $settings['section'] ) {
 					continue;
 				}
 
