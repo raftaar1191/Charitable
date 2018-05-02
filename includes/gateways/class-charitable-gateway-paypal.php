@@ -705,9 +705,9 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 
 			// Retrieve credentials from core
 			$creds = array(
-				'username'  => charitable_get_option( $mode . 'api_username' ),
-				'password'  => charitable_get_option( $mode . 'api_password' ),
-				'signature' => charitable_get_option( $mode . 'api_signature' )
+				'username'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_username' ) ),
+				'password'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_password' ) ),
+				'signature' => charitable_get_option( array( 'gateways_paypal', $mode . 'api_signature' ) )
 			);
 
 			/**
