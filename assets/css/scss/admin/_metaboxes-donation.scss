@@ -191,8 +191,11 @@ body.post-type-donation {
 }
 
 #donation-log {
+
+    table { word-break: break-all; }
     thead th {
         background: #f8f8f8;
+        &:first-child: { width: 10em; }
     }
 
     tbody td {
