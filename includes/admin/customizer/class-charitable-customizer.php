@@ -122,6 +122,35 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									),
 								),
 							),
+							'contact_consent'              => array(
+								'setting' => array(
+									'transport' => 'refresh',
+									'default'   => 0,
+								),
+								'control' => array(
+									'type'        => 'radio',
+									'label'       => __( 'Donor consent field', 'charitable' ),
+									'description' => __( 'Optionally include a checkbox asking donors to consent to being contacted in the future.', 'charitable' ),
+									'priority'    => 1026,
+									'choices'     => array(
+										1 => __( 'Yes', 'charitable' ),
+										0 => __( 'No', 'charitable' ),
+									),
+								),
+							),
+							'contact_consent_label'        => array(
+								'setting' => array(
+									'transport'         => 'refresh',
+									'default'           => __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ),
+									'sanitize_callback' => function_exists( 'sanitize_textarea_field' ) ? 'sanitize_textarea_field' : 'sanitize_text_field',
+								),
+								'control' => array(
+									'type'        => 'textarea',
+									'label'       => __( 'Donor consent label', 'charitable' ),
+									'priority'    => 1026.2,
+									'description' => __( 'A short statement describing how you would like to contact donors.', 'charitable' ),
+								),
+							),
 							'privacy_policy_page'          => array(
 								'setting' => array(
 									'transport' => 'refresh',

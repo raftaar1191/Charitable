@@ -247,10 +247,10 @@
 #charitable-meta-fields {
   padding: 0 20px; }
 
-#charitable-user-fields.bordered {
-  padding-bottom: 0.5em;
-  margin-bottom: 1.5em;
-  border-bottom: 1px solid #ebebeb; }
+#charitable-meta-fields {
+  padding-top: 1.5em;
+  margin-top: 1.5em;
+  border-top: 1px solid #ebebeb; }
 
 .charitable-terms-text {
   border: 1px solid #ebebeb;

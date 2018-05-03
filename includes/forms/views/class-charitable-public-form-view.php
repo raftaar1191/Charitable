@@ -179,13 +179,13 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  array $fields Optional. A set of fields to display. If not set, 
+		 * @param  array $fields Optional. A set of fields to display. If not set,
 		 *                       we will look for fields in the form's `get_fields()`
 		 *                       method (if it has one).
 		 * @return boolean       True if any fields were rendered. False otherwsie.
 		 */
 		public function render_fields( $fields = array() ) {
-			if ( empty( $fields ) ) {                
+			if ( empty( $fields ) ) {
 				$fields = $this->form->get_fields();
 
 				/* If still missing fields, return false and throw an error. */

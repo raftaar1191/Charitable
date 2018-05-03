@@ -334,12 +334,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'class'    => 'fieldset',
 					'priority' => 40,
 					'fields'   => array(
-						array(
+						'donor_fields' => array(
 							'type'     => 'donor-fields',
 							'fields'   => $this->get_user_fields(),
 							'priority' => 44,
 						),
-						array(
+						'meta_fields'  => array(
 							'type'     => 'meta-fields',
 							'fields'   => $this->get_meta_fields(),
 							'priority' => 48,
@@ -782,30 +782,48 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$fields = array();
 
 			foreach ( $this->get_fields() as $section_id => $section ) {
-
-				if ( 'payment_fields' == $section_id ) {
-
-					$section_fields = array();
-
-					foreach ( $section['gateways'] as $gateway_id => $gateway_section ) {
-						if ( isset( $gateway_section['fields'] ) ) {
-							$section_fields['gateways'][ $gateway_id ] = $gateway_section['fields'];
-						}
-					}
-
-					$fields = array_merge( $fields, $section_fields );
-
-				} elseif ( isset( $section['fields'] ) ) {
-
-					$fields = array_merge( $fields, $section['fields'] );
-
-				} else {
-
-					$fields[ $section_id ] = $section;
-				}
+				$fields = array_merge( $fields, $this->get_fields_from_section( $section_id, $section ) );
 			}
 
 			return $fields;
+		}
+
+		/**
+		 * Return the fields from a particular section.
+		 *
+		 * This will loop recursively, so if the section has a "fields" property,
+		 * it will loop over those fields and call itself again for each of those.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $section_id The key of the section, or field.
+		 * @param  array  $section    The section arguments.
+		 * @return array
+		 */
+		public function get_fields_from_section( $section_id, $section ) {
+			if ( 'payment_fields' == $section_id ) {
+				$section_fields = array();
+
+				foreach ( $section['gateways'] as $gateway_id => $gateway_section ) {
+					if ( isset( $gateway_section['fields'] ) ) {
+						$section_fields['gateways'][ $gateway_id ] = $gateway_section['fields'];
+					}
+				}
+
+				return $section_fields;
+			}
+
+			if ( array_key_exists( 'fields', $section ) ) {
+				$section_fields = array();
+
+				foreach ( $section['fields'] as $section_id => $section ) {
+					$section_fields = array_merge( $section_fields, $this->get_fields_from_section( $section_id, $section ) );
+				}
+
+				return $section_fields;
+			}
+
+			return array( $section_id => $section );
 		}
 
 		/**
@@ -860,7 +878,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			if ( $terms_page ) {
 				$terms_fields['terms_text'] = array(
 					'type'     => 'content',
-					'content'  => '<div class="charitable-terms-text">' . apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) ) . '</div>',
+					'content'  => '<div class="charitable-terms-text">' . $this->get_terms( $terms_page ) . '</div>',
 					'priority' => 8,
 				);
 
@@ -895,6 +913,24 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 					'priority' => 80,
 				),
 			) );
+		}
+
+		/**
+		 * Return the terms and conditions text.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $terms_page The ID of the terms page.
+		 * @return string
+		 */
+		public function get_terms( $terms_page ) {
+			remove_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
+
+			$content = apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) );
+
+			add_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
+
+			return $content;
 		}
 
 		/**
@@ -937,7 +973,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 
 			$text    = charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
 			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-privacy-policy-link">%s</a>',
-				$iurl,
+				$url,
 				__( 'privacy policy', 'charitable' )
 			);
 			return str_replace( '[privacy_policy]', $replace, $text );
