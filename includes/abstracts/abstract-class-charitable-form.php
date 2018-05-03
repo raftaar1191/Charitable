@@ -449,9 +449,9 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
-		 * 							 function once for each uploaded file.
+		 *                           function once for each uploaded file.
 		 * @param  array  $overrides Optional. An associative array of names=>values to
-		 * 							 override default variables. Default false.
+		 *                           override default variables. Default false.
 		 * @return array
 		 */
 		protected function get_file_overrides( $file_key, $overrides = array() ) {
@@ -641,15 +641,15 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 		 * @return boolean False if the field was not rendered. True otherwise.
 		 */
 		public function render_field( $field, $key, $form, $index = 0, $namespace = null, $from_template = true ) {
+			if ( ! $from_template ) {
+				return false;
+			}
+
 			charitable_get_deprecated()->deprecated_function(
 				__METHOD__,
 				'1.5.0',
 				'Charitable_Public_Form_View::render_field()'
 			);
-
-			if ( ! $from_template ) {
-				return false;
-			}
 
 			if ( ! $form->is_current_form( $this->id ) ) {
 				return false;
