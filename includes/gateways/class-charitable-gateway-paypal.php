@@ -334,7 +334,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$business_email = isset( $data['business'] ) && is_email( $data['business'] ) ? trim( $data['business'] ) : trim( $data['receiver_email'] );
 
 			/* Verify that the business email matches the PayPal email in the settings */
-			if ( strcasecmp( $business_email, trim( $gateway->get_value( 'paypal_email' ) ) ) != 0 ) {
+			if ( strcasecmp( $business_email, trim( self::get_paypal_email() ) ) != 0 ) {
 
 				$message = sprintf( '%s %s', __( 'Invalid Business email in the IPN response. IPN data:', 'charitable' ), json_encode( $data ) );
 				$donation->log()->add( $message );
