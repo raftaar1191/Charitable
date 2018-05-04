@@ -185,11 +185,10 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'   => false,
 					'callback' => array( $this, 'fix_donor_role_caps' ),
 				),
-				'update_tables_160'                       => array(
-					'version'  => '1.6.0',
-					'message'  => '',
-					'prompt'   => false,
-					'callback' => array( $this, 'update_donor_table' ),
+				'upgrade_donor_tables'                    => array(
+					'version' => '1.6.0',
+					'message' => __( 'Charitable needs to upgrade its database tables.', 'charitable' ),
+					'prompt'  => true,
 				),
 			);
 		}
@@ -958,15 +957,19 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		}
 
 		/**
-		 * Update the donors table.
+		 * Update the donors table and add the donormeta table.
 		 *
 		 * @since  1.6.0
 		 *
 		 * @return boolean Whether tables were successfully updated.
 		 */
-		public function update_donor_table() {
+		public function upgrade_donor_tables() {
 			try {
 				charitable_get_table( 'donors' )->create_table();
+				charitable_get_table( 'donormeta' )->create_table();
+
+				$this->finish_upgrade( 'upgrade_donor_tables' );
+
 				return true;
 			} catch ( Exception $e ) {
 				return false;

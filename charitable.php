@@ -284,6 +284,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'endpoints' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'donation_fields' ), 100 );
 			add_action( 'plugins_loaded', array( $this, 'campaign_fields' ), 100 );
+			add_action( 'plugins_loaded', array( $this, 'register_donormeta_table' ) );
 			add_action( 'plugins_loaded', 'charitable_load_compat_functions' );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
@@ -652,6 +653,20 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Registers our donormeta table as a meta data table.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @global WPDB $wpdb
+		 * @return void
+		 */
+		public function register_donormeta_table() {
+			global $wpdb;
+
+			$wpdb->donormeta = $wpdb->prefix . 'charitable_donormeta';
+		}
+
+		/**
 		 * Returns the model for one of Charitable's database tables.
 		 *
 		 * @since  1.0.0
@@ -692,6 +707,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			return apply_filters( 'charitable_db_tables', array(
 				'campaign_donations' => 'Charitable_Campaign_Donations_DB',
 				'donors'             => 'Charitable_Donors_DB',
+				'donormeta'          => 'Charitable_Donormeta_DB',
 			) );
 		}
 

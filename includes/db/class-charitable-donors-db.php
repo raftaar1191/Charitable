@@ -75,12 +75,12 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				last_name varchar(255) default '',
 				date_joined datetime NOT NULL default '0000-00-00 00:00:00',
 				data_erased datetime default '0000-00-00 00:00:00',
-				consent tinyint(1) unsigned NOT NULL default 0,
+				contact_consent tinyint(1) unsigned default NULL,
 				PRIMARY KEY  (donor_id),
 				KEY user_id (user_id),
 				KEY email (email),
 				KEY data_erased (data_erased),
-				KEY consent (consent)
+				KEY contact_consent (contact_consent)
 				) $charset_collate;";
 
 			$this->_create_table( $sql );
@@ -95,16 +95,14 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 */
 		public function get_columns() {
 			return array(
-				'donor_id'          => '%d',
-				'user_id'           => '%d',
-				'email'             => '%s',
-				'first_name'        => '%s',
-				'last_name'         => '%s',
-				'date_joined'       => '%s',
-				'data_erased'       => '%s',
-				'consent'           => '%d',
-				'consent_agreement' => '%s',
-				'consent_date'      => '%s',
+				'donor_id'        => '%d',
+				'user_id'         => '%d',
+				'email'           => '%s',
+				'first_name'      => '%s',
+				'last_name'       => '%s',
+				'date_joined'     => '%s',
+				'data_erased'     => '%s',
+				'contact_consent' => '%d',
 			);
 		}
 
@@ -117,16 +115,14 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 */
 		public function get_column_defaults() {
 			return array(
-				'donor_id'          => '',
-				'user_id'           => 0,
-				'email'             => '',
-				'first_name'        => '',
-				'last_name'         => '',
-				'date_joined'       => date( 'Y-m-d H:i:s' ),
-				'data_erased'       => '',
-				'consent'           => 0,
-				'consent_agreement' => '',
-				'consent_date'      => '',
+				'donor_id'        => '',
+				'user_id'         => 0,
+				'email'           => '',
+				'first_name'      => '',
+				'last_name'       => '',
+				'date_joined'     => date( 'Y-m-d H:i:s' ),
+				'data_erased'     => '',
+				'contact_consent' => '',
 			);
 		}
 

@@ -700,8 +700,8 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			$donor_values = apply_filters( 'charitable_donor_values', array(
 				'user_id'    => $this->ID,
 				'email'      => $email,
-				'first_name' => isset( $submitted['first_name'] ) ? $submitted['first_name'] : $this->first_name,
-				'last_name'  => isset( $submitted['last_name'] ) ? $submitted['last_name'] : $this->last_name,
+				'first_name' => array_key_exists( 'first_name', $submitted ) ? $submitted['first_name'] : $this->first_name,
+				'last_name'  => array_key_exists( 'last_name', $submitted ) ? $submitted['last_name'] : $this->last_name,
 			), $this, $submitted );
 
 			$donor_id = charitable_get_table( 'donors' )->insert( $donor_values );

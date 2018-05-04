@@ -74,7 +74,7 @@ if ( ! class_exists( 'Charitable_Donormeta_DB' ) ) :
                 meta_value longtext,
 				PRIMARY KEY  (meta_id),
 				KEY donor_id (donor_id),
-				KEY meta_key (meta_key(191)),
+				KEY meta_key (meta_key(191))
 				) $charset_collate;";
 
 			$this->_create_table( $sql );
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Charitable_Donormeta_DB' ) ) :
 		/**
 		 * Whitelist of columns.
 		 *
-		 * @since  166.0
+		 * @since  1.6.0
 		 *
 		 * @return array
 		 */
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Charitable_Donormeta_DB' ) ) :
 		/**
 		 * Default column values.
 		 *
-		 * @since  166.0
+		 * @since  1.6.0
 		 *
 		 * @return array
 		 */
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Charitable_Donormeta_DB' ) ) :
 		/**
 		 * Add a new donor meta item.
 		 *
-		 * @since  166.0
+		 * @since  1.6.0
 		 *
 		 * @param  array  $data Donor data to insert.
 		 * @param  string $type Should always be 'donormeta'.
