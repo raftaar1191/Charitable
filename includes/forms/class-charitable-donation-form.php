@@ -866,6 +866,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$terms_fields = array();
 			$privacy_page = (int) charitable_get_option( 'privacy_policy_page', 0 );
 			$terms_page   = (int) charitable_get_option( 'terms_conditions_page', 0 );
+			$show_consent = (int) charitable_get_option( 'contact_consent', 0 );
 
 			if ( $privacy_page ) {
 				$terms_fields['privacy_policy_text'] = array(
@@ -875,17 +876,27 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				);
 			}
 
+			if ( $show_consent ) {
+				$terms_fields['contact_consent'] = array(
+					'type'      => 'checkbox',
+					'label'     => charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) ),
+					'priority'  => 8,
+					'required'  => false,
+					'data_type' => 'meta',
+				);
+			}
+
 			if ( $terms_page ) {
 				$terms_fields['terms_text'] = array(
 					'type'     => 'content',
 					'content'  => '<div class="charitable-terms-text">' . $this->get_terms( $terms_page ) . '</div>',
-					'priority' => 8,
+					'priority' => 12,
 				);
 
 				$terms_fields['accept_terms'] = array(
 					'type'      => 'checkbox',
 					'label'     => $this->get_parsed_terms_text( $terms_page ),
-					'priority'  => 12,
+					'priority'  => 16,
 					'required'  => true,
 					'data_type' => 'meta',
 				);

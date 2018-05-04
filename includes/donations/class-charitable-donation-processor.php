@@ -437,6 +437,8 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			$this->save_donation_meta( $donation_id );
 
+			$this->save_donor_contact_consent();
+
 			$log_note = array_key_exists( 'log_note', $values ) ? $values['log_note'] : '';
 
 			if ( empty( $log_note ) ) {
@@ -582,11 +584,38 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		}
 
 		/**
+		 * Save whether the donor gave consent to be contacted.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return void
+		 */
+		public function save_donor_contact_consent() {
+			/* If we are not showing a consent field, leave this empty. */
+			if ( ! charitable_get_option( 'contact_consent', 0 ) ) {
+				return;
+			}
+
+			$donor_id        = $this->get_donor_id();
+			$meta            = $this->get_donation_data_value( 'meta' );
+			$contact_consent = array_key_exists( 'contact_consent', $meta ) ? (bool) $meta['contact_consent'] : false;
+
+			/**
+			 * Record their consent.
+			 */
+			$consent_log = new Charitable_Donor_Consent_Log( $donor_id );
+			$consent_log->add(
+				$contact_consent,
+				charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) )
+			);
+		}
+
+		/**
 		 * Add a message to the donation log.
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param 	int    $donation_id The donation ID.
+		 * @param  int    $donation_id The donation ID.
 		 * @param  string $message     The message to add to the log.
 		 * @return void
 		 */
@@ -842,10 +871,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return string
 		 */
 		protected function get_donor_name() {
-			$user = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
-			$user_data = $this->get_donation_data_value( 'user' );
+			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
+			$user_data  = $this->get_donation_data_value( 'user' );
 			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
-			$last_name = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
+			$last_name  = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
 			return trim( sprintf( '%s %s', $first_name, $last_name ) );
 		}
 

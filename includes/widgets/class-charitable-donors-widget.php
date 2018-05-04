@@ -218,8 +218,8 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			 *
 			 * @param  array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param  array $args       All the parsed arguments.
-	         * @return array
-	         */
+			 * @return array
+			 */
 			$query_args = apply_filters( 'charitable_donors_widget_donor_query_args', $query_args, $instance );
 
 			return new Charitable_Donor_Query( $query_args );
