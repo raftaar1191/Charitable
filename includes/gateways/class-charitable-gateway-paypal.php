@@ -236,7 +236,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'redirect' => $paypal_redirect,
 				'safe'     => false,
 			);
-
 		}
 
 		/**
@@ -486,7 +485,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			);
 
 			return array_merge( $data, $_POST );
-
 		}
 
 		/**
@@ -620,8 +618,8 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			 * @since 1.5.4 Added $ssl_check and $ipn_check parameters.
 			 *
 			 * @param string  $paypal_uri The URL.
-			 * @param boolean $ssl_check Whether to check SSL.
-			 * @param boolean $ipn_check Whether this is for an IPN request.
+			 * @param boolean $ssl_check  Whether to check SSL.
+			 * @param boolean $ipn_check  Whether this is for an IPN request.
 			 */
 			return apply_filters( 'charitable_paypal_uri', $paypal_uri, $ssl_check, $ipn_check );
 		}
@@ -692,6 +690,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		private static function is_valid_request() {
 			return ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' == $_SERVER['REQUEST_METHOD'];
 		}
+
 	}
 
 endif;
