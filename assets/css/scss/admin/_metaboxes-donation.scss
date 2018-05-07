@@ -195,7 +195,9 @@ body.post-type-donation {
     table { word-break: break-all; }
     thead th {
         background: #f8f8f8;
-        &:first-child: { width: 10em; }
+        &:first-child {
+            width: 140px;
+        }
     }
 
     tbody td {

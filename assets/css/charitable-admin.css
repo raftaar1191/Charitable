@@ -723,8 +723,12 @@ body.post-type-donation .donation-erasure-notice {
     border-bottom: none;
     padding-bottom: 0; }
 
+#donation-log table {
+  word-break: break-all; }
 #donation-log thead th {
   background: #f8f8f8; }
+  #donation-log thead th:first-child {
+    width: 140px; }
 #donation-log tbody td {
   border-bottom: 1px solid #e5e5e5; }
 
