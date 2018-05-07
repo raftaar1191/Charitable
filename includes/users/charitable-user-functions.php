@@ -139,9 +139,8 @@ function charitable_permit_donor_without_email() {
 	/**
 	 * Filter whether donors can be added without an email address.
 	 *
-	 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, donors
-	 * without an email address can be added by default, primarily to support manual
-	 * donations without an email address. Use this filter to disable that ability.
+	 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, it's donors
+	 * possible to support manual donations without an email address by using this filter.
 	 *
 	 * NOTE: By default, the public donation form still requires an email address, so this
 	 * primarily affects programattically created donors, or donors created via manual
