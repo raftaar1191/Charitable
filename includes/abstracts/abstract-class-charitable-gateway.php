@@ -118,10 +118,10 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		/**
 		 * Return the value for a particular gateway setting.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $setting
-		 * @return  mixed
+		 * @param  string $setting
+		 * @return mixed
 		 */
 		public function get_value( $setting ) {
 			$default = isset( $this->defaults[ $setting ] ) ? $this->defaults[ $setting ] : '';

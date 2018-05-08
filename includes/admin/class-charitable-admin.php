@@ -49,7 +49,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 		protected function __construct() {
 			$this->load_dependencies();
 
-			$this->donation_actions = new Charitable_Donation_Admin_Actions;			
+			$this->donation_actions = new Charitable_Donation_Admin_Actions;
 
 			do_action( 'charitable_admin_loaded' );
 		}
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			require_once( $admin_dir . 'campaigns/charitable-admin-campaign-hooks.php' );
 			require_once( $admin_dir . 'dashboard-widgets/charitable-dashboard-widgets-hooks.php' );
 			require_once( $admin_dir . 'donations/charitable-admin-donation-hooks.php' );
-			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );			
+			require_once( $admin_dir . 'settings/charitable-settings-admin-hooks.php' );
 		}
 
 		/**
@@ -307,6 +307,7 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 			}
 
 			$notices = array(
+				/* translators: %s: link */
 				'release-150' => sprintf( __( "Charitable 1.5 is packed with new features and improvements. <a href='%s' target='_blank'>Find out what's new</a>.", 'charitable' ),
 					'https://www.wpcharitable.com/charitable-1-5-release-notes/?utm_source=notice&utm_medium=wordpress-dashboard&utm_campaign=release-notes&utm_content=release-150'
 				),

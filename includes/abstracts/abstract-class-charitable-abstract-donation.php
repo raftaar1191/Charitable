@@ -795,7 +795,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string $new_status
+		 * @param  string $new_status The status to update the donation to.
 		 * @return int|WP_Error The value 0 or WP_Error on failure. The donation ID on success.
 		 */
 		public function update_status( $new_status ) {
@@ -827,7 +827,8 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$donation_id = wp_update_post( $this->donation_data );
 
 			$message = sprintf(
-				__( 'Donation status updated from %s to %s.', 'charitable' ),
+				/* translators: %$1s: old status; %$2s: new status. */
+				__( 'Donation status updated from %$1s to %$2s.', 'charitable' ),
 				isset( $statuses[ $old_status ] ) ? $statuses[ $old_status ] : $old_status,
 				isset( $statuses[ $new_status ] ) ? $statuses[ $new_status ] : $new_status
 			);
