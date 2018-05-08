@@ -3,14 +3,17 @@
  * Registers and performs admin actions.
  *
  * @package   Charitable/Classes/Charitable_Admin_Actions
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 
@@ -76,8 +79,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
-		 * @param  array  $args      Optional. Mixed set of arguments.
+		 * @param  int   $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+		 * @param  array $args      Optional. Mixed set of arguments.
 		 * @return array
 		 */
 		public function get_available_actions( $object_id, $args = array() ) {
@@ -97,8 +100,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
-		 * @param  array  $args      Optional. Mixed set of arguments.
+		 * @param  int   $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+		 * @param  array $args      Optional. Mixed set of arguments.
 		 * @return boolean
 		 */
 		public function has_available_actions( $object_id, $args = array() ) {
@@ -112,6 +115,39 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		}
 
 		/**
+		 * Add action fields, if there are any.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int    $object_id The current post ID.
+		 * @param  string $action_id The key of the action.
+		 * @return void
+		 */
+		public function add_action_fields( $object_id, $action_id ) {
+			if ( ! array_key_exists( $action_id, $this->actions ) ) {
+				return;
+			}
+
+			$action = $this->actions[ $action_id ];
+
+			if ( ! array_key_exists( 'fields', $action ) || ! $action['fields'] ) {
+				return;
+			}
+
+			ob_start();
+
+			call_user_func( $action['fields'], $object_id, $action );
+
+			$fields = ob_get_clean();
+
+			if ( ! $fields ) {
+				return;
+			}
+
+			echo '<div class="charitable-action-fields" style="display: none;" data-type="' . esc_attr( $action_id ) . '">' . $fields . '</div>';
+		}
+
+		/**
 		 * Checks whether an action is available.
 		 *
 		 * @since  1.5.0
@@ -122,7 +158,13 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 * @return boolean
 		 */
 		protected function is_action_available( $action_args, $object_id, $args = array() ) {
-			return ! array_key_exists( 'active_callback', $action_args ) || call_user_func( $action_args['active_callback'], $object_id, $args );
+			if ( ! array_key_exists( 'active_callback', $action_args ) ) {
+				return true;
+			}
+
+			$args['action_args'] = $action_args;
+
+			return call_user_func( $action_args['active_callback'], $object_id, $args );
 		}
 
 		/**
@@ -141,8 +183,8 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  int    $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
-		 * @param  array  $args      Optional. Mixed set of arguments.
+		 * @param  int   $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
+		 * @param  array $args      Optional. Mixed set of arguments.
 		 * @return array
 		 */
 		public function get_available_groups( $object_id, $args = array() ) {
@@ -165,7 +207,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $location
+		 * @param  string $location The message location.
 		 * @return string
 		 */
 		public function show_result_message( $location ) {
@@ -189,7 +231,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 *                                     the donation; FALSE if it should not.
 		 *     @type int      $success_message Optional. Message to display when an action is successfully run.
 		 *     @type int      $failure_message Optional. Message to display when an action fails to run.
-		 *     @type string   $fields          Optional. Additional fields or content to show when an action is selected.
+		 *     @type callable $fields          Optional. Function returning additional fields or content to show when an action is selected.
 		 * }
 		 * @param  string $group  Optional. If set, action will be added to a group of other related actions, which will be
 		 *                        shown as an optgroup.
@@ -222,6 +264,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 */
 		public function do_action( $action, $object_id, $args = array() ) {      
 			if ( ! $this->action_exists( $action ) ) {
+				/* translators: %s: action id */
 				return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );
 			}
 
@@ -252,7 +295,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 			 * @param int     $object_id The object ID. This could be the ID of the donation, campaign, donor, etc.
 			 * @param array   $args      Optional. Mixed set of arguments.
 			 * @param string  $action    The action we are executing.
-			 */            
+			 */
 			$success = apply_filters( $action_hook, false, $object_id, $args, $action );
 
 			if ( $success && array_key_exists( 'success_message', $action_args ) ) {

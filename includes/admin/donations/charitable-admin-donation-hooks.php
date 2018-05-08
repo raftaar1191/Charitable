@@ -9,11 +9,13 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Add and remove metaboxes.
@@ -23,6 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 add_action( 'add_meta_boxes_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'add_meta_boxes' ) );
 add_action( 'add_meta_boxes_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'remove_meta_boxes' ), 20 );
+
+/**
+ * Add status changes to donation actions.
+ *
+ * @see Charitable_Donation_Meta_Boxes::add_status_change_donation_actions()
+ */
+add_action( 'admin_init', array( Charitable_Donation_Meta_Boxes::get_instance(), 'register_donation_actions' ) );
 
 /**
  * Save the donation.

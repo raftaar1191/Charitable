@@ -288,11 +288,11 @@ function charitable_get_valid_donation_statuses() {
 	 * @param array $statuses The list of status as a key=>value array.
 	 */
 	return apply_filters( 'charitable_donation_statuses', array(
-		'charitable-completed'  => __( 'Paid', 'charitable' ),
-		'charitable-pending'    => __( 'Pending', 'charitable' ),
-		'charitable-failed'     => __( 'Failed', 'charitable' ),
-		'charitable-cancelled'  => __( 'Cancelled', 'charitable' ),
-		'charitable-refunded'   => __( 'Refunded', 'charitable' ),
+		'charitable-completed' => __( 'Paid', 'charitable' ),
+		'charitable-pending'   => __( 'Pending', 'charitable' ),
+		'charitable-failed'    => __( 'Failed', 'charitable' ),
+		'charitable-cancelled' => __( 'Cancelled', 'charitable' ),
+		'charitable-refunded'  => __( 'Refunded', 'charitable' ),
 	) );
 }
 

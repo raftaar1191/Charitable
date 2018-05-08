@@ -6,7 +6,7 @@
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since    1.0.0
+ * @since     1.0.0
  * @version   1.6.0
  */
 
@@ -45,6 +45,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$this->supports = array(
 				'recurring',
 				'recurring_cancellation',
+				'refunds',
 				'1.3.0',
 			);
 		}
@@ -591,6 +592,18 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			 * @param string $reason_code The reason code received from PayPal.
 			 */
 			return apply_filters( 'charitable_paypal_gateway_pending_reason_note', $note, $reason_code );
+		}
+
+		/**
+		 * Process a donation's refund.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $donation_id The donation ID.
+		 * @return boolean
+		 */
+		public function process_refund( $donation_id ) {
+			$credentials = $this->get_api_credentials();
 		}
 
 		/**

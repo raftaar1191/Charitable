@@ -225,6 +225,111 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		}
 
 		/**
+		 * Create donation actions instance, with some initial defaults.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return void
+		 */
+		public function register_donation_actions() {
+			$donation_actions = charitable_get_donation_actions();
+
+			foreach ( charitable_get_valid_donation_statuses() as $status => $label ) {
+				$donation_actions->register( 'change_status_to_' . $status, array(
+					'label'           => $label,
+					'callback'        => array( $this, 'change_donation_status' ),
+					'button_text'     => __( 'Change Status', 'charitable' ),
+					'active_callback' => array( $this, 'can_change_donation_status' ),
+					'success_message' => 11,
+					'failed_message'  => 12,
+					'fields'          => array( $this, 'get_donation_status_change_fields' ),
+				), __( 'Change Status', 'charitable' ) );
+			}
+		}
+
+		/**
+		 * Check whether a particular status change works for the given donation.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int   $object_id The donation's ID.
+		 * @param  array $args      Mixed action arguments.
+		 * @return boolean
+		 */
+		public function can_change_donation_status( $object_id, $args = array() ) {
+			$donation = charitable_get_donation( $object_id );
+
+			return $donation && $args['action_args']['label'] !== $donation->get_status_label();
+		}
+
+		/**
+		 * Change a donation's status.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  boolean $success   Whether the action has been run.
+		 * @param  int     $object_id The donation's ID.
+		 * @param  array   $args      Mixed action arguments.
+		 * @param  string  $action    The action id.
+		 * @return boolean Whether the status was changed.
+		 */
+		public function change_donation_status( $success, $object_id, $args = array(), $action ) {
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! $donation ) {
+				return false;
+			}
+
+			$status  = str_replace( 'change_status_to_', '', $action );
+			$success = $donation->update_status( $status );
+
+			if ( array_key_exists( 'gateway_refund', $_POST ) && $_POST['gateway_refund'] ) {
+
+				$gateway = $donation->get_gateway();
+
+				/**
+				 * Perform a refund in the donation's gateway.
+				 *
+				 * @since 1.6.0
+				 *
+				 * @param int $donation_id The donation's ID.
+				 */
+				do_action( 'charitable_process_refund_' . $gateway, $object_id );
+			}
+
+			return $success;
+		}
+
+		/**
+		 * Additional fields to display for a status change.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int   $object_id The donation's ID.
+		 * @param  array $action    Mixed action arguments.
+		 * @return void
+		 */
+		public function get_donation_status_change_fields( $object_id, $action ) {
+			$statuses = charitable_get_valid_donation_statuses();
+
+			if ( $statuses['charitable-refunded'] != $action['label'] ) {
+				return;
+			}
+
+			$donation = charitable_get_donation( $object_id );
+
+			if ( ! $donation || ! $donation->get_gateway_object()->supports( 'refunds' ) ) {
+				return;
+			}
+
+			/* translators: %s: gateway name */
+			printf( '%s' . __( 'Refund in %s automatically.', 'charitable' ),
+				'<input type="checkbox" name="gateway_refund" value="1" />',
+				$donation->get_gateway_object()->get_name()
+			);
+		}
+
+		/**
 		 * Save meta for the donation.
 		 *
 		 * @since  1.5.0
