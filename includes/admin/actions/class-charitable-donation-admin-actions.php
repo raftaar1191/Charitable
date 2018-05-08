@@ -3,14 +3,17 @@
  * Registers and performs donation actions.
  *
  * @package   Charitable/Classes/Charitable_Donation_Admin_Actions
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Admin_Actions' ) ) :
 

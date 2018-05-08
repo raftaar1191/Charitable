@@ -111,6 +111,13 @@ add_action( 'charitable_process_ipn_paypal', array( 'Charitable_Gateway_Paypal',
 add_action( 'charitable_paypal_web_accept', array( 'Charitable_Gateway_Paypal', 'process_web_accept' ), 10, 2 );
 
 /**
+ * Handle PayPal refund.
+ *
+ * @see Charitable_Gateway_Paypal::process_refund
+ */
+add_action( 'charitable_process_refund_paypal', array( 'Charitable_Gateway_Paypal', 'process_refund' ) );
+
+/**
  * Load charitable-donation-form.js before donation form.
  *
  * @see charitable_load_donation_form_script()
