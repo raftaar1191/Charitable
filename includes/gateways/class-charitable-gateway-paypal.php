@@ -149,6 +149,51 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		}
 
 		/**
+		 * Retrieve PayPal API credentials.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  boolean|null $test_mode Whether to get the test mode credentials.
+		 * @return array
+		 */
+		public static function get_api_credentials( $test_mode = null ) {
+			if ( is_null( $test_mode ) ) {
+				$test_mode = charitable_get_option( 'test_mode' );
+			}
+
+			$mode = $test_mode ? 'sandbox_' : '';
+
+			/**
+			 * Filter the PayPal API Credentials.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array $creds The API credentials.
+			 */
+			return apply_filters( 'charitable_paypal_api_credentials', array(
+				'username'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_username' ) ),
+				'password'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_password' ) ),
+				'signature' => charitable_get_option( array( 'gateways_paypal', $mode . 'api_signature' ) ),
+			) );
+		}
+
+		/**
+		 * Return the API endpoint, depending on whether we need the sandbox or the live one.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  boolean|null $test_mode Whether to get the test mode credentials.
+		 * @return string
+		 */
+		public static function get_api_endpoint( $test_mode = null ) {
+			if ( is_null( $test_mode ) ) {
+				$test_mode = charitable_get_option( 'test_mode' );
+			}
+
+			return $test_mode ? 'https://api-3t.sandbox.paypal.com/nvp' : 'https://api-3t.paypal.com/nvp';
+		}
+
+		/**
 		 * Validate the submitted credit card details.
 		 *
 		 * @since  1.0.0
@@ -603,7 +648,98 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return boolean
 		 */
 		public function process_refund( $donation_id ) {
-			$credentials = $this->get_api_credentials();
+			$donation = charitable_get_donation( $donation_id );
+
+			if ( ! $donation ) {
+				return false;
+			}
+
+			$credentials = self::get_api_credentials( $donation->get_test_mode() );
+
+			$n    = 0;
+			$body = array(
+				'METHOD'        => 'RefundTransaction',
+				'TRANSACTIONID' => $donation->get_gateway_transaction_id(),
+				'REFUNDTYPE'    => 'Full',
+				'USER'          => $credentials['username'],
+				'PWD'           => $credentials['password'],
+				'SIGNATURE'     => $credentials['signature'],
+				'VERSION'       => '204',
+			);
+
+			foreach ( $donation->get_campaign_donations() as $campaign_donation ) {
+				$body[ 'L_INVOICEITEMNAME' . $n ] = $campaign_donation->campaign_name;
+				$body[ 'L_DESCRIPTION' . $n ]     = __( 'Donation', 'charitable' );
+				$body[ 'L_PRICE' . $n ]           = charitable_format_money( $campaign_donation->amount );
+
+				$n += 1;
+			}
+
+			/**
+			 * Filter the PayPal refund args.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param array               $body     The arguments we're sending to PayPal.
+			 * @param Charitable_Donation $donation The donation instance.
+			 */
+			$body    = apply_filters( 'charitable_paypal_refund_args', $body, $donation );
+			$headers = array(
+				'Content-Type'  => 'application/x-www-form-urlencoded',
+				'Cache-Control' => 'no-cache',
+			);
+			$args    = array(
+				'body'        => $body,
+				'headers'     => $headers,
+				'httpversion' => '1.1',
+			);
+
+			/* Post the arguments to PayPal. */
+			$request = wp_remote_post( self::get_api_endpoint( $donation->get_test_mode( false ) ), $args );
+
+			if ( is_wp_error( $request ) ) {
+				$donation->log()->add( sprintf(
+					/* translators: %s: error message. */
+					__( 'PayPal refund failed: %s', 'charitable' ),
+					$request->get_error_message()
+				) );
+
+				return false;
+			}
+
+			$body    = wp_remote_retrieve_body( $request );
+			$code    = wp_remote_retrieve_response_code( $request );
+			$message = wp_remote_retrieve_response_message( $request );
+
+			if ( is_string( $body ) ) {
+				wp_parse_str( $body, $body );
+			}
+
+			if ( 200 === (int) $code
+				&& 'OK' === $message
+				&& isset( $body['ACK'] )
+				&& 'success' === strtolower( $body['ACK'] )
+			) {
+				update_post_meta( $donation->ID, '_paypal_refunded', true );
+
+				$payment->log()->add( sprintf(
+					/* translators: %s: transaction reference. */
+					__( 'PayPal refund transaction ID: %s', 'charitable' ),
+					$body['REFUNDTRANSACTIONID']
+				) );
+
+				return true;
+			}
+
+			$error = array_key_exists( 'L_LONGMESSAGE0', $body ) ? $body['L_LONGMESSAGE0'] : __( 'Unknown reason', 'charitable' );
+
+			$donation->log()->add( sprintf(
+				/* translators: %s: error message. */
+				__( 'PayPal refund failed: %s', 'charitable' ),
+				$error
+			) );
+
+			return false;
 		}
 
 		/**
@@ -718,33 +854,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 */
 		private static function is_valid_request() {
 			return ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' == $_SERVER['REQUEST_METHOD'];
-		}
-
-		/**
-		 * Retrieve PayPal API credentials
-		 *
-		 * @access      public
-		 * @since       1.6.0
-		 */
-		public static function get_api_credentials() {
-
-			$mode = charitable_get_option( 'test_mode' ) ? 'sandbox_' : '';
-
-			// Retrieve credentials from core
-			$creds = array(
-				'username'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_username' ) ),
-				'password'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_password' ) ),
-				'signature' => charitable_get_option( array( 'gateways_paypal', $mode . 'api_signature' ) )
-			);
-
-			/**
-			 * Filter the PayPal API Credentials.
-			 *
-			 * @since 1.6.0
-			 *
-			 * @param array $creds The API credentials.
-			 */
-			return apply_filters( 'charitable_get_paypal_api_credentials', $creds );
 		}
 	}
 
