@@ -828,7 +828,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 
 			$message = sprintf(
 				/* translators: %$1s: old status; %$2s: new status. */
-				__( 'Donation status updated from %$1s to %$2s.', 'charitable' ),
+				__( 'Donation status updated from %1$s to %2$s.', 'charitable' ),
 				isset( $statuses[ $old_status ] ) ? $statuses[ $old_status ] : $old_status,
 				isset( $statuses[ $new_status ] ) ? $statuses[ $new_status ] : $new_status
 			);
