@@ -22,8 +22,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 	 *
 	 * @since  1.0.0
 	 */
-	class Charitable_Gateway_Paypal extends Charitable_Gateway
-		implements Charitable_Gateway_Cancellable_Subscriptions_Interface {
+	class Charitable_Gateway_Paypal extends Charitable_Gateway {
 
 		/**
 		 * Gateway ID.
@@ -175,6 +174,31 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'password'  => charitable_get_option( array( 'gateways_paypal', $mode . 'api_password' ) ),
 				'signature' => charitable_get_option( array( 'gateways_paypal', $mode . 'api_signature' ) ),
 			) );
+		}
+
+		/**
+		 * Check whether we have the required PayPal API credentials.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  boolean|null $test_mode Whether to get the test mode credentials.
+		 * @return array
+		 */
+		public static function has_api_credentials( $test_mode = null ) {
+			$creds    = self::get_api_credentials( $test_mode );
+			$required = array(
+				'username',
+				'password',
+				'signature',
+			);
+
+			foreach ( $required as $key ) {
+				if ( ! array_key_exists( $key, $creds ) || empty( $creds[ $key ] ) ) {
+					return false;
+				}
+			}
+
+			return true;
 		}
 
 		/**
@@ -695,7 +719,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				'timeout'     => 30,
 				'httpversion' => '1.1',
 			);
-			
+
 			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
 				error_log( var_export( $args, true ) );
 			}
@@ -752,6 +776,23 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			) );
 
 			return false;
+		}
+
+		/**
+		 * Check whether a particular donation can have its status changed.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  Charitable_Donation $donation The donation object.
+		 * @return boolean
+		 */
+		public function is_donation_refundable( Charitable_Donation $donation ) {
+			if ( ! self::has_api_credentials( $donation->get_test_mode() ) ) {
+				return false;
+			}
+
+			return strlen( $donation->get_gateway_transaction_id() )
+				&& true != get_post_meta( $donation->ID, '_paypal_refunded', true );
 		}
 
 		/**

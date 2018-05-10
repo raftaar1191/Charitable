@@ -299,10 +299,9 @@ function charitable_get_valid_donation_statuses() {
 /**
  * Cancel a donation.
  *
- * @global 	WP_Query $wp_query
- *
  * @since  1.4.0
  *
+ * @global WP_Query $wp_query
  * @return boolean True if the donation was cancelled. False otherwise.
  */
 function charitable_cancel_donation() {

@@ -150,6 +150,18 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		}
 
 		/**
+		 * Checks whether a particular donation is refundable.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  Charitable_Donation $donation The donation object.
+		 * @return boolean
+		 */
+		public function is_donation_refundable( Charitable_Donation $donation ) {
+			return $this->supports( 'refunds' );
+		}
+
+		/**
 		 * Returns an array of credit card fields.
 		 *
 		 * If the gateway requires different fields, this can simply be redefined

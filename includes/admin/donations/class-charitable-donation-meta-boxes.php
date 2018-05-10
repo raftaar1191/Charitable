@@ -238,7 +238,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 				$donation_actions->register( 'change_status_to_' . $status, array(
 					'label'           => $label,
 					'callback'        => array( $this, 'change_donation_status' ),
-					'button_text'     => __( 'Change Status', 'charitable' ),
+					'button_text'     => __( 'Update Status', 'charitable' ),
 					'active_callback' => array( $this, 'can_change_donation_status' ),
 					'success_message' => 11,
 					'failed_message'  => 12,
@@ -318,7 +318,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 
 			$donation = charitable_get_donation( $object_id );
 
-			if ( ! $donation || ! $donation->get_gateway_object()->supports( 'refunds' ) ) {
+			if ( ! $donation || ! $donation->is_refundable_in_gateway() ) {
 				return;
 			}
 
