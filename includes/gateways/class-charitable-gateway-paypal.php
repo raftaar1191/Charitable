@@ -647,7 +647,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @param  int $donation_id The donation ID.
 		 * @return boolean
 		 */
-		public function process_refund( $donation_id ) {
+		public static function process_refund( $donation_id ) {
 			$donation = charitable_get_donation( $donation_id );
 
 			if ( ! $donation ) {
@@ -668,9 +668,10 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			);
 
 			foreach ( $donation->get_campaign_donations() as $campaign_donation ) {
-				$body[ 'L_INVOICEITEMNAME' . $n ] = $campaign_donation->campaign_name;
-				$body[ 'L_DESCRIPTION' . $n ]     = __( 'Donation', 'charitable' );
-				$body[ 'L_PRICE' . $n ]           = charitable_format_money( $campaign_donation->amount );
+				$body[ 'L_INVOICEITEMNAME' . $n ]   = $campaign_donation->campaign_name;
+				$body[ 'L_DESCRIPTION' . $n ]       = __( 'Donation', 'charitable' );
+				$body[ 'L_PRICE' . $n ]             = Charitable_Currency::get_instance()->sanitize_monetary_amount( (string) $campaign_donation->amount );
+				$body[ 'L_PRICECURRENCYCODE' . $n ] = charitable_get_currency();
 
 				$n += 1;
 			}
@@ -691,8 +692,13 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$args    = array(
 				'body'        => $body,
 				'headers'     => $headers,
+				'timeout'     => 30,
 				'httpversion' => '1.1',
 			);
+			
+			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
+				error_log( var_export( $args, true ) );
+			}
 
 			/* Post the arguments to PayPal. */
 			$request = wp_remote_post( self::get_api_endpoint( $donation->get_test_mode( false ) ), $args );
@@ -715,6 +721,12 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				wp_parse_str( $body, $body );
 			}
 
+			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
+				error_log( var_export( $body, true ) );
+				error_log( 'Response Code: ' . $code );
+				error_log( 'Response Message: ' . $message );
+			}
+
 			if ( 200 === (int) $code
 				&& 'OK' === $message
 				&& isset( $body['ACK'] )
@@ -722,7 +734,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			) {
 				update_post_meta( $donation->ID, '_paypal_refunded', true );
 
-				$payment->log()->add( sprintf(
+				$donation->log()->add( sprintf(
 					/* translators: %s: transaction reference. */
 					__( 'PayPal refund transaction ID: %s', 'charitable' ),
 					$body['REFUNDTRANSACTIONID']
