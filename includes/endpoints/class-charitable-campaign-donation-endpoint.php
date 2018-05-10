@@ -120,7 +120,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 * @param  string $template The default template.
 		 * @return string
 		 */
-		public function get_template( $template ) {			
+		public function get_template( $template ) {
 			$donation_id = get_query_var( 'donation_id', false );
 
 			/* If a donation ID is included, make sure it belongs to the current user. */

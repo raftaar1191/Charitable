@@ -27,6 +27,8 @@ do_action( 'charitable_user_registration_before', $form, $view_args );
 	/**
 	 * Do something before rendering the form fields.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param Charitable_Form $form      The form object.
 	 * @param array           $view_args All args passed to template.
 	 */
@@ -40,6 +42,8 @@ do_action( 'charitable_user_registration_before', $form, $view_args );
 
 	/**
 	 * Do something after rendering the form fields.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param Charitable_Form $form      The form object.
 	 * @param array           $view_args All args passed to template.

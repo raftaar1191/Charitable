@@ -27,7 +27,7 @@ $form = $view_args['form'];
 
 	?>
 	<form id="lostpasswordform" class="charitable-form" action="<?php echo wp_lostpassword_url() ?>" method="post">
-		<?php 
+		<?php
 		/**
 		 * Do something before rendering the form fields.
 		 *
@@ -36,8 +36,8 @@ $form = $view_args['form'];
 		 * @param Charitable_Form $form      The form object.
 		 * @param array           $view_args All args passed to template.
 		 */
-		do_action( 'charitable_form_before_fields', $form, $view_args ) 
-		
+		do_action( 'charitable_form_before_fields', $form, $view_args );
+
 		?>
 		<div class="charitable-form-fields cf">
 			<?php $form->view()->render() ?>

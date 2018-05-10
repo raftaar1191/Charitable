@@ -26,9 +26,11 @@ $form = $view_args['form'];
 
 	?>
 	<form id="resetpassform" class="charitable-form" action="<?php echo site_url( 'wp-login.php?action=resetpass' ); ?>" method="post" autocomplete="off">
-		<?php 
+		<?php
 		/**
 		 * Do something before rendering the form fields.
+		 *
+		 * @since 1.4.0
 		 *
 		 * @param Charitable_Form $form      The form object.
 		 * @param array           $view_args All args passed to template.
@@ -42,9 +44,11 @@ $form = $view_args['form'];
 			<?php $form->view()->render() ?>
 			<p class="description"><?php echo wp_get_password_hint(); ?></p>
 		</div><!-- .charitable-form-fields -->
-		<?php 
+		<?php
 		/**
 		 * Do something after rendering the form fields.
+		 *
+		 * @since 1.4.0
 		 *
 		 * @param Charitable_Form $form      The form object.
 		 * @param array           $view_args All args passed to template.

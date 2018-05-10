@@ -814,13 +814,14 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$statuses = charitable_get_valid_donation_statuses();
 
 			if ( false === charitable_is_valid_donation_status( $new_status ) ) {
-
-				$new_status = array_search( $new_status, $statuses );
+				$original_new_status = $new_status;
+				$new_status          = array_search( $new_status, $statuses );
 
 				if ( false === $new_status ) {
 					charitable_get_deprecated()->doing_it_wrong(
 						__METHOD__,
-						sprintf( '%s is not a valid donation status.', $new_status ),
+						/* translators: %s: status */
+						sprintf( '%s is not a valid donation status.', $original_new_status ),
 						'1.0.0'
 					);
 					return 0;

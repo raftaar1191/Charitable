@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @since 1.0.0
 		 * @since 1.5.0 $campaign argument became optional. Previously it was required.
 		 *
-		 * @param Charitable_Campaign|null $campaign Optional. Campaign receiving the donation, or NULL if 
+		 * @param Charitable_Campaign|null $campaign Optional. Campaign receiving the donation, or NULL if
 		 *                                           the campaign will be selected in the form.
 		 */
 		public function __construct( Charitable_Campaign $campaign = null ) {
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string $key
+		 * @param  string $key     The field key.
 		 * @param  string $default Optional. The value that will be used if none is set.
 		 * @return mixed
 		 */
