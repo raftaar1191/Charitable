@@ -2,6 +2,8 @@
 /**
  * The template used to display the donation amount inputs.
  *
+ * Override this template by copying it to yourtheme/charitable/donation-form/donation-amount.php
+ *
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0
@@ -58,7 +60,7 @@ do_action( 'charitable_donation_form_before_donation_amount', $form );
 			'form_id'     => $form_id,
 		)
 	);
-	
+
 	/**
 	 * @hook    charitable_donation_form_after_donation_amounts
 	 */

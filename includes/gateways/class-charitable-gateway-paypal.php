@@ -182,7 +182,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @since  1.6.0
 		 *
 		 * @param  boolean|null $test_mode Whether to get the test mode credentials.
-		 * @return array
+		 * @return boolean
 		 */
 		public static function has_api_credentials( $test_mode = null ) {
 			$creds    = self::get_api_credentials( $test_mode );
@@ -678,7 +678,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				return false;
 			}
 
-			$credentials = self::get_api_credentials( $donation->get_test_mode() );
+			$credentials = self::get_api_credentials( $donation->get_test_mode( false ) );
 
 			$n    = 0;
 			$body = array(
@@ -737,13 +737,11 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				return false;
 			}
 
-			$body    = wp_remote_retrieve_body( $request );
+			$body    = array();
 			$code    = wp_remote_retrieve_response_code( $request );
 			$message = wp_remote_retrieve_response_message( $request );
 
-			if ( is_string( $body ) ) {
-				wp_parse_str( $body, $body );
-			}
+			wp_parse_str( wp_remote_retrieve_body( $request ), $body );
 
 			if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
 				error_log( var_export( $body, true ) );
@@ -787,7 +785,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 		 * @return boolean
 		 */
 		public function is_donation_refundable( Charitable_Donation $donation ) {
-			if ( ! self::has_api_credentials( $donation->get_test_mode() ) ) {
+			if ( ! self::has_api_credentials( $donation->get_test_mode( false ) ) ) {
 				return false;
 			}
 
