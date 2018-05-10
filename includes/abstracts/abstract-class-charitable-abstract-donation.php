@@ -753,6 +753,17 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
+		 * Check whether this donation can be refunded in the gateway automatically.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function is_refundable_in_gateway() {
+			return $this->get_gateway_object()->is_donation_refundable( $this );
+		}
+
+		/**
 		 * Return the donation log object for this donation.
 		 *
 		 * @since  1.5.4
