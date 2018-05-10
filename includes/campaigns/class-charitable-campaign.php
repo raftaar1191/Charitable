@@ -379,7 +379,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		 * @return boolean
 		 */
 		public function can_receive_donations() {
-			$can = ! $this->has_ended();
+			$can = 'active' == $this->get_status();
 
 			/**
 			 * Filter whether the campaign can receive donations.
@@ -540,6 +540,15 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				$status = $this->has_ended() ? 'finished' : 'active';
 			}
 
+			/**
+			 * Filter the returned campaign status.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string              $status      The campaign status.
+			 * @param string              $post_status The post_status of the campaign.
+			 * @param Charitable_Campaign $campaign    This instance of `Charitable_Campaign`.
+			 */
 			return apply_filters( 'charitable_campaign_status', $status, $this->post->post_status, $this );
 		}
 
