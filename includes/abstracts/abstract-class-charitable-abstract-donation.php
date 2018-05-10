@@ -687,7 +687,8 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string|boolean Whether to return 
+		 * @param  boolean $text Whether to return a boolean value or readable text.
+		 * @return string|boolean
 		 */
 		public function get_test_mode( $text = true ) {
 			$test_mode = get_post_meta( $this->donation_id, 'test_mode', true );
@@ -807,7 +808,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  string $new_status The status to update the donation to.
-		 * @return int|WP_Error The value 0 or WP_Error on failure. The donation ID on success.
+		 * @return int The value 0 on failure. The donation ID on success.
 		 */
 		public function update_status( $new_status ) {
 			$statuses = charitable_get_valid_donation_statuses();
@@ -836,6 +837,10 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			$this->donation_data->post_status = $new_status;
 
 			$donation_id = wp_update_post( $this->donation_data );
+
+			if ( is_wp_error( $donation_id ) ) {
+				return 0;
+			}
 
 			$message = sprintf(
 				/* translators: %$1s: old status; %$2s: new status. */

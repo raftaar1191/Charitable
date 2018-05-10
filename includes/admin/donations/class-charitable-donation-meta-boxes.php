@@ -297,7 +297,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 				do_action( 'charitable_process_refund_' . $gateway, $object_id );
 			}
 
-			return $success;
+			return 0 !== $success;
 		}
 
 		/**

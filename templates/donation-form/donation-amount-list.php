@@ -2,6 +2,8 @@
 /**
  * The template used to display the donation amount inputs.
  *
+ * Override this template by copying it to yourtheme/charitable/donation-form/donation-amount-list.php
+ *
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.5.0
