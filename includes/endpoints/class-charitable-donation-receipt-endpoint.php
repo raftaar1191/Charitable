@@ -70,7 +70,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 			} else {
 				$url = esc_url_raw( add_query_arg( array(
 					'donation_receipt' => 1,
-					'donation_id' => $donation_id,
+					'donation_id'      => $donation_id,
 				), home_url() ) );
 			}
 

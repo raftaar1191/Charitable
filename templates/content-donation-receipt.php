@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $content  = $view_args['content'];
 $donation = $view_args['donation'];
