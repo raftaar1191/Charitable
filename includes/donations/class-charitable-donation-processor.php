@@ -183,7 +183,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 * @since 1.0.0
 			 *
 			 * @param Charitable_Donation_Processor $processor The Donation Processor object.
-			 * @param Charitable_Donation_Form      $form 	 The Donation Form object.
+			 * @param Charitable_Donation_Form      $form      The Donation Form object.
 			 */
 			do_action( 'charitable_before_process_donation_form', $processor, $form );
 
@@ -236,10 +236,17 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *
 				 * @since   1.3.0
 				 *
+<<<<<<< HEAD
 				 * @param 	mixed						  $result      The result of gateway processing.
 				 * @param 	int 						  $donation_id The donation ID.
 				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
 				 * @return  mixed
+=======
+				 * @param  mixed                         $result      The result of gateway processing.
+				 * @param  int                           $donation_id The donation ID.
+				 * @param  Charitable_Donation_Processor $processor   The Donation Processor object.
+				 * @return mixed
+>>>>>>> 720a0798... When a donation fails, re-attempts update the existing donation instead of creating a new one. Closes #173.
 				 */
 				return apply_filters( 'charitable_process_donation_' . $gateway, true, $this->donation_id, $processor );
 
@@ -249,10 +256,14 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *
 				 * This is a fallback for payment gateways that have not been updated to the filter method above.
 				 *
+<<<<<<< HEAD
 				 * @since   1.0.0
+=======
+				 * @since 1.0.0
+>>>>>>> 720a0798... When a donation fails, re-attempts update the existing donation instead of creating a new one. Closes #173.
 				 *
-				 * @param 	int 						  $donation_id The donation ID.
-				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
+				 * @param int                           $donation_id The donation ID.
+				 * @param Charitable_Donation_Processor $processor   The Donation Processor object.
 				 */
 				do_action( 'charitable_process_donation_' . $gateway, $this->donation_id, $processor );
 
@@ -311,8 +322,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				}
 
 				$response = array(
-					'success' => false,
-					'errors'  => $errors,
+					'success'     => false,
+					'errors'      => $errors,
+					'donation_id' => (int) $processor->get_donation_id(),
 				);
 			}
 
@@ -703,7 +715,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		/**
 		 * Redirect the user after the gateway has processed the donation.
 		 *
-		 * @uses    Charitable_Donation_Processor::get_redirection_after_gateway_processing()
+		 * @uses   Charitable_Donation_Processor::get_redirection_after_gateway_processing()
 		 *
 		 * @since   1.3.0
 		 *
@@ -719,7 +731,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				/* Log the failed payment. */
 				$this->update_donation_log(
 					$this->donation_id,
-					sprintf( __( 'Payment failed with errors: %s', 'charitable' ), PHP_EOL . implode( PHP_EOL, charitable_get_notices()->get_errors() ) )
+					sprintf(
+						/* translators: %s: error message */
+						__( 'Payment failed with errors: %s', 'charitable' ),
+						PHP_EOL . implode( PHP_EOL, charitable_get_notices()->get_errors() )
+					)
 				);
 
 				charitable_get_session()->add_notices();
@@ -733,10 +749,8 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 * use wp_safe_redirect, use wp_redirect instead.
 			 */
 			if ( isset( $gateway_processing['safe'] ) && false == $gateway_processing['safe'] ) {
-
 				wp_redirect( $redirect_url, $status );
 				die();
-
 			}
 
 			wp_safe_redirect( $redirect_url, $status );
@@ -865,6 +879,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return  void
 		 */
 		protected function set_donation_key() {
+			if ( array_key_exists( 'donation_key', $this->donation_data ) ) {
+				return;
+			}
+
 			$this->donation_data['donation_key'] = strtolower( md5( uniqid() ) );
 		}
 

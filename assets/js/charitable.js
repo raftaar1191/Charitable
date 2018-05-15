@@ -195,6 +195,10 @@ CHARITABLE = window.CHARITABLE || {};
                         helper.print_errors( response.errors );
 
                         helper.scroll_to_top();
+
+                        if ( response.donation_id ) {
+                            helper.set_donation_id( response.donation_id );
+                        }
                     }
                 }
 
@@ -560,6 +564,15 @@ CHARITABLE = window.CHARITABLE || {};
         }  
 
     };
+
+    /**
+     * Set the donation ID.
+     */
+    Donation_Form.prototype.set_donation_id = function( donation_id ) {
+
+        this.form.find( '[name=ID]' ).val( donation_id );
+
+    }
 
     /**
      * Returns all of the submitted data as key=>value object.

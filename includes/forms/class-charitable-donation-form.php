@@ -165,8 +165,10 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				return $_POST[ $key ];
 			}
 
-			if ( isset( $_GET['donation_id'] ) ) {
-				$donation = charitable_get_donation( $_GET['donation_id'] );
+			$donation_id = $this->get_validated_donation_id();
+
+			if ( $donation_id ) {
+				$donation = charitable_get_donation( $donation_id );
 				$value    = $donation->get_donor()->get_donor_meta( $key );
 
 				if ( $value ) {
@@ -432,6 +434,35 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		}
 
 		/**
+		 * Return the validated donation ID.
+		 *
+		 * The donation is picked from a GET parameter or a POST. Either way,
+		 * the donation ID is checked to ensure it corresponds to a donation
+		 * and one that the current user should have access to.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return int
+		 */
+		public function get_validated_donation_id() {
+			if ( array_key_exists( 'donation_id', $_GET ) ) {
+				$donation_id = $_GET['donation_id'];
+			} elseif ( array_key_exists( 'ID', $_POST ) ) {
+				$donation_id = $_POST['ID'];
+			} else {
+				return 0;
+			}
+
+			$donation = charitable_get_donation( $donation_id );
+
+			if ( ! $donation || ! $donation->is_from_current_user() ) {
+				return 0;
+			}
+
+			return $donation_id;
+		}
+
+		/**
 		 * Adds hidden fields to the start of the donation form.
 		 *
 		 * @since  1.5.0
@@ -446,10 +477,16 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				$fields['description'] = get_the_title( $this->campaign->ID );
 			}
 
-			if ( isset( $_GET['donation_id'] ) ) {
-				$fields['ID'] = $_GET['donation_id'];
-			}
+			$fields['ID'] = $this->get_validated_donation_id();
 
+			/**
+			 * Filter the hidden fields in the donation form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string[]                 $fields The hidden fields as key=>value pairs.
+			 * @param Charitable_Donation_Form $form   The donation form instance.
+			 */
 			return apply_filters( 'charitable_donation_form_hidden_fields', $fields, $this );
 		}
 
@@ -458,6 +495,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
+		 * @param  string[] $fields The hidden fields as key=>value pairs.
 		 * @return string[]
 		 */
 		public function add_hidden_gateway_field( $fields ) {
@@ -571,6 +609,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			/* Don't process donations with dummy emails. */
 			if ( array_key_exists( 'email', $_POST ) && ! is_email( $_POST['email'] ) ) {
 				charitable_get_notices()->add_error( sprintf(
+					/* translators: %s: email address */
 					__( '%s is not a valid email address.', 'charitable' ),
 					$_POST['email']
 				) );
@@ -673,6 +712,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		public function get_donation_values() {
 			$submitted = $this->get_submitted_values();
 			$values    = array(
+				'ID'        => $this->get_validated_donation_id(),
 				'user_id'   => get_current_user_id(),
 				'gateway'   => $submitted['gateway'],
 				'campaigns' => array(
@@ -683,9 +723,8 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				),
 			);
 
-			/* Update an existing donation instead of creating a new one. */
-			if ( isset( $submitted['ID'] ) ) {
-				$values['ID'] = $submitted['ID'];
+			if ( 0 !== $values['ID'] ) {
+				$values['donation_key'] = charitable_get_donation( $values['ID'] )->get_donation_key();
 			}
 
 			foreach ( $this->get_merged_fields() as $key => $field ) {
@@ -847,11 +886,13 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return array
 		 */
 		protected function set_field_value( $field, $key ) {
+			$donation_id = $this->get_validated_donation_id();
+
 			if ( array_key_exists( $key, $_POST ) ) {
 				$field['value'] = $_POST[ $key ];
-			} elseif ( array_key_exists( 'donation_id', $_GET ) ) {
-				$donation       = charitable_get_donation( $_GET['donation_id'] );
-				$field['value'] = is_a( $donation, 'Charitable_Donation' ) ? $donation->get( $key ) : '';
+			} elseif ( $donation_id ) {
+				$donation       = charitable_get_donation( $donation_id );
+				$field['value'] = $donation ? $donation->get( $key ) : '';
 			}
 
 			if ( array_key_exists( 'value', $field ) ) {

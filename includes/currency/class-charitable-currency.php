@@ -152,6 +152,26 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		}
 
 		/**
+		 * Force a string amount into decimal based format, regardless of the site currency.
+		 *
+		 * This effectively reverses the effect of Charitable_Currency::sanitize_database_amount.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  string $amount The amount to be cast to decimal format.
+		 * @return string
+		 */
+		public function cast_to_decimal_format( $amount ) {
+			if ( $this->is_comma_decimal() ) {
+				$amount = str_replace( ',', '.', $amount );
+			} else {
+				$amount = str_replace( ',', '', $amount );
+			}
+
+			return $amount;
+		}
+
+		/**
 		 * Checks whether the comma is being used as the separator.
 		 *
 		 * @since  1.0.0
@@ -280,7 +300,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 			}
 
 			switch ( $currency ) {
-				case 'AED' :
+				case 'AED':
 					$currency_symbol = 'د.إ';
 					break;
 				case 'BDT':
@@ -289,64 +309,112 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				case 'BOB':
 					$currency_symbol = '&#66;&#115;&#46;';
 					break;
-				case 'BRL' :
+				case 'BRL':
 					$currency_symbol = '&#82;&#36;';
 					break;
-				case 'BGN' :
+				case 'BGN':
 					$currency_symbol = '&#1083;&#1074;.';
 					break;
-				case 'AUD' :
-				case 'ARS' :
-				case 'CAD' :
-				case 'CLP' :
-				case 'MXN' :
-				case 'NZD' :
-				case 'HKD' :
-				case 'SGD' :
-				case 'USD' :
+				case 'AUD':
+				case 'ARS':
+				case 'CAD':
+				case 'CLP':
+				case 'MXN':
+				case 'NZD':
+				case 'HKD':
+				case 'SGD':
+				case 'USD':
 					$currency_symbol = '&#36;';
 					break;
-				case 'EGP' :
+				case 'EGP':
 					$currency_symbol = 'E&pound;';
 					break;
-				case 'EUR' :
+				case 'EUR':
 					$currency_symbol = '&euro;';
 					break;
-				case 'GHS' :
+				case 'GHS':
 					$currency_symbol = 'GH&#8373;';
 					break;
-				case 'CNY' :
-				case 'RMB' :
-				case 'JPY' :
+				case 'CNY':
+				case 'RMB':
+				case 'JPY':
 					$currency_symbol = '&yen;';
 					break;
-				case 'RUB' :
+				case 'RUB':
 					$currency_symbol = '&#1088;&#1091;&#1073;.';
 					break;
-				case 'KRW' : $currency_symbol = '&#8361;'; break;
-				case 'TRY' : $currency_symbol = '&#8378;'; break;
-				case 'NOK' : $currency_symbol = '&#107;&#114;'; break;
-				case 'ZAR' : $currency_symbol = '&#82;'; break;
-				case 'CZK' : $currency_symbol = '&#75;&#269;'; break;
-				case 'MYR' : $currency_symbol = '&#82;&#77;'; break;
-				case 'DKK' : $currency_symbol = 'kr.'; break;
-				case 'HUF' : $currency_symbol = '&#70;&#116;'; break;
-				case 'IDR' : $currency_symbol = 'Rp'; break;
-				case 'INR' : $currency_symbol = 'Rs.'; break;
-				case 'ISK' : $currency_symbol = 'Kr.'; break;
-				case 'ILS' : $currency_symbol = '&#8362;'; break;
-				case 'PHP' : $currency_symbol = '&#8369;'; break;
-				case 'PLN' : $currency_symbol = '&#122;&#322;'; break;
-				case 'SEK' : $currency_symbol = '&#107;&#114;'; break;
-				case 'CHF' : $currency_symbol = '&#67;&#72;&#70;'; break;
-				case 'TWD' : $currency_symbol = '&#78;&#84;&#36;'; break;
-				case 'THB' : $currency_symbol = '&#3647;'; break;
-				case 'GBP' : $currency_symbol = '&pound;'; break;
-				case 'RON' : $currency_symbol = 'lei'; break;
-				case 'VND' : $currency_symbol = '&#8363;'; break;
-				case 'NGN' : $currency_symbol = '&#8358;'; break;
-				case 'HRK' : $currency_symbol = 'Kn'; break;
-				default    : $currency_symbol = ''; break;
+				case 'KRW':
+					$currency_symbol = '&#8361;';
+					break;
+				case 'TRY':
+					$currency_symbol = '&#8378;';
+					break;
+				case 'NOK':
+					$currency_symbol = '&#107;&#114;';
+					break;
+				case 'ZAR':
+					$currency_symbol = '&#82;';
+					break;
+				case 'CZK':
+					$currency_symbol = '&#75;&#269;';
+					break;
+				case 'MYR':
+					$currency_symbol = '&#82;&#77;';
+					break;
+				case 'DKK':
+					$currency_symbol = 'kr.';
+					break;
+				case 'HUF':
+					$currency_symbol = '&#70;&#116;';
+					break;
+				case 'IDR':
+					$currency_symbol = 'Rp';
+					break;
+				case 'INR':
+					$currency_symbol = 'Rs.';
+					break;
+				case 'ISK':
+					$currency_symbol = 'Kr.';
+					break;
+				case 'ILS':
+					$currency_symbol = '&#8362;';
+					break;
+				case 'PHP':
+					$currency_symbol = '&#8369;';
+					break;
+				case 'PLN':
+					$currency_symbol = '&#122;&#322;';
+					break;
+				case 'SEK':
+					$currency_symbol = '&#107;&#114;';
+					break;
+				case 'CHF':
+					$currency_symbol = '&#67;&#72;&#70;';
+					break;
+				case 'TWD':
+					$currency_symbol = '&#78;&#84;&#36;';
+					break;
+				case 'THB':
+					$currency_symbol = '&#3647;';
+					break;
+				case 'GBP':
+					$currency_symbol = '&pound;';
+					break;
+				case 'RON':
+					$currency_symbol = 'lei';
+					break;
+				case 'VND':
+					$currency_symbol = '&#8363;';
+					break;
+				case 'NGN':
+					$currency_symbol = '&#8358;';
+					break;
+				case 'HRK':
+					$currency_symbol = 'Kn';
+					break;
+				default    :
+					$currency_symbol = '';
+					break;
 			}//end switch
 
 			return apply_filters( 'charitable_currency_symbol', $currency_symbol, $currency );
