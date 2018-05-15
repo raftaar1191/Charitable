@@ -801,7 +801,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function __clone() {
 			charitable_get_deprecated()->doing_it_wrong(
 				__FUNCTION__,
-				__( 'Cheatin&#8217; huh?', 'charitable' ),
+				__( 'Cloning this object is forbidden.', 'charitable' ),
 				'1.0.0'
 			);
 		}
@@ -816,7 +816,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 		public function __wakeup() {
 			charitable_get_deprecated()->doing_it_wrong(
 				__FUNCTION__,
-				__( 'Cheatin&#8217; huh?', 'charitable' ),
+				__( 'Unserializing instances of this class is forbidden.', 'charitable' ),
 				'1.0.0'
 			);
 		}
