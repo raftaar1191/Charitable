@@ -453,13 +453,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				return 0;
 			}
 
-			$donation = charitable_get_donation( $donation_id );
-
-			if ( ! $donation || ! $donation->is_from_current_user() ) {
-				return 0;
+			if ( charitable_user_can_access_donation( $donation_id ) ) {
+				return $donation_id;
 			}
 
-			return $donation_id;
+			return 0;
 		}
 
 		/**

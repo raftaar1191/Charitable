@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  * extensions are able to define their own donation form models to use
  * instead.
  *
- * @var 	Charitable_Donation_Form_Interface
+ * @var Charitable_Donation_Form_Interface
  */
 $form = charitable_get_current_donation_form();
 

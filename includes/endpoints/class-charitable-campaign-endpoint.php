@@ -45,7 +45,7 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 		 * @return string
 		 */
 		public function get_page_url( $args = array() ) {
-			$campaign_id  = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
+			$campaign_id = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
 
 			return get_permalink( $campaign_id );
 		}
@@ -67,6 +67,26 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 			}
 
 			return ! array_key_exists( 'donate', $wp_query->query_vars );
+		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @since  1.5.14
+		 *
+		 * @param  string $template The default template.
+		 * @return string
+		 */
+		public function get_template( $template ) {
+			$donation_id = get_query_var( 'donation_id', false );
+
+			/* If a donation ID is included, make sure it belongs to the current user. */
+			if ( $donation_id && ! charitable_user_can_access_donation( $donation_id ) ) {
+				wp_safe_redirect( charitable_get_permalink( 'campaign_donation' ) );
+				exit();
+			}
+
+			return $template;
 		}
 
 		/**

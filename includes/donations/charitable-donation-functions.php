@@ -468,3 +468,17 @@ function charitable_get_minimum_donation_amount() {
 	 */
 	return apply_filters( 'charitable_minimum_donation_amount', 0 );
 }
+
+/**
+ * Check whether the current user has access to a particular donation.
+ *
+ * @since  1.5.14
+ *
+ * @param  int $donation_id The donation ID.
+ * @return boolean
+ */
+function charitable_user_can_access_donation( $donation_id ) {
+	$donation = charitable_get_donation( $donation_id );
+
+	return $donation && $donation->is_from_current_user();
+}

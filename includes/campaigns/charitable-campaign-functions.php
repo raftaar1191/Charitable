@@ -39,7 +39,6 @@ function charitable_create_campaign( array $args ) {
 	return $processor->save();
 }
 
-
 /**
  * Returns the current campaign.
  *
@@ -62,7 +61,6 @@ function charitable_get_current_campaign_id() {
 	return charitable_get_request()->get_current_campaign_id();
 }
 
-
 /**
  * Returns whether the current user is the creator of the given campaign.
  *
@@ -77,4 +75,22 @@ function charitable_is_current_campaign_creator( $campaign_id = null ) {
 	}
 
 	return get_post_field( 'post_author', $campaign_id ) == get_current_user_id();
+}
+
+/**
+ * Returns whether the given campaign can receive donations.
+ *
+ * @since  1.5.14
+ *
+ * @param  int $campaign_id The campaign ID.
+ * @return boolean
+ */
+function charitable_campaign_can_receive_donations( $campaign_id ) {
+	if ( Charitable::CAMPAIGN_POST_TYPE !== get_post_type( $campaign_id ) ) {
+		return false;
+	}
+
+	$campaign = charitable_get_campaign( $campaign_id );
+
+	return $campaign && $campaign->can_receive_donations();
 }

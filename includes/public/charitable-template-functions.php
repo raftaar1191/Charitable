@@ -4,12 +4,12 @@
  *
  * Functions used with template hooks.
  *
- * @package     Charitable/Functions/Templates
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0.0
- * @version     1.5.12
+ * @package   Charitable/Functions/Templates
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.14
  */
 
 // Exit if accessed directly.
@@ -352,6 +352,13 @@ if ( ! function_exists( 'charitable_template_campaign_donation_form_in_page' ) )
 	 */
 	function charitable_template_campaign_donation_form_in_page( Charitable_Campaign $campaign ) {
 		if ( $campaign->can_receive_donations() && 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
+			$donation_id = get_query_var( 'donation_id', false );
+
+			/* If a donation ID is included, make sure it belongs to the current user. */
+			if ( $donation_id && ! charitable_user_can_access_donation( $donation_id ) ) {
+				return false;
+			}
+
 			charitable_get_current_donation_form()->render();
 			return true;
 		}
