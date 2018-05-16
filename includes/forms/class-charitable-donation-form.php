@@ -156,7 +156,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  string $key
+		 * @param  string $key     The field key.
 		 * @param  string $default Optional. The value that will be used if none is set.
 		 * @return mixed
 		 */
@@ -440,7 +440,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * the donation ID is checked to ensure it corresponds to a donation
 		 * and one that the current user should have access to.
 		 *
-		 * @since  1.6.0
+		 * @since  1.5.14
 		 *
 		 * @return int
 		 */

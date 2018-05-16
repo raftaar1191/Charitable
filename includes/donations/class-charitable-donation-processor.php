@@ -236,17 +236,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *
 				 * @since   1.3.0
 				 *
-<<<<<<< HEAD
-				 * @param 	mixed						  $result      The result of gateway processing.
-				 * @param 	int 						  $donation_id The donation ID.
-				 * @param 	Charitable_Donation_Processor $processor   The Donation Processor object.
-				 * @return  mixed
-=======
 				 * @param  mixed                         $result      The result of gateway processing.
 				 * @param  int                           $donation_id The donation ID.
 				 * @param  Charitable_Donation_Processor $processor   The Donation Processor object.
 				 * @return mixed
->>>>>>> 720a0798... When a donation fails, re-attempts update the existing donation instead of creating a new one. Closes #173.
 				 */
 				return apply_filters( 'charitable_process_donation_' . $gateway, true, $this->donation_id, $processor );
 
@@ -256,11 +249,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 				 *
 				 * This is a fallback for payment gateways that have not been updated to the filter method above.
 				 *
-<<<<<<< HEAD
-				 * @since   1.0.0
-=======
 				 * @since 1.0.0
->>>>>>> 720a0798... When a donation fails, re-attempts update the existing donation instead of creating a new one. Closes #173.
 				 *
 				 * @param int                           $donation_id The donation ID.
 				 * @param Charitable_Donation_Processor $processor   The Donation Processor object.
@@ -812,7 +801,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 */
 		protected function parse_donation_data() {
 			$core_values = array(
-				'ID'			=> $this->get_donation_data_value( 'ID', 0 ),
+				'ID'            => $this->get_donation_data_value( 'ID', 0 ),
 				'post_type'     => Charitable::DONATION_POST_TYPE,
 				'post_author'   => $this->get_donation_data_value( 'user_id', get_current_user_id() ),
 				'post_status'   => $this->get_donation_status(),

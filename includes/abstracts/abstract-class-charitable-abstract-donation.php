@@ -735,7 +735,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			}
 
 			return $donor->get_email() == $user->user_email;
-		}		
+		}
 
 		/**
 		 * Return the donation log object for this donation.
