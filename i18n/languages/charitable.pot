@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.5.14\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2018-05-16 10:35:01+00:00\n"
+"POT-Creation-Date: 2018-05-16 12:01:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7224,7 +7224,7 @@ msgstr ""
 msgid "Payment"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:582
+#: includes/forms/class-charitable-donation-form.php:580
 #: includes/forms/class-charitable-forgot-password-form.php:98
 #: includes/forms/class-charitable-profile-form.php:395
 #: includes/forms/class-charitable-registration-form.php:162
@@ -7234,35 +7234,35 @@ msgid ""
 "page and try again."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:613
+#: includes/forms/class-charitable-donation-form.php:611
 #: includes/forms/class-charitable-registration-form.php:179
 #. translators: %s: email address
 msgid "%s is not a valid email address."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:645
+#: includes/forms/class-charitable-donation-form.php:643
 msgid "The gateway submitted is not valid."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:679
-#: includes/forms/class-charitable-donation-form.php:686
+#: includes/forms/class-charitable-donation-form.php:677
+#: includes/forms/class-charitable-donation-form.php:684
 #: includes/public/class-charitable-public.php:101
 msgid "You must donate more than %s."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:937
+#: includes/forms/class-charitable-donation-form.php:935
 msgid "There are no active payment gateways."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:969
+#: includes/forms/class-charitable-donation-form.php:967
 msgid "Test mode is active."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:972
+#: includes/forms/class-charitable-donation-form.php:970
 msgid "Disable Test Mode"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1037
+#: includes/forms/class-charitable-donation-form.php:1035
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
@@ -7694,11 +7694,11 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/public/charitable-template-functions.php:841
+#: includes/public/charitable-template-functions.php:848
 msgid "Your Donation Amount: <strong>%s</strong>."
 msgstr ""
 
-#: includes/public/charitable-template-functions.php:842
+#: includes/public/charitable-template-functions.php:849
 msgid "Change"
 msgstr ""
 
@@ -8249,7 +8249,7 @@ msgctxt "Taxonomy Singular Name"
 msgid "Campaign Tag"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:938
+#: includes/forms/class-charitable-donation-form.php:936
 msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
