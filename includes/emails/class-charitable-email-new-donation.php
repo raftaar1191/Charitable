@@ -164,7 +164,18 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 		 * @return boolean
 		 */
 		public static function can_be_resent( $object_id, $args = array() ) {
-			return charitable_is_approved_status( get_post_status( $object_id ) );
+			$resendable = charitable_is_approved_status( get_post_status( $object_id ) );
+
+			/**
+			 * Filter whether the email can be resent.
+			 *
+			 * @since 1.6.0
+			 *
+			 * @param boolean $resendable Whether the email can be resent.
+			 * @param int     $object_id  The donation ID.
+			 * @param array   $args       Mixed set of arguments.
+			 */
+			return apply_filters( 'charitable_can_resend_new_donation_email', $resendable, $object_id, $args );
 		}
 
 		/**

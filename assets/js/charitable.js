@@ -580,9 +580,7 @@ CHARITABLE = window.CHARITABLE || {};
      * Set the donation ID.
      */
     Donation_Form.prototype.set_donation_id = function( donation_id ) {
-
         this.form.find( '[name=ID]' ).val( donation_id );
-
     }
 
     /**
