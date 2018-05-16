@@ -1,3 +1,7 @@
+# 1.5.14
+* SECURITY FIX: Prevent unauthorized users from accessing the user and donation details of previous donations through an exploit. See [our blog](http://www.wpcharitable.com/blog/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=release-notes&utm_content=1-5-14-release) for a post in the coming days.
+* FIX: Avoid duplicate donations when a donation fails and is re-attempted by the donor. [#173](https://github.com/Charitable/Charitable/issues/173)
+
 # 1.5.13
 * FIX: In some cases, when a custom donation field is registered, it was left blank in donation receipts & other donation emails. This occurred with regular PayPal donations as well as recurring donations through Stripe, and most probably with other payment gateways as well. [#540](https://github.com/Charitable/Charitable/issues/540)
 * FIX: A previous update broke the way required checkboxes in donation forms and other forms worked. When a required checkbox is not checked, the form should not submit. This was broken, but is now fixed. [#539](https://github.com/Charitable/Charitable/issues/539)
