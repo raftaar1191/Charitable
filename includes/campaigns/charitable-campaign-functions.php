@@ -4,15 +4,18 @@
  *
  * Campaign related functions.
  *
- * @package     Charitable/Functions/Campaign
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Campaign
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2018, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.14
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Returns the given campaign.
@@ -93,6 +96,7 @@ function charitable_campaign_can_receive_donations( $campaign_id ) {
 	$campaign = charitable_get_campaign( $campaign_id );
 
 	return $campaign && $campaign->can_receive_donations();
+}
 
 /**
  * Given a campaign ID and a key, return the post field.
