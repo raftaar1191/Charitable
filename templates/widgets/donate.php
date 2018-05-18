@@ -23,7 +23,7 @@ $widget_title = apply_filters( 'widget_title', $view_args['title'] );
 $campaign_id  = 'current' == $view_args['campaign_id'] ? get_the_ID() : $view_args['campaign_id'];
 $campaign     = charitable_get_campaign( $campaign_id );
 
-if ( ! $campaign->can_receive_donations() ) :
+if ( ! $campaign || ! $campaign->can_receive_donations() ) :
 	return;
 endif;
 
