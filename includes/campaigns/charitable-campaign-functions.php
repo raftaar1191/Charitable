@@ -47,7 +47,8 @@ function charitable_create_campaign( array $args ) {
  *
  * @since  1.0.0
  *
- * @return Charitable_Campaign
+ * @return Charitable_Campaign|false Campaign object if we're viewing a campaign
+ *                                   within a loop. False otherwise.
  */
 function charitable_get_current_campaign() {
 	return charitable_get_request()->get_current_campaign();
