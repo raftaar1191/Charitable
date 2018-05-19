@@ -761,7 +761,8 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return boolean
 		 */
 		public function is_refundable_in_gateway() {
-			return $this->get_gateway_object()->is_donation_refundable( $this );
+			$gateway = $this->get_gateway_object();
+			return $gateway && $gateway->is_donation_refundable( $this );
 		}
 
 		/**
