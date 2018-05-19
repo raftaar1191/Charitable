@@ -158,37 +158,27 @@ $data_erased = $donation->get_data_erasure_date();
 				/**
 				 * Add a row before the status. Any output should be wrapped in <tr></tr> with two cells.
 				 *
+				 * @deprecated 1.9.0
+				 *
 				 * @since 1.5.0
+				 * @since 1.6.0 Deprecated.
 				 *
 				 * @param Charitable_Donation $donation The Donation object.
 				 */
 				do_action( 'charitable_donation_details_table_before_status', $donation );
-			?>
-			<tr>
-				<th><?php _e( 'Change Status', 'charitable' ); ?></th>
-				<td>
-					<select id="change-donation-status" name="post_status">
-					<?php foreach ( charitable_get_valid_donation_statuses() as $status => $label ) : ?>
-						<option value="<?php echo $status ?>" <?php selected( $status, $donation->get_status() ); ?>><?php echo $label ?></option>
-					<?php endforeach ?>
-					</select>
-				</td>
-			</tr>
-			<?php
+
 				/**
 				 * Add a row after the status. Any output should be wrapped in <tr></tr> with two cells.
 				 *
+				 * @deprecated 1.9.0
+				 *
 				 * @since 1.5.0
+				 * @since 1.6.0 Deprecated.
 				 *
 				 * @param Charitable_Donation $donation The Donation object.
 				 */
 				do_action( 'charitable_donation_details_table_after_status', $donation );
 			?>
-			<tr class="hide-if-js">
-				<td colspan="2">
-					<input type="submit" name="update" class="button button-primary" value="<?php _e( 'Update Status', 'charitable' ); ?>" />
-				</td>
-			</tr>
 		</tfoot>
 	</table>
 </div>

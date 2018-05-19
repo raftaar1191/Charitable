@@ -699,9 +699,15 @@ body.post-type-donation .donation-erasure-notice {
     text-align: right; }
   #donation-overview table#overview tfoot td,
   #donation-overview table#overview tfoot th {
-    padding: 0.8em 20px 0.8em 0;
+    padding: 0.6em 20px 0.6em 0;
     background-color: #f8f8f8;
     text-align: right; }
+  #donation-overview table#overview tfoot tr:first-of-type td,
+  #donation-overview table#overview tfoot tr:first-of-type th {
+    padding-top: 1.2em; }
+  #donation-overview table#overview tfoot tr:last-of-type td,
+  #donation-overview table#overview tfoot tr:last-of-type th {
+    padding-bottom: 1.2em; }
 
 #donation-actions .inside {
   padding: 0; }

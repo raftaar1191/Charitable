@@ -40,7 +40,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		),
 	),
 	'first_name'               => array(
-		'label'          => __( 'Donor First Name', 'charitable' ),
+		'label'          => __( 'First Name', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
 		'donation_form'  => array(
@@ -60,7 +60,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		),
 	),
 	'last_name' => array(
-		'label'          => __( 'Donor Last Name', 'charitable' ),
+		'label'          => __( 'Last Name', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
 		'donation_form'  => array(

@@ -487,10 +487,6 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 			return false;
 		});
-
-		$('#change-donation-status').on( 'change', function() {
-			$(this).parents( 'form' ).submit();
-		});
 	});
 
 })( jQuery );
