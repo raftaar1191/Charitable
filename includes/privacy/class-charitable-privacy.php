@@ -78,7 +78,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		}
 
 		/**
-		 * Return the default set of data to be retained for donations within the Data Retention Period.
+		 * Return the Data Retention Period.
 		 *
 		 * @since  1.6.0
 		 *
@@ -88,6 +88,45 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 			return charitable_get_option( 'minimum_data_retention_period', 0 );
 		}
 
+		/**
+		 * Return all erasable fields for a particular donation.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $donation_id The donation ID.
+		 * @return Charitable_Donation_Field[]
+		 */
+		public function get_erasable_fields_for_donation( $donation_id ) {
+			if ( 'endless' == $this->get_data_retention_period() || ! $this->is_donation_in_data_retention_period( $donation_id ) ) {
+				return $this->get_user_donation_fields();
+			}
+
+			return $this->get_erasable_fields_in_data_retention_period();
+		}
+
+		/**
+		 * Checks whether a donation is in the Data Retention Period.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @param  int $donation_id The donation ID.
+		 * @return boolean
+		 */
+		public function is_donation_in_data_retention_period( $donation_id ) {
+			$period = $this->get_data_retention_period();
+
+			if ( 0 == $period ) {
+				return false;
+			}
+
+			if ( 'endless' == $period ) {
+				return true;
+			}
+
+			$diff = (int) abs( time() - strtotime( get_post_field( 'post_date_gmt', $donation_id, 'raw' ) ) );
+
+			return floor( $diff / YEAR_IN_SECONDS ) < $period;
+		}
 
 		/**
 		 * Register the data exporter.
@@ -98,12 +137,12 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 * @return array
 		 */
 		public function register_exporter( $exporters ) {
-			$exporters[] = array(
-				'exporter_friendly_name' => __( 'Charitable Donor Data', 'charitable' ),
-				'callback'               => array( $this, 'export_user_data' ),
-			);
-
-			return $exporters;
+			return array_merge( $exporters, array(
+				array(
+					'exporter_friendly_name' => __( 'Charitable Donor Data', 'charitable' ),
+					'callback'               => array( $this, 'export_user_data' ),
+				),
+			) );
 		}
 
 		/**
@@ -540,22 +579,6 @@ Additionally, we may also collect the following information:
 		}
 
 		/**
-		 * Return all erasable fields for a particular donation.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  int $donation_id The donation ID.
-		 * @return Charitable_Donation_Field[]
-		 */
-		protected function get_erasable_fields_for_donation( $donation_id ) {
-			if ( 'endless' == $this->get_data_retention_period() || ! $this->is_donation_in_data_retention_period( $donation_id ) ) {
-				return $this->get_user_donation_fields();
-			}
-
-			return $this->get_erasable_fields_in_data_retention_period();
-		}
-
-		/**
 		 * Checks whether there are any user donation fields that can be erased
 		 * for donations within the data retention period.
 		 *
@@ -582,26 +605,6 @@ Additionally, we may also collect the following information:
 				$this->get_user_donation_fields(),
 				array_flip( $this->get_data_retention_fields() )
 			);
-		}
-
-		/**
-		 * Checks whether a donation is in the Data Retention Period.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  int $donation_id The donation ID.
-		 * @return boolean
-		 */
-		protected function is_donation_in_data_retention_period( $donation_id ) {
-			$period = $this->get_data_retention_period();
-
-			if ( 0 == $period ) {
-				return true;
-			}
-
-			$diff = (int) abs( time() - strtotime( get_post_field( 'post_date_gmt', $donation_id, 'raw' ) ) );
-
-			return floor( $diff / YEAR_IN_SECONDS ) < $period;
 		}
 
 		/**

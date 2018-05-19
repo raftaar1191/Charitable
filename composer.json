@@ -9,7 +9,7 @@
         "issues": "https://www.wpcharitable.com/support/"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "dev-master",
+        "php-coveralls/php-coveralls": "v2.0.0",
         "phpunit/phpunit": "*",
         "phpunit/php-timer": "^1.0"
     },

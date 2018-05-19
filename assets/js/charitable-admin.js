@@ -50,7 +50,9 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			else if ('selected' === value) {
 				return $trigger.selected();
 			}
-			else {
+			else if ('!' === value[0]) {
+				return $trigger.val() !== value.slice(1);
+			} else {
 				return $trigger.val() === value;
 			}
 		}

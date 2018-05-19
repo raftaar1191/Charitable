@@ -6,7 +6,7 @@ class Test_Charitable_Locations extends Charitable_UnitTestCase {
 	 * For this collection of test, we set up our default country as Australia.
 	 */
 	function setUp() {
-		parent::setUp();		
+		parent::setUp();
 	}
 
 	function test_get_countries() {

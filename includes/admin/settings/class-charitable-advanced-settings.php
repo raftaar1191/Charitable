@@ -121,6 +121,10 @@ if ( ! class_exists( 'Charitable_Advanced_Settings' ) ) :
 					'default'   => array_keys( $data_fields ),
 					'options'   => $data_fields,
 					'help'      => __( 'The checked fields will not be erased fields when personal data is erased for a donation made within the Minimum Data Retention Period.', 'charitable' ),
+					'attrs'     => array(
+						'data-trigger-key'   => '#charitable_settings_minimum_data_retention_period',
+						'data-trigger-value' => '!0',
+					),
 				),
 				'section_dangerous'             => array(
 					'title'    => __( 'Dangerous Settings', 'charitable' ),
