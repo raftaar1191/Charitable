@@ -240,8 +240,8 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 					'callback'        => array( $this, 'change_donation_status' ),
 					'button_text'     => __( 'Update Status', 'charitable' ),
 					'active_callback' => array( $this, 'can_change_donation_status' ),
-					'success_message' => 11,
-					'failed_message'  => 12,
+					'success_message' => 13,
+					'failed_message'  => 14,
 					'fields'          => array( $this, 'get_donation_status_change_fields' ),
 				), __( 'Change Status', 'charitable' ) );
 			}
@@ -404,29 +404,48 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 			global $post, $post_ID;
 
 			$messages[ Charitable::DONATION_POST_TYPE ] = array(
-				0 => '', // Unused. Messages start at index 1.
-				1 => sprintf( __( 'Donation updated. <a href="%s">View Donation</a>', 'charitable' ), esc_url( get_permalink( $post_ID ) ) ),
-				2 => __( 'Custom field updated.', 'charitable' ),
-				3 => __( 'Custom field deleted.', 'charitable' ),
-				4 => __( 'Donation updated.', 'charitable' ),
-				5 => isset( $_GET['revision'] ) ? sprintf( __( 'Donation restored to revision from %s', 'charitable' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6 => sprintf( __( 'Donation published. <a href="%s">View Donation</a>', 'charitable' ), esc_url( get_permalink( $post_ID ) ) ),
-				7 => __( 'Donation saved.', 'charitable' ),
-				8 => sprintf(
+				0  => '', // Unused. Messages start at index 1.
+				1  => sprintf(
+					/* translators: %s: link */
+					__( 'Donation updated. <a href="%s">View Donation</a>', 'charitable' ),
+					esc_url( get_permalink( $post_ID ) )
+				),
+				2  => __( 'Custom field updated.', 'charitable' ),
+				3  => __( 'Custom field deleted.', 'charitable' ),
+				4  => __( 'Donation updated.', 'charitable' ),
+				5  => isset( $_GET['revision'] )
+					? sprintf(
+						/* translators: %s: revision title */
+						__( 'Donation restored to revision from %s', 'charitable' ),
+						wp_post_revision_title( (int) $_GET['revision'], false )
+					)
+					: false,
+				6  => sprintf(
+					/* translators: %s: link */
+					__( 'Donation published. <a href="%s">View Donation</a>', 'charitable' ),
+					esc_url( get_permalink( $post_ID ) )
+				),
+				7  => __( 'Donation saved.', 'charitable' ),
+				8  => sprintf(
+					/* translators: %s: link */
 					__( 'Donation submitted. <a target="_blank" href="%s">Preview Donation</a>', 'charitable' ),
 					esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) )
 				),
-				9 => sprintf(
+				9  => sprintf(
+					/* translators: %1$s: date and time; %2$s: link */
 					__( 'Donation scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Donation</a>', 'charitable' ),
 					date_i18n( __( 'M j, Y @ G:i', 'charitable' ), strtotime( $post->post_date ) ),
 					esc_url( get_permalink( $post_ID ) )
 				),
 				10 => sprintf(
+					/* translators: %s: link */
 					__( 'Donation draft updated. <a target="_blank" href="%s">Preview Donation</a>', 'charitable' ),
 					esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) )
 				),
 				11 => __( 'Email resent.', 'charitable' ),
 				12 => __( 'Email could not be resent.', 'charitable' ),
+				13 => __( 'Donation status changed.', 'charitable' ),
+				14 => __( 'Donation status could not be changed.', 'charitable' ),
 			);
 
 			return $messages;
