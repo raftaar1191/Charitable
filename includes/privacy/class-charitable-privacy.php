@@ -82,7 +82,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return array
+		 * @return int|string
 		 */
 		public function get_data_retention_period() {
 			return charitable_get_option( 'minimum_data_retention_period', 0 );
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		public function is_donation_in_data_retention_period( $donation_id ) {
 			$period = $this->get_data_retention_period();
 
-			if ( '0' == $period ) {
+			if ( '0' == (string) $period ) {
 				return false;
 			}
 
