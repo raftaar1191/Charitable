@@ -130,7 +130,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'           => 'dropdown-pages',
 									'label'          => __( 'Privacy policy page', 'charitable' ),
-									'priority'       => 1026,
+									'priority'       => 1025,
 									'allow_addition' => true,
 								),
 							),
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'type'        => 'textarea',
 									'label'       => __( 'Privacy policy', 'charitable' ),
 									'description' => __( 'Optionally add some text about your website privacy policy for donors to see during donation.', 'charitable' ),
-									'priority'    => 1026.2,
+									'priority'    => 1025.2,
 								),
 							),
 							'contact_consent'              => array(
@@ -156,7 +156,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'type'        => 'radio',
 									'label'       => __( 'Donor consent field', 'charitable' ),
 									'description' => __( 'Optionally include a checkbox asking donors to consent to being contacted in the future.', 'charitable' ),
-									'priority'    => 1027,
+									'priority'    => 1026,
 									'choices'     => array(
 										1 => __( 'Yes', 'charitable' ),
 										0 => __( 'No', 'charitable' ),
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'        => 'textarea',
 									'label'       => __( 'Donor consent label', 'charitable' ),
-									'priority'    => 1027.2,
+									'priority'    => 1026.2,
 									'description' => __( 'A short statement describing how you would like to contact donors.', 'charitable' ),
 								),
 							),
@@ -184,7 +184,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'           => 'dropdown-pages',
 									'label'          => __( 'Terms and conditions page', 'charitable' ),
-									'priority'       => 1028,
+									'priority'       => 1027,
 									'allow_addition' => true,
 								),
 							),
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'type'        => 'text',
 									'label'       => __( 'Terms and conditions', 'charitable' ),
 									'description' => __( 'Optionally add some text for the terms and conditions checkbox that donors must accept to complete their donation.', 'charitable' ),
-									'priority'    => 1028.2,
+									'priority'    => 1027.2,
 								),
 							),
 						),

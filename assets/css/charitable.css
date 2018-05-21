@@ -115,6 +115,10 @@
   .charitable-form-field .wp-editor-container {
     border: 1px solid #dedede; }
 
+.charitable-fieldset > :last-child,
+.charitable-fieldset-field-wrapper > :last-child {
+  margin-bottom: 1em; }
+
 .charitable-radio-list label,
 .charitable-checkbox-list label {
   display: inline; }
@@ -213,8 +217,10 @@
   .charitable-donation-form .custom-donation-input {
     max-width: 100%; }
 
-#charitable-donor-fields > .charitable-form-field {
-  clear: both; }
+#charitable-donor-fields > .charitable-form-field,
+#charitable-donor-fields .charitable-form-fields > .charitable-form-field {
+  clear: both;
+  padding: 0 20px; }
 
 .widget_charitable_donate_widget #charitable-donation-amount-form {
   padding-top: 0; }

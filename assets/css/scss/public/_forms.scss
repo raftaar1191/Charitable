@@ -72,6 +72,13 @@
     }
 }
 
+.charitable-fieldset, 
+.charitable-fieldset-field-wrapper {
+    > :last-child {
+        margin-bottom: 1em
+    }
+}
+
 .charitable-radio-list,
 .charitable-checkbox-list {
     label {
@@ -214,8 +221,10 @@
     // Fixes common issue with themes that float form fields,
     // resulting in weird placement of anonymous donations and
     // newsletter fields.
-    > .charitable-form-field {
+    > .charitable-form-field,
+    .charitable-form-fields > .charitable-form-field {
         clear: both;
+        padding: 0 20px;
     }
 }
 

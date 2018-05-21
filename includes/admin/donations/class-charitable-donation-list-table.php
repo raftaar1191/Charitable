@@ -100,7 +100,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 
 			switch ( $column_name ) {
 
-				case 'id' :
+				case 'id':
 					$title = esc_attr__( 'View Donation Details', 'charitable' );
 					$name  = $donation->get_donor()->get_name();
 
@@ -121,31 +121,24 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 					), admin_url( 'post.php' ) ) );
 
 					$display = sprintf( '<a href="%s" aria-label="%s">%s</a>', $url, $title, $text );
-
 					break;
 
-				case 'post_status' :
-
+				case 'post_status':
 					$display = sprintf( '<mark class="status %s">%s</mark>',
 						esc_attr( $donation->get_status() ),
 						strtolower( $donation->get_status_label() )
 					);
-
 					break;
 
-				case 'amount' :
-
+				case 'amount':
 					$display = charitable_format_money( $donation->get_total_donation_amount() );
 					$display .= '<span class="meta">' . sprintf( _x( 'via %s', 'charitable' ), $donation->get_gateway_label() ). '</span>';
-
 					break;
 
-				case 'campaigns' :
-
+				case 'campaigns':
 					$campaigns = array();
 
 					foreach ( $donation->get_campaign_donations() as $cd ) {
-
 						$campaigns[] = sprintf( '<a href="edit.php?post_type=%s&campaign_id=%s">%s</a>',
 							Charitable::DONATION_POST_TYPE,
 							$cd->campaign_id,
@@ -154,19 +147,14 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 					}
 
 					$display = implode( ', ', $campaigns );
-
 					break;
 
-				case 'donation_date' :
-
+				case 'donation_date':
 					$display = $donation->get_date();
-
 					break;
 
-				default :
-
+				default:
 					$display = '';
-
 					break;
 
 			}

@@ -97,8 +97,14 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			/* Main Charitable script. */
 			$minimum    = charitable_get_minimum_donation_amount();
 			$amount_msg = $minimum > 0
-				? sprintf( __( 'You must donate at least %s.', 'charitable' ), charitable_format_money( $minimum ) )
-				: sprintf( __( 'You must donate more than %s.', 'charitable' ), charitable_format_money( $minimum ) );
+				? sprintf(
+					/* Translators: %s: minimum donatino amount */
+					__( 'You must donate at least %s.', 'charitable' ), charitable_format_money( $minimum )
+				)
+				: sprintf(
+					/* Translators: %s: minimum donatino amount */
+					__( 'You must donate more than %s.', 'charitable' ), charitable_format_money( $minimum )
+				);
 
 			/**
 			 * Filter the Javascript vars array.

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.0-beta.2\n"
+"Project-Id-Version: Charitable 1.6.0-beta.3\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2018-05-21 01:57:52+00:00\n"
+"POT-Creation-Date: 2018-05-21 21:44:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4939,13 +4939,13 @@ msgid "Campaign updated. <a href=\"%s\">View Campaign</a>"
 msgstr ""
 
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:295
-#: includes/admin/donations/class-charitable-donation-list-table.php:507
+#: includes/admin/donations/class-charitable-donation-list-table.php:495
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:413
 msgid "Custom field updated."
 msgstr ""
 
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:296
-#: includes/admin/donations/class-charitable-donation-list-table.php:508
+#: includes/admin/donations/class-charitable-donation-list-table.php:496
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:414
 msgid "Custom field deleted."
 msgstr ""
@@ -4977,7 +4977,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/campaigns/class-charitable-campaign-meta-boxes.php:312
-#: includes/admin/donations/class-charitable-donation-list-table.php:519
+#: includes/admin/donations/class-charitable-donation-list-table.php:507
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:437
 msgid "M j, Y @ G:i"
 msgstr ""
@@ -5206,74 +5206,74 @@ msgstr ""
 msgid "View Donation Details"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:248
+#: includes/admin/donations/class-charitable-donation-list-table.php:236
 #: includes/admin/views/metaboxes/donation/donation-overview.php:37
 msgid "Edit Donation"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:249
+#: includes/admin/donations/class-charitable-donation-list-table.php:237
 #: includes/admin/views/metaboxes/campaign-benefactors/summary.php:27
 #: includes/class-charitable-post-types.php:89
 #: includes/class-charitable-post-types.php:136
 msgid "Edit"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:258
+#: includes/admin/donations/class-charitable-donation-list-table.php:246
 msgid "View Details"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:259
+#: includes/admin/donations/class-charitable-donation-list-table.php:247
 msgid "View"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:293
+#: includes/admin/donations/class-charitable-donation-list-table.php:281
 #: includes/admin/views/donations-page/export-form.php:34
 #: includes/admin/views/donations-page/filter-form.php:35
 msgid "All"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:486
+#: includes/admin/donations/class-charitable-donation-list-table.php:474
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:447
 msgid "Donation status changed."
 msgid_plural "%s donation statuses changed."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:506
+#: includes/admin/donations/class-charitable-donation-list-table.php:494
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:410
 #. translators: %s: link
 msgid "Donation updated. <a href=\"%s\">View Donation</a>"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:509
+#: includes/admin/donations/class-charitable-donation-list-table.php:497
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:415
 msgid "Donation updated."
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:510
+#: includes/admin/donations/class-charitable-donation-list-table.php:498
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:419
 #. translators: %s: revision title
 msgid "Donation restored to revision from %s"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:511
+#: includes/admin/donations/class-charitable-donation-list-table.php:499
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:425
 #. translators: %s: link
 msgid "Donation published. <a href=\"%s\">View Donation</a>"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:512
+#: includes/admin/donations/class-charitable-donation-list-table.php:500
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:428
 msgid "Donation saved."
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:514
+#: includes/admin/donations/class-charitable-donation-list-table.php:502
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:431
 #. translators: %s: link
 msgid "Donation submitted. <a target=\"_blank\" href=\"%s\">Preview Donation</a>"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:518
+#: includes/admin/donations/class-charitable-donation-list-table.php:506
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:436
 #. translators: %1$s: date and time; %2$s: link
 msgid ""
@@ -5281,7 +5281,7 @@ msgid ""
 "href=\"%2$s\">Preview Donation</a>"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:523
+#: includes/admin/donations/class-charitable-donation-list-table.php:511
 #: includes/admin/donations/class-charitable-donation-meta-boxes.php:442
 #. translators: %s: link
 msgid ""
@@ -5289,43 +5289,43 @@ msgid ""
 "Donation</a>"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:526
+#: includes/admin/donations/class-charitable-donation-list-table.php:514
 msgid "Donation updated and email sent."
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:527
+#: includes/admin/donations/class-charitable-donation-list-table.php:515
 msgid "Email could not be sent."
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:544
+#: includes/admin/donations/class-charitable-donation-list-table.php:532
 msgid "%d donation updated."
 msgid_plural "%d donations updated."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:545
+#: includes/admin/donations/class-charitable-donation-list-table.php:533
 msgid "1 donation not updated, somebody is editing it."
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:546
+#: includes/admin/donations/class-charitable-donation-list-table.php:534
 msgid "%s donation not updated, somebody is editing it."
 msgid_plural "%s donations not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:547
+#: includes/admin/donations/class-charitable-donation-list-table.php:535
 msgid "%s donation permanently deleted."
 msgid_plural "%s donations permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:548
+#: includes/admin/donations/class-charitable-donation-list-table.php:536
 msgid "%s donation moved to the Trash."
 msgid_plural "%s donations moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:549
+#: includes/admin/donations/class-charitable-donation-list-table.php:537
 msgid "%s donation restored from the Trash."
 msgid_plural "%s donations restored from the Trash."
 msgstr[0] ""
@@ -7533,7 +7533,8 @@ msgstr ""
 
 #: includes/forms/class-charitable-donation-form.php:719
 #: includes/forms/class-charitable-donation-form.php:726
-#: includes/public/class-charitable-public.php:101
+#: includes/public/class-charitable-public.php:106
+#. Translators: %s: minimum donatino amount
 msgid "You must donate more than %s."
 msgstr ""
 
@@ -8133,39 +8134,40 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:100
+#: includes/public/class-charitable-public.php:102
+#. Translators: %s: minimum donatino amount
 msgid "You must donate at least %s."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:119
+#: includes/public/class-charitable-public.php:125
 msgid "Please fill out all required fields."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:120
+#: includes/public/class-charitable-public.php:126
 msgid "Your donation could not be processed. Please reload the page and try again."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:121
+#: includes/public/class-charitable-public.php:127
 msgid "The credit card passed is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:122
+#: includes/public/class-charitable-public.php:128
 msgid "The credit card expiry date is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:202
+#: includes/public/class-charitable-public.php:208
 msgid "You can only upload %d file"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:203
+#: includes/public/class-charitable-public.php:209
 msgid "You can only upload a maximum of %d files"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:204
+#: includes/public/class-charitable-public.php:210
 msgid "%1$s exceeds the max upload size of %2$s"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:205
+#: includes/public/class-charitable-public.php:211
 msgid "%s failed to upload. Please try again."
 msgstr ""
 
@@ -8585,12 +8587,12 @@ msgctxt "number symbol"
 msgid "#%d"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:139
+#: includes/admin/donations/class-charitable-donation-list-table.php:135
 msgctxt "charitable"
 msgid "via %s"
 msgstr ""
 
-#: includes/admin/donations/class-charitable-donation-list-table.php:386
+#: includes/admin/donations/class-charitable-donation-list-table.php:374
 msgctxt "set donation status to x"
 msgid "Set to %s"
 msgstr ""
@@ -8701,7 +8703,7 @@ msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:201
+#: includes/public/class-charitable-public.php:207
 msgctxt "remove image button text"
 msgid "Remove"
 msgstr ""
