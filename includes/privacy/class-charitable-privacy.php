@@ -89,6 +89,21 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		}
 
 		/**
+		 * Get the user donation fields.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return Charitable_Donation_Field[]
+		 */
+		public function get_user_donation_fields() {
+			if ( ! isset( $this->user_donation_fields ) ) {
+				$this->user_donation_fields = charitable()->donation_fields()->get_data_type_fields( 'user' );
+			}
+
+			return $this->user_donation_fields;
+		}
+
+		/**
 		 * Return all erasable fields for a particular donation.
 		 *
 		 * @since  1.6.0
@@ -97,7 +112,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 * @return Charitable_Donation_Field[]
 		 */
 		public function get_erasable_fields_for_donation( $donation_id ) {
-			if ( 'endless' == $this->get_data_retention_period() || ! $this->is_donation_in_data_retention_period( $donation_id ) ) {
+			if ( ! $this->is_donation_in_data_retention_period( $donation_id ) ) {
 				return $this->get_user_donation_fields();
 			}
 
@@ -115,7 +130,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		public function is_donation_in_data_retention_period( $donation_id ) {
 			$period = $this->get_data_retention_period();
 
-			if ( 0 == $period ) {
+			if ( '0' == $period ) {
 				return false;
 			}
 
@@ -532,6 +547,7 @@ Additionally, we may also collect the following information:
 
 				/* Get the data type we will use for erasing this particular data field. */
 				$data_type = $this->get_field_data_type( $field );
+				$replace   = empty( $meta[ $field_id ] ) ? '' : wp_privacy_anonymize_data( $data_type, $meta[ $field_id ] );
 
 				/**
 				 * Filter the placeholder data that will replace the personal data.
@@ -543,7 +559,7 @@ Additionally, we may also collect the following information:
 				 * @param string                    $key   The key of the field.
 				 * @param Charitable_Donation_Field $field The field definition.
 				 */
-				$meta[ $field_id ] = apply_filters( 'charitable_privacy_erasure_donation_donor_data_prop_value', wp_privacy_anonymize_data( $data_type, $meta[ $field_id ] ), $meta[ $field_id ], $field_id, $field );
+				$meta[ $field_id ] = apply_filters( 'charitable_privacy_erasure_donation_donor_data_prop_value', $replace, $meta[ $field_id ], $field_id, $field );
 			}
 
 			update_post_meta( $donation_id, 'donor', $meta );
@@ -561,21 +577,6 @@ Additionally, we may also collect the following information:
 
 			$log = new Charitable_Donation_Log( $donation_id );
 			$log->add( __( 'Personal data erased.', 'charitable' ) );
-		}
-
-		/**
-		 * Get the user donation fields.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @return Charitable_Donation_Field[]
-		 */
-		protected function get_user_donation_fields() {
-			if ( ! isset( $this->user_donation_fields ) ) {
-				$this->user_donation_fields = charitable()->donation_fields()->get_data_type_fields( 'user' );
-			}
-
-			return $this->user_donation_fields;
 		}
 
 		/**

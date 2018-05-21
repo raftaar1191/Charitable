@@ -45,9 +45,8 @@ update_option( 'WPLANG', 'en' );
 // Don't test against UTC+0
 update_option( 'timezone_string', 'Australia/Darwin' );
 
-global $current_user;
-$current_user = new WP_User(1);
-$current_user->set_role('administrator');
+// Set admin as current user.
+wp_set_current_user( 1 );
 
 require 'includes/charitable-testcase.php';
 require 'helpers/charitable-campaign-helper.php';

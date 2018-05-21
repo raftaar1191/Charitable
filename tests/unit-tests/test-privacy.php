@@ -1,6 +1,9 @@
 <?php
 
 class Test_Charitable_Privacy extends Charitable_UnitTestCase {
+	public function setUp() {
+		parent::setUp();
+	}
 
 	/**
 	 * @covers Charitable_Privacy::__construct
@@ -37,7 +40,25 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 	 * @covers Charitable_Privacy::add_privacy_policy_content
 	 */
 	public function test_privacy_content_added() {
-		$this->assertTrue( false );
+		if ( ! class_exists( 'WP_Privacy_Policy_Content' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/misc.php' );
+
+			/* If the class is still missing, this is an earlier version of WP. */
+			if ( ! class_exists( 'WP_Privacy_Policy_Content' ) ) {
+				return $this->markTestSkipped( 'Privacy features not available in this version of WordPress.' );
+			}
+		}
+
+		$privacy = new Charitable_Privacy;
+		$privacy->add_privacy_policy_content();
+
+		foreach ( WP_Privacy_Policy_Content::get_suggested_policy_text() as $policy ) {
+			if ( 'Charitable' === $policy['plugin_name'] ) {
+				return;
+			}
+		}
+
+		$this->fail( 'Charitable privacy policy content not found.' );
 	}
 
 	/**
@@ -68,7 +89,14 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 
 		$this->set_charitable_option( 'minimum_data_retention_period', 0 );
 
-		$donation_id = Charitable_Donation_Helper::create_donation();
+		$donation_id = Charitable_Donation_Helper::create_donation( array(
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
+		) );
 		
 		$this->assertFalse( $privacy->is_donation_in_data_retention_period( $donation_id ) );
 	}
@@ -81,8 +109,15 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 
 		$this->set_charitable_option( 'minimum_data_retention_period', 'endless' );
 
-		$donation_id = Charitable_Donation_Helper::create_donation();
-		
+		$donation_id = Charitable_Donation_Helper::create_donation( array(
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
+		) );
+
 		$this->assertTrue( $privacy->is_donation_in_data_retention_period( $donation_id ) );
 	}
 
@@ -94,7 +129,14 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 
 		$this->set_charitable_option( 'minimum_data_retention_period', 1 );
 
-		$donation_id = Charitable_Donation_Helper::create_donation();
+		$donation_id = Charitable_Donation_Helper::create_donation( array(
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
+		) );
 		
 		$this->assertTrue( $privacy->is_donation_in_data_retention_period( $donation_id ) );
 	}
@@ -108,7 +150,13 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 		$this->set_charitable_option( 'minimum_data_retention_period', 1 );
 
 		$donation_id = Charitable_Donation_Helper::create_donation( array(
-			'date_gmt' => date( 'Y-m-d H:i:s', strtotime( '2 years ago' ) ),
+			'date_gmt'  => date( 'Y-m-d H:i:s', strtotime( '2 years ago' ) ),
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
 		) );
 		
 		$this->assertFalse( $privacy->is_donation_in_data_retention_period( $donation_id ) );
@@ -119,7 +167,28 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 	 * @depends test_get_user_donation_fields
 	 */
 	public function test_get_erasable_fields_for_donation_in_data_retention_period() {
-		$this->assertTrue( false );
+		$privacy     = new Charitable_Privacy();
+		$user_fields = $privacy->get_user_donation_fields();
+
+		$this->set_charitable_option( 'minimum_data_retention_period', 1 );
+		$this->set_charitable_option( 'data_retention_fields', array (
+			'first_name',
+			'last_name',
+			'email',
+			'phone',
+		) );
+
+		$donation_id = Charitable_Donation_Helper::create_donation( array(
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
+		) );
+
+		$this->assertCount( count( $user_fields ) - 4, $privacy->get_erasable_fields_for_donation( $donation_id ) );
+		$this->assertArrayNotHasKey( 'first_name', $privacy->get_erasable_fields_for_donation( $donation_id ), 'Assert that first_name is not erasable for donation in data retention period.' );
 	}
 
 	/**
@@ -127,7 +196,29 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 	 * @depends test_get_user_donation_fields
 	 */
 	public function test_get_erasable_fields_for_donation_outside_data_retention_period() {
-		$this->assertTrue( false );
+		$privacy     = new Charitable_Privacy();
+		$user_fields = $privacy->get_user_donation_fields();
+
+		$this->set_charitable_option( 'minimum_data_retention_period', 1 );
+		$this->set_charitable_option( 'data_retention_fields', array (
+			'first_name',
+			'last_name',
+			'email',
+			'phone',
+		) );
+
+		$donation_id = Charitable_Donation_Helper::create_donation( array(
+			'date_gmt'  => date( 'Y-m-d H:i:s', strtotime( '2 years ago' ) ),
+			'campaigns' => array(
+				array(
+					'campaign_id' => Charitable_Campaign_Helper::create_campaign(),
+					'amount'      => 5,
+				),
+			),
+		) );
+
+		$this->assertCount( count( $user_fields ), $privacy->get_erasable_fields_for_donation( $donation_id ) );
+		$this->assertArrayHasKey( 'first_name', $privacy->get_erasable_fields_for_donation( $donation_id ), 'Assert that first_name is erasable for donation in data retention period.' );
 	}
 
 	/**
@@ -157,12 +248,15 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 			'country'    => 'US',
 		) );
 		
+		// For some reason this is otherwise set to a null user, so we force it to
+		// user 1 here to ensure the call to Charitable_Profile_Form::get_user()
+		// returns the expected value.
+		wp_set_current_user( 1 );
+
 		$privacy  = new Charitable_Privacy();
 		$exporter = $privacy->export_user_data( 'james@gotham.com' );
-		$groups   = wp_list_pluck( $exporter, 'group_id' );
 		
-		$this->assertContains( 'charitable_users', $groups, 'Contains charitable_users group.' );
-		$this->assertNotContains( 'charitable_donors', $groups, 'Does not contain charitable_donors group.' );
-		$this->assertNotContains( 'charitable_donations', $groups, 'Does not contain charitable_donations group.' );
+		$this->assertCount( 1, $exporter['data'], 'Contains only one group.' );
+		$this->assertEquals( 'charitable_users', $exporter['data'][0]['group_id'], 'Contains charitable_users group.' );
 	}
 }
