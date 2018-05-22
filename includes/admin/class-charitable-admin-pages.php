@@ -159,7 +159,7 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 				array(
 					'page_title' => __( 'Customize', 'charitable' ),
 					'menu_title' => __( 'Customize', 'charitable' ),
-					'menu_slug'  => admin_url( 'customize.php?autofocus[panel]=charitable&url=' . $this->get_customizer_campaign_preview_url() ),
+					'menu_slug'  => 'customize.php?autofocus[panel]=charitable&url=' . $this->get_customizer_campaign_preview_url(),
 				),
 				array(
 					'page_title' => __( 'Charitable Settings', 'charitable' ),
