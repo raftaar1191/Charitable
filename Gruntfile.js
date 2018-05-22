@@ -182,10 +182,10 @@ module.exports = function(grunt) {
                 'src' :  [
                     '**',
                     '!bin/**',
-                    '!cypress',
+                    '!cypress/**',
                     '!PRIVACY.md',
                     '!cypress.json',
-                    'docker-compose.yml',
+                    '!docker-compose.yml',
                     '!composer.json',
                     '!composer.lock', 
                     '!phpunit.xml',
