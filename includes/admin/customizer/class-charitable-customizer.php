@@ -206,6 +206,14 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 				),
 			);
 
+			/* Remove the contact consent fields if the database upgrade hasn't been completed yet. */
+			if ( ! Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' ) ) {
+				unset(
+					$fields['sections']['charitable_donation_form']['contact_consent'],
+					$fields['sections']['charitable_donation_form']['contact_consent_label']
+				);
+			}
+
 			/**
 			 * Set whether to add custom styles.
 			 *

@@ -592,6 +592,11 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return void
 		 */
 		public function save_donor_contact_consent() {
+			/* Contact consent requires he database upgrade to have been completed. */
+			if ( ! Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' ) ) {
+				return;
+			}
+
 			/* If we are not showing a consent field, leave this empty. */
 			if ( ! charitable_get_option( 'contact_consent', 0 ) ) {
 				return;
