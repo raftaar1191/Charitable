@@ -311,6 +311,10 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				'release-150' => sprintf( __( "Charitable 1.5 is packed with new features and improvements. <a href='%s' target='_blank'>Find out what's new</a>.", 'charitable' ),
 					'https://www.wpcharitable.com/charitable-1-5-release-notes/?utm_source=notice&utm_medium=wordpress-dashboard&utm_campaign=release-notes&utm_content=release-150'
 				),
+				/* translators: %s: link */
+				'release-160' => sprintf( __( 'Charitable 1.6 introduces important new user privacy features and other improvements. <a href="%s" target="_blank">Find out what\'s new</a>.', 'charitable' ),
+					'https://www.wpcharitable.com/charitable-1-6-user-privacy-gdpr-better-refunds-and-a-new-shortcode/?utm_source=notice&utm_medium=wordpress-dashboard&utm_campaign=release-notes&utm_content=release-160'
+				),
 			);
 
 			$helper = charitable_get_admin_notices();

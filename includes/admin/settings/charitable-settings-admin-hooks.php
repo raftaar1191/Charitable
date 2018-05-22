@@ -92,6 +92,13 @@ add_filter( 'charitable_settings_tab_fields_licenses', array( Charitable_License
 add_filter( 'charitable_settings_button_licenses', array( Charitable_Licenses_Settings::get_instance(), 'add_license_recheck_button' ) );
 
 /**
+ * Add settings to the Privacy tab.
+ *
+ * @see Charitable_Privacy_Settings::add_privacy_fields()
+ */
+add_filter( 'charitable_settings_tab_fields_privacy', array( Charitable_Privacy_Settings::get_instance(), 'add_privacy_fields' ), 5 );
+
+/**
  * Add settings to the Advanced tab.
  *
  * @see Charitable_Advanced_Settings::add_advanced_fields()

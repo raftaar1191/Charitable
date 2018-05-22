@@ -825,7 +825,7 @@ select.charitable-settings-field {
 .charitable-gateway .make-default-gateway {
   color: #777; }
 
-.form-table .charitable-gateway-prompt {
+.charitable-settings-notice {
   max-width: 860px;
   padding: 10px 20px;
   margin-top: 20px;

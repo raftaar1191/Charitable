@@ -1,3 +1,27 @@
+# 1.6.0
+* NEW: Added Terms and Conditions section to the donation form with privacy notice, terms and conditions checkbox and marketing consent checkbox. [#558](https://github.com/Charitable/Charitable/issues/558)
+* NEW: Added Privacy Policy snippets for policy page builder in WordPress 3.9.6. [#557](https://github.com/Charitable/Charitable/issues/557)
+* NEW: Included Charitable donation and donor data in user data erasure, with additional settings to control when data can be erased. [#551](https://github.com/Charitable/Charitable/issues/551) & [#556](https://github.com/Charitable/Charitable/issues/556)
+* NEW: Included Charitable donation and donor data in user data export. [#550](https://github.com/Charitable/Charitable/issues/550)
+* NEW: Added "Customize" link to the Charitable menu to expose Customizer options. [#559](https://github.com/Charitable/Charitable/issues/559)
+* NEW: Added checkbox to the donation form to get donor consent to being contacted. [#420](https://github.com/Charitable/Charitable/issues/420)
+* NEW: Added a [charitable_stat] shortcode. [#23](https://github.com/Charitable/Charitable/issues/23)
+* NEW: Automatically refund donations in PayPal (more gateway support coming soon). [#269](https://github.com/Charitable/Charitable/issues/269)
+* NEW: Added campaign export report. [#529](https://github.com/Charitable/Charitable/issues/529)
+* NEW: Added Campaign Fields API. [#530](https://github.com/Charitable/Charitable/issues/530)
+* NEW: Added a "meta" section within the "Your Details" donation form section. [#495](https://github.com/Charitable/Charitable/issues/495)
+* NEW: Added ability to register new sections in forms through fields APIs. [#541](https://github.com/Charitable/Charitable/issues/541)
+* NEW: Added Charitable REST API namespace in preparation for Gutenberg. [#542](https://github.com/Charitable/Charitable/issues/542)
+* NEW: REST API: Added /reports/ REST API endpoint. [#543](https://github.com/Charitable/Charitable/issues/543)
+* NEW: Added informed consent notice to Licenses settings page. [#547](https://github.com/Charitable/Charitable/issues/547)
+* NEW: Added the ability to enter different PayPal addresses for live and testing (sandbox). [#517](https://github.com/Charitable/Charitable/issues/517)
+* FIX: Improved underlying structure of the Campaign Settings meta box. [#531](https://github.com/Charitable/Charitable/issues/531)
+* FIX: Support creating manual donations without an email address. [#535](https://github.com/Charitable/Charitable/issues/535)
+* FIX: Added way to re-check license expiry dates in case of license renewal. [#477](https://github.com/Charitable/Charitable/issues/477)
+* FIX: Prevent donation widget from displaying publicly for unpublished campaigns. [#276](https://github.com/Charitable/Charitable/issues/276)
+* FIX: Removed "Change Status" toggle in Donation management page. Status changes are included in the Donation Actions meta box. [#579](https://github.com/Charitable/Charitable/issues/579)
+* FIX: Bug that treated dates differently in the Donations Filter and Export. [#546](https://github.com/Charitable/Charitable/issues/546)
+
 # 1.5.14
 * SECURITY FIX: Prevent unauthorized users from accessing the user and donation details of previous donations through an exploit. See [our blog](http://www.wpcharitable.com/blog/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=release-notes&utm_content=1-5-14-release) for a post in the coming days.
 * FIX: Avoid duplicate donations when a donation fails and is re-attempted by the donor. [#173](https://github.com/Charitable/Charitable/issues/173)

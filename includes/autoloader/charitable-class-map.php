@@ -40,6 +40,7 @@ return array(
 	'Charitable_Gateway_Settings' => 'admin/settings/class-charitable-gateway-settings.php',
 	'Charitable_General_Settings' => 'admin/settings/class-charitable-general-settings.php',
 	'Charitable_Licenses_Settings' => 'admin/settings/class-charitable-licenses-settings.php',
+	'Charitable_Privacy_Settings' => 'admin/settings/class-charitable-privacy-settings.php',
 	'Charitable_Settings' => 'admin/settings/class-charitable-settings.php',
 	'Charitable_API_Route_Reports' => 'api/class-charitable-api-route-reports.php',
 	'Charitable_Map' => 'autoloader/charitable-class-map.php',

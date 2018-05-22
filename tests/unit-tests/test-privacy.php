@@ -67,9 +67,9 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 	public function test_get_data_retention_period() {
 		$privacy = new Charitable_Privacy();
 
-		$this->set_charitable_option( 'minimum_data_retention_period', 2 );
+		$this->set_charitable_option( 'minimum_data_retention_period', 3 );
 
-		$this->assertEquals( 2, $privacy->get_data_retention_period() );
+		$this->assertEquals( 3, $privacy->get_data_retention_period() );
 	}
 
 	/**

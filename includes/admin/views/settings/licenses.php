@@ -16,7 +16,12 @@ $products = $helper->get_products();
 if ( empty( $products ) ) :
 	return;
 endif;
-
+?>
+<div class="charitable-settings-notice" style="margin-bottom: 20px;">
+	<p><?php _e( 'By adding your license keys, you agree for your website to send requests to wpcharitable.com to check license details and provide automatic plugin updates.', 'charitable' ); ?></p>
+	<p><?php _e( 'Your license can be disconnected at any time.', 'charitable' ); ?></p>
+</div>
+<?php
 foreach ( $products as $key => $product ) :
 
 	$license = $helper->get_license_details( $key );

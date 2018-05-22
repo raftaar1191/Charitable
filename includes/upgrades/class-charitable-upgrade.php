@@ -190,6 +190,10 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'message' => __( 'Charitable needs to upgrade its database tables.', 'charitable' ),
 					'prompt'  => true,
 				),
+				'release_notes_160'                       => array(
+					'version' => '1.6.0',
+					'notice'  => 'release-160',
+				),
 			);
 		}
 

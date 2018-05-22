@@ -85,7 +85,7 @@ if ( ! class_exists( 'Charitable_Privacy' ) ) :
 		 * @return int|string
 		 */
 		public function get_data_retention_period() {
-			return charitable_get_option( 'minimum_data_retention_period', 0 );
+			return charitable_get_option( 'minimum_data_retention_period', 2 );
 		}
 
 		/**

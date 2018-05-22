@@ -17,8 +17,8 @@ $upgrades = $helper->get_recommended_gateways();
 
 foreach ( $gateways as $gateway ) :
 
-	$gateway    = new $gateway;
-	$is_active  = $helper->is_active_gateway( $gateway->get_gateway_id() );
+	$gateway   = new $gateway;
+	$is_active = $helper->is_active_gateway( $gateway->get_gateway_id() );
 
 	if ( $is_active ) {
 		$action_url  = esc_url( add_query_arg( array(
@@ -98,5 +98,5 @@ if ( ! empty( $upgrades ) ) :
 		);
 	}
 	?>
-	<p class="charitable-gateway-prompt"><?php echo $message; ?></p>
+	<p class="charitable-gateway-prompt charitable-settings-notice"><?php echo $message; ?></p>
 <?php endif ?>

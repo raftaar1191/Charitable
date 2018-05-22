@@ -73,7 +73,7 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 				'licenses',
 				__( 'Licenses', 'charitable' ),
 				array(
-					'index' => 3,
+					'index' => 4,
 				)
 			);
 
@@ -159,8 +159,6 @@ if ( ! class_exists( 'Charitable_Licenses_Settings' ) ) :
 			}
 
 			$html  = '<input style="margin-left:8px;height:29px;" type="submit" class="button button-secondary" name="recheck" value="' . esc_attr__( 'Save & Re-check All Licenses', 'charitable' ) . '" /></p>';
-			$html .= '<p><em>' . __( 'By adding your license keys, you agree for your website to send requests to wpcharitable.com to check license details and provide automatic plugin updates.', 'charitable' ) . '</em></p>';
-			$html .= '<p><em>' . __( 'Your license can be disconnected at any time.', 'charitable' ) . '</em></p>';
 
 			return str_replace(
 				'</p>',

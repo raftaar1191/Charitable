@@ -93,6 +93,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 				'general'  => __( 'General', 'charitable' ),
 				'gateways' => __( 'Payment Gateways', 'charitable' ),
 				'emails'   => __( 'Emails', 'charitable' ),
+				'privacy'  => __( 'Privacy', 'charitable' ),
 				'advanced' => __( 'Advanced', 'charitable' ),
 			) );
 
@@ -130,7 +131,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 					'extensions',
 					__( 'Extensions', 'charitable' ),
 					array(
-						'index' => 3,
+						'index' => 4,
 					)
 				);
 			}
