@@ -77,14 +77,9 @@ if ( ! class_exists( 'Charitable_Privacy_Settings' ) ) :
 					'priority' => 10000,
 					'value'    => 'privacy',
 				),
-				'section_privacy'               => array(
-					'title'    => __( 'User Privacy', 'charitable' ),
-					'type'     => 'heading',
-					'priority' => 20,
-				),
 				'section_privacy_description'   => array(
 					'type'     => 'content',
-					'priority' => 21,
+					'priority' => 20,
 					'content'  => '<div class="charitable-settings-notice">'
 								. '<p>' . __( 'Charitable stores personal data such as donors\' names, email addresses, addresses and phone numbers in your database. Donors may request to have their personal data erased, but you may be legally required to retain some personal data for donations made within a certain time. Below you can control how long personal data is retained for at a minimum, as well as which data fields must be retained.' ) . '</p>'
 								. '<p><a href="https://www.wpcharitable.com/documentation/charitable-user-privacy/?utm_source=privacy-page&utm_medium=wordpress-dashboard&utm_campaign=documentation">' . __( 'Read more about Charitable & user privacy', 'charitable' ) . '</a></p>'

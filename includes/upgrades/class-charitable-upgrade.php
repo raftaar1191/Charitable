@@ -373,6 +373,20 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		}		
 
 		/**
+		 * Checks whether an upgrade has been completed.
+		 *
+		 * @since  1.3.0
+		 * @since  1.6.0 Changed access to public.
+		 *
+		 * @param  string $action The upgrade action.
+		 * @return boolean
+		 */
+		public function upgrade_has_been_completed( $action ) {
+			$log = get_option( $this->upgrade_log_key );
+
+			return is_array( $log ) && array_key_exists( $action, $log );
+		}
+		/**
 		 * Evaluates two version numbers and determines whether an upgrade is
 		 * required for version A to get to version B.
 		 *
@@ -850,20 +864,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			set_transient( 'charitable_' . $upgrade['notice'] . '_notice', 1 );
 
 			$this->update_upgrade_log( $action );
-		}
-
-		/**
-		 * Checks whether an upgrade has been completed.
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  string $action The upgrade action.
-		 * @return boolean
-		 */
-		protected function upgrade_has_been_completed( $action ) {
-			$log = get_option( $this->upgrade_log_key );
-
-			return is_array( $log ) && array_key_exists( $action, $log );
 		}
 
 		/**

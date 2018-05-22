@@ -903,7 +903,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$terms_fields = array();
 			$privacy_page = (int) charitable_get_option( 'privacy_policy_page', 0 );
 			$terms_page   = (int) charitable_get_option( 'terms_conditions_page', 0 );
-			$show_consent = (int) charitable_get_option( 'contact_consent', 0 );
+			$show_consent = (int) charitable_get_option( 'contact_consent', 0 ) && Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
 
 			if ( $privacy_page ) {
 				$terms_fields['privacy_policy_text'] = array(
