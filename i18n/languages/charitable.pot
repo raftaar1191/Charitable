@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.0-beta.3\n"
+"Project-Id-Version: Charitable 1.6.0\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2018-05-21 21:44:21+00:00\n"
+"POT-Creation-Date: 2018-05-22 10:41:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5019,7 +5019,7 @@ msgid "Charitable Settings"
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:166
-#: includes/admin/class-charitable-admin.php:375
+#: includes/admin/class-charitable-admin.php:379
 msgid "Settings"
 msgstr ""
 
@@ -5061,8 +5061,15 @@ msgid ""
 "target='_blank'>Find out what's new</a>."
 msgstr ""
 
-#: includes/admin/class-charitable-admin.php:404
-#: includes/admin/settings/class-charitable-settings.php:131
+#: includes/admin/class-charitable-admin.php:315
+#. translators: %s: link
+msgid ""
+"Charitable 1.6 introduces important new user privacy features and other "
+"improvements. <a href=\"%s\" target=\"_blank\">Find out what's new</a>."
+msgstr ""
+
+#: includes/admin/class-charitable-admin.php:408
+#: includes/admin/settings/class-charitable-settings.php:132
 msgid "Extensions"
 msgstr ""
 
@@ -5379,7 +5386,7 @@ msgstr ""
 
 #: includes/admin/forms/class-charitable-admin-donation-form.php:106
 #: includes/fields/default-fields/donation-fields.php:79
-#: includes/upgrades/class-charitable-upgrade.php:989
+#: includes/upgrades/class-charitable-upgrade.php:993
 #: includes/users/class-charitable-roles.php:64
 msgid "Donor"
 msgstr ""
@@ -5567,107 +5574,15 @@ msgstr ""
 msgid "Made in Test Mode"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-advanced-settings.php:80
-msgid "User Privacy"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:87
-msgid ""
-"Charitable stores personal data such as donors' names, email addresses, "
-"addresses and phone numbers in your database. Donors may request to have "
-"their personal data erased, but you may be legally required to retain some "
-"personal data for donations made within a certain time. Below you can "
-"control how long personal data is retained for at a minimum, as well as "
-"which data fields must be retained."
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:88
-msgid "Read more about Charitable & user privacy"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:91
-msgid "Minimum Data Retention Period"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:95
-#. translators: %1$s: HTML strong tag. %2$s: HTML closing strong tag. %1$s:
-#. HTML break tag.
-msgid ""
-"Prevent personal data from being erased for donations made within a certain "
-"amount of time.%3$sChoose %1$sNone%2$s to allow the personal data of any "
-"donation to be erased.%3$sChoose %1$sForever%2$s to prevent any personal "
-"data from being erased from donations, regardless of how long ago they were "
-"made."
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:103
-#: includes/admin/settings/class-charitable-general-settings.php:125
-msgid "None"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:104
-msgid "One year"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:105
-msgid "Two years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:106
-msgid "Three years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:107
-msgid "Four years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:108
-msgid "Five years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:109
-msgid "Six years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:110
-msgid "Seven years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:111
-msgid "Eight years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:112
-msgid "Nine years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:113
-msgid "Ten years"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:114
-msgid "Forever"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:118
-msgid "Retained Data"
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:123
-msgid ""
-"The checked fields will not be erased fields when personal data is erased "
-"for a donation made within the Minimum Data Retention Period."
-msgstr ""
-
-#: includes/admin/settings/class-charitable-advanced-settings.php:130
+#: includes/admin/settings/class-charitable-advanced-settings.php:78
 msgid "Dangerous Settings"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-advanced-settings.php:135
+#: includes/admin/settings/class-charitable-advanced-settings.php:83
 msgid "Reset Data"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-advanced-settings.php:137
+#: includes/admin/settings/class-charitable-advanced-settings.php:85
 msgid "DELETE ALL DATA when uninstalling the plugin."
 msgstr ""
 
@@ -5697,11 +5612,11 @@ msgid ""
 "email if they hit \"Reply\"."
 msgstr ""
 
-#: includes/admin/settings/class-charitable-gateway-settings.php:76
+#: includes/admin/settings/class-charitable-gateway-settings.php:79
 msgid "Available Payment Gateways"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-gateway-settings.php:86
+#: includes/admin/settings/class-charitable-gateway-settings.php:89
 msgid "Turn on Test Mode"
 msgstr ""
 
@@ -5739,6 +5654,11 @@ msgstr ""
 
 #: includes/admin/settings/class-charitable-general-settings.php:124
 msgid "Space (10 000)"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-general-settings.php:125
+#: includes/admin/settings/class-charitable-privacy-settings.php:106
+msgid "None"
 msgstr ""
 
 #: includes/admin/settings/class-charitable-general-settings.php:129
@@ -5827,15 +5747,91 @@ msgstr ""
 msgid "Save & Re-check All Licenses"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-licenses-settings.php:162
-msgid ""
-"By adding your license keys, you agree for your website to send requests to "
-"wpcharitable.com to check license details and provide automatic plugin "
-"updates."
+#: includes/admin/settings/class-charitable-privacy-settings.php:81
+msgid "User Privacy"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-licenses-settings.php:163
-msgid "Your license can be disconnected at any time."
+#: includes/admin/settings/class-charitable-privacy-settings.php:89
+msgid ""
+"Charitable stores personal data such as donors' names, email addresses, "
+"addresses and phone numbers in your database. Donors may request to have "
+"their personal data erased, but you may be legally required to retain some "
+"personal data for donations made within a certain time. Below you can "
+"control how long personal data is retained for at a minimum, as well as "
+"which data fields must be retained."
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:90
+msgid "Read more about Charitable & user privacy"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:94
+msgid "Minimum Data Retention Period"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:98
+#. translators: %1$s: HTML strong tag. %2$s: HTML closing strong tag. %1$s:
+#. HTML break tag.
+msgid ""
+"Prevent personal data from being erased for donations made within a certain "
+"amount of time.%3$sChoose %1$sNone%2$s to allow the personal data of any "
+"donation to be erased.%3$sChoose %1$sForever%2$s to prevent any personal "
+"data from being erased from donations, regardless of how long ago they were "
+"made."
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:107
+msgid "One year"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:108
+msgid "Two years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:109
+msgid "Three years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:110
+msgid "Four years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:111
+msgid "Five years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:112
+msgid "Six years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:113
+msgid "Seven years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:114
+msgid "Eight years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:115
+msgid "Nine years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:116
+msgid "Ten years"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:117
+msgid "Forever"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:121
+msgid "Retained Data"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-privacy-settings.php:126
+msgid ""
+"The checked fields will not be erased fields when personal data is erased "
+"for a donation made within the Minimum Data Retention Period."
 msgstr ""
 
 #: includes/admin/settings/class-charitable-settings.php:93
@@ -5851,10 +5847,14 @@ msgid "Emails"
 msgstr ""
 
 #: includes/admin/settings/class-charitable-settings.php:96
+msgid "Privacy"
+msgstr ""
+
+#: includes/admin/settings/class-charitable-settings.php:97
 msgid "Advanced"
 msgstr ""
 
-#: includes/admin/settings/class-charitable-settings.php:227
+#: includes/admin/settings/class-charitable-settings.php:228
 msgid "Settings saved"
 msgstr ""
 
@@ -6200,27 +6200,38 @@ msgid ""
 "including %3$s and %2$s."
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:35
+#: includes/admin/views/settings/licenses.php:21
+msgid ""
+"By adding your license keys, you agree for your website to send requests to "
+"wpcharitable.com to check license details and provide automatic plugin "
+"updates."
+msgstr ""
+
+#: includes/admin/views/settings/licenses.php:22
+msgid "Your license can be disconnected at any time."
+msgstr ""
+
+#: includes/admin/views/settings/licenses.php:40
 msgid "Add your license key"
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:39
+#: includes/admin/views/settings/licenses.php:44
 msgid "Deactivate License"
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:41
+#: includes/admin/views/settings/licenses.php:46
 msgid "Lifetime license"
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:43
+#: includes/admin/views/settings/licenses.php:48
 msgid "Expiring in"
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:46
+#: includes/admin/views/settings/licenses.php:51
 msgid "This license is not valid"
 msgstr ""
 
-#: includes/admin/views/settings/licenses.php:48
+#: includes/admin/views/settings/licenses.php:53
 msgid "We could not validate this license"
 msgstr ""
 
@@ -8060,9 +8071,9 @@ msgid "You do not have permission to install plugin updates"
 msgstr ""
 
 #: includes/licensing/class-charitable-plugin-updater.php:170
-#: includes/upgrades/class-charitable-upgrade.php:439
-#: includes/upgrades/class-charitable-upgrade.php:474
-#: includes/upgrades/class-charitable-upgrade.php:576
+#: includes/upgrades/class-charitable-upgrade.php:443
+#: includes/upgrades/class-charitable-upgrade.php:478
+#: includes/upgrades/class-charitable-upgrade.php:580
 msgid "Error"
 msgstr ""
 
@@ -8229,23 +8240,23 @@ msgstr ""
 msgid "Charitable needs to upgrade its database tables."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:236
+#: includes/upgrades/class-charitable-upgrade.php:240
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:280
+#: includes/upgrades/class-charitable-upgrade.php:284
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:310
+#: includes/upgrades/class-charitable-upgrade.php:314
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:439
-#: includes/upgrades/class-charitable-upgrade.php:474
-#: includes/upgrades/class-charitable-upgrade.php:576
+#: includes/upgrades/class-charitable-upgrade.php:443
+#: includes/upgrades/class-charitable-upgrade.php:478
+#: includes/upgrades/class-charitable-upgrade.php:580
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
