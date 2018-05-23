@@ -320,7 +320,9 @@ Additionally, we may also collect the following information:
 			}
 
 			/* 3. Donation donor meta */
-			if ( ! empty( $this->get_user_donation_fields() ) ) {
+			$user_donation_fields = $this->get_user_donation_fields();
+
+			if ( ! empty( $user_donation_fields ) ) {
 				$donations = $this->get_donations_from_profiles( $profiles );
 
 				array_walk( $donations, array( $this, 'erase_donation_personal_data' ) );
