@@ -263,7 +263,9 @@ Additionally, we may also collect the following information:
 			}
 
 			/* 3. Donation donor meta */
-			if ( ! empty( $this->get_user_donation_fields() ) ) {
+			$user_donation_fields = $this->get_user_donation_fields();
+
+			if ( ! empty( $user_donation_fields ) ) {
 				$donor_id     = wp_list_pluck( $profiles, 'donor_id' );
 				$donations    = charitable_get_table( 'campaign_donations' )->get_distinct_ids( 'donation_id', $donor_id, 'donor_id' );
 				$export_items = array_merge(
