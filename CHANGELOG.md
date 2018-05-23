@@ -1,3 +1,6 @@
+# 1.6.1
+* FIX: Cleans up a fatal error in the previous release in certain versions of PHP.
+
 # 1.6.0
 * NEW: Added Terms and Conditions section to the donation form with privacy notice, terms and conditions checkbox and marketing consent checkbox. [#558](https://github.com/Charitable/Charitable/issues/558)
 * NEW: Added Privacy Policy snippets for policy page builder in WordPress 3.9.6. [#557](https://github.com/Charitable/Charitable/issues/557)

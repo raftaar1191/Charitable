@@ -233,6 +233,25 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		}
 
 		/**
+		 * Return donation fields for a particular section.
+		 *
+		 * @since  1.6.0
+		 * @since  1.6.1 Changed access to public.
+		 *
+		 * @param  string $section The section of the donation form we need fields for.
+		 * @return array
+		 */
+		public function get_sanitized_donation_fields( $section ) {
+			$fields = charitable()->donation_fields()->get_donation_form_fields( $section );
+			$keys   = array_keys( $fields );
+
+			return array_combine(
+				$keys,
+				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'donation_form' ), $keys )
+			);
+		}
+
+		/**
 		 * Only show the required user fields if that option was enabled by the site admin.
 		 *
 		 * @since  1.2.0
@@ -1089,24 +1108,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			}
 
 			add_action( 'charitable_donation_form_fields', array( $this, 'add_payment_fields' ) );
-		}
-
-		/**
-		 * Return donation fields for a particular section.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  string $section The section of the donation form we need fields for.
-		 * @return array
-		 */
-		protected function get_sanitized_donation_fields( $section ) {
-			$fields = charitable()->donation_fields()->get_donation_form_fields( $section );
-			$keys   = array_keys( $fields );
-
-			return array_combine(
-				$keys,
-				array_map( array( $this, 'set_field_value' ), wp_list_pluck( $fields, 'donation_form' ), $keys )
-			);
 		}
 
 		/**
