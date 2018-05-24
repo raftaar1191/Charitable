@@ -300,7 +300,7 @@ if ( ! class_exists( 'Charitable_Donation_Field_Registry' ) ) :
 			}
 
 			if ( ! array_key_exists( 'section', $settings ) ) {
-				$settings['section'] = $this->get_default_sections( 'admin' );
+				$settings['section'] = $this->get_default_section( 'admin' );
 			}
 
 			return $this->parse_form_settings( $settings, $field );
