@@ -82,7 +82,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 					'default'  => 'donations',
 					'help'     => sprintf( '%s<br /><a href="%s" target="_blank">%s</a>',
 						__( 'PayPal offers discounted fees to registered non-profit organizations. You must create a PayPal Business account to apply.', 'charitable' ),
-						'https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=merchant%2Fdonations',
+						'https://www.paypal.com/us/webapps/mpp/donations',
 						__( 'Find out more.', 'charitable' )
 					),
 				),
