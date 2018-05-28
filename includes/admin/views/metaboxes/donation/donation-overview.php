@@ -43,7 +43,7 @@ $data_erased = $donation->get_data_erasure_date();
 		</div>
 		<div class="donor-facts charitable-media-body">
 			<h3 class="donor-name"><?php echo $donor->get_name(); ?></h3>
-			<span class="donor-email"><?php echo $donor->get_email(); ?></span>
+			<p class="donor-email"><?php echo $donor->get_email(); ?></p>
 			<?php
 			/**
 			 * Display additional details about the donor.
@@ -58,7 +58,28 @@ $data_erased = $donation->get_data_erasure_date();
 		</div>
 	</div>
 	<div id="donation-summary">		
-		<span class="donation-status"><?php printf( '%s: <span class="status">%s</span>', __( 'Status', 'charitable' ), $donation->get_status_label() ); ?></span>
+		<span class="donation-status">
+			<?php
+				printf(
+					'%s: <span class="status %s">%s</span>',
+					__( 'Status', 'charitable' ),
+					$donation->get_status(),
+					$donation->get_status_label()
+				);
+			?>
+		</span>
+		<?php if ( $donation->contact_consent_explicitly_set() ) : ?>
+			<span class="contact-consent">
+				<?php
+					printf(
+						'%s: <span class="consent %s">%s</span>',
+						__( 'Contact Consent', 'charitable' ),
+						$donation->contact_consent() ? 'given' : 'not-given',
+						$donation->contact_consent() ? __( 'Given', 'charitable' ) : __( 'Not Given', 'charitable' )
+					);
+				?>
+			</span>
+		<?php endif ?>
 	</div>
 	<?php
 		/**

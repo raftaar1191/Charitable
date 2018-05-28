@@ -115,11 +115,6 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 						) . '</li>'
 						. '</ul>'
 						. '</div>',
-					sprintf(
-						/* translators: %s: PayPal domain */
-						__( 'API credentials are necessary to process PayPal refunds and subscription cancellations from inside WordPress. These can be obtained from <a target="_blank" href="%s/us/cgi-bin/webscr?cmd=_login-api-run">this tool</a>.', 'charitable' ),
-						charitable_get_option( 'test_mode' ) ? 'https://www.sandbox.paypal.com' : 'https://www.paypal.com'
-					),
 					'priority' => 21,
 				),
 				'api_username'             => array(

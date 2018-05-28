@@ -671,7 +671,8 @@ body.post-type-donation .donation-erasure-notice {
 #donation-overview .donation-status {
   display: block;
   margin-bottom: 6px; }
-#donation-overview .donation-status .status {
+#donation-overview .donation-status .status,
+#donation-overview .contact-consent .consent {
   font-weight: bolder; }
 #donation-overview table#overview {
   float: left;

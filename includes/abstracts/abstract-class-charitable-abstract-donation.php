@@ -701,6 +701,34 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
+		 * Check whether contact consent was given.
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function contact_consent() {
+			return (int) get_post_meta( $this->ID, 'contact_consent', true );
+		}
+
+		/**
+		 * Checks whether contact consent was explicitly set for this donation.
+		 *
+		 * If the donation form did not include a contact_consent field, this will
+		 * return false. Otherwise, it will return true (including if the donor
+		 * did not give their consent).
+		 *
+		 * @since  1.6.0
+		 *
+		 * @return boolean
+		 */
+		public function contact_consent_explicitly_set() {
+			$consent = get_post_meta( $this->ID, 'contact_consent' );
+
+			return ! empty( $consent );
+		}
+
+		/**
 		 * Return an array of meta relating to the donation.
 		 *
 		 * @since  1.2.0
