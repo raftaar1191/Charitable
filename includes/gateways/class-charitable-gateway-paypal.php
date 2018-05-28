@@ -100,7 +100,22 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 				),
 				'api_description'          => array(
 					'type'     => 'content',
-					'content'  => sprintf(
+					'content'  => '<div class="charitable-settings-notice">'
+						. '<p>' . __( 'API credentials are necessary to process PayPal refunds and subscription cancellations from inside WordPress. To find your credentials:', 'charitable' ) . '</p>'
+						. '<ul>'
+						. '<li>' . sprintf(
+							/* translators: %s: link */
+							__( '<strong>Live</strong>: Go to %s.', 'charitable' ),
+							'<a href="https://www.paypal.com/businessprofile/mytools/apiaccess/firstparty/signature" target="_blank">https://www.paypal.com/businessprofile/mytools/apiaccess/firstparty/signature</a>'
+						) . '</li>'
+						. '<li>' . sprintf(
+							/* translators: %s: link */
+							__( '<strong>Sandbox</strong>: Go to %s, click on <em>Profile</em> for the Seller account and open the <em>API keys</em> tab.', 'charitable' ),
+							'<a href="https://developer.paypal.com/developer/accounts/" target="_blank">https://developer.paypal.com/developer/accounts/</a>'
+						) . '</li>'
+						. '</ul>'
+						. '</div>',
+					sprintf(
 						/* translators: %s: PayPal domain */
 						__( 'API credentials are necessary to process PayPal refunds and subscription cancellations from inside WordPress. These can be obtained from <a target="_blank" href="%s/us/cgi-bin/webscr?cmd=_login-api-run">this tool</a>.', 'charitable' ),
 						charitable_get_option( 'test_mode' ) ? 'https://www.sandbox.paypal.com' : 'https://www.paypal.com'
