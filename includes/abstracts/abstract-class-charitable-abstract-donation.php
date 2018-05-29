@@ -705,10 +705,20 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @return boolean
+		 * @return string
 		 */
-		public function contact_consent() {
-			return (int) get_post_meta( $this->ID, 'contact_consent', true );
+		public function get_contact_consent() {
+			$consent = get_post_meta( $this->ID, 'contact_consent', true );
+
+			if ( ! $consent ) {
+				return __( 'Not Given', 'charitable' );
+			}
+
+			if ( $this->get_donor()->contact_consent ) {
+				return __( 'Given', 'charitable' );
+			}
+
+			return __( 'Withdrawn', 'charitable' );
 		}
 
 		/**

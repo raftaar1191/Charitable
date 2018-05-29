@@ -71,11 +71,13 @@ $data_erased = $donation->get_data_erasure_date();
 		<?php if ( $donation->contact_consent_explicitly_set() ) : ?>
 			<span class="contact-consent">
 				<?php
+					$consent = $donation->get_contact_consent();
+
 					printf(
 						'%s: <span class="consent %s">%s</span>',
 						__( 'Contact Consent', 'charitable' ),
-						$donation->contact_consent() ? 'given' : 'not-given',
-						$donation->contact_consent() ? __( 'Given', 'charitable' ) : __( 'Not Given', 'charitable' )
+						strtolower( str_replace( ' ', '-', $consent ) ),
+						$consent
 					);
 				?>
 			</span>
