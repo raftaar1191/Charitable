@@ -927,7 +927,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			if ( $privacy_page ) {
 				$terms_fields['privacy_policy_text'] = array(
 					'type'     => 'content',
-					'content'  => '<p class="charitable-privacy-policy-text">' . $this->get_parsed_privacy_text( $privacy_page ) . '</p>',
+					'content'  => '<p class="charitable-privacy-policy-text">' . $this->get_parsed_privacy_text() . '</p>',
 					'priority' => 4,
 				);
 			}
@@ -945,13 +945,13 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			if ( $terms_page ) {
 				$terms_fields['terms_text'] = array(
 					'type'     => 'content',
-					'content'  => '<div class="charitable-terms-text">' . $this->get_terms( $terms_page ) . '</div>',
+					'content'  => '<div class="charitable-terms-text">' . charitable_get_terms_and_conditions() . '</div>',
 					'priority' => 12,
 				);
 
 				$terms_fields['accept_terms'] = array(
 					'type'      => 'checkbox',
-					'label'     => $this->get_parsed_terms_text( $terms_page ),
+					'label'     => $this->get_parsed_terms_text(),
 					'priority'  => 16,
 					'required'  => true,
 					'data_type' => 'meta',
@@ -983,67 +983,43 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		}
 
 		/**
-		 * Return the terms and conditions text.
-		 *
-		 * @since  1.6.0
-		 *
-		 * @param  int $terms_page The ID of the terms page.
-		 * @return string
-		 */
-		public function get_terms( $terms_page ) {
-			remove_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
-
-			$content = apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) );
-
-			add_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
-
-			return $content;
-		}
-
-		/**
 		 * Return the terms text, with [terms] replaced by a link to the terms and conditions.
 		 *
 		 * @since  1.6.0
+		 * @since  1.6.2 Deprecated $terms_page parameter.
 		 *
-		 * @param  int $terms_page The ID of the terms page.
 		 * @return string
 		 */
-		public function get_parsed_terms_text( $terms_page ) {
-			$url = get_the_permalink( $terms_page );
-
-			if ( ! $url ) {
-				return '';
-			}
-
-			$text    = charitable_get_option( 'terms_conditions', __( 'I have read and agree to the website [terms].', 'charitable' ) );
-			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-terms-link">%s</a>',
-				$url,
-				__( 'terms and conditions', 'charitable' )
-			);
-			return str_replace( '[terms]', $replace, $text );
+		public function get_parsed_terms_text() {
+			/**
+			 * Filter the terms and conditions text in the donation form.
+			 *
+			 * @since 1.6.2
+			 *
+			 * @param string                   $text The terms and conditions text.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
+			return apply_filters( 'charitable_donation_form_terms_and_conditions_field_label', charitable_get_terms_and_conditions_field_label(), $this );
 		}
 
 		/**
 		 * Return the privacy policy text, with [privacy_policy] replaced by a link to the privacy policy page.
 		 *
 		 * @since  1.6.0
+		 * @since  1.6.2 Deprecated $privacy_page parameter.
 		 *
-		 * @param  int $privacy_page The ID of the privacy policy page.
 		 * @return string
 		 */
-		public function get_parsed_privacy_text( $privacy_page ) {
-			$url = get_the_permalink( $privacy_page );
-
-			if ( ! $url ) {
-				return '';
-			}
-
-			$text    = charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
-			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-privacy-policy-link">%s</a>',
-				$url,
-				__( 'privacy policy', 'charitable' )
-			);
-			return str_replace( '[privacy_policy]', $replace, $text );
+		public function get_parsed_privacy_text() {
+			/**
+			 * Filter the privacy policy text in the donation form.
+			 *
+			 * @since 1.6.2
+			 *
+			 * @param string                   $text The privacy policy text.
+			 * @param Charitable_Donation_Form $form This instance of `Charitable_Donation_Form`.
+			 */
+			return apply_filters( 'charitable_donation_form_privacy_policy_text', charitable_get_privacy_policy_field_text(), $this );
 		}
 
 		/**
