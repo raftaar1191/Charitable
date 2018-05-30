@@ -10,14 +10,24 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donor' ) ) :
 
 	/**
 	 * Charitable_Donor
 	 *
-	 * @since  1.0.0
+	 * @since    1.0.0
+	 *
+	 * @property int    $user_id
+	 * @property string $first_name
+	 * @property string $last_name
+	 * @property string $email
+	 * @property string $date_joined
+	 * @property string $data_erased
+	 * @property int    $contact_consent
 	 */
 	class Charitable_Donor {
 
