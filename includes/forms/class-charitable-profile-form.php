@@ -134,45 +134,49 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 */
 		public function get_user_fields() {
 			$user_fields = apply_filters( 'charitable_user_fields', array(
-				'username' => array(
-					'type'      => 'paragraph',
-					'priority'  => '',
-					'content'   => sprintf( __( 'Username: %s.', 'charitable' ), $this->get_user()->user_login ),
+				'username'     => array(
+					'type'     => 'paragraph',
+					'priority' => '',
+					'content'  => sprintf(
+						/* translators: %s: username */
+						__( 'Username: %s.', 'charitable' ),
+						$this->get_user()->user_login
+					),
 				),
-				'first_name' => array(
-					'label'     => __( 'First name', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 4,
-					'required'  => true,
-					'value'     => $this->get_user_value( 'first_name' ),
+				'first_name'   => array(
+					'label'    => __( 'First name', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 4,
+					'required' => true,
+					'value'    => $this->get_user_value( 'first_name' ),
 				),
-				'last_name' => array(
-					'label'     => __( 'Last name', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 6,
-					'required'  => true,
-					'value'     => $this->get_user_value( 'last_name' ),
+				'last_name'    => array(
+					'label'    => __( 'Last name', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 6,
+					'required' => true,
+					'value'    => $this->get_user_value( 'last_name' ),
 				),
-				'user_email' => array(
-					'label'     => __( 'Email', 'charitable' ),
-					'type'      => 'email',
-					'required'  => true,
-					'priority'  => 8,
-					'value'     => $this->get_user_value( 'user_email' ),
+				'user_email'   => array(
+					'label'    => __( 'Email', 'charitable' ),
+					'type'     => 'email',
+					'required' => true,
+					'priority' => 8,
+					'value'    => $this->get_user_value( 'user_email' ),
 				),
 				'organisation' => array(
-					'label'     => __( 'Organization', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 10,
-					'required'  => false,
-					'value'     => $this->get_user_value( 'organisation' ),
+					'label'    => __( 'Organization', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 10,
+					'required' => false,
+					'value'    => $this->get_user_value( 'organisation' ),
 				),
-				'description' => array(
-					'label'     => __( 'Bio', 'charitable' ),
-					'type'      => 'textarea',
-					'required'  => false,
-					'priority'  => 12,
-					'value'     => $this->get_user_value( 'description' ),
+				'description'  => array(
+					'label'    => __( 'Bio', 'charitable' ),
+					'type'     => 'textarea',
+					'required' => false,
+					'priority' => 12,
+					'value'    => $this->get_user_value( 'description' ),
 				),
 			), $this );
 
@@ -257,31 +261,48 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		public function get_social_fields() {
 			$social_fields = apply_filters( 'charitable_user_social_fields', array(
 				'user_url' => array(
-					'label'     => __( 'Your Website', 'charitable' ),
-					'type'      => 'url',
-					'priority'  => 42,
-					'required'  => false,
-					'value'     => $this->get_user_value( 'user_url' ),
+					'label'    => __( 'Your Website', 'charitable' ),
+					'type'     => 'url',
+					'priority' => 42,
+					'required' => false,
+					'value'    => $this->get_user_value( 'user_url' ),
 				),
-				'twitter' => array(
-					'label'     => __( 'Twitter', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 44,
-					'required'  => false,
-					'value'     => $this->get_user_value( 'twitter' ),
+				'twitter'  => array(
+					'label'    => __( 'Twitter', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 44,
+					'required' => false,
+					'value'    => $this->get_user_value( 'twitter' ),
 				),
-				'facebook' => array(
-					'label'     => __( 'Facebook', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 46,
-					'required'  => false,
-					'value'     => $this->get_user_value( 'facebook' ),
+				'facebook'  => array(
+					'label'    => __( 'Facebook', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 46,
+					'required' => false,
+					'value'    => $this->get_user_value( 'facebook' ),
 				),
 			), $this );
 
 			uasort( $social_fields, 'charitable_priority_sort' );
 
 			return $social_fields;
+		}
+
+		/**
+		 * Communication preferences fields.
+		 *
+		 * @since  1.6.2
+		 *
+		 * @return array
+		 */
+		public function get_communication_preferences_fields() {
+			$fields = apply_filters( 'charitable_user_communication_preferences_fields', array(
+				
+			) );
+
+			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
 		}
 
 		/**
@@ -293,29 +314,35 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 */
 		public function get_fields() {
 			$fields = apply_filters( 'charitable_user_profile_fields', array(
-				'user_fields' => array(
-					'legend'    => __( 'Your Details', 'charitable' ),
-					'type'      => 'fieldset',
-					'fields'    => $this->get_user_fields(),
-					'priority'  => 0,
+				'user_fields'          => array(
+					'legend'   => __( 'Your Details', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $this->get_user_fields(),
+					'priority' => 0,
 				),
-				'password_fields' => array(
-					'legend'    => __( 'Change Your Password', 'charitable' ),
-					'type'      => 'fieldset',
-					'fields'    => $this->get_password_fields(),
-					'priority'  => 10,
+				'password_fields'      => array(
+					'legend'   => __( 'Change Your Password', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $this->get_password_fields(),
+					'priority' => 10,
 				),
-				'address_fields' => array(
-					'legend'    => __( 'Your Address', 'charitable' ),
-					'type'      => 'fieldset',
-					'fields'    => $this->get_address_fields(),
-					'priority'  => 20,
+				'address_fields'       => array(
+					'legend'   => __( 'Your Address', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $this->get_address_fields(),
+					'priority' => 20,
 				),
-				'social_fields' => array(
-					'legend'    => __( 'Your Social Profiles', 'charitable' ),
-					'type'      => 'fieldset',
-					'fields'    => $this->get_social_fields(),
-					'priority'  => 40,
+				'social_fields'        => array(
+					'legend'   => __( 'Your Social Profiles', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $this->get_social_fields(),
+					'priority' => 40,
+				),
+				'communication_fields' => array(
+					'legend'   => __( 'Your Communication Preferences', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $this->get_communication_preferences_fields(),
+					'priority' => 60,
 				),
 			), $this );
 

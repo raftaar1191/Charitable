@@ -181,7 +181,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * FIX: Improved underlying structure of the Campaign Settings meta box. [#531](https://github.com/Charitable/Charitable/issues/531)
 * FIX: Support creating manual donations without an email address. [#535](https://github.com/Charitable/Charitable/issues/535)
 * FIX: Added way to re-check license expiry dates in case of license renewal. [#477](https://github.com/Charitable/Charitable/issues/477)
-* FIX: Prevent donation widget from displaying publicly for unpublished campaigns. [#276](https://github.com/Charitable/Charitable/issues/276)
+* FIX: Prevent donation forms from displaying publicly for unpublished or inactive campaigns. This includes the Donate widget. [#276](https://github.com/Charitable/Charitable/issues/276).
 * FIX: Removed "Change Status" toggle in Donation management page. Status changes are included in the Donation Actions meta box. [#579](https://github.com/Charitable/Charitable/issues/579)
 * FIX: Bug that treated dates differently in the Donations Filter and Export. [#546](https://github.com/Charitable/Charitable/issues/546)
 

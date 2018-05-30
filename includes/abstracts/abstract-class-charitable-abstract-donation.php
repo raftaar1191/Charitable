@@ -710,15 +710,12 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		public function get_contact_consent() {
 			$consent = get_post_meta( $this->ID, 'contact_consent', true );
 
-			if ( ! $consent ) {
-				return __( 'Not Given', 'charitable' );
+			/* The donor hasn't given their consent, or has withdrawn it. */
+			if ( ! $this->get_donor()->contact_consent ) {
+				return $consent ? __( 'Withdrawn', 'charitable' ) : __( 'Not Given', 'charitable' );
 			}
 
-			if ( $this->get_donor()->contact_consent ) {
-				return __( 'Given', 'charitable' );
-			}
-
-			return __( 'Withdrawn', 'charitable' );
+			return $consent ? __( 'Given', 'charitable' ) : __( 'Given Later', 'charitable' );
 		}
 
 		/**

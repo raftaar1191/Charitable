@@ -15,13 +15,13 @@
 * NEW: Added a "meta" section within the "Your Details" donation form section. [#495](https://github.com/Charitable/Charitable/issues/495)
 * NEW: Added ability to register new sections in forms through fields APIs. [#541](https://github.com/Charitable/Charitable/issues/541)
 * NEW: Added Charitable REST API namespace in preparation for Gutenberg. [#542](https://github.com/Charitable/Charitable/issues/542)
-* NEW: REST API: Added /reports/ REST API endpoint. [#543](https://github.com/Charitable/Charitable/issues/543)
+* NEW: Added /reports/ REST API endpoint. [#543](https://github.com/Charitable/Charitable/issues/543)
 * NEW: Added informed consent notice to Licenses settings page. [#547](https://github.com/Charitable/Charitable/issues/547)
 * NEW: Added the ability to enter different PayPal addresses for live and testing (sandbox). [#517](https://github.com/Charitable/Charitable/issues/517)
 * FIX: Improved underlying structure of the Campaign Settings meta box. [#531](https://github.com/Charitable/Charitable/issues/531)
 * FIX: Support creating manual donations without an email address. [#535](https://github.com/Charitable/Charitable/issues/535)
 * FIX: Added way to re-check license expiry dates in case of license renewal. [#477](https://github.com/Charitable/Charitable/issues/477)
-* FIX: Prevent donation widget from displaying publicly for unpublished campaigns. [#276](https://github.com/Charitable/Charitable/issues/276)
+* FIX: Prevent donation forms from displaying publicly for unpublished or inactive campaigns. This includes the Donate widget. [#276](https://github.com/Charitable/Charitable/issues/276).
 * FIX: Removed "Change Status" toggle in Donation management page. Status changes are included in the Donation Actions meta box. [#579](https://github.com/Charitable/Charitable/issues/579)
 * FIX: Bug that treated dates differently in the Donations Filter and Export. [#546](https://github.com/Charitable/Charitable/issues/546)
 

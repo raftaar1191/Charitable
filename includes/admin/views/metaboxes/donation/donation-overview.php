@@ -68,7 +68,7 @@ $data_erased = $donation->get_data_erasure_date();
 				);
 			?>
 		</span>
-		<?php if ( $donation->contact_consent_explicitly_set() ) : ?>
+		<?php if ( $donation->contact_consent_explicitly_set() || ! is_null( $donor->contact_consent ) ) : ?>
 			<span class="contact-consent">
 				<?php
 					$consent = $donation->get_contact_consent();

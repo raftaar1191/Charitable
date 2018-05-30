@@ -446,7 +446,12 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		private function get_section_fields( $section ) {
 			$registry = charitable()->campaign_fields();
 			$fields   = $registry->get_admin_form_fields( $section );
-			$keys     = $registry->get_sanitized_keys( $fields, false );
+
+			if ( empty( $fields ) ) {
+				return array();
+			}
+
+			$keys = $registry->get_sanitized_keys( $fields, false );
 
 			return array_combine(
 				$keys,

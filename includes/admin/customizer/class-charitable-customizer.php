@@ -86,7 +86,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 				'priority'   => 1000,
 				'capability' => 'manage_charitable_settings',
 				'sections'   => array(
-					'charitable_donation_form' => array(
+					'charitable_donation_form'        => array(
 						'title'    => __( 'Donation Form', 'charitable' ),
 						'priority' => 1020,
 						'settings' => array(
@@ -122,6 +122,12 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									),
 								),
 							),
+						),
+					),
+					'charitable_privacy'              => array(
+						'title'    => __( 'User Privacy', 'charitable' ),
+						'priority' => 1030,
+						'settings' => array(
 							'privacy_policy_page'          => array(
 								'setting' => array(
 									'transport' => 'refresh',
@@ -130,7 +136,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'           => 'dropdown-pages',
 									'label'          => __( 'Privacy policy page', 'charitable' ),
-									'priority'       => 1025,
+									'priority'       => 1032,
 									'allow_addition' => true,
 								),
 							),
@@ -143,8 +149,8 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'        => 'textarea',
 									'label'       => __( 'Privacy policy', 'charitable' ),
-									'description' => __( 'Optionally add some text about your website privacy policy for donors to see during donation.', 'charitable' ),
-									'priority'    => 1025.2,
+									'description' => __( 'Information about your website privacy policy for people to see when they donate, register an account, or manage their profile. Leave empty to disable.', 'charitable' ),
+									'priority'    => 1034,
 								),
 							),
 							'contact_consent'              => array(
@@ -154,9 +160,9 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								),
 								'control' => array(
 									'type'        => 'radio',
-									'label'       => __( 'Donor consent field', 'charitable' ),
-									'description' => __( 'Optionally include a checkbox asking donors to consent to being contacted in the future.', 'charitable' ),
-									'priority'    => 1026,
+									'label'       => __( 'Contact consent field', 'charitable' ),
+									'description' => __( 'Display a checkbox asking people for their consent to being contacted when they donate, register an account, or manage their profile.', 'charitable' ),
+									'priority'    => 1036,
 									'choices'     => array(
 										1 => __( 'Yes', 'charitable' ),
 										0 => __( 'No', 'charitable' ),
@@ -171,12 +177,18 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								),
 								'control' => array(
 									'type'        => 'textarea',
-									'label'       => __( 'Donor consent label', 'charitable' ),
-									'priority'    => 1026.2,
-									'description' => __( 'A short statement describing how you would like to contact donors.', 'charitable' ),
+									'label'       => __( 'Contact consent label', 'charitable' ),
+									'priority'    => 1038,
+									'description' => __( 'A short statement describing how you would like to contact people.', 'charitable' ),
 								),
 							),
-							'terms_conditions_page'        => array(
+						),
+					),
+					'charitable_terms_and_conditions' => array(
+						'title'    => __( 'Terms & Conditions', 'charitable' ),
+						'priority' => 1040,
+						'settings' => array(
+							'terms_conditions_page' => array(
 								'setting' => array(
 									'transport' => 'refresh',
 									'default'   => '',
@@ -184,21 +196,21 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 								'control' => array(
 									'type'           => 'dropdown-pages',
 									'label'          => __( 'Terms and conditions page', 'charitable' ),
-									'priority'       => 1027,
+									'priority'       => 1042,
 									'allow_addition' => true,
 								),
 							),
-							'terms_conditions'             => array(
+							'terms_conditions'      => array(
 								'setting' => array(
 									'transport'         => 'refresh',
 									'default'           => __( 'I have read and agree to the website [terms].', 'charitable' ),
 									'sanitize_callback' => 'sanitize_text_field',
 								),
 								'control' => array(
-									'type'        => 'text',
+									'type'        => 'textarea',
 									'label'       => __( 'Terms and conditions', 'charitable' ),
-									'description' => __( 'Optionally add some text for the terms and conditions checkbox that donors must accept to complete their donation.', 'charitable' ),
-									'priority'    => 1027.2,
+									'description' => __( 'Display a checkbox asking people to accept the website terms and conditions when they make a donation or register an account. Leave empty to disable.', 'charitable' ),
+									'priority'    => 1044,
 								),
 							),
 						),
