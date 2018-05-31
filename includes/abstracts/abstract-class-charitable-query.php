@@ -479,7 +479,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 * @return string
 		 */
 		public function donation_fields( $select_statement ) {
-			return $select_statement . ", cd.donation_id, GROUP_CONCAT(cd.campaign_name SEPARATOR ', ') AS campaigns, GROUP_CONCAT(cd.campaign_id SEPARATOR ',') AS campaign_ids";
+			return $select_statement . ", cd.donation_id, GROUP_CONCAT(cd.campaign_name SEPARATOR ', ') AS campaigns, GROUP_CONCAT(cd.campaign_id SEPARATOR ',') AS campaign_ids, cd.donor_id";
 		}
 
 		/**

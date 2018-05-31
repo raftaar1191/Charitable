@@ -88,7 +88,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 			}
 
 			$args['donations'] = $donations;
-			$args['user'] = $user;
+			$args['user']      = $user;
 
 			charitable_template( 'shortcodes/my-donations.php', $args );
 

@@ -297,8 +297,6 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		 * @return array
 		 */
 		public function maybe_get_communication_preferences_fields( $fields ) {
-			$communication_fields = array();
-
 			if ( ! charitable_is_contact_consent_activated() ) {
 				return $fields;
 			}
