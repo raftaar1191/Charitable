@@ -289,20 +289,62 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 		}
 
 		/**
-		 * Communication preferences fields.
+		 * Maybe add communication preferences fields.
 		 *
 		 * @since  1.6.2
 		 *
+		 * @param  array $fields The existing profile form fields.
 		 * @return array
 		 */
-		public function get_communication_preferences_fields() {
-			$fields = apply_filters( 'charitable_user_communication_preferences_fields', array(
-				
-			) );
+		public function maybe_get_communication_preferences_fields( $fields ) {
+			$communication_fields = array();
+
+			if ( ! charitable_is_contact_consent_activated() ) {
+				return $fields;
+			}
+
+			$donor = $this->get_user()->get_donor();
+
+			if ( array_key_exists( 'contact_consent', $_POST ) ) {
+				$consent = $_POST['contact_consent'];
+			} elseif ( is_null( $donor ) ) {
+				$consent = false;
+			} else {
+				$consent = $donor->contact_consent;
+			}
+
+			/**
+			 * Filter the communication preferences fields.
+			 *
+			 * @since 1.6.2
+			 *
+			 * @param array                   $communication_fields List of fields.
+			 * @param Charitable_Profile_Form $form                 Instance of `Charitable_Profile_Form`.
+			 */
+			$communication_fields = apply_filters( 'charitable_user_communication_preferences_fields', array(
+				'contact_consent' => array(
+					'type'     => 'checkbox',
+					'label'    => charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) ),
+					'priority' => 8,
+					'required' => false,
+					'value'    => $consent,
+				),
+			), $this );
+
+			if ( empty( $communication_fields ) ) {
+				return $fields;
+			}
 
 			uasort( $fields, 'charitable_priority_sort' );
 
-			return $fields;
+			return array_merge( $fields, array(
+				'communication_fields' => array(
+					'legend'   => __( 'Communication Preferences', 'charitable' ),
+					'type'     => 'fieldset',
+					'fields'   => $communication_fields,
+					'priority' => 60,
+				),
+			) );
 		}
 
 		/**
@@ -338,13 +380,9 @@ if ( ! class_exists( 'Charitable_Profile_Form' ) ) :
 					'fields'   => $this->get_social_fields(),
 					'priority' => 40,
 				),
-				'communication_fields' => array(
-					'legend'   => __( 'Your Communication Preferences', 'charitable' ),
-					'type'     => 'fieldset',
-					'fields'   => $this->get_communication_preferences_fields(),
-					'priority' => 60,
-				),
 			), $this );
+
+			$fields = $this->maybe_get_communication_preferences_fields( $fields );
 
 			uasort( $fields, 'charitable_priority_sort' );
 

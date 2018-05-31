@@ -128,7 +128,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 						'title'    => __( 'User Privacy', 'charitable' ),
 						'priority' => 1030,
 						'settings' => array(
-							'privacy_policy_page'          => array(
+							'privacy_policy_page'   => array(
 								'setting' => array(
 									'transport' => 'refresh',
 									'default'   => '',
@@ -140,7 +140,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'allow_addition' => true,
 								),
 							),
-							'privacy_policy'               => array(
+							'privacy_policy'        => array(
 								'setting' => array(
 									'transport'         => 'refresh',
 									'default'           => __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ),
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									'priority'    => 1034,
 								),
 							),
-							'contact_consent'              => array(
+							'contact_consent'       => array(
 								'setting' => array(
 									'transport' => 'refresh',
 									'default'   => 0,
@@ -169,7 +169,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 									),
 								),
 							),
-							'contact_consent_label'        => array(
+							'contact_consent_label' => array(
 								'setting' => array(
 									'transport'         => 'refresh',
 									'default'           => __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ),

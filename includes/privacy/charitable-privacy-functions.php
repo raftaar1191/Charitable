@@ -1,4 +1,6 @@
 <?php
+
+use function foo\func;
 /**
  * Charitable Privacy Functions.
  *
@@ -41,6 +43,21 @@ function charitable_is_terms_and_conditions_activated() {
  */
 function charitable_is_privacy_policy_activated() {
 	return 0 != charitable_get_option( 'privacy_policy_page', 0 ) && '' != charitable_get_option( 'privacy_policy' );
+}
+
+/**
+ * Check whether the contact consent is active.
+ *
+ * This returns true when the "contact_consent" and the "contact_consent_label"
+ * fields are not empty, and when the upgrade_donor_tables upgrade routine has
+ * been run.
+ *
+ * @since  1.6.2
+ *
+ * @return boolean
+ */
+function charitable_is_contact_consent_activated() {
+	return 0 != charitable_get_option( 'contact_consent', 0 ) && Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
 }
 
 /**

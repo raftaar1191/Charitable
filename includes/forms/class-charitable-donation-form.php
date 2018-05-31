@@ -920,11 +920,8 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function maybe_add_terms_conditions_fields( $fields ) {
 			$terms_fields = array();
-			$privacy_page = (int) charitable_get_option( 'privacy_policy_page', 0 );
-			$terms_page   = (int) charitable_get_option( 'terms_conditions_page', 0 );
-			$show_consent = (int) charitable_get_option( 'contact_consent', 0 ) && Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
 
-			if ( $privacy_page ) {
+			if ( charitable_is_privacy_policy_activated() ) {
 				$terms_fields['privacy_policy_text'] = array(
 					'type'     => 'content',
 					'content'  => '<p class="charitable-privacy-policy-text">' . $this->get_parsed_privacy_text() . '</p>',
@@ -932,7 +929,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				);
 			}
 
-			if ( $show_consent ) {
+			if ( charitable_is_contact_consent_activated() ) {
 				$terms_fields['contact_consent'] = array(
 					'type'      => 'checkbox',
 					'label'     => charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) ),
@@ -942,7 +939,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				);
 			}
 
-			if ( $terms_page ) {
+			if ( charitable_is_terms_and_conditions_activated() ) {
 				$terms_fields['terms_text'] = array(
 					'type'     => 'content',
 					'content'  => '<div class="charitable-terms-text">' . charitable_get_terms_and_conditions() . '</div>',
