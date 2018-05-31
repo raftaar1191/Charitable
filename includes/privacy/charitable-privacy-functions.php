@@ -1,6 +1,4 @@
 <?php
-
-use function foo\func;
 /**
  * Charitable Privacy Functions.
  *
