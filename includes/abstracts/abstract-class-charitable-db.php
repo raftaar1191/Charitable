@@ -266,15 +266,15 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		}
 
 		/**
-		 * Update a row
+		 * Update a row.
 		 *
-		 * @global 	WPDB $wpdb
 		 * @since  1.0.0
 		 *
-		 * @param  int 	$row_id
-		 * @param  array 	$data
-		 * @param  string 	$where 	Column used in where argument.
-		 * @return  bool
+		 * @global WPDB $wpdb
+		 * @param  int    $row_id The record to update.
+		 * @param  array  $data   Data to update.
+		 * @param  string $where  Column used in where argument.
+		 * @return boolean
 		 */
 		public function update( $row_id, $data = array(), $where = '' ) {
 			global $wpdb;

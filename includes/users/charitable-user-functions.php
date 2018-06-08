@@ -102,6 +102,28 @@ function charitable_get_user_core_keys() {
 }
 
 /**
+ * Returns a list of the donor keys.
+ *
+ * These keys correspond to the columns in the wp_charitable_donors table.
+ *
+ * @since  1.6.2
+ *
+ * @return string[]
+ */
+function charitable_get_donor_keys() {
+	return array(
+		'donor_id',
+		'user_id',
+		'email',
+		'first_name',
+		'last_name',
+		'date_joined',
+		'date_erased',
+		'contact_consent',
+	);
+}
+
+/**
  * Return the email address when data is erased.
  *
  * @since  1.6.0
@@ -153,4 +175,16 @@ function charitable_permit_donor_without_email() {
 	 * @param boolean $permitted Whether donors can be added without an email address.
 	 */
 	return apply_filters( 'charitable_permit_donor_without_email', false );
+}
+
+/**
+ * Get a donor ID based on an email address.
+ *
+ * @since  1.6.2
+ *
+ * @param  string $email The email address.
+ * @return int
+ */
+function charitable_get_donor_id_by_email( $email ) {
+	return charitable_get_table( 'donors' )->get_donor_id_by_email( $email );
 }
