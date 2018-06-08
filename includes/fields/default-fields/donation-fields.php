@@ -59,7 +59,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'preview'     => 'John',
 		),
 	),
-	'last_name' => array(
+	'last_name'               => array(
 		'label'          => __( 'Last Name', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -75,7 +75,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_export' => true,
 		'email_tag'      => false,
 	),
-	'donor' => array(
+	'donor'                    => array(
 		'label'          => __( 'Donor', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false,
@@ -88,7 +88,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'preview'     => 'John Deere',
 		),
 	),
-	'email' => array(
+	'email'                    => array(
 		'label'          => __( 'Email', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -107,7 +107,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 			'preview'     => 'john@example.com',
 		),
 	),
-	'donor_address' => array(
+	'donor_address'            => array(
 		'label'          => __( 'Address', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_donor_address().
@@ -129,7 +129,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => true,
 	),
-	'address' => array(
+	'address'                  => array(
 		'label'          => __( 'Address', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -142,7 +142,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'address_2' => array(
+	'address_2'                => array(
 		'label'          => __( 'Address 2', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -155,7 +155,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'city' => array(
+	'city'                     => array(
 		'label'          => __( 'City', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -168,7 +168,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'state' => array(
+	'state'                    => array(
 		'label'          => __( 'State', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -181,7 +181,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'postcode' => array(
+	'postcode'                 => array(
 		'label'          => __( 'Postcode', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -194,7 +194,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'country' => array(
+	'country'                  => array(
 		'label'          => __( 'Country', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -210,7 +210,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'phone' => array(
+	'phone'                    => array(
 		'label'          => __( 'Phone Number', 'charitable' ),
 		'data_type'      => 'user',
 		'value_callback' => 'charitable_get_donor_meta_value',
@@ -227,7 +227,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => true,
 	),
-	'campaigns' => array(
+	'campaigns'                => array(
 		'label'          => __( 'Campaigns', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_campaigns().
@@ -254,7 +254,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'amount_formatted' => array(
+	'amount_formatted'         => array(
 		'label'          => __( 'Donation Amount', 'charitable' ),
 		'data_type'      => 'core',
 		'donation_form'  => false,
@@ -267,7 +267,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => false,
 	),
-	'date' => array(
+	'date'                     => array(
 		'label'          => __( 'Date of Donation', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_date().
@@ -288,7 +288,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'time' => array(
+	'time'                     => array(
 		'label'          => __( 'Time of Donation', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_time().
@@ -298,7 +298,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'status' => array(
+	'status'                   => array(
 		'label'          => __( 'Donation Status', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_status().
@@ -314,7 +314,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => false,
 	),
-	'status_label' => array(
+	'status_label'             => array(
 		'label'          => __( 'Donation Status', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_status_label().
@@ -328,7 +328,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => true,
 	),
-	'donation_gateway' => array(
+	'donation_gateway'         => array(
 		'label'          => __( 'Payment Method', 'charitable' ),
 		'data_type'      => 'meta',
 		'value_callback' => 'charitable_get_donation_meta_value',
@@ -341,7 +341,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => false,
 		'show_in_export' => false,
 	),
-	'gateway_label' => array(
+	'gateway_label'            => array(
 		'label'          => __( 'Payment Method', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_gateway_label().
@@ -351,7 +351,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => true,
 	),
-	'donation_key' => array(
+	'donation_key'             => array(
 		'label'          => __( 'Donation Key', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_donation_key().
@@ -361,7 +361,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => false,
 	),
-	'test_mode' => array(
+	'test_mode'                => array(
 		'label'          => __( 'Donation made in test mode?', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_test_mode_text().
@@ -371,7 +371,7 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		'show_in_meta'   => true,
 		'show_in_export' => true,
 	),
-	'donation_summary' => array(
+	'donation_summary'         => array(
 		'label'          => __( 'Summary', 'charitable' ),
 		'data_type'      => 'core',
 		'value_callback' => false, // Will use Charitable_Donation::get_donation_summary().
@@ -383,5 +383,18 @@ return apply_filters( 'charitable_default_donation_fields', array(
 		),
 		'show_in_meta'   => false,
 		'show_in_export' => false,
-	),		
+	),
+	'contact_consent'          => array(
+		'label'          => __( 'Contact Consent', 'charitable' ),
+		'data_type'      => 'core',
+		'value_callback' => false,
+		'donation_form'  => false,
+		'admin_form'     => false,
+		'email_tag'      => array(
+			'description' => __( 'Whether the donor gave consent to be contacted', 'charitable' ),
+			'preview'     => __( 'Given', 'charitable' ),
+		),
+		'show_in_meta'   => false,
+		'show_in_export' => true,
+	),
 ) );
