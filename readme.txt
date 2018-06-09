@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 4.9.6
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -157,6 +157,18 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.1 =
+* NEW: Allow donors to manage their contact consent preference via the Profile form. [#591](https://github.com/Charitable/Charitable/issues/591)
+* NEW: Include terms and conditions, privacy policy and contact consent checkbox in Registration form. [#599](https://github.com/Charitable/Charitable/issues/599)
+* NEW: Include donor's contact consent status in Donations export. [#590](https://github.com/Charitable/Charitable/issues/590)
+* NEW: Show whether contact consent was given in donation details. [#589](https://github.com/Charitable/Charitable/issues/589)
+* NEW: Added "User Privacy" and "Terms and Conditions" sections to the Charitable Customizer panel. [#592](https://github.com/Charitable/Charitable/issues/592)
+* NEW: Added the `required` attribute to all required form fields. [#595](https://github.com/Charitable/Charitable/issues/595)
+* FIX: Prevent donors from changing their profile email to same as existing donor. [#596](https://github.com/Charitable/Charitable/issues/596)
+* FIX: Fixed `array_combine` PHP warning in donation form. [#593](https://github.com/Charitable/Charitable/issues/593)
+* FIX: Misspelt function name in Donation Field Registry class. [#594](https://github.com/Charitable/Charitable/issues/594)
+* FIX: Improved inline documentation for PayPal API fields. [#587](https://github.com/Charitable/Charitable/issues/587) and [#588](https://github.com/Charitable/Charitable/issues/588)
 
 = 1.6.1 =
 * FIX: Cleans up a fatal error in the previous release in certain versions of PHP.
