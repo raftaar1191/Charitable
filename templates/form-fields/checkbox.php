@@ -30,7 +30,6 @@ if ( isset( $field['checked'] ) ) {
 		name="<?php echo $field['key']; ?>"
 		value="<?php echo $value; ?>"
 		id="charitable_field_<?php echo $field['key']; ?>_element"
-		<?php echo $is_required ? 'required' : ''; ?>
 		<?php checked( $checked ); ?>
 		<?php echo charitable_get_arbitrary_attributes( $field ); ?>
 	/>

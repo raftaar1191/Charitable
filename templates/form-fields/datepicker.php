@@ -57,5 +57,12 @@ wp_enqueue_style( 'charitable-datepicker' );
 			<?php endif ?>
 		</label>
 	<?php endif ?>
-	<input type="text" class="datepicker" name="<?php echo esc_attr( $field['key'] ); ?>" value="<?php echo esc_attr( $value ); ?>" id="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_element" <?php echo charitable_get_arbitrary_attributes( $field ); ?>/>
+	<input
+		type="text"
+		class="datepicker"
+		name="<?php echo esc_attr( $field['key'] ); ?>"
+		value="<?php echo esc_attr( $value ); ?>"
+		id="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_element"
+		<?php echo charitable_get_arbitrary_attributes( $field ); ?>
+	/>
 </div>
