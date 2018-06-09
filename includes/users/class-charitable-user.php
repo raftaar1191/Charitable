@@ -811,11 +811,13 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$donor_id = $this->get_donor_id();
 			}
 
-			if ( ! $donor_id ) {
-				return charitable_get_table( 'donors' )->insert( $donor_data );
+			if ( $donor_id ) {
+				$updated = charitable_get_table( 'donors' )->update( $donor_id, $donor_data );
+
+				return $donor_id;
 			}
 
-			return charitable_get_table( 'donors' )->update( $donor_id, $donor_data );
+			return charitable_get_table( 'donors' )->insert( $donor_data );
 		}
 
 		/**

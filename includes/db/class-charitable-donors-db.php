@@ -154,14 +154,14 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @param  int    $row_id The record to update.
 		 * @param  array  $data   Donor data to update.
 		 * @param  string $where  Column used in where argument.
-		 * @return int The ID of the inserted donor.
+		 * @return boolean Whether the donor record was updated.
 		 */
 		public function update( $row_id, $data = array(), $where = 'donor_id' ) {
 			if ( ! $this->validate_donor_email( $data, $row_id, $where ) ) {
 				charitable_get_notices()->add_error(
 					__( 'Unable to update donor. This email address is already in use.', 'charitable' )
 				);
-				return 0;
+				return false;
 			}
 
 			return parent::update( $row_id, $data, $where );
