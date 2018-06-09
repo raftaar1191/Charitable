@@ -61,10 +61,16 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 		 * @param  boolean $consent_given     Whether the donor gave their consent.
 		 * @param  string  $consent_statement The statement that the donor agreed to.
 		 * @return int|boolean Meta ID if the key didn't exist, true on successful update,
-		 *                     false on failure.
+		 *                     false on failure or if the log has not changed.
 		 */
 		public function add( $consent_given, $consent_statement ) {
-			$log = $this->get_log();
+			$log      = $this->get_log();
+			$last_log = end( $log );
+
+			/* Consent has not changed. */
+			if ( $last_log['consent_given'] == $consent_given && $last_log['statement'] == $consent_statement ) {
+				return false;
+			}
 
 			array_push( $log, array(
 				'time'          => time(),
@@ -78,10 +84,6 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 			unset(
 				$this->log
 			);
-
-			charitable_get_table( 'donors' )->update( $this->donor_id, array(
-				'contact_consent' => $consent_given,
-			) );
 
 			return $ret;
 		}

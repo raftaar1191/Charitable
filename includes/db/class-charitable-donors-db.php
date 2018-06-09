@@ -143,7 +143,11 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				return 0;
 			}
 
-			return parent::insert( $data, $type );
+			$donor_id = parent::insert( $data, $type );
+
+			$this->maybe_log_consent( $data, $donor_id );
+
+			return $donor_id;
 		}
 
 		/**
@@ -164,7 +168,13 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				return false;
 			}
 
-			return parent::update( $row_id, $data, $where );
+			$updated = parent::update( $row_id, $data, $where );
+
+			if ( $updated ) {
+				$this->maybe_log_consent( $data, $row_id, $where );
+			}
+
+			return $updated;
 		}
 
 		/**
@@ -201,6 +211,32 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 
 			/* For an existing donor, the email address isn't being changed. */
 			return $this->get_column_by( 'email', $where, $row_id ) == $data['email'];
+		}
+
+		/**
+		 * Log consent after a donor record has been added or updated, if contact_consent
+		 * was explicitly set.
+		 *
+		 * @since  1.6.2
+		 *
+		 * @param  array  $data   The donor data.
+		 * @param  mixed  $row_id The id of the donor record to update.
+		 * @param  string $where  Column used in where argument.
+		 * @return boolean Whether consent was logged.
+		 */
+		public function maybe_log_consent( $data, $row_id, $where = 'donor_id' ) {
+			if ( ! array_key_exists( 'contact_consent', $data ) || is_null( $data['contact_consent'] ) ) {
+				return false;
+			}
+
+			$donor_id = 'donor_id' == $where ? $row_id : $this->get_column_by( 'donor_id', $where, $row_id );
+
+			$log = new Charitable_Donor_Consent_Log( $donor_id );
+
+			return $log->add(
+				$data['contact_consent'],
+				charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) )
+			);
 		}
 
 		/**

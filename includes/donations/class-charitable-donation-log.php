@@ -114,7 +114,7 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 					$this->meta_log = array();
 				}
 			}
-			
+
 			return $this->meta_log;
 		}
 

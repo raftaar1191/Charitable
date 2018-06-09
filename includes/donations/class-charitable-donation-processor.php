@@ -593,12 +593,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 */
 		public function save_donor_contact_consent() {
 			/* Contact consent requires he database upgrade to have been completed. */
-			if ( ! Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' ) ) {
-				return;
-			}
-
-			/* If we are not showing a consent field, leave this empty. */
-			if ( ! charitable_get_option( 'contact_consent', 0 ) ) {
+			if ( ! charitable_is_contact_consent_activated() ) {
 				return;
 			}
 
@@ -606,14 +601,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$meta            = $this->get_donation_data_value( 'meta' );
 			$contact_consent = array_key_exists( 'contact_consent', $meta ) ? (bool) $meta['contact_consent'] : false;
 
-			/**
-			 * Record their consent.
-			 */
-			$consent_log = new Charitable_Donor_Consent_Log( $donor_id );
-			$consent_log->add(
-				$contact_consent,
-				charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) )
-			);
+			charitable_get_table( 'donors' )->update( $donor_id, array(
+				'contact_consent' => $contact_consent,
+			) );
 		}
 
 		/**

@@ -812,7 +812,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			}
 
 			if ( $donor_id ) {
-				$updated = charitable_get_table( 'donors' )->update( $donor_id, $donor_data );
+				charitable_get_table( 'donors' )->update( $donor_id, $donor_data );
 
 				return $donor_id;
 			}

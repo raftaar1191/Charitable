@@ -100,31 +100,88 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * @return array
 		 */
 		public function get_fields() {
-			$fields = apply_filters( 'charitable_user_registration_fields', array(
+			$fields = array(
 				'user_email' => array(
-					'label'     => __( 'Email', 'charitable' ),
-					'type'      => 'email',
-					'required'  => true,
-					'priority'  => 4,
-					'value'     => isset( $_POST['user_email'] ) ? $_POST['user_email'] : '',
+					'label'    => __( 'Email', 'charitable' ),
+					'type'     => 'email',
+					'required' => true,
+					'priority' => 4,
+					'value'    => isset( $_POST['user_email'] ) ? $_POST['user_email'] : '',
 				),
 				'user_login' => array(
-					'label'     => __( 'Username', 'charitable' ),
-					'type'      => 'text',
-					'priority'  => 6,
-					'required'  => true,
-					'value'     => isset( $_POST['user_login'] ) ? $_POST['user_login'] : '',
+					'label'    => __( 'Username', 'charitable' ),
+					'type'     => 'text',
+					'priority' => 6,
+					'required' => true,
+					'value'    => isset( $_POST['user_login'] ) ? $_POST['user_login'] : '',
 				),
-				'user_pass' => array(
-					'label'     => __( 'Password', 'charitable' ),
-					'type'      => 'password',
-					'priority'  => 8,
-					'required'  => true,
-					'value'     => isset( $_POST['user_pass'] ) ? $_POST['user_pass'] : '',
+				'user_pass'  => array(
+					'label'    => __( 'Password', 'charitable' ),
+					'type'     => 'password',
+					'priority' => 8,
+					'required' => true,
+					'value'    => isset( $_POST['user_pass'] ) ? $_POST['user_pass'] : '',
 				),
-			) );
+			);
+
+			$fields = $this->maybe_add_terms_conditions_fields( $fields );
+
+			/**
+			 * Filter the user registration fields.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $fields The registered fields.
+			 */
+			apply_filters( 'charitable_user_registration_fields', $fields );
 
 			uasort( $fields, 'charitable_priority_sort' );
+
+			return $fields;
+		}
+
+		/**
+		 * Maybe add terms and conditions fields to the form.
+		 *
+		 * @since  1.6.2
+		 *
+		 * @param  array $fields The registered form fields.
+		 * @return array
+		 */
+		public function maybe_add_terms_conditions_fields( $fields ) {
+			if ( charitable_is_privacy_policy_activated() ) {
+				$fields['privacy_policy_text'] = array(
+					'type'     => 'content',
+					'content'  => '<p class="charitable-privacy-policy-text">' . charitable_get_privacy_policy_field_text() . '</p>',
+					'priority' => 20,
+				);
+			}
+
+			if ( charitable_is_contact_consent_activated() ) {
+				$fields['contact_consent'] = array(
+					'type'     => 'checkbox',
+					'label'    => charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) ),
+					'priority' => 22,
+					'required' => false,
+					'checked'  => array_key_exists( 'contact_consent', $_POST ) && $_POST['contact_consent'],
+				);
+			}
+
+			if ( charitable_is_terms_and_conditions_activated() ) {
+				$fields['terms_text'] = array(
+					'type'     => 'content',
+					'content'  => '<div class="charitable-terms-text">' . charitable_get_terms_and_conditions() . '</div>',
+					'priority' => 24,
+				);
+
+				$fields['accept_terms'] = array(
+					'type'      => 'checkbox',
+					'label'     => charitable_get_terms_and_conditions_field_label(),
+					'priority'  => 28,
+					'required'  => true,
+					'data_type' => 'meta',
+				);
+			}
 
 			return $fields;
 		}
@@ -158,10 +215,8 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			$form = new Charitable_Registration_Form();
 
 			if ( ! $form->validate_nonce() || ! $form->validate_honeypot() ) {
-
 				charitable_get_notices()->add_error( __( 'There was an error with processing your form submission. Please reload the page and try again.', 'charitable' ) );
 				return;
-
 			}
 
 			$fields = $form->get_fields();
@@ -174,8 +229,8 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			$submitted = apply_filters( 'charitable_registration_values', $_POST, $fields, $form );
 
 			if ( ! isset( $submitted['user_email'] ) || ! is_email( $submitted['user_email'] ) ) {
-
 				charitable_get_notices()->add_error( sprintf(
+					/* translators: %s: submitted email address */
 					__( '%s is not a valid email address.', 'charitable' ),
 					$submitted['user_email']
 				) );
@@ -216,7 +271,6 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 		 * @return false|string
 		 */
 		public function get_login_link() {
-
 			if ( false == $this->shortcode_args['login_link_text'] || 'false' == $this->shortcode_args['login_link_text'] ) {
 				return false;
 			}

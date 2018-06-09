@@ -1220,6 +1220,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
+		 * @param  array $submitted The submitted values.
 		 * @return string[]
 		 */
 		protected function get_donor_value_fields( $submitted ) {
