@@ -427,8 +427,10 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Donation_Form.prototype.hide_inactive_payment_methods = function() {
         var active = this.get_payment_method();
+        var fields = this.form.find( '.charitable-gateway-fields[data-gateway!=' + active + ']' );
 
-        this.form.find( '.charitable-gateway-fields[data-gateway!=' + active + ']' ).hide();
+        fields.hide();
+        fields.find( 'input[required],select[required],textarea[required]' ).attr( 'data-required', 1 ).attr( 'required', false );
     };
 
     /**
@@ -438,8 +440,10 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Donation_Form.prototype.show_active_payment_methods = function( active ) {
         var active = active || this.get_payment_method();
-
-        this.form.find( '.charitable-gateway-fields[data-gateway=' + active + ']' ).show();
+        var fields = this.form.find( '.charitable-gateway-fields[data-gateway=' + active + ']' );
+        
+        fields.show();
+        fields.find( '[data-required]' ).attr( 'required', true );
     };    
 
     /**
