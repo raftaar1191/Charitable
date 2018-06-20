@@ -1,3 +1,6 @@
+# 1.6.3
+* FIX: Fixed bug that prevented donation form from submitting in certain cases when using Stripe or Authorize.Net alongside another payment gateway. [#601](https://github.com/Charitable/Charitable/issues/601)
+
 # 1.6.2
 * NEW: Allow donors to manage their contact consent preference via the Profile form. [#591](https://github.com/Charitable/Charitable/issues/591)
 * NEW: Include terms and conditions, privacy policy and contact consent checkbox in Registration form. [#599](https://github.com/Charitable/Charitable/issues/599)

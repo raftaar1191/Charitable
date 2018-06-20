@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 4.9.6
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,7 +158,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
-= 1.6.1 =
+= 1.6.3 =
+* FIX: Fixed bug that prevented donation form from submitting in certain cases when using Stripe or Authorize.Net alongside another payment gateway. [#601](https://github.com/Charitable/Charitable/issues/601)
+
+= 1.6.2 =
 * NEW: Allow donors to manage their contact consent preference via the Profile form. [#591](https://github.com/Charitable/Charitable/issues/591)
 * NEW: Include terms and conditions, privacy policy and contact consent checkbox in Registration form. [#599](https://github.com/Charitable/Charitable/issues/599)
 * NEW: Include donor's contact consent status in Donations export. [#590](https://github.com/Charitable/Charitable/issues/590)
