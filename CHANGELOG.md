@@ -1,3 +1,6 @@
+# 1.6.4
+* FIX: Fixed a fatal error triggered during donations when using a previous version of WordPress. [#603](https://github.com/Charitable/Charitable/issues/603)
+
 # 1.6.3
 * FIX: Fixed bug that prevented donation form from submitting in certain cases when using Stripe or Authorize.Net alongside another payment gateway. [#601](https://github.com/Charitable/Charitable/issues/601)
 
