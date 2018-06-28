@@ -193,7 +193,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			}
 
 			/* We're anonymizing their email address. */
-			if ( wp_privacy_anonymize_data( 'email' ) == $data['email'] ) {
+			if ( $this->is_anonymized_email( $data['email'] ) ) {
 				return true;
 			}
 
@@ -375,6 +375,18 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 					$parameters
 				)
 			);
+		}
+
+		/**
+		 * Checks whether the passed email is an anonymized email address.
+		 *
+		 * @since  1.6.4
+		 *
+		 * @param  string $email The email address.
+		 * @return boolean
+		 */
+		private function is_anonymized_email( $email ) {
+			return function_exists( 'wp_privacy_anonymize_data' ) && wp_privacy_anonymize_data( 'email' ) == $email;
 		}
 	}
 
