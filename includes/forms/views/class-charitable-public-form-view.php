@@ -89,6 +89,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 *
 		 * @since  1.5.2
 		 *
+		 * @param  string $prop The class property.
 		 * @return mixed
 		 */
 		public function __get( $prop ) {
@@ -132,7 +133,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string
+		 * @return void
 		 */
 		public function render_notices() {
 			charitable_template_from_session( 'form-fields/notices.php', array(
@@ -245,7 +246,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 *
 		 * @param  array  $field Field definition.
 		 * @param  string $key   Field key.
-		 * @param  array $args   Mixed array of arguments.
+		 * @param  array  $args  Mixed array of arguments.
 		 * @return boolean       False if the field was not rendered. True otherwise.
 		 */
 		public function render_field( $field, $key, $args = array() ) {
@@ -301,7 +302,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 *
 		 * @param  string      $key       Field key.
 		 * @param  string|null $namespace Namespace for the form field's name attribute.
-		 * @param  int         $index     The current index.         
+		 * @param  int         $index     The current index.
 		 * @return string
 		 */
 		protected function get_field_name( $key, $namespace = null, $index = 0 ) {

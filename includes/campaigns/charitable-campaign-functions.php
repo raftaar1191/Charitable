@@ -104,10 +104,26 @@ function charitable_campaign_can_receive_donations( $campaign_id ) {
  *
  * @since  1.6.0
  *
- * @param  Charitable_Campaign $campaign The campaign ID.
+ * @param  Charitable_Campaign $campaign The campaign object.
  * @param  string              $key      The meta key.
  * @return mixed
  */
 function charitable_get_campaign_post_field( Charitable_Campaign $campaign, $key ) {
 	return get_post_field( $key, $campaign->ID );
+}
+
+/**
+ * Get a particular user field for a campaign's creator.
+ *
+ * @since  1.6.5
+ *
+ * @param  Charitable_Campaign $campaign The campaign object.
+ * @param  string              $key      The meta key.
+ * @return string
+ */
+function charitable_get_campaign_creator_field( Charitable_Campaign $campaign, $key ) {
+	$creator = charitable_get_user( $campaign->get_campaign_creator() );
+	$key     = str_replace( 'campaign_creator_', '', $key );
+
+	return $creator->get( $key );
 }

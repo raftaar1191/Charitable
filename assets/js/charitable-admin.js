@@ -44,19 +44,20 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		var triggers = [];
 
 		show_setting = function(value, $trigger) {
-			if ('checked' === value) {
-				return $trigger.is(':checked');
+			var not = '!' === value[0],
+				compare = not ? value.slice(1) : value,
+				show;
+
+			if ('checked' === compare) {
+				show = $trigger.is(':checked');
+			} else if ('selected' === compare) {
+				show = $trigger.selected();
+			} else {
+				show = $trigger.val() === compare;
 			}
-			else if ('selected' === value) {
-				return $trigger.selected();
-			}
-			else if ('!' === value[0]) {
-				return $trigger.val() !== value.slice(1);
-			}
-			else {
-				return $trigger.val() === value;
-			}
-		}
+	
+			return not ? !show : show;
+		};
 
 		toggle_setting = function($setting, $trigger) {
 			var $el = (function($setting){

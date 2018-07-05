@@ -100,19 +100,19 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 					'priority' => 21,
 					'tabindex' => 1,
 				),
-				'donor_header' => array(
+				'donor_header'    => array(
 					'type'     => 'heading',
 					'level'    => 'h3',
 					'title'    => __( 'Donor', 'charitable' ),
 					'priority' => 40,
 				),
-				'user_fields' => array(
+				'user_fields'     => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'user' ),
 					'priority' => 50,
 					'tabindex' => 100,
 				),
-				'meta_fields' => array(
+				'meta_fields'     => array(
 					'type'     => 'fieldset',
 					'fields'   => $this->get_section_fields( 'meta' ),
 					'priority' => 60,

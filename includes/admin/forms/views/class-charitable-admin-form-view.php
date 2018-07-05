@@ -108,7 +108,7 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @return string
+		 * @return void
 		 */
 		public function render_notices() {
 		}
