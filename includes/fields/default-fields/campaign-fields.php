@@ -55,7 +55,7 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'type'        => 'number',
 			'view'        => 'metaboxes/campaign-goal',
 			'priority'    => 6,
-			'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
+			'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
 		),
 		'email_tag'      => false,
 		'show_in_export' => true,
@@ -80,7 +80,7 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 			'type'        => 'date',
 			'view'        => 'metaboxes/campaign-end-date',
 			'priority'    => 8,
-			'description' => __( 'Leave empty for campaigns without a fundraising goal.', 'charitable' ),
+			'description' => __( 'Leave empty for ongoing campaigns.', 'charitable' ),
 		),
 		'email_tag'      => array(
 			'tag'         => 'campaign_end_date',
