@@ -817,7 +817,7 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			$paypal_uri = $this->use_ssl( $ssl_check, $ipn_check ) ? 'https://' : 'http://';
 
 			if ( charitable_get_option( 'test_mode' ) ) {
-				$paypal_uri .= $ipn_check ? 'ipnpb.sandbox.' : 'sandbox.';
+				$paypal_uri .= $ipn_check ? 'ipnpb.sandbox.' : 'www.sandbox.';
 			} else {
 				$paypal_uri .= $ipn_check ? 'ipnpb.' : 'www.';
 			}
