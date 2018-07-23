@@ -42,7 +42,7 @@ if ( ! class_exists( 'Charitable_Customizer' ) ) :
 
 		/**
 		 * Returns and/or create the single instance of this class.
-		 *		 
+		 *
 		 * @since  1.2.0
 		 *
 		 * @global WP_Customize_Manager $wp_customize

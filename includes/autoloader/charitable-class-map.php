@@ -26,6 +26,7 @@ return array(
 	'Charitable_Admin' => 'admin/class-charitable-admin.php',
 	'Charitable_Meta_Box_Helper' => 'admin/class-charitable-meta-box-helper.php',
 	'Charitable_Customizer' => 'admin/customizer/class-charitable-customizer.php',
+	'Charitable_Customize_Select_Sections_Control' => 'admin/customizer/controls/class-charitable-customize-select-sections-control.php',
 	'Charitable_Donations_Dashboard_Widget' => 'admin/dashboard-widgets/class-charitable-donations-dashboard-widget.php',
 	'Charitable_Donation_List_Table' => 'admin/donations/class-charitable-donation-list-table.php',
 	'Charitable_Donation_Meta_Boxes' => 'admin/donations/class-charitable-donation-meta-boxes.php',
