@@ -230,8 +230,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			}
 
 			$donor_id = 'donor_id' == $where ? $row_id : $this->get_column_by( 'donor_id', $where, $row_id );
-
-			$log = new Charitable_Donor_Consent_Log( $donor_id );
+			$log      = new Charitable_Donor_Consent_Log( $donor_id );
 
 			return $log->add(
 				$data['contact_consent'],

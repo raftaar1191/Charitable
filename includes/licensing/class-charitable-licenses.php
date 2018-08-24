@@ -115,11 +115,11 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			if ( ! empty( $missing_data ) ) {
 
 				$versions = $this->get_versions();
-				
+
 				unset( $versions['request_speed'] );
 
 				if ( ! empty( $versions ) ) {
-					
+
 					$versions_name_lookup = wp_list_pluck( $versions, 'name' );
 
 					foreach ( $missing_data as $product ) {

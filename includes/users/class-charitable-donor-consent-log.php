@@ -64,11 +64,13 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 		 *                     false on failure or if the log has not changed.
 		 */
 		public function add( $consent_given, $consent_statement ) {
-			$log      = $this->get_log();
-			$last_log = end( $log );
+			$log               = $this->get_log();
+			$last_log          = end( $log );
+			$consent_changed   = $last_log['consent_given'] != $consent_given;
+			$statement_changed = $last_log['statement'] != $consent_statement;
 
-			/* Consent has not changed. */
-			if ( $last_log['consent_given'] == $consent_given && $last_log['statement'] == $consent_statement ) {
+			/* Neither the consent nor the statement has changed. */
+			if ( ! $consent_changed && ! $statement_changed ) {
 				return false;
 			}
 
@@ -84,6 +86,17 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 			unset(
 				$this->log
 			);
+
+			/**
+			 * Do something when contact consent is changed.
+			 *
+			 * @since 1.6.5
+			 *
+			 * @param boolean $consent_changed   Whether the actual consent has changed.
+			 * @param boolean $statement_changed Whether the consent statement changed.
+			 * @param int     $donor_id          The donor ID.
+			 */
+			do_action( 'charitable_donor_contact_consent_changed', $consent_changed, $statement_changed, $this->donor_id );
 
 			return $ret;
 		}
@@ -107,6 +120,19 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 			}
 
 			return $this->log;
+		}
+
+		/**
+		 * Return the most recent consent log entry.
+		 *
+		 * @since  1.6.5
+		 *
+		 * @return array
+		 */
+		public function get_last_log() {
+			$log = $this->get_log();
+
+			return end( $log );
 		}
 	}
 
