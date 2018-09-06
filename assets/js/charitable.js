@@ -191,6 +191,7 @@ CHARITABLE = window.CHARITABLE || {};
                 data: data,
                 dataType: "json",
                 url: CHARITABLE_VARS.ajaxurl,
+                timeout: 0,
                 xhrFields: {
                     withCredentials: true
                 },

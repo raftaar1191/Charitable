@@ -811,6 +811,9 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$donor_id = $this->get_donor_id();
 			}
 
+			/* Clear out the cache */
+			wp_cache_delete( $donor_id, 'donors' );
+
 			if ( $donor_id ) {
 				charitable_get_table( 'donors' )->update( $donor_id, $donor_data );
 
