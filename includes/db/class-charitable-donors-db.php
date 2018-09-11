@@ -286,7 +286,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @since  1.6.0
 		 *
 		 * @global $wpdb WPDB
-		 * @param  string $email   Donor email address.
+		 * @param  string $email Donor email address.
 		 * @return array|object|null Database query results
 		 */
 		public function get_personal_data( $email ) {

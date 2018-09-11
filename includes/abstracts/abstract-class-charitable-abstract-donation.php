@@ -961,7 +961,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * Return the parent donation, if exists
+		 * Return the parent donation, if exists.
 		 *
 		 * @since  1.4.5
 		 *
@@ -984,11 +984,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 *
 		 * @since  1.4.6
 		 *
-		 * @param  string   $value
+		 * @param  string $value The transaction ID.
 		 * @return bool
 		 */
 		public function set_gateway_transaction_id( $value ) {
-			$key = '_gateway_transaction_id';
+			$key   = '_gateway_transaction_id';
 			$value = charitable_sanitize_donation_meta( $value, $key );
 			return update_post_meta( $this->donation_id, $key , $value );
 		}

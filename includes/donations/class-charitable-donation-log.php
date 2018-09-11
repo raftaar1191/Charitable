@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 
@@ -134,7 +136,7 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 					$this->email_logs = array_merge( $this->email_logs, $this->parse_email_log( $log ) );
 				}
 			}
-			
+
 			return $this->email_logs;
 		}
 
