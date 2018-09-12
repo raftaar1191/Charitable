@@ -50,6 +50,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				'distinct_donors' => true,
 				'donor_id'        => 0,
 				'include_erased'  => 1,
+				'date_query'      => array(),
 			) );
 
 			$this->args             = wp_parse_args( $args, $defaults );
@@ -238,6 +239,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -264,6 +266,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
+			add_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 
