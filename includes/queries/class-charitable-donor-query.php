@@ -51,6 +51,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				'donor_id'        => 0,
 				'include_erased'  => 1,
 				'date_query'      => array(),
+				'meta_query'      => array(),
 			) );
 
 			$this->args             = wp_parse_args( $args, $defaults );

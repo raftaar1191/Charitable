@@ -53,6 +53,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 				'user_id'    => 0,
 				// Filter donations by date.
 				'date_query' => array(),
+				// Filter donations by meta.
+				'meta_query' => array(),
 			);
 
 			$this->args = wp_parse_args( $args, $defaults );
