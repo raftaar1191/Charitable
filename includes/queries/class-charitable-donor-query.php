@@ -235,11 +235,13 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_fields', array( $this, 'donation_amount_sum_field' ), 6 );
 			remove_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
 			remove_filter( 'charitable_query_join', array( $this, 'join_donors_table' ), 6 );
+			remove_filter( 'charitable_query_join', array( $this, 'join_meta' ), 7 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -262,11 +264,13 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_select_count_fields', array( $this, 'select_donor_count' ) );
 			add_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
 			add_filter( 'charitable_query_join', array( $this, 'join_donors_table' ), 6 );
+			add_filter( 'charitable_query_join', array( $this, 'join_meta' ), 7 );
 			add_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			add_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
+			add_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 

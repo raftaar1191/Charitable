@@ -162,7 +162,7 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 				$this->log = apply_filters( 'charitable_donation_logs', $this->log, charitable_get_donation( $this->donation_id ) );
 
 				/* Order the logs by time. */
-				usort( $this->log, 'charitable_timestamp_sort' );                
+				usort( $this->log, 'charitable_timestamp_sort' );
 			}
 
 			return $this->log;

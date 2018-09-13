@@ -67,6 +67,15 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		protected $parameters = array();
 
 		/**
+		 * Meta SQL query.
+		 *
+		 * @since 1.6.5
+		 *
+		 * @var   array|false
+		 */
+		protected $meta_sql;
+
+		/**
 		 * Return the query argument value for the given key.
 		 *
 		 * @since  1.0.0
@@ -507,6 +516,38 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * Return the SQL to be used for meta queries.
+		 *
+		 * @since  1.6.5
+		 *
+		 * @global WPDB $wpdb
+		 *
+		 * @return false|array {
+		 *     Array containing JOIN and WHERE SQL clauses to append to the main query.
+		 *
+		 *     @type string $join  SQL fragment to append to the main JOIN clause.
+		 *     @type string $where SQL fragment to append to the main WHERE clause.
+		 * }
+		 */
+		public function get_meta_sql() {
+			if ( ! isset( $this->meta_sql ) ) {
+				global $wpdb;
+
+				$meta_args = $this->get( 'meta_query' );
+
+				if ( empty( $meta_args ) ) {
+					return false;
+				}
+
+				$meta_query = new WP_Meta_Query( $meta_args );
+
+				$this->meta_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
+			}
+
+			return $this->meta_sql;
+		}
+
+		/**
 		 * A helper function used to populate the query parameters ith an item and a return a string
 		 * of placeholders that can be used in a MySQL `IN` statement.
 		 *
@@ -640,6 +681,26 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * Filter a query by meta data.
+		 *
+		 * @uses   WP_Meta_Query
+		 *
+		 * @since  1.6.5
+		 *
+		 * @param  string $where_statement The where query.
+		 * @return string
+		 */
+		public function where_meta( $where_statement ) {
+			$meta_sql = $this->get_meta_sql();
+
+			if ( ! $meta_sql || empty( $meta_sql['where'] ) ) {
+				return $where_statement;
+			}
+
+			return $where_statement . $meta_sql['where'];
+		}
+
+		/**
 		 * A method used to join the campaign donations table on the campaigns query.
 		 *
 		 * @global WPBD $wpdb
@@ -652,6 +713,26 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		public function join_campaign_donations_table_on_campaign( $join_statement ) {
 			global $wpdb;
 			return $join_statement . " INNER JOIN {$wpdb->prefix}charitable_campaign_donations cd ON cd.campaign_id = $wpdb->posts.ID ";
+		}
+
+		/**
+		 * Add one or more joins to the post meta table.
+		 *
+		 * @uses   WP_Meta_Query
+		 *
+		 * @since  1.6.5
+		 *
+		 * @param  string $join_statement The where query.
+		 * @return string
+		 */
+		public function join_meta( $join_statement ) {
+			$meta_sql = $this->get_meta_sql();
+
+			if ( ! $meta_sql || empty( $meta_sql['join'] ) ) {
+				return $join_statement;
+			}
+
+			return $join_statement . $meta_sql['join'];
 		}
 
 		/**
