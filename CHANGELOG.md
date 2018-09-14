@@ -1,3 +1,14 @@
+# 1.6.5
+* NEW: Added `meta_query` and `date_query` support to `Charitable_Donations_Query` and `Charitable_Donor_Query`. [#615](https://github.com/Charitable/Charitable/issues/615) and [#614](https://github.com/Charitable/Charitable/issues/614)
+* NEW: Added `charitable_get_campaign_creator_field` helper function to retrieve meta information about a campaign creator given a campaign ID and a key. Designed to be used with the Campaign Fields API.
+* NEW: Added `charitable_donor_contact_consent_changed` hook to broadcast when a donor has updated their contact consent setting.
+* NEW: Added a multi-select field for admin forms. [#609](https://github.com/Charitable/Charitable/issues/609)
+* NEW: Added a Customizer control for select fields with optgroups. [#610](https://github.com/Charitable/Charitable/issues/610)
+* FIX: Fixed an error that resulted in a database error when adding donations in certain conditions. This only occurred on sites that upgraded to version 1.6.0 - 1.6.4 without running the database upgrade, and could result in donations being prevented or in donations being recorded without a donor record. This version resolves this bug, and also adds an upgrade routine to retroactively add donor records for all donations missing one. [#616](https://github.com/Charitable/Charitable/issues/616)
+* FIX: Help text for End Date & Goal fields were swapped. [#606](https://github.com/Charitable/Charitable/issues/606)
+* FIX: Browser security warning when doing a donation in the PayPal sandbox. [#604](https://github.com/Charitable/Charitable/issues/604)
+* FIX: Prevent time-outs in AJAX requests to process donations.
+
 # 1.6.4
 * FIX: Fixed a fatal error triggered during donations when using a previous version of WordPress. [#603](https://github.com/Charitable/Charitable/issues/603)
 
