@@ -194,6 +194,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'version' => '1.6.0',
 					'notice'  => 'release-160',
 				),
+				'fix_empty_donor_ids'                     => array(
+					'version'         => '1.6.5',
+					'message'         => __( 'Charitable needs to fix donations saved without a donor ID.', 'charitable' ),
+					'prompt'          => true,
+					'active_callback' => array( $this, 'has_empty_donor_ids' ),
+				),
 			);
 		}
 
@@ -309,6 +315,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			if ( array_key_exists( 'notice', $upgrade ) ) {
 				return $this->set_update_notice_transient( $upgrade, $action );
 			}
+
 ?>
 			<div class="updated">
 				<p><?php printf( '%s %s', $upgrade['message'], sprintf( __( 'Click <a href="%s">here</a> to start the upgrade.', 'charitable' ), esc_url( admin_url( 'index.php?page=charitable-upgrades&charitable-upgrade=' . $action ) ) ) ) ?>
@@ -366,6 +373,13 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			}
 
 			foreach ( $this->upgrade_actions as $action => $upgrade ) {
+
+				/* If the upgrade has an active_callback, check whether the upgrade is required. If not, mark it as done. */
+				if ( array_key_exists( 'active_callback', $upgrade ) && ! call_user_func( $upgrade['active_callback'] ) ) {
+					$this->update_upgrade_log( $action );
+					continue;
+				}
+
 				if ( ! $this->upgrade_has_been_completed( $action ) ) {
 					call_user_func( $callback, $action, $upgrade );
 				}
@@ -995,6 +1009,95 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			) );
 
 			return true;
+		}
+
+		/**
+		 * Checks whether the site has donations missing a donor id.
+		 *
+		 * @since  1.6.5
+		 *
+		 * @return boolean
+		 */
+		protected function has_empty_donor_ids() {
+			return charitable()->get_db_table( 'campaign_donations' )->count_donations_by_donor( 0, true );
+		}
+
+		/**
+		 * Fix donations with missing donor ids.
+		 *
+		 * @since  1.6.5
+		 *
+		 * @return ?
+		 */
+		public function fix_empty_donor_ids() {
+			global $wpdb;
+
+			if ( ! current_user_can( 'manage_charitable_settings' ) ) {
+				wp_die( __( 'You do not have permission to do Charitable upgrades', 'charitable' ), __( 'Error', 'charitable' ), array( 'response' => 403 ) );
+			}
+
+			ignore_user_abort( true );
+
+			if ( ! charitable_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
+				@set_time_limit( 0 );
+			}
+
+			$step            = array_key_exists( 'step', $_GET ) ? absint( $_GET['step'] ) : 1;
+			$number          = 20;
+			$donations_table = charitable()->get_db_table( 'campaign_donations' );
+			$total           = $donations_table->count_donations_by_donor( 0, true );
+
+			/**
+			 * If there are no donors left to remove, go ahead and wrap it up right now.
+			 */
+			if ( ! $total ) {
+				$this->finish_upgrade( 'fix_empty_donor_ids' );
+			}
+
+			$donors_table = charitable()->get_db_table( 'donors' );
+			$donations    = $wpdb->get_col( "SELECT DISTINCT donation_id FROM $donations_table->table_name WHERE donor_id = 0 LIMIT $number;" );
+
+			if ( count( $donations ) ) {
+
+				foreach ( $donations as $donation_id ) {
+					$data     = get_post_meta( $donation_id, 'donor', true );
+					$email    = array_key_exists( 'email', $data ) ? $data['email'] : '';
+					$donor_id = 0;
+
+					if ( ! empty( $email ) ) {
+						$donor_id = $donors_table->get_donor_id_by_email( $email );
+					}
+
+					if ( ! $donor_id ) {
+						$donor_id = $donors_table->insert( array(
+							'email'      => $email,
+							'first_name' => array_key_exists( 'first_name', $data ) ? $data['first_name'] : '',
+							'last_name'  => array_key_exists( 'last_name', $data ) ? $data['last_name'] : '',
+						) );
+					}
+
+					$donations_table->update( $donation_id, array(
+						'donor_id' => $donor_id
+					), 'donation_id' );
+
+				}//end foreach
+
+				$step++;
+
+				$redirect = add_query_arg( array(
+					'charitable-upgrade' => 'fix_empty_donor_ids',
+					'page'               => 'charitable-upgrades',
+					'step'               => $step,
+					'number'             => $number,
+					'total'              => $total,
+				), admin_url( 'index.php' ) );
+
+				wp_redirect( $redirect );
+
+				exit;
+			}//end if
+
+			$this->finish_upgrade( 'fix_empty_donor_ids' );
 		}
 
 		/**

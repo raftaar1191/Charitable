@@ -70,3 +70,10 @@ add_action( 'charitable_remove_duplicate_donors', array( Charitable_Upgrade::get
  * @see Charitable_Upgrade::upgrade_donor_tables()
  */
 add_action( 'charitable_upgrade_donor_tables', array( Charitable_Upgrade::get_instance(), 'upgrade_donor_tables' ) );
+
+/**
+ * Fix up donations missing donor IDs.
+ *
+ * @see Charitable_Upgrade::fix_empty_donor_ids()
+ */
+add_action( 'charitable_fix_empty_donor_ids', array( Charitable_Upgrade::get_instance(), 'fix_empty_donor_ids' ) );

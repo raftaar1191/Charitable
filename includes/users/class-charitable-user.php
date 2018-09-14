@@ -671,7 +671,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			 * donations without an email address. Use this filter to disable that ability.
 			 *
 			 * NOTE: By default, the public donation form still requires an email address, so this
-			 * primarily affects programattically created donors, or donors created via manual
+			 * primarily affects programmatically created donors, or donors created via manual
 			 * donations in the admin.
 			 *
 			 * @see https://github.com/Charitable/Charitable/issues/535
