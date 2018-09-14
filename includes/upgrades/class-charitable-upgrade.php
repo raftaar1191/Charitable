@@ -1070,9 +1070,10 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 					if ( ! $donor_id ) {
 						$donor_id = $donors_table->insert( array(
-							'email'      => $email,
-							'first_name' => array_key_exists( 'first_name', $data ) ? $data['first_name'] : '',
-							'last_name'  => array_key_exists( 'last_name', $data ) ? $data['last_name'] : '',
+							'email'       => $email,
+							'first_name'  => array_key_exists( 'first_name', $data ) ? $data['first_name'] : '',
+							'last_name'   => array_key_exists( 'last_name', $data ) ? $data['last_name'] : '',
+							'date_joined' => get_post_field( 'post_date_gmt', $donation_id ),
 						) );
 					}
 
