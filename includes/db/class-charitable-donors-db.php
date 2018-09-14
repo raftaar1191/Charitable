@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.6.0
+ * @version   1.6.5
  */
 
 // Exit if accessed directly.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 *
 		 * @var   string
 		 */
-		public $version = '1.6.0';
+		public $version = '1.6.5';
 
 		/**
 		 * The name of the primary column
@@ -41,6 +41,15 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @var   string
 		 */
 		public $primary_key = 'donor_id';
+
+		/**
+		 * Columns found in the database.
+		 *
+		 * @since 1.6.5
+		 *
+		 * @var   array
+		 */
+		protected $db_columns;
 
 		/**
 		 * Set up the database table name.
@@ -87,6 +96,29 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		}
 
 		/**
+		 * Return the list of tables that currently exist in the database.
+		 *
+		 * This allows us to handle backwards compatibility in cases where
+		 * columns have been added to the table structure, but have not yet
+		 * been added in the database.
+		 *
+		 * @since  1.6.5
+		 *
+		 * @global WPDB $wpdb
+		 * @return array
+		 */
+		public function get_db_columns() {
+			if ( ! isset( $this->db_columns ) ) {
+				global $wpdb;
+
+				$columns          = $wpdb->get_results( "SHOW COLUMNS FROM $this->table_name" );
+				$this->db_columns = $columns ? wp_list_pluck( $columns, 'Field' ) : array();
+			}
+
+			return $this->db_columns;
+		}
+
+		/**
 		 * Whitelist of columns.
 		 *
 		 * @since  1.0.0
@@ -94,7 +126,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @return array
 		 */
 		public function get_columns() {
-			return array(
+			$columns = array(
 				'donor_id'        => '%d',
 				'user_id'         => '%d',
 				'email'           => '%s',
@@ -104,6 +136,8 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				'data_erased'     => '%s',
 				'contact_consent' => '%d',
 			);
+
+			return array_intersect_key( $columns, array_flip( $this->get_db_columns() ) );
 		}
 
 		/**
@@ -114,7 +148,7 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 * @return array
 		 */
 		public function get_column_defaults() {
-			return array(
+			$defaults = array(
 				'donor_id'        => '',
 				'user_id'         => 0,
 				'email'           => '',
@@ -124,6 +158,8 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 				'data_erased'     => '',
 				'contact_consent' => '',
 			);
+
+			return array_intersect_key( $defaults, array_flip( $this->get_db_columns() ) );
 		}
 
 		/**
