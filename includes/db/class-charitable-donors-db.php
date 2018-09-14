@@ -394,22 +394,37 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 			}
 
 			$placeholders = charitable_get_query_placeholders( count( $donor_id ), '%d' );
-			$parameters   = array_merge(
-				array(
-					wp_privacy_anonymize_data( 'email' ),
-					current_time( 'mysql', 0 ),
-				),
-				$donor_id
-			);
 
-			return $wpdb->query(
-				$wpdb->prepare(
-					"UPDATE {$this->table_name}
+			if ( in_array( 'data_erased', $this->get_db_columns() ) ) {
+
+				$parameters = array_merge(
+					array(
+						wp_privacy_anonymize_data( 'email' ),
+						current_time( 'mysql', 0 ),
+					),
+					$donor_id
+				);
+
+				$sql = "UPDATE {$this->table_name}
 					SET email = %s, first_name = '', last_name = '', data_erased = %s
-					WHERE donor_id IN ( $placeholders )",
-					$parameters
-				)
-			);
+					WHERE donor_id IN ( $placeholders )";
+
+			} else {
+
+				$parameters = array_merge(
+					array(
+						wp_privacy_anonymize_data( 'email' ),
+					),
+					$donor_id
+				);
+
+				$sql = "UPDATE {$this->table_name}
+					SET email = %s, first_name = '', last_name = ''
+					WHERE donor_id IN ( $placeholders )";
+
+			}
+
+			return $wpdb->query( $wpdb->prepare( $sql, $parameters ) );
 		}
 
 		/**
