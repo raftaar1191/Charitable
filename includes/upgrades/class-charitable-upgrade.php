@@ -1027,7 +1027,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.6.5
 		 *
-		 * @return ?
+		 * @return void
 		 */
 		public function fix_empty_donor_ids() {
 			global $wpdb;
@@ -1078,7 +1078,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					}
 
 					$donations_table->update( $donation_id, array(
-						'donor_id' => $donor_id
+						'donor_id' => $donor_id,
 					), 'donation_id' );
 
 				}//end foreach
