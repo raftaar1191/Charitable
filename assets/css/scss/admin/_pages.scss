@@ -24,9 +24,11 @@
         position: absolute;
         right: 0;
         top: 0;
-        padding: 14px;
+        width: 80px;
+        height: 80px;
         border-radius: 40px;
-        background-color: #f99d33;    
+        background-color: #f99d33;
+        text-align: center;
 
         a {
             color: #fff;
@@ -35,6 +37,8 @@
 
         i {
             font-size: 40px;
+            line-height: 80px;
+            margin-left: -7px;
         }
     }
 

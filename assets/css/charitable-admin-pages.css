@@ -15,14 +15,18 @@
   position: absolute;
   right: 0;
   top: 0;
-  padding: 14px;
+  width: 80px;
+  height: 80px;
   border-radius: 40px;
-  background-color: #f99d33; }
+  background-color: #f99d33;
+  text-align: center; }
   .charitable-wrap .badge a {
     color: #fff;
     text-decoration: none; }
   .charitable-wrap .badge i {
-    font-size: 40px; }
+    font-size: 40px;
+    line-height: 80px;
+    margin-left: -7px; }
 .charitable-wrap .intro {
   margin-bottom: 21px;
   color: #777; }
