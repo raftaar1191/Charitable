@@ -1095,7 +1095,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			}
 
 			$step    = array_key_exists( 'step', $_GET ) ? absint( $_GET['step'] ) : 1;
-			$number  = 1;
+			$number  = 20;
 			$skipped = get_option( 'charitable_skipped_donations_with_empty_donor_id', array() );
 			$total   = $this->count_empty_donor_id_donations( $skipped );
 
