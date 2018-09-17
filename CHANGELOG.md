@@ -1,3 +1,6 @@
+# 1.6.6
+* FIX: Prevents an endless loop in the donor id upgrade process added in version 1.6.5. In certain cases, the upgrade could not complete properly.
+
 # 1.6.5
 * NEW: Added `meta_query` and `date_query` support to `Charitable_Donations_Query` and `Charitable_Donor_Query`. [#615](https://github.com/Charitable/Charitable/issues/615) and [#614](https://github.com/Charitable/Charitable/issues/614)
 * NEW: Added `charitable_get_campaign_creator_field` helper function to retrieve meta information about a campaign creator given a campaign ID and a key. Designed to be used with the Campaign Fields API.

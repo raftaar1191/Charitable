@@ -1019,7 +1019,56 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @return boolean
 		 */
 		protected function has_empty_donor_ids() {
-			return charitable()->get_db_table( 'campaign_donations' )->count_donations_by_donor( 0, true );
+			return 0 < $this->count_empty_donor_id_donations( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) );
+		}
+
+		/**
+		 * Count donations with empty donor ids.
+		 *
+		 * @since  1.6.6
+		 *
+		 * @return int
+		 */
+		protected function count_empty_donor_id_donations( $skipped = array() ) {
+			if ( empty( $skipped ) ) {
+				return charitable()->get_db_table( 'campaign_donations' )->count_donations_by_donor( 0, true );
+			}
+
+			global $wpdb;
+
+			$placeholders = charitable_get_query_placeholders( count( $skipped ), '%d' );
+			$sql          = "SELECT COUNT(*)
+            				 FROM {$wpdb->prefix}charitable_campaign_donations
+            				 WHERE donor_id = 0
+            		       	 AND donation_id NOT IN ( $placeholders )";
+			
+			return $wpdb->get_var( $wpdb->prepare( $sql, $skipped ) );
+		}
+
+		/**
+		 * Get donations with empty donor ids.
+		 *
+		 * @since  1.6.6
+		 *
+		 * @return int
+		 */
+		protected function get_empty_donor_id_donations( $skipped = array(), $number = 20 ) {
+			global $wpdb;
+
+			if ( empty( $skipped ) ) {
+				return $wpdb->get_col( "SELECT DISTINCT donation_id 
+										FROM {$wpdb->prefix}charitable_campaign_donations 
+										WHERE donor_id = 0 
+										LIMIT $number;" );
+			}
+
+			$placeholders = charitable_get_query_placeholders( count( $skipped ), '%d' );
+			
+			return $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT donation_id 
+													FROM {$wpdb->prefix}charitable_campaign_donations 
+													WHERE donor_id = 0 
+													AND donation_id NOT IN ( $placeholders )
+													LIMIT $number;", $skipped ) );
 		}
 
 		/**
@@ -1042,46 +1091,56 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 				@set_time_limit( 0 );
 			}
 
-			$step            = array_key_exists( 'step', $_GET ) ? absint( $_GET['step'] ) : 1;
-			$number          = 20;
-			$donations_table = charitable()->get_db_table( 'campaign_donations' );
-			$total           = $donations_table->count_donations_by_donor( 0, true );
+			$step    = array_key_exists( 'step', $_GET ) ? absint( $_GET['step'] ) : 1;
+			$number  = 1;
+			$skipped = get_option( 'charitable_skipped_donations_with_empty_donor_id', array() );
+			$total   = $this->count_empty_donor_id_donations( $skipped );
 
 			/**
 			 * If there are no donors left to remove, go ahead and wrap it up right now.
 			 */
 			if ( ! $total ) {
+				delete_option( 'charitable_skipped_donations_with_empty_donor_id' );
+
 				$this->finish_upgrade( 'fix_empty_donor_ids' );
 			}
 
-			$donors_table = charitable()->get_db_table( 'donors' );
-			$donations    = $wpdb->get_col( "SELECT DISTINCT donation_id FROM $donations_table->table_name WHERE donor_id = 0 LIMIT $number;" );
+			$donations_table = charitable()->get_db_table( 'campaign_donations' );
+			$donors_table    = charitable()->get_db_table( 'donors' );
+			$donations       = $this->get_empty_donor_id_donations( $skipped, $number );
 
 			if ( count( $donations ) ) {
 
 				foreach ( $donations as $donation_id ) {
-					$data     = get_post_meta( $donation_id, 'donor', true );
-					$email    = array_key_exists( 'email', $data ) ? $data['email'] : '';
-					$donor_id = 0;
+					$data = get_post_meta( $donation_id, 'donor', true );
 
-					if ( ! empty( $email ) ) {
-						$donor_id = $donors_table->get_donor_id_by_email( $email );
+					if ( ! array_key_exists( 'email', $data ) || empty( $data['email'] ) ) {
+						$skipped[] = $donation_id;
+						continue;
 					}
+					
+					$donor_id = $donors_table->get_donor_id_by_email( $data['email'] );
 
 					if ( ! $donor_id ) {
 						$donor_id = $donors_table->insert( array(
-							'email'       => $email,
+							'email'       => $data['email'],
 							'first_name'  => array_key_exists( 'first_name', $data ) ? $data['first_name'] : '',
 							'last_name'   => array_key_exists( 'last_name', $data ) ? $data['last_name'] : '',
 							'date_joined' => get_post_field( 'post_date_gmt', $donation_id ),
 						) );
 					}
 
-					$donations_table->update( $donation_id, array(
-						'donor_id' => $donor_id,
-					), 'donation_id' );
+					if ( $donor_id ) {
+						$donations_table->update( $donation_id, array(
+							'donor_id' => $donor_id,
+						), 'donation_id' );
+					} else {
+						$skipped[] = $donation_id;
+					}
 
 				}//end foreach
+
+				update_option( 'charitable_skipped_donations_with_empty_donor_id', $skipped );
 
 				$step++;
 
@@ -1097,6 +1156,8 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 				exit;
 			}//end if
+			
+			delete_option( 'charitable_skipped_donations_with_empty_donor_id' );
 
 			$this->finish_upgrade( 'fix_empty_donor_ids' );
 		}
