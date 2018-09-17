@@ -1027,6 +1027,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.6.6
 		 *
+		 * @param  array $skipped List of skipped donations.
 		 * @return int
 		 */
 		protected function count_empty_donor_id_donations( $skipped = array() ) {
@@ -1041,7 +1042,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
             				 FROM {$wpdb->prefix}charitable_campaign_donations
             				 WHERE donor_id = 0
             		       	 AND donation_id NOT IN ( $placeholders )";
-			
+
 			return $wpdb->get_var( $wpdb->prepare( $sql, $skipped ) );
 		}
 
@@ -1050,6 +1051,8 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.6.6
 		 *
+		 * @param  array $skipped List of skipped donations.
+		 * @param  int   $number  The number of donations to retrieve.
 		 * @return int
 		 */
 		protected function get_empty_donor_id_donations( $skipped = array(), $number = 20 ) {
@@ -1057,18 +1060,18 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 			if ( empty( $skipped ) ) {
 				return $wpdb->get_col( "SELECT DISTINCT donation_id 
-										FROM {$wpdb->prefix}charitable_campaign_donations 
-										WHERE donor_id = 0 
-										LIMIT $number;" );
+					FROM {$wpdb->prefix}charitable_campaign_donations 
+					WHERE donor_id = 0 
+					LIMIT $number;" );
 			}
 
 			$placeholders = charitable_get_query_placeholders( count( $skipped ), '%d' );
-			
+
 			return $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT donation_id 
-													FROM {$wpdb->prefix}charitable_campaign_donations 
-													WHERE donor_id = 0 
-													AND donation_id NOT IN ( $placeholders )
-													LIMIT $number;", $skipped ) );
+				FROM {$wpdb->prefix}charitable_campaign_donations 
+				WHERE donor_id = 0 
+				AND donation_id NOT IN ( $placeholders )
+				LIMIT $number;", $skipped ) );
 		}
 
 		/**
@@ -1118,7 +1121,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 						$skipped[] = $donation_id;
 						continue;
 					}
-					
+
 					$donor_id = $donors_table->get_donor_id_by_email( $data['email'] );
 
 					if ( ! $donor_id ) {
@@ -1137,7 +1140,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					} else {
 						$skipped[] = $donation_id;
 					}
-
 				}//end foreach
 
 				update_option( 'charitable_skipped_donations_with_empty_donor_id', $skipped );
@@ -1156,7 +1158,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 				exit;
 			}//end if
-			
+
 			delete_option( 'charitable_skipped_donations_with_empty_donor_id' );
 
 			$this->finish_upgrade( 'fix_empty_donor_ids' );
