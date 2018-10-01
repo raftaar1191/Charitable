@@ -23,6 +23,8 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 	 */
 	class Charitable_Donor_Query extends Charitable_Query {
 
+		public $table_name = '';
+
 		/**
 		 * Create new query object.
 		 *
@@ -31,6 +33,10 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @param array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
+			global $wpdb;
+
+			$this->table_name = "d";
+
 			/**
 			 * Filter the default arguments for Charitable_Donor_Query.
 			 *
@@ -244,6 +250,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_search' ), 10 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -273,7 +280,120 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			add_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			add_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
+			add_filter( 'charitable_query_where', array( $this, 'where_search' ), 10 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
+		}
+
+		/**
+		 * Set search where clause.
+		 *
+		 * @since  1.7.0
+		 * @access private
+		 *
+		 * @param string $where
+		 *
+		 * @global wpdb $wpdb
+		 * @return string
+		 */
+		public function where_search( $where ) {
+
+			$where_new[] = $this->get_where_search();
+			$where_new[] = $this->get_where_email();
+			$where_new[] = $this->get_where_donor();
+
+			$where_new = array_filter( $where_new );
+
+			$where .= trim( implode( ' ', array_map( 'trim', $where_new ) ) );
+
+			return $where;
+		}
+
+		/**
+		 * Set email where clause.
+		 *
+		 * @since  1.7.0
+		 * @access private
+		 *
+		 * @global wpdb $wpdb
+		 * @return string
+		 */
+		private function get_where_email() {
+			global $wpdb;
+
+			$where = '';
+
+			if ( ! empty( $this->args['email'] ) ) {
+
+				if ( is_array( $this->args['email'] ) ) {
+
+					$emails_count       = count( $this->args['email'] );
+					$emails_placeholder = array_fill( 0, $emails_count, '%s' );
+					$emails             = implode( ', ', $emails_placeholder );
+
+					$where .= $wpdb->prepare( "AND {$this->table_name}.email IN( $emails )", $this->args['email'] );
+				} else {
+					$where .= $wpdb->prepare( "AND {$this->table_name}.email = %s", $this->args['email'] );
+				}
+			}
+
+			return $where;
+		}
+
+		/**
+		 * Set donor where clause.
+		 *
+		 * @since  1.7.0
+		 * @access private
+		 *
+		 * @global wpdb $wpdb
+		 * @return string
+		 */
+		private function get_where_donor() {
+			$where = '';
+
+			// Specific donors.
+			if ( ! empty( $this->args['donor'] ) ) {
+				if ( ! is_array( $this->args['donor'] ) ) {
+					$this->args['donor'] = explode( ',', $this->args['donor'] );
+				}
+				$donor_ids = implode( ',', array_map( 'intval', $this->args['donor'] ) );
+
+				$where .= "AND {$this->table_name}.id IN( {$donor_ids} )";
+			}
+
+			return $where;
+		}
+
+		/**
+		 * Set search where clause.
+		 *
+		 * @since  1.7.0
+		 * @access private
+		 *
+		 * @global wpdb $wpdb
+		 * @return string
+		 */
+		private function get_where_search() {
+			$where = '';
+
+			// Donors created for a specific date or in a date range
+			if ( ! empty( $this->args['s'] ) && false !== strpos( $this->args['s'], ':' ) ) {
+				$search_parts = explode( ':', $this->args['s'] );
+
+				if ( ! empty( $search_parts[0] ) ) {
+					switch ( $search_parts[0] ) {
+						case 'name':
+							$where = "AND {$this->table_name}.name LIKE '%{$search_parts[1]}%'";
+							break;
+
+						case 'note':
+							$where = "AND {$this->table_name}.notes LIKE '%{$search_parts[1]}%'";
+							break;
+					}
+				}
+			}
+
+			return $where;
 		}
 
 		/**
