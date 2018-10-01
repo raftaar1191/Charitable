@@ -169,8 +169,8 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			'donor_id'        => __( 'Donor ID', 'charitable' ),
 			'name'            => __( 'Name', 'charitable' ),
 			'email'           => __( 'Email', 'charitable' ),
-			'num_donations'   => __( 'Donations', 'charitable' ),
-			'amount_spent'    => __( 'Lifetime value', 'charitable' ),
+			'donations'       => __( 'Donations', 'charitable' ),
+			'amount'          => __( 'Lifetime value', 'charitable' ),
 			'date_joined'     => __( 'Date joined', 'charitable' ),
 			'contact_consent' => __( 'Contact consent', 'charitable' ),
 		);
@@ -188,8 +188,10 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	public function get_sortable_columns() {
 		$columns = array(
-			'donor_id' => array( 'donor_id', true ),
-			'name'     => array( 'name', true ),
+			'donor_id'  => array( 'donor_id', true ),
+			'name'      => array( 'name', true ),
+			'donations' => array( 'donations', true ),
+			'amount'    => array( 'amount', true ),
 		);
 
 		return apply_filters( 'charitable_list_donors_sortable_columns', $columns );
@@ -267,8 +269,8 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 					'user_id'         => $donor->user_id,
 					'name'            => $charitable_donor->get_name(),
 					'email'           => $charitable_donor->get_email(),
-					'num_donations'   => $charitable_donor->count_donations(),
-					'amount_spent'    => $charitable_donor->get_amount(),
+					'donations'       => $charitable_donor->count_donations(),
+					'amount'          => $charitable_donor->get_amount(),
 					'date_joined'     => $donor->date_joined,
 					'contact_consent' => $donor->contact_consent,
 				);
