@@ -222,10 +222,6 @@ if ( ! class_exists( 'Charitable_Donors_Widget' ) ) :
 			 */
 			$query_args = apply_filters( 'charitable_donors_widget_donor_query_args', $query_args, $instance );
 
-			var_dump( $query_args );
-
-			var_dump( new Charitable_Donor_Query( $query_args ) );
-
 			return new Charitable_Donor_Query( $query_args );
 		}
 	}

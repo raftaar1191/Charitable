@@ -350,28 +350,20 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		// Get donor query.
 		$args = $this->get_donor_query();
 
-		var_dump( $args );
-
-		$donors = give()->donors->get_donors( $args );
+		$donors = new Charitable_Donor_Query( $args );
 
 		if ( $donors ) {
 
 			foreach ( $donors as $donor ) {
 
-				$user_id      = ! empty( $donor->user_id ) ? intval( $donor->user_id ) : 0;
-				$title_prefix = charitable()->donor_meta->get_meta( $donor->id, '_charitable_donor_title_prefix', true );
-
-				// If title prefix is set, then update the donor name.
-				$donor->name = charitable_get_donor_name_with_title_prefixes( $title_prefix, $donor->name );
-
 				$data[] = array(
-					'donor_id'            => $donor->id,
-					'user_id'       => $user_id,
-					'name'          => $donor->name,
+					'donor_id'      => $donor->donor_id,
+					'user_id'       => $donor->donor_id,
+					'name'          => $donor->first_name . ' ' . $donor->last_name,
 					'email'         => $donor->email,
-					'num_donations' => $donor->purchase_count,
-					'amount_spent'  => $donor->purchase_value,
-					'date_created'  => $donor->date_created,
+					'num_donations' => 'Not yet',
+					'amount_spent'  => 'Not yet',
+					'date_created'  => $donor->date_joined,
 				);
 			}
 		}
@@ -391,7 +383,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		$_donor_query['number'] = - 1;
 		$_donor_query['offset'] = 0;
-		$donors                 = charitable()->donors->get_donors( $_donor_query );
+		$donors                 = new Charitable_Donor_Query( $_donor_query );
 
 		return count( $donors );
 	}
@@ -458,7 +450,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
 
-		$get_data = charitable_clean( $_GET ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		$get_data = sanitize_text_field( $_GET ); // WPCS: input var ok, sanitization ok, CSRF ok.
 
 		$search_keyword = ! empty( $get_data['s'] ) ? $get_data['s'] : '';
 		$order          = ! empty( $get_data['order'] ) ? $get_data['order'] : 'DESC';
