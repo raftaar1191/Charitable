@@ -99,9 +99,9 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			?>
 
             <hr class="wp-header-end">
-            <form id="give-donors-search-filter" method="get"
+            <form id="charitable-donors-search-filter" method="get"
                   action="<?php echo admin_url( 'admin.php?page=donors' ); ?>">
-				<?php $donors_table->search_box( __( 'Search Donors', 'give' ), 'give-donors' ); ?>
+				<?php $donors_table->search_box( __( 'Search Donors', 'charitable' ), 'charitable-donors' ); ?>
                 <input type="hidden" name="page" value="donors"/>
             </form>
             <form id="charitable-donors-filter" method="get">
