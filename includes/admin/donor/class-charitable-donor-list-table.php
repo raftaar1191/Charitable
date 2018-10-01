@@ -143,34 +143,10 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return string Column Name.
 	 */
 	public function column_default( $donor, $column_name ) {
-
-		switch ( $column_name ) {
-			default:
-				$value = isset( $donor[ $column_name ] ) ? $donor[ $column_name ] : null;
-				break;
-		}
+		$value = isset( $donor[ $column_name ] ) ? $donor[ $column_name ] : null;
 
 		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor['donor_id'] );
 
-	}
-
-	/**
-	 * For CheckBox Column
-	 *
-	 * @param array $donor Donor Data.
-	 *
-	 * @access public
-	 * @since  1.7.0
-	 *
-	 * @return string
-	 */
-	public function column_cb( $donor ) {
-		return sprintf(
-			'<input class="donor-selector" type="checkbox" name="%1$s[]" value="%2$d" data-name="%3$s" />',
-			$this->_args['singular'],
-			$donor['donor_id'],
-			$donor['name']
-		);
 	}
 
 	/**
@@ -201,7 +177,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'cb'              => '<input type="checkbox" />', // Render a checkbox instead of text.
 			'donor_id'        => __( 'Donor ID', 'charitable' ),
 			'email'           => __( 'Email', 'charitable' ),
 			'name'            => __( 'Name', 'charitable' ),
@@ -304,7 +279,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		}
 		?>
         <div class="tablenav <?php echo esc_attr( $which ); ?>">
-            <?php
+			<?php
 			$this->extra_tablenav( $which );
 			$this->pagination( $which );
 			?>
