@@ -20,6 +20,7 @@ return array(
 	'Charitable_Addons' => 'addons/class-charitable-addons.php',
 	'Charitable_Donation_Admin_Actions' => 'admin/actions/class-charitable-donation-admin-actions.php',
 	'Charitable_Campaign_List_Table' => 'admin/campaigns/class-charitable-campaign-list-table.php',
+	'Charitable_Donor_List_Table' => 'admin/donor/class-charitable-donor-list-table.php',
 	'Charitable_Campaign_Meta_Boxes' => 'admin/campaigns/class-charitable-campaign-meta-boxes.php',
 	'Charitable_Admin_Notices' => 'admin/class-charitable-admin-notices.php',
 	'Charitable_Admin_Pages' => 'admin/class-charitable-admin-pages.php',

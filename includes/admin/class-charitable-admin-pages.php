@@ -152,6 +152,12 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_category&post_type=campaign',
 				),
 				array(
+					'page_title' => __( 'Donors', 'charitable' ),
+					'menu_title' => __( 'Donors', 'charitable' ),
+					'menu_slug'  => 'donors',
+					'function'   => array( 'Charitable_Donor_List_Table', 'donors_list' ),
+				),
+				array(
 					'page_title' => __( 'Campaign Tags', 'charitable' ),
 					'menu_title' => __( 'Tags', 'charitable' ),
 					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_tag&post_type=campaign',

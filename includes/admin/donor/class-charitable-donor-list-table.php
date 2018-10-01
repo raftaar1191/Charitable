@@ -68,6 +68,54 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	}
 
 	/**
+	 * List table of donors.
+	 *
+	 * @since  1.0
+	 * @return void
+	 */
+	static function donors_list() {
+
+		$donors_table = new charitable_Donor_List_Table();
+		$donors_table->prepare_items();
+		?>
+        <div class="wrap">
+            <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
+			<?php
+			/**
+			 * Fires in donors screen, above the table.
+			 *
+			 * @since 1.0
+			 */
+			do_action( 'charitable_donors_table_top' );
+			?>
+
+            <hr class="wp-header-end">
+            <form id="charitable-donors-search-filter" method="get"
+                  action="<?php echo admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors' ); ?>">
+				<?php $donors_table->search_box( __( 'Search Donors', 'charitable' ), 'charitable-donors' ); ?>
+                <input type="hidden" name="post_type" value="charitable_forms"/>
+                <input type="hidden" name="page" value="charitable-donors"/>
+                <input type="hidden" name="view" value="donors"/>
+            </form>
+            <form id="charitable-donors-filter" method="get">
+				<?php $donors_table->display(); ?>
+                <input type="hidden" name="post_type" value="charitable_forms"/>
+                <input type="hidden" name="page" value="charitable-donors"/>
+                <input type="hidden" name="view" value="donors"/>
+            </form>
+			<?php
+			/**
+			 * Fires in donors screen, below the table.
+			 *
+			 * @since 1.0
+			 */
+			do_action( 'charitable_donors_table_bottom' );
+			?>
+        </div>
+		<?php
+	}
+
+	/**
 	 * Show the search field.
 	 *
 	 * @param string $text Label for the search box.
@@ -93,7 +141,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
             <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
             <input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>"/>
 			<?php submit_button( $text, 'button', false, false, array(
-				'ID' => 'search-submit',
+				'donor_id' => 'search-submit',
 			) ); ?>
         </p>
 		<?php
@@ -118,7 +166,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 				break;
 		}
 
-		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor['id'] );
+		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor['donor_id'] );
 
 	}
 
@@ -136,7 +184,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		return sprintf(
 			'<input class="donor-selector" type="checkbox" name="%1$s[]" value="%2$d" data-name="%3$s" />',
 			$this->_args['singular'],
-			$donor['id'],
+			$donor['donor_id'],
 			$donor['name']
 		);
 	}
@@ -153,7 +201,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	public function column_name( $donor ) {
 		$name     = ! empty( $donor['name'] ) ? $donor['name'] : '<em>' . __( 'Unnamed Donor', 'charitable' ) . '</em>';
-		$view_url = admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['id'] );
+		$view_url = admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['donor_id'] );
 		$actions  = $this->get_row_actions( $donor );
 
 		return '<a href="' . esc_url( $view_url ) . '">' . $name . '</a>' . $this->row_actions( $actions );
@@ -213,7 +261,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	public function get_row_actions( $donor ) {
 
 		$actions = array(
-			'view' => sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>', admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['id'] ), sprintf( esc_attr__( 'View "%s"', 'charitable' ), $donor['name'] ), __( 'View Donor', 'charitable' ) ),
+			'view' => sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>', admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['donor_id'] ), sprintf( esc_attr__( 'View "%s"', 'charitable' ), $donor['name'] ), __( 'View Donor', 'charitable' ) ),
 		);
 
 		return apply_filters( 'charitable_donor_row_actions', $actions, $donor );
@@ -304,7 +352,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		var_dump( $args );
 
-		//$donors = charitable()->donors->get_donors( $args );
+		$donors = give()->donors->get_donors( $args );
 
 		if ( $donors ) {
 
@@ -317,7 +365,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 				$donor->name = charitable_get_donor_name_with_title_prefixes( $title_prefix, $donor->name );
 
 				$data[] = array(
-					'id'            => $donor->id,
+					'donor_id'            => $donor->id,
 					'user_id'       => $user_id,
 					'name'          => $donor->name,
 					'email'         => $donor->email,
@@ -361,7 +409,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		$offset  = $this->per_page * ( $paged - 1 );
 		$search  = $this->get_search();
 		$order   = isset( $_GET['order'] ) ? sanitize_text_field( $_GET['order'] ) : 'DESC';
-		$orderby = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : 'id';
+		$orderby = isset( $_GET['orderby'] ) ? sanitize_text_field( $_GET['orderby'] ) : 'donor_id';
 
 		$args = array(
 			'number'  => $this->per_page,
@@ -374,7 +422,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			if ( is_email( $search ) ) {
 				$args['email'] = $search;
 			} elseif ( is_numeric( $search ) ) {
-				$args['id'] = $search;
+				$args['donor_id'] = $search;
 			} else {
 				$args['name'] = $search;
 			}
@@ -392,7 +440,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @access public
 	 */
 	public function single_row( $item ) {
-		echo sprintf( '<tr id="donor-%1$d" data-id="%2$d" data-name="%3$s">', $item['id'], $item['id'], $item['name'] );
+		echo sprintf( '<tr id="donor-%1$d" data-id="%2$d" data-name="%3$s">', $item['donor_id'], $item['donor_id'], $item['name'] );
 		$this->single_row_columns( $item );
 		echo '</tr>';
 	}
@@ -414,7 +462,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		$search_keyword = ! empty( $get_data['s'] ) ? $get_data['s'] : '';
 		$order          = ! empty( $get_data['order'] ) ? $get_data['order'] : 'DESC';
-		$order_by       = ! empty( $get_data['orderby'] ) ? $get_data['orderby'] : 'ID';
+		$order_by       = ! empty( $get_data['orderby'] ) ? $get_data['orderby'] : 'donor_id';
 		?>
         <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
             <thead>
