@@ -90,13 +90,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			?>
 
             <hr class="wp-header-end">
-            <form id="charitable-donors-search-filter" method="get"
-                  action="<?php echo admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors' ); ?>">
-				<?php $donors_table->search_box( __( 'Search Donors', 'charitable' ), 'charitable-donors' ); ?>
-                <input type="hidden" name="post_type" value="charitable_forms"/>
-                <input type="hidden" name="page" value="charitable-donors"/>
-                <input type="hidden" name="view" value="donors"/>
-            </form>
             <form id="charitable-donors-filter" method="get">
 				<?php $donors_table->display(); ?>
                 <input type="hidden" name="post_type" value="charitable_forms"/>
@@ -136,15 +129,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		if ( ! empty( $_REQUEST['order'] ) ) {
 			echo sprintf( '<input type="hidden" name="order" value="%1$s" />', esc_attr( $_REQUEST['order'] ) );
 		}
-		?>
-        <p class="search-box" role="search">
-            <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
-            <input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>"/>
-			<?php submit_button( $text, 'button', false, false, array(
-				'donor_id' => 'search-submit',
-			) ); ?>
-        </p>
-		<?php
 	}
 
 	/**
@@ -239,10 +223,8 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return array Array of all the sortable columns.
 	 */
 	public function get_sortable_columns() {
-
 		$columns = array(
-			'date_created' => array( 'date_created', true ),
-			'name'         => array( 'name', true ),
+			'name' => array( 'name', true ),
 		);
 
 		return apply_filters( 'charitable_list_donors_sortable_columns', $columns );
@@ -322,11 +304,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		}
 		?>
         <div class="tablenav <?php echo esc_attr( $which ); ?>">
-			<?php if ( $this->has_items() ) : ?>
-                <div class="alignleft actions bulkactions">
-					<?php $this->bulk_actions( $which ); ?>
-                </div>
-			<?php endif;
+            <?php
 			$this->extra_tablenav( $which );
 			$this->pagination( $which );
 			?>
@@ -357,13 +335,14 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			foreach ( $donors as $donor ) {
 
 				$data[] = array(
-					'donor_id'      => $donor->donor_id,
-					'user_id'       => $donor->donor_id,
-					'name'          => $donor->first_name . ' ' . $donor->last_name,
-					'email'         => $donor->email,
-					'num_donations' => 'Not yet',
-					'amount_spent'  => 'Not yet',
-					'date_created'  => $donor->date_joined,
+					'donor_id'        => $donor->donor_id,
+					'user_id'         => $donor->donor_id,
+					'name'            => $donor->first_name . ' ' . $donor->last_name,
+					'email'           => $donor->email,
+					'num_donations'   => 'Not yet',
+					'amount_spent'    => 'Not yet',
+					'date_joined'     => $donor->date_joined,
+					'contact_consent' => $donor->contact_consent,
 				);
 			}
 		}
@@ -450,7 +429,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
 
-		$get_data = sanitize_text_field( $_GET ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		$get_data = $_GET; // WPCS: input var ok, sanitization ok, CSRF ok.
 
 		$search_keyword = ! empty( $get_data['s'] ) ? $get_data['s'] : '';
 		$order          = ! empty( $get_data['order'] ) ? $get_data['order'] : 'DESC';
