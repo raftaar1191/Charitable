@@ -99,6 +99,11 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			?>
 
             <hr class="wp-header-end">
+            <form id="give-donors-search-filter" method="get"
+                  action="<?php echo admin_url( 'admin.php?page=donors' ); ?>">
+				<?php $donors_table->search_box( __( 'Search Donors', 'give' ), 'give-donors' ); ?>
+                <input type="hidden" name="page" value="donors"/>
+            </form>
             <form id="charitable-donors-filter" method="get">
 				<?php $donors_table->display(); ?>
                 <input type="hidden" name="page" value="donors"/>
@@ -136,6 +141,15 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		if ( ! empty( $_REQUEST['order'] ) ) {
 			echo sprintf( '<input type="hidden" name="order" value="%1$s" />', esc_attr( $_REQUEST['order'] ) );
 		}
+		?>
+        <p class="search-box" role="search">
+            <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
+            <input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>"/>
+			<?php submit_button( $text, 'button', false, false, array(
+				'ID' => 'search-submit',
+			) ); ?>
+        </p>
+		<?php
 	}
 
 	/**
@@ -347,7 +361,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			} elseif ( is_numeric( $search ) ) {
 				$args['donor_id'] = $search;
 			} else {
-				$args['name'] = $search;
+				$args['first_name'] = $search;
 			}
 		}
 
@@ -380,12 +394,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		$this->display_tablenav( 'top' );
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
-
-		$get_data = $_GET; // WPCS: input var ok, sanitization ok, CSRF ok.
-
-		$search_keyword = ! empty( $get_data['s'] ) ? $get_data['s'] : '';
-		$order          = ! empty( $get_data['order'] ) ? $get_data['order'] : 'DESC';
-		$order_by       = ! empty( $get_data['orderby'] ) ? $get_data['orderby'] : 'donor_id';
 		?>
         <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
             <thead>
