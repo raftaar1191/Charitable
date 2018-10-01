@@ -79,7 +79,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * List table of donors.
 	 *
-	 * @since  1.0
+	 * @since  1.7.0
 	 * @return void
 	 */
 	static function donors_list() {
@@ -93,7 +93,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			/**
 			 * Fires in donors screen, above the table.
 			 *
-			 * @since 1.0
+			 * @since 1.7.0
 			 */
 			do_action( 'charitable_donors_table_top' );
 			?>
@@ -107,7 +107,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			/**
 			 * Fires in donors screen, below the table.
 			 *
-			 * @since 1.0
+			 * @since r
 			 */
 			do_action( 'charitable_donors_table_bottom' );
 			?>
@@ -150,10 +150,22 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return string Column Name.
 	 */
 	public function column_default( $donor, $column_name ) {
-		$value = isset( $donor[ $column_name ] ) ? $donor[ $column_name ] : null;
 
-		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor['donor_id'] );
+		switch ( $column_name ) {
+			case 'donations' :
+				$value = sprintf(
+					'<a href="%s">%s</a>',
+					admin_url( 'edit.php?post_type=donation&donor_id=' . absint( $donor['donor_id'] ) ),
+					esc_html( $donor['donations'] )
+				);
+				break;
 
+			default:
+				$value = isset( $donor[ $column_name ] ) ? $donor[ $column_name ] : null;
+				break;
+		}
+
+		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor, $column_name );
 	}
 
 	/**
