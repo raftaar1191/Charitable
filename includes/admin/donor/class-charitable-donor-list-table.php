@@ -32,7 +32,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @var int
 	 * @since 1.7.0
 	 */
-	public $per_page = 30;
+	public $per_page = 20;
 
 	/**
 	 * Number of donors found.
@@ -315,15 +315,12 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	private function get_donor_count() {
 
-		if ( empty( $this->donors ) ) {
+		// Get donor query.
+		$_donor_query = $this->get_donor_query();
 
-			// Get donor query.
-			$_donor_query = $this->get_donor_query();
+		$_donor_query['number'] = - 1;
 
-			$_donor_query['number'] = - 1;
-
-			$this->donors = new Charitable_Donor_Query( $_donor_query );
-		}
+		$this->donors = new Charitable_Donor_Query( $_donor_query );
 
 		$count = 0;
 		foreach ( $this->donors as $donor ) {
