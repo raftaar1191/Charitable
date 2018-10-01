@@ -51,6 +51,15 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	public $total = 0;
 
 	/**
+	 * Contain the donors list
+	 *
+	 * @since 1.7.1
+	 *
+	 * @var array
+	 */
+	public $donors = array();
+
+	/**
 	 * Get things started.
 	 *
 	 * @since 1.7.0
@@ -92,9 +101,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
             <hr class="wp-header-end">
             <form id="charitable-donors-filter" method="get">
 				<?php $donors_table->display(); ?>
-                <input type="hidden" name="post_type" value="charitable_forms"/>
-                <input type="hidden" name="page" value="charitable-donors"/>
-                <input type="hidden" name="view" value="donors"/>
+                <input type="hidden" name="page" value="donors"/>
             </form>
 			<?php
 			/**
@@ -150,24 +157,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Column name.
-	 *
-	 * @param array $donor Donor Data.
-	 *
-	 * @access public
-	 * @since  1.7.0
-	 *
-	 * @return string
-	 */
-	public function column_name( $donor ) {
-		$name     = ! empty( $donor['name'] ) ? $donor['name'] : '<em>' . __( 'Unnamed Donor', 'charitable' ) . '</em>';
-		$view_url = admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['donor_id'] );
-		$actions  = $this->get_row_actions( $donor );
-
-		return '<a href="' . esc_url( $view_url ) . '">' . $name . '</a>' . $this->row_actions( $actions );
-	}
-
-	/**
 	 * Retrieve the table columns.
 	 *
 	 * @access public
@@ -199,30 +188,12 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	public function get_sortable_columns() {
 		$columns = array(
-			'name' => array( 'name', true ),
+			'donor_id' => array( 'donor_id', true ),
+			'name'     => array( 'name', true ),
+			'email'    => array( 'email', true ),
 		);
 
 		return apply_filters( 'charitable_list_donors_sortable_columns', $columns );
-	}
-
-	/**
-	 * Retrieve row actions.
-	 *
-	 * @param array $donor Donor Data.
-	 *
-	 * @since  1.7.0
-	 * @access public
-	 *
-	 * @return array An array of action links.
-	 */
-	public function get_row_actions( $donor ) {
-
-		$actions = array(
-			'view' => sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>', admin_url( 'edit.php?post_type=charitable_forms&page=charitable-donors&view=overview&id=' . $donor['donor_id'] ), sprintf( esc_attr__( 'View "%s"', 'charitable' ), $donor['name'] ), __( 'View Donor', 'charitable' ) ),
-		);
-
-		return apply_filters( 'charitable_donor_row_actions', $actions, $donor );
-
 	}
 
 	/**
@@ -250,22 +221,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Get the Bulk Actions.
-	 *
-	 * @access public
-	 * @since  1.7.0
-	 *
-	 * @return array
-	 */
-	public function get_bulk_actions() {
-		$actions = array(
-			'delete' => __( 'Delete', 'charitable' ),
-		);
-
-		return $actions;
-	}
-
-	/**
 	 * Generate the table navigation above or below the table
 	 *
 	 * @param string $which Position to trigger i.e. Top/Bottom.
@@ -274,9 +229,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @since  1.7.0
 	 */
 	protected function display_tablenav( $which ) {
-		if ( 'top' === $which ) {
-			wp_nonce_field( 'bulk-' . $this->_args['plural'], '_wpnonce', false );
-		}
 		?>
         <div class="tablenav <?php echo esc_attr( $which ); ?>">
 			<?php
@@ -300,14 +252,14 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		$data = array();
 
-		// Get donor query.
-		$args = $this->get_donor_query();
+		if ( empty( $this->donors ) ) {
+			// Get donor query.
+			$args         = $this->get_donor_query();
+			$this->donors = new Charitable_Donor_Query( $args );
+		}
 
-		$donors = new Charitable_Donor_Query( $args );
-
-		if ( $donors ) {
-
-			foreach ( $donors as $donor ) {
+		if ( $this->donors ) {
+			foreach ( $this->donors as $donor ) {
 
 				$data[] = array(
 					'donor_id'        => $donor->donor_id,
@@ -332,14 +284,23 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @access private
 	 */
 	private function get_donor_count() {
-		// Get donor query.
-		$_donor_query = $this->get_donor_query();
 
-		$_donor_query['number'] = - 1;
-		$_donor_query['offset'] = 0;
-		$donors                 = new Charitable_Donor_Query( $_donor_query );
+		if ( empty( $this->donors ) ) {
 
-		return count( $donors );
+			// Get donor query.
+			$_donor_query = $this->get_donor_query();
+
+			$_donor_query['number'] = - 1;
+
+			$this->donors = new Charitable_Donor_Query( $_donor_query );
+		}
+
+		$count = 0;
+		foreach ( $this->donors as $donor ) {
+			$count ++;
+		}
+
+		return $count;
 	}
 
 	/**
@@ -421,51 +382,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			if ( $singular ) {
 				echo " data-wp-lists='list:$singular'";
 			} ?>>
-            <tr class="hidden"></tr>
-            <tr id="charitable-bulk-delete"
-                class="inline-edit-row inline-edit-row-page inline-edit-page bulk-edit-row bulk-edit-row-page bulk-edit-page inline-editor"
-                style="display: none;">
-                <td colspan="6" class="colspanchange">
-
-                    <fieldset class="inline-edit-col-left">
-                        <legend class="inline-edit-legend"><?php esc_attr_e( 'BULK DELETE', 'charitable' ); ?></legend>
-                        <div class="inline-edit-col">
-                            <div id="bulk-titles">
-                                <div id="charitable-bulk-donors" class="charitable-bulk-donors">
-
-                                </div>
-                            </div>
-                    </fieldset>
-
-                    <fieldset class="inline-edit-col-right">
-                        <div class="inline-edit-col">
-                            <label>
-                                <input class="charitable-donor-delete-confirm" type="checkbox"
-                                       name="charitable-donor-delete-confirm"/>
-								<?php esc_attr_e( 'Are you sure you want to delete the selected donor(s)?', 'charitable' ); ?>
-                            </label>
-                            <label>
-                                <input class="charitable-donor-delete-records" type="checkbox"
-                                       name="charitable-donor-delete-records"/>
-								<?php esc_attr_e( 'Delete all associated donations and records?', 'charitable' ); ?>
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <p class="submit inline-edit-save">
-                        <input type="hidden" name="charitable_action" value="delete_bulk_donor"/>
-                        <input type="hidden" name="s" value="<?php echo esc_html( $search_keyword ); ?>"/>
-                        <input type="hidden" name="orderby" value="<?php echo esc_html( $order_by ); ?>"/>
-                        <input type="hidden" name="order" value="<?php echo esc_html( $order ); ?>"/>
-                        <button type="button" id="charitable-bulk-delete-cancel"
-                                class="button cancel alignleft"><?php esc_attr_e( 'Cancel', 'charitable' ); ?></button>
-                        <input type="submit" id="charitable-bulk-delete-button" disabled
-                               class="button button-primary alignright"
-                               value="<?php esc_attr_e( 'Delete', 'charitable' ); ?>">
-                        <br class="clear">
-                    </p>
-                </td>
-            </tr>
 			<?php $this->display_rows_or_placeholder(); ?>
             </tbody>
 
