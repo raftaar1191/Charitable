@@ -457,6 +457,18 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		}
 
 		/**
+		 * Return the number of donations made by the donor.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @param  boolean $distinct_donations If true, will only count unique donations.
+		 * @return int
+		 */
+		public function count_donations( $distinct_donations = false ) {
+			return apply_filters( 'charitable_donor_donation_count', charitable_get_table( 'campaign_donations' )->count_donations_by_donor( $this->donor_id, $distinct_donations ), $this, $distinct_donations );
+		}
+
+		/**
 		 * Return the array of mapped keys, where the key is mapped to a meta_key in the user meta table.
 		 *
 		 * @since  1.0.0
