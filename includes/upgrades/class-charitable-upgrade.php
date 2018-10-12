@@ -287,7 +287,14 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 				}
 ?>		
 				<div class="error">
-					<p><?php printf( __( 'Charitable needs to complete an upgrade that was started earlier. Click <a href="%s">here</a> to continue the upgrade.', 'charitable' ), esc_url( add_query_arg( $upgrade_progress, admin_url( 'index.php' ) ) ) ) ?>
+					<p>
+						<?php 
+							printf(
+								/* translators: %s: upgrade link */
+								__( 'Charitable needs to complete an upgrade that was started earlier. Click <a href="%s">here</a> to continue the upgrade.', 'charitable' ),
+								esc_url( add_query_arg( $upgrade_progress, admin_url( 'index.php' ) ) )
+							);
+						?>
 					</p>
 				</div>
 <?php
