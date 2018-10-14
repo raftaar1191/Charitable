@@ -99,7 +99,7 @@ if ( empty( $donations ) ) : ?>
 		<tbody>
 			<?php foreach ( $donations as $donation ) : ?>
 			<tr>
-				<td><?php echo mysql2date( 'F j, Y', get_post_field( 'post_date', $donation->ID ) ); ?></td>
+				<td class="date" data-title="<?php esc_attr_e( 'Date', 'charitable' ); ?>"><?php echo mysql2date( 'F j, Y', get_post_field( 'post_date', $donation->ID ) ); ?></td>
 				<?php
 					/**
 					 * Add a cell after the donation date. Any output should be wrapped in <td></td>.
@@ -111,7 +111,7 @@ if ( empty( $donations ) ) : ?>
 					 */
 					do_action( 'charitable_my_donations_table_after_date', $donation );
 				?>
-				<td><?php echo $donation->campaigns; ?></td>
+				<td class="campaign" data-title="<?php esc_attr_e( 'Campaign', 'charitable' ); ?>"><?php echo $donation->campaigns; ?></td>
 				<?php
 					/**
 					 * Add a cell after the list of campaigns. Any output should be wrapped in <td></td>.
@@ -123,7 +123,7 @@ if ( empty( $donations ) ) : ?>
 					 */
 					do_action( 'charitable_my_donations_table_after_campaigns', $donation );
 				?>
-				<td><?php echo charitable_format_money( $donation->amount ); ?></td>
+				<td class="amount" data-title="<?php esc_attr_e( 'Amount', 'charitable' ); ?>"><?php echo charitable_format_money( $donation->amount ); ?></td>
 				<?php
 					/**
 					 * Add a cell after the donation amount. Any output should be wrapped in <td></td>.
@@ -135,7 +135,7 @@ if ( empty( $donations ) ) : ?>
 					 */
 					do_action( 'charitable_my_donations_table_after_amount', $donation );
 				?>
-				<td><?php echo charitable_get_donation( $donation->ID )->get_status_label(); ?></td>
+				<td class="status" data-title="<?php esc_attr_e( 'Status', 'charitable' ); ?>"><?php echo charitable_get_donation( $donation->ID )->get_status_label(); ?></td>
 				<?php
 					/**
 					 * Add a cell after the donation status. Any output should be wrapped in <td></td>.
@@ -146,7 +146,7 @@ if ( empty( $donations ) ) : ?>
 					 */
 					do_action( 'charitable_my_donations_table_after_status', $donation );
 				?>
-				<td><a href="<?php echo esc_url( charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $donation->ID ) ) ); ?>"><?php _e( 'View Receipt', 'charitable' ); ?></a></td>
+				<td class="actions" data-title="<?php esc_attr_e( 'Actions', 'charitable' ); ?>"><a href="<?php echo esc_url( charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $donation->ID ) ) ); ?>"><?php _e( 'View Receipt', 'charitable' ); ?></a></td>
 				<?php
 					/**
 					 * Add a cell after the link to the receipt. Any output should be wrapped in <td></td>.
