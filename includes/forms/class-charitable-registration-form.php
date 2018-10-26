@@ -133,7 +133,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			 *
 			 * @param array $fields The registered fields.
 			 */
-			apply_filters( 'charitable_user_registration_fields', $fields );
+			$fields = apply_filters( 'charitable_user_registration_fields', $fields );
 
 			uasort( $fields, 'charitable_priority_sort' );
 
