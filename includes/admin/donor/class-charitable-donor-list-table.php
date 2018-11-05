@@ -84,7 +84,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	static function donors_list() {
 
-		$donors_table = new charitable_Donor_List_Table();
+		$donors_table = new Charitable_Donor_List_Table();
 		$donors_table->prepare_items();
 		?>
         <div class="wrap">
