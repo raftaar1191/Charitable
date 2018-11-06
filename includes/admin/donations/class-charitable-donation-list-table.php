@@ -45,6 +45,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 
 		/**
 		 * Returns and/or create the single instance of this class.
+		 *
 		 * @since  1.5.0
 		 *
 		 * @return Charitable_Donation_List_Table
@@ -131,7 +132,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 					break;
 
 				case 'amount':
-					$display = charitable_format_money( $donation->get_total_donation_amount() );
+					$display  = charitable_format_money( $donation->get_total_donation_amount() );
 					$display .= '<span class="meta">' . sprintf( _x( 'via %s', 'charitable' ), $donation->get_gateway_label() ). '</span>';
 					break;
 
