@@ -63,10 +63,11 @@ if ( ! class_exists( 'Charitable_i18n' ) ) :
 		 */
 		private function __construct() {
 			$this->languages_directory = apply_filters( 'charitable_languages_directory', 'charitable/i18n/languages' );
-			$this->locale = apply_filters( 'plugin_locale', get_locale(), $this->textdomain );
-			$this->mofile = sprintf( '%1$s-%2$s.mo', $this->textdomain, $this->locale );
+			$this->locale              = apply_filters( 'plugin_locale', get_locale(), $this->textdomain );
+			$this->mofile              = sprintf( '%1$s-%2$s.mo', $this->textdomain, $this->locale );
 
-			$this->load_textdomain();
+			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ), 20 );
+			// $this->load_textdomain();
 		}
 
 		/**
