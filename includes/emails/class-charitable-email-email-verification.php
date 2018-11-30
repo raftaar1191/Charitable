@@ -2,14 +2,17 @@
 /**
  * Class that models the Email Verification email.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Email_Email_Verification
  * @author    Eric Daams
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 
@@ -52,7 +55,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 
 		/**
 		 * Array of supported object types (campaigns, donations, donors, etc).
-		 *		 
+		 *
 		 * @since 1.5.0
 		 *
 		 * @var   string[]
@@ -82,8 +85,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 *
 		 * @since 1.5.0
 		 *
-		 * @param mixed[] $objects Array containing a user object,
-		 *                         or nothing if this is a preview.
+		 * @param mixed[] $objects Array containing a user object, or nothing if this is a preview.
 		 */
 		public function __construct( $objects = array() ) {
 			parent::__construct( $objects );
@@ -114,12 +116,12 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		}
 
 		/**
-		* Return the recipient for the email.
-		*
-		* @since  1.5.0
-		*
-		* @return string
-		*/
+		 * Return the recipient for the email.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @return string
+		 */
 		public function get_recipient() {
 			return $this->has_valid_user() ? $this->user->user_email : '';
 		}

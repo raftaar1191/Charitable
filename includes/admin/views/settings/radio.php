@@ -1,20 +1,17 @@
 <?php
 /**
- * Display select field.
+ * Display radio field.
  *
  * @author    Eric Daams
  * @package   Charitable/Admin View/Settings
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.7.0
  */
 
-$value = charitable_get_option( $view_args['key'] );
-
-if ( empty( $value ) ) :
-	$value = isset( $view_args['default'] ) ? $view_args['default'] : '';
-endif;
+$default = array_key_exists( 'default', $view_args ) ? $view_args['default'] : false;
+$value   = charitable_get_option( $view_args['key'], $default );
 
 ?>
 <ul class="charitable-radio-list <?php echo esc_attr( $view_args['classes'] ); ?>">
