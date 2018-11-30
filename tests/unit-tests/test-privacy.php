@@ -49,6 +49,16 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 			}
 		}
 
+		/**
+		 * wp_add_privacy_policy_content requires both an admin request
+		 * and for admin_init to be firing or have been fired, so we need
+		 * to simulate that.
+		 */
+		set_current_screen( 'edit.php' );
+
+		global $wp_current_filter;
+		$wp_current_filter[] = 'admin_init';
+
 		$privacy = new Charitable_Privacy;
 		$privacy->add_privacy_policy_content();
 
@@ -256,7 +266,8 @@ class Test_Charitable_Privacy extends Charitable_UnitTestCase {
 		$privacy  = new Charitable_Privacy();
 		$exporter = $privacy->export_user_data( 'james@gotham.com' );
 		
-		$this->assertCount( 1, $exporter['data'], 'Contains only one group.' );
+		$this->assertCount( 2, $exporter['data'], 'Contains two groups.' );
 		$this->assertEquals( 'charitable_users', $exporter['data'][0]['group_id'], 'Contains charitable_users group.' );
+		$this->assertEquals( 'charitable_donors', $exporter['data'][1]['group_id'], 'Contains charitable_donors group.' );
 	}
 }

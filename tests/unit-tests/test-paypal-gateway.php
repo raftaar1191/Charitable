@@ -37,7 +37,7 @@ class Test_Charitable_Paypal_Gateway extends Charitable_UnitTestCase {
      */
     public function testmode_redirect_urls() {
         return array(
-            array( 'https://sandbox.paypal.com/cgi-bin/webscr', false, false ),
+            array( 'https://www.sandbox.paypal.com/cgi-bin/webscr', false, false ),
             array( 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr', false, true ),
         );
     }
