@@ -116,14 +116,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		 * @return array
 		 */
 		public function get_column_defaults() {
-			return array(
-				'campaign_donation_id' => '',
-				'donation_id'          => '',
-				'donor_id'             => '',
-				'campaign_id'          => '',
-				'campaign_name'        => '',
-				'amount'               => '',
-			);
+			return array();
 		}
 
 		/**

@@ -149,14 +149,8 @@ if ( ! class_exists( 'Charitable_Donors_DB' ) ) :
 		 */
 		public function get_column_defaults() {
 			$defaults = array(
-				'donor_id'        => '',
-				'user_id'         => 0,
-				'email'           => '',
-				'first_name'      => '',
-				'last_name'       => '',
-				'date_joined'     => date( 'Y-m-d H:i:s' ),
-				'data_erased'     => '',
-				'contact_consent' => '',
+				'user_id'     => 0,
+				'date_joined' => date( 'Y-m-d H:i:s' ),
 			);
 
 			return array_intersect_key( $defaults, array_flip( $this->get_db_columns() ) );
