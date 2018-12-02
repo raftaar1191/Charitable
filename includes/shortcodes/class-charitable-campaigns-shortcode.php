@@ -90,12 +90,12 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 			/**
 			 * Customize the output of the shortcode.
 			 *
-			 * @since   1.0.0
+			 * @since  1.0.0
 			 *
-			 * @param 	string $content The content to be displayed.
-			 * @param 	array  $args    All the parsed arguments.
-	         * @return 	string
-	         */
+			 * @param  string $content The content to be displayed.
+			 * @param  array  $args    All the parsed arguments.
+			 * @return string
+			 */
 			return apply_filters( 'charitable_campaigns_shortcode', ob_get_clean(), $args );
 		}
 
@@ -156,15 +156,15 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 				$query_args['meta_query'] = array(
 					'relation' => 'OR',
 					array(
-						'key'       => '_campaign_end_date',
-						'value'     => date( 'Y-m-d H:i:s' ),
-						'compare'   => '>=',
-						'type'      => 'datetime',
+						'key'     => '_campaign_end_date',
+						'value'   => date( 'Y-m-d H:i:s' ),
+						'compare' => '>=',
+						'type'    => 'datetime',
 					),
 					array(
-						'key'       => '_campaign_end_date',
-						'value'     => 0,
-						'compare'   => '=',
+						'key'     => '_campaign_end_date',
+						'value'   => 0,
+						'compare' => '=',
 					),
 				);
 			}
