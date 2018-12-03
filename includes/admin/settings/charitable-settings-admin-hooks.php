@@ -39,6 +39,13 @@ add_action( 'charitable_settings_tabs', array( Charitable_Licenses_Settings::get
 add_action( 'charitable_settings_tabs', array( Charitable_Settings::get_instance(), 'maybe_add_extensions_tab' ), 2 );
 
 /**
+ * Add a hidden "extensions" field.
+ *
+ * @see Charitable_Settings::add_hidden_extensions_setting_field()
+ */
+add_filter( 'charitable_settings_tab_fields', array( Charitable_Settings::get_instance(), 'add_hidden_extensions_setting_field' ) );
+
+/**
  * Save the license when saving settings.
  *
  * @see Charitable_Licenses_Settings::save_license()

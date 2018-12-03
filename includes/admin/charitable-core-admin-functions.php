@@ -92,14 +92,13 @@ function charitable_get_admin_notices() {
  */
 function charitable_is_settings_view( $tab = '' ) {
 	if ( ! empty( $_POST ) ) {
-
-		$is_settings = isset( $_POST['charitable_settings'] );
+		$is_settings = array_key_exists( 'option_page', $_POST ) && 'charitable_settings' === $_POST['option_page'];
 
 		if ( ! $is_settings || empty( $tab ) ) {
 			return $is_settings;
 		}
 
-		return array_key_exists( $tab, $_POST['charitable_settings'] );
+		return array_key_exists( 'charitable_settings', $_POST ) && array_key_exists( $tab, $_POST['charitable_settings'] );
 	}
 
 	$is_settings = isset( $_GET['page'] ) && 'charitable-settings' == $_GET['page'];
