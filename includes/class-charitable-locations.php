@@ -276,7 +276,7 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 				return $address_fields;
 			}
 
-			$address_fields = array_map( 'trim', $address_fields );
+			$address_fields = array_map( 'trim', array_filter( $address_fields, 'is_string' ) );
 
 			/**
 			 * Set up empty default fields and merge with address fields.
@@ -284,14 +284,14 @@ if ( ! class_exists( 'Charitable_Locations' ) ) :
 			$defaults = array(
 				'first_name'   => '',
 				'last_name'    => '',
-				'company'	   => '',
-				'address'	   => '',
+				'company'      => '',
+				'address'      => '',
 				'address_2'    => '',
-				'city' 		   => '',
-				'state'		   => '',
+				'city'         => '',
+				'state'        => '',
 				'full_state'   => '',
-				'postcode'	   => '',
-				'country'	   => '',
+				'postcode'     => '',
+				'country'      => '',
 				'full_country' => '',
 			);
 

@@ -159,11 +159,34 @@
     input[type=radio] {
         width: auto;
     }
+
+    &.charitable-radio-wrap,
+    &.charitable-multi-checkbox-wrap {
+        margin-bottom: 14px;
+    }
 }
 
 .charitable-checkbox-wrap {
     label {
         display: inline;
+    }
+}
+
+.charitable-checkbox-list,
+.charitable-radio-list {
+    label {
+        display: inline-block;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+}
+
+.charitable-radio-list {
+    label {
+        margin-bottom: 0;
+        vertical-align: text-bottom;
     }
 }
 

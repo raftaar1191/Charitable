@@ -1039,7 +1039,7 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return array
 		 */
 		protected function parse_donation_meta_field( Charitable_Donation_Field $field ) {
-			$value = $this->get( $field->field );
+			$value = charitable_get_sanitized_donation_field_value( $this->get( $field->field ), $field->field, $this );
 
 			if ( empty( $value ) ) {
 				$value = '-';

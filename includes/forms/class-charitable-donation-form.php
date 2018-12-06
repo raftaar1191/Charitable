@@ -829,6 +829,15 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				}
 			}
 
+			/**
+			 * Filter the submitted donation form values, before any processing happens.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array                    $values    The structured submitted values.
+			 * @param array                    $submitted The raw submitted values (i.e. $_POST).
+			 * @param Charitable_Donation_Form $form      This instance of `Charitable_Donation_Form`.
+			 */
 			return apply_filters( 'charitable_donation_form_submission_values', $values, $submitted, $this );
 		}
 

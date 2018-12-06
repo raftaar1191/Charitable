@@ -64,6 +64,43 @@ function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donat
 }
 
 /**
+ * Sanitize a value for a donation field, based on the type of field.
+ *
+ * @since  1.6.7
+ *
+ * @param  mixed                        $value    The submitted value.
+ * @param  string                       $key      The meta key.
+ * @param  Charitable_Abstract_Donation $donation The donation ID.
+ * @return mixed
+ */
+function charitable_get_sanitized_donation_field_value( $value, $key, Charitable_Abstract_Donation $donation ) {
+	$field = charitable()->donation_fields()->get_field( $key );
+	$form  = ( false === $field->admin_form ) ? $field->donation_form : $field->admin_form;
+
+	if ( ! $form ) {
+		return $value;
+	}
+
+	if ( ! array_key_exists( 'options', $form ) ) {
+		return $value;
+	}
+
+	if ( is_array( $value ) ) {
+		$values = array();
+
+		foreach ( $value as $val ) {
+			$values[] = array_key_exists( $val, $form['options'] ) ? $form['options'][ $val ] : $val;
+		}
+
+		$value = implode( ', ', $values );
+	} else {
+		$value = array_key_exists( $value, $form['options'] ) ? $form['options'][ $value ] : $value;
+	}
+
+	return $value;
+}
+
+/**
  * Return the date formatted for a form field value.
  *
  * @since  1.5.3
@@ -107,7 +144,7 @@ function charitable_create_donation( array $args ) {
  *
  * @since  1.4.0
  *
- * @param  string $donation_key
+ * @param  string $donation_key The donation key to query by.
  * @return int|null
  */
 function charitable_get_donation_by_key( $donation_key ) {
@@ -126,7 +163,7 @@ function charitable_get_donation_by_key( $donation_key ) {
  *
  * @since  1.4.7
  *
- * @param  string $transaction_id
+ * @param  string $transaction_id The transaction id to query by.
  * @return int|null
  */
 function charitable_get_donation_by_transaction_id( $transaction_id ) {
@@ -147,7 +184,7 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param 	string $gateway
+ * @param  string $gateway The gateway to get the ipn URL for.
  * @return string
  */
 function charitable_get_ipn_url( $gateway ) {
@@ -227,6 +264,7 @@ function charitable_is_after_donation() {
  *
  * @since  1.4.0
  *
+ * @param  string $status The status to check.
  * @return boolean
  */
 function charitable_is_valid_donation_status( $status ) {
@@ -265,7 +303,7 @@ function charitable_get_approval_statuses() {
  *
  * @since  1.4.0
  *
- * @param  string $key
+ * @param  string $status The status to check.
  * @return boolean
  */
 function charitable_is_approved_status( $status ) {
@@ -351,9 +389,9 @@ function charitable_load_donation_form_script() {
  *
  * @since  1.0.0
  *
- * @param  string $message
- * @return int|bool Meta ID if the key didn't exist, true on successful update,
- *                  false on failure.
+ * @param  int    $donation_id The donation ID.
+ * @param  string $message     The message to add to the log.
+ * @return int|bool Meta ID if the key didn't exist, true on successful update, false on failure.
  */
 function charitable_update_donation_log( $donation_id, $message ) {
 	return charitable_get_donation( $donation_id )->log()->add( $message );
@@ -364,10 +402,11 @@ function charitable_update_donation_log( $donation_id, $message ) {
  *
  * @since  1.0.0
  *
+ * @param  int $donation_id The donation ID.
  * @return array
  */
 function charitable_get_donation_log( $donation_id ) {
-	charitable_get_donation( $donation_id )->log()->get_meta_log();
+	return charitable_get_donation( $donation_id )->log()->get_meta_log();
 }
 
 /**
@@ -375,7 +414,7 @@ function charitable_get_donation_log( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  int $donation_id
+ * @param  int $donation_id The donation ID.
  * @return string
  */
 function charitable_get_donation_gateway( $donation_id ) {
@@ -387,8 +426,8 @@ function charitable_get_donation_gateway( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  mixed  $value
- * @param  string $key
+ * @param  mixed  $value The value to sanitize.
+ * @param  string $key   The key of the meta field to be sanitized.
  * @return mixed
  */
 function charitable_sanitize_donation_meta( $value, $key ) {

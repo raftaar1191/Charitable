@@ -188,9 +188,22 @@
   .charitable-metabox-wrap input[type=checkbox],
   .charitable-metabox-wrap input[type=radio] {
     width: auto; }
+  .charitable-metabox-wrap.charitable-radio-wrap, .charitable-metabox-wrap.charitable-multi-checkbox-wrap {
+    margin-bottom: 14px; }
 
 .charitable-checkbox-wrap label {
   display: inline; }
+
+.charitable-checkbox-list label,
+.charitable-radio-list label {
+  display: inline-block; }
+.charitable-checkbox-list li,
+.charitable-radio-list li {
+  margin-bottom: 10px; }
+
+.charitable-radio-list label {
+  margin-bottom: 0;
+  vertical-align: text-bottom; }
 
 .charitable-metabox-block {
   padding: 10px;

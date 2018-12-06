@@ -596,7 +596,18 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.get_data = function() {
 
         return this.form.serializeArray().reduce( function( obj, item ) {
-            obj[ item.name ] = item.value;
+            if ( '[]' === item.name.slice( -2 ) ) {
+                var name = item.name.slice( 0, -2 );
+
+                if ( ! obj.hasOwnProperty( name ) ) {
+                    obj[name] = [];
+                }
+
+                obj[name].push( item.value );
+            } else {
+                obj[ item.name ] = item.value;
+            }
+
             return obj;
         }, {} );
 
