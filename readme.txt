@@ -167,6 +167,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * FIX: Add responsive styling for campaign grid when masonry is turned on. [#628](https://github.com/Charitable/Charitable/issues/628)
 * FIX: Removed confusing "Payment attempted" log message for new donations. [#624](https://github.com/Charitable/Charitable/issues/624)
 * FIX: Added debug logging when CHARITABLE_DEBUG constant is set and true, and when a nonce check fails. [#630](https://github.com/Charitable/Charitable/issues/630)
+* FIX: Made sure the `charitable_user_registration_fields` filter actually works. :)
 
 = 1.6.6 =
 * FIX: Prevents an endless loop in the donor id upgrade process added in version 1.6.5. In certain cases, the upgrade could not complete properly.
