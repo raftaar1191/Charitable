@@ -443,7 +443,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$log_note = array_key_exists( 'log_note', $values ) ? $values['log_note'] : '';
 
 			if ( empty( $log_note ) ) {
-				$log_note = isset( $values['ID'] ) ? __( 'Payment attempted.', 'charitable' ) : __( 'Donation created.', 'charitable' );
+				$log_note = isset( $values['ID'] ) && 0 !== $values['ID'] ? __( 'Payment attempted.', 'charitable' ) : __( 'Donation created.', 'charitable' );
 			}
 
 			$this->update_donation_log( $donation_id, $log_note );

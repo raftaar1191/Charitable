@@ -77,7 +77,7 @@ function charitable_get_sanitized_donation_field_value( $value, $key, Charitable
 	$field = charitable()->donation_fields()->get_field( $key );
 	$form  = ( false === $field->admin_form ) ? $field->donation_form : $field->admin_form;
 
-	if ( ! $form ) {
+	if ( ! is_array( $form ) ) {
 		return $value;
 	}
 
