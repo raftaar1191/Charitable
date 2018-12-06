@@ -225,6 +225,18 @@ if ( ! class_exists( 'Charitable_Form' ) ) :
 
 			if ( ! $validated ) {
 				charitable_get_notices()->add_error( __( 'Unable to submit form. Please try again.', 'charitable' ) );
+
+				if ( defined( 'CHARITABLE_DEBUG' ) && CHARITABLE_DEBUG ) {
+					error_log(
+						sprintf(
+							/* translators: %1$s: nonce name; %2$s: nonce action; %3$s: submitted nonce */
+							__( 'Nonce verification failed for nonce with name "%1$s" and action "%2$s". Submitted nonce is "%3$s".', 'charitable' ),
+							$this->nonce_name,
+							$this->nonce_action,
+							array_key_exists( $this->nonce_name, $submitted ) ? $submitted[ $this->nonce_name ] : ''
+						)
+					);
+				}
 			}
 
 			return $validated;

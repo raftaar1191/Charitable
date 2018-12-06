@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.9.8
-Stable tag: 1.6.6
+Tested up to: 5.0.0
+Stable tag: 1.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -157,6 +157,16 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.7 =
+* FIX: Load scripts properly when adding a custom 'picture' field to the donation form. [#627](https://github.com/Charitable/Charitable/issues/627)
+* FIX: Save settings on Extensions settings page when there is only a single checkbox field. This bug affected Donor Comments. [#629](https://github.com/Charitable/Charitable/issues/629)
+* FIX: Add full support for radio & multi-checkbox fields with the Donation Fields API. [#577](https://github.com/Charitable/Charitable/issues/577) and [#576](https://github.com/Charitable/Charitable/issues/576)
+* FIX: Properly reflect the value for the "Send after Registration" setting in the settings for the User Verification email. [#626](https://github.com/Charitable/Charitable/issues/626)
+* FIX: Only define defaults for database fields that require one. This avoids duplicate primary key issues in certain environments (Windows servers). [#623](https://github.com/Charitable/Charitable/issues/623)
+* FIX: Add responsive styling for campaign grid when masonry is turned on. [#628](https://github.com/Charitable/Charitable/issues/628)
+* FIX: Removed confusing "Payment attempted" log message for new donations. [#624](https://github.com/Charitable/Charitable/issues/624)
+* FIX: Added debug logging when CHARITABLE_DEBUG constant is set and true, and when a nonce check fails. [#630](https://github.com/Charitable/Charitable/issues/630)
 
 = 1.6.6 =
 * FIX: Prevents an endless loop in the donor id upgrade process added in version 1.6.5. In certain cases, the upgrade could not complete properly.

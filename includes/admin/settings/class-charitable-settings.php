@@ -142,7 +142,7 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 		/**
 		 * Add the hidden "extensions" section field.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.7
 		 *
 		 * @param  array $fields All the settings fields.
 		 * @return array
