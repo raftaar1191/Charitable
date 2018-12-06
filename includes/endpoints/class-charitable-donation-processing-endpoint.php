@@ -119,7 +119,7 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $content
+		 * @param  string $content The default content to show.
 		 * @return string
 		 */
 		public function get_content( $content ) {

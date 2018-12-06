@@ -68,12 +68,11 @@ function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donat
  *
  * @since  1.6.7
  *
- * @param  mixed                        $value    The submitted value.
- * @param  string                       $key      The meta key.
- * @param  Charitable_Abstract_Donation $donation The donation ID.
+ * @param  mixed  $value The submitted value.
+ * @param  string $key   The meta key.
  * @return mixed
  */
-function charitable_get_sanitized_donation_field_value( $value, $key, Charitable_Abstract_Donation $donation ) {
+function charitable_get_sanitized_donation_field_value( $value, $key ) {
 	$field = charitable()->donation_fields()->get_field( $key );
 	$form  = ( false === $field->admin_form ) ? $field->donation_form : $field->admin_form;
 
@@ -117,7 +116,7 @@ function charitable_get_donation_date_for_form_value( Charitable_Abstract_Donati
  *
  * @since  1.0.0
  *
- * @return Charitable_Donation
+ * @return Charitable_Donation|false
  */
 function charitable_get_current_donation() {
 	return charitable_get_helper( 'request' )->get_current_donation();
@@ -303,11 +302,11 @@ function charitable_get_approval_statuses() {
  *
  * @since  1.4.0
  *
- * @param  string $status The status to check.
+ * @param  string|false $status The status to check.
  * @return boolean
  */
 function charitable_is_approved_status( $status ) {
-	return in_array( $status, charitable_get_approval_statuses() );
+	return false !== $status && in_array( $status, charitable_get_approval_statuses() );
 }
 
 /**
