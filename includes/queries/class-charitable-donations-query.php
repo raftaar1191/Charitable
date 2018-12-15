@@ -74,8 +74,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		public function get_donations() {
 			$records = $this->query();
 
-			/* Return array with the count. */
-			if ( 'count' == $this->get( 'output' ) ) {
+			/* Return array. */
+			if ( in_array( $this->get( 'output' ), array( 'count', 'ids' ) ) ) {
 				return $records;
 			}
 
