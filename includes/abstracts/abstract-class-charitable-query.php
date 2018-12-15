@@ -118,11 +118,11 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global WPDB $wpdb
 		 *
-		 * @since  1.0.0
+		 * @since  1.7.0
 		 *
 		 * @return object[]
 		 */
-		public function query() {
+		public function get_query() {
 			if ( ! isset( $this->query ) ) {
 				/**
 				 * Fires right before the query is executed.
@@ -148,6 +148,19 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			}//end if
 
 			return $this->query;
+		}
+
+		/**
+		 * Return the results of the query.
+		 *
+		 * @global WPDB $wpdb
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return object[]
+		 */
+		public function query() {
+			return $this->get_query();
 		}
 
 		/**
