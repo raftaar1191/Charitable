@@ -225,14 +225,14 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 				return 0;
 			}
 
-			if ( $this->show_all() ) {
-				return count( $this->query );
-			}
-
 			if ( 'count' == $this->get( 'output' ) ) {
 				return current( $this->query );
 			}
 
+			if ( $this->show_all() ) {
+				return count( $this->query );
+			}
+			
 			/**
 			 * Filters the query used to retrieve the query result count.
 			 *
