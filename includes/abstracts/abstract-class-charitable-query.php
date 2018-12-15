@@ -151,6 +151,17 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		}
 
 		/**
+		 * Return the results.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @return object[]
+		 */
+		public function get_results() {
+			return $this->results;
+		}
+
+		/**
 		 * Return the results of the query.
 		 *
 		 * @global WPDB $wpdb
