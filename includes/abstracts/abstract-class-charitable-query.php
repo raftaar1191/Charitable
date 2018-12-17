@@ -118,7 +118,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global WPDB $wpdb
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.8
 		 *
 		 * @return object[]
 		 */
@@ -153,7 +153,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Return the results.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.8
 		 *
 		 * @return object[]
 		 */
@@ -219,7 +219,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global WPDB $wpdb
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.8
 		 *
 		 * @return array
 		 */
@@ -616,7 +616,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Filter query by donation_plan ID.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.8
 		 *
 		 * @global WPBD   $wpdb
 		 * @param  string $where_statement The default where statement.
