@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.4.0
- * @version   1.6.5
+ * @version   1.6.8
  */
 
 // Exit if accessed directly.
@@ -110,8 +110,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * @return void
 		 */
 		public function setup_fields() {
-			/* If we are returning Donation objects, we only need to return the donation IDs. */
-			if ( 'donations' == $this->get( 'output' ) ) {
+			/* If we are returning IDs or Donation objects, we only need to return the donation IDs. */
+			if ( in_array( $this->get( 'output' ), array( 'donations', 'ids' ) ) ) {
 				return;
 			}
 
