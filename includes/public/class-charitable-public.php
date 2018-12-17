@@ -57,7 +57,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_enqueue_donation_form_scripts' ), 11 );
 			add_action( 'charitable_campaign_loop_before', array( $this, 'maybe_enqueue_donation_form_scripts' ) );
 			add_filter( 'post_class', array( $this, 'campaign_post_class' ) );
-			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ) );			
+			add_filter( 'comments_open', array( $this, 'disable_comments_on_application_pages' ) );
 
 			do_action( 'charitable_public_start', $this );
 		}
@@ -106,6 +106,8 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 					__( 'You must donate more than %s.', 'charitable' ), charitable_format_money( $minimum )
 				);
 
+			$currency = charitable_get_currency_helper();
+
 			/**
 			 * Filter the Javascript vars array.
 			 *
@@ -116,10 +118,11 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			$vars = apply_filters( 'charitable_javascript_vars', array(
 				'ajaxurl'                      => admin_url( 'admin-ajax.php' ),
 				'loading_gif'                  => $assets_dir . '/images/charitable-loading.gif',
-				'currency_format_num_decimals' => esc_attr( charitable_get_currency_helper()->get_decimals() ),
-				'currency_format_decimal_sep'  => esc_attr( charitable_get_currency_helper()->get_decimal_separator() ),
-				'currency_format_thousand_sep' => esc_attr( charitable_get_currency_helper()->get_thousands_separator() ),
-				'currency_format'              => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ), // For accounting.js.
+				'currency_symbol'              => $currency->get_currency_symbol(),
+				'currency_format_num_decimals' => esc_attr( $currency->get_decimals() ),
+				'currency_format_decimal_sep'  => esc_attr( $currency->get_decimal_separator() ),
+				'currency_format_thousand_sep' => esc_attr( $currency->get_thousands_separator() ),
+				'currency_format'              => esc_attr( $currency->get_accounting_js_format() ), // For accounting.js.
 				'minimum_donation'             => $minimum,
 				'error_invalid_amount'         => $amount_msg,
 				'error_required_fields'        => __( 'Please fill out all required fields.', 'charitable' ),
@@ -131,7 +134,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			/* Accounting.js */
 			wp_register_script(
 				'accounting',
-				$assets_dir . 'js/libraries/accounting'. $suffix . '.js',
+				$assets_dir . 'js/libraries/accounting' . $suffix . '.js',
 				array( 'jquery-core' ),
 				$version,
 				true
@@ -145,7 +148,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 
 			wp_register_script(
 				'charitable-script',
-				$assets_dir . 'js/charitable'. $suffix . '.js',
+				$assets_dir . 'js/charitable' . $suffix . '.js',
 				$deps,
 				$version,
 				true
@@ -160,7 +163,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			/* Credit card validation */
 			wp_register_script(
 				'charitable-credit-card',
-				$assets_dir . 'js/charitable-credit-card'. $suffix . '.js',
+				$assets_dir . 'js/charitable-credit-card' . $suffix . '.js',
 				array( 'charitable-script' ),
 				$version,
 				true
@@ -169,7 +172,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			/* Main styles */
 			wp_register_style(
 				'charitable-styles',
-				$assets_dir . 'css/charitable' . $suffix .'.css',
+				$assets_dir . 'css/charitable' . $suffix . '.css',
 				array(),
 				$version
 			);

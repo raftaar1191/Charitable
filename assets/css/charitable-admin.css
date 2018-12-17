@@ -190,6 +190,10 @@
     width: auto; }
   .charitable-metabox-wrap.charitable-radio-wrap, .charitable-metabox-wrap.charitable-multi-checkbox-wrap {
     margin-bottom: 14px; }
+  .charitable-metabox-wrap .charitable-radio-list li {
+    display: block; }
+  .charitable-metabox-wrap .charitable-radio-list label {
+    vertical-align: baseline; }
 
 .charitable-checkbox-wrap label {
   display: inline; }

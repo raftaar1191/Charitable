@@ -164,6 +164,16 @@
     &.charitable-multi-checkbox-wrap {
         margin-bottom: 14px;
     }
+
+    .charitable-radio-list {
+        li {
+            display: block;
+        }
+
+        label {
+            vertical-align: baseline;
+        }
+    }
 }
 
 .charitable-checkbox-wrap {

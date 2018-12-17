@@ -111,7 +111,10 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 * @return void
 		 */
 		public function register_custom_field_template( $field_type, $class, $path ) {
-			$this->custom_field_templates[ $field_type ] = array( 'class' => $class, 'path' => $path );
+			$this->custom_field_templates[ $field_type ] = array(
+				'class' => $class,
+				'path'  => $path,
+			);
 		}
 
 		/**
@@ -341,7 +344,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			/**
 			 * Filter the template to be used for the form.
 			 *
-			 * Any callback hooking into this filter should return a `Charitable_Template` 
+			 * Any callback hooking into this filter should return a `Charitable_Template`
 			 * instance. Anything else will be ignored.
 			 *
 			 * @since 1.0.0
