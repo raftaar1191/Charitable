@@ -227,7 +227,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 
 			global $wpdb;
 
-			$sql = "SELECT {$this->fieldsy()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
+			$sql = "SELECT {$this->fields()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
 
 			return $wpdb->get_col( $this->get_prepared_sql( $sql ) );
 		}
