@@ -227,7 +227,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 
 			global $wpdb;
 
-			$sql = "SELECT {$this->select_id()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
+			$sql = "SELECT {$this->fieldsy()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
 
 			return $wpdb->get_col( $this->get_prepared_sql( $sql ) );
 		}
@@ -313,32 +313,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			 * @param Charitable_Query $query The `Charitable_Query` instance.
 			 */
 			return apply_filters( 'charitable_select_count_fields', "COUNT(DISTINCT {$wpdb->posts}.ID)", $this );
-		}
-
-		/**
-		 * Return the ID query right after the SELECT part of the query.
-		 *
-		 * This is used instead of Charitable_Query::fields and is only appropriate
-		 * when all you want to do with a query is get the number of something.
-		 *
-		 * @global WPBD $wpdb
-		 *
-		 * @since  1.7.0
-		 *
-		 * @return string
-		 */
-		public function select_id() {
-			global $wpdb;
-
-			/**
-			 * Filter the `SELECT ID` statement.
-			 *
-			 * @since 1.7.0
-			 *
-			 * @param string           $sql   The `SELECT ID` statement.
-			 * @param Charitable_Query $query The `Charitable_Query` instance.
-			 */
-			return apply_filters( 'charitable_select_id_fields', "{$wpdb->posts}.ID", $this );
 		}
 
 		/**
