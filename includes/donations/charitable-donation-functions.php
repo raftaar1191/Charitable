@@ -149,9 +149,9 @@ function charitable_create_donation( array $args ) {
 function charitable_get_donation_by_key( $donation_key ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = 'donation_key' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = 'donation_key'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $donation_key ) );
@@ -168,9 +168,9 @@ function charitable_get_donation_by_key( $donation_key ) {
 function charitable_get_donation_by_transaction_id( $transaction_id ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = '_gateway_transaction_id' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = '_gateway_transaction_id'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $transaction_id ) );

@@ -217,7 +217,7 @@ if ( ! class_exists( 'Charitable_Email_Fields' ) ) :
 		 * @param  string     $object_type Object type to add.
 		 * @return array
 		 */
-		private function get_object_type_fields( $fields, $object_type ) {			
+		private function get_object_type_fields( $fields, $object_type ) {
 			if ( is_null( $fields ) ) {
 				$fields = array();
 			}
