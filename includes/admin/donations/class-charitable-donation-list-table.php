@@ -250,7 +250,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 			), $actions );
 
 			return $actions;
-		}   
+		}
 
 		/**
 		 * Customize the output of the status views.
@@ -394,7 +394,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 		 *
 		 * @global string $post_type
 		 *
-		 * @return void		 
+		 * @return void
 		 */
 		public function bulk_admin_footer() {
 			global $post_type;
@@ -402,7 +402,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 			if ( Charitable::DONATION_POST_TYPE == $post_type ) {
 				?>
 				<script type="text/javascript">
-				(function($) { 
+				(function($) {
 					<?php
 					foreach ( $this->get_bulk_actions() as $status_key => $label ) {
 						printf( "jQuery('<option>').val('%s').text('%s').appendTo( [ '#bulk-action-selector-top', '#bulk-action-selector-bottom' ] );", $status_key, $label );

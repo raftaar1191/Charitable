@@ -158,8 +158,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 			 *
 			 * @since 1.5.0
 			 *
-			 * @var   array                          $fields Array of fields.
-			 * @var   Charitable_Admin_Donation_Form $form   This instance of `Charitable_Admin_Donation_Form`.
+			 * @param array                          $fields Array of fields.
+			 * @param Charitable_Admin_Donation_Form $form   This instance of `Charitable_Admin_Donation_Form`.
 			 */
 			$fields = apply_filters( 'charitable_admin_donation_form_fields', $fields, $this );
 
@@ -272,6 +272,7 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
+		 * @param  object $campaign_donation A particular campaign donation.
 		 * @return boolean
 		 */
 		public function filter_campaign_donation( $campaign_donation ) {

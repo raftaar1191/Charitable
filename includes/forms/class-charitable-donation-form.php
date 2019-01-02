@@ -1307,7 +1307,7 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				'1.5.0'
 			);
 
-			return $custom_template;			
+			return $custom_template;
 		}
 	}
 

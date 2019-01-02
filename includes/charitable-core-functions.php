@@ -57,7 +57,7 @@ function charitable_get_option( $key, $default = false, $settings = array() ) {
 	array_shift( $key );
 
 	if ( ! empty( $key ) ) {
-		return charitable_get_option( $key, $default, $settings[ $current_key ] );	
+		return charitable_get_option( $key, $default, $settings[ $current_key ] );
 	}
 
 	return $settings[ $current_key ];

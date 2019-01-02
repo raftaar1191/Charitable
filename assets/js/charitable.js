@@ -37,7 +37,7 @@ CHARITABLE = window.CHARITABLE || {};
          * @access  public
          */
         this.submit_processing = false;
-        
+
         var self = this;
         var $body = $( 'body' );
 
@@ -57,15 +57,15 @@ CHARITABLE = window.CHARITABLE || {};
          * @access  private
          */
         var on_focus_custom_amount = function() {
-            
+
             $( this ).closest( 'li' ).trigger( 'click' ).find( 'input[name=donation_amount]' ).prop( 'checked', true ).trigger( 'change' );
 
             self.form.off( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
 
             $( this ).focus();
-            
+
             self.form.on( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
-        
+
         };
 
         /**
@@ -88,7 +88,7 @@ CHARITABLE = window.CHARITABLE || {};
          *
          * @return  void
          */
-        var on_select_donation_amount = function() {            
+        var on_select_donation_amount = function() {
 
             var $li = $( this ).closest( 'li' );
 
@@ -98,7 +98,7 @@ CHARITABLE = window.CHARITABLE || {};
             }
 
             $li.parents( '.charitable-donation-form' ).find( '.donation-amount.selected' ).removeClass( 'selected' );
-            
+
             $li.addClass( 'selected' );
 
             if ( $li.hasClass( 'custom-donation-amount' ) ) {
@@ -112,12 +112,12 @@ CHARITABLE = window.CHARITABLE || {};
          * @access  private
          */
         var on_change_payment_gateway = function() {
-        
+
             self.hide_inactive_payment_methods();
 
             self.show_active_payment_methods( $(this).val() );
-        
-        };                
+
+        };
 
         /**
          * Submit event handler for donation form.
@@ -136,7 +136,7 @@ CHARITABLE = window.CHARITABLE || {};
 
             /* Display the processing spinner and hide the button */
             helper.show_processing();
-            
+
             /* Validate the form submission before going further. */
             if ( false === helper.validate() ) {
 
@@ -164,7 +164,7 @@ CHARITABLE = window.CHARITABLE || {};
             $body.trigger( 'charitable:form:process', helper );
 
             return false;
-        
+
         };
 
         /**
@@ -178,12 +178,12 @@ CHARITABLE = window.CHARITABLE || {};
          */
         var process_donation = function( event, helper ) {
 
-            var data = helper.get_data(); 
+            var data = helper.get_data();
             var form = helper.form;
 
-            /* Cancel the default Charitable action, but pass it along as the form_action variable */       
+            /* Cancel the default Charitable action, but pass it along as the form_action variable */
             data.action = 'make_donation';
-            data.form_action = data.charitable_action;          
+            data.form_action = data.charitable_action;
             delete data.charitable_action;
 
             $.ajax({
@@ -265,9 +265,9 @@ CHARITABLE = window.CHARITABLE || {};
 
                 // Process the donation on the 'charitable:form:process' event.
                 $body.on( 'charitable:form:process', process_donation );
-            
+
                 $body.trigger( 'charitable:form:initialize', self );
-                
+
                 CHARITABLE.forms_initialized = true;
             }
 
@@ -394,7 +394,7 @@ CHARITABLE = window.CHARITABLE || {};
      * Clear credit card fields.
 
      *
-     * This is used by gateways that create tokens through Javascript (such as Stripe), to 
+     * This is used by gateways that create tokens through Javascript (such as Stripe), to
      * avoid credit card details hitting the server.
      *
      * @return  void
@@ -442,10 +442,10 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.show_active_payment_methods = function( active ) {
         var active = active || this.get_payment_method();
         var fields = this.form.find( '.charitable-gateway-fields[data-gateway=' + active + ']' );
-        
+
         fields.show();
         fields.find( '[data-required]' ).attr( 'required', true );
-    };    
+    };
 
     /**
      * Select a donation amount.
@@ -463,7 +463,7 @@ CHARITABLE = window.CHARITABLE || {};
                 decimal : CHARITABLE_VARS.currency_format_decimal_sep,
                 thousand: CHARITABLE_VARS.currency_format_thousand_sep,
                 precision : CHARITABLE_VARS.currency_format_num_decimals,
-                format: CHARITABLE_VARS.currency_format  
+                format: CHARITABLE_VARS.currency_format
         }).trim();
     };
 
@@ -526,7 +526,7 @@ CHARITABLE = window.CHARITABLE || {};
         }
 
         output += '<div class="charitable-form-errors charitable-notice"><ul class="errors"><li>';
-        output += e.join( '</li><li>' );    
+        output += e.join( '</li><li>' );
         output += '</li></ul></div>';
 
         this.form.prepend( output );
@@ -539,7 +539,7 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.clear_errors = function() {
 
         this.errors = [];
-        
+
         if ( this.form.find( '.charitable-form-errors' ).length ) {
             this.form.find( '.charitable-form-errors' ).remove();
         }
@@ -577,7 +577,7 @@ CHARITABLE = window.CHARITABLE || {};
         }
         else {
             window.scrollTo( this.form.position().left, this.form.position().top );
-        }  
+        }
 
     };
 
@@ -619,9 +619,9 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  object
      */
     Donation_Form.prototype.get_required_fields = function() {
-        
+
         var fields = this.form.find( '.charitable-fieldset .required-field' ).not( '#charitable-gateway-fields .required-field' ),
-            method = this.get_payment_method();        
+            method = this.get_payment_method();
 
         if ( '' !== method ) {
 
@@ -656,15 +656,15 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.validate_amount = function() {
-        
+
         if ( false === this.is_valid_amount() ) {
             this.add_error( CHARITABLE_VARS.error_invalid_amount );
             return false;
         }
-    
+
         return true;
 
-    };    
+    };
 
     /**
      * Verify that all required fields are filled out.
@@ -672,7 +672,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.validate_required_fields = function() {
-        
+
         var has_all_required_fields = true;
 
         var required = this.get_required_fields();
@@ -687,7 +687,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         if ( ! has_all_required_fields ) {
             this.add_error( CHARITABLE_VARS.error_required_fields );
-        }        
+        }
 
         return has_all_required_fields;
 
@@ -740,7 +740,7 @@ CHARITABLE = window.CHARITABLE || {};
 
             if ( target[0] !== '.' && target[0] !== '#' ) {
                 target = '#' + target;
-            } 
+            }
 
             return $( target );
         }
@@ -787,7 +787,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         // Initialization that will be performed everytime
         return init;
-    }    
+    }
 
     exports.Toggle = Toggle();
 
@@ -804,7 +804,7 @@ CHARITABLE = window.CHARITABLE || {};
          * Sanitize URLs.
          */
         this.sanitize_url = function( input ) {
-            
+
             var url = input.value.toLowerCase();
 
             if ( !/^https?:\/\//i.test( url ) && url.length > 0 ) {

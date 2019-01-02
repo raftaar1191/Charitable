@@ -10,14 +10,14 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 	}
 
 	var Datepicker = function( $el ) {
-	
+
 		this.$el = $el;
 		options = {
-			dateFormat 	: 'MM d, yy', 
+			dateFormat 	: 'MM d, yy',
 			minDate 	: this.$el.data('min-date') || '',
 			beforeShow	: function( input, inst ) {
 				$('#ui-datepicker-div').addClass('charitable-datepicker-table');
-			}	
+			}
 		}
 
 		this.$el.datepicker( options );
@@ -55,7 +55,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			} else {
 				show = $trigger.val() === compare;
 			}
-	
+
 			return not ? !show : show;
 		};
 
@@ -64,7 +64,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 					var $tr = $setting.parents('tr');
 					return $tr.length ? $tr.first() : $setting;
 				})($setting),
-				value = get_setting_value( $setting ), 
+				value = get_setting_value( $setting ),
 				show = show_setting(value, $trigger);
 
 			$el.toggle(show);
@@ -139,7 +139,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		};
 
 		on_change = function() {
-			var $trigger = $( this ), 
+			var $trigger = $( this ),
 				trigger_idx = $trigger.data( 'trigger_idx' ),
 				settings;
 
@@ -173,7 +173,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 		this.$el.find( '[data-trigger-key],[data-show-only-if-key]' ).each( function(){
 			var $this      = $(this),
-				trigger_id = get_trigger_id( $this ), 
+				trigger_id = get_trigger_id( $this ),
 				element    = triggers[trigger_id];
 
 			if ( 'undefined' === typeof triggers[trigger_id] ) {
@@ -208,7 +208,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 			$trigger.trigger( 'change' );
 		};
-	};	
+	};
 
 	exports.Settings = Settings;
 
@@ -219,7 +219,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 	var setup_campaign_end_date_field = function() {
 		$( '#campaign_end_date' ).on( 'change', function() {
 			var $field = $( this ),
-				date   = $field.val(), 
+				date   = $field.val(),
 				$span  = $field.siblings( '.charitable-end-time' ),
 				$input = $field.siblings( '#campaign_end_time' );
 
@@ -235,17 +235,17 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 	var setup_charitable_ajax = function() {
 		$('[data-charitable-action]').on( 'click', function( e ){
-			var data 	= $(this).data( 'charitable-args' ) || {}, 
+			var data 	= $(this).data( 'charitable-args' ) || {},
 				action 	= 'charitable-' + $(this).data( 'charitable-action' );
 
-			$.post( ajaxurl, 
+			$.post( ajaxurl,
 				{
 					'action'	: action,
 					'data'		: data
-				}, 
+				},
 				function( response ) {
 					console.log( "Response: " + response );
-				} 
+				}
 			);
 
 			return false;
@@ -254,7 +254,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 	var setup_charitable_toggle = function() {
 		$( '[data-charitable-toggle]' ).on( 'click', function( e ){
-			var toggle_id = $(this).data( 'charitable-toggle' ), 
+			var toggle_id = $(this).data( 'charitable-toggle' ),
 				toggle_text = $(this).attr( 'data-charitable-toggle-text' );
 
 			if ( toggle_text && toggle_text.length ) {
@@ -281,10 +281,10 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 	};
 
 	var toggle_custom_donations_checkbox = function() {
-		var $custom = $('#campaign_allow_custom_donations'), 
+		var $custom = $('#campaign_allow_custom_donations'),
 			$suggestions = $('.charitable-campaign-suggested-donations tbody tr:not(.to-copy)'),
 			has_suggestions = $suggestions.length > 1 || false === $suggestions.first().hasClass('no-suggested-amounts');
-	
+
 		$custom.prop( 'disabled', ! has_suggestions );
 
 		if ( ! has_suggestions ) {
@@ -302,7 +302,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 	    });
 	};
-		
+
 	var add_suggested_amount_row = function( $button ) {
 		var $table = $button.closest( '.charitable-campaign-suggested-donations' ).find('tbody');
 		var $clone = $table.find('tr.to-copy').clone().removeClass('to-copy hidden');
@@ -310,7 +310,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		$table.append( $clone );
 		reindex_rows();
 		toggle_custom_donations_checkbox();
-	};	
+	};
 
 	var delete_suggested_amount_row = function($button) {
 		console.log($button);
@@ -321,7 +321,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		}
 		reindex_rows();
 		toggle_custom_donations_checkbox();
-	};	
+	};
 
 	var reindex_rows = function(){
 		$('.charitable-campaign-suggested-donations tbody').each(function(){
@@ -331,7 +331,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 					this.name = this.name.replace(/(\[\d\])/, '[' + index + ']');
 				});
 			});
-		});		
+		});
 	};
 
 	var setup_dashboard_widgets = function() {
@@ -368,7 +368,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		$submit.hide();
 
 		$select.on( 'change', function() {
-			var action = $select.val(), 
+			var action = $select.val(),
 				text = $select.find( 'option:selected' ).data( 'button-text');
 
 			if ( '' === action ) {
@@ -425,7 +425,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 
 		if ( CHARITABLE_ADMIN.Datepicker ) {
 			$( '.charitable-datepicker' ).each( function() {
-				CHARITABLE_ADMIN.Datepicker( $(this ) ); 
+				CHARITABLE_ADMIN.Datepicker( $(this ) );
 			});
 		}
 
@@ -439,8 +439,8 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		setup_advanced_meta_box();
 		setup_sortable_suggested_donations();
 		toggle_custom_donations_checkbox();
-		setup_charitable_ajax();	
-		setup_charitable_toggle();	
+		setup_charitable_ajax();
+		setup_charitable_toggle();
 		setup_dashboard_widgets();
 		setup_campaign_end_date_field();
 		setup_actions_form();
@@ -453,7 +453,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 				add_suggested_amount_row($(this));
 			}
 
-			return false; 
+			return false;
 		});
 
 		$('.charitable-campaign-suggested-donations').on( 'click', '.charitable-delete-row', function() { console.log('clicked');
@@ -461,11 +461,11 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			return false;
 		});
 
-		$('body').on( 'click', '[data-campaign-benefactor-delete]', function() {			
+		$('body').on( 'click', '[data-campaign-benefactor-delete]', function() {
 			var $block = $( this ).parents( '.charitable-benefactor' ),
 				data = {
 					action 			: 'charitable_delete_benefactor',
-					benefactor_id 	: $(this).data( 'campaign-benefactor-delete' ), 
+					benefactor_id 	: $(this).data( 'campaign-benefactor-delete' ),
 					nonce 			: $(this).data( 'nonce' )
 				};
 
