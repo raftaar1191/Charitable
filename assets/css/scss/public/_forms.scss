@@ -4,10 +4,10 @@
     label {
         display: block;
         margin-bottom: 4px;
-    }    
+    }
 
-    input, 
-    select, 
+    input,
+    select,
     textarea {
         width: 100%;
     }
@@ -15,7 +15,7 @@
     button,
     input[type=submit],
     input[type=button],
-    input[type=radio], 
+    input[type=radio],
     input[type=checkbox] {
         width: auto;
         margin-left: 0;
@@ -40,14 +40,14 @@
         list-style: none;
         margin-left: 0;
         padding-left: 0;
-    
+
         li {
             list-style: none;
             margin: 0 20px 0 0;
             display: inline-block;
             line-height: 1em;
         }
-    }    
+    }
 
     &.charitable-form-field-multi-checkbox {
         ul {
@@ -72,7 +72,7 @@
     }
 }
 
-.charitable-fieldset, 
+.charitable-fieldset,
 .charitable-fieldset-field-wrapper {
     > :last-child {
         margin-bottom: 1em
@@ -102,7 +102,7 @@
 }
 
 #charitable_field_cc_cvc {
-    max-width: 140px;
+    max-width: 180px;
 
     @include bp( 768 ) {
         float: left;
@@ -115,6 +115,11 @@
         float: left;
         width: 63%;
         margin-left: 4%;
+        clear: none;
+    }
+
+    .charitable-fieldset-field-header {
+        font-weight: normal;
     }
 
     fieldset > *:not(.charitable-fieldset-field-header) {
@@ -122,17 +127,17 @@
         width: 49%;
         max-width: 140px;
     }
-    
+
     .year {
         margin-left: 2%;
     }
 }
 
 .charitable-form-fields {
-    .charitable-fieldset {  
+    .charitable-fieldset {
         margin: 0 0 1em;
         padding: 1.5em 20px 0.5em;
-        border: 1px solid #ebebeb;  
+        border: 1px solid #ebebeb;
     }
 
     .charitable-fieldset-field-wrapper {
@@ -172,11 +177,11 @@
             width: 49%;
             margin: 0 2% 0.5em 0;
             border: 1px solid #ddd;
-            background-color: transparent;      
+            background-color: transparent;
             list-style: none;
-    
-            .custom-donation-amount-wrapper,            
-            > label { 
+
+            .custom-donation-amount-wrapper,
+            > label {
                 display: block;
                 width: 100%;
                 padding: 0.5em 1em;
@@ -209,7 +214,7 @@
                 width: 100%;
                 margin-right: 0;
             }
-        }        
+        }
     }
 
     .custom-donation-input {
@@ -261,7 +266,7 @@
 .charitable-donor-details {
     padding: 0 20px 1em;
 
-    .donor-address, 
+    .donor-address,
     .donor-contact-details {
         margin-bottom: 0.5em;
     }
@@ -272,7 +277,7 @@
     }
 }
 
-#charitable-user-fields, 
+#charitable-user-fields,
 #charitable-meta-fields {
     padding: 0 20px;
 }
@@ -287,7 +292,7 @@
     border: 1px solid #ebebeb;
     padding: 10px;
     background-color: #f8f8f8;
-    margin-bottom: 1em;    
+    margin-bottom: 1em;
     max-height: 200px;
     overflow: scroll;
     display: none;
@@ -305,16 +310,16 @@
     padding: 1em;
     margin-bottom: 1em;
     border: 1px solid #ebebeb;
-    
+
     label {
         display: block;
         margin-bottom: 4px;
     }
-    
+
     > p,
     .login-username,
-    .login-password, 
-    .login-remember {   
+    .login-password,
+    .login-remember {
         margin-bottom: 1em;
         padding-bottom: 0;
     }

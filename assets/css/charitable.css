@@ -134,7 +134,7 @@
   padding-top: 1em; }
 
 #charitable_field_cc_cvc {
-  max-width: 140px; }
+  max-width: 180px; }
   @media (min-width: 48em) {
     #charitable_field_cc_cvc {
       float: left;
@@ -144,7 +144,10 @@
   #charitable_field_cc_expiration {
     float: left;
     width: 63%;
-    margin-left: 4%; } }
+    margin-left: 4%;
+    clear: none; } }
+#charitable_field_cc_expiration .charitable-fieldset-field-header {
+  font-weight: normal; }
 #charitable_field_cc_expiration fieldset > *:not(.charitable-fieldset-field-header) {
   float: left;
   width: 49%;
