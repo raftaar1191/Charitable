@@ -53,7 +53,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * Contain the donors list
 	 *
-	 * @since 1.7.1
+	 * @since 1.7.0
 	 *
 	 * @var array
 	 */
@@ -83,41 +83,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return void
 	 */
 	static function donors_list() {
-
-		$donors_table = new Charitable_Donor_List_Table();
-		$donors_table->prepare_items();
-		?>
-        <div class="wrap">
-            <h1 class="wp-heading-inline"><?php echo get_admin_page_title(); ?></h1>
-			<?php
-			/**
-			 * Fires in donors screen, above the table.
-			 *
-			 * @since 1.7.0
-			 */
-			do_action( 'charitable_donors_table_top' );
-			?>
-
-            <hr class="wp-header-end">
-            <form id="charitable-donors-search-filter" method="get"
-                  action="<?php echo admin_url( 'admin.php?page=donors' ); ?>">
-				<?php $donors_table->search_box( __( 'Search Donors', 'charitable' ), 'charitable-donors' ); ?>
-                <input type="hidden" name="page" value="donors"/>
-            </form>
-            <form id="charitable-donors-filter" method="get">
-				<?php $donors_table->display(); ?>
-                <input type="hidden" name="page" value="donors"/>
-            </form>
-			<?php
-			/**
-			 * Fires in donors screen, below the table.
-			 *
-			 * @since r
-			 */
-			do_action( 'charitable_donors_table_bottom' );
-			?>
-        </div>
-		<?php
+		charitable_admin_view( 'donors-page/list' );
 	}
 
 	/**
@@ -132,24 +98,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function search_box( $text, $input_id ) {
-		$input_id = $input_id . '-search-input';
-
-		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			echo sprintf( '<input type="hidden" name="orderby" value="%1$s" />', esc_attr( $_REQUEST['orderby'] ) );
-		}
-
-		if ( ! empty( $_REQUEST['order'] ) ) {
-			echo sprintf( '<input type="hidden" name="order" value="%1$s" />', esc_attr( $_REQUEST['order'] ) );
-		}
-		?>
-        <p class="search-box" role="search">
-            <label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
-            <input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>"/>
-			<?php submit_button( $text, 'button', false, false, array(
-				'ID' => 'search-submit',
-			) ); ?>
-        </p>
-		<?php
+		charitable_admin_view( 'donors-page/search' );
 	}
 
 	/**
@@ -282,7 +231,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		if ( empty( $this->donors ) ) {
 			// Get donor query.
-			$args         = $this->get_donor_query();
+			$args         = $this->get_donor_query_args();
 			$this->donors = new Charitable_Donor_Query( $args );
 		}
 
@@ -316,18 +265,12 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	private function get_donor_count() {
 
 		// Get donor query.
-		$_donor_query = $this->get_donor_query();
+		$_donor_query = $this->get_donor_query_args();
 
 		$_donor_query['number'] = - 1;
+		$_donor_query['output'] = 'count';
 
-		$this->donors = new Charitable_Donor_Query( $_donor_query );
-
-		$count = 0;
-		foreach ( $this->donors as $donor ) {
-			$count ++;
-		}
-
-		return $count;
+		return new Charitable_Donor_Query( $_donor_query );
 	}
 
 	/**
@@ -338,7 +281,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 *
 	 * @return array
 	 */
-	public function get_donor_query() {
+	public function get_donor_query_args() {
 		$paged   = $this->get_paged();
 		$offset  = $this->per_page * ( $paged - 1 );
 		$search  = $this->get_search();
@@ -377,44 +320,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		echo sprintf( '<tr id="donor-%1$d" data-id="%2$d" data-name="%3$s">', $item['donor_id'], $item['donor_id'], $item['name'] );
 		$this->single_row_columns( $item );
 		echo '</tr>';
-	}
-
-	/**
-	 * Display the final donor table
-	 *
-	 * @since 1.7.0
-	 * @access public
-	 */
-	public function display() {
-		$singular = $this->_args['singular'];
-
-		$this->display_tablenav( 'top' );
-
-		$this->screen->render_screen_reader_content( 'heading_list' );
-		?>
-        <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
-            <thead>
-            <tr>
-				<?php $this->print_column_headers(); ?>
-            </tr>
-            </thead>
-
-            <tbody id="the-list"<?php
-			if ( $singular ) {
-				echo " data-wp-lists='list:$singular'";
-			} ?>>
-			<?php $this->display_rows_or_placeholder(); ?>
-            </tbody>
-
-            <tfoot>
-            <tr>
-				<?php $this->print_column_headers( false ); ?>
-            </tr>
-            </tfoot>
-
-        </table>
-		<?php
-		$this->display_tablenav( 'bottom' );
 	}
 
 	/**

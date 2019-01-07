@@ -358,7 +358,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				}
 				$donor_ids = implode( ',', array_map( 'intval', $this->args['donor'] ) );
 
-				$where .= "AND {$this->table_name}.id IN( {$donor_ids} )";
+				$where .= "AND {$this->table_name}.donor_id IN( {$donor_ids} )";
 			}
 
 			return $where;
@@ -383,11 +383,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 				if ( ! empty( $search_parts[0] ) ) {
 					switch ( $search_parts[0] ) {
 						case 'name':
-							$where = "AND {$this->table_name}.name LIKE '%{$search_parts[1]}%'";
-							break;
-
-						case 'note':
-							$where = "AND {$this->table_name}.notes LIKE '%{$search_parts[1]}%'";
+							$where = "AND {$this->table_name}.first_name LIKE '%{$search_parts[1]}%' AND {$this->table_name}.last_name LIKE '%{$search_parts[1]}%'";
 							break;
 					}
 				}
