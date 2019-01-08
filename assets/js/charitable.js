@@ -13,38 +13,56 @@ CHARITABLE = window.CHARITABLE || {};
         /**
          * Array of errors.
          *
-         * @access  public
+         * @access public
          */
         this.errors = [];
 
         /**
          * Form object.
          *
-         * @access  public
+         * @access public
          */
         this.form = form;
 
         /**
          * Flag to allow processing to be paused (i.e. while something like Stripe is processing).
          *
-         * @access  public
+         * @access public
          */
         this.pause_processing = false;
 
         /**
          * Flag to prevent the on_submit handler from sending multiple concurrent AJAX requests
          *
-         * @access  public
+         * @access public
          */
         this.submit_processing = false;
 
+        /**
+         * The donation amount.
+         *
+         * @access public
+         */
+        this.total = 0;
+
+        /**
+         * Reference to this object.
+         *
+         * @access private
+         */
         var self = this;
+
+        /**
+         * Body element reference.
+         *
+         * @access private
+         */
         var $body = $( 'body' );
 
         /**
          * Handle click of terms link.
          *
-         * @access  private
+         * @access private
          */
         var on_click_terms = function() {
             self.form.find( '.charitable-terms-text' ).addClass( 'active' );
@@ -54,10 +72,9 @@ CHARITABLE = window.CHARITABLE || {};
         /**
          * Focus event handler on custom donation amount input field.
          *
-         * @access  private
+         * @access private
          */
         var on_focus_custom_amount = function() {
-
             $( this ).closest( 'li' ).trigger( 'click' ).find( 'input[name=donation_amount]' ).prop( 'checked', true ).trigger( 'change' );
 
             self.form.off( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
@@ -65,22 +82,19 @@ CHARITABLE = window.CHARITABLE || {};
             $( this ).focus();
 
             self.form.on( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
-
         };
 
         /**
          * Focus event handler for changes to custom donation amount input field.
          *
-         * @access  private
+         * @access private
          */
         var on_change_custom_donation_amount = function() {
-
             var unformatted = self.unformat_amount( $( this ).val() );
 
             if ( $.trim( unformatted ) > 0 ) {
                 $( this ).val( self.format_amount( unformatted ) );
             }
-
         };
 
         /**
@@ -89,7 +103,6 @@ CHARITABLE = window.CHARITABLE || {};
          * @return  void
          */
         var on_select_donation_amount = function() {
-
             var $li = $( this ).closest( 'li' );
 
             // Already selected, quit early to prevent focus/change loop
@@ -109,23 +122,19 @@ CHARITABLE = window.CHARITABLE || {};
         /**
          * Change event handler for payment gateway selector.
          *
-         * @access  private
+         * @access private
          */
         var on_change_payment_gateway = function() {
-
             self.hide_inactive_payment_methods();
-
             self.show_active_payment_methods( $(this).val() );
-
         };
 
         /**
          * Submit event handler for donation form.
          *
-         * @access  private
+         * @access private
          */
         var on_submit = function( event ) {
-
             var helper = event.data.helper;
 
             if ( helper.submit_processing ) {
@@ -164,7 +173,6 @@ CHARITABLE = window.CHARITABLE || {};
             $body.trigger( 'charitable:form:process', helper );
 
             return false;
-
         };
 
         /**
@@ -177,7 +185,6 @@ CHARITABLE = window.CHARITABLE || {};
          * @param   object Donation_Form
          */
         var process_donation = function( event, helper ) {
-
             var data = helper.get_data();
             var form = helper.form;
 
@@ -228,7 +235,6 @@ CHARITABLE = window.CHARITABLE || {};
             });
 
             return false;
-
         }
 
         /**
@@ -237,7 +243,6 @@ CHARITABLE = window.CHARITABLE || {};
          * @return  void
          */
         var init = function() {
-
             // Init donation amount selection
             self.form.on( 'click', '.donation-amount', on_select_donation_amount );
             self.form.on( 'focus', 'input.custom-donation-input', on_focus_custom_amount );
@@ -275,7 +280,6 @@ CHARITABLE = window.CHARITABLE || {};
         }
 
         init();
-
     };
 
     /**
@@ -337,12 +341,54 @@ CHARITABLE = window.CHARITABLE || {};
     }
 
     /**
+     * Get the donation subtotal, which is the amount passed by the donor.
+     *
+     * Notably, this does not include any additional amounts that may be added onto the donation
+     * total, such as processing fees that the donor agrees to pay.
+     *
+     * @since  1.6.7
+     *
+     * @return float
+     */
+    Donation_Form.prototype.get_subtotal = function() {
+        return this.get_suggested_amount() || this.get_custom_amount();
+    };
+
+    /**
      * Get the submitted amount, taking into account both the custom & suggested donation fields.
      *
      * @return  float
      */
     Donation_Form.prototype.get_amount = function() {
-        return this.get_suggested_amount() || this.get_custom_amount();
+        this.total = this.get_subtotal();
+
+        this.form.trigger( 'charitable:form:get_amount', this );
+
+        return this.total;
+    };
+
+    /**
+     * Get the submitted amount, taking into account both the custom & suggested donation fields.
+     *
+     * @since  1.6.8
+     *
+     * @param  float add
+     * @return void
+     */
+    Donation_Form.prototype.add_amount = function( add ) {
+        this.total += add;
+    };
+
+    /**
+     * Get the submitted amount, taking into account both the custom & suggested donation fields.
+     *
+     * @since  1.6.8
+     *
+     * @param  float remove Amount to be removed
+     * @return void
+     */
+    Donation_Form.prototype.remove_amount = function( remove ) {
+        this.total -= remove;
     };
 
     /**
@@ -511,7 +557,6 @@ CHARITABLE = window.CHARITABLE || {};
      * @param   array
      */
     Donation_Form.prototype.print_errors = function( errors ) {
-
         var e = errors || this.errors,
             i = 0,
             count = e.length,
@@ -530,20 +575,17 @@ CHARITABLE = window.CHARITABLE || {};
         output += '</li></ul></div>';
 
         this.form.prepend( output );
-
     }
 
     /**
      * Clear the errors and remove the printed errors.
      */
     Donation_Form.prototype.clear_errors = function() {
-
         this.errors = [];
 
         if ( this.form.find( '.charitable-form-errors' ).length ) {
             this.form.find( '.charitable-form-errors' ).remove();
         }
-
     }
 
     /**
@@ -569,7 +611,6 @@ CHARITABLE = window.CHARITABLE || {};
      * Scroll to the top of the form.
      */
     Donation_Form.prototype.scroll_to_top = function() {
-
         var $modal = this.form.parents( '.charitable-modal' );
 
         if ( $modal.length ) {
@@ -578,7 +619,6 @@ CHARITABLE = window.CHARITABLE || {};
         else {
             window.scrollTo( this.form.position().left, this.form.position().top );
         }
-
     };
 
     /**
@@ -619,7 +659,6 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  object
      */
     Donation_Form.prototype.get_required_fields = function() {
-
         var fields = this.form.find( '.charitable-fieldset .required-field' ).not( '#charitable-gateway-fields .required-field' ),
             method = this.get_payment_method();
 
@@ -634,7 +673,6 @@ CHARITABLE = window.CHARITABLE || {};
         }
 
         return fields;
-
     };
 
     /**
@@ -643,11 +681,9 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.is_valid_amount = function() {
-
         var minimum = parseFloat( CHARITABLE_VARS.minimum_donation );
 
-        return minimum > 0 ? this.get_amount() >= minimum : this.get_amount() >= minimum;
-
+        return minimum > 0 ? this.get_subtotal() >= minimum : this.get_subtotal() >= minimum;
     };
 
     /**
@@ -656,14 +692,12 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.validate_amount = function() {
-
         if ( false === this.is_valid_amount() ) {
             this.add_error( CHARITABLE_VARS.error_invalid_amount );
             return false;
         }
 
         return true;
-
     };
 
     /**
@@ -672,17 +706,12 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.validate_required_fields = function() {
-
         var has_all_required_fields = true;
 
-        var required = this.get_required_fields();
-
         this.get_required_fields().each( function() {
-
             if ( '' === $( this ).find( 'input, select, textarea' ).val() ) {
                 has_all_required_fields = false;
             }
-
         });
 
         if ( ! has_all_required_fields ) {
@@ -690,7 +719,6 @@ CHARITABLE = window.CHARITABLE || {};
         }
 
         return has_all_required_fields;
-
     };
 
     /**
@@ -700,7 +728,6 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     Donation_Form.prototype.validate = function() {
-
         /* First clear out the errors. */
         this.clear_errors();
 
@@ -711,7 +738,6 @@ CHARITABLE = window.CHARITABLE || {};
         this.form.trigger( 'charitable:form:validate', this );
 
         return this.errors.length === 0;
-
     };
 
     exports.Donation_Form = Donation_Form;
@@ -748,7 +774,7 @@ CHARITABLE = window.CHARITABLE || {};
         /**
          * Toggle event handler for any fields with the [data-charitable-toggle] attribute.
          *
-         * @access  private
+         * @access private
          */
         var on_toggle = function() {
             var $this   = $( this ),

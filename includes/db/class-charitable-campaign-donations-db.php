@@ -239,7 +239,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 			list( $in, $parameters ) = $this->get_in_clause_params( $donation_id );
 
 			$sql = "SELECT *
-                    FROM $this->table_name 
+                    FROM $this->table_name
                     WHERE $column IN ( $in );";
 
 			$records = $wpdb->get_results( $wpdb->prepare( $sql, $parameters ), OBJECT_K );
@@ -270,8 +270,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			list( $in, $parameters ) = $this->get_in_clause_params( $id );
 
-			$sql = "SELECT DISTINCT $select_column 
-                    FROM $this->table_name 
+			$sql = "SELECT DISTINCT $select_column
+                    FROM $this->table_name
                     WHERE $where_column IN ( $in );";
 
 			return $wpdb->get_col( $wpdb->prepare( $sql, $parameters ) );
@@ -317,8 +317,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			}
 
-			$sql = "SELECT SUM(amount) 
-                    FROM $this->table_name 
+			$sql = "SELECT SUM(amount)
+                    FROM $this->table_name
                     WHERE $where_clause;";
 
 			$total = $wpdb->get_var( $wpdb->prepare( $sql, $parameters ) );
@@ -353,8 +353,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 		public function get_campaigns_for_donation( $donation_id ) {
 			global $wpdb;
 
-			$sql = "SELECT DISTINCT campaign_id 
-                    FROM $this->table_name 
+			$sql = "SELECT DISTINCT campaign_id
+                    FROM $this->table_name
                     WHERE donation_id = %d;";
 
 			return $wpdb->get_col( $wpdb->prepare( $sql, intval( $donation_id ) ) );
@@ -459,7 +459,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donations_DB' ) ) :
 
 			$parameters = array_merge( $campaigns_parameters, $status_parameters );
 
-			$sql = "SELECT COUNT( DISTINCT cd.donor_id ) 
+			$sql = "SELECT COUNT( DISTINCT cd.donor_id )
                     FROM $this->table_name cd
                     INNER JOIN $wpdb->posts p ON p.ID = cd.donation_id
                     WHERE cd.campaign_id IN ( $campaigns_in )
