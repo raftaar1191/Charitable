@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2018, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.6.8
  */
 
 // Exit if accessed directly.
@@ -118,11 +118,11 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		 *
 		 * @global WPDB $wpdb
 		 *
-		 * @since  1.0.0
+		 * @since  1.6.8
 		 *
 		 * @return object[]
 		 */
-		public function query() {
+		public function get_query() {
 			if ( ! isset( $this->query ) ) {
 				/**
 				 * Fires right before the query is executed.
@@ -148,6 +148,30 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			}//end if
 
 			return $this->query;
+		}
+
+		/**
+		 * Return the results.
+		 *
+		 * @since  1.6.8
+		 *
+		 * @return object[]
+		 */
+		public function get_results() {
+			return $this->results;
+		}
+
+		/**
+		 * Return the results of the query.
+		 *
+		 * @global WPDB $wpdb
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return object[]
+		 */
+		public function query() {
+			return $this->get_query();
 		}
 
 		/**
@@ -189,6 +213,25 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			return array( $wpdb->get_var( $this->get_prepared_sql( $sql ) ) );
 		}
 
+
+		/**
+		 * Run query, returning the results.
+		 *
+		 * @global WPDB $wpdb
+		 *
+		 * @since  1.6.8
+		 *
+		 * @return array
+		 */
+		public function run_query_ids() {
+
+			global $wpdb;
+
+			$sql = "SELECT {$this->fields()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
+
+			return $wpdb->get_col( $this->get_prepared_sql( $sql ) );
+		}
+
 		/**
 		 * Prepare a query with any passed parameters.
 		 *
@@ -225,14 +268,14 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 				return 0;
 			}
 
-			if ( $this->show_all() ) {
-				return count( $this->query );
-			}
-
 			if ( 'count' == $this->get( 'output' ) ) {
 				return current( $this->query );
 			}
 
+			if ( $this->show_all() ) {
+				return count( $this->query );
+			}
+			
 			/**
 			 * Filters the query used to retrieve the query result count.
 			 *
@@ -568,6 +611,29 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			$this->add_parameters( $item );
 
 			return $this->get_placeholders( count( $item ), $placeholder_type );
+		}
+
+		/**
+		 * Filter query by donation_plan ID.
+		 *
+		 * @since  1.6.8
+		 *
+		 * @global WPBD   $wpdb
+		 * @param  string $where_statement The default where statement.
+		 * @return string
+		 */
+		public function where_donation_plan_is_in( $where_statement ) {
+			global $wpdb;
+
+			$donation_plan = $this->get( 'donation_plan', false );
+
+			if ( ! $donation_plan ) {
+				return $where_statement;
+			}
+
+			$placeholders = $this->get_where_in_placeholders( $donation_plan, 'charitable_validate_absint', '%d' );
+
+			return $where_statement . " AND {$wpdb->posts}.post_parent IN ({$placeholders})";
 		}
 
 		/**
