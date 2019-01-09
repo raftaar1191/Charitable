@@ -1,3 +1,10 @@
+# 1.6.8
+* FIX: Resolved bug related to WordPress core updates that prevented any donations from appearing under Charitable > Donations when on the "All" view. [#641](https://github.com/Charitable/Charitable/issues/641)
+* NEW: Added "Subtotal" row to the Donation Overview table in the admin. This is not shown by default, but will be used by extensions like Gift Aid and our new Fee Relief extension. [#643](https://github.com/Charitable/Charitable/issues/643)
+* NEW: Added support for querying by donation plan with `Charitable_Donations_Query`. This will be used by Recurring Donations. [#608](https://github.com/Charitable/Charitable/issues/608)
+* NEW: Allow `Charitable_Donations_Query` to output a list of IDs. [#633](https://github.com/Charitable/Charitable/issues/633)
+* NEW: Added the currency symbol to the Javascript variables used in the donation form. [#635](https://github.com/Charitable/Charitable/issues/635)
+
 # 1.6.7
 * FIX: Load scripts properly when adding a custom 'picture' field to the donation form. [#627](https://github.com/Charitable/Charitable/issues/627)
 * FIX: Save settings on Extensions settings page when there is only a single checkbox field. This bug affected Donor Comments. [#629](https://github.com/Charitable/Charitable/issues/629)
@@ -214,13 +221,13 @@
 ## 1.4.18
 * Added an end time when editing campaigns to make it clearer when a campaign ends. Previously, a campaign's end time was ambiguous and this caused confusion for some users. [#335](https://github.com/Charitable/Charitable/issues/335)
 * Add space as a thousands separator for countries where `12 500,00` would be the correct way to format an amount. [#332](https://github.com/Charitable/Charitable/issues/332)
-* Add campaign edit link as email shortcode option for campaign-related emails. [#345](https://github.com/Charitable/Charitable/issues/345) 
+* Add campaign edit link as email shortcode option for campaign-related emails. [#345](https://github.com/Charitable/Charitable/issues/345)
 * Fixed multiple HTML validation issues in Charitable forms and the campaigns widget. [#344](https://github.com/Charitable/Charitable/issues/344) and [#349](https://github.com/Charitable/Charitable/issues/349)
 * Prevent a bug where the donated amount on a campaign is completely wrong after a site changes its decimal/thousands separators. [#279](https://github.com/Charitable/Charitable/issues/279)
 * Flush the campaign donation cache in popular caching plugins (WP Super Cache, W3 Total Cache, WP Rocket and WP Fastest Cache). [#186](https://github.com/Charitable/Charitable/issues/186)
 * Fixed an error during donation processing that prevented donations when database caching is enabled in W3 Total Cache. [#347](https://github.com/Charitable/Charitable/issues/347)
 * Improved the way upgrades are run to ensure they are not re-run unneccesarily and store the minimum required information about each upgrade.
- 
+
 ## 1.4.17
 * **THANK YOU**: Thanks to first-time contributor [@qriouslad](https://github.com/qriouslad) for his contribution to this release!
 * When using Stripe Checkout, amounts over $999 were sometimes incorrectly sent to the Stripe modal. [#339](https://github.com/Charitable/Charitable/issues/339)
@@ -244,7 +251,7 @@
 
 ## 1.4.13
 * Added `tag` parameter to the [campaigns] shortcode. [#313](https://github.com/Charitable/Charitable/issues/313)
-* We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310) 
+* We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310)
 * Persist un-rendered notices across page loads. [#314](https://github.com/Charitable/Charitable/issues/314)
 * Hide radio inputs when Javascript is enabled. [#312](https://github.com/Charitable/Charitable/issues/312)
 * We made some minor improvements to how the donation form submission is processed in Javascript. Needed for improvements to Stripe extension.
@@ -398,7 +405,7 @@
 ## 1.3.1
 * **APOLOGIES**: 1.3.0 introduced a couple of bugs that we failed to pick up on before releasing the update. We have fixed those bugs now and are working on improving the process around how we push out updates, to avoid issues like this in the future.
 * Removes leftover testing code that prevented campaigns from being created or edited.
-* Format the donation amount so that PayPal can understand it (PayPal doesn't like amounts with more than two decimal places). [See issue](https://github.com/Charitable/Charitable/issues/102) 
+* Format the donation amount so that PayPal can understand it (PayPal doesn't like amounts with more than two decimal places). [See issue](https://github.com/Charitable/Charitable/issues/102)
 * Prevent PHP notice when making a donation. [See issue](https://github.com/Charitable/Charitable/issues/100)
 * Fixes a bug that prevented the Donate widget from working as expected.
 
