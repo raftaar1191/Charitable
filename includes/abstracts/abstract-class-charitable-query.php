@@ -213,25 +213,6 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			return array( $wpdb->get_var( $this->get_prepared_sql( $sql ) ) );
 		}
 
-
-		/**
-		 * Run query, returning the results.
-		 *
-		 * @global WPDB $wpdb
-		 *
-		 * @since  1.6.8
-		 *
-		 * @return array
-		 */
-		public function run_query_ids() {
-
-			global $wpdb;
-
-			$sql = "SELECT {$this->fields()} {$this->from()} {$this->join()} {$this->where()} {$this->groupby()} {$this->orderby()} {$this->order()} {$this->limit()} {$this->offset()};";
-
-			return $wpdb->get_col( $this->get_prepared_sql( $sql ) );
-		}
-
 		/**
 		 * Prepare a query with any passed parameters.
 		 *
@@ -275,7 +256,7 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 			if ( $this->show_all() ) {
 				return count( $this->query );
 			}
-			
+
 			/**
 			 * Filters the query used to retrieve the query result count.
 			 *
