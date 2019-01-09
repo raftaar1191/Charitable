@@ -45,7 +45,7 @@ body.post-type-donation {
         border-bottom: 1px solid #e5e5e5;
         font-style: italic;
     }
-    
+
     @include bp(1120) {
         #poststuff #post-body.columns-2 {
             margin-right: 340px;
@@ -67,7 +67,7 @@ body.post-type-donation {
         @include clearfix;
     }
 
-    .postbox-title, 
+    .postbox-title,
     .hndle {
         display: none;
     }
@@ -122,9 +122,9 @@ body.post-type-donation {
 
         .col-campaign-name {
             padding-left: 20px;
-            text-align: left;            
+            text-align: left;
         }
-        
+
         .col-campaign-donation-amount {
             padding-right: 20px;
             text-align: right;
@@ -150,7 +150,7 @@ body.post-type-donation {
             text-align: right;
         }
 
-        tfoot td, 
+        tfoot td,
         tfoot th {
             padding: 0.6em 20px 0.6em 0;
             background-color: #f8f8f8;
@@ -179,7 +179,7 @@ body.post-type-donation {
     }
 }
 
-#donation-details, 
+#donation-details,
 #donation-log {
     padding: 12px 8px;
 }
@@ -209,7 +209,7 @@ body.post-type-donation {
         background: #f8f8f8;
 
         &:first-child {
-            width: 180px;
+            width: 200px;
         }
     }
 
@@ -224,7 +224,7 @@ body.post-type-donation {
         margin-bottom: 0;
         border: 1px solid #dedede;
         border-radius: 4px;
-        background: #fff;  
+        background: #fff;
     }
 
     .charitable-metabox-wrap {
@@ -239,7 +239,7 @@ body.post-type-donation {
         border: none;
         background: transparent;
         box-shadow: none;
-              
+
         .postbox-title {
             display: none;
         }
@@ -267,7 +267,7 @@ body.post-type-donation {
 
     #donation-form-meta {
         padding: 24px 12px 12px;
-    }    
+    }
 }
 
 #charitable-campaign-donations thead th {
