@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Admin_Notices
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.4.6
  * @version   1.5.4
@@ -235,7 +235,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		 * @return	void
 		 */
 		public function shutdown() {
-			set_transient( 'charitable_notices', $this->notices );	
+			set_transient( 'charitable_notices', $this->notices );
 		}
 
 		/**
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Charitable_Admin_Notices' ) ) :
 		 */
 		public function load_notices() {
 			$this->notices = get_transient( 'charitable_notices' );
-			
+
 			if ( ! is_array( $this->notices ) ) {
 				$this->clear();
 			}

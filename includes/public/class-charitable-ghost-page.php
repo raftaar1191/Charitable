@@ -7,7 +7,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Ghost_Page
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
             if ( 'campaign' == $current_view ) {
                 throw new Exception( 'Charitable_Ghost_Page should not be constructed when $current_view is "campaign".' );
             }
-            
+
             $this->current_view = $current_view;
 
             $defaults = array(
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Charitable_Ghost_Page' ) ) :
             $wp_query->is_singular = false;
             $wp_query->is_posts_page = false;
             $wp_query->is_post_type_archive = false;
-            
+
             $GLOBALS['wp_query'] = $wp_query;
         }
 

@@ -5,7 +5,7 @@
  * @package   Charitable/Interfaces/Charitable_Admin_Actions_Interface
  * @version   1.5.0
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -39,7 +39,7 @@ if ( ! interface_exists( 'Charitable_Admin_Actions_Interface' ) ) :
          *
          * @since  1.5.0
          *
-         * @param  string $action The action key. 
+         * @param  string $action The action key.
          * @param  array  $args   {
          *     Array of arguments for the action.
          *

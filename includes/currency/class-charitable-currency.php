@@ -2,9 +2,9 @@
 /**
  * Charitable Currency helper.
  *
- * @package   Charitable/Classes/Charitable_Currency 
+ * @package   Charitable/Classes/Charitable_Currency
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0

@@ -5,7 +5,7 @@
  * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Email
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -741,7 +741,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 			<ul>
 			<?php foreach ( $fields->get_fields() as $key => $field ) : ?>
 				<li><strong><?php echo $field['description'] ?></strong>: [charitable_email show=<?php echo $key ?>]</li>
-			<?php endforeach ?> 
+			<?php endforeach ?>
 			</ul>
 
 <?php

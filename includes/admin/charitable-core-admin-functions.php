@@ -7,7 +7,7 @@
  * @package 	Charitable/Functions/Admin
  * @version     1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -121,7 +121,7 @@ function charitable_is_settings_view( $tab = '' ) {
  * This is based on WordPress' do_settings_fields but allows the possibility
  * of leaving out a field lable/title, for fullwidth fields.
  *
- * @see    do_settings_fields 
+ * @see    do_settings_fields
  *
  * @since  1.0.0
  *

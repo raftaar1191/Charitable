@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Campaign_Donation_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.4
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 
 		/**
 		 * Return the endpoint URL.
-		 *		 
+		 *
 		 * @since  1.5.0
 		 *
 		 * @global WP_Rewrite $wp_rewrite

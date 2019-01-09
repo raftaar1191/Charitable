@@ -2,9 +2,9 @@
 /**
  * Class that manages the display and processing of the forgot password form.
  *
- * @package   Charitable/Classes/Charitable_Forgot_Password_Form 
+ * @package   Charitable/Classes/Charitable_Forgot_Password_Form
  * @author    Rafe Colton, Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.4.0
  * @version   1.5.1

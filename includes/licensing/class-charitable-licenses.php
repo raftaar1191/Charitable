@@ -5,7 +5,7 @@
  * @package     Charitable/Classes/Charitable_Licenses
  * @version     1.4.20
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -80,7 +80,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
 			add_action( 'charitable_deactivate_license', array( $this, 'deactivate_license' ) );
 			add_filter( 'upgrader_pre_download', array( $this, 'set_upgrader_error_message' ), 10, 3 );
-			add_filter( 'upgrader_package_options', array( $this, 'set_upgrader_package_options' ) );			
+			add_filter( 'upgrader_package_options', array( $this, 'set_upgrader_package_options' ) );
 		}
 
 		/**
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 						$plugin_file             = plugin_basename( $product['file'] );
 						$product_key             = array_search( $product['name'], wp_list_pluck( $this->get_products(), 'name' ) );
 						$version_info            = $versions[ array_search( $product['name'], $versions_name_lookup ) ];
-						$version_info['license'] = $this->get_license_details( $product_key ); 
+						$version_info['license'] = $this->get_license_details( $product_key );
 
 						if ( version_compare( $product['version'], $version_info['new_version'], '<' ) ) {
 
@@ -162,7 +162,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 *
 		 * @param  mixed  $_data   Default set of data.
 		 * @param  string $_action The current action.
-		 * @param  object $_args   Request args. 
+		 * @param  object $_args   Request args.
 		 * @return object $_data
 		 */
 		public function plugins_api_filter( $_data, $_action = '', $_args = null ) {
@@ -214,7 +214,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		public function get_version_info( $slug, $update_cache = false ) {
 			if ( ! $update_cache ) {
 				$update_cache = get_site_transient( 'update_plugins' );
-			}			
+			}
 
 			if ( ! is_object( $update_cache ) || empty( $update_cache->response ) || ! array_key_exists( $slug, $update_cache->response ) ) {
 				return false;
@@ -228,10 +228,10 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 * without a license or with an expired license.
 		 *
 		 * @since  1.4.20
-		 * 
+		 *
 		 * @param  false|WP_Error  $reply    The messaage to return. Set to false by default.
 		 * @param  string          $package  Package URL. For Charitable extensions without a
-		 *                                   license or that have expired, we set this to a 
+		 *                                   license or that have expired, we set this to a
 		 *                                   key. Kind of a hack to pass a message to this hook.
 		 * @param  Plugin_Upgrader $upgrader The Plugin_Upgrader object.
 		 * @return false|WP_Error
@@ -254,7 +254,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			}
 
 			if ( false !== strpos( $package, 'expired_license:' ) ) {
-				
+
 				$renewal_link = str_replace( 'expired_license:', '', $package );
 
 				if ( $ajax_skin ) {
@@ -283,7 +283,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 *
 		 * @param  array $options Upgrader package options.
 		 * @return array
-		 */ 
+		 */
 		public function set_upgrader_package_options( $options ) {
 			if ( 'expired_license' != $options['package'] && empty( $options['package'] ) ) {
 				return $options;
@@ -301,12 +301,12 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 
 			/* Set up the renewal link for expired licenses. */
 			if ( 'expired_license' == $options['package'] ) {
-				$options['package'] = $this->get_expired_license_package( $options['hook_extra']['plugin'] );					
+				$options['package'] = $this->get_expired_license_package( $options['hook_extra']['plugin'] );
 
-				return $options;						
+				return $options;
 			}
 
-			$license_details = $this->get_license_details( $plugin_key );				
+			$license_details = $this->get_license_details( $plugin_key );
 
 			if ( ! is_array( $license_details ) || ! array_key_exists( 'license', $license_details ) || empty( $license_details['license'] ) ) {
 				$options['package'] = 'missing_license';
@@ -325,10 +325,10 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 		 */
 		public function get_expired_license_package( $plugin ) {
 			$version_info     = $this->get_version_info( $plugin );
-			$base_renewal_url = isset( $version_info->renewal_link ) ? $version_info->renewal_link : 'https://www.wpcharitable.com/account';		
+			$base_renewal_url = isset( $version_info->renewal_link ) ? $version_info->renewal_link : 'https://www.wpcharitable.com/account';
 
 			return sprintf( 'expired_license:%s', add_query_arg( array(
-				'utm_source'   => 'plugin-upgrades', 
+				'utm_source'   => 'plugin-upgrades',
 				'utm_medium'   => 'wordpress-dashboard',
 				'utm_campaign' => 'expired-license',
 			), $base_renewal_url ) );
@@ -581,7 +581,7 @@ if ( ! class_exists( 'Charitable_Licenses' ) ) :
 			if ( is_wp_error( $response ) ) {
 				return;
 			}
-			
+
 			$this->flush_update_cache();
 
 			/* Decode the license data */

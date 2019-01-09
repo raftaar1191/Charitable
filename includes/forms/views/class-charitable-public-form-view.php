@@ -6,7 +6,7 @@
  *
  * @package   Charitable/Forms/Charitable_Public_Form_View
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.2
@@ -353,7 +353,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			 * @param array                     $field    Field definition.
 			 * @param Charitable_Form           $form     The Charitable_Form object.
 			 * @param int                       $index    The current index.
-			 */            
+			 */
 			$template = apply_filters( 'charitable_form_field_template', $template, $field, $this->form, $index );
 
 			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
@@ -554,7 +554,7 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			 * @param Charitable_Form $form      The form we are displaying.
 			 * @param int             $index     The current index.
 			 */
-			return apply_filters( 'charitable_form_field_increment', 1, $field, $key, $this->form, $index );            
+			return apply_filters( 'charitable_form_field_increment', 1, $field, $key, $this->form, $index );
 		}
 
 		/**

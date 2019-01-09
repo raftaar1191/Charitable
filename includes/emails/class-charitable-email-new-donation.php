@@ -5,7 +5,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Email_New_Donation
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) { 
+			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) {
 				return false;
 			}
 

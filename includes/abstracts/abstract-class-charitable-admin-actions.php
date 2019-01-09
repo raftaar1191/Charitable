@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Admin_Actions
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.6.0
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Charitable_Admin_Actions' ) ) :
 		 * @param  array  $args      Optional. Mixed set of arguments.
 		 * @return boolean|WP_Error WP_Error in case of error. Mixed results if the action was performed.
 		 */
-		public function do_action( $action, $object_id, $args = array() ) {      
+		public function do_action( $action, $object_id, $args = array() ) {
 			if ( ! $this->action_exists( $action ) ) {
 				/* translators: %s: action id */
 				return new WP_Error( sprintf( __( 'Action "%s" is not registered.', 'charitable' ), $action ) );

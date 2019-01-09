@@ -7,7 +7,7 @@
  * @package   Charitable/Functions/Utility
  * @version   1.0.0
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function charitable_element_key_sort( $key, $a, $b ) {
 	foreach ( array( $a, $b ) as $item ) {
-		if ( ! array_key_exists( $key, $item ) ) {			
+		if ( ! array_key_exists( $key, $item ) ) {
 			error_log( sprintf( '%s missing from element: ' . json_encode( $item ), $key ) );
 		}
 	}
@@ -48,7 +48,7 @@ function charitable_element_key_sort( $key, $a, $b ) {
  * @return int
  */
 function charitable_priority_sort( $a, $b ) {
-	return charitable_element_key_sort( 'priority', $a, $b );	
+	return charitable_element_key_sort( 'priority', $a, $b );
 }
 
 /**
