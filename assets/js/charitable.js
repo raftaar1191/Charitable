@@ -18,6 +18,13 @@ CHARITABLE = window.CHARITABLE || {};
         this.errors = [];
 
         /**
+         * Pending processes array.
+         *
+         * @access public
+         */
+        this.pending_processes = [];
+
+        /**
          * Form object.
          *
          * @access public
@@ -169,11 +176,33 @@ CHARITABLE = window.CHARITABLE || {};
                 return true;
             }
 
-            /* If we're still here, trigger the processing event. */
-            $body.trigger( 'charitable:form:process', helper );
+            /* Continue on to process the donation. */
+            maybe_process( helper );
 
             return false;
         };
+
+        /**
+         * Check whether there are any asynchronous threads we need to wait for.
+         *
+         * If not, trigger processing. If there are, check again in 500ms.
+         */
+        var maybe_process = function( helper ) {
+            if ( ! helper.waiting() ) {
+                /* Double-check that there are still no errors. */
+                if ( helper.get_errors().length > 0 ) {
+                    helper.hide_processing();
+                    helper.print_errors();
+                    helper.scroll_to_top();
+                } else {
+                    $body.trigger( 'charitable:form:process', helper );
+                }
+
+                return;
+            }
+
+            setTimeout( maybe_process, 500, helper );
+        }
 
         /**
          * Process the donation.
@@ -589,6 +618,41 @@ CHARITABLE = window.CHARITABLE || {};
     }
 
     /**
+     * Return whether we are waiting for an asynchronous process to finish.
+     *
+     * @since  1.6.9
+     *
+     * @return boolean
+     */
+    Donation_Form.prototype.waiting = function() {
+        return this.pending_processes.length > 0;
+    }
+
+    /**
+     * Add a pending process.
+     *
+     * @since  1.6.9
+     *
+     * @param  string Process identifier.
+     * @return int Index of the process.
+     */
+    Donation_Form.prototype.add_pending_process = function( process ) {
+        return this.pending_processes.push( process ) - 1;
+    }
+
+    /**
+     * Remove a pending process by index.
+     *
+     * @since  1.6.9
+     *
+     * @param  int Index of the process.
+     * @return void
+     */
+    Donation_Form.prototype.remove_pending_process = function( index ) {
+        this.pending_processes.splice( index, 1 );
+    }
+
+    /**
      * Show that the donation form is processing.
      */
     Donation_Form.prototype.show_processing = function() {
@@ -683,7 +747,9 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.is_valid_amount = function() {
         var minimum = parseFloat( CHARITABLE_VARS.minimum_donation );
 
-        return minimum > 0 ? this.get_subtotal() >= minimum : this.get_subtotal() >= minimum;
+        return minimum > 0
+            ? this.get_subtotal() >= minimum
+            : this.get_subtotal() > minimum;
     };
 
     /**

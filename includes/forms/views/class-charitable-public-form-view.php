@@ -13,7 +13,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 
@@ -511,16 +513,16 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			$classes = array();
 
 			switch ( $type ) {
-				case 'paragraph' :
+				case 'paragraph':
 					$classes[] = 'charitable-form-content';
 					break;
 
-				case 'fieldset' :
-				case 'donation-amount-wrapper' :
+				case 'fieldset':
+				case 'donation-amount-wrapper':
 					$classes[] = 'charitable-fieldset';
 					break;
 
-				default :
+				default:
 					$classes[] = 'charitable-form-field';
 					$classes[] = 'charitable-form-field-' . $type;
 			}
@@ -637,4 +639,4 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		}
 	}
 
-endif; // End interface_exists check.
+endif;
