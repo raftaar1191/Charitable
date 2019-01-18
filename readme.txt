@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 5.0.2
-Stable tag: 1.6.8
+Tested up to: 5.0.3
+Stable tag: 1.6.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.9 =
+* FIX: Handle deleted images set as the value of a Picture field. [#644](https://github.com/Charitable/Charitable/issues/644)
+* NEW: Added a more flexible way for asynchronous processes to pause donation form processing. [#645](https://github.com/Charitable/Charitable/issues/645)
 
 = 1.6.8 =
 * FIX: Resolved bug related to WordPress core updates that prevented any donations from appearing under Charitable > Donations when on the "All" view. [#641](https://github.com/Charitable/Charitable/issues/641)

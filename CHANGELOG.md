@@ -1,3 +1,7 @@
+# 1.6.9
+* FIX: Handle deleted images set as the value of a Picture field. [#644](https://github.com/Charitable/Charitable/issues/644)
+* NEW: Added a more flexible way for asynchronous processes to pause donation form processing. [#645](https://github.com/Charitable/Charitable/issues/645)
+
 # 1.6.8
 * FIX: Resolved bug related to WordPress core updates that prevented any donations from appearing under Charitable > Donations when on the "All" view. [#641](https://github.com/Charitable/Charitable/issues/641)
 * NEW: Added "Subtotal" row to the Donation Overview table in the admin. This is not shown by default, but will be used by extensions like Gift Aid and our new Fee Relief extension. [#643](https://github.com/Charitable/Charitable/issues/643)
