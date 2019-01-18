@@ -192,7 +192,9 @@ CHARITABLE = window.CHARITABLE || {};
                 /* Double-check that there are still no errors. */
                 if ( helper.get_errors().length > 0 ) {
                     helper.hide_processing();
+
                     helper.print_errors();
+
                     helper.scroll_to_top();
                 } else {
                     $body.trigger( 'charitable:form:process', helper );

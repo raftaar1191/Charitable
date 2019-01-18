@@ -24,18 +24,23 @@ $placeholder   = isset( $field['placeholder'] ) ? esc_attr( $field['placeholder'
 $size          = isset( $field['size'] ) ? $field['size'] : 'thumbnail';
 $max_uploads   = isset( $field['max_uploads'] ) ? $field['max_uploads'] : 1;
 $max_file_size = isset( $field['max_file_size'] ) ? $field['max_file_size'] : wp_max_upload_size();
-$value         = isset( $field['value'] ) ? $field['value'] : array();
+$pictures      = isset( $field['value'] ) ? $field['value'] : array();
 
 if ( wp_is_mobile() ) {
 	$classes .= ' mobile';
 }
 
-if ( ! is_array( $value ) ) {
-	$value = array( $value );
+if ( ! is_array( $pictures ) ) {
+	$pictures = array( $pictures );
 }
 
-$value           = array_filter( $value );
-$has_max_uploads = count( $value ) >= $max_uploads;
+foreach ( array_filter( $pictures ) as $i => $picture ) {
+	if ( false === strpos( $image, 'img' ) && ! wp_attachment_is_image( $picture ) ) {
+		unset( $pictures[ $i ] );
+	}
+}
+
+$has_max_uploads = count( $pictures ) >= $max_uploads;
 $params          = array(
 	'runtimes'            => 'html5,silverlight,flash,html4',
 	'file_data_name'      => 'async-upload',
@@ -98,7 +103,7 @@ wp_enqueue_style( 'charitable-plup-styles' );
 		</div>
 		<ul id="<?php echo $field['key']; ?>-dragdrop-images" class="charitable-drag-drop-images charitable-drag-drop-images-<?php echo $max_uploads; ?>">
 			<?php
-			foreach ( $value as $image ) :
+			foreach ( $pictures as $image ) :
 				charitable_template( 'form-fields/picture-preview.php', array(
 					'image' => $image,
 					'field' => $field,

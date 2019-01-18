@@ -2,6 +2,8 @@
 /**
  * The template used to display the default form.
  *
+ * Override this template by copying it to yourtheme/charitable/donation-form/form-donation.php
+ *
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.0.0

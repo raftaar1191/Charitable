@@ -16,7 +16,7 @@ $campaign = $view_args['campaign'];
 do_action( 'charitable_campaign_summary_before', $campaign );
 
 ?>
-<div class="campaign-summary">  
+<div class="campaign-summary">
 	<?php
 
 	/**
