@@ -170,6 +170,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 = 1.6.9 =
 * FIX: Handle deleted images set as the value of a Picture field. [#644](https://github.com/Charitable/Charitable/issues/644)
+* FIX: Fixed logic error in check for whether the donation amount is above the minimum amount. This only affected situations where the minimum donation was $0 and someone tried to donate $0.
 * NEW: Added a more flexible way for asynchronous processes to pause donation form processing. [#645](https://github.com/Charitable/Charitable/issues/645)
 
 = 1.6.8 =
