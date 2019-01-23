@@ -41,9 +41,25 @@ function charitable_load_compat_functions() {
 	if ( class_exists( 'WpFastestCache' ) ) {
 		require_once( $includes_path . 'compat/charitable-wp-fastest-cache-compat-functions.php' );
 	}
+}
 
-	/* Yoast SEO */
-	if ( defined( 'WPSEO_VERSION' ) ) {
-		require_once( $includes_path . 'compat/charitable-wpseo-compat-functions.php' );
-	}
+/**
+ * Yoast attempts to executes shortcodes from the admin, so we
+ * need to make sure these will work properly.
+ *
+ * @deprecated 2.0.0
+ *
+ * @since  1.5.4
+ * @since  1.6.10 Deprecated.
+ *
+ * @return void
+ */
+function charitable_wpseo_compat_load_template_files() {
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.10',
+		'charitable()->load_template_files()'
+	);
+
+	charitable()->load_template_files();
 }
