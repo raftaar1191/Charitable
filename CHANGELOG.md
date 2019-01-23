@@ -1,3 +1,6 @@
+# 1.6.10
+* FIX: Load template files in admin area. This resolves a fatal error when using a Charitable shortcode in the Shortcode block, or when using Divi. [#646](https://github.com/Charitable/Charitable/issues/646) and [#605](https://github.com/Charitable/Charitable/issues/605)
+
 # 1.6.9
 * FIX: Handle deleted images set as the value of a Picture field. [#644](https://github.com/Charitable/Charitable/issues/644)
 * FIX: Fixed logic error in check for whether the donation amount is above the minimum amount. This only affected situations where the minimum donation was $0 and someone tried to donate $0.
