@@ -136,6 +136,30 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		}
 
 		/**
+		 * Returns an amount as a localized monetary string, without a currency symbol.
+		 *
+		 * @since  1.6.11
+		 *
+		 * @param  string    $amount        The amount to convert.
+		 * @param  int|false $decimal_count Optional. If not set, default decimal count will be used.
+		 * @return string
+		 */
+		public function get_sanitized_and_localized_amount( $amount, $decimal_count = false ) {
+			if ( false === $decimal_count ) {
+				$decimal_count = charitable_get_option( 'decimal_count', 2 );
+			}
+
+			$amount = $this->sanitize_monetary_amount( $amount, false );
+
+			return number_format(
+				$amount,
+				(int) $decimal_count,
+				$this->get_decimal_separator(),
+				$this->get_thousands_separator()
+			);
+		}
+
+		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
 		 * @since  1.3.0

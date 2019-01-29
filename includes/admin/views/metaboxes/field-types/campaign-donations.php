@@ -27,6 +27,8 @@ if ( empty( $campaign_donations ) ) {
 	);
 }
 
+$currency_helper = Charitable_Currency::get_instance();
+
 ?>
 <div id="charitable-campaign-donations-metabox-wrap" class="<?php echo esc_attr( $view_args['wrapper_class'] ); ?>">
 	<table id="charitable-campaign-donations" class="widefat">
@@ -53,7 +55,7 @@ if ( empty( $campaign_donations ) ) {
 						name="<?php echo esc_attr( sprintf( '%s[%d][amount]', $view_args['key'], $i ) ); ?>"
 						labelledby="<?php echo esc_attr( $view_args['id'] ); ?>-amount-label"
 						tabindex="<?php echo esc_attr( $view_args['tabindex'] ); ?>"
-						value="<?php echo empty( $campaign_donation->amount ) ? '' : esc_attr( charitable_sanitize_amount( $campaign_donation->amount, false ) ); ?>"
+						value="<?php echo empty( $campaign_donation->amount ) ? '' : esc_attr( $currency_helper->get_sanitized_and_localized_amount( $campaign_donation->amount ) ); ?>"
 					/>
 					<?php if ( isset( $campaign_donation->campaign_donation_id ) ) : ?>
 						<input type="hidden"
