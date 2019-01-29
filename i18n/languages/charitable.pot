@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.10\n"
+"Project-Id-Version: Charitable 1.6.11\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-01-23 06:34:55+00:00\n"
+"POT-Creation-Date: 2019-01-29 06:09:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5074,7 +5074,7 @@ msgstr ""
 #: includes/admin/class-charitable-admin.php:180
 #: includes/admin/views/metaboxes/campaign-donation-options/suggested-amounts.php:23
 #: includes/admin/views/metaboxes/campaign-donation-options/suggested-amounts.php:24
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:36
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:38
 #: templates/shortcodes/my-donations.php:62
 msgid "Amount"
 msgstr ""
@@ -6157,7 +6157,7 @@ msgid "Personal data for this donation was erased on %s."
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:111
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:35
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:37
 #: includes/class-charitable-post-types.php:85
 #: templates/donation-receipt/details.php:25 templates/donation-stats.php:17
 #: templates/shortcodes/my-donations.php:50
@@ -6181,7 +6181,7 @@ msgstr ""
 msgid "Payment Method"
 msgstr ""
 
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:44
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:46
 msgid "Select a campaign"
 msgstr ""
 
@@ -6763,175 +6763,175 @@ msgstr ""
 msgid "Amount must be passed as a string."
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:236
+#: includes/currency/class-charitable-currency.php:260
 msgid "Emirati Dirham (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:237
+#: includes/currency/class-charitable-currency.php:261
 msgid "Australian Dollars (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:238
+#: includes/currency/class-charitable-currency.php:262
 msgid "Argentine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:239
+#: includes/currency/class-charitable-currency.php:263
 msgid "Bangladeshi Taka (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:240
+#: includes/currency/class-charitable-currency.php:264
 msgid "Bolivian Bolíviano (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:241
+#: includes/currency/class-charitable-currency.php:265
 msgid "Brazilian Real (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:242
+#: includes/currency/class-charitable-currency.php:266
 msgid "Bulgarian Lev (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:243
+#: includes/currency/class-charitable-currency.php:267
 msgid "Canadian Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:244
+#: includes/currency/class-charitable-currency.php:268
 msgid "Swiss Franc (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:245
+#: includes/currency/class-charitable-currency.php:269
 msgid "Chilean Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:246
+#: includes/currency/class-charitable-currency.php:270
 msgid "Chinese Yuan Renminbi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:247
+#: includes/currency/class-charitable-currency.php:271
 msgid "Czech Koruna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:248
+#: includes/currency/class-charitable-currency.php:272
 msgid "Danish Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:249
+#: includes/currency/class-charitable-currency.php:273
 msgid "Egyptian Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:250
+#: includes/currency/class-charitable-currency.php:274
 msgid "Euro (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:251
+#: includes/currency/class-charitable-currency.php:275
 msgid "British Pound (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:252
+#: includes/currency/class-charitable-currency.php:276
 msgid "Ghanaian Cedi (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:253
+#: includes/currency/class-charitable-currency.php:277
 msgid "Hong Kong Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:254
+#: includes/currency/class-charitable-currency.php:278
 msgid "Croatian Kuna (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:255
+#: includes/currency/class-charitable-currency.php:279
 msgid "Hungarian Forint (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:256
+#: includes/currency/class-charitable-currency.php:280
 msgid "Indonesian Rupiah (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:257
+#: includes/currency/class-charitable-currency.php:281
 msgid "Israeli Shekel (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:258
+#: includes/currency/class-charitable-currency.php:282
 msgid "Indian Rupee (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:259
+#: includes/currency/class-charitable-currency.php:283
 msgid "Icelandic Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:260
+#: includes/currency/class-charitable-currency.php:284
 msgid "Japanese Yen (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:261
+#: includes/currency/class-charitable-currency.php:285
 msgid "South Korean Won (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:262
+#: includes/currency/class-charitable-currency.php:286
 msgid "Mexican Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:263
+#: includes/currency/class-charitable-currency.php:287
 msgid "Malaysian Ringgit (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:264
+#: includes/currency/class-charitable-currency.php:288
 msgid "Nigerian Naira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:265
+#: includes/currency/class-charitable-currency.php:289
 msgid "Norwegian Krone (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:266
+#: includes/currency/class-charitable-currency.php:290
 msgid "New Zealand Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:267
+#: includes/currency/class-charitable-currency.php:291
 msgid "Philippine Peso (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:268
+#: includes/currency/class-charitable-currency.php:292
 msgid "Polish Zloty (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:269
+#: includes/currency/class-charitable-currency.php:293
 msgid "Romanian New Leu (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:270
+#: includes/currency/class-charitable-currency.php:294
 msgid "Russian Ruble (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:271
+#: includes/currency/class-charitable-currency.php:295
 msgid "Swedish Krona (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:272
+#: includes/currency/class-charitable-currency.php:296
 msgid "Singapore Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:273
+#: includes/currency/class-charitable-currency.php:297
 msgid "Thai Baht (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:274
+#: includes/currency/class-charitable-currency.php:298
 msgid "Turkish Lira (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:275
+#: includes/currency/class-charitable-currency.php:299
 msgid "Taiwan New Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:276
+#: includes/currency/class-charitable-currency.php:300
 msgid "US Dollar (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:277
+#: includes/currency/class-charitable-currency.php:301
 msgid "Vietnamese Dong (%s)"
 msgstr ""
 
-#: includes/currency/class-charitable-currency.php:278
+#: includes/currency/class-charitable-currency.php:302
 msgid "South African Rand (%s)"
 msgstr ""
 
