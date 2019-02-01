@@ -1,3 +1,6 @@
+# 1.6.12
+* FIX: Picture drag & drop field would not show unless pictures were already set. [#648](https://github.com/Charitable/Charitable/issues/648)
+
 # 1.6.11
 * FIX: Fixed error that would show the incorrect amount in the admin donation form in sites that use commas for the decimal separator. [#497](https://github.com/Charitable/Charitable/issues/497)
 
