@@ -5,7 +5,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Form Fields
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.6.12
  */
 
 if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
@@ -34,7 +34,7 @@ if ( ! is_array( $pictures ) ) {
 	$pictures = array( $pictures );
 }
 
-foreach ( array_filter( $pictures ) as $i => $picture ) {
+foreach ( $pictures as $i => $picture ) {
 	if ( false === strpos( $image, 'img' ) && ! wp_attachment_is_image( $picture ) ) {
 		unset( $pictures[ $i ] );
 	}
