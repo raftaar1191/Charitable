@@ -405,7 +405,7 @@
 .campaign-grid-3 li.campaign,
 .campaign-grid-3 .campaign.hentry {
   width: 32%; }
-.campaign-grid-3 li.campaign,
+.campaign-grid-3 li.campaign:nth-child(3n+3),
 .campaign-grid-3 .campaign.hentry:nth-child(3n+3) {
   margin-right: 0; }
 .campaign-grid-3.masonry {
@@ -416,7 +416,7 @@
 .campaign-grid-4 li.campaign,
 .campaign-grid-4 .campaign.hentry {
   width: 23.5%; }
-.campaign-grid-4 li.campaign,
+.campaign-grid-4 li.campaign:nth-child(4n+4),
 .campaign-grid-4 .campaign.hentry:nth-child(4n+4) {
   margin-right: 0; }
 .campaign-grid-4.masonry {
