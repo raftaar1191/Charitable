@@ -455,7 +455,7 @@ if ( ! function_exists( 'charitable_template_responsive_styles' ) ) :
 <style type="text/css" media="screen">
 @media only screen and (max-width: <?php echo $breakpoint; ?>) {
 	.campaign-loop.campaign-grid.masonry { -moz-column-count: 1; -webkit-column-count: 1; column-count: 1; }
-	.campaign-loop.campaign-grid .campaign.hentry { width: 100% !important; }
+	.campaign-loop.campaign-grid .campaign,.campaign-loop.campaign-grid .campaign.hentry { width: 100% !important; }
 }
 </style>
 <?php
