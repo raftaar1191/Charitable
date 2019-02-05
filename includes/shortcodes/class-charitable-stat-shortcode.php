@@ -85,8 +85,9 @@ if ( ! class_exists( 'Charitable_Stat_Shortcode' ) ) :
 						return charitable_format_money( $total );
 					}
 
+					$goal    = charitable_sanitize_amount( $this->args['goal'], false );
 					$total   = charitable_sanitize_amount( $total, true );
-					$percent = ( $total / $this->args['goal'] ) * 100;
+					$percent = ( $total / $goal ) * 100;
 
 					return '<div class="campaign-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' . $percent . '"><span class="bar" style="width:' . $percent . '%;"></span></div>';
 
