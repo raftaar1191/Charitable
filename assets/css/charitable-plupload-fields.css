@@ -51,7 +51,8 @@
     .charitable-drag-drop-images li:hover {
       border: 1px dashed; }
       .charitable-drag-drop-images li:hover a.remove-image {
-        display: block; }
+        display: block;
+        z-index: 1; }
 
 .charitable-drag-drop-image-loader {
   border: 1px solid #ebebeb; }
