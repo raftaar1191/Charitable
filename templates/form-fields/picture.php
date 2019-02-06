@@ -35,7 +35,7 @@ if ( ! is_array( $pictures ) ) {
 }
 
 foreach ( $pictures as $i => $picture ) {
-	if ( false === strpos( $image, 'img' ) && ! wp_attachment_is_image( $picture ) ) {
+	if ( false === strpos( $picture, 'img' ) && ! wp_attachment_is_image( $picture ) ) {
 		unset( $pictures[ $i ] );
 	}
 }
