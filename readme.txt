@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 5.0.3
-Stable tag: 1.6.12
+Stable tag: 1.6.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,13 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.13 =
+* FIX: "Remove" button in Picture field was hidden in the Twenty Nineteen theme. [#654](https://github.com/Charitable/Charitable/issues/654)
+* FIX: Undefined variable notice in Picture field template. [#653](https://github.com/Charitable/Charitable/issues/653)
+* FIX: Gracefully handle currency symbols included in the goal parameter in the `[charitable_stat]` shortcode. [#652](https://github.com/Charitable/Charitable/issues/652)
+* FIX: Fix campaign grid layout in themes where campaigns don't have the `hentry` class. [#650](https://github.com/Charitable/Charitable/issues/650)
+* FIX: Ensure campaign grid is responsive in themes where campaigns don't have the `hentry` class. [#651](https://github.com/Charitable/Charitable/issues/651)
 
 = 1.6.12 =
 * FIX: Picture drag & drop field would not show unless pictures were already set. [#648](https://github.com/Charitable/Charitable/issues/648)
