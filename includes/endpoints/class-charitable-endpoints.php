@@ -161,7 +161,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			if ( ! $this->endpoint_exists( $endpoint ) ) {
 				charitable_get_deprecated()->doing_it_wrong(
 					__METHOD__,
-					sprintf( __( 'Endpoint %s has not been registered.', 'charitable' ), $endpoint ),
+					sprintf(
+						/* translators: %s: endpoint id */
+						__( 'Endpoint %s has not been registered.', 'charitable' ), $endpoint
+					),
 					'1.5.0'
 				);
 
@@ -209,7 +212,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @param  string $template The default template.
-		 * @return void
+		 * @return string
 		 */
 		public function template_loader( $template ) {
 			$current_endpoint = $this->get_current_endpoint();

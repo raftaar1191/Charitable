@@ -183,11 +183,13 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param  string $gateway The gateway to get the ipn URL for.
+ * @param  string  $gateway     The gateway to get the ipn URL for.
+ * @param  boolean $force_https Whether to force the scheme to be https.
  * @return string
  */
-function charitable_get_ipn_url( $gateway ) {
-	return add_query_arg( 'charitable-listener', $gateway, home_url( 'index.php' ) );
+function charitable_get_ipn_url( $gateway, $force_https = false ) {
+	$scheme = $force_https ? 'https' : null;
+	return add_query_arg( 'charitable-listener', $gateway, home_url( 'index.php', $scheme ) );
 }
 
 /**

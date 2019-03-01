@@ -934,19 +934,17 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 */
 		public function maybe_add_terms_conditions_fields( $fields ) {
 			$terms_fields = array();
-			$privacy_page = (int) charitable_get_option( 'privacy_policy_page', 0 );
-			$terms_page   = (int) charitable_get_option( 'terms_conditions_page', 0 );
 			$show_consent = (int) charitable_get_option( 'contact_consent', 0 ) && Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
 
-			if ( $privacy_page ) {
+			if ( charitable_is_privacy_policy_activated() ) {
 				$terms_fields['privacy_policy_text'] = array(
 					'type'     => 'content',
-					'content'  => '<p class="charitable-privacy-policy-text">' . $this->get_parsed_privacy_text( $privacy_page ) . '</p>',
+					'content'  => '<p class="charitable-privacy-policy-text">' . charitable_get_privacy_policy_field_text() . '</p>',
 					'priority' => 4,
 				);
 			}
 
-			if ( $show_consent ) {
+			if ( charitable_is_contact_consent_activated() ) {
 				$terms_fields['contact_consent'] = array(
 					'type'      => 'checkbox',
 					'label'     => charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) ),
@@ -956,16 +954,16 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				);
 			}
 
-			if ( $terms_page ) {
+			if ( charitable_is_terms_and_conditions_activated() ) {
 				$terms_fields['terms_text'] = array(
 					'type'     => 'content',
-					'content'  => '<div class="charitable-terms-text">' . $this->get_terms( $terms_page ) . '</div>',
+					'content'  => '<div class="charitable-terms-text">' . charitable_get_terms_and_conditions() . '</div>',
 					'priority' => 12,
 				);
 
 				$terms_fields['accept_terms'] = array(
 					'type'      => 'checkbox',
-					'label'     => $this->get_parsed_terms_text( $terms_page ),
+					'label'     => charitable_get_terms_and_conditions_field_label(),
 					'priority'  => 16,
 					'required'  => true,
 					'data_type' => 'meta',
@@ -999,65 +997,64 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		/**
 		 * Return the terms and conditions text.
 		 *
+		 * @deprecated 2.0.0
+		 *
 		 * @since  1.6.0
+		 * @since  1.6.14 Deprecated.
 		 *
 		 * @param  int $terms_page The ID of the terms page.
 		 * @return string
 		 */
 		public function get_terms( $terms_page ) {
-			remove_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.6.14',
+				'charitable_get_terms_and_conditions'
+			);
 
-			$content = apply_filters( 'the_content', get_post_field( 'post_content', $terms_page, 'display' ) );
-
-			add_filter( 'the_content', array( charitable()->endpoints(), 'get_content' ) );
-
-			return $content;
+			return charitable_get_terms_and_conditions();
 		}
 
 		/**
 		 * Return the terms text, with [terms] replaced by a link to the terms and conditions.
 		 *
+		 * @deprecated 2.0.0
+		 *
 		 * @since  1.6.0
+		 * @since  1.6.14 Deprecated.
 		 *
 		 * @param  int $terms_page The ID of the terms page.
 		 * @return string
 		 */
 		public function get_parsed_terms_text( $terms_page ) {
-			$url = get_the_permalink( $terms_page );
-
-			if ( ! $url ) {
-				return '';
-			}
-
-			$text    = charitable_get_option( 'terms_conditions', __( 'I have read and agree to the website [terms].', 'charitable' ) );
-			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-terms-link">%s</a>',
-				$url,
-				__( 'terms and conditions', 'charitable' )
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.6.14',
+				'charitable_get_terms_and_conditions_field_label'
 			);
-			return str_replace( '[terms]', $replace, $text );
+
+			return charitable_get_terms_and_conditions_field_label();
 		}
 
 		/**
 		 * Return the privacy policy text, with [privacy_policy] replaced by a link to the privacy policy page.
 		 *
+		 * @deprecated 2.0.0
+		 *
 		 * @since  1.6.0
+		 * @since  1.6.14 Deprecated.
 		 *
 		 * @param  int $privacy_page The ID of the privacy policy page.
 		 * @return string
 		 */
 		public function get_parsed_privacy_text( $privacy_page ) {
-			$url = get_the_permalink( $privacy_page );
-
-			if ( ! $url ) {
-				return '';
-			}
-
-			$text    = charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
-			$replace = sprintf( '<a href="%s" target="_blank" class="charitable-privacy-policy-link">%s</a>',
-				$url,
-				__( 'privacy policy', 'charitable' )
+			charitable_get_deprecated()->deprecated_function(
+				__METHOD__,
+				'1.6.14',
+				'charitable_get_privacy_policy_field_text'
 			);
-			return str_replace( '[privacy_policy]', $replace, $text );
+
+			return charitable_get_privacy_policy_field_text();
 		}
 
 		/**

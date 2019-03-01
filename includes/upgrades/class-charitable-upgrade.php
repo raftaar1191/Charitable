@@ -963,7 +963,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.3.0
 		 *
-		 * @param  string $upgrade 	 The upgrade action.
+		 * @param  string $upgrade      The upgrade action.
 		 * @param  string $redirect_url Optional URL to redirect to after the upgrade.
 		 * @return void
 		 */

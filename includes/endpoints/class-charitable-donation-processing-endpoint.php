@@ -92,6 +92,8 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		public function is_page( $args = array() ) {
 			global $wp_query;
 
+
+
 			return is_main_query()
 				&& array_key_exists( 'donation_processing', $wp_query->query_vars )
 				&& array_key_exists( 'donation_id', $wp_query->query_vars );
