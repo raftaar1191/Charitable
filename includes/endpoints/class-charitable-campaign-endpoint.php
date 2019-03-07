@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 	 */
 	class Charitable_Campaign_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'campaign';
 
 		/**

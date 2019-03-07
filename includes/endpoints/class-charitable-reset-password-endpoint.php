@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 	 */
 	class Charitable_Reset_Password_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'reset_password';
 
 		/**

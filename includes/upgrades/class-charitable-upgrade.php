@@ -209,6 +209,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'          => true,
 					'active_callback' => array( $this, 'has_empty_donor_ids' ),
 				),
+				'flush_permalinks_1614'                   => array(
+					'version'  => '1.6.14',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'flush_permalinks' ),
+				),
 			);
 		}
 

@@ -23,7 +23,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 	 */
 	class Charitable_Email_Email_Verification extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'email_verification';
 
 		/**

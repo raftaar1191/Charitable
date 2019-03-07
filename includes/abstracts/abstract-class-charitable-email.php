@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 	 */
 	abstract class Charitable_Email implements Charitable_Email_Interface {
 
-		/* @var string */
+		/** Email ID */
 		const ID = '';
 
 		/**

@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 	 */
 	class Charitable_Email_Campaign_End extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'campaign_end';
 
 		/**

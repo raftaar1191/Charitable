@@ -24,9 +24,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 	 */
 	class Charitable_Campaign_Donation_Endpoint extends Charitable_Endpoint {
 
-		/**
-		 * @var     string
-		 */
+		/** Endpoint ID. */
 		const ID = 'campaign_donation';
 
 		/**
@@ -72,6 +70,10 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 
 			$campaign_id  = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
 			$campaign_url = get_permalink( $campaign_id );
+
+			if ( array_key_exists( 'force_ssl', $args ) && $args['force_ssl'] ) {
+				$campaign_url = str_replace( 'http://', 'https://', $campaign_url );
+			}
 
 			if ( 'same_page' == charitable_get_option( 'donation_form_display', 'separate_page' ) ) {
 				return $campaign_url;
@@ -134,12 +136,28 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 				exit();
 			}
 
+			/**
+			 * If SSL is forced on the campaign donation page and we're not
+			 * on SSL, redirect to HTTPS.
+			 *
+			 * @since  1.6.14
+			 *
+			 * @param boolean $force_ssl Whether to force SSL on the campaign donation page.
+			 */
+			if ( apply_filters( 'charitable_force_ssl_on_donation_page', false ) && ! is_ssl() ) {
+				wp_safe_redirect( charitable_get_permalink( 'campaign_donation', array(
+					'force_ssl' => true,
+				) ) );
+				exit();
+			}
+
 			$donation_id = get_query_var( 'donation_id', false );
 
 			/* If a donation ID is included, make sure it belongs to the current user. */
 			if ( $donation_id && ! charitable_user_can_access_donation( $donation_id ) ) {
 				wp_safe_redirect( charitable_get_permalink( 'campaign_donation', array(
 					'campaign_id' => $campaign_id,
+					'force_ssl'   => apply_filters( 'charitable_force_ssl_on_donation_page', false ),
 				) ) );
 				exit();
 			}

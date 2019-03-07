@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 	 */
 	class Charitable_Email_Password_Reset extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'password_reset';
 
 		/**

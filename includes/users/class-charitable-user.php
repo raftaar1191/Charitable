@@ -55,24 +55,27 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 *
 		 * NOTE: This is not the same as the user ID.
 		 *
-		 * @var     int
-		 * @since  1.0.0
+		 * @since 1.0.0
+		 *
+		 * @var   int
 		 */
 		protected $donor_id;
 
 		/**
 		 * A mapping of user keys.
 		 *
-		 * @var 	string[]
-		 * @since  1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string[]
 		 */
 		protected $mapped_keys;
 
 		/**
 		 * Core keys.
 		 *
-		 * @var 	string[]
 		 * @since  1.4.0
+		 *
+		 * @var   string[]
 		 */
 		protected $core_keys;
 

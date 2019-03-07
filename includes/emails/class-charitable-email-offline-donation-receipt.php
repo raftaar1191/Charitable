@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 	 */
 	class Charitable_Email_Offline_Donation_Receipt extends Charitable_Email_Donation_Receipt {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'offline_donation_receipt';
 
 		/**

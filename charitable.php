@@ -651,6 +651,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 				$endpoints->register( new Charitable_Registration_Endpoint );
 				$endpoints->register( new Charitable_Login_Endpoint );
 				$endpoints->register( new Charitable_Profile_Endpoint );
+				$endpoints->register( new Charitable_Webhook_Listener_Endpoint );
 
 				$this->registry->register_object( $endpoints );
 			}

@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 	 */
 	class Charitable_Forgot_Password_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'forgot_password';
 
 		/**

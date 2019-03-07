@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 	 */
 	class Charitable_Email_Preview_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'email_preview';
 
 		/**

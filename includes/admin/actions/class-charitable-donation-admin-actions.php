@@ -24,7 +24,7 @@ if ( ! class_exists( 'Charitable_Donation_Admin_Actions' ) ) :
 	 */
 	class Charitable_Donation_Admin_Actions extends Charitable_Admin_Actions {
 
-		/* @var string */
+		/** Email ID */
 		const TYPE = 'donation';
 
 		/**

@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 	 */
 	class Charitable_Donation_Cancellation_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'donation_cancellation';
 
 		/**
