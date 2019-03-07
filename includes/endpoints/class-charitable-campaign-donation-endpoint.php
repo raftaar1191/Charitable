@@ -28,12 +28,30 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		const ID = 'campaign_donation';
 
 		/**
+		 * Whether to force HTTPS on the endpoint.
+		 *
+		 * @since 1.6.14
+		 *
+		 * @var   boolean
+		 */
+		private $force_https;
+
+		/**
 		 * Object instantiation.
 		 *
 		 * @since 1.5.4
 		 */
 		public function __construct() {
 			$this->cacheable = false;
+
+			/**
+			 * Whether to force HTTPS on the donation endpoint.
+			 *
+			 * @since 1.6.14
+			 *
+			 * @param boolean $force_https Whether HTTPS is forced for the donation endpoint.
+			 */
+			$this->force_https = apply_filters( 'charitable_campaign_donation_endpoint_force_https', false );
 		}
 
 		/**
@@ -71,7 +89,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			$campaign_id  = array_key_exists( 'campaign_id', $args ) ? $args['campaign_id'] : get_the_ID();
 			$campaign_url = get_permalink( $campaign_id );
 
-			if ( array_key_exists( 'force_ssl', $args ) && $args['force_ssl'] ) {
+			if ( $this->force_https ) {
 				$campaign_url = str_replace( 'http://', 'https://', $campaign_url );
 			}
 
@@ -136,18 +154,8 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 				exit();
 			}
 
-			/**
-			 * If SSL is forced on the campaign donation page and we're not
-			 * on SSL, redirect to HTTPS.
-			 *
-			 * @since  1.6.14
-			 *
-			 * @param boolean $force_ssl Whether to force SSL on the campaign donation page.
-			 */
-			if ( apply_filters( 'charitable_force_ssl_on_donation_page', false ) && ! is_ssl() ) {
-				wp_safe_redirect( charitable_get_permalink( 'campaign_donation', array(
-					'force_ssl' => true,
-				) ) );
+			if ( $this->force_https && ! is_ssl() ) {
+				wp_safe_redirect( charitable_get_permalink( 'campaign_donation' ) );
 				exit();
 			}
 
@@ -157,7 +165,6 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			if ( $donation_id && ! charitable_user_can_access_donation( $donation_id ) ) {
 				wp_safe_redirect( charitable_get_permalink( 'campaign_donation', array(
 					'campaign_id' => $campaign_id,
-					'force_ssl'   => apply_filters( 'charitable_force_ssl_on_donation_page', false ),
 				) ) );
 				exit();
 			}

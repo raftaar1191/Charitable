@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.13\n"
+"Project-Id-Version: Charitable 1.6.14\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-02-06 11:38:15+00:00\n"
+"POT-Creation-Date: 2019-03-07 03:37:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,11 +24,11 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n1.0.2\n"
 
-#: charitable.php:822
+#: charitable.php:823
 msgid "Cloning this object is forbidden."
 msgstr ""
 
-#: charitable.php:837
+#: charitable.php:838
 msgid "Unserializing instances of this class is forbidden."
 msgstr ""
 
@@ -5136,8 +5136,8 @@ msgid "Privacy policy page"
 msgstr ""
 
 #: includes/admin/customizer/class-charitable-customizer.php:146
-#: includes/forms/class-charitable-donation-form.php:1055
-#: includes/privacy/charitable-privacy-functions.php:117
+#: includes/privacy/charitable-privacy-functions.php:45
+#: includes/privacy/charitable-privacy-functions.php:121
 msgid ""
 "Your personal data will be used to process your donation, support your "
 "experience throughout this website, and for other purposes described in our "
@@ -5167,9 +5167,10 @@ msgstr ""
 
 #: includes/admin/customizer/class-charitable-customizer.php:175
 #: includes/db/class-charitable-donors-db.php:267
-#: includes/forms/class-charitable-donation-form.php:952
+#: includes/forms/class-charitable-donation-form.php:950
 #: includes/forms/class-charitable-profile-form.php:327
 #: includes/forms/class-charitable-registration-form.php:163
+#: includes/privacy/charitable-privacy-functions.php:61
 msgid "Yes, I am happy for you to contact me via email or phone."
 msgstr ""
 
@@ -5190,8 +5191,8 @@ msgid "Terms and conditions page"
 msgstr ""
 
 #: includes/admin/customizer/class-charitable-customizer.php:206
-#: includes/forms/class-charitable-donation-form.php:1032
-#: includes/privacy/charitable-privacy-functions.php:94
+#: includes/privacy/charitable-privacy-functions.php:30
+#: includes/privacy/charitable-privacy-functions.php:98
 msgid "I have read and agree to the website [terms]."
 msgstr ""
 
@@ -5424,7 +5425,7 @@ msgstr ""
 
 #: includes/admin/forms/class-charitable-admin-donation-form.php:108
 #: includes/fields/default-fields/donation-fields.php:79
-#: includes/upgrades/class-charitable-upgrade.php:1014
+#: includes/upgrades/class-charitable-upgrade.php:1056
 #: includes/users/class-charitable-roles.php:64
 msgid "Donor"
 msgstr ""
@@ -5911,7 +5912,7 @@ msgid "Any"
 msgstr ""
 
 #: includes/admin/views/campaigns-page/export-form.php:23
-#: includes/donations/charitable-donation-functions.php:329
+#: includes/donations/charitable-donation-functions.php:324
 msgid "Pending"
 msgstr ""
 
@@ -6949,52 +6950,52 @@ msgstr ""
 msgid "Unable to update donor. This email address is already in use."
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:92
+#: includes/deprecated/class-charitable-deprecated.php:94
 msgid ""
 "%1$s was called with an argument that is <strong>deprecated</strong> since "
 "version %2$s of %4$s! %3$s"
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:94
+#: includes/deprecated/class-charitable-deprecated.php:96
 msgid ""
 "%1$s was called with an argument that is <strong>deprecated</strong> since "
 "version %2$s of %3$s with no alternatives available."
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:118
+#: includes/deprecated/class-charitable-deprecated.php:120
 msgid ""
 "%1$s is <strong>deprecated</strong> since version %2$s of %4$s! Use %3$s "
 "instead."
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:120
+#: includes/deprecated/class-charitable-deprecated.php:122
 msgid ""
 "%1$s is <strong>deprecated</strong> since version %2$s of %3$s with no "
 "alternatives available."
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:143
+#: includes/deprecated/class-charitable-deprecated.php:145
 msgid "(This message was added in %s version %s.)"
 msgstr ""
 
-#: includes/deprecated/class-charitable-deprecated.php:145
+#: includes/deprecated/class-charitable-deprecated.php:147
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:328
+#: includes/donations/charitable-donation-functions.php:323
 #: includes/fields/default-fields/donation-fields.php:326
 msgid "Paid"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:330
+#: includes/donations/charitable-donation-functions.php:325
 msgid "Failed"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:331
+#: includes/donations/charitable-donation-functions.php:326
 msgid "Cancelled"
 msgstr ""
 
-#: includes/donations/charitable-donation-functions.php:332
+#: includes/donations/charitable-donation-functions.php:327
 msgid "Refunded"
 msgstr ""
 
@@ -7085,7 +7086,7 @@ msgid "Donor: Donation Receipt"
 msgstr ""
 
 #: includes/emails/class-charitable-email-donation-receipt.php:216
-#: includes/endpoints/class-charitable-donation-processing-endpoint.php:110
+#: includes/endpoints/class-charitable-donation-processing-endpoint.php:112
 msgid "Thank you for your donation"
 msgstr ""
 
@@ -7300,7 +7301,7 @@ msgstr ""
 msgid "Your website URL"
 msgstr ""
 
-#: includes/endpoints/class-charitable-donation-processing-endpoint.php:111
+#: includes/endpoints/class-charitable-donation-processing-endpoint.php:113
 msgid ""
 "You will shortly be redirected to the payment gateway to complete your "
 "donation."
@@ -7323,11 +7324,12 @@ msgstr ""
 msgid "Email Verification"
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:71
+#: includes/endpoints/class-charitable-endpoints.php:74
 msgid "Endpoint %s has already been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:164
+#: includes/endpoints/class-charitable-endpoints.php:169
+#. translators: %s: endpoint id
 msgid "Endpoint %s has not been registered."
 msgstr ""
 
@@ -7606,33 +7608,23 @@ msgstr ""
 msgid "You must donate more than %s."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:991
+#: includes/forms/class-charitable-donation-form.php:989
 msgid "Terms and Conditions"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1035
-#: includes/privacy/charitable-privacy-functions.php:97
-msgid "terms and conditions"
-msgstr ""
-
-#: includes/forms/class-charitable-donation-form.php:1058
-#: includes/privacy/charitable-privacy-functions.php:120
-msgid "privacy policy"
-msgstr ""
-
-#: includes/forms/class-charitable-donation-form.php:1185
+#: includes/forms/class-charitable-donation-form.php:1182
 msgid "There are no active payment gateways."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1217
+#: includes/forms/class-charitable-donation-form.php:1214
 msgid "Test mode is active."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1220
+#: includes/forms/class-charitable-donation-form.php:1217
 msgid "Disable Test Mode"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1286
+#: includes/forms/class-charitable-donation-form.php:1283
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
@@ -8156,11 +8148,19 @@ msgid "You do not have permission to install plugin updates"
 msgstr ""
 
 #: includes/licensing/class-charitable-plugin-updater.php:170
-#: includes/upgrades/class-charitable-upgrade.php:478
-#: includes/upgrades/class-charitable-upgrade.php:513
-#: includes/upgrades/class-charitable-upgrade.php:615
-#: includes/upgrades/class-charitable-upgrade.php:1095
+#: includes/upgrades/class-charitable-upgrade.php:520
+#: includes/upgrades/class-charitable-upgrade.php:555
+#: includes/upgrades/class-charitable-upgrade.php:657
+#: includes/upgrades/class-charitable-upgrade.php:1137
 msgid "Error"
+msgstr ""
+
+#: includes/privacy/charitable-privacy-functions.php:101
+msgid "terms and conditions"
+msgstr ""
+
+#: includes/privacy/charitable-privacy-functions.php:124
+msgid "privacy policy"
 msgstr ""
 
 #: includes/privacy/class-charitable-privacy.php:157
@@ -8310,45 +8310,45 @@ msgstr ""
 msgid "Upgrade Charitable"
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:117
+#: includes/upgrades/class-charitable-upgrade.php:126
 msgid "Charitable needs to update the database."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:122
+#: includes/upgrades/class-charitable-upgrade.php:131
 msgid "Charitable needs to fix incorrect donation dates."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:163
+#: includes/upgrades/class-charitable-upgrade.php:172
 msgid "Charitable needs to remove duplicate donor records."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:190
+#: includes/upgrades/class-charitable-upgrade.php:199
 msgid "Charitable needs to upgrade its database tables."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:199
+#: includes/upgrades/class-charitable-upgrade.php:208
 msgid "Charitable needs to fix donations saved without a donor ID."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:246
+#: includes/upgrades/class-charitable-upgrade.php:261
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:294
+#: includes/upgrades/class-charitable-upgrade.php:326
+msgid "Click <a href=\"%s\">here</a> to start the upgrade."
+msgstr ""
+
+#: includes/upgrades/class-charitable-upgrade.php:442
 #. translators: %s: upgrade link
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:328
-msgid "Click <a href=\"%s\">here</a> to start the upgrade."
-msgstr ""
-
-#: includes/upgrades/class-charitable-upgrade.php:478
-#: includes/upgrades/class-charitable-upgrade.php:513
-#: includes/upgrades/class-charitable-upgrade.php:615
-#: includes/upgrades/class-charitable-upgrade.php:1095
+#: includes/upgrades/class-charitable-upgrade.php:520
+#: includes/upgrades/class-charitable-upgrade.php:555
+#: includes/upgrades/class-charitable-upgrade.php:657
+#: includes/upgrades/class-charitable-upgrade.php:1137
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
@@ -8370,7 +8370,7 @@ msgstr ""
 msgid "Campaign Manager"
 msgstr ""
 
-#: includes/users/class-charitable-user.php:686
+#: includes/users/class-charitable-user.php:689
 msgid "Unable to add donor. Email not set for logged out user."
 msgstr ""
 
@@ -8606,19 +8606,19 @@ msgstr ""
 msgid "You must be logged in to access your donation receipt."
 msgstr ""
 
-#: templates/donation-receipt/summary.php:22
+#: templates/donation-receipt/summary.php:24
 msgid "Donation Number:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:24
+#: templates/donation-receipt/summary.php:26
 msgid "Date:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:26
+#: templates/donation-receipt/summary.php:28
 msgid "Total:"
 msgstr ""
 
-#: templates/donation-receipt/summary.php:41
+#: templates/donation-receipt/summary.php:45
 msgid "Payment Method:"
 msgstr ""
 
@@ -8801,7 +8801,7 @@ msgctxt "Taxonomy Singular Name"
 msgid "Campaign Tag"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1186
+#: includes/forms/class-charitable-donation-form.php:1183
 msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""

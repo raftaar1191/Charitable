@@ -27,6 +27,15 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		const ID = 'webhook_listener';
 
 		/**
+		 * Whether to force HTTPS on the endpoint.
+		 *
+		 * @since 1.6.14
+		 *
+		 * @var   boolean
+		 */
+		private $force_https;
+
+		/**
 		 * Object instantiation.
 		 *
 		 * @since 1.6.14
@@ -43,7 +52,7 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 			 */
 			$this->force_https = apply_filters( 'charitable_webhook_listener_endpoint_force_https', false );
 
-			add_action( 'init', array( $this, 'process_incoming_webhook' ), 20 );
+			add_action( 'parse_query', array( $this, 'process_incoming_webhook' ) );
 		}
 
 		/**
