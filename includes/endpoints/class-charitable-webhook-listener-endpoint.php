@@ -33,6 +33,17 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		 */
 		public function __construct() {
 			$this->cacheable = false;
+
+			/**
+			 * Whether to force HTTPS on the webhook listener endpoint.
+			 *
+			 * @since 1.6.14
+			 *
+			 * @param boolean $force_https Whether HTTPS is forced for the webhook listener endpoint.
+			 */
+			$this->force_https = apply_filters( 'charitable_webhook_listener_endpoint_force_https', false );
+
+			add_action( 'init', array( $this, 'process_incoming_webhook' ), 20 );
 		}
 
 		/**
@@ -68,12 +79,14 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		public function get_page_url( $args = array() ) {
 			global $wp_rewrite;
 
+			$home_url = $this->force_https ? home_url( '', 'https' ) : home_url();
+
 			if ( $wp_rewrite->using_permalinks() ) {
-				$url = sprintf( '%s/charitable-listener/%s', untrailingslashit( home_url() ), $args['gateway'] );
+				$url = sprintf( '%s/charitable-listener/%s', untrailingslashit( $home_url ), $args['gateway'] );
 			} else {
 				$url = esc_url_raw( add_query_arg( array(
 					'charitable_listener' => $args['gateway'],
-				), home_url() ) );
+				), $home_url ) );
 			}
 
 			return $url;
@@ -96,14 +109,13 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		}
 
 		/**
-		 * Return the template to display for this endpoint.
+		 * Process an incoming webhook if we are on the listener page.
 		 *
 		 * @since  1.6.14
 		 *
-		 * @param  string $template The default template.
-		 * @return string
+		 * @return boolean
 		 */
-		public function get_template( $template ) {
+		public function process_incoming_webhook() {
 			$gateway = get_query_var( 'charitable-listener', false );
 
 			if ( $gateway ) {
@@ -115,9 +127,10 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 				 */
 				do_action( 'charitable_process_ipn_' . $gateway );
 
+				return true;
 			}
 
-			return $template;
+			return false;
 		}
 	}
 

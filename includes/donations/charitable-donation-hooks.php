@@ -77,13 +77,6 @@ add_filter( 'charitable_sanitize_donation_meta', 'charitable_sanitize_donation_m
 add_action( 'deleted_post', array( 'Charitable_Campaign_Donations_DB', 'delete_donation_records' ) );
 
 /**
- * IPN listener.
- *
- * @see charitable_ipn_listener()
- */
-add_action( 'init', 'charitable_ipn_listener', 20 );
-
-/**
  * Post donation hook.
  *
  * @see charitable_is_after_donation()

@@ -2,15 +2,18 @@
 /**
  * The endpoint registry class, providing a clean way to access details about individual endpoints.
  *
- * @package     Charitable/Classes/Charitable_Endpoints
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Endpoints
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.6.14
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 
@@ -326,6 +329,18 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 */
 		public function endpoint_exists( $endpoint ) {
 			return array_key_exists( $endpoint, $this->endpoints );
+		}
+
+		/**
+		 * Returns an endpoint.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @param  string $endpoint The endpoint ID.
+		 * @return Charitable_Endpoint|false False if no endpoint exists, or the object.
+		 */
+		public function get_endpoint( $endpoint ) {
+			return $this->endpoint_exists( $endpoint ) ? $this->endpoints[ $endpoint ] : false;
 		}
 
 		/**

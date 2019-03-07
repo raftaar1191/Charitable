@@ -183,13 +183,11 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param  string  $gateway     The gateway to get the ipn URL for.
- * @param  boolean $force_https Whether to force the scheme to be https.
+ * @param  string $gateway The gateway to get the ipn URL for.
  * @return string
  */
-function charitable_get_ipn_url( $gateway, $force_https = false ) {
-	$scheme = $force_https ? 'https' : null;
-	return add_query_arg( 'charitable-listener', $gateway, home_url( 'index.php', $scheme ) );
+function charitable_get_ipn_url( $gateway ) {
+	return charitable_get_permalink( 'webhook_listener', array( 'gateway' => $gateway ) );
 }
 
 /**
@@ -199,26 +197,21 @@ function charitable_get_ipn_url( $gateway, $force_https = false ) {
  *
  * IPNs in Charitable are structured in this way: charitable-listener=gateway
  *
+ * @deprecated 1.9.0
+ *
  * @since  1.4.0
+ * @since  1.6.14 Deprecated. This is now handled by the webhook listener endpoint.
  *
  * @return boolean True if this is a call to our IPN. False otherwise.
  */
 function charitable_ipn_listener() {
-	if ( isset( $_GET['charitable-listener'] ) ) {
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.14',
+		"charitable()->endpoints()->get_endpoint( 'webhook_listener' )->process_incoming_webhook()"
+	);
 
-		$gateway = $_GET['charitable-listener'];
-
-		/**
-		 * Handle a gateway's IPN.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'charitable_process_ipn_' . $gateway );
-
-		return true;
-	}
-
-	return false;
+	return charitable()->endpoints()->get_endpoint( 'webhook_listener' )->process_incoming_webhook();
 }
 
 /**
