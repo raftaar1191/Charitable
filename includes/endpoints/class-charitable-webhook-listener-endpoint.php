@@ -125,15 +125,14 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		 * @return boolean
 		 */
 		public function process_incoming_webhook() {
+			/**
+			 * Prevent this from being called again for this request.
+			 */
+			remove_action( 'parse_query', array( $this, 'process_incoming_webhook' ) );
+				
 			$gateway = get_query_var( 'charitable-listener', false );
 
 			if ( $gateway ) {
-
-				/**
-				 * Prevent this from being called again for this request.
-				 */
-				remove_action( 'parse_query', array( $this, 'process_incoming_webhook' ) );
-
 
 				/**
 				 * Handle a gateway's IPN.
