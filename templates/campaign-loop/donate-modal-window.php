@@ -50,12 +50,12 @@ wp_enqueue_style( 'lean-modal-css' );
 			success: function ( response ) {
 				if ( response.success ) {
 					$wrapper.html( response.data );
-	
+
 					new CHARITABLE.Donation_Form( $wrapper.find( '#charitable-donation-form' ) );
 
 					CHARITABLE.Toggle();
 
-					resize_modal();                    
+					resize_modal();
 
 					return;
 				}

@@ -49,7 +49,7 @@ if ( ! class_exists( 'Charitable_Deprecated' ) ) :
 		 *
 		 * @var   string
 		 */
-		private $context;
+		protected $context;
 
 		/**
 		 * Create class object. Private constructor.
