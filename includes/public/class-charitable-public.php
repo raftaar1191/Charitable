@@ -2,23 +2,25 @@
 /**
  * Charitable Public class.
  *
- * @package 	Charitable/Classes/Charitable_Public
- * @version     1.0.0
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Public
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.2.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Public' ) ) :
 
 	/**
 	 * Charitable Public class.
 	 *
-	 * @final
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	final class Charitable_Public {
 
@@ -84,12 +86,25 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			$amount_msg = $minimum > 0
 				? sprintf(
 					/* Translators: %s: minimum donatino amount */
-					__( 'You must donate at least %s.', 'charitable' ), charitable_format_money( $minimum )
+					__( 'You must donate at least %s.', 'charitable' ),
+					charitable_format_money( $minimum )
 				)
 				: sprintf(
 					/* Translators: %s: minimum donatino amount */
-					__( 'You must donate more than %s.', 'charitable' ), charitable_format_money( $minimum )
+					__( 'You must donate more than %s.', 'charitable' ),
+					charitable_format_money( $minimum )
 				);
+
+			/**
+			 * Return whether $0 donations are permitted.
+			 *
+			 * Note that this filter is also called in Charitable_Donation_Form::validate_amount().
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param boolean $permitted Whether $0 donations are permitted.
+			 */
+			$permit_0_donation = apply_filters( 'charitable_permit_0_donation', false );
 
 			$currency = charitable_get_currency_helper();
 
@@ -100,21 +115,25 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 			 *
 			 * @param array $vars The set of vars.
 			 */
-			$vars = apply_filters( 'charitable_javascript_vars', array(
-				'ajaxurl'                      => admin_url( 'admin-ajax.php' ),
-				'loading_gif'                  => $assets_dir . '/images/charitable-loading.gif',
-				'currency_symbol'              => $currency->get_currency_symbol(),
-				'currency_format_num_decimals' => esc_attr( $currency->get_decimals() ),
-				'currency_format_decimal_sep'  => esc_attr( $currency->get_decimal_separator() ),
-				'currency_format_thousand_sep' => esc_attr( $currency->get_thousands_separator() ),
-				'currency_format'              => esc_attr( $currency->get_accounting_js_format() ), // For accounting.js.
-				'minimum_donation'             => $minimum,
-				'error_invalid_amount'         => $amount_msg,
-				'error_required_fields'        => __( 'Please fill out all required fields.', 'charitable' ),
-				'error_unknown'                => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
-				'error_invalid_cc_number'      => __( 'The credit card passed is not valid.', 'charitable' ),
-				'error_invalid_cc_expiry'      => __( 'The credit card expiry date is not valid.', 'charitable' ),
-			) );
+			$vars = apply_filters(
+				'charitable_javascript_vars',
+				array(
+					'ajaxurl'                      => admin_url( 'admin-ajax.php' ),
+					'loading_gif'                  => $assets_dir . '/images/charitable-loading.gif',
+					'currency_symbol'              => $currency->get_currency_symbol(),
+					'currency_format_num_decimals' => esc_attr( $currency->get_decimals() ),
+					'currency_format_decimal_sep'  => esc_attr( $currency->get_decimal_separator() ),
+					'currency_format_thousand_sep' => esc_attr( $currency->get_thousands_separator() ),
+					'currency_format'              => esc_attr( $currency->get_accounting_js_format() ), // For accounting.js.
+					'minimum_donation'             => $minimum,
+					'permit_0_donation'            => $permit_0_donation,
+					'error_invalid_amount'         => $amount_msg,
+					'error_required_fields'        => __( 'Please fill out all required fields.', 'charitable' ),
+					'error_unknown'                => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
+					'error_invalid_cc_number'      => __( 'The credit card passed is not valid.', 'charitable' ),
+					'error_invalid_cc_expiry'      => __( 'The credit card expiry date is not valid.', 'charitable' ),
+				)
+			);
 
 			/* Accounting.js */
 			wp_register_script(

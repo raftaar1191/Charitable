@@ -749,7 +749,7 @@ CHARITABLE = window.CHARITABLE || {};
     Donation_Form.prototype.is_valid_amount = function() {
         var minimum = parseFloat( CHARITABLE_VARS.minimum_donation );
 
-        return minimum > 0
+        return minimum > 0 || CHARITABLE_VARS.permit_0_donation
             ? this.get_subtotal() >= minimum
             : this.get_subtotal() > minimum;
     };

@@ -51,15 +51,18 @@ if ( empty( $suggested ) && ! $custom ) {
 			<?php
 			foreach ( $suggested as $suggestion ) :
 				$checked  = checked( $suggestion['amount'], $amount, false );
-				$field_id = esc_attr( sprintf( 'form-%s-field-%s',
-					$form_id,
-					$suggestion['amount']
-				) );
+				$field_id = esc_attr(
+					sprintf(
+						'form-%s-field-%s',
+						$form_id,
+						$suggestion['amount']
+					)
+				);
 
 				if ( strlen( $checked ) ) :
 					$amount_is_suggestion = true;
 				endif;
-			?>
+				?>
 				<li class="donation-amount suggested-donation-amount">
 					<label for="<?php echo $field_id; ?>">
 						<input
@@ -77,13 +80,13 @@ if ( empty( $suggested ) && ! $custom ) {
 						?>
 					</label>
 				</li>
-			<?php
+				<?php
 			endforeach;
 
 			if ( $custom ) :
 
 				$has_custom_donation_amount = ! $amount_is_suggestion && $amount;
-			?>
+				?>
 				<li class="donation-amount custom-donation-amount">
 					<span class="custom-donation-amount-wrapper">
 						<label for="form-<?php echo esc_attr( $form_id ); ?>-field-custom-amount">

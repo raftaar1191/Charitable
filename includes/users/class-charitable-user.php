@@ -572,7 +572,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 */
 		public function get_campaigns( $args = array() ) {
 			$defaults = array(
-			'author' => $this->ID,
+				'author' => $this->ID,
 			);
 
 			$args = wp_parse_args( $args, $defaults );
