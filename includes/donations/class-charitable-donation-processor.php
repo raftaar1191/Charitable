@@ -569,6 +569,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 * @param Charitable_Donation_Processor $processor   This instance of `Charitable_Donation_Processor`.
 			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
+			
+			// Save meta to donation_data.
+			$this->set_donation_data_value( 'meta', $meta );
 
 			foreach ( $meta as $meta_key => $value ) {
 				/**
