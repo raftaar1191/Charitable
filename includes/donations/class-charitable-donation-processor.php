@@ -569,9 +569,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 * @param Charitable_Donation_Processor $processor   This instance of `Charitable_Donation_Processor`.
 			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
-			
-			// Save meta to donation_data.
-			$this->set_donation_data_value( 'meta', $meta );
 
 			foreach ( $meta as $meta_key => $value ) {
 				/**
@@ -732,6 +729,53 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		}
 
 		/**
+		 * Returns the donation status. Defaults to charitable-pending.
+		 *
+		 * @since  1.0.0
+		 * @since  1.6.14 Changed access to public. Previously protected.
+		 *
+		 * @return string
+		 */
+		public function get_donation_status() {
+			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
+
+			if ( ! charitable_is_valid_donation_status( $status ) ) {
+				$status = 'charitable-pending';
+			}
+
+			return $status;
+		}
+
+		/**
+		 * Returns the name of the donor.
+		 *
+		 * @since  1.0.0
+		 * @since  1.6.14 Changed access to public. Previously protected.
+		 *
+		 * @return string
+		 */
+		public function get_donor_name() {
+			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
+			$user_data  = $this->get_donation_data_value( 'user' );
+			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
+			$last_name  = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
+			return trim( sprintf( '%s %s', $first_name, $last_name ) );
+		}
+
+		/**
+		 * Returns a comma separated list of the campaigns that are being donated to.
+		 *
+		 * @since  1.0.0
+		 * @since  1.6.14 Changed access to public. Previously protected.
+		 *
+		 * @return string
+		 */
+		public function get_campaign_names() {
+			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
+			return implode( ', ', $campaigns );
+		}
+
+		/**
 		 * Redirect the user after the gateway has processed the donation.
 		 *
 		 * @uses   Charitable_Donation_Processor::get_redirection_after_gateway_processing()
@@ -848,50 +892,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$core_values['post_date'] = get_date_from_gmt( $core_values['post_date_gmt'] );
 
 			return apply_filters( 'charitable_donation_values_core', $core_values, $this );
-		}
-
-		/**
-		 * Returns the donation status. Defaults to charitable-pending.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		public function get_donation_status() {
-			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
-
-			if ( ! charitable_is_valid_donation_status( $status ) ) {
-				$status = 'charitable-pending';
-			}
-
-			return $status;
-		}
-
-		/**
-		 * Returns the name of the donor.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		public function get_donor_name() {
-			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
-			$user_data  = $this->get_donation_data_value( 'user' );
-			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
-			$last_name  = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
-			return trim( sprintf( '%s %s', $first_name, $last_name ) );
-		}
-
-		/**
-		 * Returns a comma separated list of the campaigns that are being donated to.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		public function get_campaign_names() {
-			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
-			return implode( ', ', $campaigns );
 		}
 
 		/**
