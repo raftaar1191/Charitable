@@ -569,6 +569,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 * @param Charitable_Donation_Processor $processor   This instance of `Charitable_Donation_Processor`.
 			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
+			
+			// Save meta to donation_data.
+			$this->set_donation_data_value( 'meta', $meta );
 
 			foreach ( $meta as $meta_key => $value ) {
 				/**
@@ -854,7 +857,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @return string
 		 */
-		protected function get_donation_status() {
+		public function get_donation_status() {
 			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
 
 			if ( ! charitable_is_valid_donation_status( $status ) ) {
@@ -871,7 +874,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @return string
 		 */
-		protected function get_donor_name() {
+		public function get_donor_name() {
 			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
 			$user_data  = $this->get_donation_data_value( 'user' );
 			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
@@ -886,7 +889,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @return string
 		 */
-		protected function get_campaign_names() {
+		public function get_campaign_names() {
 			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
 			return implode( ', ', $campaigns );
 		}
