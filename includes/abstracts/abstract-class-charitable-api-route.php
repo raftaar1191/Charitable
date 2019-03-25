@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_API_Route' ) ) :
 		 *
 		 * @since 1.6.0
 		 */
-		public function __constrct() {
+		public function __construct() {
 			$this->version   = 1;
 			$this->namespace = 'charitable/v' . $this->version;
 		}
