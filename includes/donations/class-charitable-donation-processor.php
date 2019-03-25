@@ -570,9 +570,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
 
-			/* Update the donation data with the filtered, full meta. */
-			$this->set_donation_data_value( 'meta', $meta );
-
 			foreach ( $meta as $meta_key => $value ) {
 				/**
 				 * Sanitize a particular meta value.
@@ -601,12 +598,15 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			}
 
 			$donor_id        = $this->get_donor_id();
-			$meta            = $this->get_donation_data_value( 'meta' );
+			$meta            = $this->get_donation_data_value( 'meta', array() );
 			$contact_consent = array_key_exists( 'contact_consent', $meta ) ? (bool) $meta['contact_consent'] : false;
 
-			charitable_get_table( 'donors' )->update( $donor_id, array(
-				'contact_consent' => $contact_consent,
-			) );
+			charitable_get_table( 'donors' )->update(
+				$donor_id,
+				array(
+					'contact_consent' => $contact_consent,
+				)
+			);
 		}
 
 		/**
