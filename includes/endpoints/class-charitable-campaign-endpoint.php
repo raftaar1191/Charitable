@@ -132,10 +132,13 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 
 			ob_start();
 
-			charitable_template( 'content-campaign.php', array(
-				'content'  => $content,
-				'campaign' => charitable_get_current_campaign(),
-			) );
+			charitable_template(
+				'content-campaign.php',
+				array(
+					'content'  => $content,
+					'campaign' => charitable_get_current_campaign(),
+				)
+			);
 
 			$content = ob_get_clean();
 

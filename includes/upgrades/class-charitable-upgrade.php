@@ -381,13 +381,14 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 			foreach ( $this->upgrade_actions as $action => $upgrade ) {
 
-				/* If the upgrade has an active_callback, check whether the upgrade is required. If not, mark it as done. */
-				if ( array_key_exists( 'active_callback', $upgrade ) && ! call_user_func( $upgrade['active_callback'] ) ) {
-					$this->update_upgrade_log( $action );
-					continue;
-				}
-
 				if ( ! $this->upgrade_has_been_completed( $action ) ) {
+
+					/* If the upgrade has an active_callback, check whether the upgrade is required. If not, mark it as done. */
+					if ( array_key_exists( 'active_callback', $upgrade ) && ! call_user_func( $upgrade['active_callback'] ) ) {
+						$this->update_upgrade_log( $action );
+						continue;
+					}
+
 					call_user_func( $callback, $action, $upgrade );
 				}
 			}
@@ -1053,9 +1054,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		public function fix_donor_role_caps() {
 			remove_role( 'donor' );
 
-			add_role( 'donor', __( 'Donor', 'charitable' ), array(
-				'read' => true,
-			) );
+			add_role( 'donor', __( 'Donor', 'charitable' ), array( 'read' => true ) );
 
 			return true;
 		}
@@ -1068,6 +1067,11 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @return boolean
 		 */
 		protected function has_empty_donor_ids() {
+			echo '<pre>';
+			var_dump( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) );
+			var_dump( $this->count_empty_donor_id_donations( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) ) );
+			echo '</pre>';
+
 			return 0 < $this->count_empty_donor_id_donations( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) );
 		}
 
