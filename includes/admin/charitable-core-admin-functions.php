@@ -44,7 +44,11 @@ function charitable_admin_view( $view, $view_args = array() ) {
 	if ( ! is_readable( $filename ) ) {
 		charitable_get_deprecated()->doing_it_wrong(
 			__FUNCTION__,
-			__( 'Passed view (' . $filename . ') not found or is not readable.', 'charitable' ),
+			printf(
+				/* translators: %s: Filename of passed view */
+				__( 'Passed view (%s) not found or is not readable.', 'charitable' ),
+				$filename
+			),
 			'1.0.0'
 		);
 
