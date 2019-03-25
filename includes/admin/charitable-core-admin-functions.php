@@ -39,12 +39,12 @@ function charitable_admin_view( $view, $view_args = array() ) {
 	 * @param string $view      The view.
 	 * @param array  $view_args View args.
 	 */
-	$filename  = apply_filters( 'charitable_admin_view_path', $base_path . $view . '.php', $view, $view_args );
+	$filename = apply_filters( 'charitable_admin_view_path', $base_path . $view . '.php', $view, $view_args );
 
 	if ( ! is_readable( $filename ) ) {
 		charitable_get_deprecated()->doing_it_wrong(
 			__FUNCTION__,
-			printf(
+			sprintf(
 				/* translators: %s: Filename of passed view */
 				__( 'Passed view (%s) not found or is not readable.', 'charitable' ),
 				$filename
