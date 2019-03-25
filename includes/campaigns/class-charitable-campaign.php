@@ -1103,6 +1103,20 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				return $checked;
 			}
 
+			/**
+			 * Filter whether a campaign can be saved with custom donations disabled
+			 * and no suggested donations.
+			 *
+			 * @since 1.6.14
+			 *
+			 * @param boolean             $permitted Whether a campaign is permitted to be saved without
+			 *                                       suggested donations or custom donations.
+			 * @param array               $submitted The submitted values.
+			 */
+			if ( apply_filters( 'charitable_campaign_permitted_without_custom_or_suggested', false, $submitted ) ) {
+				return $checked;
+			}
+
 			/* If suggested donations are not set, custom donations needs to be enabled. */
 			if ( ! isset( $submitted['_campaign_suggested_donations'] ) ) {
 				return 1;

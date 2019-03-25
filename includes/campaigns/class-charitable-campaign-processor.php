@@ -415,9 +415,7 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 				return $value;
 			}
 
-			return Charitable_Campaign::sanitize_custom_donations( $value, array(
-				'_campaign_suggested_donations' => $this->get_suggested_donations_value(),
-			) );
+			return Charitable_Campaign::sanitize_custom_donations( $value, $this->input );
 		}
 
 		/**
