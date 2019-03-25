@@ -570,6 +570,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			 */
 			$meta = apply_filters( 'charitable_donation_meta', $meta, $donation_id, $this );
 
+			/* Update the donation data with the filtered, full meta. */
+			$this->set_donation_data_value( 'meta', $meta );
+
 			foreach ( $meta as $meta_key => $value ) {
 				/**
 				 * Sanitize a particular meta value.
