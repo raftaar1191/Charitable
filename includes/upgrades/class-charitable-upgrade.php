@@ -1067,11 +1067,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 * @return boolean
 		 */
 		protected function has_empty_donor_ids() {
-			echo '<pre>';
-			var_dump( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) );
-			var_dump( $this->count_empty_donor_id_donations( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) ) );
-			echo '</pre>';
-
 			return 0 < $this->count_empty_donor_id_donations( get_option( 'charitable_skipped_donations_with_empty_donor_id', array() ) );
 		}
 
