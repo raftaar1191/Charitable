@@ -308,7 +308,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 
 				if ( ! empty( $search_parts ) ) {
 					global $wpdb;
-					$where_statement .= $wpdb->prepare( " AND {$this->table_name}.first_name LIKE %s", "%{$search_parts}%" );
+					$where_statement .= $wpdb->prepare( " AND ({$this->table_name}.first_name LIKE %s OR {$this->table_name}.last_name LIKE %s)", "%{$search_parts}%", "%{$search_parts}%" );
 				}
 			}
 
