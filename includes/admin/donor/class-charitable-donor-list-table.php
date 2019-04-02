@@ -310,20 +310,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Generates content for a single row of the table
-	 *
-	 * @param object $item The current item.
-	 *
-	 * @since  1.7.0
-	 * @access public
-	 */
-	public function single_row( $item ) {
-		echo sprintf( '<tr id="donor-%1$d" data-id="%2$d" data-name="%3$s">', $item['donor_id'], $item['donor_id'], $item['name'] );
-		$this->single_row_columns( $item );
-		echo '</tr>';
-	}
-
-	/**
 	 * Setup the final data for the table.
 	 *
 	 * @access public
