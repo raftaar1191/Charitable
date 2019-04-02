@@ -289,6 +289,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		}
 
 		/**
+		/**
 		 * Set search where clause.
 		 *
 		 * @since  1.7.0
@@ -302,15 +303,12 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		public function where_search( $where_statement ) {
 
 			// Donors created for a specific date or in a date range
-			if ( ! empty( $this->args['s'] ) && false !== strpos( $this->args['s'], ':' ) ) {
-				$search_parts = explode( ':', $this->args['s'] );
+			if ( ! empty( $this->args['first_name'] ) ) {
+				$search_parts = $this->args['first_name'];
 
-				if ( ! empty( $search_parts[0] ) ) {
-					switch ( $search_parts[0] ) {
-						case 'name':
-							$where_statement = " AND {$this->table_name}.first_name LIKE '%{$search_parts[1]}%' AND {$this->table_name}.last_name LIKE '%{$search_parts[1]}%'";
-							break;
-					}
+				if ( ! empty( $search_parts ) ) {
+					global $wpdb;
+					$where_statement .= $wpdb->prepare( " AND {$this->table_name}.first_name LIKE %s", "%{$search_parts}%" );
 				}
 			}
 
