@@ -268,7 +268,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		$_donor_query = $this->get_donor_query_args();
 
 		$_donor_query['number'] = - 1;
-		$_donor_query['output'] = 'count';
 
 		$query = new Charitable_Donor_Query( $_donor_query );
 		return $query->count();
