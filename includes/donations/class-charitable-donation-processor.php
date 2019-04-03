@@ -729,24 +729,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		}
 
 		/**
-		 * Returns the donation status. Defaults to charitable-pending.
-		 *
-		 * @since  1.0.0
-		 * @since  1.6.14 Changed access to public. Previously protected.
-		 *
-		 * @return string
-		 */
-		public function get_donation_status() {
-			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
-
-			if ( ! charitable_is_valid_donation_status( $status ) ) {
-				$status = 'charitable-pending';
-			}
-
-			return $status;
-		}
-
-		/**
 		 * Returns the name of the donor.
 		 *
 		 * @since  1.0.0
@@ -773,6 +755,23 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		public function get_campaign_names() {
 			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
 			return implode( ', ', $campaigns );
+		}
+
+		/**
+		 * Returns the donation status. Defaults to charitable-pending.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return string
+		 */
+		protected function get_donation_status() {
+			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
+
+			if ( ! charitable_is_valid_donation_status( $status ) ) {
+				$status = 'charitable-pending';
+			}
+
+			return $status;
 		}
 
 		/**
