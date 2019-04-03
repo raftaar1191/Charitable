@@ -93,7 +93,7 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 			if ( $wp_rewrite->using_permalinks() ) {
 				$url = sprintf( '%s/charitable-listener/%s', untrailingslashit( $home_url ), $args['gateway'] );
 			} else {
-				$url = add_query_arg( array( 'charitable_listener' => $args['gateway'] ), $home_url );
+				$url = add_query_arg( array( 'charitable-listener' => $args['gateway'] ), $home_url );
 				$url = esc_url_raw( $url );
 			}
 
