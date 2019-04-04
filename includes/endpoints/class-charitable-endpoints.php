@@ -190,7 +190,13 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 				return;
 			}
 
-			if ( $this->get_endpoint( $this->get_current_endpoint() )->is_cacheable() ) {
+			$endpoint_id = $this->get_current_endpoint();
+
+			if ( ! $endpoint_id ) {
+				return;
+			}
+
+			if ( $this->get_endpoint( $endpoint_id )->is_cacheable() ) {
 				return;
 			}
 

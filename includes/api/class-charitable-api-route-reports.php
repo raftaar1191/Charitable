@@ -41,7 +41,7 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 		 * @return void
 		 */
 		public function __construct() {
-			parent::__constrct();
+			parent::__construct();
 
 			$this->base = 'reports';
 		}

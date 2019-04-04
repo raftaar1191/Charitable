@@ -103,33 +103,13 @@ class Charitable_Plugin_Updater {
 			$changelog_link = self_admin_url( 'index.php?edd_sl_action=view_plugin_changelog&plugin=' . $this->name . '&slug=' . $this->slug . '&TB_iframe=true&width=772&height=911' );
 
 			switch ( $version_info->download_link ) {
-				case 'missing_license' :
-					printf(
-						__( '<p>There is a new version of %1$s available but you have not activated your license. <a target="_top" href="%2$s">Activate your license</a> or <a target="_blank" class="thickbox" href="%3$s">view version %4$s details</a>.</p>', 'charitable' ),
-						esc_html( $version_info->name ),
-						admin_url( 'admin.php?page=charitable-settings&tab=licenses' ),
-						esc_url( $changelog_link ),
-						esc_html( $version_info->new_version )
-					);
+				case 'missing_license':
+				case 'expired_license':
+				case 'missing_requirements':
+					echo htmlspecialchars_decode( $version_info->package_download_restriction );
 					break;
 
-				case 'expired_license' :
-					$base_renewal_url = isset( $version_info->renewal_link ) ? $version_info->renewal_link : 'https://www.wpcharitable.com/account';
-
-					printf(
-						__( '<p>There is a new version of %1$s available but your license has expired. <a target="_blank" href="%2$s">Renew your license</a> or <a target="_blank" class="thickbox" href="%3$s">view version %4$s details</a>.</p>', 'charitable' ),
-						esc_html( $version_info->name ),
-						esc_url( add_query_arg( array(
-							'utm_source' => 'plugin-upgrades', 
-							'utm_medium' => 'wordpress-dashboard',
-							'utm_campaign' => 'expired-license',
-						), $base_renewal_url ) ),
-						esc_url( $changelog_link ),
-						esc_html( $version_info->new_version )
-					);
-					break;
-
-				default : 
+				default:
 					printf(
 						__( '<p>There is a new version of %1$s available. <a target="_blank" class="thickbox" href="%2$s">View version %3$s details</a> or <a href="%4$s">update now</a>.</p>', 'charitable' ),
 						esc_html( $version_info->name ),
