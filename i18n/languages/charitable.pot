@@ -4,25 +4,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.6.14\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-03-07 03:37:14+00:00\n"
+"POT-Creation-Date: 2019-04-04 12:05:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: WP-Translations (http://wp-translations.org/)\n"
 "Language-Team: WP-Translations <wpt@wp-translations.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
 "Language: en_US\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Country: United States\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
 "X-Poedit-Basepath: ../\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: grunt-wp-i18n1.0.2\n"
 
 #: charitable.php:823
 msgid "Cloning this object is forbidden."
@@ -5013,6 +5013,11 @@ msgid ""
 "Campaign</a>"
 msgstr ""
 
+#: includes/admin/charitable-core-admin-functions.php:49
+#. translators: %s: Filename of passed view
+msgid "Passed view (%s) not found or is not readable."
+msgstr ""
+
 #: includes/admin/class-charitable-admin-pages.php:150
 #: includes/fields/default-fields/donation-fields.php:244
 msgid "Campaign Categories"
@@ -5425,7 +5430,7 @@ msgstr ""
 
 #: includes/admin/forms/class-charitable-admin-donation-form.php:108
 #: includes/fields/default-fields/donation-fields.php:79
-#: includes/upgrades/class-charitable-upgrade.php:1056
+#: includes/upgrades/class-charitable-upgrade.php:1057
 #: includes/users/class-charitable-roles.php:64
 msgid "Donor"
 msgstr ""
@@ -6394,8 +6399,8 @@ msgstr ""
 #: includes/admin/views/welcome-page/page.php:130
 msgid ""
 "You can help us translate Charitable into %s by <a "
-"href=\"https://translate.wordpress.org/projects/wp-plugins/charitable\""
-">contributing to the translation project</a>."
+"href=\"https://translate.wordpress.org/projects/wp-plugins/charitable\">"
+"contributing to the translation project</a>."
 msgstr ""
 
 #: includes/admin/views/welcome-page/page.php:135
@@ -6460,13 +6465,13 @@ msgstr ""
 msgid "List of donation reports."
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign-processor.php:475
+#: includes/campaigns/class-charitable-campaign-processor.php:473
 msgid ""
 "Campaign processor requires date in YYYY-MM-DD format. Date passed as %s. "
 "This message was added in Charitable version 1.5.9."
 msgstr ""
 
-#: includes/campaigns/class-charitable-campaign-processor.php:631
+#: includes/campaigns/class-charitable-campaign-processor.php:629
 msgid ""
 "%s is deprecated as a sanitizer on the %s hook. To prevent sanitization, "
 "use add_filter( 'charitable_campaign_processor_disable_sanitizer_%s', "
@@ -7045,7 +7050,7 @@ msgstr ""
 msgid "Donation created."
 msgstr ""
 
-#: includes/donations/class-charitable-donation-processor.php:749
+#: includes/donations/class-charitable-donation-processor.php:798
 #. translators: %s: error message
 msgid "Payment failed with errors: %s"
 msgstr ""
@@ -7257,7 +7262,7 @@ msgstr ""
 
 #: includes/emails/class-charitable-emails.php:157
 #: includes/gateways/class-charitable-gateways.php:98
-#: includes/licensing/class-charitable-licenses.php:550
+#: includes/licensing/class-charitable-licenses.php:682
 msgid "Cheatin' eh?!"
 msgstr ""
 
@@ -7324,11 +7329,11 @@ msgstr ""
 msgid "Email Verification"
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:74
+#: includes/endpoints/class-charitable-endpoints.php:75
 msgid "Endpoint %s has already been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:169
+#: includes/endpoints/class-charitable-endpoints.php:170
 #. translators: %s: endpoint id
 msgid "Endpoint %s has not been registered."
 msgstr ""
@@ -7603,7 +7608,7 @@ msgstr ""
 
 #: includes/forms/class-charitable-donation-form.php:743
 #: includes/forms/class-charitable-donation-form.php:750
-#: includes/public/class-charitable-public.php:91
+#: includes/public/class-charitable-public.php:94
 #. Translators: %s: minimum donatino amount
 msgid "You must donate more than %s."
 msgstr ""
@@ -8092,35 +8097,27 @@ msgstr ""
 msgid "Gateway disabled"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:244
+#: includes/licensing/class-charitable-licenses.php:251
 msgid "You have not activated your license key. Activate your license to update: %s"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:248
+#: includes/licensing/class-charitable-licenses.php:255
 msgid ""
 "You have not activated your license key. <a href=\"%s\" "
 "target=\"_top\">Activate your license to update.</a>"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:261
+#: includes/licensing/class-charitable-licenses.php:268
 msgid "Your license has expired. Renew your license key: %s"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:265
+#: includes/licensing/class-charitable-licenses.php:272
 msgid ""
 "Your license has expired. <a href=\"%s\" target=\"_blank\">Renew your "
 "license key.</a>"
 msgstr ""
 
-#: includes/licensing/class-charitable-licenses.php:557
-msgid "Missing product key"
-msgstr ""
-
-#: includes/licensing/class-charitable-licenses.php:564
-msgid "This product is not valid or does not have a valid license key."
-msgstr ""
-
-#: includes/licensing/class-charitable-plugin-updater.php:108
+#: includes/licensing/class-charitable-licenses.php:307
 msgid ""
 "<p>There is a new version of %1$s available but you have not activated your "
 "license. <a target=\"_top\" href=\"%2$s\">Activate your license</a> or <a "
@@ -8128,7 +8125,7 @@ msgid ""
 "details</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:120
+#: includes/licensing/class-charitable-licenses.php:321
 msgid ""
 "<p>There is a new version of %1$s available but your license has expired. "
 "<a target=\"_blank\" href=\"%2$s\">Renew your license</a> or <a "
@@ -8136,22 +8133,44 @@ msgid ""
 "details</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:134
+#: includes/licensing/class-charitable-licenses.php:347
+msgid "<li>Requires PHP version %s or greater.</li>"
+msgstr ""
+
+#: includes/licensing/class-charitable-licenses.php:358
+msgid "Requires Charitable version %s or greater."
+msgstr ""
+
+#: includes/licensing/class-charitable-licenses.php:373
+msgid ""
+"<p>There is a new version of %1$s available but you are missing the "
+"following minimum requirements:</p>%2$s"
+msgstr ""
+
+#: includes/licensing/class-charitable-licenses.php:689
+msgid "Missing product key"
+msgstr ""
+
+#: includes/licensing/class-charitable-licenses.php:696
+msgid "This product is not valid or does not have a valid license key."
+msgstr ""
+
+#: includes/licensing/class-charitable-plugin-updater.php:114
 msgid ""
 "<p>There is a new version of %1$s available. <a target=\"_blank\" "
 "class=\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a "
 "href=\"%4$s\">update now</a>.</p>"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:170
+#: includes/licensing/class-charitable-plugin-updater.php:150
 msgid "You do not have permission to install plugin updates"
 msgstr ""
 
-#: includes/licensing/class-charitable-plugin-updater.php:170
-#: includes/upgrades/class-charitable-upgrade.php:520
-#: includes/upgrades/class-charitable-upgrade.php:555
-#: includes/upgrades/class-charitable-upgrade.php:657
-#: includes/upgrades/class-charitable-upgrade.php:1137
+#: includes/licensing/class-charitable-plugin-updater.php:150
+#: includes/upgrades/class-charitable-upgrade.php:521
+#: includes/upgrades/class-charitable-upgrade.php:556
+#: includes/upgrades/class-charitable-upgrade.php:658
+#: includes/upgrades/class-charitable-upgrade.php:1136
 msgid "Error"
 msgstr ""
 
@@ -8231,40 +8250,40 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:87
+#: includes/public/class-charitable-public.php:89
 #. Translators: %s: minimum donatino amount
 msgid "You must donate at least %s."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:113
+#: includes/public/class-charitable-public.php:131
 msgid "Please fill out all required fields."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:114
+#: includes/public/class-charitable-public.php:132
 msgid "Your donation could not be processed. Please reload the page and try again."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:115
+#: includes/public/class-charitable-public.php:133
 msgid "The credit card passed is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:116
+#: includes/public/class-charitable-public.php:134
 msgid "The credit card expiry date is not valid."
 msgstr ""
 
-#: includes/public/class-charitable-public.php:196
+#: includes/public/class-charitable-public.php:215
 msgid "You can only upload %d file"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:197
+#: includes/public/class-charitable-public.php:216
 msgid "You can only upload a maximum of %d files"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:198
+#: includes/public/class-charitable-public.php:217
 msgid "%1$s exceeds the max upload size of %2$s"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:199
+#: includes/public/class-charitable-public.php:218
 msgid "%s failed to upload. Please try again."
 msgstr ""
 
@@ -8338,17 +8357,17 @@ msgstr ""
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:442
+#: includes/upgrades/class-charitable-upgrade.php:443
 #. translators: %s: upgrade link
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:520
-#: includes/upgrades/class-charitable-upgrade.php:555
-#: includes/upgrades/class-charitable-upgrade.php:657
-#: includes/upgrades/class-charitable-upgrade.php:1137
+#: includes/upgrades/class-charitable-upgrade.php:521
+#: includes/upgrades/class-charitable-upgrade.php:556
+#: includes/upgrades/class-charitable-upgrade.php:658
+#: includes/upgrades/class-charitable-upgrade.php:1136
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 
@@ -8554,11 +8573,11 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: templates/donation-form/donation-amount-list.php:95
+#: templates/donation-form/donation-amount-list.php:98
 msgid "Custom amount"
 msgstr ""
 
-#: templates/donation-form/donation-amount-list.php:113
+#: templates/donation-form/donation-amount-list.php:116
 msgid "Enter donation amount"
 msgstr ""
 
@@ -8806,15 +8825,18 @@ msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
 
-#: includes/public/class-charitable-public.php:195
+#: includes/public/class-charitable-public.php:214
 msgctxt "remove image button text"
 msgid "Remove"
 msgstr ""
 
-#: includes/utilities/charitable-utility-functions.php:204
 #: includes/utilities/charitable-utility-functions.php:209
+#: includes/utilities/charitable-utility-functions.php:219
+#. translators: %1$s: first list item; %2$s: second list item.
+#. translators: %1$s: all list items except last, comma-separated; %2$s: second
+#. list item.
 msgctxt "x and y"
-msgid "%s and %s"
+msgid "%1$s and %2$s"
 msgstr ""
 
 #: templates/campaign/donate-link.php:26 templates/campaign/donate-modal.php:21

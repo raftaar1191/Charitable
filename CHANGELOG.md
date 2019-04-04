@@ -2,8 +2,14 @@
 * FIX: Show terms and conditions, privacy policy and contact consent on the registration form if enabled, regardless of whether the settings have been saved. [#657](https://github.com/Charitable/Charitable/issues/657)
 * FIX: If you have multiple extensions installed and you have an unfinished upgrade routine, the notice was shown repeatedly. [#655](https://github.com/Charitable/Charitable/issues/655)
 * NEW: Added option to force HTTPS on the campaign donation page. This is off by default but can be enabled by returning `true` to the `charitable_campaign_donation_endpoint_force_https` filter. [#658](https://github.com/Charitable/Charitable/issues/658)
-* NEW: Added Webhook Listener endpoint to provide pretty URL for IPNs/webhooks. <strong>Note: The IPN listener is now run on the <code>parse_query</code> hook, which is later than previously when it was run on the <code>init</code> hook.</strong> [#659](https://github.com/Charitable/Charitable/issues/659)
+* NEW: Added Webhook Listener endpoint to provide pretty URL for IPNs/webhooks. <strong>Note: The IPN listener is now run on the `parse_query` hook, which is later than previously when it was run on the `init` hook.</strong> [#659](https://github.com/Charitable/Charitable/issues/659)
 * NEW: Added option to force HTTPS for the IPN/Webhook listener URL. This is off by default but can be enabled by returning `true` to the `charitable_webhook_listener_endpoint_force_https` filter.
+* NEW: Added ability for Charitable to check whether an extension update has minimum requirements (i.e. minimum PHP or Charitable version) and prevent update if those minimum requirements are not met.
+* NEW: Added filter to set whether a campaign can be saved with custom donations disabled and no suggested donations. [#669](https://github.com/Charitable/Charitable/issues/669)
+* NEW: Added `charitable_is_localhost` function to return whether installation is localhost. This also introduces the `charitable_localhost_ips` filter to filter the set of whitelisted IP addresses that will result in `charitable_is_localhost` returning `true`.
+* NEW: Improved support for Comet Cache and Litespeed Cache. [#673](https://github.com/Charitable/Charitable/issues/673) and [#674](https://github.com/Charitable/Charitable/issues/674)
+* FIX: Ensure that $0 donations work if `charitable_permit_0_donation` is returning `true`. [#668](https://github.com/Charitable/Charitable/issues/668)
+* FIX: Numerous small errors fixed.
 
 # 1.6.13
 * FIX: "Remove" button in Picture field was hidden in the Twenty Nineteen theme. [#654](https://github.com/Charitable/Charitable/issues/654)
