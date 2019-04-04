@@ -50,6 +50,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		public function __construct() {
 			$this->endpoints = array();
 
+			add_action( 'wp', array( $this, 'disable_endpoint_cache' ) );
 			add_action( 'init', array( $this, 'setup_rewrite_rules' ) );
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 			add_filter( 'template_include', array( $this, 'template_loader' ), 12 );
@@ -175,6 +176,25 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			return $this->endpoints[ $endpoint ]->get_template( $default_template );
+		}
+
+		/**
+		 * Disable page cache on non-cacheable endpoints using the DONOTCACHEPAGE constant.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @return void
+		 */
+		public function disable_endpoint_cache() {
+			if ( defined( 'DONOTCACHEPAGE' ) ) {
+				return;
+			}
+
+			if ( $this->get_endpoint( $this->get_current_endpoint() )->is_cacheable() ) {
+				return;
+			}
+
+			define( 'DONOTCACHEPAGE', true );
 		}
 
 		/**
