@@ -195,6 +195,13 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			define( 'DONOTCACHEPAGE', true );
+
+			/**
+			 * Fire action to note that the current page should not be cached.
+			 *
+			 * @since 1.6.14
+			 */
+			do_action( 'charitable_do_not_cache' );
 		}
 
 		/**

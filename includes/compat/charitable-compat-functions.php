@@ -41,6 +41,11 @@ function charitable_load_compat_functions() {
 	if ( class_exists( 'WpFastestCache' ) ) {
 		require_once( $includes_path . 'compat/charitable-wp-fastest-cache-compat-functions.php' );
 	}
+
+	/* Litespeed Cache */
+	if ( class_exists( 'LiteSpeed_Cache' ) ) {
+		require_once( $includes_path . 'compat/charitable-litespeed-cache-compat-functions.php' );
+	}
 }
 
 /**
