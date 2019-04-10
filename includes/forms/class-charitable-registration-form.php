@@ -229,11 +229,13 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			$submitted = apply_filters( 'charitable_registration_values', $_POST, $fields, $form );
 
 			if ( ! isset( $submitted['user_email'] ) || ! is_email( $submitted['user_email'] ) ) {
-				charitable_get_notices()->add_error( sprintf(
-					/* translators: %s: submitted email address */
-					__( '%s is not a valid email address.', 'charitable' ),
-					$submitted['user_email']
-				) );
+				charitable_get_notices()->add_error(
+					sprintf(
+						/* translators: %s: submitted email address */
+						__( '%s is not a valid email address.', 'charitable' ),
+						$submitted['user_email']
+					)
+				);
 
 				return false;
 			}
