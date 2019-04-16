@@ -723,11 +723,14 @@ if ( ! class_exists( 'Charitable' ) ) :
 			 *
 			 * @param array $tables List of tables as a key=>value array.
 			 */
-			return apply_filters( 'charitable_db_tables', array(
-				'campaign_donations' => 'Charitable_Campaign_Donations_DB',
-				'donors'             => 'Charitable_Donors_DB',
-				'donormeta'          => 'Charitable_Donormeta_DB',
-			) );
+			return apply_filters(
+				'charitable_db_tables',
+				array(
+					'campaign_donations' => 'Charitable_Campaign_Donations_DB',
+					'donors'             => 'Charitable_Donors_DB',
+					'donormeta'          => 'Charitable_Donormeta_DB',
+				)
+			);
 		}
 
 		/**

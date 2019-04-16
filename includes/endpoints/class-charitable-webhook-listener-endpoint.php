@@ -121,9 +121,14 @@ if ( ! class_exists( 'Charitable_Webhook_Listener_Endpoint' ) ) :
 		 *
 		 * @since  1.6.14
 		 *
+		 * @param  WP_Query $wp_query The query object.
 		 * @return boolean
 		 */
-		public function process_incoming_webhook() {
+		public function process_incoming_webhook( WP_Query $wp_query ) {
+			if ( ! $wp_query->is_main_query() ) {
+				return false;
+			}
+
 			/**
 			 * Prevent this from being called again for this request.
 			 */
