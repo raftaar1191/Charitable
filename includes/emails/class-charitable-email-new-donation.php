@@ -99,9 +99,11 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			$email = new self( array(
-				'donation' => $donation,
-			) );
+			$email = new self(
+				array(
+					'donation' => $donation,
+				)
+			);
 
 			/**
 			 * Don't resend the email.

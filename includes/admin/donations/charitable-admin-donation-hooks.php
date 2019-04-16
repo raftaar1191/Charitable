@@ -41,6 +41,15 @@ add_action( 'admin_init', array( Charitable_Donation_Meta_Boxes::get_instance(),
 add_action( 'save_post_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'save_donation' ), 10, 2 );
 
 /**
+ * Maybe prevent emails if we're saving a donation.
+ *
+ * @see Charitable_Donation_Meta_Boxes::maybe_block_new_donation_email()
+ * @see Charitable_Donation_Meta_Boxes::maybe_block_donation_receipt_email()
+ */
+add_filter( 'charitable_send_' . Charitable_Email_New_Donation::get_email_id(), array( Charitable_Donation_Meta_Boxes::get_instance(), 'maybe_block_new_donation_email' ) );
+add_filter( 'charitable_send_' . Charitable_Email_Donation_Receipt::get_email_id(), array( Charitable_Donation_Meta_Boxes::get_instance(), 'maybe_block_donation_receipt_email' ) );
+
+/**
  * Save the donation.
  *
  * @see Charitable_Donation_Meta_Boxes::post_messages()
