@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 5.1.1
-Stable tag: 1.6.14
+Stable tag: 1.6.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,11 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.15 =
+* NEW: Added Colombian Peso as currency. [#676](https://github.com/Charitable/Charitable/issues/676)
+* FIX: Error resulted in donation receipts not getting sent initially for manually added donations, and then getting sent twice. [#631](https://github.com/Charitable/Charitable/issues/631)
+* FIX: Avoid fatal error related to the new Webhook Listener Endpoint when Social Warfare is active. [#678](https://github.com/Charitable/Charitable/issues/678)
 
 = 1.6.14 =
 * FIX: Show terms and conditions, privacy policy and contact consent on the registration form if enabled, regardless of whether the settings have been saved. [#657](https://github.com/Charitable/Charitable/issues/657)
