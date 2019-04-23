@@ -420,6 +420,11 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 				return $field;
 			}
 
+			if ( array_key_exists( 'value_callback', $field ) && is_callable( $field['value_callback'] ) ) {
+				$field['value'] = call_user_func( $field['value_callback'], $campaign, $key );
+				return $field;
+			}
+
 			$value = $campaign->get( $field_name );
 
 			if ( ! $value ) {

@@ -416,12 +416,15 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 			 *
 			 * @param string[] $types Field types.
 			 */
-			$default_field_types = apply_filters( 'charitable_default_template_field_types', array(
-				'text',
-				'email',
-				'password',
-				'date',
-			) );
+			$default_field_types = apply_filters(
+				'charitable_default_template_field_types',
+				array(
+					'text',
+					'email',
+					'password',
+					'date',
+				)
+			);
 
 			return in_array( $field_type, $default_field_types );
 		}
