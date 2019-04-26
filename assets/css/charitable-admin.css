@@ -171,7 +171,8 @@
     display: block;
     padding-top: 6px;
     font-style: italic; }
-  .charitable-metabox-wrap label {
+  .charitable-metabox-wrap label,
+  .charitable-metabox-wrap legend {
     display: block;
     margin-bottom: 6px; }
   .charitable-metabox-wrap th label {
