@@ -1,3 +1,7 @@
+# 1.6.16
+* NEW: Allow `value_callback` in `admin_form` settings for a field registered with the Campaign Fields API to override the main `value_callback` parameter. [#679](https://github.com/Charitable/Charitable/issues/679)
+* FIX: Prevent credit card validation in donation widget, which prevented it from working in certain specific scenarios. [#680](https://github.com/Charitable/Charitable/issues/680)
+
 # 1.6.15
 * NEW: Added Colombian Peso as currency. [#676](https://github.com/Charitable/Charitable/issues/676)
 * FIX: Error resulted in donation receipts not getting sent initially for manually added donations, and then getting sent twice. [#631](https://github.com/Charitable/Charitable/issues/631)

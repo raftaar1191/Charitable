@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 5.1.1
-Stable tag: 1.6.15
+Stable tag: 1.6.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -167,6 +167,10 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.16 =
+* NEW: Allow `value_callback` in `admin_form` settings for a field registered with the Campaign Fields API to override the main `value_callback` parameter. [#679](https://github.com/Charitable/Charitable/issues/679)
+* FIX: Prevent credit card validation in donation widget, which prevented it from working in certain specific scenarios. [#680](https://github.com/Charitable/Charitable/issues/680)
 
 = 1.6.15 =
 * NEW: Added Colombian Peso as currency. [#676](https://github.com/Charitable/Charitable/issues/676)

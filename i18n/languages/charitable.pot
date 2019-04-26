@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.15\n"
+"Project-Id-Version: Charitable 1.6.16\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-04-17 02:06:47+00:00\n"
+"POT-Creation-Date: 2019-04-26 02:17:40+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4708,7 +4708,7 @@ msgid "Not Given"
 msgstr ""
 
 #: includes/abstracts/abstract-class-charitable-abstract-donation.php:718
-#: includes/fields/default-fields/donation-fields.php:395
+#: includes/fields/default-fields/donation-fields.php:397
 msgid "Given"
 msgstr ""
 
@@ -5013,13 +5013,13 @@ msgid ""
 "Campaign</a>"
 msgstr ""
 
-#: includes/admin/charitable-core-admin-functions.php:49
+#: includes/admin/charitable-core-admin-functions.php:51
 #. translators: %s: Filename of passed view
 msgid "Passed view (%s) not found or is not readable."
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:150
-#: includes/fields/default-fields/donation-fields.php:244
+#: includes/fields/default-fields/donation-fields.php:246
 msgid "Campaign Categories"
 msgstr ""
 
@@ -5429,7 +5429,7 @@ msgid "Donation status could not be changed."
 msgstr ""
 
 #: includes/admin/forms/class-charitable-admin-donation-form.php:108
-#: includes/fields/default-fields/donation-fields.php:79
+#: includes/fields/default-fields/donation-fields.php:81
 #: includes/upgrades/class-charitable-upgrade.php:1057
 #: includes/users/class-charitable-roles.php:64
 msgid "Donor"
@@ -5514,7 +5514,7 @@ msgid "Campaign Creator Email"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:129
-#: includes/fields/default-fields/donation-fields.php:31
+#: includes/fields/default-fields/donation-fields.php:33
 msgid "Donation ID"
 msgstr ""
 
@@ -5523,20 +5523,20 @@ msgid "Campaign Title"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:132
-#: includes/fields/default-fields/donation-fields.php:43
+#: includes/fields/default-fields/donation-fields.php:45
 #: includes/privacy/class-charitable-privacy.php:415
 msgid "First Name"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:133
-#: includes/fields/default-fields/donation-fields.php:63
+#: includes/fields/default-fields/donation-fields.php:65
 #: includes/privacy/class-charitable-privacy.php:419
 msgid "Last Name"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:134
-#: includes/fields/default-fields/donation-fields.php:92
-#: includes/fields/default-fields/donation-fields.php:97
+#: includes/fields/default-fields/donation-fields.php:94
+#: includes/fields/default-fields/donation-fields.php:99
 #: includes/forms/class-charitable-profile-form.php:163
 #: includes/forms/class-charitable-registration-form.php:105
 #: includes/privacy/class-charitable-privacy.php:423
@@ -5545,43 +5545,43 @@ msgid "Email"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:135
-#: includes/fields/default-fields/donation-fields.php:111
-#: includes/fields/default-fields/donation-fields.php:133
+#: includes/fields/default-fields/donation-fields.php:113
+#: includes/fields/default-fields/donation-fields.php:135
 #: includes/forms/class-charitable-profile-form.php:200
 msgid "Address"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:136
-#: includes/fields/default-fields/donation-fields.php:146
+#: includes/fields/default-fields/donation-fields.php:148
 #: includes/forms/class-charitable-profile-form.php:207
 msgid "Address 2"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:137
-#: includes/fields/default-fields/donation-fields.php:159
+#: includes/fields/default-fields/donation-fields.php:161
 #: includes/forms/class-charitable-profile-form.php:214
 msgid "City"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:138
-#: includes/fields/default-fields/donation-fields.php:172
+#: includes/fields/default-fields/donation-fields.php:174
 #: includes/forms/class-charitable-profile-form.php:221
 msgid "State"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:139
-#: includes/fields/default-fields/donation-fields.php:185
+#: includes/fields/default-fields/donation-fields.php:187
 msgid "Postcode"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:140
-#: includes/fields/default-fields/donation-fields.php:198
+#: includes/fields/default-fields/donation-fields.php:200
 #: includes/forms/class-charitable-profile-form.php:235
 msgid "Country"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:141
-#: includes/fields/default-fields/donation-fields.php:214
+#: includes/fields/default-fields/donation-fields.php:216
 msgid "Phone Number"
 msgstr ""
 
@@ -5590,23 +5590,23 @@ msgid "Address Formatted"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:143
-#: includes/fields/default-fields/donation-fields.php:258
+#: includes/fields/default-fields/donation-fields.php:260
 msgid "Donation Amount"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:144
-#: includes/fields/default-fields/donation-fields.php:271
+#: includes/fields/default-fields/donation-fields.php:273
 msgid "Date of Donation"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:145
-#: includes/fields/default-fields/donation-fields.php:292
+#: includes/fields/default-fields/donation-fields.php:294
 msgid "Time of Donation"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:146
-#: includes/fields/default-fields/donation-fields.php:302
-#: includes/fields/default-fields/donation-fields.php:318
+#: includes/fields/default-fields/donation-fields.php:304
+#: includes/fields/default-fields/donation-fields.php:320
 msgid "Donation Status"
 msgstr ""
 
@@ -5620,7 +5620,7 @@ msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:149
 #: includes/admin/views/metaboxes/donation/donation-overview.php:89
-#: includes/fields/default-fields/donation-fields.php:388
+#: includes/fields/default-fields/donation-fields.php:390
 msgid "Contact Consent"
 msgstr ""
 
@@ -5906,7 +5906,7 @@ msgstr ""
 
 #: includes/admin/views/campaigns-page/export-form.php:19
 #: includes/class-charitable-post-types.php:84
-#: includes/fields/default-fields/donation-fields.php:231
+#: includes/fields/default-fields/donation-fields.php:233
 #: includes/widgets/class-charitable-campaigns-widget.php:32
 #: templates/donation-stats.php:17
 msgid "Campaigns"
@@ -6182,8 +6182,8 @@ msgid "Subtotal"
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:192
-#: includes/fields/default-fields/donation-fields.php:332
-#: includes/fields/default-fields/donation-fields.php:345
+#: includes/fields/default-fields/donation-fields.php:334
+#: includes/fields/default-fields/donation-fields.php:347
 msgid "Payment Method"
 msgstr ""
 
@@ -7036,7 +7036,7 @@ msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr ""
 
 #: includes/donations/charitable-donation-functions.php:323
-#: includes/fields/default-fields/donation-fields.php:326
+#: includes/fields/default-fields/donation-fields.php:328
 msgid "Paid"
 msgstr ""
 
@@ -7235,7 +7235,7 @@ msgid ""
 msgstr ""
 
 #: includes/emails/class-charitable-email-offline-donation-notification.php:215
-#: includes/fields/default-fields/donation-fields.php:375
+#: includes/fields/default-fields/donation-fields.php:377
 msgid "Summary"
 msgstr ""
 
@@ -7466,7 +7466,7 @@ msgid "The title of the campaign"
 msgstr ""
 
 #: includes/fields/default-fields/campaign-fields.php:123
-#: includes/fields/default-fields/donation-fields.php:238
+#: includes/fields/default-fields/donation-fields.php:240
 msgid "Fake Campaign"
 msgstr ""
 
@@ -7530,81 +7530,81 @@ msgstr ""
 msgid "Display a link to the campaign in the dashboard"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:38
+#: includes/fields/default-fields/donation-fields.php:40
 msgid "The donation ID"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:47
+#: includes/fields/default-fields/donation-fields.php:49
 #: includes/forms/class-charitable-profile-form.php:149
 msgid "First name"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:58
+#: includes/fields/default-fields/donation-fields.php:60
 msgid "The first name of the donor"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:67
+#: includes/fields/default-fields/donation-fields.php:69
 #: includes/forms/class-charitable-profile-form.php:156
 msgid "Last name"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:87
+#: includes/fields/default-fields/donation-fields.php:89
 msgid "The full name of the donor"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:106
+#: includes/fields/default-fields/donation-fields.php:108
 msgid "The email address of the donor"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:117
+#: includes/fields/default-fields/donation-fields.php:119
 msgid "The donor's address"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:224
+#: includes/fields/default-fields/donation-fields.php:226
 msgid "The donor's phone number"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:237
+#: includes/fields/default-fields/donation-fields.php:239
 msgid "The campaigns that were donated to"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:251
+#: includes/fields/default-fields/donation-fields.php:253
 msgid "The categories of the campaigns that were donated to"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:252
+#: includes/fields/default-fields/donation-fields.php:254
 msgid "Fake Category"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:264
+#: includes/fields/default-fields/donation-fields.php:266
 msgid "The total amount donated"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:285
+#: includes/fields/default-fields/donation-fields.php:287
 msgid "The date the donation was made"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:325
+#: includes/fields/default-fields/donation-fields.php:327
 msgid "The status of the donation (pending, paid, etc.)"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:355
+#: includes/fields/default-fields/donation-fields.php:357
 msgid "Donation Key"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:365
+#: includes/fields/default-fields/donation-fields.php:367
 msgid "Donation made in test mode?"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:381
+#: includes/fields/default-fields/donation-fields.php:383
 msgid "A summary of the donation"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:382
+#: includes/fields/default-fields/donation-fields.php:384
 msgid "Fake Campaign: $50.00"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:394
+#: includes/fields/default-fields/donation-fields.php:396
 msgid "Whether the donor gave consent to be contacted"
 msgstr ""
 
