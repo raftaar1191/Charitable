@@ -98,7 +98,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  boolean
      */
     CHARITABLE.Donation_Form.prototype.validate_card_number = function() {
-    
+
         var require_cc = $( '#charitable-gateway-fields-' + this.get_payment_method() + ' #charitable_field_cc_number' );
 
         if ( 0 === require_cc.length ) {
@@ -109,7 +109,7 @@ CHARITABLE = window.CHARITABLE || {};
             this.add_error( CHARITABLE_VARS.error_invalid_cc_number );
             return false;
         }
-    
+
         return true;
 
     };
@@ -121,7 +121,10 @@ CHARITABLE = window.CHARITABLE || {};
     });
 
     $body.on( 'charitable:form:validate', function( event, helper ) {
-        helper.validate_card_number();
+         // Only run validation on the main donation form.
+         if ( 'make_donation' === helper.get_input( 'charitable_action' ).val() ) {
+            helper.validate_card_number();
+        }
     });
 
 })( jQuery );
