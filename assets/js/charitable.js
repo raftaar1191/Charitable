@@ -655,6 +655,19 @@ CHARITABLE = window.CHARITABLE || {};
     }
 
     /**
+     * Remove a pending process by process name.
+     *
+     * @since  1.6.17
+     *
+     * @param  string Name of the process.
+     * @return void
+     */
+    Donation_Form.prototype.remove_pending_process_by_name = function( process ) {
+        var index = this.pending_processes.indexOf( process );
+        return -1 !== index && this.remove_pending_process( index );
+    }
+
+    /**
      * Show that the donation form is processing.
      */
     Donation_Form.prototype.show_processing = function() {
