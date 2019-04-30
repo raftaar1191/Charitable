@@ -17,7 +17,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 	/**
 	 * Charitable_User_Dashboard
 	 *
-	 * @since   1.0.0
+	 * @since  1.0.0
 	 */
 	class Charitable_User_Dashboard {
 
@@ -31,9 +31,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_User_Dashboard
+		 * @return Charitable_User_Dashboard
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'register_menu' ), 100 );
@@ -61,9 +61,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Register navigation menu for frontend dashboard.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function register_menu() {
 			register_nav_menu( 'charitable-dashboard', __( 'User Dashboard', 'charitable' ) );
@@ -73,10 +73,10 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Returns the user dashboard navigation menu.
 		 *
 		 * @uses    wp_nav_menu
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   array       $args
-		 * @return  void
+		 * @return void
 		 */
 		public function nav( $args ) {
 			$defaults = array(
@@ -92,9 +92,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Return the menu ID based on the theme location.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int         0 if no menu found. Menu ID otherwise.
+		 * @return int         0 if no menu found. Menu ID otherwise.
 		 */
 		public function get_nav_id() {
 			$locations = get_nav_menu_locations();
@@ -110,9 +110,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 * Returns all objects in the user dashboard navigation.
 		 *
 		 * @uses    wp_get_nav_menu_items
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  WP_Post[]
+		 * @return WP_Post[]
 		 */
 		public function nav_objects() {
 			$objects = get_transient( 'charitable_user_dashboard_objects' );
@@ -153,28 +153,34 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Flushes the menu object cache after updating a menu or menu item.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @param  int $menu_id The menu id.
+		 * @return void
 		 */
 		public function flush_menu_object_cache( $menu_id ) {
-			$nav_menu = wp_get_nav_menu_object( $this->get_nav_id() );
-            
-            //if $nav_menu is not set that means the location 'charitable-dashboard' is not checked
-			if ( $nav_menu == 0 || $menu_id == $nav_menu->term_id ) {
+			$dashboard_menu = $this->get_nav_id();
 
+			if ( ! $dashboard_menu ) {
 				delete_transient( 'charitable_user_dashboard_objects' );
+				return;
+			}
 
+			$nav_menu = wp_get_nav_menu_object( $dashboard_menu );
+
+			/* If $nav_menu is not set that means the location 'charitable-dashboard' is not checked. */
+			if ( $menu_id == $nav_menu->term_id ) {
+				delete_transient( 'charitable_user_dashboard_objects' );
 			}
 		}
 
 		/**
 		 * Checks whether the current requested page is in the user dashboard nav.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   Object $object Optional. If not set, will base it on the current queried object.
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function in_nav() {
 			global $wp;
@@ -201,10 +207,10 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Loads the user dashboard template.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   string $template
-		 * @return  string
+		 * @return string
 		 */
 		public function load_user_dashboard_template( $template ) {
 			/**
@@ -232,10 +238,10 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Add the user-dashboard class to the body if we're looking at it.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
 		 * @param   array       $classes
-		 * @return  array
+		 * @return array
 		 */
 		public function add_body_class( $classes ) {
 			if ( $this->in_nav() ) {
