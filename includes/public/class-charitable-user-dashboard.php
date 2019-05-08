@@ -2,29 +2,32 @@
 /**
  * Main class for setting up the Charitable User Dashboard.
  *
- * @package     Charitable/Classes/Charitable_User_Dashboard
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_User_Dashboard
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.17
  */
 
 /* Exit if accessed directly */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 
 	/**
 	 * Charitable_User_Dashboard
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_User_Dashboard {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_User_Dashboard|null
+		 * @var Charitable_User_Dashboard|null
 		 */
 		private static $instance = null;
 
@@ -46,7 +49,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since  1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'register_menu' ), 100 );
@@ -72,11 +75,11 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns the user dashboard navigation menu.
 		 *
-		 * @uses    wp_nav_menu
+		 * @uses   wp_nav_menu
 		 * @since  1.0.0
 		 *
-		 * @param   array       $args
-		 * @return void
+		 * @param  array $args Additional arguments to pass to wp_nav_menu.
+		 * @return string|false|void Menu output if $echo is false, false if there are no items or no menu was found.
 		 */
 		public function nav( $args ) {
 			$defaults = array(
@@ -94,7 +97,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @return int         0 if no menu found. Menu ID otherwise.
+		 * @return int 0 if no menu found. Menu ID otherwise.
 		 */
 		public function get_nav_id() {
 			$locations = get_nav_menu_locations();
@@ -109,7 +112,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns all objects in the user dashboard navigation.
 		 *
-		 * @uses    wp_get_nav_menu_items
+		 * @uses   wp_get_nav_menu_items
 		 * @since  1.0.0
 		 *
 		 * @return WP_Post[]
@@ -118,29 +121,21 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 			$objects = get_transient( 'charitable_user_dashboard_objects' );
 
 			if ( false === $objects ) {
-
 				$objects        = array();
 				$nav_menu_items = wp_get_nav_menu_items( $this->get_nav_id() );
 
 				if ( is_array( $nav_menu_items ) ) {
-
 					foreach ( $nav_menu_items as $nav_menu_item ) {
-
 						switch ( $nav_menu_item->type ) {
-
-							case 'custom' :
-
+							case 'custom':
 								$identifier = trailingslashit( $nav_menu_item->url );
-
 								break;
 
-							default :
-
+							default:
 								$identifier = apply_filters( 'charitable_nav_menu_object_identifier', $nav_menu_item->object_id, $nav_menu_item );
 						}
 
 						$objects[] = $identifier;
-
 					}
 				}
 
@@ -179,7 +174,6 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param   Object $object Optional. If not set, will base it on the current queried object.
 		 * @return boolean
 		 */
 		public function in_nav() {
@@ -209,7 +203,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param   string $template
+		 * @param  string $template The template to use for the user dashboard.
 		 * @return string
 		 */
 		public function load_user_dashboard_template( $template ) {
@@ -240,14 +234,12 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param   array       $classes
+		 * @param  array $classes Body classes.
 		 * @return array
 		 */
 		public function add_body_class( $classes ) {
 			if ( $this->in_nav() ) {
-
 				$classes[] = 'user-dashboard';
-
 			}
 
 			return $classes;

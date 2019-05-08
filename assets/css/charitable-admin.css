@@ -456,6 +456,7 @@ body.post-type-campaign .postbox-container .empty-container {
   clear: both;
   padding: 0;
   background-color: #f5f5f5;
+  border: none;
   border-radius: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 13px; }

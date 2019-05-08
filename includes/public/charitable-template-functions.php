@@ -422,10 +422,13 @@ if ( ! function_exists( 'charitable_template_campaign_loop' ) ) :
 			$campaigns = $wp_query;
 		}
 
-		charitable_template( 'campaign-loop.php', array(
-			'campaigns' => $campaigns,
-			'columns'   => $columns,
-		) );
+		charitable_template(
+			'campaign-loop.php',
+			array(
+				'campaigns' => $campaigns,
+				'columns'   => $columns,
+			)
+		);
 	}
 
 endif;
@@ -451,14 +454,14 @@ if ( ! function_exists( 'charitable_template_responsive_styles' ) ) :
 		if ( preg_match( '/[px|em]/', $args['responsive'] ) ) {
 			$breakpoint = $args['responsive'];
 		}
-?>
+		?>
 <style type="text/css" media="screen">
 @media only screen and (max-width: <?php echo $breakpoint; ?>) {
 	.campaign-loop.campaign-grid.masonry { -moz-column-count: 1; -webkit-column-count: 1; column-count: 1; }
 	.campaign-loop.campaign-grid .campaign,.campaign-loop.campaign-grid .campaign.hentry { width: 100% !important; }
 }
 </style>
-<?php
+		<?php
 	}
 
 endif;

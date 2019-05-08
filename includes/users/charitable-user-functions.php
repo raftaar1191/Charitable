@@ -53,19 +53,31 @@ function charitable_get_user( $user_id, $force = false ) {
  * @return string[]
  */
 function charitable_get_user_mapped_keys() {
-	return apply_filters( 'charitable_donor_mapped_keys', array(
-		'email'            => 'user_email',
-		'company'          => 'donor_company',
-		'address'          => 'donor_address',
-		'address_2'        => 'donor_address_2',
-		'city'             => 'donor_city',
-		'state'            => 'donor_state',
-		'postcode'         => 'donor_postcode',
-		'zip'              => 'donor_postcode',
-		'country'          => 'donor_country',
-		'phone'            => 'donor_phone',
-		'user_description' => 'description',
-	) );
+	/**
+	 * Filter the mapping of shorthand keys to meta keys.
+	 *
+	 * The meta keys are used in the wp_usermeta table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $keys User meta keys.
+	 */
+	return apply_filters(
+		'charitable_donor_mapped_keys',
+		array(
+			'email'            => 'user_email',
+			'company'          => 'donor_company',
+			'address'          => 'donor_address',
+			'address_2'        => 'donor_address_2',
+			'city'             => 'donor_city',
+			'state'            => 'donor_state',
+			'postcode'         => 'donor_postcode',
+			'zip'              => 'donor_postcode',
+			'country'          => 'donor_country',
+			'phone'            => 'donor_phone',
+			'user_description' => 'description',
+		)
+	);
 }
 
 /**
