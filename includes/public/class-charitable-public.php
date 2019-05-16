@@ -211,11 +211,11 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 
 			/* pupload Fields is also registered but NOT enqueued. */
 			$upload_vars = array(
-				'remove_image' => _x( 'Remove', 'remove image button text', 'charitable' ),
-				'max_file_uploads_single' => __( 'You can only upload %d file', 'charitable' ),
+				'remove_image'            => _x( 'Remove', 'remove image button text', 'charitable' ),
+				'max_file_uploads_single' => /* translators: %d: number of files */ __( 'You can only upload %d file', 'charitable' ),
 				'max_file_uploads_plural' => __( 'You can only upload a maximum of %d files', 'charitable' ),
-				'max_file_size' => __( '%1$s exceeds the max upload size of %2$s', 'charitable' ),
-				'upload_problem' => __( '%s failed to upload. Please try again.', 'charitable' ),
+				'max_file_size'           => /* translators: %1$s: file name; %2$s: max upload size */ __( '%1$s exceeds the max upload size of %2$s', 'charitable' ),
+				'upload_problem'          => /* translators: %s: file name */ __( '%s failed to upload. Please try again.', 'charitable' ),
 			);
 
 			wp_register_script(

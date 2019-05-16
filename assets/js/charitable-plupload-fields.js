@@ -97,7 +97,7 @@ CHARITABLE = window.CHARITABLE || {};
         // If the file is too big, remove it and show a message.
         if ( file.size >= this.max_file_size ) {
             if ( ! this.max_upload_size_alert_shown ) {
-                alert( file, CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', this.bytes_to_mb( this.max_file_size ) ) );
+                alert( CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', this.bytes_to_mb( this.max_file_size ) ) );
             }
 
             this.max_upload_size_alert_shown = true;
