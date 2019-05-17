@@ -61,7 +61,7 @@ return apply_filters(
 				'preview'     => 'John',
 			),
 		),
-		'last_name'               => array(
+		'last_name'                => array(
 			'label'          => __( 'Last Name', 'charitable' ),
 			'data_type'      => 'user',
 			'value_callback' => 'charitable_get_donor_meta_value',
@@ -75,7 +75,11 @@ return apply_filters(
 			),
 			'show_in_meta'   => false,
 			'show_in_export' => true,
-			'email_tag'      => false,
+			'email_tag'      => array(
+				'tag'         => 'donor_last_name',
+				'description' => __( 'The last name of the donor', 'charitable' ),
+				'preview'     => 'Smith',
+			),
 		),
 		'donor'                    => array(
 			'label'          => __( 'Donor', 'charitable' ),
