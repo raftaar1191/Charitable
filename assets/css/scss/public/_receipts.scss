@@ -21,4 +21,29 @@
     tr, td {
         padding-right: 1.5em;
     }
+
+
+	@include bp( 768, false ) {
+		thead {
+			display: none;
+		}
+		tr {
+			display: block;
+			padding: 1em 0;
+
+			td {
+				display: block;
+				text-align: right !important;
+				border: 0;
+
+				&::before {
+					content: attr(data-title) ": ";
+					font-weight: 700;
+					float: left;
+				}
+			}
+		}
+
+	}
 }
+

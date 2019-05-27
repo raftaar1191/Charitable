@@ -310,6 +310,20 @@
 
 .charitable-table tr, .charitable-table td {
   padding-right: 1.5em; }
+@media (max-width: 48em) {
+  .charitable-table thead {
+    display: none; }
+  .charitable-table tr {
+    display: block;
+    padding: 1em 0; }
+    .charitable-table tr td {
+      display: block;
+      text-align: right !important;
+      border: 0; }
+      .charitable-table tr td::before {
+        content: attr(data-title) ": ";
+        font-weight: 700;
+        float: left; } }
 
 /* Campaigns grid */
 .campaign-loop.campaign-list,
