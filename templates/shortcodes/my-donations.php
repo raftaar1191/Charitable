@@ -26,11 +26,7 @@ $donations = $view_args['donations'];
  */
 do_action( 'charitable_my_donations_before', $donations, $view_args );
 
-if ( empty( $donations ) ) : ?>
-
-	<p><?php _e( 'You have not made any donations yet.', 'charitable' ); ?></p>
-
-<?php else : ?>
+if ( $donations instanceof Charitable_Donations_Query && $donations->count() ) : ?>
 
 	<table class="charitable-my-donations charitable-table">
 		<thead>
@@ -163,6 +159,10 @@ if ( empty( $donations ) ) : ?>
 		</tbody>
 	</table>
 
+<?php else : ?>
+
+	<p><?php _e( 'You have not made any donations yet.', 'charitable' ); ?></p>
+	
 <?php
 endif;
 
