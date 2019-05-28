@@ -131,10 +131,9 @@ function charitable_is_settings_view( $tab = '' ) {
  *
  * @since  1.0.0
  *
- * @global $wp_settings_fields Storage array of settings fields and their pages/sections
- *
- * @param  string  $page       Slug title of the admin page who's settings fields you want to show.
- * @param  string  $section    Slug title of the settings section who's fields you want to show.
+ * @global $wp_settings_fields Storage array of settings fields and their pages/sections.
+ * @param  string $page    Slug title of the admin page who's settings fields you want to show.
+ * @param  string $section Slug title of the settings section who's fields you want to show.
  * @return string
  */
 function charitable_do_settings_fields( $page, $section ) {
