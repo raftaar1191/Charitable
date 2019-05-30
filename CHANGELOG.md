@@ -1,3 +1,10 @@
+# 1.6.18
+* NEW: Added email tag for donor's last name. [#685](https://github.com/Charitable/Charitable/issues/685)
+* NEW: Added an `inline-content` setting type.
+* FIX: Added __sleep() methods to Campaign and Donation classes to avoid serializing Donation/Campaign Fields. This avoids errors relating to serialization of closures.
+* FIX: Improved error message when max file size is exceeded while trying to upload a picture via the front-end picture field. [#683](https://github.com/Charitable/Charitable/issues/683)
+* FIX: After clicking "Change" link in donation form to select a different donation amount, hide the link to avoid confusion. [#682](https://github.com/Charitable/Charitable/issues/682)
+
 # 1.6.17
 * FIX: Removing pending processes in Javascript fails in certain cases when there is more than one pending process. [#681](https://github.com/Charitable/Charitable/issues/681)
 * FIX: Improved styling of `<legend>` elements inside Charitable meta boxes.

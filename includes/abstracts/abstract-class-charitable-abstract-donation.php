@@ -2,11 +2,12 @@
 /**
  * Donation model.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Donation
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.0
+ * @version   1.6.18
  */
 
 // Exit if accessed directly.
@@ -186,6 +187,26 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 			}
 
 			return $this->__get( $key );
+		}
+
+		/**
+		 * Limit properties to be serialized.
+		 *
+		 * @since  1.6.18
+		 *
+		 * @return array
+		 */
+		public function __sleep() {
+			return array(
+				'donation_id',
+				'donation_type',
+				'donation_plan',
+				'donation_data',
+				'campaign_donations_db',
+				'gateway_transaction_id',
+				'campaign_donations',
+				'donor',
+			);
 		}
 
 		/**

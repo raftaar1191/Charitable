@@ -137,6 +137,13 @@ CHARITABLE = window.CHARITABLE || {};
         };
 
         /**
+         * Event handler when the "Change" link is clicked for pre-filled donations.
+         */
+        var on_click_change_amount_link = function() {
+            $(this).parent().addClass( 'charitable-hidden' );
+        };
+
+        /**
          * Submit event handler for donation form.
          *
          * @access private
@@ -290,6 +297,8 @@ CHARITABLE = window.CHARITABLE || {};
                 self.hide_inactive_payment_methods();
                 self.form.on( 'change', '#charitable-gateway-selector input[name=gateway]', on_change_payment_gateway );
             }
+
+            self.form.on( 'click', '.change-donation', on_click_change_amount_link );
 
             // Handle donation form submission
             self.form.on( 'submit', {

@@ -7,11 +7,13 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.6.18
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
@@ -127,6 +129,24 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			return $this->get( $key );
+		}
+
+		/**
+		 * Limit properties to be serialized.
+		 *
+		 * @since  1.6.18
+		 *
+		 * @return array
+		 */
+		public function __sleep() {
+			return array(
+				'post',
+				'end_time',
+				'goal',
+				'donations',
+				'donated_amount',
+				'donation_form',
+			);
 		}
 
 		/**
