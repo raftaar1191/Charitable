@@ -130,6 +130,22 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
+		 * On serialization, unset $fields property.
+		 *
+		 * @since
+		 */
+		public function __sleep() {
+			return array(
+				'post',
+				'end_time',
+				'goal',
+				'donations',
+				'donated_amount',
+				'donation_form',
+			);
+		}
+
+		/**
 		 * Returns the campaign's post_meta values. _campaign_ is automatically prepended to the meta key.
 		 *
 		 * @see    get_post_meta

@@ -189,6 +189,24 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
+		 * On serialization, unset $fields property.
+		 *
+		 * @since
+		 */
+		public function __sleep() {
+			return array(
+				'donation_id',
+				'donation_type',
+				'donation_plan',
+				'donation_data',
+				'campaign_donations_db',
+				'gateway_transaction_id',
+				'campaign_donations',
+				'donor',
+			);
+		}
+
+		/**
 		 * Return the Charitable_Object_Fields instance.
 		 *
 		 * @since  1.5.0
