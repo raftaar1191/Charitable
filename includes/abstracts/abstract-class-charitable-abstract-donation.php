@@ -2,11 +2,12 @@
 /**
  * Donation model.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Donation
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.4.0
+ * @version   1.6.18
  */
 
 // Exit if accessed directly.
@@ -189,9 +190,11 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		}
 
 		/**
-		 * On serialization, unset $fields property.
+		 * Limit properties to be serialized.
 		 *
-		 * @since
+		 * @since  1.6.18
+		 *
+		 * @return array
 		 */
 		public function __sleep() {
 			return array(
