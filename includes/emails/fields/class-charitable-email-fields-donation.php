@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Email_Fields_Donation
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.0
@@ -63,9 +63,9 @@ if ( ! class_exists( 'Charitable_Email_Fields_Donation' ) ) :
 			 *
 			 * @since 1.5.0
 			 *
-			 * @param array               $fields   The default set of fields.
-			 * @param Charitable_Donation $donation Instance of `Charitable_Donation`.
-			 * @param Charitable_Email    $email    Instance of `Charitable_Email`.
+			 * @param array                    $fields   The default set of fields.
+			 * @param Charitable_Donation|null $donation When an email is being sent, this will be an instance of `Charitable_Donation`. Otherwise it's null.
+			 * @param Charitable_Email         $email    Instance of `Charitable_Email`.
 			 */
 			return apply_filters( 'charitable_email_donation_fields', $fields, $this->donation, $this->email );
 		}

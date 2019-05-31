@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Gateway_Offline
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Charitable_Gateway_Offline' ) ) :
 
 			$this->supports = array(
 				'recurring',
-				'1.3.0',				
+				'1.3.0',
 			);
 		}
 

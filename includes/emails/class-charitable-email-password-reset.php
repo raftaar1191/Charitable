@@ -5,7 +5,7 @@
  * @version     1.4.0
  * @package     Charitable/Classes/Charitable_Email_Password_Reset
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 	 */
 	class Charitable_Email_Password_Reset extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'password_reset';
 
 		/**
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Charitable_Email_Password_Reset' ) ) :
 
 		/**
 		 * Array of supported object types (campaigns, donations, donors, etc).
-		 *		 
+		 *
 		 * @since 1.4.0
 		 *
 		 * @var   string[]

@@ -4,14 +4,16 @@
  *
  * @package   Charitable/Classes/Charitable_Email_Settings
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 
@@ -66,42 +68,42 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 			}
 
 			return array(
-				'section' => array(
-					'title'     => '',
-					'type'      => 'hidden',
-					'priority'  => 10000,
-					'value'     => 'emails',
-					'save'      => false,
+				'section'              => array(
+					'title'    => '',
+					'type'     => 'hidden',
+					'priority' => 10000,
+					'value'    => 'emails',
+					'save'     => false,
 				),
-				'section_emails' => array(
-					'title'     => __( 'Available Emails', 'charitable' ),
-					'type'      => 'heading',
-					'priority'  => 5,
+				'section_emails'        => array(
+					'title'    => __( 'Available Emails', 'charitable' ),
+					'type'     => 'heading',
+					'priority' => 5,
 				),
-				'emails' => array(
-					'title'     => false,
-					'callback'  => array( $this, 'render_emails_table' ),
-					'priority'  => 7,
+				'emails'                => array(
+					'title'    => false,
+					'callback' => array( $this, 'render_emails_table' ),
+					'priority' => 7,
 				),
 				'section_email_general' => array(
-					'title'     => __( 'General Email Settings', 'charitable' ),
-					'type'      => 'heading',
-					'priority'  => 10,
+					'title'    => __( 'General Email Settings', 'charitable' ),
+					'type'     => 'heading',
+					'priority' => 10,
 				),
-				'email_from_name' => array(
-					'title'     => __( '"From" Name', 'charitable' ),
-					'type'      => 'text',
-					'help'      => __( 'The name of the email sender.', 'charitable' ),
-					'priority'  => 12,
-					'default'   => get_option( 'blogname' ),
+				'email_from_name'       => array(
+					'title'    => __( '"From" Name', 'charitable' ),
+					'type'     => 'text',
+					'help'     => __( 'The name of the email sender.', 'charitable' ),
+					'priority' => 12,
+					'default'  => get_option( 'blogname' ),
 				),
-				 'email_from_email' => array(
-					'title'     => __( '"From" Email', 'charitable' ),
-					'type'      => 'email',
-					'help'      => __( 'The email address of the email sender. This will be the address recipients email if they hit "Reply".', 'charitable' ),
-					'priority'  => 14,
-					'default'   => get_option( 'admin_email' ),
-				 ),
+				'email_from_email'      => array(
+					'title'    => __( '"From" Email', 'charitable' ),
+					'type'     => 'email',
+					'help'     => __( 'The email address of the email sender. This will be the address recipients email if they hit "Reply".', 'charitable' ),
+					'priority' => 14,
+					'default'  => get_option( 'admin_email' ),
+				),
 			);
 		}
 
@@ -169,7 +171,7 @@ if ( ! class_exists( 'Charitable_Email_Settings' ) ) :
 			);
 
 			return $this->add_individual_email_fields( $groups );
-		}		
+		}
 	}
 
 endif;

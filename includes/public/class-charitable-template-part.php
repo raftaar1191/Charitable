@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Template_Part
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -19,7 +19,7 @@ if ( ! class_exists( 'Charitable_Template_Part' ) ) :
  *
  * @since   1.0.0
  */
-class Charitable_Template_Part {	
+class Charitable_Template_Part {
 
 	/**
 	 * @var 	string 			The template's slug.

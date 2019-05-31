@@ -43,13 +43,18 @@ do_action( 'charitable_donation_form_before_donation_amount', $form );
 
 ?>
 <div class="charitable-donation-options">
-<?php
+	<?php
 	/**
-	 * @hook    charitable_donation_form_before_donation_amounts
+	 * Do something before the donation amounts are listed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Charitable_Donation_Form $form An instance of `Charitable_Donation_Form`.
 	 */
 	do_action( 'charitable_donation_form_before_donation_amounts', $form );
 
-	charitable_template_from_session( 'donation-form/donation-amount-list.php',
+	charitable_template_from_session(
+		'donation-form/donation-amount-list.php',
 		array(
 			'campaign' => $campaign,
 			'form_id'  => $form_id,
@@ -62,11 +67,14 @@ do_action( 'charitable_donation_form_before_donation_amount', $form );
 	);
 
 	/**
-	 * @hook    charitable_donation_form_after_donation_amounts
+	 * Do something after the donation amounts are listed.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Charitable_Donation_Form $form An instance of `Charitable_Donation_Form`.
 	 */
 	do_action( 'charitable_donation_form_after_donation_amounts', $form );
-
-?>
+	?>
 </div><!-- .charitable-donation-options -->
 <?php
 

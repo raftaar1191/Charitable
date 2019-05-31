@@ -283,30 +283,30 @@ class Charitable_Data_Spawn {
     private $goals = array( 0, 500, 1000, 2500, 10000, 50000, 100000, 200000, 500000, 1000000 );
     private $goal_count;
     private $end_date_offsets = array(
-        0, 
-        '+1 day', 
-        'now', 
-        '-15 days', 
-        '+15 days', 
-        '+150 days', 
+        0,
+        '+1 day',
+        'now',
+        '-15 days',
+        '+15 days',
+        '+150 days',
         '-150 days'
     );
     private $end_date_count;
     private $suggested_donations = array(
-        array(), 
-        array( 
-            array( 'amount' => 10, 'description' => '' ), 
-            array( 'amount' => 25, 'description' => '' ), 
-            array( 'amount' => 50, 'description' => '' ) 
-        ), 
+        array(),
         array(
-            array( 'amount' => 14, 'description' => 'Bronze' ), 
-            array( 'amount' => 38, 'description' => 'Silver' ), 
-            array( 'amount' => 79, 'description' => 'Gold' ), 
+            array( 'amount' => 10, 'description' => '' ),
+            array( 'amount' => 25, 'description' => '' ),
+            array( 'amount' => 50, 'description' => '' )
+        ),
+        array(
+            array( 'amount' => 14, 'description' => 'Bronze' ),
+            array( 'amount' => 38, 'description' => 'Silver' ),
+            array( 'amount' => 79, 'description' => 'Gold' ),
             array( 'amount' => 113, 'description' => 'Platinum' ),
             array( 'amount' => 198, 'description' => 'Adamantium' )
         )
-    );    
+    );
     private $suggested_donations_count;
     private $amounts = array(
         2, 4, 5, 10, 15, 25, 40, 50, 75, 100, 120, 150, 200, 250, 500, 800, 1200
@@ -324,7 +324,7 @@ class Charitable_Data_Spawn {
         if ( isset( $args[ 1 ] ) ) {
             $this->campaigns_count = $args[ 1 ];
         }
-        
+
         $this->people_count = count( $this->people );
 
         $this->goal_count = count( $this->goals );
@@ -369,17 +369,17 @@ class Charitable_Data_Spawn {
 
         $campaign_id = wp_insert_post( array(
             'post_title'    => $title,
-            'post_type'     => 'campaign', 
-            'post_status'   => 'publish', 
+            'post_type'     => 'campaign',
+            'post_status'   => 'publish',
             'post_author'   => $user[ 'ID' ],
             'post_content'  => sprintf( 'Content of campaign %d', $i )
         ) );
 
-        $meta = array( 
+        $meta = array(
             '_campaign_description' => sprintf( 'Description of campaign %d', $i ),
-            '_campaign_goal' => $this->get_random_goal(), 
-            '_campaign_end_date' => $this->get_random_end_date(), 
-            '_campaign_suggested_donations' => $this->get_random_suggested_donations(), 
+            '_campaign_goal' => $this->get_random_goal(),
+            '_campaign_end_date' => $this->get_random_end_date(),
+            '_campaign_suggested_donations' => $this->get_random_suggested_donations(),
             '_campaign_allow_custom_donations' => 1
         );
 
@@ -401,7 +401,7 @@ class Charitable_Data_Spawn {
             'user' => array(
                 'email' => $user[ 'user_email' ],
                 'first_name' => $user[ 'first_name' ],
-                'last_name' => $user[ 'last_name' ], 
+                'last_name' => $user[ 'last_name' ],
                 'address' => '',
                 'address_2' => '',
                 'city' => '',
@@ -412,11 +412,11 @@ class Charitable_Data_Spawn {
             'campaigns'     => array(
                 array(
                     'campaign_id'   => $campaign[ 'ID' ],
-                    'campaign_name' => $campaign[ 'title' ], 
+                    'campaign_name' => $campaign[ 'title' ],
                     'amount'        => $amount
-                )                
-            ), 
-            'status'        => 'charitable-completed', 
+                )
+            ),
+            'status'        => 'charitable-completed',
             'gateway'       => 'manual'
         );
 
@@ -441,9 +441,9 @@ class Charitable_Data_Spawn {
 
         $user = array(
             'display_name' => $name,
-            'first_name' => $first_name, 
-            'last_name' => $last_name, 
-            'user_email' => str_replace( ' ', '', sprintf( '%s.%s@example.com', $first_name, $last_name ) ), 
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'user_email' => str_replace( ' ', '', sprintf( '%s.%s@example.com', $first_name, $last_name ) ),
             'user_pass' => 'password',
             'user_login' => str_replace( '-', '', strtolower( sprintf( '%s-%s', $first_name, $last_name ) ) )
         );

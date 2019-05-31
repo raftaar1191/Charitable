@@ -4,7 +4,7 @@
  *
  * @package   Charitable_Stat/Classes/Charitable_Stat_Shortcode
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
  * @version   1.6.0
@@ -85,8 +85,9 @@ if ( ! class_exists( 'Charitable_Stat_Shortcode' ) ) :
 						return charitable_format_money( $total );
 					}
 
+					$goal    = charitable_sanitize_amount( $this->args['goal'], false );
 					$total   = charitable_sanitize_amount( $total, true );
-					$percent = ( $total / $this->args['goal'] ) * 100;
+					$percent = ( $total / $goal ) * 100;
 
 					return '<div class="campaign-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' . $percent . '"><span class="bar" style="width:' . $percent . '%;"></span></div>';
 

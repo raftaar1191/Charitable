@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Gateways
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -404,15 +404,15 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		/**
 		 * Enable a payment gateway.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $gateway Gateway ID.
-		 * @return  void
+		 * @param  string $gateway Gateway ID.
+		 * @return void
 		 */
 		protected function enable_gateway( $gateway ) {
 			$settings = get_option( 'charitable_settings' );
 
-			$active_gateways = isset( $settings['active_gateways'] ) ? $settings['active_gateways'] : array();
+			$active_gateways             = isset( $settings['active_gateways'] ) ? $settings['active_gateways'] : array();
 			$active_gateways[ $gateway ] = $this->gateways[ $gateway ];
 			$settings['active_gateways'] = $active_gateways;
 
@@ -425,16 +425,23 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 
 			Charitable_Settings::get_instance()->add_update_message( __( 'Gateway enabled', 'charitable' ), 'success' );
 
+			/**
+			 * Do something when a payment gateway is enabled.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $gateway The payment gateway.
+			 */
 			do_action( 'charitable_gateway_enable', $gateway );
 		}
 
 		/**
 		 * Disable a payment gateway.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param 	string $gateway Gateway ID.
-		 * @return  void
+		 * @param  string $gateway Gateway ID.
+		 * @return void
 		 */
 		protected function disable_gateway( $gateway ) {
 			$settings = get_option( 'charitable_settings' );
@@ -456,6 +463,13 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 
 			Charitable_Settings::get_instance()->add_update_message( __( 'Gateway disabled', 'charitable' ), 'success' );
 
+			/**
+			 * Do something when a payment gateway is disabled.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $gateway The payment gateway.
+			 */
 			do_action( 'charitable_gateway_disable', $gateway );
 		}
 

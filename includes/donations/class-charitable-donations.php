@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Donations
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -52,8 +52,8 @@ if ( ! class_exists( 'Charitable_Donations' ) ) :
 		public static function count_all( $post_type = 'donation' ) {
 			global $wpdb;
 
-			$sql = "SELECT COUNT( * ) 
-					FROM $wpdb->posts 
+			$sql = "SELECT COUNT( * )
+					FROM $wpdb->posts
 					WHERE post_type = %s";
 
 			return $wpdb->get_var( $wpdb->prepare( $sql, $post_type ) );
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Charitable_Donations' ) ) :
 			}
 
 			$sql = "SELECT post_status, COUNT( * ) AS num_donations
-				FROM $wpdb->posts	
+				FROM $wpdb->posts
 				WHERE $where_clause
 				GROUP BY post_status";
 

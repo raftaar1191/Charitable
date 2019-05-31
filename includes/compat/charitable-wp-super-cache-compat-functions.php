@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Functions/Compatibility
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.4.18
  * @version   1.5.4
@@ -51,20 +51,19 @@ add_action( 'charitable_flush_campaign_cache', 'charitable_compat_wp_super_cache
 /**
  * Prevent caching on certain Charitable pages.
  *
+ * @deprecated 1.9.0
+ *
  * @since  1.5.4
+ * @since  1.6.14 Deprecated.
  *
  * @return void
  */
 function charitable_compat_wp_super_cache_disable_cache() {
-	if ( defined( 'DONOTCACHEPAGE' ) ) {
-		return;
-	}
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.14',
+		'charitable()->endpoints()->disable_endpoint_cache()'
+	);
 
-	$endpoints = charitable()->endpoints();
-
-	if ( in_array( $endpoints->get_current_endpoint(), $endpoints->get_non_cacheable_endpoints() ) ) {
-		define( 'DONOTCACHEPAGE', true );
-	}
+	charitable()->endpoints()->disable_endpoint_cache();
 }
-
-add_action( 'wp', 'charitable_compat_wp_super_cache_disable_cache' );

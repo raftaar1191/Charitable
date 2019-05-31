@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 4.9.8
-Stable tag: 1.6.6
+Tested up to: 5.2.1
+Stable tag: 1.6.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,8 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 
 **More Extensions**
 
+* [Fee Relief](https://www.wpcharitable.com/extensions/charitable-fee-relief/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
+* [Donor Comments](https://www.wpcharitable.com/extensions/charitable-donor-comments/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Anonymous Donations](https://www.wpcharitable.com/extensions/charitable-anonymous-donations/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Gift Aid](https://www.wpcharitable.com/extensions/charitable-gift-aid/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Easy Digital Downloads](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
@@ -139,6 +141,14 @@ You can also accept credit card donations with the [Stripe extension](https://ww
 
 Easy. Just add `[campaigns]` into your page content. [Read more](https://www.wpcharitable.com/documentation/the-campaigns-shortcode?utm_source=readme&utm_medium=faq-tab&utm_content=campaigns-shortcode&utm_campaign=plugin-page-referrals).
 
+= How do I add a donation form to a page? =
+
+You can use the `[charitable_donation_form]` shortcode to embed a particular campaign's donation form on a page. [Read more](https://www.wpcharitable.com/documentation/add-your-donation-form-to-a-page/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals)
+
+= Can I let donors pay the gateway processing fees? =
+
+Yes. Our Fee Relief extension adds support for this, with the option to set how fees are calculated for different payment gateways. [Read more](https://www.wpcharitable.com/extensions/charitable-fee-relief/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals)
+
 = Does Charitable support recurring donations? =
 
 Yes. Recurring donations support is possible with our [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=faq-tab&utm_campaign=recurring-donations).
@@ -157,6 +167,79 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.18 =
+* NEW: Added email tag for donor's last name. [#685](https://github.com/Charitable/Charitable/issues/685)
+* NEW: Added an `inline-content` setting type.
+* FIX: Added __sleep() methods to Campaign and Donation classes to avoid serializing Donation/Campaign Fields. This avoids errors relating to serialization of closures.
+* FIX: Improved error message when max file size is exceeded while trying to upload a picture via the front-end picture field. [#683](https://github.com/Charitable/Charitable/issues/683)
+* FIX: After clicking "Change" link in donation form to select a different donation amount, hide the link to avoid confusion. [#682](https://github.com/Charitable/Charitable/issues/682)
+
+= 1.6.17 =
+* FIX: Removing pending processes in Javascript fails in certain cases when there is more than one pending process. [#681](https://github.com/Charitable/Charitable/issues/681)
+* FIX: Improved styling of `<legend>` elements inside Charitable meta boxes.
+* FIX: Delete user dashboard menu transient if one isn't set. This fixes a bug in Reach. [#52](https://github.com/Charitable/Reach/issues/52)
+
+= 1.6.16 =
+* NEW: Allow `value_callback` in `admin_form` settings for a field registered with the Campaign Fields API to override the main `value_callback` parameter. [#679](https://github.com/Charitable/Charitable/issues/679)
+* FIX: Prevent credit card validation in donation widget, which prevented it from working in certain specific scenarios. [#680](https://github.com/Charitable/Charitable/issues/680)
+
+= 1.6.15 =
+* NEW: Added Colombian Peso as currency. [#676](https://github.com/Charitable/Charitable/issues/676)
+* FIX: Error resulted in donation receipts not getting sent initially for manually added donations, and then getting sent twice. [#631](https://github.com/Charitable/Charitable/issues/631)
+* FIX: Avoid fatal error related to the new Webhook Listener Endpoint when Social Warfare is active. [#678](https://github.com/Charitable/Charitable/issues/678)
+
+= 1.6.14 =
+* FIX: Show terms and conditions, privacy policy and contact consent on the registration form if enabled, regardless of whether the settings have been saved. [#657](https://github.com/Charitable/Charitable/issues/657)
+* FIX: If you have multiple extensions installed and you have an unfinished upgrade routine, the notice was shown repeatedly. [#655](https://github.com/Charitable/Charitable/issues/655)
+* NEW: Added option to force HTTPS on the campaign donation page. This is off by default but can be enabled by returning `true` to the `charitable_campaign_donation_endpoint_force_https` filter. [#658](https://github.com/Charitable/Charitable/issues/658)
+* NEW: Added Webhook Listener endpoint to provide pretty URL for IPNs/webhooks. <strong>Note: The IPN listener is now run on the `parse_query` hook, which is later than previously when it was run on the `init` hook.</strong> [#659](https://github.com/Charitable/Charitable/issues/659)
+* NEW: Added option to force HTTPS for the IPN/Webhook listener URL. This is off by default but can be enabled by returning `true` to the `charitable_webhook_listener_endpoint_force_https` filter.
+* NEW: Added ability for Charitable to check whether an extension update has minimum requirements (i.e. minimum PHP or Charitable version) and prevent update if those minimum requirements are not met.
+* NEW: Added filter to set whether a campaign can be saved with custom donations disabled and no suggested donations. [#669](https://github.com/Charitable/Charitable/issues/669)
+* NEW: Added `charitable_is_localhost` function to return whether installation is localhost. This also introduces the `charitable_localhost_ips` filter to filter the set of whitelisted IP addresses that will result in `charitable_is_localhost` returning `true`.
+* NEW: Improved support for Comet Cache and Litespeed Cache. [#673](https://github.com/Charitable/Charitable/issues/673) and [#674](https://github.com/Charitable/Charitable/issues/674)
+* FIX: Ensure that $0 donations work if `charitable_permit_0_donation` is returning `true`. [#668](https://github.com/Charitable/Charitable/issues/668)
+* FIX: Numerous small errors fixed.
+
+= 1.6.13 =
+* FIX: "Remove" button in Picture field was hidden in the Twenty Nineteen theme. [#654](https://github.com/Charitable/Charitable/issues/654)
+* FIX: Undefined variable notice in Picture field template. [#653](https://github.com/Charitable/Charitable/issues/653)
+* FIX: Gracefully handle currency symbols included in the goal parameter in the `[charitable_stat]` shortcode. [#652](https://github.com/Charitable/Charitable/issues/652)
+* FIX: Fix campaign grid layout in themes where campaigns don't have the `hentry` class. [#650](https://github.com/Charitable/Charitable/issues/650)
+* FIX: Ensure campaign grid is responsive in themes where campaigns don't have the `hentry` class. [#651](https://github.com/Charitable/Charitable/issues/651)
+
+= 1.6.12 =
+* FIX: Picture drag & drop field would not show unless pictures were already set. [#648](https://github.com/Charitable/Charitable/issues/648)
+
+= 1.6.11 =
+* FIX: Fixed error that would show the incorrect amount in the admin donation form in sites that use commas for the decimal separator. [#497](https://github.com/Charitable/Charitable/issues/497)
+
+= 1.6.10 =
+* FIX: Load template files in admin area. This resolves a fatal error when using a Charitable shortcode in the Shortcode block, or when using Divi. [#646](https://github.com/Charitable/Charitable/issues/646) and [#605](https://github.com/Charitable/Charitable/issues/605)
+
+= 1.6.9 =
+* FIX: Handle deleted images set as the value of a Picture field. [#644](https://github.com/Charitable/Charitable/issues/644)
+* FIX: Fixed logic error in check for whether the donation amount is above the minimum amount. This only affected situations where the minimum donation was $0 and someone tried to donate $0.
+* NEW: Added a more flexible way for asynchronous processes to pause donation form processing. [#645](https://github.com/Charitable/Charitable/issues/645)
+
+= 1.6.8 =
+* FIX: Resolved bug related to WordPress core updates that prevented any donations from appearing under Charitable > Donations when on the "All" view. [#641](https://github.com/Charitable/Charitable/issues/641)
+* NEW: Added "Subtotal" row to the Donation Overview table in the admin. This is not shown by default, but will be used by extensions like Gift Aid and our new Fee Relief extension. [#643](https://github.com/Charitable/Charitable/issues/643)
+* NEW: Added support for querying by donation plan with `Charitable_Donations_Query`. This will be used by Recurring Donations. [#608](https://github.com/Charitable/Charitable/issues/608)
+* NEW: Allow `Charitable_Donations_Query` to output a list of IDs. [#633](https://github.com/Charitable/Charitable/issues/633)
+* NEW: Added the currency symbol to the Javascript variables used in the donation form. [#635](https://github.com/Charitable/Charitable/issues/635)
+
+= 1.6.7 =
+* FIX: Load scripts properly when adding a custom 'picture' field to the donation form. [#627](https://github.com/Charitable/Charitable/issues/627)
+* FIX: Save settings on Extensions settings page when there is only a single checkbox field. This bug affected Donor Comments. [#629](https://github.com/Charitable/Charitable/issues/629)
+* FIX: Add full support for radio & multi-checkbox fields with the Donation Fields API. [#577](https://github.com/Charitable/Charitable/issues/577) and [#576](https://github.com/Charitable/Charitable/issues/576)
+* FIX: Properly reflect the value for the "Send after Registration" setting in the settings for the User Verification email. [#626](https://github.com/Charitable/Charitable/issues/626)
+* FIX: Only define defaults for database fields that require one. This avoids duplicate primary key issues in certain environments (Windows servers). [#623](https://github.com/Charitable/Charitable/issues/623)
+* FIX: Add responsive styling for campaign grid when masonry is turned on. [#628](https://github.com/Charitable/Charitable/issues/628)
+* FIX: Removed confusing "Payment attempted" log message for new donations. [#624](https://github.com/Charitable/Charitable/issues/624)
+* FIX: Added debug logging when CHARITABLE_DEBUG constant is set and true, and when a nonce check fails. [#630](https://github.com/Charitable/Charitable/issues/630)
+* FIX: Made sure the `charitable_user_registration_fields` filter actually works. :)
 
 = 1.6.6 =
 * FIX: Prevents an endless loop in the donor id upgrade process added in version 1.6.5. In certain cases, the upgrade could not complete properly.
@@ -282,7 +365,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * FIX: Prevents Charitable from co-opting the forgot password page in WooCommerce. [#473](https://github.com/Charitable/Charitable/issues/473)
 * FIX: Minor styling update to improve theme compatibility for [campaigns] display. [#475](https://github.com/Charitable/Charitable/issues/475)
 
-= 1.5.5 = 
+= 1.5.5 =
 * FIX: Fixes fatal error in the campaign submission form in Ambassadors. [#471](https://github.com/Charitable/Charitable/issues/471)
 
 = 1.5.4 =
@@ -363,13 +446,13 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 = 1.4.18 =
 * Added an end time when editing campaigns to make it clearer when a campaign ends. Previously, a campaign's end time was ambiguous and this caused confusion for some users. [#335](https://github.com/Charitable/Charitable/issues/335)
 * Add space as a thousands separator for countries where `12 500,00` would be the correct way to format an amount. [#332](https://github.com/Charitable/Charitable/issues/332)
-* Add campaign edit link as email shortcode option for campaign-related emails. [#345](https://github.com/Charitable/Charitable/issues/345) 
+* Add campaign edit link as email shortcode option for campaign-related emails. [#345](https://github.com/Charitable/Charitable/issues/345)
 * Fixed multiple HTML validation issues in Charitable forms and the campaigns widget. [#344](https://github.com/Charitable/Charitable/issues/344) and [#349](https://github.com/Charitable/Charitable/issues/349)
 * Prevent a bug where the donated amount on a campaign is completely wrong after a site changes its decimal/thousands separators. [#279](https://github.com/Charitable/Charitable/issues/279)
 * Flush the campaign donation cache in popular caching plugins (WP Super Cache, W3 Total Cache, WP Rocket and WP Fastest Cache). [#186](https://github.com/Charitable/Charitable/issues/186)
 * Fixed an error during donation processing that prevented donations when database caching is enabled in W3 Total Cache. [#347](https://github.com/Charitable/Charitable/issues/347)
 * Improved the way upgrades are run to ensure they are not re-run unneccesarily and store the minimum required information about each upgrade.
- 
+
 = 1.4.17 =
 * **THANK YOU**: Thanks to first-time contributor [@qriouslad](https://github.com/qriouslad) for his contribution to this release!
 * When using Stripe Checkout, amounts over $999 were sometimes incorrectly sent to the Stripe modal. [#339](https://github.com/Charitable/Charitable/issues/339)
@@ -393,7 +476,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 = 1.4.13 =
 * Added `tag` parameter to the [campaigns] shortcode. [#313](https://github.com/Charitable/Charitable/issues/313)
-* We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310) 
+* We cleaned up another bug involving our [Easy Digital Downloads Connect extension](https://www.wpcharitable.com/extensions/charitable-easy-digital-downloads-connect/?utm_source=readme&utm_medium=changelog-tab&utm_campaign=edd-connect), which resulted in being unable to set an end date for contribution rules when the campaign doesn't have an end date. [#310](https://github.com/Charitable/Charitable/issues/310)
 * Persist un-rendered notices across page loads. [#314](https://github.com/Charitable/Charitable/issues/314)
 * Hide radio inputs when Javascript is enabled. [#312](https://github.com/Charitable/Charitable/issues/312)
 * We made some minor improvements to how the donation form submission is processed in Javascript. Needed for improvements to Stripe extension.
@@ -547,7 +630,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 = 1.3.1 =
 * **APOLOGIES**: 1.3.0 introduced a couple of bugs that we failed to pick up on before releasing the update. We have fixed those bugs now and are working on improving the process around how we push out updates, to avoid issues like this in the future.
 * Removes leftover testing code that prevented campaigns from being created or edited.
-* Format the donation amount so that PayPal can understand it (PayPal doesn't like amounts with more than two decimal places). [See issue](https://github.com/Charitable/Charitable/issues/102) 
+* Format the donation amount so that PayPal can understand it (PayPal doesn't like amounts with more than two decimal places). [See issue](https://github.com/Charitable/Charitable/issues/102)
 * Prevent PHP notice when making a donation. [See issue](https://github.com/Charitable/Charitable/issues/100)
 * Fixes a bug that prevented the Donate widget from working as expected.
 
@@ -568,7 +651,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 * Fixed a bug in modal donation window. [See issue](https://github.com/Charitable/Charitable/issues/43)
 * Changed the `amount` column in the `wp_charitable_campaign_donations` table to a DECIMAL, instead of FLOAT. [See issue](https://github.com/Charitable/Charitable/issues/56)
 
-= 1.2.4 =  
+= 1.2.4 =
 * Updated for compatibility with WordPress 4.4.
 * Improves the API for dealing with the donation processor. Both the `charitable_before_process_donation_form` and `charitable_before_process_donation_amount_form` hooks now pass the donation form object as a second parameter.
 * Fixes a bug that prevented you from being able to select the donation amount inside a modal opened via AJAX.

@@ -95,6 +95,7 @@ return array(
 	'Charitable_Profile_Endpoint' => 'endpoints/class-charitable-profile-endpoint.php',
 	'Charitable_Registration_Endpoint' => 'endpoints/class-charitable-registration-endpoint.php',
 	'Charitable_Reset_Password_Endpoint' => 'endpoints/class-charitable-reset-password-endpoint.php',
+	'Charitable_Webhook_Listener_Endpoint' => 'endpoints/class-charitable-webhook-listener-endpoint.php',
 	'Charitable_Campaign_Field_Registry' => 'fields/class-charitable-campaign-field-registry.php',
 	'Charitable_Campaign_Field' => 'fields/class-charitable-campaign-field.php',
 	'Charitable_Donation_Field_Registry' => 'fields/class-charitable-donation-field-registry.php',

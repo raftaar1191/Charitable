@@ -2,14 +2,14 @@
 /**
  * A class that is used when filtering a set of fields by a particular property.
  *
- * This is designed to be used in conjunction with array_filter in a PHP 5.2-friendly way. 
+ * This is designed to be used in conjunction with array_filter in a PHP 5.2-friendly way.
  * i.e.:
  *
  * array_filter( $fields, array( new Charitable_Field_Filter( 'property' ), 'is_true' ) );
  *
  * @package   Charitable/Classes/Charitable_Field_Filter
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
  * @version   1.6.0

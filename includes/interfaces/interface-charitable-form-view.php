@@ -7,7 +7,7 @@
  * @version   1.5.0
  * @package   Charitable/Interfaces/Charitable_Form_View_Interface
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -63,7 +63,7 @@ if ( ! interface_exists( 'Charitable_Form_View_Interface' ) ) :
          * Render a specific form fields.
          *
          * @since  1.5.0
-         *         
+         *
          * @param  array  $field Field definition.
          * @param  string $key   Field key.
          * @param  array  $args  Mixed array of arguments.

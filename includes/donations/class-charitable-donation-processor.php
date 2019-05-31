@@ -5,7 +5,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Donation_Processor
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -443,7 +443,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$log_note = array_key_exists( 'log_note', $values ) ? $values['log_note'] : '';
 
 			if ( empty( $log_note ) ) {
-				$log_note = isset( $values['ID'] ) ? __( 'Payment attempted.', 'charitable' ) : __( 'Donation created.', 'charitable' );
+				$log_note = isset( $values['ID'] ) && 0 !== $values['ID'] ? __( 'Payment attempted.', 'charitable' ) : __( 'Donation created.', 'charitable' );
 			}
 
 			$this->update_donation_log( $donation_id, $log_note );
@@ -598,12 +598,15 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			}
 
 			$donor_id        = $this->get_donor_id();
-			$meta            = $this->get_donation_data_value( 'meta' );
+			$meta            = $this->get_donation_data_value( 'meta', array() );
 			$contact_consent = array_key_exists( 'contact_consent', $meta ) ? (bool) $meta['contact_consent'] : false;
 
-			charitable_get_table( 'donors' )->update( $donor_id, array(
-				'contact_consent' => $contact_consent,
-			) );
+			charitable_get_table( 'donors' )->update(
+				$donor_id,
+				array(
+					'contact_consent' => $contact_consent,
+				)
+			);
 		}
 
 		/**
@@ -726,6 +729,52 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		}
 
 		/**
+		 * Returns the name of the donor.
+		 *
+		 * @since  1.0.0
+		 * @since  1.6.14 Changed access to public. Previously protected.
+		 *
+		 * @return string
+		 */
+		public function get_donor_name() {
+			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
+			$user_data  = $this->get_donation_data_value( 'user' );
+			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
+			$last_name  = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
+			return trim( sprintf( '%s %s', $first_name, $last_name ) );
+		}
+
+		/**
+		 * Returns a comma separated list of the campaigns that are being donated to.
+		 *
+		 * @since  1.0.0
+		 * @since  1.6.14 Changed access to public. Previously protected.
+		 *
+		 * @return string
+		 */
+		public function get_campaign_names() {
+			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
+			return implode( ', ', $campaigns );
+		}
+
+		/**
+		 * Returns the donation status. Defaults to charitable-pending.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return string
+		 */
+		protected function get_donation_status() {
+			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
+
+			if ( ! charitable_is_valid_donation_status( $status ) ) {
+				$status = 'charitable-pending';
+			}
+
+			return $status;
+		}
+
+		/**
 		 * Redirect the user after the gateway has processed the donation.
 		 *
 		 * @uses   Charitable_Donation_Processor::get_redirection_after_gateway_processing()
@@ -842,50 +891,6 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			$core_values['post_date'] = get_date_from_gmt( $core_values['post_date_gmt'] );
 
 			return apply_filters( 'charitable_donation_values_core', $core_values, $this );
-		}
-
-		/**
-		 * Returns the donation status. Defaults to charitable-pending.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		protected function get_donation_status() {
-			$status = $this->get_donation_data_value( 'status', 'charitable-pending' );
-
-			if ( ! charitable_is_valid_donation_status( $status ) ) {
-				$status = 'charitable-pending';
-			}
-
-			return $status;
-		}
-
-		/**
-		 * Returns the name of the donor.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		protected function get_donor_name() {
-			$user       = new WP_User( $this->get_donation_data_value( 'user_id', 0 ) );
-			$user_data  = $this->get_donation_data_value( 'user' );
-			$first_name = isset( $user_data['first_name'] ) ? $user_data['first_name'] : $user->get( 'first_name' );
-			$last_name  = isset( $user_data['last_name'] ) ? $user_data['last_name'] : $user->get( 'last_name' );
-			return trim( sprintf( '%s %s', $first_name, $last_name ) );
-		}
-
-		/**
-		 * Returns a comma separated list of the campaigns that are being donated to.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return string
-		 */
-		protected function get_campaign_names() {
-			$campaigns = wp_list_pluck( $this->get_campaign_donations_data(), 'campaign_name' );
-			return implode( ', ', $campaigns );
 		}
 
 		/**

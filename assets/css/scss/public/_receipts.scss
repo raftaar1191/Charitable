@@ -21,4 +21,33 @@
     tr, td {
         padding-right: 1.5em;
     }
+
+
+	@include bp( 768, false ) {
+		border: none !important;
+
+		thead {
+			display: none;
+		}
+
+		tr {
+			display: block;
+			padding: 1em 0;
+			margin-bottom: 1em;
+
+			td {
+				display: block;
+				padding: 0.5em 0 !important;
+				text-align: right !important;
+				border: none !important;
+
+				&::before {
+					content: attr(data-title) ": ";
+					font-weight: 700;
+					float: left;
+				}
+			}
+		}
+
+	}
 }

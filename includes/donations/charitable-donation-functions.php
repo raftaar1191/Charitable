@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Functions/Donation
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.5.0
@@ -64,6 +64,42 @@ function charitable_get_donation_meta_value( Charitable_Abstract_Donation $donat
 }
 
 /**
+ * Sanitize a value for a donation field, based on the type of field.
+ *
+ * @since  1.6.7
+ *
+ * @param  mixed  $value The submitted value.
+ * @param  string $key   The meta key.
+ * @return mixed
+ */
+function charitable_get_sanitized_donation_field_value( $value, $key ) {
+	$field = charitable()->donation_fields()->get_field( $key );
+	$form  = ( false === $field->admin_form ) ? $field->donation_form : $field->admin_form;
+
+	if ( ! is_array( $form ) ) {
+		return $value;
+	}
+
+	if ( ! array_key_exists( 'options', $form ) ) {
+		return $value;
+	}
+
+	if ( is_array( $value ) ) {
+		$values = array();
+
+		foreach ( $value as $val ) {
+			$values[] = array_key_exists( $val, $form['options'] ) ? $form['options'][ $val ] : $val;
+		}
+
+		$value = implode( ', ', $values );
+	} else {
+		$value = array_key_exists( $value, $form['options'] ) ? $form['options'][ $value ] : $value;
+	}
+
+	return $value;
+}
+
+/**
  * Return the date formatted for a form field value.
  *
  * @since  1.5.3
@@ -80,7 +116,7 @@ function charitable_get_donation_date_for_form_value( Charitable_Abstract_Donati
  *
  * @since  1.0.0
  *
- * @return Charitable_Donation
+ * @return Charitable_Donation|false
  */
 function charitable_get_current_donation() {
 	return charitable_get_helper( 'request' )->get_current_donation();
@@ -107,15 +143,15 @@ function charitable_create_donation( array $args ) {
  *
  * @since  1.4.0
  *
- * @param  string $donation_key
+ * @param  string $donation_key The donation key to query by.
  * @return int|null
  */
 function charitable_get_donation_by_key( $donation_key ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = 'donation_key' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = 'donation_key'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $donation_key ) );
@@ -126,15 +162,15 @@ function charitable_get_donation_by_key( $donation_key ) {
  *
  * @since  1.4.7
  *
- * @param  string $transaction_id
+ * @param  string $transaction_id The transaction id to query by.
  * @return int|null
  */
 function charitable_get_donation_by_transaction_id( $transaction_id ) {
 	global $wpdb;
 
-	$sql = "SELECT post_id 
-			FROM $wpdb->postmeta 
-			WHERE meta_key = '_gateway_transaction_id' 
+	$sql = "SELECT post_id
+			FROM $wpdb->postmeta
+			WHERE meta_key = '_gateway_transaction_id'
 			AND meta_value = %s";
 
 	return $wpdb->get_var( $wpdb->prepare( $sql, $transaction_id ) );
@@ -147,11 +183,11 @@ function charitable_get_donation_by_transaction_id( $transaction_id ) {
  *
  * @since  1.4.0
  *
- * @param 	string $gateway
+ * @param  string $gateway The gateway to get the ipn URL for.
  * @return string
  */
 function charitable_get_ipn_url( $gateway ) {
-	return add_query_arg( 'charitable-listener', $gateway, home_url( 'index.php' ) );
+	return charitable_get_permalink( 'webhook_listener', array( 'gateway' => $gateway ) );
 }
 
 /**
@@ -161,26 +197,21 @@ function charitable_get_ipn_url( $gateway ) {
  *
  * IPNs in Charitable are structured in this way: charitable-listener=gateway
  *
+ * @deprecated 1.9.0
+ *
  * @since  1.4.0
+ * @since  1.6.14 Deprecated. This is now handled by the webhook listener endpoint.
  *
  * @return boolean True if this is a call to our IPN. False otherwise.
  */
 function charitable_ipn_listener() {
-	if ( isset( $_GET['charitable-listener'] ) ) {
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.14',
+		"charitable()->endpoints()->get_endpoint( 'webhook_listener' )->process_incoming_webhook()"
+	);
 
-		$gateway = $_GET['charitable-listener'];
-
-		/**
-		 * Handle a gateway's IPN.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'charitable_process_ipn_' . $gateway );
-
-		return true;
-	}
-
-	return false;
+	return charitable()->endpoints()->get_endpoint( 'webhook_listener' )->process_incoming_webhook();
 }
 
 /**
@@ -227,6 +258,7 @@ function charitable_is_after_donation() {
  *
  * @since  1.4.0
  *
+ * @param  string $status The status to check.
  * @return boolean
  */
 function charitable_is_valid_donation_status( $status ) {
@@ -265,11 +297,11 @@ function charitable_get_approval_statuses() {
  *
  * @since  1.4.0
  *
- * @param  string $key
+ * @param  string|false $status The status to check.
  * @return boolean
  */
 function charitable_is_approved_status( $status ) {
-	return in_array( $status, charitable_get_approval_statuses() );
+	return false !== $status && in_array( $status, charitable_get_approval_statuses() );
 }
 
 /**
@@ -351,9 +383,9 @@ function charitable_load_donation_form_script() {
  *
  * @since  1.0.0
  *
- * @param  string $message
- * @return int|bool Meta ID if the key didn't exist, true on successful update,
- *                  false on failure.
+ * @param  int    $donation_id The donation ID.
+ * @param  string $message     The message to add to the log.
+ * @return int|bool Meta ID if the key didn't exist, true on successful update, false on failure.
  */
 function charitable_update_donation_log( $donation_id, $message ) {
 	return charitable_get_donation( $donation_id )->log()->add( $message );
@@ -364,10 +396,11 @@ function charitable_update_donation_log( $donation_id, $message ) {
  *
  * @since  1.0.0
  *
+ * @param  int $donation_id The donation ID.
  * @return array
  */
 function charitable_get_donation_log( $donation_id ) {
-	charitable_get_donation( $donation_id )->log()->get_meta_log();
+	return charitable_get_donation( $donation_id )->log()->get_meta_log();
 }
 
 /**
@@ -375,7 +408,7 @@ function charitable_get_donation_log( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  int $donation_id
+ * @param  int $donation_id The donation ID.
  * @return string
  */
 function charitable_get_donation_gateway( $donation_id ) {
@@ -387,8 +420,8 @@ function charitable_get_donation_gateway( $donation_id ) {
  *
  * @since  1.0.0
  *
- * @param  mixed  $value
- * @param  string $key
+ * @param  mixed  $value The value to sanitize.
+ * @param  string $key   The key of the meta field to be sanitized.
  * @return mixed
  */
 function charitable_sanitize_donation_meta( $value, $key ) {

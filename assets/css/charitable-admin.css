@@ -171,7 +171,8 @@
     display: block;
     padding-top: 6px;
     font-style: italic; }
-  .charitable-metabox-wrap label {
+  .charitable-metabox-wrap label,
+  .charitable-metabox-wrap legend {
     display: block;
     margin-bottom: 6px; }
   .charitable-metabox-wrap th label {
@@ -188,9 +189,26 @@
   .charitable-metabox-wrap input[type=checkbox],
   .charitable-metabox-wrap input[type=radio] {
     width: auto; }
+  .charitable-metabox-wrap.charitable-radio-wrap, .charitable-metabox-wrap.charitable-multi-checkbox-wrap {
+    margin-bottom: 14px; }
+  .charitable-metabox-wrap .charitable-radio-list li {
+    display: block; }
+  .charitable-metabox-wrap .charitable-radio-list label {
+    vertical-align: baseline; }
 
 .charitable-checkbox-wrap label {
   display: inline; }
+
+.charitable-checkbox-list label,
+.charitable-radio-list label {
+  display: inline-block; }
+.charitable-checkbox-list li,
+.charitable-radio-list li {
+  margin-bottom: 10px; }
+
+.charitable-radio-list label {
+  margin-bottom: 0;
+  vertical-align: text-bottom; }
 
 .charitable-metabox-block {
   padding: 10px;
@@ -438,6 +456,7 @@ body.post-type-campaign .postbox-container .empty-container {
   clear: both;
   padding: 0;
   background-color: #f5f5f5;
+  border: none;
   border-radius: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 13px; }
@@ -735,7 +754,7 @@ body.post-type-donation .donation-erasure-notice {
 #donation-log thead th {
   background: #f8f8f8; }
   #donation-log thead th:first-child {
-    width: 150px; }
+    width: 200px; }
 #donation-log tbody td {
   border-bottom: 1px solid #e5e5e5; }
 

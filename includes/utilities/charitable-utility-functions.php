@@ -5,14 +5,17 @@
  * Utility functions.
  *
  * @package   Charitable/Functions/Utility
- * @version   1.0.0
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Orders an array by a particular key.
@@ -26,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  */
 function charitable_element_key_sort( $key, $a, $b ) {
 	foreach ( array( $a, $b ) as $item ) {
-		if ( ! array_key_exists( $key, $item ) ) {			
+		if ( ! array_key_exists( $key, $item ) ) {
 			error_log( sprintf( '%s missing from element: ' . json_encode( $item ), $key ) );
 		}
 	}
@@ -48,7 +51,7 @@ function charitable_element_key_sort( $key, $a, $b ) {
  * @return int
  */
 function charitable_priority_sort( $a, $b ) {
-	return charitable_element_key_sort( 'priority', $a, $b );	
+	return charitable_element_key_sort( 'priority', $a, $b );
 }
 
 /**
@@ -71,11 +74,11 @@ function charitable_timestamp_sort( $a, $b ) {
  *
  * @since  1.0.0
  *
- * @param  string  $function 	Name of the function.
- * @return bool 				Whether or not function is disabled.
+ * @param  string $function Name of the function.
+ * @return boolean Whether or not function is disabled.
  */
 function charitable_is_func_disabled( $function ) {
-	$disabled = explode( ',',  ini_get( 'disable_functions' ) );
+	$disabled = explode( ',', ini_get( 'disable_functions' ) );
 
 	return in_array( $function, $disabled );
 }
@@ -85,9 +88,9 @@ function charitable_is_func_disabled( $function ) {
  *
  * @since  1.0.0
  *
- * @param  string $nonce
- * @param  string $action
- * @param  array  $request_args
+ * @param  string $nonce        The nonce name.
+ * @param  string $action       The nonce action.
+ * @param  array  $request_args Request arguments. If not set, will populate with $_GET.
  * @return boolean
  */
 function charitable_verify_nonce( $nonce, $action, $request_args = array() ) {
@@ -190,7 +193,7 @@ function charitable_sanitize_checkbox( $value = false ) {
  *
  * @since  1.3.0
  *
- * @param  string[] $list
+ * @param  string[] $list The list.
  * @return string
  */
 function charitable_list_to_sentence_part( $list ) {
@@ -201,12 +204,22 @@ function charitable_list_to_sentence_part( $list ) {
 	}
 
 	if ( 2 == count( $list ) ) {
-		return sprintf( _x( '%s and %s', 'x and y', 'charitable' ), $list[0], $list[1] );
+		return sprintf(
+			/* translators: %1$s: first list item; %2$s: second list item. */
+			_x( '%1$s and %2$s', 'x and y', 'charitable' ),
+			$list[0],
+			$list[1]
+		);
 	}
 
 	$last = array_pop( $list );
 
-	return sprintf( _x( '%s and %s', 'x and y', 'charitable' ), implode( ', ', $list ), $last );
+	return sprintf(
+		/* translators: %1$s: all list items except last, comma-separated; %2$s: second list item. */
+		_x( '%1$s and %2$s', 'x and y', 'charitable' ),
+		implode( ', ', $list ),
+		$last
+	);
 }
 
 /**
@@ -232,9 +245,7 @@ function charitable_sanitize_date( $date, $return_format = 'U' ) {
 	list( $month, $day, $year ) = explode( ' ', $date );
 
 	$day   = trim( $day, ',' );
-
 	$month = 1 + array_search( $month, array_values( $wp_locale->month ) );
-
 	$time  = mktime( 0, 0, 0, $month, $day, $year );
 
 	if ( 'U' == $return_format ) {
@@ -276,4 +287,32 @@ function charitable_get_pages_options( $args = array() ) {
 	}
 
 	return array_combine( wp_list_pluck( $pages, 'ID' ), wp_list_pluck( $pages, 'post_title' ) );
+}
+
+/**
+ * Checks whether this is localhost.
+ *
+ * This is not fullproof. It uses a whitelist of IP addresses.
+ *
+ * @since  1.6.14
+ *
+ * @return boolean
+ */
+function charitable_is_localhost() {
+	/**
+	 * Filter list of localhost IP addresses.
+	 *
+	 * @since 1.6.14
+	 *
+	 * @param array $ip_addresses The list of IP addresses.
+	 */
+	$whitelist = apply_filters(
+		'charitable_localhost_ips',
+		array(
+			'127.0.0.1',
+			'::1',
+		)
+	);
+
+	return in_array( $_SERVER['REMOTE_ADDR'], $whitelist );
 }

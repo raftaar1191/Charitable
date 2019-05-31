@@ -5,7 +5,7 @@
  * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Emails
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -215,7 +215,7 @@ if ( ! class_exists( 'Charitable_Emails' ) ) :
 		public function get_enabled_emails_names() {
 			$emails = array();
 
-			foreach ( $this->get_enabled_emails() as $class ) {				
+			foreach ( $this->get_enabled_emails() as $class ) {
 				if ( ! class_exists( $class ) ) {
 					continue;
 				}

@@ -5,7 +5,7 @@
  * @version		1.0.0
  * @package		Charitable/Classes/Charitable_Gateway
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -172,36 +172,47 @@ if ( ! class_exists( 'Charitable_Gateway' ) ) :
 		 * @return  array[]
 		 */
 		public function get_credit_card_fields() {
-			return apply_filters( 'charitable_credit_card_fields', array(
-				'cc_name' => array(
-					'label'     => __( 'Name on Card', 'charitable' ),
-					'type'      => 'text',
-					'required'  => true,
-					'priority'  => 2,
-					'data_type' => 'gateway',
+			/**
+			 * Filter the credit card fields.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $fields The credit card fields.
+			 */
+			return apply_filters(
+				'charitable_credit_card_fields',
+				array(
+					'cc_name' => array(
+						'label'     => __( 'Name on Card', 'charitable' ),
+						'type'      => 'text',
+						'required'  => true,
+						'priority'  => 2,
+						'data_type' => 'gateway',
+					),
+					'cc_number' => array(
+						'label'     => __( 'Card Number', 'charitable' ),
+						'type'      => 'text',
+						'required'  => true,
+						'priority'  => 4,
+						'data_type' => 'gateway',
+					),
+					'cc_cvc' => array(
+						'label'     => __( 'CVV Number', 'charitable' ),
+						'type'      => 'text',
+						'required'  => true,
+						'priority'  => 6,
+						'data_type' => 'gateway',
+					),
+					'cc_expiration' => array(
+						'label'     => __( 'Expiration', 'charitable' ),
+						'type'      => 'cc-expiration',
+						'required'  => true,
+						'priority'  => 8,
+						'data_type' => 'gateway',
+					),
 				),
-				'cc_number' => array(
-					'label'     => __( 'Card Number', 'charitable' ),
-					'type'      => 'text',
-					'required'  => true,
-					'priority'  => 4,
-					'data_type' => 'gateway',
-				),
-				'cc_cvc' => array(
-					'label'     => __( 'CVV Number', 'charitable' ),
-					'type'      => 'text',
-					'required'  => true,
-					'priority'  => 6,
-					'data_type' => 'gateway',
-				),
-				'cc_expiration' => array(
-					'label'     => __( 'Expiration', 'charitable' ),
-					'type'      => 'cc-expiration',
-					'required'  => true,
-					'priority'  => 8,
-					'data_type' => 'gateway',
-				),
-			), $this );
+				$this
+			);
 		}
 
 		/**

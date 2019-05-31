@@ -35,6 +35,15 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		private static $instance = null;
 
 		/**
+		 * Whether the "upgrade in progress" notice has been shown.
+		 *
+		 * @since 1.6.14
+		 *
+		 * @var   boolean
+		 */
+		private $notice_shown_for_upgrade_in_progress = false;
+
+		/**
 		 * Current database version.
 		 *
 		 * @since 1.0.0
@@ -200,6 +209,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 					'prompt'          => true,
 					'active_callback' => array( $this, 'has_empty_donor_ids' ),
 				),
+				'flush_permalinks_1614'                   => array(
+					'version'  => '1.6.14',
+					'message'  => '',
+					'prompt'   => false,
+					'callback' => array( $this, 'flush_permalinks' ),
+				),
 			);
 		}
 
@@ -277,21 +292,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			/**
 			 * If an upgrade is still in progress, continue it until it's done.
 			 */
-			$upgrade_progress = $this->upgrade_is_in_progress();
+			if ( ! Charitable_Upgrade::get_instance()->notice_shown_for_upgrade_in_progress() ) {
+				$upgrade_progress = $this->upgrade_is_in_progress();
 
-			if ( false !== $upgrade_progress ) {
-
-				/* Fixes a bug that incorrectly set the page as charitable-upgrade */
-				if ( isset( $upgrade_progress['page'] ) && 'charitable-upgrade' == $upgrade_progress['page'] ) {
-					$upgrade_progress['page'] = 'charitable-upgrades';
+				if ( false !== $upgrade_progress ) {
+					return Charitable_Upgrade::get_instance()->show_upgrade_in_progress_notice( $upgrade_progress );
 				}
-?>		
-				<div class="error">
-					<p><?php printf( __( 'Charitable needs to complete an upgrade that was started earlier. Click <a href="%s">here</a> to continue the upgrade.', 'charitable' ), esc_url( add_query_arg( $upgrade_progress, admin_url( 'index.php' ) ) ) ) ?>
-					</p>
-				</div>
-<?php
-				return;
 			}
 
 			$this->walk_upgrade_actions( array( $this, 'show_upgrade_notice' ) );
@@ -315,7 +321,6 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			if ( array_key_exists( 'notice', $upgrade ) ) {
 				return $this->set_update_notice_transient( $upgrade, $action );
 			}
-
 ?>
 			<div class="updated">
 				<p><?php printf( '%s %s', $upgrade['message'], sprintf( __( 'Click <a href="%s">here</a> to start the upgrade.', 'charitable' ), esc_url( admin_url( 'index.php?page=charitable-upgrades&charitable-upgrade=' . $action ) ) ) ) ?>
@@ -344,10 +349,12 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
+		 * @param  string $action  The upgrade's action key.
+		 * @param  array  $upgrade Upgrade details.
 		 * @return void
 		 */
 		public function perform_immediate_upgrade( $action, $upgrade ) {
-			if ( $this->do_upgrade_immediately( $upgrade ) ) {				
+			if ( $this->do_upgrade_immediately( $upgrade ) ) {
 				$ret = call_user_func( $upgrade['callback'], $action );
 
 				/* If the upgrade succeeded, update the log. */
@@ -374,17 +381,18 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 			foreach ( $this->upgrade_actions as $action => $upgrade ) {
 
-				/* If the upgrade has an active_callback, check whether the upgrade is required. If not, mark it as done. */
-				if ( array_key_exists( 'active_callback', $upgrade ) && ! call_user_func( $upgrade['active_callback'] ) ) {
-					$this->update_upgrade_log( $action );
-					continue;
-				}
-
 				if ( ! $this->upgrade_has_been_completed( $action ) ) {
+
+					/* If the upgrade has an active_callback, check whether the upgrade is required. If not, mark it as done. */
+					if ( array_key_exists( 'active_callback', $upgrade ) && ! call_user_func( $upgrade['active_callback'] ) ) {
+						$this->update_upgrade_log( $action );
+						continue;
+					}
+
 					call_user_func( $callback, $action, $upgrade );
 				}
 			}
-		}		
+		}
 
 		/**
 		 * Checks whether an upgrade has been completed.
@@ -400,6 +408,48 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 			return is_array( $log ) && array_key_exists( $action, $log );
 		}
+
+
+		/**
+		 * Check whether a notice has been shown to say that an upgrade is in progress.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @return boolean
+		 */
+		public function notice_shown_for_upgrade_in_progress() {
+			return $this->notice_shown_for_upgrade_in_progress;
+		}
+
+		/**
+		 * Show the "upgrade in progress" notice.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @param  array $upgrade_progress Array detailing the upgrade progress.
+		 * @return void
+		 */
+		public function show_upgrade_in_progress_notice( $upgrade_progress ) {
+			/* Fixes a bug that incorrectly set the page as charitable-upgrade */
+			if ( isset( $upgrade_progress['page'] ) && 'charitable-upgrade' == $upgrade_progress['page'] ) {
+				$upgrade_progress['page'] = 'charitable-upgrades';
+			}
+?>
+			<div class="error">
+				<p>
+					<?php
+						printf(
+							/* translators: %s: upgrade link */
+							__( 'Charitable needs to complete an upgrade that was started earlier. Click <a href="%s">here</a> to continue the upgrade.', 'charitable' ),
+							esc_url( add_query_arg( $upgrade_progress, admin_url( 'index.php' ) ) )
+						);
+					?>
+				</p>
+			</div>
+<?php
+			$this->notice_shown_for_upgrade_in_progress = true;
+		}
+
 		/**
 		 * Evaluates two version numbers and determines whether an upgrade is
 		 * required for version A to get to version B.
@@ -753,7 +803,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		}
 
 		/**
-		 * Remove the 'manage_charitable_settings' cap from the Campaign Manager role.		 
+		 * Remove the 'manage_charitable_settings' cap from the Campaign Manager role.
 		 *
 		 * @since  1.4.5
 		 *
@@ -920,7 +970,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		 *
 		 * @since  1.3.0
 		 *
-		 * @param  string $upgrade 	 The upgrade action.
+		 * @param  string $upgrade      The upgrade action.
 		 * @param  string $redirect_url Optional URL to redirect to after the upgrade.
 		 * @return void
 		 */
@@ -1004,9 +1054,7 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 		public function fix_donor_role_caps() {
 			remove_role( 'donor' );
 
-			add_role( 'donor', __( 'Donor', 'charitable' ), array(
-				'read' => true,
-			) );
+			add_role( 'donor', __( 'Donor', 'charitable' ), array( 'read' => true ) );
 
 			return true;
 		}
@@ -1059,17 +1107,17 @@ if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 			global $wpdb;
 
 			if ( empty( $skipped ) ) {
-				return $wpdb->get_col( "SELECT DISTINCT donation_id 
-					FROM {$wpdb->prefix}charitable_campaign_donations 
-					WHERE donor_id = 0 
+				return $wpdb->get_col( "SELECT DISTINCT donation_id
+					FROM {$wpdb->prefix}charitable_campaign_donations
+					WHERE donor_id = 0
 					LIMIT $number;" );
 			}
 
 			$placeholders = charitable_get_query_placeholders( count( $skipped ), '%d' );
 
-			return $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT donation_id 
-				FROM {$wpdb->prefix}charitable_campaign_donations 
-				WHERE donor_id = 0 
+			return $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT donation_id
+				FROM {$wpdb->prefix}charitable_campaign_donations
+				WHERE donor_id = 0
 				AND donation_id NOT IN ( $placeholders )
 				LIMIT $number;", $skipped ) );
 		}

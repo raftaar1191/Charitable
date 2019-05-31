@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Shortcodes/Profile
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.5.7
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Charitable_Profile_Shortcode' ) ) :
 			/* If the user is logged in, show the profile template. */
 			charitable_template( 'shortcodes/profile.php', $args );
 
-			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );      
+			return apply_filters( 'charitable_profile_shortcode', ob_get_clean() );
 		}
 	}
 

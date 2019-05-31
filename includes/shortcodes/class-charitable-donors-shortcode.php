@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Shortcodes/Donors
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.7
@@ -53,12 +53,12 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * If you replace the template with your own, it needs to be an instance of Charitable_Template.
 			 *
-			 * @since   1.5.0
+			 * @since  1.5.0
 			 *
-			 * @param 	false|Charitable_Template The template. If false (the default), we will use our own template.
-			 * @param 	array $args               All the parsed arguments.
-	         * @return 	false|Charitable_Template
-	         */
+			 * @param  false|Charitable_Template The template. If false (the default), we will use our own template.
+			 * @param  array $args               All the parsed arguments.
+			 * @return false|Charitable_Template
+			 */
 			$template = apply_filters( 'charitable_donors_shortcode_template', false, $args );
 
 			/* Fall back to default Charitable_Template if no template returned or if template was not object of 'Charitable_Template' class. */
@@ -77,21 +77,21 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  array $view_args The arguments to pass.
 			 * @param  array $args      All the parsed arguments.
-	         * @return array
-	         */
+			 * @return array
+			 */
 			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
-					'donors',
-					'number',
-					'orderby',
-					'order',
-					'campaign',
-					'orientation',
-					'distinct_donors',
-					'show_name',
-					'show_location',
-					'show_amount',
-					'show_avatar',
-					'hide_if_no_donors',
+				'donors',
+				'number',
+				'orderby',
+				'order',
+				'campaign',
+				'orientation',
+				'distinct_donors',
+				'show_name',
+				'show_location',
+				'show_amount',
+				'show_avatar',
+				'hide_if_no_donors',
 			) ), $args );
 
 			$template->set_view_args( $view_args );
@@ -107,8 +107,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  string $content The content to be displayed.
 			 * @param  array  $args    All the parsed arguments.
-	         * @return string
-	         */
+			 * @return string
+			 */
 			return apply_filters( 'charitable_donors_shortcode', ob_get_clean(), $args );
 		}
 
@@ -128,8 +128,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 *
 			 * @param  array $query_args The arguments to be passed to Charitable_Donor_Query::__construct.
 			 * @param  array $args       All the parsed arguments.
-	         * @return array
-	         */
+			 * @return array
+			 */
 			$query_args = apply_filters( 'charitable_donors_shortcode_donor_query_args',
 				charitable_array_subset( $args, array( 'number', 'orderby', 'order', 'campaign', 'distinct_donors' ) ),
 				$args

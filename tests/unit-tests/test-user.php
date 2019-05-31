@@ -21,30 +21,31 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 
 		/* James Gordon makes a donation and becomes a donor/user in the process. */
 		$this->james_gordon = Charitable_User::create_profile( array(
-			'user_email'		=> 'james@gotham.com',
-			'first_name'		=> 'James',
-			'last_name'			=> 'Gordon', 
-			'user_pass' 		=> 'password', // Required for the user to be created at the moment.
-			'address' 			=> '22 Batman Avenue',
-			'address_2' 		=> '',
-			'city' 				=> 'Gotham',
-			'state' 			=> 'Gotham State',
-			'postcode' 			=> '29292',
-			'country' 			=> 'US'
+			'user_email' => 'james@gotham.com',
+			'first_name' => 'James',
+			'last_name'	 => 'Gordon', 
+			'user_pass'  => 'password', // Required for the user to be created at the moment.
+			'address'    => '22 Batman Avenue',
+			'address_2'  => '',
+			'city'       => 'Gotham',
+			'state'      => 'Gotham State',
+			'postcode'   => '29292',
+			'country'    => 'US',
 		) );
 
 		/* Create a campaign wth a donation from James Gordon */
 		Charitable_Donation_Helper::create_donation( array(
-			'user_id'			=> $this->james_gordon->ID, 
-			'campaigns'			=> array(
+			'user_id'   => $this->james_gordon->ID, 
+			'donor_id'  => $this->james_gordon->get_donor_id(),
+			'campaigns' => array(
 				array( 
 					'campaign_id' 	=> Charitable_Campaign_Helper::create_campaign(),
 					'amount'		=> 100
 				)
 			), 
-			'status'			=> 'charitable-completed', 
-			'gateway'			=> 'paypal',
-			'note'				=> 'This is a note'	
+			'status'    => 'charitable-completed', 
+			'gateway'   => 'paypal',
+			'note'      => 'This is a note'	
 		) );
 	}	
 
@@ -71,9 +72,9 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 	 */
 	public function test_is_donor_with_non_donor() {
 		$user_id = $this->factory->user->create( array( 
-			'user_email'		=> 'carmine@gotham.com',
-			'first_name'		=> 'Carmine', 
-			'last_name'			=> 'Falcone' 
+			'user_email' => 'carmine@gotham.com',
+			'first_name' => 'Carmine', 
+			'last_name'  => 'Falcone' 
 		) );
 
 		$user = new Charitable_User( $user_id );
@@ -85,9 +86,9 @@ class Test_Charitable_User extends Charitable_UnitTestCase {
 	 */
 	public function test_is_donor_with_non_wpuser() {
 		$donor_id = charitable_get_table( 'donors' )->insert( array( 
-			'email'			=> 'fish.mooney@gotham.com',
-			'first_name'	=> 'Fish', 
-			'last_name'		=> 'Mooney'
+			'email'      => 'fish.mooney@gotham.com',
+			'first_name' => 'Fish', 
+			'last_name'	 => 'Mooney'
 		) );
 
 		$user = Charitable_User::init_with_donor( $donor_id );

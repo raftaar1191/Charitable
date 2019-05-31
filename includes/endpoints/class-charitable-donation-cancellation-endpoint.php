@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Donation_Cancellation_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.4
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 	 */
 	class Charitable_Donation_Cancellation_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'donation_cancellation';
 
 		/**

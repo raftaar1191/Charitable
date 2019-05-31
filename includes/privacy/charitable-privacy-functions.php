@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Functions/Privacy
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.2
  * @version   1.6.2
@@ -26,7 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return boolean
  */
 function charitable_is_terms_and_conditions_activated() {
-	return 0 != charitable_get_option( 'terms_conditions_page', 0 ) && '' != charitable_get_option( 'terms_conditions' );
+	return 0 != charitable_get_option( 'terms_conditions_page', 0 )
+		&& '' != charitable_get_option( 'terms_conditions', __( 'I have read and agree to the website [terms].', 'charitable' ) );
 }
 
 /**
@@ -40,7 +41,8 @@ function charitable_is_terms_and_conditions_activated() {
  * @return boolean
  */
 function charitable_is_privacy_policy_activated() {
-	return 0 != charitable_get_option( 'privacy_policy_page', 0 ) && '' != charitable_get_option( 'privacy_policy' );
+	return 0 != charitable_get_option( 'privacy_policy_page', 0 )
+		&& '' != charitable_get_option( 'privacy_policy', __( 'Your personal data will be used to process your donation, support your experience throughout this website, and for other purposes described in our [privacy_policy].', 'charitable' ) );
 }
 
 /**
@@ -55,7 +57,9 @@ function charitable_is_privacy_policy_activated() {
  * @return boolean
  */
 function charitable_is_contact_consent_activated() {
-	return 0 != charitable_get_option( 'contact_consent', 0 ) && Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
+	return 0 != charitable_get_option( 'contact_consent', 0 )
+		&& '' != charitable_get_option( 'contact_consent_label', __( 'Yes, I am happy for you to contact me via email or phone.', 'charitable' ) )
+		&& Charitable_Upgrade::get_instance()->upgrade_has_been_completed( 'upgrade_donor_tables' );
 }
 
 /**

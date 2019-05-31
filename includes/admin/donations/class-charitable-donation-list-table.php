@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Donation_List_Table
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.0
@@ -45,6 +45,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 
 		/**
 		 * Returns and/or create the single instance of this class.
+		 *
 		 * @since  1.5.0
 		 *
 		 * @return Charitable_Donation_List_Table
@@ -131,7 +132,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 					break;
 
 				case 'amount':
-					$display = charitable_format_money( $donation->get_total_donation_amount() );
+					$display  = charitable_format_money( $donation->get_total_donation_amount() );
 					$display .= '<span class="meta">' . sprintf( _x( 'via %s', 'charitable' ), $donation->get_gateway_label() ). '</span>';
 					break;
 
@@ -249,7 +250,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 			), $actions );
 
 			return $actions;
-		}   
+		}
 
 		/**
 		 * Customize the output of the status views.
@@ -393,23 +394,22 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 		 *
 		 * @global string $post_type
 		 *
-		 * @return void		 
+		 * @return void
 		 */
 		public function bulk_admin_footer() {
 			global $post_type;
 
 			if ( Charitable::DONATION_POST_TYPE == $post_type ) {
-				?>
-				<script type="text/javascript">
-				(function($) { 
-					<?php
-					foreach ( $this->get_bulk_actions() as $status_key => $label ) {
-						printf( "jQuery('<option>').val('%s').text('%s').appendTo( [ '#bulk-action-selector-top', '#bulk-action-selector-bottom' ] );", $status_key, $label );
-					}
-					?>
-				})(jQuery);
-				</script>
-				<?php
+
+				$js  = '<script type="text/javascript">';
+				$js .= '(function($) {';
+				foreach ( $this->get_bulk_actions() as $status_key => $label ) {
+					$js .= sprintf( "jQuery('<option>').val('%s').text('%s').appendTo( [ '#bulk-action-selector-top', '#bulk-action-selector-bottom' ] );", $status_key, $label );
+				}
+				$js .= '})(jQuery);';
+				$js .= '</script>';
+
+				echo $js;
 			}
 		}
 
@@ -660,7 +660,7 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 			}
 
 			/* No Status: fix WP's crappy handling of "all" post status. */
-			if ( ! isset( $vars['post_status'] ) ) {
+			if ( ! isset( $vars['post_status'] ) || empty( $vars['post_status'] ) ) {
 				$vars['post_status'] = array_keys( charitable_get_valid_donation_statuses() );
 			}
 

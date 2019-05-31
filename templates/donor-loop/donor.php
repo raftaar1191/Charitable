@@ -108,4 +108,3 @@ $campaign_id = $view_args['campaign'];
 	do_action( 'charitable_donor_loop_after_donor', $donor, $view_args );
 	?>
 </li><!-- .donor-<?php echo $donor->donor_id; ?> -->
-

@@ -2,23 +2,24 @@
 /**
  * Charitable Currency helper.
  *
- * @package   Charitable/Classes/Charitable_Currency 
+ * @package   Charitable/Classes/Charitable_Currency
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.6.15
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Currency' ) ) :
 
 	/**
 	 * Charitable_Currency
 	 *
-	 * @final
 	 * @since 1.0.0
 	 */
 	final class Charitable_Currency {
@@ -136,6 +137,30 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		}
 
 		/**
+		 * Returns an amount as a localized monetary string, without a currency symbol.
+		 *
+		 * @since  1.6.11
+		 *
+		 * @param  string    $amount        The amount to convert.
+		 * @param  int|false $decimal_count Optional. If not set, default decimal count will be used.
+		 * @return string
+		 */
+		public function get_sanitized_and_localized_amount( $amount, $decimal_count = false ) {
+			if ( false === $decimal_count ) {
+				$decimal_count = charitable_get_option( 'decimal_count', 2 );
+			}
+
+			$amount = $this->sanitize_monetary_amount( $amount, false );
+
+			return number_format(
+				$amount,
+				(int) $decimal_count,
+				$this->get_decimal_separator(),
+				$this->get_thousands_separator()
+			);
+		}
+
+		/**
 		 * Turns a database amount into an amount formatted for the currency that the site is in.
 		 *
 		 * @since  1.3.0
@@ -206,6 +231,14 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 					$format = '%2$s&nbsp;%1$s';
 					break;
 				default:
+					/**
+					 * Filter the fallback currency format.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param string $format          The currency format.
+					 * @param string $symbol_position Where the symbol is positioned in relation to the amount.
+					 */
 					$format = apply_filters( 'charitable_currency_format', '%1$s%2$s', $symbol_position );
 			}
 
@@ -220,6 +253,13 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 * @return string
 		 */
 		public function get_accounting_js_format() {
+			/**
+			 * Filter the currency format to use with accounting.js.
+			 *
+			 * @since 1.3.0
+			 *
+			 * @param string $format The currency format.
+			 */
 			return apply_filters( 'charitable_accounting_js_currency_format', '%s%v' );
 		}
 
@@ -232,51 +272,240 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 		 */
 		public function get_all_currencies() {
 			if ( empty( $this->currencies ) ) {
-				$this->currencies = apply_filters( 'charitable_currencies', array(
-					'AED'	=> sprintf( __( 'Emirati Dirham (%s)', 'charitable' ), $this->get_currency_symbol( 'AED' ) ),
-					'AUD'	=> sprintf( __( 'Australian Dollars (%s)', 'charitable' ), $this->get_currency_symbol( 'AUD' ) ),
-					'ARS'	=> sprintf( __( 'Argentine Peso (%s)', 'charitable' ), $this->get_currency_symbol( 'ARS' ) ),
-					'BDT'	=> sprintf( __( 'Bangladeshi Taka (%s)', 'charitable' ), $this->get_currency_symbol( 'BDT' ) ),
-					'BOB'   => sprintf( __( 'Bolivian Bolíviano (%s)', 'charitable' ), $this->get_currency_symbol( 'BOB' ) ),
-					'BRL'	=> sprintf( __( 'Brazilian Real (%s)', 'charitable' ), $this->get_currency_symbol( 'BRL' ) ),
-					'BGN'	=> sprintf( __( 'Bulgarian Lev (%s)', 'charitable' ), $this->get_currency_symbol( 'BGN' ) ),
-					'CAD'	=> sprintf( __( 'Canadian Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'CAD' ) ),
-					'CHF'	=> sprintf( __( 'Swiss Franc (%s)', 'charitable' ), $this->get_currency_symbol( 'CHF' ) ),
-					'CLP'	=> sprintf( __( 'Chilean Peso (%s)', 'charitable' ), $this->get_currency_symbol( 'CLP' ) ),
-					'CNY'	=> sprintf( __( 'Chinese Yuan Renminbi (%s)', 'charitable' ), $this->get_currency_symbol( 'CNY' ) ),
-					'CZK'	=> sprintf( __( 'Czech Koruna (%s)', 'charitable' ), $this->get_currency_symbol( 'CZK' ) ),
-					'DKK'	=> sprintf( __( 'Danish Krone (%s)', 'charitable' ), $this->get_currency_symbol( 'DKK' ) ),
-					'EGP'   => sprintf( __( 'Egyptian Pound (%s)', 'charitable' ), $this->get_currency_symbol( 'EGP' ) ),
-					'EUR'	=> sprintf( __( 'Euro (%s)', 'charitable' ), $this->get_currency_symbol( 'EUR' ) ),
-					'GBP'	=> sprintf( __( 'British Pound (%s)', 'charitable' ), $this->get_currency_symbol( 'GBP' ) ),
-					'GHS' 	=> sprintf( __( 'Ghanaian Cedi (%s)', 'charitable' ), $this->get_currency_symbol( 'GHS' ) ),
-					'HKD'	=> sprintf( __( 'Hong Kong Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'HKD' ) ),
-					'HRK'	=> sprintf( __( 'Croatian Kuna (%s)', 'charitable' ), $this->get_currency_symbol( 'HRK' ) ),
-					'HUF'	=> sprintf( __( 'Hungarian Forint (%s)', 'charitable' ), $this->get_currency_symbol( 'HUF' ) ),
-					'IDR'	=> sprintf( __( 'Indonesian Rupiah (%s)', 'charitable' ), $this->get_currency_symbol( 'IDR' ) ),
-					'ILS'	=> sprintf( __( 'Israeli Shekel (%s)', 'charitable' ), $this->get_currency_symbol( 'ILS' ) ),
-					'INR'	=> sprintf( __( 'Indian Rupee (%s)', 'charitable' ), $this->get_currency_symbol( 'INR' ) ),
-					'ISK'	=> sprintf( __( 'Icelandic Krona (%s)', 'charitable' ), $this->get_currency_symbol( 'ISK' ) ),
-					'JPY'	=> sprintf( __( 'Japanese Yen (%s)', 'charitable' ), $this->get_currency_symbol( 'JPY' ) ),
-					'KRW'	=> sprintf( __( 'South Korean Won (%s)', 'charitable' ), $this->get_currency_symbol( 'KRW' ) ),
-					'MXN'	=> sprintf( __( 'Mexican Peso (%s)', 'charitable' ), $this->get_currency_symbol( 'MXN' ) ),
-					'MYR'	=> sprintf( __( 'Malaysian Ringgit (%s)', 'charitable' ), $this->get_currency_symbol( 'MYR' ) ),
-					'NGN'	=> sprintf( __( 'Nigerian Naira (%s)', 'charitable' ), $this->get_currency_symbol( 'NGN' ) ),
-					'NOK'	=> sprintf( __( 'Norwegian Krone (%s)', 'charitable' ), $this->get_currency_symbol( 'NOK' ) ),
-					'NZD'	=> sprintf( __( 'New Zealand Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'NZD' ) ),
-					'PHP'	=> sprintf( __( 'Philippine Peso (%s)', 'charitable' ), $this->get_currency_symbol( 'PHP' ) ),
-					'PLN'	=> sprintf( __( 'Polish Zloty (%s)', 'charitable' ), $this->get_currency_symbol( 'PLN' ) ),
-					'RON'	=> sprintf( __( 'Romanian New Leu (%s)', 'charitable' ), $this->get_currency_symbol( 'RON' ) ),
-					'RUB'	=> sprintf( __( 'Russian Ruble (%s)', 'charitable' ), $this->get_currency_symbol( 'RUB' ) ),
-					'SEK'	=> sprintf( __( 'Swedish Krona (%s)', 'charitable' ), $this->get_currency_symbol( 'SEK' ) ),
-					'SGD'	=> sprintf( __( 'Singapore Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'SGD' ) ),
-					'THB'	=> sprintf( __( 'Thai Baht (%s)', 'charitable' ), $this->get_currency_symbol( 'THB' ) ),
-					'TRY'	=> sprintf( __( 'Turkish Lira (%s)', 'charitable' ), $this->get_currency_symbol( 'TRY' ) ),
-					'TWD'	=> sprintf( __( 'Taiwan New Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'TWD' ) ),
-					'USD'	=> sprintf( __( 'US Dollar (%s)', 'charitable' ), $this->get_currency_symbol( 'USD' ) ),
-					'VND'	=> sprintf( __( 'Vietnamese Dong (%s)', 'charitable' ), $this->get_currency_symbol( 'VND' ) ),
-					'ZAR'	=> sprintf( __( 'South African Rand (%s)', 'charitable' ), $this->get_currency_symbol( 'ZAR' ) ),
-				) );
+				/**
+				 * Filter the currencies available in Charitable.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param array $currencies All currencies as a key=>index array, with
+				 *                          the currency code as the key and the currency
+				 *                          name including symbol as value.
+				 */
+				$this->currencies = apply_filters(
+					'charitable_currencies',
+					array(
+						'AED' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Emirati Dirham (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'AED' )
+						),
+						'AUD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Australian Dollars (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'AUD' )
+						),
+						'ARS' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Argentine Peso (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'ARS' )
+						),
+						'BDT' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Bangladeshi Taka (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'BDT' )
+						),
+						'BOB' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Bolivian Bolíviano (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'BOB' )
+						),
+						'BRL' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Brazilian Real (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'BRL' )
+						),
+						'BGN' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Bulgarian Lev (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'BGN' )
+						),
+						'CAD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Canadian Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'CAD' )
+						),
+						'CHF' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Swiss Franc (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'CHF' )
+						),
+						'CLP' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Chilean Peso (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'CLP' )
+						),
+						'CNY' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Chinese Yuan Renminbi (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'CNY' )
+						),
+						'COP' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Colombian Peso (%s', 'charitable' ),
+							$this->get_currency_symbol( 'COP' )
+						),
+						'CZK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Czech Koruna (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'CZK' )
+						),
+						'DKK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Danish Krone (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'DKK' )
+						),
+						'EGP' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Egyptian Pound (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'EGP' )
+						),
+						'EUR' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Euro (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'EUR' )
+						),
+						'GBP' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'British Pound (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'GBP' )
+						),
+						'GHS' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Ghanaian Cedi (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'GHS' )
+						),
+						'HKD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Hong Kong Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'HKD' )
+						),
+						'HRK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Croatian Kuna (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'HRK' )
+						),
+						'HUF' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Hungarian Forint (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'HUF' )
+						),
+						'IDR' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Indonesian Rupiah (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'IDR' )
+						),
+						'ILS' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Israeli Shekel (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'ILS' )
+						),
+						'INR' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Indian Rupee (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'INR' )
+						),
+						'ISK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Icelandic Krona (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'ISK' )
+						),
+						'JPY' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Japanese Yen (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'JPY' )
+						),
+						'KRW' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'South Korean Won (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'KRW' )
+						),
+						'MXN' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Mexican Peso (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'MXN' )
+						),
+						'MYR' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Malaysian Ringgit (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'MYR' )
+						),
+						'NGN' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Nigerian Naira (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'NGN' )
+						),
+						'NOK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Norwegian Krone (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'NOK' )
+						),
+						'NZD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'New Zealand Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'NZD' )
+						),
+						'PHP' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Philippine Peso (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'PHP' )
+						),
+						'PLN' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Polish Zloty (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'PLN' )
+						),
+						'RON' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Romanian New Leu (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'RON' )
+						),
+						'RUB' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Russian Ruble (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'RUB' )
+						),
+						'SEK' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Swedish Krona (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'SEK' )
+						),
+						'SGD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Singapore Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'SGD' )
+						),
+						'THB' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Thai Baht (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'THB' )
+						),
+						'TRY' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Turkish Lira (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'TRY' )
+						),
+						'TWD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Taiwan New Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'TWD' )
+						),
+						'USD' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'US Dollar (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'USD' )
+						),
+						'VND' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'Vietnamese Dong (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'VND' )
+						),
+						'ZAR' => sprintf(
+							/* translators: %s: currency symbol */
+							__( 'South African Rand (%s)', 'charitable' ),
+							$this->get_currency_symbol( 'ZAR' )
+						),
+					)
+				);
 			}//end if
 
 			return $this->currencies;
@@ -319,6 +548,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				case 'ARS':
 				case 'CAD':
 				case 'CLP':
+				case 'COP':
 				case 'MXN':
 				case 'NZD':
 				case 'HKD':
@@ -412,7 +642,7 @@ if ( ! class_exists( 'Charitable_Currency' ) ) :
 				case 'HRK':
 					$currency_symbol = 'Kn';
 					break;
-				default    :
+				default:
 					$currency_symbol = '';
 					break;
 			}//end switch

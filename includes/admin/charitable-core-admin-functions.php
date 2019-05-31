@@ -7,12 +7,14 @@
  * @package 	Charitable/Functions/Admin
  * @version     1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Load a view from the admin/views folder.
@@ -39,12 +41,16 @@ function charitable_admin_view( $view, $view_args = array() ) {
 	 * @param string $view      The view.
 	 * @param array  $view_args View args.
 	 */
-	$filename  = apply_filters( 'charitable_admin_view_path', $base_path . $view . '.php', $view, $view_args );
+	$filename = apply_filters( 'charitable_admin_view_path', $base_path . $view . '.php', $view, $view_args );
 
 	if ( ! is_readable( $filename ) ) {
 		charitable_get_deprecated()->doing_it_wrong(
 			__FUNCTION__,
-			__( 'Passed view (' . $filename . ') not found or is not readable.', 'charitable' ),
+			sprintf(
+				/* translators: %s: Filename of passed view */
+				__( 'Passed view (%s) not found or is not readable.', 'charitable' ),
+				$filename
+			),
 			'1.0.0'
 		);
 
@@ -92,14 +98,13 @@ function charitable_get_admin_notices() {
  */
 function charitable_is_settings_view( $tab = '' ) {
 	if ( ! empty( $_POST ) ) {
-
-		$is_settings = isset( $_POST['charitable_settings'] );
+		$is_settings = array_key_exists( 'option_page', $_POST ) && 'charitable_settings' === $_POST['option_page'];
 
 		if ( ! $is_settings || empty( $tab ) ) {
 			return $is_settings;
 		}
 
-		return array_key_exists( $tab, $_POST['charitable_settings'] );
+		return array_key_exists( 'charitable_settings', $_POST ) && array_key_exists( $tab, $_POST['charitable_settings'] );
 	}
 
 	$is_settings = isset( $_GET['page'] ) && 'charitable-settings' == $_GET['page'];
@@ -122,14 +127,13 @@ function charitable_is_settings_view( $tab = '' ) {
  * This is based on WordPress' do_settings_fields but allows the possibility
  * of leaving out a field lable/title, for fullwidth fields.
  *
- * @see    do_settings_fields 
+ * @see    do_settings_fields
  *
  * @since  1.0.0
  *
- * @global $wp_settings_fields Storage array of settings fields and their pages/sections
- *
- * @param  string  $page       Slug title of the admin page who's settings fields you want to show.
- * @param  string  $section    Slug title of the settings section who's fields you want to show.
+ * @global $wp_settings_fields Storage array of settings fields and their pages/sections.
+ * @param  string $page    Slug title of the admin page who's settings fields you want to show.
+ * @param  string $section Slug title of the settings section who's fields you want to show.
  * @return string
  */
 function charitable_do_settings_fields( $page, $section ) {

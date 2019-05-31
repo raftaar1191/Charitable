@@ -7,7 +7,7 @@ CHARITABLE = window.CHARITABLE || {};
      */
     var Uploader = function( $dragdrop ) {
         var self = this,
-            params = $dragdrop.data('params'), 
+            params = $dragdrop.data('params'),
             uploader = new plupload.Uploader( params );
 
         this.$dragdrop = $dragdrop;
@@ -35,7 +35,7 @@ CHARITABLE = window.CHARITABLE || {};
         });
 
         uploader.bind( 'FilesAdded', function( uploader, files ) {
-            self.FilesAdded( uploader, files );            
+            self.FilesAdded( uploader, files );
         });
 
         uploader.bind( 'Error', function( uploader, e ){
@@ -43,7 +43,7 @@ CHARITABLE = window.CHARITABLE || {};
         });
 
         uploader.bind( 'FileUploaded', function( uploader, file, r ){
-            self.FileUploaded( uploader, file, r );            
+            self.FileUploaded( uploader, file, r );
         });
     };
 
@@ -57,7 +57,7 @@ CHARITABLE = window.CHARITABLE || {};
             return;
         }
 
-        if ( uploader.features.dragdrop && ! this.$dragdrop.parent().hasClass('mobile') ) { 
+        if ( uploader.features.dragdrop && ! this.$dragdrop.parent().hasClass('mobile') ) {
             this.$dragdrop.parent().addClass( 'supports-drag-drop' );
 
             // We may need to enhance this to account for the issue noted
@@ -69,7 +69,7 @@ CHARITABLE = window.CHARITABLE || {};
             this.$dropzone.bind( 'dragleave', function(){
                 self.$dropzone.removeClass('drag-over');
             });
-        }        
+        }
 
         // Set up image remove handler
         this.$dragdrop.on( 'click', '.remove-image', function( e ) {
@@ -77,7 +77,7 @@ CHARITABLE = window.CHARITABLE || {};
             return self.remove_image( $(this), uploader );
         });
     };
-    
+
     /**
      * FileFiltered event
      */
@@ -89,7 +89,7 @@ CHARITABLE = window.CHARITABLE || {};
             if ( ! this.max_uploads_alert_shown ) {
                 alert( this.get_max_uploads_message() );
             }
-            
+
             this.max_uploads_alert_shown = true;
             return uploader.removeFile( file );
         }
@@ -97,7 +97,7 @@ CHARITABLE = window.CHARITABLE || {};
         // If the file is too big, remove it and show a message.
         if ( file.size >= this.max_file_size ) {
             if ( ! this.max_upload_size_alert_shown ) {
-                alert( file, CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', this.bytes_to_mb( this.max_file_size ) ) );
+                alert( CHARITABLE_UPLOAD_VARS.max_file_size.replace('%1$s', file.name).replace('%2$s', this.bytes_to_mb( this.max_file_size ) ) );
             }
 
             this.max_upload_size_alert_shown = true;
@@ -113,7 +113,7 @@ CHARITABLE = window.CHARITABLE || {};
 
         this.add_image_loader( file );
     }
-    
+
     /**
      * FilesAdded event
      */
@@ -140,7 +140,7 @@ CHARITABLE = window.CHARITABLE || {};
 
             this.add_image_error( file, CHARITABLE_UPLOAD_VARS.upload_problem.replace('%s', file.name) );
             return;
-            
+
         }
 
         // Remove the image from the loader & possibly hide the loader.
@@ -171,7 +171,7 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Uploader.prototype.add_image_loader = function( file ) {
         this.$loader.fadeIn( 300 )
-        this.$loader.children('.images').append( '<li data-file-id="' + file.id + '" class="">' + file.name + '</li>' );        
+        this.$loader.children('.images').append( '<li data-file-id="' + file.id + '" class="">' + file.name + '</li>' );
     };
 
     /**
@@ -186,12 +186,12 @@ CHARITABLE = window.CHARITABLE || {};
 
         if ( ! this.$loader.find('.images li').length ) {
             this.$loader.hide();
-        }        
+        }
     };
 
     /**
      * Remove an image.
-     *  
+     *
      * @return  void
      */
     Uploader.prototype.remove_image = function($anchor, uploader) {
@@ -235,7 +235,7 @@ CHARITABLE = window.CHARITABLE || {};
      *
      * @param   object $loader
      * @param   object $dropzone
-     * @param   object file 
+     * @param   object file
      * @param   string msg
      * @return  void
      */
@@ -245,7 +245,7 @@ CHARITABLE = window.CHARITABLE || {};
         self.$dropzone.fadeIn( 300 );
 
         self.$loader.find( '[data-file-id=' + file.id + ']' ).addClass( 'error' ).text( msg ).delay( 5000 ).fadeOut( 300, function(){
-            self.hide_image_loader( file );            
+            self.hide_image_loader( file );
         });
     }
 
@@ -258,6 +258,6 @@ CHARITABLE = window.CHARITABLE || {};
         $('.charitable-drag-drop').each( function() {
             new Uploader( $(this) );
         });
-    });    
+    });
 
 })( jQuery, CHARITABLE );

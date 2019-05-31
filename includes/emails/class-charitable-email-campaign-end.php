@@ -5,7 +5,7 @@
  * @version     1.1.0
  * @package     Charitable/Classes/Charitable_Email_Campaign_End
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_Campaign_End' ) ) :
 	 */
 	class Charitable_Email_Campaign_End extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'campaign_end';
 
 		/**

@@ -2,11 +2,11 @@
 /**
  * Display select field.
  *
- * @author      Eric Daams
- * @package     Charitable/Admin Views/Metaboxes
- * @copyright   Copyright (c) 2018, Studio 164a
- * @since       1.4.6
- * @version     1.5.0
+ * @author    Eric Daams
+ * @package   Charitable/Admin Views/Metaboxes
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @since     1.4.6
+ * @version   1.6.8
  */
 
 if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']->field_has_required_args( $view_args ) ) {
@@ -14,7 +14,7 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 }
 
 ?>
-<div id="<?php echo esc_attr( $view_args['wrapper_id'] ); ?>" class="<?php echo esc_attr( $view_args['wrapper_class'] ); ?>">
+<div id="<?php echo esc_attr( $view_args['wrapper_id'] ); ?>" class="<?php echo esc_attr( $view_args['wrapper_class'] ); ?>" <?php echo charitable_get_arbitrary_attributes( $view_args ); ?>>
 	<?php if ( isset( $view_args['label'] ) ) : ?>
 		<label for="<?php echo esc_attr( $view_args['id'] ); ?>"><?php echo esc_html( $view_args['label'] ); ?></label>
 	<?php endif ?>
@@ -26,12 +26,12 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 			?>
 			<optgroup label="<?php echo esc_attr( $label ); ?>">
 			<?php foreach ( $option['options'] as $k => $opt ) : ?>
-				<option value="<?php echo esc_attr( $k ); ?>" <?php selected( $k, $view_args['value'] ); ?>><?php echo $opt ?></option>
+				<option value="<?php echo esc_attr( $k ); ?>" <?php selected( $k, $view_args['value'] ); ?>><?php echo $opt; ?></option>
 			<?php endforeach ?>
 			</optgroup>
 		<?php else : ?>
-			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $view_args['value'] ); ?>><?php echo $option ?></option>
-		<?php
+			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $view_args['value'] ); ?>><?php echo $option; ?></option>
+			<?php
 		endif;
 	endforeach;
 	?>

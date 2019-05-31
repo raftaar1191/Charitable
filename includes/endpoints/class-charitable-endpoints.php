@@ -2,15 +2,18 @@
 /**
  * The endpoint registry class, providing a clean way to access details about individual endpoints.
  *
- * @package     Charitable/Classes/Charitable_Endpoints
- * @version     1.5.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Endpoints
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.6.14
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 
@@ -47,6 +50,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		public function __construct() {
 			$this->endpoints = array();
 
+			add_action( 'wp', array( $this, 'disable_endpoint_cache' ) );
 			add_action( 'init', array( $this, 'setup_rewrite_rules' ) );
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
 			add_filter( 'template_include', array( $this, 'template_loader' ), 12 );
@@ -161,7 +165,10 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			if ( ! $this->endpoint_exists( $endpoint ) ) {
 				charitable_get_deprecated()->doing_it_wrong(
 					__METHOD__,
-					sprintf( __( 'Endpoint %s has not been registered.', 'charitable' ), $endpoint ),
+					sprintf(
+						/* translators: %s: endpoint id */
+						__( 'Endpoint %s has not been registered.', 'charitable' ), $endpoint
+					),
 					'1.5.0'
 				);
 
@@ -169,6 +176,38 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			return $this->endpoints[ $endpoint ]->get_template( $default_template );
+		}
+
+		/**
+		 * Disable page cache on non-cacheable endpoints using the DONOTCACHEPAGE constant.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @return void
+		 */
+		public function disable_endpoint_cache() {
+			if ( defined( 'DONOTCACHEPAGE' ) ) {
+				return;
+			}
+
+			$endpoint_id = $this->get_current_endpoint();
+
+			if ( ! $endpoint_id ) {
+				return;
+			}
+
+			if ( $this->get_endpoint( $endpoint_id )->is_cacheable() ) {
+				return;
+			}
+
+			define( 'DONOTCACHEPAGE', true );
+
+			/**
+			 * Fire action to note that the current page should not be cached.
+			 *
+			 * @since 1.6.14
+			 */
+			do_action( 'charitable_do_not_cache' );
 		}
 
 		/**
@@ -209,7 +248,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 * @since  1.5.0
 		 *
 		 * @param  string $template The default template.
-		 * @return void
+		 * @return string
 		 */
 		public function template_loader( $template ) {
 			$current_endpoint = $this->get_current_endpoint();
@@ -323,6 +362,18 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		 */
 		public function endpoint_exists( $endpoint ) {
 			return array_key_exists( $endpoint, $this->endpoints );
+		}
+
+		/**
+		 * Returns an endpoint.
+		 *
+		 * @since  1.6.14
+		 *
+		 * @param  string $endpoint The endpoint ID.
+		 * @return Charitable_Endpoint|false False if no endpoint exists, or the object.
+		 */
+		public function get_endpoint( $endpoint ) {
+			return $this->endpoint_exists( $endpoint ) ? $this->endpoints[ $endpoint ] : false;
 		}
 
 		/**

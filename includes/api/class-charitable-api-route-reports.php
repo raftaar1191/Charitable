@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_API_Route_Reports
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
  * @version   1.6.0
@@ -41,7 +41,7 @@ if ( ! class_exists( 'Charitable_API_Route_Reports' ) ) :
 		 * @return void
 		 */
 		public function __construct() {
-			parent::__constrct();
+			parent::__construct();
 
 			$this->base = 'reports';
 		}

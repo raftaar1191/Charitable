@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Email_Verification_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.4
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 	 */
 	class Charitable_Email_Verification_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'email_verification';
 
 		/**
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 				if ( array_key_exists( 'redirect_to', $_GET ) ) {
 					wp_safe_redirect( $_GET['redirect_to'] );
 					exit();
-				}				
+				}
 			}
 
 			$profile = charitable_get_option( 'profile_page', false );

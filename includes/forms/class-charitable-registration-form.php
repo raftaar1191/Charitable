@@ -5,7 +5,7 @@
  * @package     Charitable/Classes/Charitable_Registration_Form
  * @version     1.5.1
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			 *
 			 * @param array $fields The registered fields.
 			 */
-			apply_filters( 'charitable_user_registration_fields', $fields );
+			$fields = apply_filters( 'charitable_user_registration_fields', $fields );
 
 			uasort( $fields, 'charitable_priority_sort' );
 
@@ -229,11 +229,13 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 			$submitted = apply_filters( 'charitable_registration_values', $_POST, $fields, $form );
 
 			if ( ! isset( $submitted['user_email'] ) || ! is_email( $submitted['user_email'] ) ) {
-				charitable_get_notices()->add_error( sprintf(
-					/* translators: %s: submitted email address */
-					__( '%s is not a valid email address.', 'charitable' ),
-					$submitted['user_email']
-				) );
+				charitable_get_notices()->add_error(
+					sprintf(
+						/* translators: %s: submitted email address */
+						__( '%s is not a valid email address.', 'charitable' ),
+						$submitted['user_email']
+					)
+				);
 
 				return false;
 			}

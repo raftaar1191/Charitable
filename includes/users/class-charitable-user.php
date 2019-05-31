@@ -11,7 +11,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_User
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -55,24 +55,27 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 *
 		 * NOTE: This is not the same as the user ID.
 		 *
-		 * @var     int
-		 * @since  1.0.0
+		 * @since 1.0.0
+		 *
+		 * @var   int
 		 */
 		protected $donor_id;
 
 		/**
 		 * A mapping of user keys.
 		 *
-		 * @var 	string[]
-		 * @since  1.4.0
+		 * @since 1.4.0
+		 *
+		 * @var   string[]
 		 */
 		protected $mapped_keys;
 
 		/**
 		 * Core keys.
 		 *
-		 * @var 	string[]
 		 * @since  1.4.0
+		 *
+		 * @var   string[]
 		 */
 		protected $core_keys;
 
@@ -569,7 +572,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 */
 		public function get_campaigns( $args = array() ) {
 			$defaults = array(
-			'author' => $this->ID,
+				'author' => $this->ID,
 			);
 
 			$args = wp_parse_args( $args, $defaults );
@@ -699,12 +702,17 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			 * @param Charitable_User $user         This instance of `Charitable_User`.
 			 * @param array           $submitted    Submitted values.
 			 */
-			$donor_values = apply_filters( 'charitable_donor_values', array(
-				'user_id'    => $this->ID,
-				'email'      => $email,
-				'first_name' => array_key_exists( 'first_name', $submitted ) ? $submitted['first_name'] : $this->first_name,
-				'last_name'  => array_key_exists( 'last_name', $submitted ) ? $submitted['last_name'] : $this->last_name,
-			), $this, $submitted );
+			$donor_values = apply_filters(
+				'charitable_donor_values',
+				array(
+					'user_id'    => $this->ID,
+					'email'      => $email,
+					'first_name' => array_key_exists( 'first_name', $submitted ) ? $submitted['first_name'] : $this->first_name,
+					'last_name'  => array_key_exists( 'last_name', $submitted ) ? $submitted['last_name'] : $this->last_name,
+				),
+				$this,
+				$submitted
+			);
 
 			$donor_id = charitable_get_table( 'donors' )->insert( $donor_values );
 

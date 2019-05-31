@@ -2,9 +2,9 @@
     border-bottom: 1px solid #eee;
 }
 
-#campaign-title, 
-#campaign-goal, 
-#campaign-end-date, 
+#campaign-title,
+#campaign-goal,
+#campaign-end-date,
 #campaign-description {
     @include charitable_metabox();
 }
@@ -13,8 +13,8 @@
 
 #campaign-top-sortables {
     padding-top: 20px;
-    
-    #campaign-goal, 
+
+    #campaign-goal,
     #campaign-end-date {
         float: left;
         width: 48%;
@@ -29,7 +29,7 @@
     }
 
     @include bp(600, false) {
-        #campaign-goal, 
+        #campaign-goal,
         #campaign-end-date {
             width: 100%;
             padding: 0 0 24px;
@@ -56,7 +56,7 @@
         padding: 14px 10px;
         border-left: 1px solid rgba( 0, 0, 0, 0.07 );
         box-shadow: inset 0 1px 2px rgba( 0, 0, 0, 0.07 );
-        background: #f5f5f5;        
+        background: #f5f5f5;
         text-align: center;
 
         @include bp(782) {
@@ -100,6 +100,7 @@
         clear: both;
         padding: 0;
         background-color: #f5f5f5;
+        border: none;
         border-radius: 0;
         font-family: "Open Sans", sans-serif;
         font-size: 13px;
@@ -108,7 +109,7 @@
             background-color: transparent;
         }
     }
-    
+
     .ui-tabs-nav {
         float: left;
         width: 20%;
@@ -125,11 +126,11 @@
             display: block;
             width: 100%;
             float: none;
-            background: none;           
+            background: none;
             margin: 0;
             padding: 0 1px 0 0;
             border: 0;
-            white-space: normal;                    
+            white-space: normal;
         }
 
         a {
@@ -149,8 +150,8 @@
             margin-right: -2px;
             border-top: 1px solid #dedede;
             border-bottom: 1px solid #dedede !important;
-            background-color: #fff;         
-        }       
+            background-color: #fff;
+        }
 
         li:first-child {
             border-top-color: 1px solid #dedede;
@@ -165,12 +166,12 @@
             border-bottom-color: transparent;
         }
     }
-    
+
     .ui-tabs-panel {
         clear: none;
         box-sizing: border-box;
         float: right;
-        width: 80%;     
+        width: 80%;
         padding: 20px;
         margin: 0;
         border-left: 1px solid #dedede;
@@ -211,7 +212,7 @@
     }
 }
 
-.charitable-benefactor-summary {    
+.charitable-benefactor-summary {
     @include clearfix;
     .summary {
         float: left;
@@ -221,7 +222,7 @@
     .alignright {
         float: right;
         width: 18%;
-        text-align: right;   
+        text-align: right;
     }
 }
 
@@ -242,7 +243,7 @@
         border: 1px solid #ddd;
         background-color: #fff;
 
-        .contribution-amount {          
+        .contribution-amount {
             width: auto;
             min-width: 220px;
             margin: 1px;
@@ -252,11 +253,11 @@
 
         .contribution-type {
             float: right;
-            margin: 10px;       
+            margin: 10px;
             width: auto;
         }
 
-        input:focus, 
+        input:focus,
         select:focus {
             box-shadow: none;
         }
@@ -267,9 +268,9 @@
     margin-top: 10px;
 
     label {
-        float: left; 
-        width: 49%;     
-    }   
+        float: left;
+        width: 49%;
+    }
 
     label:nth-child(2n+2) {
         margin-left: 2%;
@@ -284,7 +285,7 @@
 .charitable-benefactor-inactive,
 .charitable-benefactor-expired {
     background-color: #f5f5f5;
- 
+
     .summary span {
         font-weight: bold;
         text-transform: uppercase;
@@ -319,5 +320,5 @@
 #charitable-post-author-wrap {
     padding-top: 24px;
     margin-top: 12px;
-    border-top: 1px solid #e1e1e1;    
+    border-top: 1px solid #e1e1e1;
 }

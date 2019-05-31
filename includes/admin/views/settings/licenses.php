@@ -4,7 +4,7 @@
  *
  * @author    Eric Daams
  * @package   Charitable/Admin View/Settings
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0
@@ -53,7 +53,7 @@ foreach ( $products as $key => $product ) :
 					<span class="license-invalid"><?php _e( 'We could not validate this license', 'charitable' ); ?></span>
 				<?php endif ?>
 			</div>
-		<?php endif ?>        
+		<?php endif ?>
 	</div>
 
 	<?php

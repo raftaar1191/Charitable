@@ -3,14 +3,16 @@
  * Sets up the donation meta boxes.
  *
  * @package   Charitable/Classes/Charitable_Donation_Meta_Boxes
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.0
- * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
- * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 
@@ -370,7 +372,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		 * @return boolean True if this was a form submission. False otherwise.
 		 */
 		public function maybe_save_form_submission( $donation_id ) {
-			if ( ! array_key_exists( 'charitable_action', $_POST ) || did_action( 'charitable_before_save_donation' ) ) {
+			if ( ! $this->is_admin_donation_save() || did_action( 'charitable_before_save_donation' ) ) {
 				return false;
 			}
 
@@ -381,11 +383,7 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 				exit();
 			}
 
-			$this->disable_automatic_emails();
-
 			charitable_create_donation( $form->get_donation_values() );
-
-			$this->reenable_automatic_emails();
 
 			update_post_meta( $donation_id, '_donation_manually_edited', true );
 
@@ -452,54 +450,65 @@ if ( ! class_exists( 'Charitable_Donation_Meta_Boxes' ) ) :
 		}
 
 		/**
-		 * Disable automatic emails when a donation is created.
+		 * Prevent email from sending if we are saving the donation via the admin.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.15
 		 *
-		 * @return void
+		 * @param  boolean $send_email Whether to send the email.
+		 * @return boolean
 		 */
-		public function disable_automatic_emails() {
-			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
-
-			remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
-
-			if ( ! $send_receipt ) {
-				remove_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+		public function maybe_block_new_donation_email( $send_email ) {
+			if ( ! $send_email ) {
+				return $send_email;
 			}
 
-			foreach ( charitable_get_approval_statuses() as $status ) {
-				remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
-
-				if ( ! $send_receipt ) {
-					remove_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
-				}
-			}
+			return ! $this->is_admin_donation_save() && ! $this->is_donation_action();
 		}
 
 		/**
-		 * Re-enable automatic emails after the donation has been saved.
+		 * Prevent email from sending if we are saving the donation via the admin.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.15
 		 *
-		 * @return void
+		 * @param  boolean $send_email Whether to send the email.
+		 * @return boolean
 		 */
-		public function reenable_automatic_emails() {
-			$send_receipt = array_key_exists( 'send_donation_receipt', $_POST ) && 'on' == $_POST['send_donation_receipt'];
-
-			add_action( 'charitable_after_save_donation', array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
-
-			if ( ! $send_receipt ) {
-				add_action( 'charitable_after_save_donation', array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
+		public function maybe_block_donation_receipt_email( $send_email ) {
+			if ( ! $send_email ) {
+				return $send_email;
 			}
 
-			foreach ( charitable_get_approval_statuses() as $status ) {
-				add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_New_Donation', 'send_with_donation_id' ) );
-
-				if ( ! $send_receipt ) {
-					add_action( $status . '_' . Charitable::DONATION_POST_TYPE, array( 'Charitable_Email_Donation_Receipt', 'send_with_donation_id' ) );
-				}
+			if ( $this->is_donation_action() ) {
+				return false;
 			}
 
+			if ( $this->is_admin_donation_save() ) {
+				$send_email = array_key_exists( 'send_donation_receipt', $_POST ) && $_POST['send_donation_receipt'];
+			}
+
+			return $send_email;
+		}
+
+		/**
+		 * Checks whether we are saving the admin donation form.
+		 *
+		 * @since  1.6.15
+		 *
+		 * @return boolean
+		 */
+		public function is_admin_donation_save() {
+			return array_key_exists( 'charitable_action', $_POST );
+		}
+
+		/**
+		 * Checks whether we are doing a donation action.
+		 *
+		 * @since  1.6.15
+		 *
+		 * @return boolean
+		 */
+		public function is_donation_action() {
+			return array_key_exists( 'charitable_donation_action', $_POST );
 		}
 	}
 

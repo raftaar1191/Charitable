@@ -6,7 +6,7 @@
  *
  * @package   Charitable/Functions/Admin
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.2.0
  * @version   1.6.0
@@ -37,6 +37,13 @@ add_action( 'charitable_settings_tabs', array( Charitable_Licenses_Settings::get
  * @see Charitable_Settings::maybe_add_extensions_tab()
  */
 add_action( 'charitable_settings_tabs', array( Charitable_Settings::get_instance(), 'maybe_add_extensions_tab' ), 2 );
+
+/**
+ * Add a hidden "extensions" field.
+ *
+ * @see Charitable_Settings::add_hidden_extensions_setting_field()
+ */
+add_filter( 'charitable_settings_tab_fields', array( Charitable_Settings::get_instance(), 'add_hidden_extensions_setting_field' ) );
 
 /**
  * Save the license when saving settings.

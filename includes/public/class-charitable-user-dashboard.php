@@ -2,38 +2,41 @@
 /**
  * Main class for setting up the Charitable User Dashboard.
  *
- * @package     Charitable/Classes/Charitable_User_Dashboard
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_User_Dashboard
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.17
  */
 
 /* Exit if accessed directly */
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 
 	/**
 	 * Charitable_User_Dashboard
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_User_Dashboard {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_User_Dashboard|null
+		 * @var Charitable_User_Dashboard|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * Returns and/or create the single instance of this class.
 		 *
-		 * @since   1.2.0
+		 * @since  1.2.0
 		 *
-		 * @return  Charitable_User_Dashboard
+		 * @return Charitable_User_Dashboard
 		 */
 		public static function get_instance() {
 			if ( is_null( self::$instance ) ) {
@@ -46,7 +49,7 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Create class instance.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 */
 		private function __construct() {
 			add_action( 'after_setup_theme', array( $this, 'register_menu' ), 100 );
@@ -61,9 +64,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Register navigation menu for frontend dashboard.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @return void
 		 */
 		public function register_menu() {
 			register_nav_menu( 'charitable-dashboard', __( 'User Dashboard', 'charitable' ) );
@@ -72,11 +75,11 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns the user dashboard navigation menu.
 		 *
-		 * @uses    wp_nav_menu
-		 * @since   1.0.0
+		 * @uses   wp_nav_menu
+		 * @since  1.0.0
 		 *
-		 * @param   array       $args
-		 * @return  void
+		 * @param  array $args Additional arguments to pass to wp_nav_menu.
+		 * @return string|false|void Menu output if $echo is false, false if there are no items or no menu was found.
 		 */
 		public function nav( $args ) {
 			$defaults = array(
@@ -92,9 +95,9 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Return the menu ID based on the theme location.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  int         0 if no menu found. Menu ID otherwise.
+		 * @return int 0 if no menu found. Menu ID otherwise.
 		 */
 		public function get_nav_id() {
 			$locations = get_nav_menu_locations();
@@ -109,38 +112,30 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Returns all objects in the user dashboard navigation.
 		 *
-		 * @uses    wp_get_nav_menu_items
-		 * @since   1.0.0
+		 * @uses   wp_get_nav_menu_items
+		 * @since  1.0.0
 		 *
-		 * @return  WP_Post[]
+		 * @return WP_Post[]
 		 */
 		public function nav_objects() {
 			$objects = get_transient( 'charitable_user_dashboard_objects' );
 
 			if ( false === $objects ) {
-
 				$objects        = array();
 				$nav_menu_items = wp_get_nav_menu_items( $this->get_nav_id() );
 
 				if ( is_array( $nav_menu_items ) ) {
-
 					foreach ( $nav_menu_items as $nav_menu_item ) {
-
 						switch ( $nav_menu_item->type ) {
-
-							case 'custom' :
-
+							case 'custom':
 								$identifier = trailingslashit( $nav_menu_item->url );
-
 								break;
 
-							default :
-
+							default:
 								$identifier = apply_filters( 'charitable_nav_menu_object_identifier', $nav_menu_item->object_id, $nav_menu_item );
 						}
 
 						$objects[] = $identifier;
-
 					}
 				}
 
@@ -153,27 +148,33 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Flushes the menu object cache after updating a menu or menu item.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return  void
+		 * @param  int $menu_id The menu id.
+		 * @return void
 		 */
 		public function flush_menu_object_cache( $menu_id ) {
-			$nav_menu = wp_get_nav_menu_object( $this->get_nav_id() );
+			$dashboard_menu = $this->get_nav_id();
 
-			if ( $nav_menu && $menu_id == $nav_menu->term_id ) {
-
+			if ( ! $dashboard_menu ) {
 				delete_transient( 'charitable_user_dashboard_objects' );
+				return;
+			}
 
+			$nav_menu = wp_get_nav_menu_object( $dashboard_menu );
+
+			/* If $nav_menu is not set that means the location 'charitable-dashboard' is not checked. */
+			if ( $menu_id == $nav_menu->term_id ) {
+				delete_transient( 'charitable_user_dashboard_objects' );
 			}
 		}
 
 		/**
 		 * Checks whether the current requested page is in the user dashboard nav.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   Object $object Optional. If not set, will base it on the current queried object.
-		 * @return  boolean
+		 * @return boolean
 		 */
 		public function in_nav() {
 			global $wp;
@@ -200,10 +201,10 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Loads the user dashboard template.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string $template
-		 * @return  string
+		 * @param  string $template The template to use for the user dashboard.
+		 * @return string
 		 */
 		public function load_user_dashboard_template( $template ) {
 			/**
@@ -231,16 +232,14 @@ if ( ! class_exists( 'Charitable_User_Dashboard' ) ) :
 		/**
 		 * Add the user-dashboard class to the body if we're looking at it.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   array       $classes
-		 * @return  array
+		 * @param  array $classes Body classes.
+		 * @return array
 		 */
 		public function add_body_class( $classes ) {
 			if ( $this->in_nav() ) {
-
 				$classes[] = 'user-dashboard';
-
 			}
 
 			return $classes;

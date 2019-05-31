@@ -3,7 +3,7 @@
  * Renders the Campaign Creator metabox.
  *
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @package   Charitable/Admin Views/Metaboxes
  * @since     1.2.0
  * @version   1.2.0
@@ -14,8 +14,8 @@ global $post;
 $creator  = new Charitable_User( $post->post_author );
 $campaign = new Charitable_Campaign( $post );
 
-?>  
-<div id="charitable-campaign-creator-metabox-wrap" class="charitable-metabox-wrap">    
+?>
+<div id="charitable-campaign-creator-metabox-wrap" class="charitable-metabox-wrap">
 	<div id="campaign-creator" class="charitable-media-block">
 		<div class="creator-avatar charitable-media-image">
 			<?php echo $creator->get_avatar(); ?>
@@ -27,7 +27,7 @@ $campaign = new Charitable_Campaign( $post );
 				<li><a href="<?php echo get_author_posts_url( $creator->ID ); ?>"><?php _e( 'Public Profile', 'charitable-ambassadors' ); ?></a></li>
 				<li><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $creator->ID ); ?>"><?php _e( 'Edit Profile', 'charitable' ); ?></a></li>
 			</ul>
-		</div><!--.creator-facts-->        
+		</div><!--.creator-facts-->
 	</div><!--#campaign-creator-->
 	<div id="charitable-post-author-wrap" class="charitable-metabox charitable-select-wrap">
 		<label for="post_author"><?php _e( 'Change the campaign creator' ); ?></label>

@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Campaigns
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 			$statuses = "'" . implode( "','", charitable_get_approval_statuses() ) . "'";
 
 			return $join_statement . " LEFT JOIN ( SELECT cd1.campaign_donation_id, cd1.donation_id, cd1.donor_id, cd1.amount, cd1.campaign_id
-                FROM {$wpdb->prefix}charitable_campaign_donations cd1 
+                FROM {$wpdb->prefix}charitable_campaign_donations cd1
                 INNER JOIN $wpdb->posts po1 ON cd1.donation_id = po1.ID
                 WHERE po1.post_status IN ( $statuses )
 			) cd ON cd.campaign_id = $wpdb->posts.ID";

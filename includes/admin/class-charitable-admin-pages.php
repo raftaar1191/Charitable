@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Admin_Pages
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.6.0
@@ -130,51 +130,54 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 			 * @param array $pages Every page is an array with at least a page_title,
 			 *                     menu_title and menu_slug set.
 			 */
-			return apply_filters( 'charitable_submenu_pages', array(
+			return apply_filters(
+				'charitable_submenu_pages',
 				array(
-					'page_title' => $campaign_post_type->labels->menu_name,
-					'menu_title' => $campaign_post_type->labels->menu_name,
-					'menu_slug'  => 'edit.php?post_type=campaign',
-				),
-				array(
-					'page_title' => $campaign_post_type->labels->add_new,
-					'menu_title' => $campaign_post_type->labels->add_new,
-					'menu_slug'  => 'post-new.php?post_type=campaign',
-				),
-				array(
-					'page_title' => $donation_post_type->labels->menu_name,
-					'menu_title' => $donation_post_type->labels->menu_name,
-					'menu_slug'  => 'edit.php?post_type=donation',
-				),
-				array(
-					'page_title' => __( 'Campaign Categories', 'charitable' ),
-					'menu_title' => __( 'Categories', 'charitable' ),
-					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_category&post_type=campaign',
-				),
-				array(
-					'page_title' => __( 'Donors', 'charitable' ),
-					'menu_title' => __( 'Donors', 'charitable' ),
-					'menu_slug'  => 'donors',
-					'function'   => array( 'Charitable_Donor_List_Table', 'donors_list' ),
-				),
-				array(
-					'page_title' => __( 'Campaign Tags', 'charitable' ),
-					'menu_title' => __( 'Tags', 'charitable' ),
-					'menu_slug'  => 'edit-tags.php?taxonomy=campaign_tag&post_type=campaign',
-				),
-				array(
-					'page_title' => __( 'Customize', 'charitable' ),
-					'menu_title' => __( 'Customize', 'charitable' ),
-					'menu_slug'  => 'customize.php?autofocus[panel]=charitable&url=' . $this->get_customizer_campaign_preview_url(),
-				),
-				array(
-					'page_title' => __( 'Charitable Settings', 'charitable' ),
-					'menu_title' => __( 'Settings', 'charitable' ),
-					'menu_slug'  => 'charitable-settings',
-					'function'   => array( $this, 'render_settings_page' ),
-					'capability' => 'manage_charitable_settings',
-				),
-			) );
+					array(
+						'page_title' => $campaign_post_type->labels->menu_name,
+						'menu_title' => $campaign_post_type->labels->menu_name,
+						'menu_slug'  => 'edit.php?post_type=campaign',
+					),
+					array(
+						'page_title' => $campaign_post_type->labels->add_new,
+						'menu_title' => $campaign_post_type->labels->add_new,
+						'menu_slug'  => 'post-new.php?post_type=campaign',
+					),
+					array(
+						'page_title' => $donation_post_type->labels->menu_name,
+						'menu_title' => $donation_post_type->labels->menu_name,
+						'menu_slug'  => 'edit.php?post_type=donation',
+					),
+          array(
+					  'page_title' => __( 'Donors', 'charitable' ),
+  					'menu_title' => __( 'Donors', 'charitable' ),
+	  				'menu_slug'  => 'donors',
+		  			'function'   => array( 'Charitable_Donor_List_Table', 'donors_list' ),
+			  	),
+					array(
+						'page_title' => __( 'Campaign Categories', 'charitable' ),
+						'menu_title' => __( 'Categories', 'charitable' ),
+						'menu_slug'  => 'edit-tags.php?taxonomy=campaign_category&post_type=campaign',
+					),
+					array(
+						'page_title' => __( 'Campaign Tags', 'charitable' ),
+						'menu_title' => __( 'Tags', 'charitable' ),
+						'menu_slug'  => 'edit-tags.php?taxonomy=campaign_tag&post_type=campaign',
+					),
+					array(
+						'page_title' => __( 'Customize', 'charitable' ),
+						'menu_title' => __( 'Customize', 'charitable' ),
+						'menu_slug'  => 'customize.php?autofocus[panel]=charitable&url=' . $this->get_customizer_campaign_preview_url(),
+					),
+					array(
+						'page_title' => __( 'Charitable Settings', 'charitable' ),
+						'menu_title' => __( 'Settings', 'charitable' ),
+						'menu_slug'  => 'charitable-settings',
+						'function'   => array( $this, 'render_settings_page' ),
+						'capability' => 'manage_charitable_settings',
+					),
+				)
+			);
 		}
 
 		/**

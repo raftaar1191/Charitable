@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Campaign_Widget_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.9
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Campaign_Widget_Endpoint' ) ) :
 	 */
 	class Charitable_Campaign_Widget_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'campaign_widget';
 
 		/**

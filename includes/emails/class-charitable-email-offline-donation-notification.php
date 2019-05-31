@@ -5,7 +5,7 @@
  * @version     1.5.0
  * @package     Charitable/Classes/Charitable_Email_Offline_Donation_Notification
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 	 */
 	class Charitable_Email_Offline_Donation_Notification extends Charitable_Email_New_Donation {
 
-		/* @var string */
+		/** Email ID */
 		CONST ID = 'offline_donation_notification';
 
 		/**

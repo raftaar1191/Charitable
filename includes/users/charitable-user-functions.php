@@ -6,7 +6,7 @@
  *
  * @package     Charitable/Functions/User
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since       1.0.0
  * @version     1.6.0
@@ -53,19 +53,31 @@ function charitable_get_user( $user_id, $force = false ) {
  * @return string[]
  */
 function charitable_get_user_mapped_keys() {
-	return apply_filters( 'charitable_donor_mapped_keys', array(
-		'email'            => 'user_email',
-		'company'          => 'donor_company',
-		'address'          => 'donor_address',
-		'address_2'        => 'donor_address_2',
-		'city'             => 'donor_city',
-		'state'            => 'donor_state',
-		'postcode'         => 'donor_postcode',
-		'zip'              => 'donor_postcode',
-		'country'          => 'donor_country',
-		'phone'            => 'donor_phone',
-		'user_description' => 'description',
-	) );
+	/**
+	 * Filter the mapping of shorthand keys to meta keys.
+	 *
+	 * The meta keys are used in the wp_usermeta table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $keys User meta keys.
+	 */
+	return apply_filters(
+		'charitable_donor_mapped_keys',
+		array(
+			'email'            => 'user_email',
+			'company'          => 'donor_company',
+			'address'          => 'donor_address',
+			'address_2'        => 'donor_address_2',
+			'city'             => 'donor_city',
+			'state'            => 'donor_state',
+			'postcode'         => 'donor_postcode',
+			'zip'              => 'donor_postcode',
+			'country'          => 'donor_country',
+			'phone'            => 'donor_phone',
+			'user_description' => 'description',
+		)
+	);
 }
 
 /**
@@ -161,8 +173,8 @@ function charitable_permit_donor_without_email() {
 	/**
 	 * Filter whether donors can be added without an email address.
 	 *
-	 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, it's donors
-	 * possible to support manual donations without an email address by using this filter.
+	 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, it's possible
+	 * to support manual donations without an email address by using this filter.
 	 *
 	 * NOTE: By default, the public donation form still requires an email address, so this
 	 * primarily affects programattically created donors, or donors created via manual

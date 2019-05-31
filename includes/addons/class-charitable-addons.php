@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Addons
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0
@@ -23,7 +23,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 	class Charitable_Addons {
 
 		/**
-		 * Load addons. This is executed before the charitable_start hook 
+		 * Load addons. This is executed before the charitable_start hook
 		 * to allow addons to hook into that.
 		 *
 		 * @since  1.0.0
@@ -44,7 +44,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		private function __construct() {		
+		private function __construct() {
 			add_action( 'charitable_activate_addon', array( $this, 'activate_addon' ) );
 			add_action( 'after_setup_theme', array( $this, 'load_addons' ) );
 
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Charitable_Addons' ) ) :
 		/**
 		 * Activate an addon.
 		 *
-		 * This is programatically called on the charitable_activate_addon hook, 
+		 * This is programatically called on the charitable_activate_addon hook,
 		 * triggered by a plugin.
 		 *
 		 * @since  1.0.0

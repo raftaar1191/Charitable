@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Settings
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.0.0
@@ -137,6 +137,30 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			}
 
 			return $tabs;
+		}
+
+		/**
+		 * Add the hidden "extensions" section field.
+		 *
+		 * @since  1.6.7
+		 *
+		 * @param  array $fields All the settings fields.
+		 * @return array
+		 */
+		public function add_hidden_extensions_setting_field( $fields ) {
+			if ( ! array_key_exists( 'extensions', $fields ) ) {
+				return $fields;
+			}
+
+			$fields['extensions']['section'] = array(
+				'title'    => '',
+				'type'     => 'hidden',
+				'priority' => 10000,
+				'value'    => 'extensions',
+				'save'     => false,
+			);
+
+			return $fields;
 		}
 
 		/**

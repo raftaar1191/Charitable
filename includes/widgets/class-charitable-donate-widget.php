@@ -5,7 +5,7 @@
  * @package     Charitable/Classes/Charitable_Donate_Widget
  * @version     1.0.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 		 *
 		 * @since   1.0.0
 		 *
-		 * @param   array $instance Widget instance. 
+		 * @param   array $instance Widget instance.
 		 * @return  void
 		 */
 		public function form( $instance ) {
@@ -81,9 +81,9 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'charitable' ) ?>
 					<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 				</label>
-			</p> 
+			</p>
 			<p>
-				<label for="<?php echo $this->get_field_id( 'campaign_id' ); ?>"><?php _e( 'Campaign:', 'charitable' ) ?>        
+				<label for="<?php echo $this->get_field_id( 'campaign_id' ); ?>"><?php _e( 'Campaign:', 'charitable' ) ?>
 					<select name="<?php echo $this->get_field_name( 'campaign_id' ) ?>">
 						<option value="current"><?php _e( 'Campaign currently viewed', 'charitable' ) ?></option>
 						<optgroup label="<?php _e( 'Specific campaigns', 'charitable' ) ?>">
@@ -91,9 +91,9 @@ if ( ! class_exists( 'Charitable_Donate_Widget' ) ) :
 								<option value="<?php echo $campaign->ID ?>" <?php selected( $campaign->ID, $campaign_id ) ?>><?php echo $campaign->post_title ?></option>
 							<?php endforeach ?>
 						</optgroup>
-					</select>    
-				</label>      
-			</p>       
+					</select>
+				</label>
+			</p>
 			<?php
 		}
 

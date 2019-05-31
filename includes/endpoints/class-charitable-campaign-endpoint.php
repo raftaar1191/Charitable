@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Campaign_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.0
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 	 */
 	class Charitable_Campaign_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'campaign';
 
 		/**
@@ -132,10 +132,13 @@ if ( ! class_exists( 'Charitable_Campaign_Endpoint' ) ) :
 
 			ob_start();
 
-			charitable_template( 'content-campaign.php', array(
-				'content'  => $content,
-				'campaign' => charitable_get_current_campaign(),
-			) );
+			charitable_template(
+				'content-campaign.php',
+				array(
+					'content'  => $content,
+					'campaign' => charitable_get_current_campaign(),
+				)
+			);
 
 			$content = ob_get_clean();
 

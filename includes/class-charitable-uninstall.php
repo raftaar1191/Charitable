@@ -2,14 +2,14 @@
 /**
  * Charitable Uninstall class.
  *
- * The responsibility of this class is to manage the events that need to happen 
+ * The responsibility of this class is to manage the events that need to happen
  * when the plugin is deactivated.
  *
  * @package		Charitable/Charitable_Uninstall
  * @version		1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License 
+ * @copyright 	Copyright (c) 2019, Studio 164a
+ * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) { exit; }
@@ -35,8 +35,8 @@ class Charitable_Uninstall {
 			$this->remove_post_data();
 			$this->remove_tables();
 
-			do_action( 'charitable_uninstall' );		
-		}				
+			do_action( 'charitable_uninstall' );
+		}
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Charitable_Uninstall {
 	private function remove_post_data() {
 		foreach ( array( 'campaign', 'donation' ) as $post_type ) {
 			$posts = get_posts( array(
-				'posts_per_page' 	=> -1, 
+				'posts_per_page' 	=> -1,
 				'post_type'			=> $post_type
 			) );
 
@@ -72,14 +72,14 @@ class Charitable_Uninstall {
 	}
 
 	/**
-	 * Remove the custom tables added by Charitable.  
+	 * Remove the custom tables added by Charitable.
 	 *
 	 * @since   1.0.0
 	 *
 	 * @return 	void
 	 */
 	private function remove_tables() {
-		global $wpdb;		
+		global $wpdb;
 
 		$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "charitable_campaign_donations" );
 		$wpdb->query( "DROP TABLE IF EXISTS " . $wpdb->prefix . "charitable_donors" );

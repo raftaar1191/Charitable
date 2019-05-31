@@ -5,7 +5,7 @@
  * @package     Charitable/Classes/Charitable_Export_Donations
  * @version     1.0.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -102,7 +102,8 @@ if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 		 */
 		public function set_custom_field_data( $value, $key, $data ) {
 			if ( array_key_exists( $key, $this->fields ) ) {
-				$value = $this->get_donation( $data['donation_id'] )->get( $key );
+				$donation = $this->get_donation( $data['donation_id'] );
+				$value    = charitable_get_sanitized_donation_field_value( $donation->get( $key ), $key );
 			}
 
 			return $value;

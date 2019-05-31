@@ -4,14 +4,16 @@
  *
  * @package   Charitable/Classes/Charitable_Campaign
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.6.18
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
@@ -127,6 +129,24 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			return $this->get( $key );
+		}
+
+		/**
+		 * Limit properties to be serialized.
+		 *
+		 * @since  1.6.18
+		 *
+		 * @return array
+		 */
+		public function __sleep() {
+			return array(
+				'post',
+				'end_time',
+				'goal',
+				'donations',
+				'donated_amount',
+				'donation_form',
+			);
 		}
 
 		/**
@@ -1100,6 +1120,20 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$checked = self::sanitize_checkbox( $value );
 
 			if ( $checked ) {
+				return $checked;
+			}
+
+			/**
+			 * Filter whether a campaign can be saved with custom donations disabled
+			 * and no suggested donations.
+			 *
+			 * @since 1.6.14
+			 *
+			 * @param boolean             $permitted Whether a campaign is permitted to be saved without
+			 *                                       suggested donations or custom donations.
+			 * @param array               $submitted The submitted values.
+			 */
+			if ( apply_filters( 'charitable_campaign_permitted_without_custom_or_suggested', false, $submitted ) ) {
 				return $checked;
 			}
 

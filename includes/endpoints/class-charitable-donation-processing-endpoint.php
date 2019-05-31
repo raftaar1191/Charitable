@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Donation_Processing_Endpoint
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.9
@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 	 */
 	class Charitable_Donation_Processing_Endpoint extends Charitable_Endpoint {
 
-		/* @var string */
+		/** Endpoint ID. */
 		const ID = 'donation_processing';
 
 		/**
@@ -92,6 +92,8 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		public function is_page( $args = array() ) {
 			global $wp_query;
 
+
+
 			return is_main_query()
 				&& array_key_exists( 'donation_processing', $wp_query->query_vars )
 				&& array_key_exists( 'donation_id', $wp_query->query_vars );
@@ -119,7 +121,7 @@ if ( ! class_exists( 'Charitable_Donation_Processing_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $content
+		 * @param  string $content The default content to show.
 		 * @return string
 		 */
 		public function get_content( $content ) {

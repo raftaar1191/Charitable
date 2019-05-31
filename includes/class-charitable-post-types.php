@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Post_Types
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  * @version   1.2.0
@@ -105,7 +105,10 @@ if ( ! class_exists( 'Charitable_Post_Types' ) ) :
 				'publicly_queryable'  => true,
 				'exclude_from_search' => false,
 				'hierarchical'        => false,
-				'rewrite'             => array( 'slug' => 'campaigns', 'with_front' => true ),
+				'rewrite'             => array(
+					'slug'       => 'campaigns',
+					'with_front' => true,
+				),
 				'query_var'           => true,
 				'supports'            => array( 'title', 'thumbnail', 'comments' ),
 				'has_archive'         => false,

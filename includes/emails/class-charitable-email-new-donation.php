@@ -5,7 +5,7 @@
  * @version     1.0.0
  * @package     Charitable/Classes/Charitable_Email_New_Donation
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 	 */
 	class Charitable_Email_New_Donation extends Charitable_Email {
 
-		/* @var string */
+		/** Email ID */
 		const ID = 'new_donation';
 
 		/**
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) { 
+			if ( ! charitable_is_approved_status( get_post_status( $donation_id ) ) ) {
 				return false;
 			}
 
@@ -99,9 +99,11 @@ if ( ! class_exists( 'Charitable_Email_New_Donation' ) ) :
 				return false;
 			}
 
-			$email = new self( array(
-				'donation' => $donation,
-			) );
+			$email = new self(
+				array(
+					'donation' => $donation,
+				)
+			);
 
 			/**
 			 * Don't resend the email.

@@ -7,7 +7,7 @@
  * @package 	Charitable/Functions/Core
  * @version     1.0.0
  * @author 		Eric Daams
- * @copyright 	Copyright (c) 2018, Studio 164a
+ * @copyright 	Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -57,7 +57,7 @@ function charitable_get_option( $key, $default = false, $settings = array() ) {
 	array_shift( $key );
 
 	if ( ! empty( $key ) ) {
-		return charitable_get_option( $key, $default, $settings[ $current_key ] );	
+		return charitable_get_option( $key, $default, $settings[ $current_key ] );
 	}
 
 	return $settings[ $current_key ];

@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Campaign Fields
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
  * @version   1.6.0
@@ -188,7 +188,7 @@ return apply_filters( 'charitable_default_campaign_fields', array(
 		'admin_form'     => false,
 		'email_tag'      => array(
 			'tag'         => 'campaign_achieved_goal',
-			'description' => __( 'Display whether the campaign reached its goal. Add a `success` parameter as the message when the campaign was successful, and a `failure` parameter as the message when the campaign is not successful', 'charitable' ),                    
+			'description' => __( 'Display whether the campaign reached its goal. Add a `success` parameter as the message when the campaign was successful, and a `failure` parameter as the message when the campaign is not successful', 'charitable' ),
 			'preview'     => __( 'The campaign achieved its fundraising goal.', 'charitable' ),
 		),
 		'show_in_export' => false,

@@ -7,7 +7,7 @@
  * @package     Charitable/Functions/Benefactors
  * @version     1.2.0
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 /**
  * Register the custom script.
  *
- * @see     Charitable_Benefactors::register_script() 
+ * @see     Charitable_Benefactors::register_script()
  */
 add_action( 'admin_enqueue_scripts', array( Charitable_Benefactors::get_instance(), 'register_script' ) );
 

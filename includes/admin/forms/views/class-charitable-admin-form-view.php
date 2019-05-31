@@ -6,7 +6,7 @@
  *
  * @package   Charitable/Forms/Charitable_Admin_Form_View
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.5.9
@@ -416,12 +416,15 @@ if ( ! class_exists( 'Charitable_Admin_Form_View' ) ) :
 			 *
 			 * @param string[] $types Field types.
 			 */
-			$default_field_types = apply_filters( 'charitable_default_template_field_types', array(
-				'text',
-				'email',
-				'password',
-				'date',
-			) );
+			$default_field_types = apply_filters(
+				'charitable_default_template_field_types',
+				array(
+					'text',
+					'email',
+					'password',
+					'date',
+				)
+			);
 
 			return in_array( $field_type, $default_field_types );
 		}

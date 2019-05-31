@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_API_Route
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
  * @version   1.6.0
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Charitable_API_Route' ) ) :
 		 *
 		 * @since 1.6.0
 		 */
-		public function __constrct() {
+		public function __construct() {
 			$this->version   = 1;
 			$this->namespace = 'charitable/v' . $this->version;
 		}

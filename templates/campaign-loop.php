@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $campaigns = $view_args['campaigns'];
 
@@ -33,7 +35,7 @@ $args       = charitable_campaign_loop_args( $view_args );
 do_action( 'charitable_campaign_loop_before', $campaigns, $args );
 
 ?>
-<ol class="<?php echo esc_attr( $loop_class ) ?>">
+<ol class="<?php echo esc_attr( $loop_class ); ?>">
 
 <?php
 while ( $campaigns->have_posts() ) :

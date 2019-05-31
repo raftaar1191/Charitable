@@ -18,12 +18,12 @@ $donation = $view_args['donation'];
 $amount   = $donation->get_total_donation_amount();
 
 ?>
-<h3 class="charitable-header"><?php _e( 'Your Donation', 'charitable' ) ?></h3>
+<h3 class="charitable-header"><?php _e( 'Your Donation', 'charitable' ); ?></h3>
 <table class="donation-details charitable-table">
 	<thead>
 		<tr>
-			<th><?php _e( 'Campaign', 'charitable' ) ?></th>
-			<th><?php _e( 'Total', 'charitable' ) ?></th>
+			<th><?php _e( 'Campaign', 'charitable' ); ?></th>
+			<th><?php _e( 'Total', 'charitable' ); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -43,7 +43,7 @@ $amount   = $donation->get_total_donation_amount();
 				do_action( 'charitable_donation_receipt_after_campaign_name', $campaign_donation, $donation );
 				?>
 			</td>
-			<td class="donation-amount"><?php echo charitable_format_money( $campaign_donation->amount ) ?></td>
+			<td class="donation-amount"><?php echo charitable_format_money( $campaign_donation->amount ); ?></td>
 		</tr>
 	<?php endforeach ?>
 	</tbody>
@@ -61,21 +61,23 @@ $amount   = $donation->get_total_donation_amount();
 			do_action( 'charitable_donation_receipt_before_donation_total', $donation );
 		?>
 		<tr>			
-			<td><?php _e( 'Total', 'charitable' ) ?></td>
-			<td><?php
-				/**
-				 * Filter the total donation amount.
-				 *
-				 * @since  1.5.0
-				 *
-				 * @param  string              $amount   The default amount to display.
-				 * @param  float               $total    The total, unformatted.
-				 * @param  Charitable_Donation $donation The Donation object.
-				 * @param  string              $context  The context in which this is being shown.
-				 * @return string
-				 */
-				echo apply_filters( 'charitable_donation_receipt_donation_amount', charitable_format_money( $amount ), $amount, $donation, 'details' )
-			?></td>
+			<td><?php _e( 'Total', 'charitable' ); ?></td>
+			<td>
+				<?php
+					/**
+					 * Filter the total donation amount.
+					 *
+					 * @since  1.5.0
+					 *
+					 * @param  string              $amount   The default amount to display.
+					 * @param  float               $total    The total, unformatted.
+					 * @param  Charitable_Donation $donation The Donation object.
+					 * @param  string              $context  The context in which this is being shown.
+					 * @return string
+					 */
+					echo apply_filters( 'charitable_donation_receipt_donation_amount', charitable_format_money( $amount ), $amount, $donation, 'details' )
+				?>
+			</td>
 		</tr>
 		<?php
 			/**

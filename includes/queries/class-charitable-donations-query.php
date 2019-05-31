@@ -4,10 +4,10 @@
  *
  * @package   Charitable/Classes/Charitable_Donations_Query
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.4.0
- * @version   1.6.5
+ * @version   1.6.8
  */
 
 // Exit if accessed directly.
@@ -34,27 +34,29 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		public function __construct( $args = array() ) {
 			$defaults = array(
 				// Use 'posts' to get standard post objects.
-				'output'     => 'donations',
+				'output'        => 'donations',
 				// Set to an array with statuses to only show certain statuses.
-				'status'     => false,
+				'status'        => false,
 				// Currently only supports 'date'.
-				'orderby'    => 'date',
+				'orderby'       => 'date',
 				// May be 'DESC' or 'ASC'.
-				'order'      => 'DESC',
+				'order'         => 'DESC',
 				// Number of donations to retrieve.
-				'number'     => 20,
+				'number'        => 20,
 				// For paged results.
-				'paged'      => 1,
+				'paged'         => 1,
 				// Only get donations for a specific campaign.
-				'campaign'   => 0,
+				'campaign'      => 0,
 				// Only get donations by a specific donor.
-				'donor_id'   => 0,
+				'donor_id'      => 0,
 				// Only get donations by a specific user.
-				'user_id'    => 0,
+				'user_id'       => 0,
+				// Donation plan is essentially post_parent.
+				'donation_plan' => 0,
 				// Filter donations by date.
-				'date_query' => array(),
+				'date_query'    => array(),
 				// Filter donations by meta.
-				'meta_query' => array(),
+				'meta_query'    => array(),
 			);
 
 			$this->args = wp_parse_args( $args, $defaults );
@@ -74,8 +76,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		public function get_donations() {
 			$records = $this->query();
 
-			/* Return array with the count. */
-			if ( 'count' == $this->get( 'output' ) ) {
+			/* Return the raw records. */
+			if ( in_array( $this->get( 'output' ), array( 'count', 'ids' ) ) ) {
 				return $records;
 			}
 
@@ -108,8 +110,8 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 		 * @return void
 		 */
 		public function setup_fields() {
-			/* If we are returning Donation objects, we only need to return the donation IDs. */
-			if ( 'donations' == $this->get( 'output' ) ) {
+			/* If we are returning IDs or Donation objects, we only need to return the donation IDs. */
+			if ( in_array( $this->get( 'output' ), array( 'donations', 'ids' ) ) ) {
 				return;
 			}
 
@@ -155,6 +157,7 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			remove_filter( 'charitable_query_fields', array( $this, 'donation_calc_fields' ), 5 );
 			remove_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
 			remove_filter( 'charitable_query_join', array( $this, 'join_meta' ), 6 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_donation_plan_is_in' ), 4 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );
@@ -180,6 +183,7 @@ if ( ! class_exists( 'Charitable_Donations_Query' ) ) :
 			add_action( 'charitable_pre_query', array( $this, 'setup_orderby' ) );
 			add_filter( 'charitable_query_join', array( $this, 'join_campaign_donations_table_on_donation' ), 5 );
 			add_filter( 'charitable_query_join', array( $this, 'join_meta' ), 6 );
+			add_filter( 'charitable_query_where', array( $this, 'where_donation_plan_is_in' ), 4 );
 			add_filter( 'charitable_query_where', array( $this, 'where_status_is_in' ), 5 );
 			add_filter( 'charitable_query_where', array( $this, 'where_campaign_is_in' ), 6 );
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_id_is_in' ), 7 );

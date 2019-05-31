@@ -4,8 +4,9 @@
  *
  * @author    Eric Daams
  * @package   Charitable/Admin Views/Metaboxes
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @since     1.5.0
+ * @version   1.5.0
  */
 
 if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']->field_has_required_args( $view_args ) ) {

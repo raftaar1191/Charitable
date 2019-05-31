@@ -7,7 +7,7 @@
  * @package     Charitable/Functions/AJAX
  * @version     1.2.3
  * @author      Eric Daams
- * @copyright   Copyright (c) 2018, Studio 164a
+ * @copyright   Copyright (c) 2019, Studio 164a
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -38,7 +38,7 @@ add_action( 'wp_ajax_nopriv_charitable_plupload_image_upload', 'charitable_plupl
 add_action( 'wp_ajax_charitable_get_session_content', 'charitable_ajax_get_session_content' );
 add_action( 'wp_ajax_nopriv_charitable_get_session_content', 'charitable_ajax_get_session_content' );
 
-/** 
+/**
  * Return the content for particular templates.
  *
  * @see charitable_ajax_get_session_donation_receipt

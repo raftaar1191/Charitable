@@ -3,18 +3,18 @@
  * Plugin Name:       Charitable
  * Plugin URI:        https://www.wpcharitable.com
  * Description:       The WordPress fundraising alternative for non-profits, created to help non-profits raise money on their own website.
- * Version:           1.6.6
+ * Version:           1.6.18
  * Author:            WP Charitable
  * Author URI:        https://wpcharitable.com
  * Requires at least: 4.1
- * Tested up to:      4.9.8
+ * Tested up to:      5.2.1
  *
  * Text Domain:       charitable
  * Domain Path:       /i18n/languages/
  *
  * @package           Charitable
  * @author            Eric Daams
- * @copyright         Copyright (c) 2018, Studio 164a
+ * @copyright         Copyright (c) 2019, Studio 164a
  * @license           http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
@@ -32,32 +32,16 @@ if ( ! class_exists( 'Charitable' ) ) :
 	 */
 	class Charitable {
 
-		/**
-		 * Plugin version.
-		 *
-		 * @var string
-		 */
-		const VERSION = '1.6.6';
+		/* Plugin version. */
+		const VERSION = '1.6.18';
 
-		/**
-		 * Version of database schema.
-		 *
-		 * @var string A date in the format: YYYYMMDD
-		 */
+		/* Version of database schema. */
 		const DB_VERSION = '20180522';
 
-		/**
-		 * Campaign post type.
-		 *
-		 * @var string
-		 */
+		/* Campaign post type. */
 		const CAMPAIGN_POST_TYPE = 'campaign';
 
-		/**
-		 * Donation post type.
-		 *
-		 * @var string
-		 */
+		/* Donation post type. */
 		const DONATION_POST_TYPE = 'donation';
 
 		/**
@@ -210,6 +194,22 @@ if ( ! class_exists( 'Charitable' ) ) :
 		}
 
 		/**
+		 * Load the template functions after theme is loaded.
+		 *
+		 * This gives themes time to override the functions.
+		 *
+		 * @since  1.6.10
+		 *
+		 * @return void
+		 */
+		public function load_template_files() {
+			$includes_path = $this->get_path( 'includes' );
+
+			require_once( $includes_path . 'public/charitable-template-functions.php' );
+			require_once( $includes_path . 'public/charitable-template-hooks.php' );
+		}
+
+		/**
 		 * Dynamically loads the class attempting to be instantiated elsewhere in the
 		 * plugin by looking at the $class_name parameter being passed as an argument.
 		 *
@@ -288,6 +288,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 			add_action( 'plugins_loaded', array( $this, 'register_donormeta_table' ) );
 			add_action( 'plugins_loaded', 'charitable_load_compat_functions' );
 			add_action( 'setup_theme', array( 'Charitable_Customizer', 'start' ) );
+			add_action( 'after_setup_theme', array( $this, 'load_template_files' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'maybe_start_qunit' ), 100 );
 			add_action( 'rest_api_init', 'charitable_register_api_routes' );
 
@@ -634,6 +635,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 				$endpoints->register( new Charitable_Registration_Endpoint );
 				$endpoints->register( new Charitable_Login_Endpoint );
 				$endpoints->register( new Charitable_Profile_Endpoint );
+				$endpoints->register( new Charitable_Webhook_Listener_Endpoint );
 
 				$this->registry->register_object( $endpoints );
 			}
@@ -705,11 +707,14 @@ if ( ! class_exists( 'Charitable' ) ) :
 			 *
 			 * @param array $tables List of tables as a key=>value array.
 			 */
-			return apply_filters( 'charitable_db_tables', array(
-				'campaign_donations' => 'Charitable_Campaign_Donations_DB',
-				'donors'             => 'Charitable_Donors_DB',
-				'donormeta'          => 'Charitable_Donormeta_DB',
-			) );
+			return apply_filters(
+				'charitable_db_tables',
+				array(
+					'campaign_donations' => 'Charitable_Campaign_Donations_DB',
+					'donors'             => 'Charitable_Donors_DB',
+					'donormeta'          => 'Charitable_Donormeta_DB',
+				)
+			);
 		}
 
 		/**

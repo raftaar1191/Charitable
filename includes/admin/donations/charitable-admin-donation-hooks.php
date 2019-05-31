@@ -6,7 +6,7 @@
  *
  * @package   Charitable/Functions/Admin
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
  * @version   1.6.0
@@ -39,6 +39,15 @@ add_action( 'admin_init', array( Charitable_Donation_Meta_Boxes::get_instance(),
  * @see Charitable_Donation_Meta_Boxes::save_donation()
  */
 add_action( 'save_post_' . Charitable::DONATION_POST_TYPE, array( Charitable_Donation_Meta_Boxes::get_instance(), 'save_donation' ), 10, 2 );
+
+/**
+ * Maybe prevent emails if we're saving a donation.
+ *
+ * @see Charitable_Donation_Meta_Boxes::maybe_block_new_donation_email()
+ * @see Charitable_Donation_Meta_Boxes::maybe_block_donation_receipt_email()
+ */
+add_filter( 'charitable_send_' . Charitable_Email_New_Donation::get_email_id(), array( Charitable_Donation_Meta_Boxes::get_instance(), 'maybe_block_new_donation_email' ) );
+add_filter( 'charitable_send_' . Charitable_Email_Donation_Receipt::get_email_id(), array( Charitable_Donation_Meta_Boxes::get_instance(), 'maybe_block_donation_receipt_email' ) );
 
 /**
  * Save the donation.

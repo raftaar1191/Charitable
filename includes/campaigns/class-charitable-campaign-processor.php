@@ -4,7 +4,7 @@
  *
  * @package   Charitable/Classes/Charitable_Campaign_Processor
  * @author    Eric Daams
- * @copyright Copyright (c) 2018, Studio 164a
+ * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.9
  * @version   1.5.10
@@ -415,9 +415,7 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 				return $value;
 			}
 
-			return Charitable_Campaign::sanitize_custom_donations( $value, array(
-				'_campaign_suggested_donations' => $this->get_suggested_donations_value(),
-			) );
+			return Charitable_Campaign::sanitize_custom_donations( $value, $this->input );
 		}
 
 		/**
