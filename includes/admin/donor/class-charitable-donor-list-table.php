@@ -250,16 +250,13 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 		if ( $this->donors ) {
 			foreach ( $this->donors as $donor ) {
-
-				$charitable_donor = new Charitable_Donor( $donor->donor_id );
-
 				$data[] = array(
-					'donor_id'        => $charitable_donor->donor_id,
+					'donor_id'        => $donor->donor_id,
 					'user_id'         => $donor->user_id,
-					'name'            => $charitable_donor->get_name(),
-					'email'           => $charitable_donor->get_email(),
-					'donations'       => $charitable_donor->count_donations(),
-					'amount'          => $charitable_donor->get_amount(),
+					'name'            => $donor->get_name(),
+					'email'           => $donor->get_email(),
+					'donations'       => $donor->count_donations(),
+					'amount'          => $donor->get_amount(),
 					'date'            => $donor->date_joined,
 					'contact_consent' => $donor->contact_consent,
 				);
