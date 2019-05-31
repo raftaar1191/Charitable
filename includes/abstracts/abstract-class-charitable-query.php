@@ -664,9 +664,9 @@ if ( ! class_exists( 'Charitable_Query' ) ) :
 		/**
 		 * Filter query by donor ID.
 		 *
-		 * @global  WPBD $wpdb
 		 * @since  1.0.0
 		 *
+		 * @global WPBD $wpdb
 		 * @param  string $where_statement The default where statement.
 		 * @return string
 		 */

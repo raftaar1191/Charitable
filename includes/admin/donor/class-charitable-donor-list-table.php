@@ -29,24 +29,27 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * Number of items per page.
 	 *
-	 * @var int
 	 * @since 1.7.0
+	 *
+	 * @var   int
 	 */
 	public $per_page = 20;
 
 	/**
 	 * Number of donors found.
 	 *
-	 * @var int
 	 * @since 1.7.0
+	 *
+	 * @var   int
 	 */
 	public $count = 0;
 
 	/**
 	 * Total donors.
 	 *
-	 * @var int
 	 * @since 1.7.0
+	 *
+	 * @var   int
 	 */
 	public $total = 0;
 
@@ -55,7 +58,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 *
 	 * @since 1.7.0
 	 *
-	 * @var array
+	 * @var   array
 	 */
 	public $donors = array();
 
@@ -63,23 +66,24 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * Get things started.
 	 *
 	 * @since 1.7.0
-	 * @see   WP_List_Table::__construct()
+	 *
+	 * @see WP_List_Table::__construct()
 	 */
 	public function __construct() {
-
-		// Set parent defaults.
-		parent::__construct( array(
-			'singular' => __( 'Donor', 'charitable' ), // Singular name of the listed records.
-			'plural'   => __( 'Donors', 'charitable' ), // Plural name of the listed records.
-			'ajax'     => false, // Does this table support ajax?.
-		) );
-
+		parent::__construct(
+			array(
+				'singular' => __( 'Donor', 'charitable' ), // Singular name of the listed records.
+				'plural'   => __( 'Donors', 'charitable' ), // Plural name of the listed records.
+				'ajax'     => false, // Does this table support ajax?.
+			)
+		);
 	}
 
 	/**
 	 * List table of donors.
 	 *
 	 * @since  1.7.0
+	 *
 	 * @return void
 	 */
 	static function donors_list() {
@@ -89,12 +93,10 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * Show the search field.
 	 *
-	 * @param string $text Label for the search box.
-	 * @param string $input_id ID of the search box.
-	 *
 	 * @since  1.7.0
-	 * @access public
 	 *
+	 * @param  string $text     Label for the search box.
+	 * @param  string $input_id ID of the search box.
 	 * @return void
 	 */
 	public function search_box( $text, $input_id ) {
@@ -104,18 +106,15 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * This function renders most of the columns in the list table.
 	 *
-	 * @param array $donor Contains all the data of the donors.
-	 * @param string $column_name The name of the column.
-	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
+	 * @param  array  $donor       Contains all the data of the donors.
+	 * @param  string $column_name The name of the column.
 	 * @return string Column Name.
 	 */
 	public function column_default( $donor, $column_name ) {
-
 		switch ( $column_name ) {
-			case 'donations' :
+			case 'donations':
 				$value = sprintf(
 					'<a href="%s">%s</a>',
 					admin_url( 'edit.php?post_type=donation&donor_id=' . absint( $donor['donor_id'] ) ),
@@ -128,55 +127,74 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 				break;
 		}
 
-		return apply_filters( "charitable_donors_column_{$column_name}", $value, $donor, $column_name );
+		/**
+		 * Filter the value to display in a particular donor table column.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @param string $value The default value to show.
+		 * @param array  $donor Contains all the donor data.
+		 */
+		return apply_filters( 'charitable_donors_column_' . $column_name, $value, $donor );
 	}
 
 	/**
 	 * Retrieve the table columns.
 	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
 	 * @return array $columns Array of all the list table columns.
 	 */
 	public function get_columns() {
-		$columns = array(
-			'donor_id'        => __( 'Donor ID', 'charitable' ),
-			'name'            => __( 'Name', 'charitable' ),
-			'email'           => __( 'Email', 'charitable' ),
-			'donations'       => __( 'Donations', 'charitable' ),
-			'amount'          => __( 'Lifetime value', 'charitable' ),
-			'date'            => __( 'Date joined', 'charitable' ),
-			'contact_consent' => __( 'Contact consent', 'charitable' ),
+		/**
+		 * Filter list of columns in Donors table.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @param array $columns The list of columns.
+		 */
+		return apply_filters(
+			'charitable_list_donors_columns',
+			array(
+				'donor_id'        => __( 'Donor ID', 'charitable' ),
+				'name'            => __( 'Name', 'charitable' ),
+				'email'           => __( 'Email', 'charitable' ),
+				'donations'       => __( 'Donations', 'charitable' ),
+				'amount'          => __( 'Lifetime value', 'charitable' ),
+				'date'            => __( 'Date joined', 'charitable' ),
+				'contact_consent' => __( 'Contact consent', 'charitable' ),
+			)
 		);
-
-		return apply_filters( 'charitable_list_donors_columns', $columns );
-
 	}
 
 	/**
 	 * Get the sortable columns.
 	 *
-	 * @access public
 	 * @since  1.7.0
+	 *
 	 * @return array Array of all the sortable columns.
 	 */
 	public function get_sortable_columns() {
-		$columns = array(
-			'donor_id'  => array( 'donor_id', true ),
-			'name'      => array( 'name', true ),
-			'donations' => array( 'donations', true ),
-			'amount'    => array( 'amount', true ),
-			'date'      => array( 'date', true ),
+		/**
+		 * Filter the list of sortable columns in the Donors table.
+		 *
+		 * @param array $columns The list of columns.
+		 */
+		return apply_filters(
+			'charitable_list_donors_sortable_columns',
+			array(
+				'donor_id'  => array( 'donor_id', true ),
+				'name'      => array( 'name', true ),
+				'donations' => array( 'donations', true ),
+				'amount'    => array( 'amount', true ),
+				'date'      => array( 'date', true ),
+			)
 		);
-
-		return apply_filters( 'charitable_list_donors_sortable_columns', $columns );
 	}
 
 	/**
 	 * Retrieve the current page number.
 	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
 	 * @return int Current page number.
@@ -188,7 +206,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * Retrieves the search query string.
 	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
 	 * @return mixed string If search is present, false otherwise.
@@ -202,35 +219,31 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 *
 	 * @param string $which Position to trigger i.e. Top/Bottom.
 	 *
-	 * @access protected
 	 * @since  1.7.0
 	 */
 	protected function display_tablenav( $which ) {
 		?>
-        <div class="tablenav <?php echo esc_attr( $which ); ?>">
+		<div class="tablenav <?php echo esc_attr( $which ); ?>">
 			<?php
 			$this->extra_tablenav( $which );
 			$this->pagination( $which );
 			?>
-            <br class="clear"/>
-        </div>
+			<br class="clear"/>
+		</div>
 		<?php
 	}
 
 	/**
 	 * Retrieves the donor data from db.
 	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
 	 * @return array $data The Donor data.
 	 */
 	public function donor_data() {
-
 		$data = array();
 
 		if ( empty( $this->donors ) ) {
-			// Get donor query.
 			$args         = $this->get_donor_query_args();
 			$this->donors = new Charitable_Donor_Query( $args );
 		}
@@ -253,6 +266,13 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			}
 		}
 
+		/**
+		 * Filter the query data to include for a particular donor.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @param array $data The data relating to a particular donor.
+		 */
 		return apply_filters( 'charitable_donors_column_query_data', $data );
 	}
 
@@ -260,7 +280,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * Get donor count.
 	 *
 	 * @since  1.7.0
-	 * @access private
 	 */
 	private function get_donor_count() {
 
@@ -277,7 +296,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * Get donor query.
 	 *
 	 * @since  1.7.0
-	 * @access public
 	 *
 	 * @return array
 	 */
@@ -301,7 +319,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 			} elseif ( is_numeric( $search ) ) {
 				$args['donor_id'] = $search;
 			} else {
-				$args['first_name'] = $search;
+				$args['s'] = $search;
 			}
 		}
 
@@ -311,7 +329,6 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	/**
 	 * Setup the final data for the table.
 	 *
-	 * @access public
 	 * @since  1.7.0
 	 *
 	 * @return void

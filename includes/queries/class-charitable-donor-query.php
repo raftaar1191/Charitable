@@ -23,7 +23,14 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 	 */
 	class Charitable_Donor_Query extends Charitable_Query {
 
-		public $table_name = '';
+		/**
+		 * The alias we use for the charitable_donors table.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @var   string
+		 */
+		private $table_alias = '';
 
 		/**
 		 * Create new query object.
@@ -33,9 +40,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @param array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
-			global $wpdb;
-
-			$this->table_name = "d";
+			$this->table_alias = 'd';
 
 			/**
 			 * Filter the default arguments for Charitable_Donor_Query.
@@ -44,22 +49,26 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			 *
 			 * @param array $args The default arguments.
 			 */
-			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
-				'output'          => 'donors',
-				'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
-				'orderby'         => 'date',
-				'order'           => 'DESC',
-				'number'          => 20,
-				'paged'           => 1,
-				'fields'          => 'all',
-				'campaign'        => 0,
-				'distinct_donors' => true,
-				'donor_id'        => 0,
-				'include_erased'  => 1,
-				'date_query'      => array(),
-				'meta_query'      => array(),
-				's'               => null,
-			) );
+			$defaults = apply_filters(
+				'charitable_donor_query_default_args',
+				array(
+					'output'          => 'donors',
+					'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
+					'orderby'         => 'date',
+					'order'           => 'DESC',
+					'number'          => 20,
+					'paged'           => 1,
+					'fields'          => 'all',
+					'campaign'        => 0,
+					'distinct_donors' => true,
+					'donor_id'        => 0,
+					'include_erased'  => 1,
+					'date_query'      => array(),
+					'meta_query'      => array(),
+					'email'           => false,
+					's'               => false,
+				)
+			);
 
 			$this->args             = wp_parse_args( $args, $defaults );
 			$this->args['campaign'] = $this->sanitize_campaign();
@@ -251,8 +260,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_search' ), 11 );
-			remove_filter( 'charitable_query_where', array( $this, 'where_email' ), 12 );
-			remove_filter( 'charitable_query_where', array( $this, 'where_donor' ), 13 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_email_is_in' ), 12 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -283,8 +291,7 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			add_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
 			add_filter( 'charitable_query_where', array( $this, 'where_search' ), 11 );
-			add_filter( 'charitable_query_where', array( $this, 'where_email' ), 12 );
-			add_filter( 'charitable_query_where', array( $this, 'where_donor' ), 13 );
+			add_filter( 'charitable_query_where', array( $this, 'where_email_is_in' ), 12 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
 		}
 
@@ -293,24 +300,26 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * Set search where clause.
 		 *
 		 * @since  1.7.0
-		 * @access public
-		 *
-		 * @param string $where_statement
 		 *
 		 * @global wpdb $wpdb
+		 * @param  string $where_statement The WHERE statement of the query.
 		 * @return string
 		 */
 		public function where_search( $where_statement ) {
+			$search = $this->get( 's', false );
 
-			// Donors created for a specific date or in a date range
-			if ( ! empty( $this->args['first_name'] ) ) {
-				$search_parts = $this->args['first_name'];
-
-				if ( ! empty( $search_parts ) ) {
-					global $wpdb;
-					$where_statement .= $wpdb->prepare( " AND ({$this->table_name}.first_name LIKE %s OR {$this->table_name}.last_name LIKE %s)", "%{$search_parts}%", "%{$search_parts}%" );
-				}
+			if ( ! $search ) {
+				return $where_statement;
 			}
+
+			global $wpdb;
+
+			$where_statement .= $wpdb->prepare(
+				" AND CONCAT( {$this->table_alias}.first_name, ' ', {$this->table_alias}.last_name ) LIKE %s
+				OR {$this->table_alias}.email LIKE %s",
+				"%{$search}%",
+				"%{$search}%"
+			);
 
 			return $where_statement;
 		}
@@ -319,57 +328,27 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * Set email where clause.
 		 *
 		 * @since  1.7.0
-		 * @access public
-		 *
-		 * @param string $where_statement
 		 *
 		 * @global wpdb $wpdb
+		 * @param  string $where_statement The WHERE statement of the query.
 		 * @return string
 		 */
-		public function where_email( $where_statement ) {
+		public function where_email_is_in( $where_statement ) {
+			$emails = $this->get( 'email', false );
 
-			if ( ! empty( $this->args['email'] ) ) {
-				global $wpdb;
-
-				if ( is_array( $this->args['email'] ) ) {
-
-					$emails_count       = count( $this->args['email'] );
-					$emails_placeholder = array_fill( 0, $emails_count, '%s' );
-					$emails             = implode( ', ', $emails_placeholder );
-
-					$where_statement .= $wpdb->prepare( " AND {$this->table_name}.email IN( $emails )", $this->args['email'] );
-				} else {
-					$where_statement .= $wpdb->prepare( " AND {$this->table_name}.email = %s", $this->args['email'] );
-				}
+			if ( ! $emails ) {
+				return $where_statement;
 			}
 
-			return $where_statement;
-		}
-
-		/**
-		 * Set donor where clause.
-		 *
-		 * @since  1.7.0
-		 * @access public
-		 *
-		 * @param string $where_statement
-		 *
-		 * @global wpdb $wpdb
-		 * @return string
-		 */
-		public function where_donor( $where_statement ) {
-
-			// Specific donors.
-			if ( ! empty( $this->args['donor'] ) ) {
-				if ( ! is_array( $this->args['donor'] ) ) {
-					$this->args['donor'] = explode( ',', $this->args['donor'] );
-				}
-				$donor_ids = implode( ',', array_map( 'intval', $this->args['donor'] ) );
-
-				$where_statement .= " AND {$this->table_name}.donor_id IN( {$donor_ids} )";
+			/* Cast emails to array. */
+			if ( ! is_array( $emails ) ) {
+				$emails = array( $emails );
 			}
 
-			return $where_statement;
+			/* Filter emails, returning placeholders and adding the emails to the parameters to be used in prepared query. */
+			$placeholders = $this->get_where_in_placeholders( $emails, 'is_email', '%s' );
+
+			return $where_statement . " AND {$this->table_alias}.email IN ({$placeholders})";
 		}
 
 		/**
