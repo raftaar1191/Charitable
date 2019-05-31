@@ -74,11 +74,14 @@ if ( ! class_exists( 'Charitable_Donor_Consent_Log' ) ) :
 				return false;
 			}
 
-			array_push( $log, array(
-				'time'          => time(),
-				'consent_given' => $consent_given,
-				'statement'     => $consent_statement,
-			) );
+			array_push(
+				$log,
+				array(
+					'time'          => time(),
+					'consent_given' => $consent_given,
+					'statement'     => $consent_statement,
+				)
+			);
 
 			$ret = update_metadata( 'donor', $this->donor_id, 'consent_log', $log );
 
