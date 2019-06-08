@@ -11,68 +11,78 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Roles' ) ) :
 
 	/**
 	 * Charitable_Roles class.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Roles {
 
 		/**
 		 * Sets up roles for Charitable. This is called by the install script.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @return void
 		 */
 		public function add_roles() {
-			add_role( 'campaign_manager', __( 'Campaign Manager', 'charitable' ), array(
-				'read'                   => true,
-				'delete_posts'           => true,
-				'edit_posts'             => true,
-				'delete_published_posts' => true,
-				'publish_posts'          => true,
-				'upload_files'           => true,
-				'edit_published_posts'   => true,
-				'read_private_pages'     => true,
-				'edit_private_pages'     => true,
-				'delete_private_pages'   => true,
-				'read_private_posts'     => true,
-				'edit_private_posts'     => true,
-				'delete_private_posts'   => true,
-				'delete_others_posts'    => true,
-				'delete_published_pages' => true,
-				'delete_others_pages'    => true,
-				'delete_pages'           => true,
-				'publish_pages'          => true,
-				'edit_published_pages'   => true,
-				'edit_others_pages'      => true,
-				'edit_pages'             => true,
-				'edit_others_posts'      => true,
-				'manage_links'           => true,
-				'manage_categories'      => true,
-				'moderate_comments'      => true,
-				'import'                 => true,
-				'export'                 => true,
-				'unfiltered_html'        => true,
-			) );
+			add_role(
+				'campaign_manager',
+				__( 'Campaign Manager', 'charitable' ),
+				array(
+					'read'                   => true,
+					'delete_posts'           => true,
+					'edit_posts'             => true,
+					'delete_published_posts' => true,
+					'publish_posts'          => true,
+					'upload_files'           => true,
+					'edit_published_posts'   => true,
+					'read_private_pages'     => true,
+					'edit_private_pages'     => true,
+					'delete_private_pages'   => true,
+					'read_private_posts'     => true,
+					'edit_private_posts'     => true,
+					'delete_private_posts'   => true,
+					'delete_others_posts'    => true,
+					'delete_published_pages' => true,
+					'delete_others_pages'    => true,
+					'delete_pages'           => true,
+					'publish_pages'          => true,
+					'edit_published_pages'   => true,
+					'edit_others_pages'      => true,
+					'edit_pages'             => true,
+					'edit_others_posts'      => true,
+					'manage_links'           => true,
+					'manage_categories'      => true,
+					'moderate_comments'      => true,
+					'import'                 => true,
+					'export'                 => true,
+					'unfiltered_html'        => true,
+				)
+			);
 
-			add_role( 'donor', __( 'Donor', 'charitable' ), array(
-				'read' => true,
-			) );
+			add_role(
+				'donor',
+				__( 'Donor', 'charitable' ),
+				array(
+					'read' => true,
+				)
+			);
 		}
 
 		/**
 		 * Sets up capabilities for Charitable. This is called by the install script.
 		 *
-		 * @global 	WP_Roles
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @global WP_Roles
+		 * @return void
 		 */
 		public function add_caps() {
 			global $wp_roles;
@@ -84,7 +94,6 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 			}
 
 			if ( is_object( $wp_roles ) ) {
-
 				$wp_roles->add_cap( 'campaign_manager', 'view_charitable_sensitive_data' );
 				$wp_roles->add_cap( 'campaign_manager', 'export_charitable_reports' );
 
@@ -103,10 +112,10 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		/**
 		 * Removes roles. This is called upon deactivation.
 		 *
-		 * @global 	WP_Roles
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	void
+		 * @global WP_Roles
+		 * @return void
 		 */
 		public function remove_caps() {
 			global $wp_roles;
@@ -118,7 +127,6 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 			}
 
 			if ( is_object( $wp_roles ) ) {
-
 				$wp_roles->remove_cap( 'campaign_manager', 'view_charitable_sensitive_data' );
 				$wp_roles->remove_cap( 'campaign_manager', 'export_charitable_reports' );
 
@@ -140,9 +148,9 @@ if ( ! class_exists( 'Charitable_Roles' ) ) :
 		/**
 		 * Returns the caps for the post types that Charitable adds.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @return 	array
+		 * @return array
 		 */
 		private function get_core_caps() {
 			return array(

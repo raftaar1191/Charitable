@@ -89,13 +89,16 @@ if ( ! class_exists( 'Charitable_Settings' ) ) :
 			 *
 			 * @param string[] $tabs List of tabs in key=>label format.
 			 */
-			return apply_filters( 'charitable_settings_tabs', array(
-				'general'  => __( 'General', 'charitable' ),
-				'gateways' => __( 'Payment Gateways', 'charitable' ),
-				'emails'   => __( 'Emails', 'charitable' ),
-				'privacy'  => __( 'Privacy', 'charitable' ),
-				'advanced' => __( 'Advanced', 'charitable' ),
-			) );
+			return apply_filters(
+				'charitable_settings_tabs',
+				array(
+					'general'  => __( 'General', 'charitable' ),
+					'gateways' => __( 'Payment Gateways', 'charitable' ),
+					'emails'   => __( 'Emails', 'charitable' ),
+					'privacy'  => __( 'Privacy', 'charitable' ),
+					'advanced' => __( 'Advanced', 'charitable' ),
+				)
+			);
 
 		}
 

@@ -186,7 +186,8 @@ function charitable_ajax_get_session_donation_form_amount_field( $content, $args
 
 	ob_start();
 
-	charitable_template( 'donation-form/donation-amount-list.php',
+	charitable_template(
+		'donation-form/donation-amount-list.php',
 		array(
 			'campaign' => charitable_get_campaign( $args['campaign_id'] ),
 			'form_id'  => $args['form_id'],
@@ -236,9 +237,12 @@ function charitable_ajax_get_session_errors( $content ) {
 
 	ob_start();
 
-	charitable_template( 'form-fields/errors.php', array(
-		'errors' => $errors,
-	) );
+	charitable_template(
+		'form-fields/errors.php',
+		array(
+			'errors' => $errors,
+		)
+	);
 
 	return ob_get_clean();
 }
@@ -260,9 +264,12 @@ function charitable_ajax_get_session_notices( $content ) {
 
 	ob_start();
 
-	charitable_template( 'form-fields/notices.php', array(
-		'notices' => $notices,
-	) );
+	charitable_template(
+		'form-fields/notices.php',
+		array(
+			'notices' => $notices,
+		)
+	);
 
 	return ob_get_clean();
 }

@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Account
  * @since   1.4.0
- * @version 1.6.0
+ * @version 1.6.19
  */
 
 // Exit if accessed directly.
@@ -123,7 +123,19 @@ if ( empty( $donations ) ) : ?>
 					 */
 					do_action( 'charitable_my_donations_table_after_campaigns', $donation );
 				?>
-				<td><?php echo charitable_format_money( $donation->amount ); ?></td>
+				<td class="amount" data-title="<?php esc_attr_e( 'Amount', 'charitable' ); ?>">
+					<?php
+						/**
+						 * Filter the total donation amount.
+						 *
+						 * @since 1.6.19
+						 *
+						 * @param string $amount   The total donation amount.
+						 * @param object $donation The donation as a simple object.
+						 */
+						echo apply_filters( 'charitable_my_donation_total_amount', charitable_format_money( $donation->amount ), $donation );
+					?>
+				</td>
 				<?php
 					/**
 					 * Add a cell after the donation amount. Any output should be wrapped in <td></td>.
@@ -162,8 +174,7 @@ if ( empty( $donations ) ) : ?>
 			<?php endforeach ?>
 		</tbody>
 	</table>
-
-<?php
+	<?php
 endif;
 
 /**
