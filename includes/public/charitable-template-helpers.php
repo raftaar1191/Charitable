@@ -4,15 +4,18 @@
  *
  * Functions used to assist with rendering templates.
  *
- * @package     Charitable/Functions/Templates
- * @version     1.2.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Templates
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.19
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Displays a template.
@@ -100,11 +103,12 @@ function charitable_template_from_session_content( $template_key, $wrapper_args 
  *
  * @since  1.0.0
  *
- * @param 	string|string[] $template
+ * @param  string|string[] $template The template to load.
+ * @param  string          $default  The default to load if the template file doesn't exist.
  * @return string The template path if the template exists. Otherwise, return default.
  */
 function charitable_get_template_path( $template, $default = '' ) {
-	$t = new Charitable_Template( $template, false );
+	$t    = new Charitable_Template( $template, false );
 	$path = $t->locate_template();
 
 	if ( ! file_exists( $path ) ) {
@@ -258,7 +262,7 @@ function charitable_get_arbitrary_attributes( $field ) {
  *
  * @since  1.4.11
  *
- * @return 	boolean
+ * @return boolean
  */
 function charitable_is_main_loop() {
 	return is_single() && in_the_loop() && is_main_query();
@@ -271,10 +275,19 @@ function charitable_is_main_loop() {
  *
  * @since  1.0.0
  *
+ * @global WP $wp
  * @return string
  */
 function charitable_get_current_url() {
-	return home_url( add_query_arg( null, null ) );
+	global $wp;
+
+	return trailingslashit(
+		add_query_arg(
+			$_SERVER['QUERY_STRING'],
+			'',
+			home_url( $wp->request )
+		)
+	);
 }
 
 /**
@@ -321,9 +334,11 @@ function charitable_table_template( array $columns, array $data, $args = array()
  * @return string
  */
 function charitable_get_email_verification_link( WP_User $user, $redirect_url = false ) {
-	return add_query_arg( array(
-		'charitable_action' => 'verify_email',
-		'user'              => $user->ID,
-		'redirect_url'      => $redirect_url,
-	) );
+	return add_query_arg(
+		array(
+			'charitable_action' => 'verify_email',
+			'user'              => $user->ID,
+			'redirect_url'      => $redirect_url,
+		)
+	);
 }

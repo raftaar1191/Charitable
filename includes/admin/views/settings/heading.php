@@ -13,5 +13,5 @@
 if ( isset( $view_args['description'] ) ) : ?>
 	<div class="charitable-description"><?php echo $view_args['description']; ?></div>
 <?php else : ?>
-<hr />
+<hr <?php echo charitable_get_arbitrary_attributes( $view_args ); ?> />
 <?php endif; ?>

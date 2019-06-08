@@ -78,7 +78,7 @@ CHARITABLE = window.CHARITABLE || {};
         // Set cookie.
         function set_cookie() {
             Cookies.set( CHARITABLE_SESSION.cookie_name,
-                CHARITABLE_SESSION.generated_id + '||' + CHARITABLE_SESSION.expiration + '||' + CHARITABLE_SESSION.expiration_variant, 
+                CHARITABLE_SESSION.generated_id + '||' + CHARITABLE_SESSION.expiration + '||' + CHARITABLE_SESSION.expiration_variant,
                 {
                     expires: new Date( new Date().getTime() + ( parseInt( CHARITABLE_SESSION.expiration ) * 1000 ) ),
                     path: CHARITABLE_SESSION.cookie_path,

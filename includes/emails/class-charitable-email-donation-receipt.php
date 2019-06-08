@@ -87,9 +87,11 @@ if ( ! class_exists( 'Charitable_Email_Donation_Receipt' ) ) :
 				return false;
 			}
 
-			$email = new self( array(
-				'donation' => $donation,
-			) );
+			$email = new self(
+				array(
+					'donation' => $donation,
+				)
+			);
 
 			/**
 			 * Don't resend the email.

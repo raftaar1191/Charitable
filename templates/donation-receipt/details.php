@@ -29,18 +29,19 @@ $amount   = $donation->get_total_donation_amount();
 	<tbody>
 	<?php foreach ( $donation->get_campaign_donations() as $campaign_donation ) : ?>
 		<tr>
-			<td class="campaign-name"><?php
-				echo $campaign_donation->campaign_name;
+			<td class="campaign-name">
+				<?php
+					echo $campaign_donation->campaign_name;
 
-				/**
-				 * Do something after displaying the campaign name.
-				 *
-				 * @since 	1.3.0
-				 *
-				 * @param 	object              $campaign_donation Database record for the campaign donation.
-				 * @param 	Charitable_Donation $donation 	 	   The Donation object.
-				 */
-				do_action( 'charitable_donation_receipt_after_campaign_name', $campaign_donation, $donation );
+					/**
+					 * Do something after displaying the campaign name.
+					 *
+					 * @since 1.3.0
+					 *
+					 * @param object              $campaign_donation Database record for the campaign donation.
+					 * @param Charitable_Donation $donation          The Donation object.
+					 */
+					do_action( 'charitable_donation_receipt_after_campaign_name', $campaign_donation, $donation );
 				?>
 			</td>
 			<td class="donation-amount"><?php echo charitable_format_money( $campaign_donation->amount ); ?></td>
@@ -60,7 +61,7 @@ $amount   = $donation->get_total_donation_amount();
 			 */
 			do_action( 'charitable_donation_receipt_before_donation_total', $donation );
 		?>
-		<tr>			
+		<tr>
 			<td><?php _e( 'Total', 'charitable' ); ?></td>
 			<td>
 				<?php
