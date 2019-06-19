@@ -296,13 +296,12 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 			$processor = self::get_instance();
 
-			$result = $processor->process_donation();
+			$result   = $processor->process_donation();
+			$response = is_array( $result ) ? $result : array();
 
-			if ( $result ) {
-				$response = array(
-					'success'     => true,
-					'redirect_to' => $processor->get_redirection_after_gateway_processing( $result ),
-				);
+			if ( false !== $result ) {
+				$response['success']     = true;
+				$response['redirect_to'] = $processor->get_redirection_after_gateway_processing( $result );
 			} else {
 				$errors = charitable_get_notices()->get_errors();
 
@@ -310,11 +309,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					$errors = array( __( 'Unable to process donation.', 'charitable' ) );
 				}
 
-				$response = array(
-					'success'     => false,
-					'errors'      => $errors,
-					'donation_id' => (int) $processor->get_donation_id(),
-				);
+				$response['success']     = false;
+				$response['errors']      = $errors;
+				$response['donation_id'] = (int) $processor->get_donation_id();
 			}
 
 			wp_send_json( $response );

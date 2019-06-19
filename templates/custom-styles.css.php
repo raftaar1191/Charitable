@@ -17,9 +17,9 @@ $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'c
 
 ?>
 <style id="charitable-highlight-colour-styles">
-.campaign-raised .amount, 
+.campaign-raised .amount,
 .campaign-figures .amount,
-.donors-count, 
+.donors-count,
 .time-left,
 .charitable-form-field a:not(.button),
 .charitable-form-fields .charitable-fieldset a:not(.button),
@@ -37,7 +37,7 @@ $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'c
 
 .charitable-donation-form .donation-amount.selected,
 .charitable-donation-amount-form .donation-amount.selected,
-.charitable-notice, 
+.charitable-notice,
 .charitable-drag-drop-images li:hover a.remove-image,
 .supports-drag-drop .charitable-drag-drop-dropzone.drag-over {
     border-color: <?php echo $highlight_colour ?>;

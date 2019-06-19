@@ -92,6 +92,21 @@ CHARITABLE = window.CHARITABLE || {};
         };
 
         /**
+         * Trigger jQuery events to broadcast the change in donation amount.
+         *
+         * @since  1.6.19
+         *
+         * @access private
+         */
+        var trigger_amount_change_events = function() {
+            /* The chosen donation amount has changed. */
+            $body.trigger( 'charitable:form:amount:changed', self );
+
+            /* The overall donation amount has changed. */
+            $body.trigger( 'charitable:form:total:changed', self );
+        };
+
+        /**
          * Focus event handler for changes to custom donation amount input field.
          *
          * @access private
@@ -102,6 +117,8 @@ CHARITABLE = window.CHARITABLE || {};
             if ( $.trim( unformatted ) > 0 ) {
                 $( this ).val( self.format_amount( unformatted ) );
             }
+
+            trigger_amount_change_events();
         };
 
         /**
@@ -124,6 +141,8 @@ CHARITABLE = window.CHARITABLE || {};
             if ( $li.hasClass( 'custom-donation-amount' ) ) {
                 $li.find( 'input.custom-donation-input' ).focus();
             }
+
+            trigger_amount_change_events();
         };
 
         /**
@@ -184,7 +203,9 @@ CHARITABLE = window.CHARITABLE || {};
             }
 
             /* Continue on to process the donation. */
-            maybe_process( helper );
+            maybe_process( helper, function() {
+                $body.trigger( 'charitable:form:process', helper );
+            } );
 
             return false;
         };
@@ -194,7 +215,7 @@ CHARITABLE = window.CHARITABLE || {};
          *
          * If not, trigger processing. If there are, check again in 500ms.
          */
-        var maybe_process = function( helper ) {
+        var maybe_process = function( helper, callback ) {
             if ( ! helper.waiting() ) {
                 /* Double-check that there are still no errors. */
                 if ( helper.get_errors().length > 0 ) {
@@ -204,7 +225,7 @@ CHARITABLE = window.CHARITABLE || {};
 
                     helper.scroll_to_top();
                 } else {
-                    $body.trigger( 'charitable:form:process', helper );
+                    callback();
                 }
 
                 return;
@@ -241,15 +262,16 @@ CHARITABLE = window.CHARITABLE || {};
                     withCredentials: true
                 },
                 success: function (response) {
+                    $body.trigger( 'charitable:form:processed', [ response, helper ] );
 
                     if ( response.success ) {
-                        window.location.href = response.redirect_to;
+                        maybe_process( helper, function() {
+                            window.location.href = response.redirect_to;
+                        } );
                     }
                     else {
                         helper.hide_processing();
-
                         helper.print_errors( response.errors );
-
                         helper.scroll_to_top();
 
                         if ( response.donation_id ) {
@@ -257,7 +279,6 @@ CHARITABLE = window.CHARITABLE || {};
                         }
                     }
                 }
-
             }).fail(function (response, textStatus, errorThrown) {
 
                 if ( window.console && window.console.log ) {
@@ -941,6 +962,37 @@ CHARITABLE = window.CHARITABLE || {};
  */
 CHARITABLE.SanitizeURL = function( input ) {
     CHARITABLE.Helpers.sanitize_url( input );
+};
+
+/**
+ * Do a version check.
+ *
+ * @since 1.6.19
+ *
+ * @param string version The version we are comparing with.
+ * @param string compare If compare is left empty, use the Charitable version.
+ * @return integer|boolean
+ */
+CHARITABLE.VersionCompare = function( version, compare ) {
+    compare = compare || CHARITABLE_VARS.version;
+
+    if ( typeof version + typeof compare != 'stringstring')
+        return false;
+
+    var a = version.split( '.' ),
+        b = compare.split( '.' ),
+        i = 0,
+        len = Math.max( a.length, b.length );
+
+    for ( ; i < len; i++ ) {
+        if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+            return 1;
+        } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+            return -1;
+        }
+    }
+
+    return 0;
 };
 
 /***

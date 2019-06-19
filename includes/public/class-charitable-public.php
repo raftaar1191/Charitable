@@ -132,6 +132,7 @@ if ( ! class_exists( 'Charitable_Public' ) ) :
 					'error_unknown'                => __( 'Your donation could not be processed. Please reload the page and try again.', 'charitable' ),
 					'error_invalid_cc_number'      => __( 'The credit card passed is not valid.', 'charitable' ),
 					'error_invalid_cc_expiry'      => __( 'The credit card expiry date is not valid.', 'charitable' ),
+					'version'                      => charitable()->get_version(),
 				)
 			);
 
