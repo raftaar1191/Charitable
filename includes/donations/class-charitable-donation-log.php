@@ -83,10 +83,13 @@ if ( ! class_exists( 'Charitable_Donation_Log' ) ) :
 		public function add( $message ) {
 			$log = $this->get_meta_log();
 
-			array_push( $log, array(
-				'time'    => time(),
-				'message' => $message,
-			) );
+			array_push(
+				$log,
+				array(
+					'time'    => time(),
+					'message' => $message,
+				)
+			);
 
 			$ret = update_post_meta( $this->donation_id, '_donation_log', $log );
 
