@@ -273,7 +273,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 					'name'            => $charitable_donor->get_name(),
 					'email'           => $charitable_donor->get_email(),
 					'donations'       => $charitable_donor->count_donations(),
-					'amount'          => $charitable_donor->get_amount(),
+					'amount'          => charitable_format_money( $charitable_donor->get_amount() ),
 					'date'            => $donor->date_joined,
 					'contact_consent' => $donor->contact_consent ? __( 'Given', 'charitable' ) : __( 'Not Given', 'charitable' ),
 				);
