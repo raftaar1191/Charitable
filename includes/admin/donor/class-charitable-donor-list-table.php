@@ -100,7 +100,13 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function search_box( $text, $input_id ) {
-		charitable_admin_view( 'donors-page/search' );
+		charitable_admin_view(
+			'donors-page/search',
+			array(
+				'label'    => $text,
+				'input_id' => $input_id,
+			)
+		);
 	}
 
 	/**
@@ -114,6 +120,15 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 	 */
 	public function column_default( $donor, $column_name ) {
 		switch ( $column_name ) {
+			case 'donor':
+				$value = sprintf(
+					'#%d %s',
+					$donor['donor_id'],
+					$donor['name']
+				);
+
+				break;
+
 			case 'donations':
 				$value = sprintf(
 					'<a href="%s">%s</a>',
@@ -156,8 +171,7 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		return apply_filters(
 			'charitable_list_donors_columns',
 			array(
-				'donor_id'        => __( 'Donor ID', 'charitable' ),
-				'name'            => __( 'Name', 'charitable' ),
+				'donor'           => __( 'Donor', 'charitable' ),
 				'email'           => __( 'Email', 'charitable' ),
 				'donations'       => __( 'Donations', 'charitable' ),
 				'amount'          => __( 'Lifetime value', 'charitable' ),
@@ -178,13 +192,14 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 		/**
 		 * Filter the list of sortable columns in the Donors table.
 		 *
+		 * @since 1.7.0
+		 *
 		 * @param array $columns The list of columns.
 		 */
 		return apply_filters(
 			'charitable_list_donors_sortable_columns',
 			array(
-				'donor_id'  => array( 'donor_id', true ),
-				'name'      => array( 'name', true ),
+				'donor'     => array( 'name', true ),
 				'donations' => array( 'donations', true ),
 				'amount'    => array( 'amount', true ),
 				'date'      => array( 'date', true ),
@@ -255,13 +270,12 @@ class Charitable_Donor_List_Table extends WP_List_Table {
 
 				$data[] = array(
 					'donor_id'        => $charitable_donor->donor_id,
-					'user_id'         => $donor->user_id,
 					'name'            => $charitable_donor->get_name(),
 					'email'           => $charitable_donor->get_email(),
 					'donations'       => $charitable_donor->count_donations(),
 					'amount'          => $charitable_donor->get_amount(),
 					'date'            => $donor->date_joined,
-					'contact_consent' => $donor->contact_consent,
+					'contact_consent' => $donor->contact_consent ? __( 'Given', 'charitable' ) : __( 'Not Given', 'charitable' ),
 				);
 			}
 		}

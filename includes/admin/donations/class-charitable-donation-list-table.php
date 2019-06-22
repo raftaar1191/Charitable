@@ -75,14 +75,17 @@ if ( ! class_exists( 'Charitable_Donation_List_Table' ) ) :
 			 *
 			 * @param array $columns The list of columns.
 			 */
-			return apply_filters( 'charitable_donation_dashboard_column_names', array(
-				'cb'            => '<input type="checkbox"/>',
-				'id'            => __( 'Donation', 'charitable' ),
-				'amount'        => __( 'Amount Donated', 'charitable' ),
-				'campaigns'     => __( 'Campaign(s)', 'charitable' ),
-				'donation_date' => __( 'Date', 'charitable' ),
-				'post_status'   => __( 'Status', 'charitable' ),
-			) );
+			return apply_filters(
+				'charitable_donation_dashboard_column_names',
+				array(
+					'cb'            => '<input type="checkbox"/>',
+					'id'            => __( 'Donation', 'charitable' ),
+					'amount'        => __( 'Amount Donated', 'charitable' ),
+					'campaigns'     => __( 'Campaign(s)', 'charitable' ),
+					'donation_date' => __( 'Date', 'charitable' ),
+					'post_status'   => __( 'Status', 'charitable' ),
+				)
+			);
 		}
 
 		/**
