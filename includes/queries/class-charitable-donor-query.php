@@ -24,6 +24,15 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 	class Charitable_Donor_Query extends Charitable_Query {
 
 		/**
+		 * The alias we use for the charitable_donors table.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @var   string
+		 */
+		private $table_alias = '';
+
+		/**
 		 * Create new query object.
 		 *
 		 * @since 1.0.0
@@ -31,6 +40,8 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 		 * @param array $args Query arguments.
 		 */
 		public function __construct( $args = array() ) {
+			$this->table_alias = 'd';
+
 			/**
 			 * Filter the default arguments for Charitable_Donor_Query.
 			 *
@@ -38,21 +49,26 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			 *
 			 * @param array $args The default arguments.
 			 */
-			$defaults = apply_filters( 'charitable_donor_query_default_args', array(
-				'output'          => 'donors',
-				'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
-				'orderby'         => 'date',
-				'order'           => 'DESC',
-				'number'          => 20,
-				'paged'           => 1,
-				'fields'          => 'all',
-				'campaign'        => 0,
-				'distinct_donors' => true,
-				'donor_id'        => 0,
-				'include_erased'  => 1,
-				'date_query'      => array(),
-				'meta_query'      => array(),
-			) );
+			$defaults = apply_filters(
+				'charitable_donor_query_default_args',
+				array(
+					'output'          => 'donors',
+					'status'          => array( 'charitable-completed', 'charitable-preapproved' ),
+					'orderby'         => 'date',
+					'order'           => 'DESC',
+					'number'          => 20,
+					'paged'           => 1,
+					'fields'          => 'all',
+					'campaign'        => 0,
+					'distinct_donors' => true,
+					'donor_id'        => 0,
+					'include_erased'  => 1,
+					'date_query'      => array(),
+					'meta_query'      => array(),
+					'email'           => false,
+					's'               => false,
+				)
+			);
 
 			$this->args             = wp_parse_args( $args, $defaults );
 			$this->args['campaign'] = $this->sanitize_campaign();
@@ -243,6 +259,8 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			remove_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			remove_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_search' ), 11 );
+			remove_filter( 'charitable_query_where', array( $this, 'where_email_is_in' ), 12 );
 			remove_filter( 'charitable_query_groupby', array( $this, 'groupby_donor_id' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_date' ) );
 			remove_filter( 'charitable_query_orderby', array( $this, 'orderby_count' ) );
@@ -272,7 +290,65 @@ if ( ! class_exists( 'Charitable_Donor_Query' ) ) :
 			add_filter( 'charitable_query_where', array( $this, 'where_donor_is_not_erased' ), 8 );
 			add_filter( 'charitable_query_where', array( $this, 'where_date' ), 9 );
 			add_filter( 'charitable_query_where', array( $this, 'where_meta' ), 10 );
+			add_filter( 'charitable_query_where', array( $this, 'where_search' ), 11 );
+			add_filter( 'charitable_query_where', array( $this, 'where_email_is_in' ), 12 );
 			add_action( 'charitable_post_query', array( $this, 'unhook_callbacks' ) );
+		}
+
+		/**
+		/**
+		 * Set search where clause.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @global wpdb $wpdb
+		 * @param  string $where_statement The WHERE statement of the query.
+		 * @return string
+		 */
+		public function where_search( $where_statement ) {
+			$search = $this->get( 's', false );
+
+			if ( ! $search ) {
+				return $where_statement;
+			}
+
+			global $wpdb;
+
+			$where_statement .= $wpdb->prepare(
+				" AND CONCAT( {$this->table_alias}.first_name, ' ', {$this->table_alias}.last_name ) LIKE %s
+				OR {$this->table_alias}.email LIKE %s",
+				"%{$search}%",
+				"%{$search}%"
+			);
+
+			return $where_statement;
+		}
+
+		/**
+		 * Set email where clause.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @global wpdb $wpdb
+		 * @param  string $where_statement The WHERE statement of the query.
+		 * @return string
+		 */
+		public function where_email_is_in( $where_statement ) {
+			$emails = $this->get( 'email', false );
+
+			if ( ! $emails ) {
+				return $where_statement;
+			}
+
+			/* Cast emails to array. */
+			if ( ! is_array( $emails ) ) {
+				$emails = array( $emails );
+			}
+
+			/* Filter emails, returning placeholders and adding the emails to the parameters to be used in prepared query. */
+			$placeholders = $this->get_where_in_placeholders( $emails, 'is_email', '%s' );
+
+			return $where_statement . " AND {$this->table_alias}.email IN ({$placeholders})";
 		}
 
 		/**

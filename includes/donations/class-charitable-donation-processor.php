@@ -592,7 +592,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return void
 		 */
 		public function save_donor_contact_consent() {
-			/* Contact consent requires he database upgrade to have been completed. */
+			/* Contact consent requires the database upgrade to have been completed. */
 			if ( ! charitable_is_contact_consent_activated() ) {
 				return;
 			}

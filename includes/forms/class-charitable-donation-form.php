@@ -984,14 +984,17 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 				return $fields;
 			}
 
-			return array_merge( $fields, array(
-				'terms_fields' => array(
-					'legend'   => __( 'Terms and Conditions', 'charitable' ),
-					'type'     => 'fieldset',
-					'fields'   => $terms_fields,
-					'priority' => 80,
-				),
-			) );
+			return array_merge(
+				$fields,
+				array(
+					'terms_fields' => array(
+						'legend'   => __( 'Terms and Conditions', 'charitable' ),
+						'type'     => 'fieldset',
+						'fields'   => $terms_fields,
+						'priority' => 80,
+					),
+				)
+			);
 		}
 
 		/**
