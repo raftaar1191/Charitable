@@ -385,14 +385,17 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 * @return array
 		 */
 		public function get_address_fields() {
-			return apply_filters( 'charitable_user_address_fields', array(
-				'donor_address',
-				'donor_address_2',
-				'donor_city',
-				'donor_state',
-				'donor_postcode',
-				'donor_country',
-			) );
+			return apply_filters(
+				'charitable_user_address_fields',
+				array(
+					'donor_address',
+					'donor_address_2',
+					'donor_city',
+					'donor_state',
+					'donor_postcode',
+					'donor_country',
+				)
+			);
 		}
 
 		/**
@@ -482,13 +485,17 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 
 			if ( false === $amount ) {
 
-				$args = apply_filters( 'charitable_user_total_donated_query_args', array(
-					'output'          => 'raw',
-					'donor_id'        => $this->get_donor_id(),
-					'distinct_donors' => true,
-					'fields'          => 'amount',
-					'campaign'        => (int) $campaign_id,
-				), $this );
+				$args = apply_filters(
+					'charitable_user_total_donated_query_args',
+					array(
+						'output'          => 'raw',
+						'donor_id'        => $this->get_donor_id(),
+						'distinct_donors' => true,
+						'fields'          => 'amount',
+						'campaign'        => (int) $campaign_id,
+					),
+					$this
+				);
 
 				$query = new Charitable_Donor_Query( $args );
 

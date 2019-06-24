@@ -307,10 +307,12 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 		 */
 		public function get_last_donation() {
 			if ( ! isset( $this->last_donation ) ) {
-				$donation = new Charitable_Donations_Query( array(
-					'number'   => 1,
-					'donor_id' => $this->donor_id,
-				) );
+				$donation = new Charitable_Donations_Query(
+					array(
+						'number'   => 1,
+						'donor_id' => $this->donor_id,
+					)
+				);
 
 				$this->last_donation = $donation->count() ? $donation->current() : null;
 			}

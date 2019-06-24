@@ -25,6 +25,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 # User input.
 # =======================================================================
 allowroot=""
+url=""
 campaigns=0
 donations=0
 
@@ -32,6 +33,9 @@ while [ $# -gt 0 ]; do
     case "$1" in
         --allow-root)
             allowroot="--allow-root"
+            ;;
+        --url=*)
+            url="--url=${1#*=}"
             ;;
         --campaigns=*)
             campaigns="${1#*=}"
@@ -63,26 +67,26 @@ fi
 # =======================================================================
 # Activate Charitable.
 # =======================================================================
-wp plugin activate charitable $allowroot
+wp plugin activate charitable $allowroot $url
 
 # =======================================================================
 # Setting up pages.
 # =======================================================================
 printf "Creating Charitable pages...\n"
-profilepage=`wp post create --post_type=page --post_title="Profile" --post_content="[charitable_profile]" --post_status="publish" --porcelain $allowroot`
-loginpage=`wp post create --post_type=page --post_title="Login" --post_content="[charitable_login]" --post_status="publish" --porcelain $allowroot`
-registrationpage=`wp post create --post_type=page --post_title="Register" --post_content="[charitable_registration]" --post_status="publish" --porcelain $allowroot`
-submissionpage=`wp post create --post_type=page --post_title="Create a Campaign" --post_content="[charitable_submit_campaign]" --post_status="publish" --porcelain $allowroot`
-wp post create --post_type=page --post_title="Campaigns" --post_content="[campaigns]" --post_status="publish" $allowroot 
-wp post create --post_type=page --post_title="My Donations" --post_content="[charitable_my_donations]" --post_status="publish" $allowroot
-wp post create --post_type=page --post_title="My Campaigns" --post_content="[charitable_my_campaigns]" --post_status="publish" $allowroot
-wp post create --post_type=page --post_title="Donations Received" --post_content="[charitable_creator_donations]" --post_status="publish" $allowroot
+profilepage=`wp post create --post_type=page --post_title="Profile" --post_content="[charitable_profile]" --post_status="publish" --porcelain $allowroot $url`
+loginpage=`wp post create --post_type=page --post_title="Login" --post_content="[charitable_login]" --post_status="publish" --porcelain $allowroot $url`
+registrationpage=`wp post create --post_type=page --post_title="Register" --post_content="[charitable_registration]" --post_status="publish" --porcelain $allowroot $url`
+submissionpage=`wp post create --post_type=page --post_title="Create a Campaign" --post_content="[charitable_submit_campaign]" --post_status="publish" --porcelain $allowroot $url`
+wp post create --post_type=page --post_title="Campaigns" --post_content="[campaigns]" --post_status="publish" $allowroot $url
+wp post create --post_type=page --post_title="My Donations" --post_content="[charitable_my_donations]" --post_status="publish" $allowroot $url
+wp post create --post_type=page --post_title="My Campaigns" --post_content="[charitable_my_campaigns]" --post_status="publish" $allowroot $url
+wp post create --post_type=page --post_title="Donations Received" --post_content="[charitable_creator_donations]" --post_status="publish" $allowroot $url
 
 # =======================================================================
 # Updating settings.
 # =======================================================================
 printf "Pages added. Now updating Charitable settings...\n"
-wp option get charitable_settings --format=json $allowroot | php -r "
+wp option get charitable_settings --format=json $allowroot $url | php -r "
     \$option = json_decode( fgets(STDIN) );
     if ( ! is_object(\$option) ) { \$option = new stdClass(); }
     \$option->login_page = \"$loginpage\";
@@ -90,7 +94,7 @@ wp option get charitable_settings --format=json $allowroot | php -r "
     \$option->registration_page = \"$registrationpage\";
     \$option->campaign_submission_page = \"$submissionpage\";
     print json_encode(\$option);
-" | wp option set charitable_settings --format=json $allowroot
+" | wp option set charitable_settings --format=json $allowroot $url
 
 # =======================================================================
 # Spawning campaigns & donations.
@@ -101,6 +105,6 @@ if [ $campaigns -eq 0 ]; then
 fi
 
 printf "Creating fake campaigns & donations.\n"
-wp eval-file $DIR/spawn-data.php $donations $campaigns $allowroot
+wp eval-file $DIR/spawn-data.php $donations $campaigns $allowroot $url
 
 printf "All done!"
