@@ -170,6 +170,7 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 == Changelog ==
 
 = 1.6.19 =
+* NEW: Registered campaigns fields for getting a campaign's tags and categories as commma-separated lists. These are now available in campaign-related emails as well as the Campaigns export. [#688](https://github.com/Charitable/Charitable/issues/688)
 * NEW: Include Charitable version in Javascript vars. This is available as `CHARITABLE_VARS.version`. We also added a way to check that Charitable is at least a certain version, using `CHARITABLE.VersionCompare( version )` (where `version` is the version it must be).
 * NEW: Added extra jQuery events when processing/viewing a donation form: `charitable:form:processed`, triggered right after a donation is created but before being redirected to the donation receipt or payment page; `charitable:form:amount:changed`, triggered when the donor changes the amount they are donating; `charitable:form:total:changed`, triggered when the donor changes the total amount they are donating (i.e. they choose a different payment amount or opt in to pay the processing fees).
 * NEW: Added `charitable_my_donation_total_amount` filter to allow the donation amount shown in the output of `[charitable_my_donations]` to include any processing fees paid by the donor.
