@@ -73,7 +73,7 @@ profilepage=`wp post create --post_type=page --post_title="Profile" --post_conte
 loginpage=`wp post create --post_type=page --post_title="Login" --post_content="[charitable_login]" --post_status="publish" --porcelain $allowroot`
 registrationpage=`wp post create --post_type=page --post_title="Register" --post_content="[charitable_registration]" --post_status="publish" --porcelain $allowroot`
 submissionpage=`wp post create --post_type=page --post_title="Create a Campaign" --post_content="[charitable_submit_campaign]" --post_status="publish" --porcelain $allowroot`
-wp post create --post_type=page --post_title="Campaigns" --post_content="[campaigns]" --post_status="publish" $allowroot 
+wp post create --post_type=page --post_title="Campaigns" --post_content="[campaigns]" --post_status="publish" $allowroot
 wp post create --post_type=page --post_title="My Donations" --post_content="[charitable_my_donations]" --post_status="publish" $allowroot
 wp post create --post_type=page --post_title="My Campaigns" --post_content="[charitable_my_campaigns]" --post_status="publish" $allowroot
 wp post create --post_type=page --post_title="Donations Received" --post_content="[charitable_creator_donations]" --post_status="publish" $allowroot

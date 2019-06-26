@@ -1,3 +1,10 @@
+# 1.6.19
+* NEW: Include Charitable version in Javascript vars. This is available as `CHARITABLE_VARS.version`. We also added a way to check that Charitable is at least a certain version, using `CHARITABLE.VersionCompare( version )` (where `version` is the version it must be).
+* NEW: Added extra jQuery events when processing/viewing a donation form: `charitable:form:processed`, triggered right after a donation is created but before being redirected to the donation receipt or payment page; `charitable:form:amount:changed`, triggered when the donor changes the amount they are donating; `charitable:form:total:changed`, triggered when the donor changes the total amount they are donating (i.e. they choose a different payment amount or opt in to pay the processing fees).
+* NEW: Added `charitable_my_donation_total_amount` filter to allow the donation amount shown in the output of `[charitable_my_donations]` to include any processing fees paid by the donor.
+* FIX: Improved return links for settings pages nested under other settings page (i.e. individual MailChimp list settings page links back to MailChimp settings).
+* FIX: `charitable_get_current_url()` returned incorrect URLs on multisite. [#687](https://github.com/Charitable/Charitable/issues/687)
+
 # 1.6.18
 * NEW: Added email tag for donor's last name. [#685](https://github.com/Charitable/Charitable/issues/685)
 * NEW: Added an `inline-content` setting type.
