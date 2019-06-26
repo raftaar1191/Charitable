@@ -127,3 +127,28 @@ function charitable_get_campaign_creator_field( Charitable_Campaign $campaign, $
 
 	return $creator->get( $key );
 }
+
+/**
+ * Get a particular taxonomy field for a campa
+ *
+ * @since  1.6.19
+ *
+ * @param  Charitable_Campaign $campaign The campaign object.
+ * @param  string              $key      The meta key.
+ * @return string
+ */
+function charitable_get_campaign_taxonomy_terms_list( Charitable_Campaign $campaign, $key ) {
+	$taxonomies = array(
+		'categories' => 'campaign_category',
+		'tags'       => 'campaign_tag',
+	);
+
+	$taxonomy = array_key_exists( $key, $taxonomies ) ? $taxonomies[ $key ] : $key;
+	$terms    = wp_get_object_terms( $campaign->ID, $taxonomy, array( 'fields' => 'names' ) );
+
+	if ( is_wp_error( $terms ) ) {
+		return '';
+	}
+
+	return implode( ', ', $terms );
+}

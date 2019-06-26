@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Account
  * @since   1.4.0
- * @version 1.6.0
+ * @version 1.6.19
  */
 
 // Exit if accessed directly.
@@ -26,8 +26,8 @@ $donations = $view_args['donations'];
  */
 do_action( 'charitable_my_donations_before', $donations, $view_args );
 
-if ( $donations instanceof Charitable_Donations_Query && $donations->count() ) : ?>
-
+if ( $donations instanceof Charitable_Donations_Query && $donations->count() ) :
+	?>
 	<table class="charitable-my-donations charitable-table">
 		<thead>
 			<tr>
@@ -170,12 +170,11 @@ if ( $donations instanceof Charitable_Donations_Query && $donations->count() ) :
 			<?php endforeach ?>
 		</tbody>
 	</table>
-
-<?php else : ?>
-
+	<?php
+else :
+	?>
 	<p><?php _e( 'You have not made any donations yet.', 'charitable' ); ?></p>
-
-<?php
+	<?php
 endif;
 
 /**
