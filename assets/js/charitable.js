@@ -231,7 +231,7 @@ CHARITABLE = window.CHARITABLE || {};
                 return;
             }
 
-            setTimeout( maybe_process, 500, helper );
+            setTimeout( maybe_process, 500, helper, callback );
         }
 
         /**
