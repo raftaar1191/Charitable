@@ -169,6 +169,9 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
+= 1.6.20 =
+* FIX: Corrected error introduced by 1.6.19 resulting in donations not processing in certain situations when using Authorize.Net or Stripe.
+
 = 1.6.19 =
 * NEW: Registered campaigns fields for getting a campaign's tags and categories as commma-separated lists. These are now available in campaign-related emails as well as the Campaigns export. [#688](https://github.com/Charitable/Charitable/issues/688)
 * NEW: Include Charitable version in Javascript vars. This is available as `CHARITABLE_VARS.version`. We also added a way to check that Charitable is at least a certain version, using `CHARITABLE.VersionCompare( version )` (where `version` is the version it must be).
