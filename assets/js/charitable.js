@@ -363,6 +363,19 @@ CHARITABLE = window.CHARITABLE || {};
     };
 
     /**
+     * Returns whether this is a recurring donation.
+     *
+     * @since  1.4.21
+     *
+     * @return boolean
+     */
+    Donation_Form.prototype.is_recurring_donation = function() {
+        var recurring = this.form.find( '[name=recurring_donation]' );
+
+        return recurring.length() && 'once' !== recurring.val();
+    };
+
+    /**
      * Get the chosen suggested amount.
      *
      * Note that when no option has been selected, or a custom donation amount has been added,
