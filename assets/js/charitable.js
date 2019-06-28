@@ -266,17 +266,7 @@ CHARITABLE = window.CHARITABLE || {};
                     withCredentials: true
                 },
                 success: function (response) {
-                    // var errors;
-
                     $body.trigger( 'charitable:form:processed', [ response, helper ] );
-
-                    // if ( response.success ) {
-                    //     maybe_process( helper, function() {
-                    //         window.location.href = response.redirect_to;
-                    //     } );
-                    // } else {
-
-                    // }
 
                     if ( response.success ) {
                         maybe_process( helper, function() {
@@ -373,6 +363,19 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Donation_Form.prototype.get_email = function() {
         return this.form.find( '[name=email]' ).val();
+    };
+
+    /**
+     * Returns whether this is a recurring donation.
+     *
+     * @since  1.4.21
+     *
+     * @return boolean
+     */
+    Donation_Form.prototype.is_recurring_donation = function() {
+        var recurring = this.form.find( '[name=recurring_donation]' );
+
+        return recurring.length() && 'once' !== recurring.val();
     };
 
     /**
