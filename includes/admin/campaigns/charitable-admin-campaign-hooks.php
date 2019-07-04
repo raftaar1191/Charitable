@@ -34,8 +34,6 @@ add_filter( 'enter_title_here', array( $registry->get( 'campaign_meta_boxes' ), 
  */
 add_action( 'edit_form_after_title', array( $registry->get( 'campaign_meta_boxes' ), 'campaign_form_top' ) );
 
-add_filter( 'get_user_option_meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE, '__return_false' );
-
 /**
  * Campaign Metaboxes.
  *

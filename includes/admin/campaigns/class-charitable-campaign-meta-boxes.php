@@ -45,6 +45,11 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 */
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
+
+			/**
+			 * Prevent sorting of campaign meta boxes.
+			 */
+			add_filter( 'get_user_option_meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE, '__return_false' );
 		}
 
 		/**
@@ -128,17 +133,7 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 */
 		public function campaign_form_top( $post ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE == $post->post_type ) {
-				// $ret = delete_user_option( get_current_user_id(), 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE );
-				// echo '<pre>';
-				// var_dump( $ret );
-				// echo '</pre>';
-				$context = false === get_user_option( 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE ) ? 'campaign-top' : 'campaign';
-				echo '<pre>';
-				var_dump( get_user_option( 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE ) );
-				var_dump( $context );
-				echo '</pre>';
-
-				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, $context, $post );
+				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign-top', $post );
 			}
 		}
 
