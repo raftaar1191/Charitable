@@ -254,13 +254,13 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  int $campaign_id Campaign ID.
-		 * @param  int $amount 	    Donation amount.
+		 * @param  int $amount      Donation amount.
 		 * @return void
 		 */
 		public function add_donation( $campaign_id, $amount ) {
 			$donations = $this->get( 'donations' );
 
-			$campaign_donation = isset( $donations[ $campaign_id ] ) ? $donations[ $campaign_id ] : array();
+			$campaign_donation           = isset( $donations[ $campaign_id ] ) ? $donations[ $campaign_id ] : array();
 			$campaign_donation['amount'] = floatval( $amount );
 
 			$donations[ $campaign_id ] = $campaign_donation;
