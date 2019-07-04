@@ -163,13 +163,27 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 
 			/* If a donation ID is included, make sure it belongs to the current user. */
 			if ( $donation_id && ! charitable_user_can_access_donation( $donation_id ) ) {
-				wp_safe_redirect( charitable_get_permalink( 'campaign_donation', array(
-					'campaign_id' => $campaign_id,
-				) ) );
+				wp_safe_redirect(
+					charitable_get_permalink(
+						'campaign_donation',
+						array(
+							'campaign_id' => $campaign_id,
+						)
+					)
+				);
 				exit();
 			}
 
-			do_action( 'charitable_is_donate_page' );
+			/**
+			 * Do something when the donate page is loaded.
+			 *
+			 * @since 1.0.0
+			 * @since 1.7.0 Added $campaign_id and $donation_id parameters.
+			 *
+			 * @param int $campaign_id The campaign receiving the donation.
+			 * @param int $donation_id The donation id, if this is an update to an existing donation.
+			 */
+			do_action( 'charitable_is_donate_page', $campaign_id, $donation_id );
 
 			return array( 'campaign-donation-page.php', 'page.php', 'index.php' );
 		}
@@ -179,7 +193,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $content
+		 * @param  string $content Default content.
 		 * @return string
 		 */
 		public function get_content( $content ) {
