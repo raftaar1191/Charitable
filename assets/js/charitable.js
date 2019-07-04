@@ -96,14 +96,15 @@ CHARITABLE = window.CHARITABLE || {};
          *
          * @since  1.6.19
          *
+         * @param  int amount
          * @access private
          */
-        var trigger_amount_change_events = function() {
+        var trigger_amount_change_events = function( amount ) {
             /* The chosen donation amount has changed. */
-            $body.trigger( 'charitable:form:amount:changed', self );
+            $body.trigger( 'charitable:form:amount:changed', self, amount );
 
             /* The overall donation amount has changed. */
-            $body.trigger( 'charitable:form:total:changed', self );
+            $body.trigger( 'charitable:form:total:changed', self, amount );
         };
 
         /**
@@ -129,10 +130,13 @@ CHARITABLE = window.CHARITABLE || {};
         var on_select_donation_amount = function() {
             var $li = $( this ).closest( 'li' );
 
-            // Already selected, quit early to prevent focus/change loop
+            // Already selected, quit early to prevent focus/change loop.
             if ( $li.hasClass( 'selected' ) ) {
                 return;
             }
+
+            // Mark input as checked.
+            $( this ).find( 'input' ).prop( 'checked', true );
 
             $li.parents( '.charitable-donation-form' ).find( '.donation-amount.selected' ).removeClass( 'selected' );
 
@@ -268,8 +272,7 @@ CHARITABLE = window.CHARITABLE || {};
                         maybe_process( helper, function() {
                             window.location.href = response.redirect_to;
                         } );
-                    }
-                    else {
+                    } else {
                         helper.hide_processing();
                         helper.print_errors( response.errors );
                         helper.scroll_to_top();
@@ -310,9 +313,9 @@ CHARITABLE = window.CHARITABLE || {};
             // Init currency formatting
             self.form.on( 'blur', '.custom-donation-input', on_change_custom_donation_amount );
 
-            self.form.find( '.donation-amount input:checked' ).each( function() {
-                $( this ).closest( 'li' ).addClass( 'selected' );
-            });
+            // self.form.find( '.donation-amount input:checked' ).each( function() {
+            //     $( this ).closest( 'li' ).addClass( 'selected' );
+            // });
 
             if ( self.get_all_payment_methods().length ) {
                 self.hide_inactive_payment_methods();
@@ -360,6 +363,19 @@ CHARITABLE = window.CHARITABLE || {};
      */
     Donation_Form.prototype.get_email = function() {
         return this.form.find( '[name=email]' ).val();
+    };
+
+    /**
+     * Returns whether this is a recurring donation.
+     *
+     * @since  1.4.21
+     *
+     * @return boolean
+     */
+    Donation_Form.prototype.is_recurring_donation = function() {
+        var recurring = this.form.find( '[name=recurring_donation]' );
+
+        return recurring.length() && 'once' !== recurring.val();
     };
 
     /**
