@@ -433,8 +433,8 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			CHARITABLE_ADMIN.Settings( $(this) );
 		});
 
-		$('body.post-type-campaign .handlediv, body.post-type-donation .handlediv').remove();
-		$('body.post-type-campaign .hndle, body.post-type-donation .hndle').removeClass( 'hndle ui-sortable-handle' ).addClass( 'postbox-title' );
+		// $('body.post-type-campaign .handlediv, body.post-type-donation .handlediv').remove();
+		// $('body.post-type-campaign .hndle, body.post-type-donation .hndle').removeClass( 'hndle ui-sortable-handle' ).addClass( 'postbox-title' );
 
 		setup_advanced_meta_box();
 		setup_sortable_suggested_donations();

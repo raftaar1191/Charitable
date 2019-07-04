@@ -128,9 +128,21 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 */
 		public function campaign_form_top( $post ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE == $post->post_type ) {
-				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign-top', $post );
+				// $ret = delete_user_option( get_current_user_id(), 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE );
+				// echo '<pre>';
+				// var_dump( $ret );
+				// echo '</pre>';
+				$context = false === get_user_option( 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE ) ? 'campaign-top' : 'campaign';
+				echo '<pre>';
+				var_dump( get_user_option( 'meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE ) );
+				var_dump( $context );
+				echo '</pre>';
+
+				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, $context, $post );
 			}
 		}
+
+
 
 		/**
 		 * Return campaign settings panels.
