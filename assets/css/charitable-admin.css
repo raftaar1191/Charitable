@@ -101,9 +101,10 @@
     padding: 0; }
 .charitable-metabox .postbox-title {
   padding: 0 0 6px 0; }
-.charitable-metabox .handlediv,
-.charitable-metabox .hndle {
+.charitable-metabox .handlediv {
   display: none; }
+.charitable-metabox .hndle {
+  padding-left: 0; }
 .charitable-metabox input,
 .charitable-metabox textarea {
   padding: 14px 10px;
@@ -258,14 +259,15 @@ body.post-type-campaign .postbox-container .empty-container {
 #campaign-description .postbox-title {
   padding: 0 0 6px 0; }
 #campaign-title .handlediv,
-#campaign-title .hndle,
 #campaign-goal .handlediv,
-#campaign-goal .hndle,
 #campaign-end-date .handlediv,
-#campaign-end-date .hndle,
-#campaign-description .handlediv,
-#campaign-description .hndle {
+#campaign-description .handlediv {
   display: none; }
+#campaign-title .hndle,
+#campaign-goal .hndle,
+#campaign-end-date .hndle,
+#campaign-description .hndle {
+  padding-left: 0; }
 #campaign-title input,
 #campaign-title textarea,
 #campaign-goal input,
@@ -397,21 +399,29 @@ body.post-type-campaign .postbox-container .empty-container {
   margin-top: 0; }
 
 /* --- Top campaign meta boxes --- */
+#campaign-sortables,
 #campaign-top-sortables {
   padding-top: 20px; }
+  #campaign-sortables #campaign-goal,
+  #campaign-sortables #campaign-end-date,
   #campaign-top-sortables #campaign-goal,
   #campaign-top-sortables #campaign-end-date {
     float: left;
     width: 48%; }
+  #campaign-sortables #campaign-goal,
   #campaign-top-sortables #campaign-goal {
     padding-right: 4%; }
+  #campaign-sortables #campaign-description,
   #campaign-top-sortables #campaign-description {
     clear: both; }
   @media (max-width: 37.5em) {
+    #campaign-sortables #campaign-goal,
+    #campaign-sortables #campaign-end-date,
     #campaign-top-sortables #campaign-goal,
     #campaign-top-sortables #campaign-end-date {
       width: 100%;
       padding: 0 0 24px; }
+    #campaign-sortables #campaign-end-date .charitable-end-time,
     #campaign-top-sortables #campaign-end-date .charitable-end-time {
       padding-bottom: 14px; } }
 

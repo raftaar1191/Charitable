@@ -17,9 +17,12 @@
         padding: 0 0 6px 0;
     }
 
-    .handlediv,
-    .hndle {
+    .handlediv {
         display: none;
+    }
+
+    .hndle {
+        padding-left: 0;
     }
 
     input,

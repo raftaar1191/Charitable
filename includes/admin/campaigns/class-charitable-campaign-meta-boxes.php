@@ -45,6 +45,11 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 */
 		private function __construct() {
 			$this->meta_box_helper = new Charitable_Meta_Box_Helper( 'charitable-campaign' );
+
+			/**
+			 * Prevent sorting of campaign meta boxes.
+			 */
+			add_filter( 'get_user_option_meta-box-order_' . Charitable::CAMPAIGN_POST_TYPE, '__return_false' );
 		}
 
 		/**
@@ -131,6 +136,8 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign-top', $post );
 			}
 		}
+
+
 
 		/**
 		 * Return campaign settings panels.
