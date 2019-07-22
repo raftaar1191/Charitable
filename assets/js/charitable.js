@@ -370,9 +370,9 @@ CHARITABLE = window.CHARITABLE || {};
      * @return boolean
      */
     Donation_Form.prototype.is_recurring_donation = function() {
-        var recurring = this.form.find( '[name=recurring_donation]' );
+        var recurring = this.form.find( '[name=recurring_donation]:checked' );
 
-        return recurring.length() && 'once' !== recurring.val();
+        return recurring.length && 'once' !== recurring.val();
     };
 
     /**
