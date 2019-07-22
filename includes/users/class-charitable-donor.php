@@ -21,7 +21,7 @@ if ( ! class_exists( 'Charitable_Donor' ) ) :
 	 *
 	 * @since    1.0.0
 	 *
-	 * @property int    $user_id
+	 * @property int    $donor_id
 	 * @property string $first_name
 	 * @property string $last_name
 	 * @property string $email

@@ -274,12 +274,10 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 * @return void
 		 */
 		public static function process_donation_form_submission() {
-
 			$processor = self::get_instance();
 			$result    = $processor->process_donation();
 
 			$processor->redirect_after_gateway_processing( $result );
-
 		}
 
 		/**
