@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.20\n"
+"Project-Id-Version: Charitable 1.6.21\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-06-27 02:01:15+00:00\n"
+"POT-Creation-Date: 2019-07-25 07:52:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5433,7 +5433,7 @@ msgstr ""
 
 #: includes/admin/forms/class-charitable-admin-donation-form.php:108
 #: includes/fields/default-fields/donation-fields.php:85
-#: includes/upgrades/class-charitable-upgrade.php:1057
+#: includes/upgrades/class-charitable-upgrade.php:1063
 #: includes/users/class-charitable-roles.php:72
 msgid "Donor"
 msgstr ""
@@ -5501,7 +5501,7 @@ msgid "Percentage of Goal Raised"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-campaigns.php:137
-#: includes/fields/class-charitable-campaign-field-registry.php:73
+#: includes/fields/class-charitable-campaign-field-registry.php:75
 #: includes/fields/default-fields/campaign-fields.php:164
 msgid "Campaign Creator"
 msgstr ""
@@ -7380,11 +7380,11 @@ msgstr ""
 msgid "Email Verification"
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:75
+#: includes/endpoints/class-charitable-endpoints.php:78
 msgid "Endpoint %s has already been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:170
+#: includes/endpoints/class-charitable-endpoints.php:173
 #. translators: %s: endpoint id
 msgid "Endpoint %s has not been registered."
 msgstr ""
@@ -7408,16 +7408,16 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
-#: includes/fields/class-charitable-campaign-field-registry.php:71
+#: includes/fields/class-charitable-campaign-field-registry.php:73
 msgid "Donation Options"
 msgstr ""
 
-#: includes/fields/class-charitable-campaign-field-registry.php:72
+#: includes/fields/class-charitable-campaign-field-registry.php:74
 #: includes/fields/default-fields/campaign-fields.php:151
 msgid "Extended Description"
 msgstr ""
 
-#: includes/fields/class-charitable-campaign-field-registry.php:74
+#: includes/fields/class-charitable-campaign-field-registry.php:76
 msgid "Extended Settings"
 msgstr ""
 
@@ -8230,10 +8230,10 @@ msgid "You do not have permission to install plugin updates"
 msgstr ""
 
 #: includes/licensing/class-charitable-plugin-updater.php:150
-#: includes/upgrades/class-charitable-upgrade.php:521
-#: includes/upgrades/class-charitable-upgrade.php:556
-#: includes/upgrades/class-charitable-upgrade.php:658
-#: includes/upgrades/class-charitable-upgrade.php:1136
+#: includes/upgrades/class-charitable-upgrade.php:527
+#: includes/upgrades/class-charitable-upgrade.php:562
+#: includes/upgrades/class-charitable-upgrade.php:664
+#: includes/upgrades/class-charitable-upgrade.php:1142
 msgid "Error"
 msgstr ""
 
@@ -8415,25 +8415,25 @@ msgstr ""
 msgid "Charitable needs to fix donations saved without a donor ID."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:261
+#: includes/upgrades/class-charitable-upgrade.php:267
 msgid "Charitable was installed."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:326
+#: includes/upgrades/class-charitable-upgrade.php:332
 msgid "Click <a href=\"%s\">here</a> to start the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:443
+#: includes/upgrades/class-charitable-upgrade.php:449
 #. translators: %s: upgrade link
 msgid ""
 "Charitable needs to complete an upgrade that was started earlier. Click <a "
 "href=\"%s\">here</a> to continue the upgrade."
 msgstr ""
 
-#: includes/upgrades/class-charitable-upgrade.php:521
-#: includes/upgrades/class-charitable-upgrade.php:556
-#: includes/upgrades/class-charitable-upgrade.php:658
-#: includes/upgrades/class-charitable-upgrade.php:1136
+#: includes/upgrades/class-charitable-upgrade.php:527
+#: includes/upgrades/class-charitable-upgrade.php:562
+#: includes/upgrades/class-charitable-upgrade.php:664
+#: includes/upgrades/class-charitable-upgrade.php:1142
 msgid "You do not have permission to do Charitable upgrades"
 msgstr ""
 

@@ -56,6 +56,9 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			add_filter( 'template_include', array( $this, 'template_loader' ), 12 );
 			add_filter( 'the_content', array( $this, 'get_content' ) );
 			add_filter( 'body_class', array( $this, 'add_body_classes' ) );
+
+			/* Avoid Polylang rewriting the rewrite rules. */
+			add_filter( 'pll_modify_rewrite_rule', array( $this, 'prevent_polylang_rewrite_modification' ), 10, 2 );
 		}
 
 		/**
@@ -208,6 +211,33 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			 * @since 1.6.14
 			 */
 			do_action( 'charitable_do_not_cache' );
+		}
+
+		/**
+		 * Prevent Polylang from changing some rewrite rules.
+		 *
+		 * @since  1.6.21
+		 *
+		 * @param  boolean $modify Whether to modify or not the rule, defaults to true.
+		 * @param  array   $rule   Original rewrite rule.
+		 * @return boolean
+		 */
+		public function prevent_polylang_rewrite_modification( $modify, $rule ) {
+			/**
+			 * Filter the list of endpoint URLs that Polylang won't touch.
+			 *
+			 * @since 1.6.21
+			 *
+			 * @param array $protected_rules The protected rules.
+			 */
+			$protected_rules = apply_filters(
+				'charitable_polylang_protected_rewrite_rules',
+				array(
+					'charitable-listener(/(.*))?/?$',
+				)
+			);
+
+			return $modify && ! in_array( key( $rule ), $protected_rules );
 		}
 
 		/**

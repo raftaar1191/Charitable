@@ -63,17 +63,20 @@ if ( ! class_exists( 'Charitable_Campaign_Field_Registry' ) ) :
 		 * @return array
 		 */
 		private function get_core_sections() {
-			return apply_filters( 'charitable_default_campaign_sections', array(
-				'defaults' => array(
-					'admin' => 'campaign-extended-settings',
-				),
-				'admin'    => array(
-					'campaign-donation-options'     => __( 'Donation Options', 'charitable' ),
-					'campaign-extended-description' => __( 'Extended Description', 'charitable' ),
-					'campaign-creator'              => __( 'Campaign Creator', 'charitable' ),
-					'campaign-extended-settings'    => __( 'Extended Settings', 'charitable' ),
-				),
-			) );
+			return apply_filters(
+				'charitable_default_campaign_sections',
+				array(
+					'defaults' => array(
+						'admin' => 'campaign-extended-settings',
+					),
+					'admin'    => array(
+						'campaign-donation-options'     => __( 'Donation Options', 'charitable' ),
+						'campaign-extended-description' => __( 'Extended Description', 'charitable' ),
+						'campaign-creator'              => __( 'Campaign Creator', 'charitable' ),
+						'campaign-extended-settings'    => __( 'Extended Settings', 'charitable' ),
+					),
+				)
+			);
 		}
 
 		/**
