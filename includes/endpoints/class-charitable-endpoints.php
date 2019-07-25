@@ -230,8 +230,11 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			 *
 			 * @param array $protected_rules The protected rules.
 			 */
-			$protected_rules = array(
-				'charitable-listener(/(.*))?/?$',
+			$protected_rules = apply_filters(
+				'charitable_polylang_protected_rewrite_rules',
+				array(
+					'charitable-listener(/(.*))?/?$',
+				)
 			);
 
 			return $modify && ! in_array( key( $rule ), $protected_rules );
