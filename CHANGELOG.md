@@ -1,3 +1,6 @@
+# 1.6.21
+* FIX: Prevent Polylang from modifying the rewrite rule for the webhook listener endpoint. With certain configurations, Polylang prevented webhooks/IPNs from working. [#692](https://github.com/Charitable/Charitable/issues/692)
+
 # 1.6.20
 * FIX: Corrected error introduced by 1.6.19 resulting in donations not processing in certain situations when using Authorize.Net or Stripe.
 
