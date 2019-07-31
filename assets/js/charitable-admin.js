@@ -141,30 +141,22 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		on_change = function() {
 			var $trigger = $( this ),
 				trigger_idx = $trigger.data( 'trigger_idx' ),
-				settings;
+				settings,
+				change;
 
-			for ( idx in trigger_idx ) {
-				if ( ! trigger_idx.hasOwnProperty( idx ) ) {
-					continue;
-				}
+			trigger_idx.forEach( function( id ) {
+				settings = triggers[id]['settings'];
 
-				settings = triggers[idx]['settings'];
-
-				for ( setting_key in settings ) {
-					if ( ! settings.hasOwnProperty( setting_key ) ) {
-						continue;
-					}
-
-					var $setting = settings[setting_key],
-						change = get_change_type( $setting );
+				settings.forEach( function( $setting ) {
+					var change = get_change_type( $setting );
 
 					if ( 'visibility' === change ) {
 						toggle_setting( $setting, $trigger );
 					} else if ( 'options' === change ) {
 						toggle_options( $setting, $trigger );
 					}
-				};
-			}
+				} );
+			} );
 		};
 
 		this.$el = $el;
@@ -188,13 +180,9 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			i += 1;
 		});
 
-		for ( i in triggers ) {
-			if ( ! triggers.hasOwnProperty( i ) ) {
-				continue;
-			}
-
-			var $trigger = get_trigger( triggers[i]['trigger_id'] );
-			var trigger_idx = $trigger.data( 'trigger_idx' );
+		triggers.forEach( function( trigger, i ) {
+			var $trigger = get_trigger( trigger['trigger_id'] ),
+				trigger_idx = $trigger.data( 'trigger_idx' );
 
 			if ( 'undefined' === typeof( trigger_idx ) ) {
 				trigger_idx = [];
@@ -207,7 +195,7 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 			$trigger.on( 'change', on_change );
 
 			$trigger.trigger( 'change' );
-		};
+		} );
 	};
 
 	exports.Settings = Settings;
