@@ -18,6 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * In Twenty Seventeen, add a hidden sidebar to avoid a Javascript error.
  *
+ * On the donation page, there is no sidebar, and Twenty Seventeen throws
+ * an error as a result, which can pause other Javascript processing.
+ *
+ * @see https://core.trac.wordpress.org/ticket/41050
+ *
  * @since  1.6.22
  *
  * @return void
