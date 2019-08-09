@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.22
  */
 
 // Exit if accessed directly.
@@ -366,6 +366,19 @@ return apply_filters(
 			'email_tag'      => false,
 			'show_in_meta'   => true,
 			'show_in_export' => false,
+		),
+		'gateway_transaction_id'   => array(
+			'label'          => __( 'Gateway Transaction ID', 'charitable' ),
+			'data_type'      => 'meta',
+			'value_callback' => false,
+			'donation_form'  => false,
+			'admin_form'     => false,
+			'email_tag'      => array(
+				'description' => __( 'The payment gateway\'s transaction ID for the donation', 'charitable' ),
+				'preview'     => __( 'XYZ-2132323', 'charitable' ),
+			),
+			'show_in_meta'   => true,
+			'show_in_export' => true,
 		),
 		'test_mode'                => array(
 			'label'          => __( 'Donation made in test mode?', 'charitable' ),

@@ -1,3 +1,10 @@
+# 1.6.22
+* NEW: Added gateway transaction ID to donation meta and as an optional email field. [#694](https://github.com/Charitable/Charitable/issues/694)
+* NEW: Added client-side helper function to check whether the donation being processed is a recurring donation.
+* FIX: Improved compatibility with Twenty Seventeen theme to avoid a Javascript error on the donation pages. [#693](https://github.com/Charitable/Charitable/issues/693)
+* FIX: Corrected spelling of default text in Offline Donation Receipt.
+* FIX: Fixed issue preventing conditionally loaded admin settings/form fields from working correctly when there is more than one on the page.
+
 # 1.6.21
 * FIX: Prevent Polylang from modifying the rewrite rule for the webhook listener endpoint. With certain configurations, Polylang prevented webhooks/IPNs from working. [#692](https://github.com/Charitable/Charitable/issues/692)
 
