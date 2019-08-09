@@ -9,7 +9,9 @@
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class_exists( 'Charitable_Email_New_Donation' ) ) {
 
@@ -210,11 +212,11 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Notification' ) && class
 		 */
 		protected function get_default_body() {
 			ob_start();
-?>
-<p><?php _e( '[charitable_email show=donor] ([charitable_email show=donor_email]) has just made a offline donation!', 'charitable' ) ?></p>
-<p><strong><?php _e( 'Summary', 'charitable' ) ?></strong></p>
+			?>
+<p><?php _e( '[charitable_email show=donor] ([charitable_email show=donor_email]) has just made an offline donation!', 'charitable' ); ?></p>
+<p><strong><?php _e( 'Summary', 'charitable' ); ?></strong></p>
 <p>[charitable_email show=donation_summary]</p>
-<?php
+		<?php
 			/**
 			 * Filter the default body content.
 			 *

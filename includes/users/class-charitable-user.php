@@ -585,7 +585,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param 	array $args Query arguments.
+		 * @param  array $args Query arguments.
 		 * @return WP_Query
 		 */
 		public function get_current_campaigns( $args = array() ) {
