@@ -2,10 +2,10 @@
 /**
  * The template used to display datepicker form fields.
  *
- * @author 	Studio 164a
+ * @author  Studio 164a
  * @package Charitable/Templates/Form Fields
  * @since   1.0.0
- * @version 1.0.0
+ * @version 1.7.0
  */
 
 if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
@@ -19,11 +19,13 @@ $is_required = isset( $field['required'] ) ? $field['required'] : false;
 $value       = isset( $field['value'] ) ? esc_attr( $field['value'] ) : '';
 $min_date    = isset( $field['min_date'] ) ? esc_attr( $field['min_date'] ) : '';
 $max_date    = isset( $field['max_date'] ) ? esc_attr( $field['max_date'] ) : '';
+$year_range  = array_key_exists( 'year_range', $field ) ? $field['year_range'] : 'c-10:c+10';
 $date_format = array_key_exists( 'date_format', $field ) ? $field['date_format'] : 'MM d, yy';
 $json_args   = array(
 	'changeMonth' => true,
 	'changeYear'  => true,
 	'dateFormat'  => $date_format,
+	'yearRange'   => 'c-100:c',
 );
 
 if ( array_key_exists( 'min_date', $field ) ) {
@@ -41,9 +43,10 @@ if ( ! wp_script_is( 'jquery-ui-datepicker' ) ) {
 
 $datepicker_json_args = json_encode( $json_args );
 
-wp_add_inline_script( 'jquery-ui-datepicker', "jQuery(document).ready( function(){
-	jQuery( '.datepicker' ).datepicker( {$datepicker_json_args} );
-});" );
+wp_add_inline_script(
+	'jquery-ui-datepicker',
+	"jQuery(document).ready( function(){ jQuery( '.datepicker' ).datepicker( {$datepicker_json_args} ); });"
+);
 
 wp_enqueue_style( 'charitable-datepicker' );
 

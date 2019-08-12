@@ -2,7 +2,9 @@
 /**
  * The template used to display checkbox form fields.
  *
- * @author 	Studio 164a
+ * Override this template by copying it to yourtheme/charitable/form-fields/checkbox.php
+ *
+ * @author  Studio 164a
  * @package Charitable/Templates/Form Fields
  * @since   1.0.0
  * @version 1.2.0
