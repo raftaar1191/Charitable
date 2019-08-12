@@ -2,6 +2,8 @@
 /**
  * The template used to display the suggested amounts field.
  *
+ * Override this template by copying it to yourtheme/charitable/form-fields/content.php
+ *
  * @author  Studio 164a
  * @package Charitable/Templates/Form Fields
  * @since   1.4.14
