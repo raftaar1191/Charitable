@@ -219,7 +219,7 @@ if ( ! class_exists( 'Charitable_Email_Email_Verification' ) ) :
 		 */
 		public function get_redirect_url() {
 			if ( ! isset( $this->redirect_url ) ) {
-				$profile = charitable_get_option( 'profile_page', false );
+				$profile            = charitable_get_option( 'profile_page', false );
 				$this->redirect_url = $profile ? get_permalink( $profile ) : false;
 			}
 

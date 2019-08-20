@@ -10,7 +10,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $form = $view_args['form'];
 
@@ -41,7 +43,7 @@ $form = $view_args['form'];
 		<div class="charitable-form-fields cf">
 			<input type="hidden" id="user_login" name="rp_login" value="<?php echo esc_attr( $view_args['login'] ); ?>" autocomplete="off" >
 			<input type="hidden" name="rp_key" value="<?php echo esc_attr( $view_args['key'] ); ?>" >
-			<?php $form->view()->render() ?>
+			<?php $form->view()->render(); ?>
 			<p class="description"><?php echo wp_get_password_hint(); ?></p>
 		</div><!-- .charitable-form-fields -->
 		<?php
@@ -57,8 +59,7 @@ $form = $view_args['form'];
 
 		?>
 		<div class="charitable-form-field charitable-submit-field resetpass-submit">
-			<input type="submit" name="submit" class="lostpassword-button" id="resetpass-button"
-			 value="<?php _e( 'Reset Password', 'charitable' ); ?>">
+			<input type="submit" name="submit" class="lostpassword-button" id="resetpass-button" value="<?php _e( 'Reset Password', 'charitable' ); ?>">
 		</div>
 	</form><!-- #resetpassform -->
 	<?php

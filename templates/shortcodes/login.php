@@ -32,9 +32,9 @@ $login_form_args = array_key_exists( 'login_form_args', $view_args ) ? $view_arg
 	?>
 	<p>
 		<?php if ( array_key_exists( 'registration_link', $view_args ) && $view_args['registration_link'] ) : ?>
-			<a href="<?php echo esc_url( $view_args['registration_link'] ) ?>"><?php echo $view_args['registration_link_text'] ?></a>&nbsp;|&nbsp;
+			<a href="<?php echo esc_url( $view_args['registration_link'] ); ?>"><?php echo $view_args['registration_link_text']; ?></a>&nbsp;|&nbsp;
 		<?php endif ?>
-		<a href="<?php echo esc_url( charitable_get_permalink( 'forgot_password_page' ) ) ?>"><?php _e( 'Forgot Password', 'charitable' ) ?></a>
+		<a href="<?php echo esc_url( charitable_get_permalink( 'forgot_password_page' ) ); ?>"><?php _e( 'Forgot Password', 'charitable' ); ?></a>
 	</p>
 	<?php
 

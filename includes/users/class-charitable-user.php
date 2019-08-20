@@ -267,6 +267,15 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$donor->set_user_id( $this->ID );
 			}
 
+			/**
+			 * Do something when a user is verified.
+			 *
+			 * @since 1.6.23
+			 *
+			 * @param Charitable_User $user The user object.
+			 */
+			do_action( 'charitable_user_verified', $this );
+
 			return $verified;
 		}
 

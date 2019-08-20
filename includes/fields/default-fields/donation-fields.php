@@ -121,16 +121,18 @@ return apply_filters(
 			'admin_form'     => false,
 			'email_tag'      => array(
 				'description' => __( 'The donor\'s address', 'charitable' ),
-				'preview'     => charitable_get_location_helper()->get_formatted_address( array(
-					'first_name' => 'John',
-					'last_name'  => 'Deere',
-					'company'    => 'Deere & Company',
-					'address'    => 'One John Deere Place',
-					'city'       => 'Moline',
-					'state'      => 'Illinois',
-					'postcode'   => '61265',
-					'country'    => 'US',
-				) ),
+				'preview'     => charitable_get_location_helper()->get_formatted_address(
+					array(
+						'first_name' => 'John',
+						'last_name'  => 'Deere',
+						'company'    => 'Deere & Company',
+						'address'    => 'One John Deere Place',
+						'city'       => 'Moline',
+						'state'      => 'Illinois',
+						'postcode'   => '61265',
+						'country'    => 'US',
+					)
+				),
 			),
 			'show_in_meta'   => true,
 			'show_in_export' => true,

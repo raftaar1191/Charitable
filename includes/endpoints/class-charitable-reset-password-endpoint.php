@@ -1,6 +1,6 @@
 <?php
 /**
- * reset_password endpoint.
+ * Password reset endpoint.
  *
  * @package   Charitable/Classes/Charitable_Reset_Password_Endpoint
  * @author    Eric Daams
@@ -10,7 +10,9 @@
  * @version   1.5.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 

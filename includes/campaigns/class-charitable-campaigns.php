@@ -10,7 +10,9 @@
  * @version   1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 
@@ -58,9 +60,9 @@ if ( ! class_exists( 'Charitable_Campaigns' ) ) :
 						'type'    => 'datetime',
 					),
 				),
-				'meta_key' => '_campaign_end_date',
-				'orderby'  => 'meta_value',
-				'order'    => 'ASC',
+				'meta_key'   => '_campaign_end_date',
+				'orderby'    => 'meta_value',
+				'order'      => 'ASC',
 			);
 
 			$args = wp_parse_args( $args, $defaults );
