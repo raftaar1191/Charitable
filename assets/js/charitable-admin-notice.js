@@ -6,12 +6,12 @@
             var $el = $( this ), $button = $el.find( '.notice-dismiss' );
 
             $button.on( 'click', function( event ) {
-                event.preventDefault();           
+                event.preventDefault();
 
                 $.ajax({
                     type: "POST",
                     data: {
-                        action : 'charitable_dismiss_notice', 
+                        action : 'charitable_dismiss_notice',
                         notice : $el.data( 'notice' )
                     },
                     dataType: "json",
