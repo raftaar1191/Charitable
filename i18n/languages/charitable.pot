@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.6.22\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-08-09 02:35:33+00:00\n"
+"POT-Creation-Date: 2019-09-10 04:39:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4708,7 +4708,7 @@ msgid "Not Given"
 msgstr ""
 
 #: includes/abstracts/abstract-class-charitable-abstract-donation.php:739
-#: includes/fields/default-fields/donation-fields.php:414
+#: includes/fields/default-fields/donation-fields.php:416
 msgid "Given"
 msgstr ""
 
@@ -5019,7 +5019,7 @@ msgid "Passed view (%s) not found or is not readable."
 msgstr ""
 
 #: includes/admin/class-charitable-admin-pages.php:150
-#: includes/fields/default-fields/donation-fields.php:250
+#: includes/fields/default-fields/donation-fields.php:252
 msgid "Campaign Categories"
 msgstr ""
 
@@ -5177,7 +5177,7 @@ msgstr ""
 #: includes/db/class-charitable-donors-db.php:267
 #: includes/forms/class-charitable-donation-form.php:950
 #: includes/forms/class-charitable-profile-form.php:327
-#: includes/forms/class-charitable-registration-form.php:163
+#: includes/forms/class-charitable-registration-form.php:165
 #: includes/privacy/charitable-privacy-functions.php:61
 msgid "Yes, I am happy for you to contact me via email or phone."
 msgstr ""
@@ -5452,36 +5452,36 @@ msgstr ""
 msgid "Send an email receipt to the donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:304
+#: includes/admin/forms/class-charitable-admin-donation-form.php:306
 msgid "You must provide both a campaign and amount."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:310
+#: includes/admin/forms/class-charitable-admin-donation-form.php:312
 msgid "Please choose an existing donor or provide an email address for a new donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:346
+#: includes/admin/forms/class-charitable-admin-donation-form.php:348
 msgid "Manual"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:514
+#: includes/admin/forms/class-charitable-admin-donation-form.php:516
 msgid "Donation updated manually by <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:617
+#: includes/admin/forms/class-charitable-admin-donation-form.php:619
 msgid "Select a Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:618
+#: includes/admin/forms/class-charitable-admin-donation-form.php:620
 msgid "Add a New Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:620
+#: includes/admin/forms/class-charitable-admin-donation-form.php:622
 msgid "Existing Donors"
 msgstr ""
 
 #: includes/admin/forms/views/class-charitable-admin-form-view.php:134
-#: includes/forms/views/class-charitable-public-form-view.php:201
+#: includes/forms/views/class-charitable-public-form-view.php:205
 msgid "There are no fields to render."
 msgstr ""
 
@@ -5541,7 +5541,7 @@ msgstr ""
 #: includes/fields/default-fields/donation-fields.php:98
 #: includes/fields/default-fields/donation-fields.php:103
 #: includes/forms/class-charitable-profile-form.php:163
-#: includes/forms/class-charitable-registration-form.php:105
+#: includes/forms/class-charitable-registration-form.php:107
 #: includes/privacy/class-charitable-privacy.php:423
 #: templates/donation-form/donor-fields/login-form.php:32
 msgid "Email"
@@ -5549,42 +5549,42 @@ msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:135
 #: includes/fields/default-fields/donation-fields.php:117
-#: includes/fields/default-fields/donation-fields.php:139
+#: includes/fields/default-fields/donation-fields.php:141
 #: includes/forms/class-charitable-profile-form.php:200
 msgid "Address"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:136
-#: includes/fields/default-fields/donation-fields.php:152
+#: includes/fields/default-fields/donation-fields.php:154
 #: includes/forms/class-charitable-profile-form.php:207
 msgid "Address 2"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:137
-#: includes/fields/default-fields/donation-fields.php:165
+#: includes/fields/default-fields/donation-fields.php:167
 #: includes/forms/class-charitable-profile-form.php:214
 msgid "City"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:138
-#: includes/fields/default-fields/donation-fields.php:178
+#: includes/fields/default-fields/donation-fields.php:180
 #: includes/forms/class-charitable-profile-form.php:221
 msgid "State"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:139
-#: includes/fields/default-fields/donation-fields.php:191
+#: includes/fields/default-fields/donation-fields.php:193
 msgid "Postcode"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:140
-#: includes/fields/default-fields/donation-fields.php:204
+#: includes/fields/default-fields/donation-fields.php:206
 #: includes/forms/class-charitable-profile-form.php:235
 msgid "Country"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:141
-#: includes/fields/default-fields/donation-fields.php:220
+#: includes/fields/default-fields/donation-fields.php:222
 msgid "Phone Number"
 msgstr ""
 
@@ -5593,23 +5593,23 @@ msgid "Address Formatted"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:143
-#: includes/fields/default-fields/donation-fields.php:264
+#: includes/fields/default-fields/donation-fields.php:266
 msgid "Donation Amount"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:144
-#: includes/fields/default-fields/donation-fields.php:277
+#: includes/fields/default-fields/donation-fields.php:279
 msgid "Date of Donation"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:145
-#: includes/fields/default-fields/donation-fields.php:298
+#: includes/fields/default-fields/donation-fields.php:300
 msgid "Time of Donation"
 msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:146
-#: includes/fields/default-fields/donation-fields.php:308
-#: includes/fields/default-fields/donation-fields.php:324
+#: includes/fields/default-fields/donation-fields.php:310
+#: includes/fields/default-fields/donation-fields.php:326
 msgid "Donation Status"
 msgstr ""
 
@@ -5623,7 +5623,7 @@ msgstr ""
 
 #: includes/admin/reports/class-charitable-export-donations.php:149
 #: includes/admin/views/metaboxes/donation/donation-overview.php:89
-#: includes/fields/default-fields/donation-fields.php:407
+#: includes/fields/default-fields/donation-fields.php:409
 msgid "Contact Consent"
 msgstr ""
 
@@ -5909,7 +5909,7 @@ msgstr ""
 
 #: includes/admin/views/campaigns-page/export-form.php:19
 #: includes/class-charitable-post-types.php:84
-#: includes/fields/default-fields/donation-fields.php:237
+#: includes/fields/default-fields/donation-fields.php:239
 #: includes/widgets/class-charitable-campaigns-widget.php:32
 #: templates/donation-stats.php:17
 msgid "Campaigns"
@@ -6185,8 +6185,8 @@ msgid "Subtotal"
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:192
-#: includes/fields/default-fields/donation-fields.php:338
-#: includes/fields/default-fields/donation-fields.php:351
+#: includes/fields/default-fields/donation-fields.php:340
+#: includes/fields/default-fields/donation-fields.php:353
 msgid "Payment Method"
 msgstr ""
 
@@ -6464,7 +6464,7 @@ msgstr ""
 msgid "Missing templates in request."
 msgstr ""
 
-#: includes/api/class-charitable-api-route-reports.php:95
+#: includes/api/class-charitable-api-route-reports.php:96
 msgid "List of donation reports."
 msgstr ""
 
@@ -7039,7 +7039,7 @@ msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr ""
 
 #: includes/donations/charitable-donation-functions.php:323
-#: includes/fields/default-fields/donation-fields.php:332
+#: includes/fields/default-fields/donation-fields.php:334
 msgid "Paid"
 msgstr ""
 
@@ -7238,7 +7238,7 @@ msgid ""
 msgstr ""
 
 #: includes/emails/class-charitable-email-offline-donation-notification.php:217
-#: includes/fields/default-fields/donation-fields.php:394
+#: includes/fields/default-fields/donation-fields.php:396
 msgid "Summary"
 msgstr ""
 
@@ -7371,12 +7371,12 @@ msgstr ""
 msgid "Missing email_id in args for email preview endpoint URL."
 msgstr ""
 
-#: includes/endpoints/class-charitable-email-verification-endpoint.php:120
+#: includes/endpoints/class-charitable-email-verification-endpoint.php:122
 #: templates/account/email-verified.php:24
 msgid "Your email address has been verified."
 msgstr ""
 
-#: includes/endpoints/class-charitable-email-verification-endpoint.php:132
+#: includes/endpoints/class-charitable-email-verification-endpoint.php:136
 msgid "Email Verification"
 msgstr ""
 
@@ -7394,17 +7394,17 @@ msgstr ""
 msgid "Forgot Password"
 msgstr ""
 
-#: includes/endpoints/class-charitable-reset-password-endpoint.php:77
+#: includes/endpoints/class-charitable-reset-password-endpoint.php:79
 msgid ""
 "Password reset link should not be called when using the default WordPress "
 "login."
 msgstr ""
 
-#: includes/endpoints/class-charitable-reset-password-endpoint.php:130
-#: templates/account/forgot-password.php:41
+#: includes/endpoints/class-charitable-reset-password-endpoint.php:132
+#: templates/account/forgot-password.php:42
 #: templates/account/reset-password.php:44
-#: templates/shortcodes/forgot-password.php:58
-#: templates/shortcodes/reset-password.php:61
+#: templates/shortcodes/forgot-password.php:60
+#: templates/shortcodes/reset-password.php:62
 msgid "Reset Password"
 msgstr ""
 
@@ -7469,7 +7469,7 @@ msgid "The title of the campaign"
 msgstr ""
 
 #: includes/fields/default-fields/campaign-fields.php:125
-#: includes/fields/default-fields/donation-fields.php:244
+#: includes/fields/default-fields/donation-fields.php:246
 msgid "Fake Campaign"
 msgstr ""
 
@@ -7575,73 +7575,73 @@ msgstr ""
 msgid "The donor's address"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:230
+#: includes/fields/default-fields/donation-fields.php:232
 msgid "The donor's phone number"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:243
+#: includes/fields/default-fields/donation-fields.php:245
 msgid "The campaigns that were donated to"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:257
+#: includes/fields/default-fields/donation-fields.php:259
 msgid "The categories of the campaigns that were donated to"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:258
+#: includes/fields/default-fields/donation-fields.php:260
 msgid "Fake Category"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:270
+#: includes/fields/default-fields/donation-fields.php:272
 msgid "The total amount donated"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:291
+#: includes/fields/default-fields/donation-fields.php:293
 msgid "The date the donation was made"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:331
+#: includes/fields/default-fields/donation-fields.php:333
 msgid "The status of the donation (pending, paid, etc.)"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:361
+#: includes/fields/default-fields/donation-fields.php:363
 msgid "Donation Key"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:371
+#: includes/fields/default-fields/donation-fields.php:373
 msgid "Gateway Transaction ID"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:377
+#: includes/fields/default-fields/donation-fields.php:379
 msgid "The payment gateway's transaction ID for the donation"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:378
+#: includes/fields/default-fields/donation-fields.php:380
 msgid "XYZ-2132323"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:384
+#: includes/fields/default-fields/donation-fields.php:386
 msgid "Donation made in test mode?"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:400
+#: includes/fields/default-fields/donation-fields.php:402
 msgid "A summary of the donation"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:401
+#: includes/fields/default-fields/donation-fields.php:403
 msgid "Fake Campaign: $50.00"
 msgstr ""
 
-#: includes/fields/default-fields/donation-fields.php:413
+#: includes/fields/default-fields/donation-fields.php:415
 msgid "Whether the donor gave consent to be contacted"
 msgstr ""
 
 #: includes/forms/class-charitable-donation-form.php:288
-#: includes/forms/class-charitable-registration-form.php:119
+#: includes/forms/class-charitable-registration-form.php:121
 msgid "Password"
 msgstr ""
 
 #: includes/forms/class-charitable-donation-form.php:299
-#: includes/forms/class-charitable-registration-form.php:112
+#: includes/forms/class-charitable-registration-form.php:114
 #: templates/donation-form/donor-fields/login-form.php:32
 msgid "Username"
 msgstr ""
@@ -7663,7 +7663,7 @@ msgstr ""
 #: includes/forms/class-charitable-donation-form.php:646
 #: includes/forms/class-charitable-forgot-password-form.php:98
 #: includes/forms/class-charitable-profile-form.php:473
-#: includes/forms/class-charitable-registration-form.php:218
+#: includes/forms/class-charitable-registration-form.php:220
 #: includes/forms/class-charitable-reset-password-form.php:169
 msgid ""
 "There was an error with processing your form submission. Please reload the "
@@ -7671,7 +7671,7 @@ msgid ""
 msgstr ""
 
 #: includes/forms/class-charitable-donation-form.php:677
-#: includes/forms/class-charitable-registration-form.php:235
+#: includes/forms/class-charitable-registration-form.php:237
 #. translators: %s: email address
 #. translators: %s: submitted email address
 msgid "%s is not a valid email address."
@@ -7813,7 +7813,7 @@ msgid ""
 "charitable_form_after_fields instead."
 msgstr ""
 
-#: includes/forms/class-charitable-registration-form.php:258
+#: includes/forms/class-charitable-registration-form.php:260
 msgid ""
 "Thank you for registering. We have sent you an email to confirm your email "
 "address."
@@ -8380,7 +8380,7 @@ msgid "You are already logged in!"
 msgstr ""
 
 #: includes/shortcodes/class-charitable-login-shortcode.php:39
-#: templates/shortcodes/registration.php:55
+#: templates/shortcodes/registration.php:57
 msgid "Register"
 msgstr ""
 
@@ -8392,7 +8392,8 @@ msgstr ""
 msgid "We have sent you an email to confirm your email address."
 msgstr ""
 
-#: includes/shortcodes/class-charitable-my-donations-shortcode.php:79
+#: includes/shortcodes/class-charitable-my-donations-shortcode.php:80
+#. translators: %s: email verification link
 msgid ""
 "<a href=\"%s\">Confirm your email address</a> to access your full donation "
 "history."
@@ -8467,7 +8468,7 @@ msgstr ""
 msgid "Campaign Manager"
 msgstr ""
 
-#: includes/users/class-charitable-user.php:689
+#: includes/users/class-charitable-user.php:698
 msgid "Unable to add donor. Email not set for logged out user."
 msgstr ""
 
