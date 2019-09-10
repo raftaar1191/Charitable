@@ -76,6 +76,7 @@ if ( ! class_exists( 'Charitable_My_Donations_Shortcode' ) ) :
 						$message = __( 'We have sent you an email to confirm your email address.', 'charitable' );
 					} else {
 						$message = sprintf(
+							/* translators: %s: email verification link */
 							__( '<a href="%s">Confirm your email address</a> to access your full donation history.', 'charitable' ),
 							esc_url( charitable_get_email_verification_link( $user, charitable_get_current_url() ) )
 						);

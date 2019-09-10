@@ -10,7 +10,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 
@@ -287,7 +289,8 @@ if ( ! class_exists( 'Charitable_Registration_Form' ) ) :
 				$login_link = add_query_arg( 'redirect_to', $_GET['redirect_to'], $login_link );
 			}
 
-			return sprintf( '<a href="%1$s">%2$s</a>',
+			return sprintf(
+				'<a href="%1$s">%2$s</a>',
 				esc_url( $login_link ),
 				$this->shortcode_args['login_link_text']
 			);

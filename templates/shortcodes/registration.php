@@ -9,7 +9,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $form = $view_args['form'];
 
@@ -36,7 +38,7 @@ do_action( 'charitable_user_registration_before', $form, $view_args );
 
 	?>
 	<div class="charitable-form-fields cf">
-		<?php $form->view()->render() ?>
+		<?php $form->view()->render(); ?>
 	</div><!-- .charitable-form-fields -->
 	<?php
 
@@ -52,7 +54,7 @@ do_action( 'charitable_user_registration_before', $form, $view_args );
 
 	?>
 	<div class="charitable-form-field charitable-submit-field">
-		<button class="button button-primary" type="submit" name="register"><?php esc_attr_e( 'Register', 'charitable' ) ?></button>
+		<button class="button button-primary" type="submit" name="register"><?php esc_attr_e( 'Register', 'charitable' ); ?></button>
 	</div>
 </form><!-- #charitable-registration-form -->
 <?php

@@ -276,6 +276,8 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function filter_campaign_donation( $campaign_donation ) {
+			$campaign_donation = (array) $campaign_donation;
+
 			return array_key_exists( 'campaign_id', $campaign_donation )
 				&& array_key_exists( 'amount', $campaign_donation )
 				&& ! empty( $campaign_donation['campaign_id'] )

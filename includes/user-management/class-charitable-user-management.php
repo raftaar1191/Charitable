@@ -365,6 +365,9 @@ if ( ! class_exists( 'Charitable_User_Management' ) ) :
 			$email = new Charitable_Email_Email_Verification( array( 'user' => $user ) );
 
 			if ( ! empty( $redirect_url ) ) {
+				/* Ensure that the redirect URL is encoded, but not double-encoded. */
+				$redirect_url = urlencode( urldecode( $redirect_url ) );
+
 				$email->set_redirect_url( $redirect_url );
 			}
 

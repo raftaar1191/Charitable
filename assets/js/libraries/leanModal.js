@@ -24,9 +24,9 @@
             $overlay = $('#lean_overlay');
 
             $trigger.on( 'click', function(e) {
-                var modal_id = methods.get_target($(this)), 
+                var modal_id = methods.get_target($(this)),
                     $modal = $(modal_id);
-                
+
                 methods.open( $modal, e );
 
                 $modal.on( 'click', options.closeButton, function(e){
@@ -70,11 +70,11 @@
             };
 
             $overlay.css({
-                'display': 'block', 
+                'display': 'block',
                 'opacity': 0,
             }).fadeTo(200, options.overlay);
 
-            $modal.css({                     
+            $modal.css({
                 'display': 'block',
                 'position': 'fixed',
                 'opacity': 0,
@@ -105,7 +105,7 @@
         },
 
         /**
-         * Close modal 
+         * Close modal
          */
         close : function( $modal ) {
             $overlay.fadeOut( 200 );
@@ -119,9 +119,9 @@
         /**
          * Reset modal CSS
          */
-        reset : function( $modal ) {            
+        reset : function( $modal ) {
             $modal.css({
-                'bottom' : 'auto', 
+                'bottom' : 'auto',
                 'overflowY' : 'auto'
             });
         },
@@ -129,15 +129,15 @@
         /**
          * Resize modal
          */
-        resize : function( $modal ) {            
-            var window_height = $(window).height(),            
+        resize : function( $modal ) {
+            var window_height = $(window).height(),
                 modal_width = $modal.outerWidth(),
                 modal_height = $modal.outerHeight()
-                available_offset = window_height - modal_height, 
+                available_offset = window_height - modal_height,
                 modal_is_too_tall = ( function() {
                     var modal_calc_height = modal_height + ( 2 * options.verticalOffset );
                     return window_height < modal_calc_height;
-                })(), 
+                })(),
                 modal_css = {
                     'left' : 50 + '%',
                     'margin-left' : -( modal_width / 2 ) + "px",
@@ -155,21 +155,21 @@
                 if ( available_offset <= 0 ) {
                     modal_css.top = '10px';
                     modal_css.bottom = '10px';
-                    modal_css.overflowY = 'scroll';                
+                    modal_css.overflowY = 'scroll';
                 }
-            }                   
+            }
 
             $modal.css( modal_css );
 
             /* Provide an event hook for other scripts to use. */
             $body.trigger( 'charitable:modal:resize' );
-        }        
-    };   
- 
-    /** 
+        }
+    };
+
+    /**
      * Register this as a jQuery function.
      */
-    $.fn.extend({ 
+    $.fn.extend({
         leanModal : function( method_or_options ) {
             if ( methods[ method_or_options ] ) {
                 return methods[  method_or_options  ].apply( this, Array.prototype.slice.call( arguments, 1 ));
@@ -178,7 +178,7 @@
                 return methods.init.apply( this, arguments );
             } else {
                 $.error( 'Method ' +   method_or_options  + ' does not exist on jQuery.leanModal' );
-            }    
+            }
         }
     });
 
@@ -189,6 +189,6 @@
         $( '[data-trigger-modal]' ).leanModal({
             closeButton : ".modal-close"
         });
-    }); 
-     
+    });
+
 })(jQuery, document);

@@ -267,6 +267,15 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$donor->set_user_id( $this->ID );
 			}
 
+			/**
+			 * Do something when a user is verified.
+			 *
+			 * @since 1.6.23
+			 *
+			 * @param Charitable_User $user The user object.
+			 */
+			do_action( 'charitable_user_verified', $this );
+
 			return $verified;
 		}
 
@@ -908,24 +917,35 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 					return false;
 				}
 
+				/**
+				 * Do something after a user has been registered.
+				 *
+				 * @since 1.0.0
+				 *
+				 * @param int   $user_id The new user's ID.
+				 * @param array $values  Values submitted to register user.
+				 */
 				do_action( 'charitable_after_insert_user', $user_id, $values );
 
 			} else {
-
 				$values['ID'] = $this->ID;
-
-				$user_id = wp_update_user( $values );
-
+				$user_id      = wp_update_user( $values );
 			}//end if
 
 			/* If there was an error when inserting or updating the user, lodge the error. */
 			if ( is_wp_error( $user_id ) ) {
-
 				charitable_get_notices()->add_errors_from_wp_error( $user_id );
 				return false;
-
 			}
 
+			/**
+			 * Do something after a user's account has been updated or created.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param int   $user_id The user's ID.
+			 * @param array $values  Values submitted to save user.
+			 */
 			do_action( 'charitable_after_save_user', $user_id, $values );
 
 			return $user_id;

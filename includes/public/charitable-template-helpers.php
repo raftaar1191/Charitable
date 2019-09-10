@@ -283,7 +283,7 @@ function charitable_get_current_url() {
 
 	return trailingslashit(
 		add_query_arg(
-			$_SERVER['QUERY_STRING'],
+			array_key_exists( 'QUERY_STRING', $_SERVER ) ? $_SERVER['QUERY_STRING'] : '',
 			'',
 			home_url( $wp->request )
 		)

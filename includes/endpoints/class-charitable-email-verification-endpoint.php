@@ -10,7 +10,9 @@
  * @version   1.5.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 
@@ -128,10 +130,13 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 
 			$profile = charitable_get_option( 'profile_page', false );
 
-			new Charitable_Ghost_Page( 'email-verification-page', array(
-				'title'   => __( 'Email Verification', 'charitable' ),
-				'content' => '<!-- Silence is golden -->',
-			) );
+			new Charitable_Ghost_Page(
+				'email-verification-page',
+				array(
+					'title'   => __( 'Email Verification', 'charitable' ),
+					'content' => '<!-- Silence is golden -->',
+				)
+			);
 
 			$templates = array( 'email-verification-page.php', 'page.php', 'index.php' );
 
@@ -155,9 +160,12 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 
 			ob_start();
 
-			charitable_template( $template, array(
-				'result' => $this->get_verification_check_result(),
-			) );
+			charitable_template(
+				$template,
+				array(
+					'result' => $this->get_verification_check_result(),
+				)
+			);
 
 			return ob_get_clean();
 		}

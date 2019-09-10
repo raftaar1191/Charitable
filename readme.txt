@@ -3,8 +3,8 @@ Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
-Tested up to: 5.2.2
-Stable tag: 1.6.22
+Tested up to: 5.2.3
+Stable tag: 1.6.23
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,12 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.23 =
+* NEW: Added option to specify `year_range` parameter for datepicker fields. By default, the datepicker will show the previous 100 years. [#696](https://github.com/Charitable/Charitable/issues/696)
+* NEW: Added `charitable_user_verified` action hook to do something after a user verifies their email address.
+* NEW: Added `charitable_profile_endpoint_descendent_query_vars` filter, which is used internally when registering endpoints through Charitable's Endpoints API to handle cases where endpoints use the Profile endpoint as their base.
+* FIX: In some cases, the js.cookie script was not loaded correctly due to the presence of Javascript module loaders, which resulted in Charitable's session script not working correctly. [#699](https://github.com/Charitable/Charitable/issues/699)
 
 = 1.6.22 =
 * NEW: Added gateway transaction ID to donation meta and as an optional email field. [#694](https://github.com/Charitable/Charitable/issues/694)

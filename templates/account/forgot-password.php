@@ -1,3 +1,4 @@
+
 <?php
 /**
  * The template used to display the forgot password form. Provided here primarily as a way to make it easier to override using theme templates.
@@ -14,7 +15,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 /**
- * @var 	Charitable_Forgot_Password_Form
+ * @var Charitable_Forgot_Password_Form
  */
 $form = $view_args['form'];
 

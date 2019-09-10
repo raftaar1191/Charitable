@@ -7,17 +7,19 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.23
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 
 	/**
 	 * Charitable_Profile_Endpoint
 	 *
-	 * @since  1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Profile_Endpoint extends Charitable_Endpoint {
 
@@ -64,20 +66,56 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @global WP_Post $post
+		 * @global WP_Post  $post
+		 * @global WP_Query $wp_query
 		 * @param  array $args Mixed args.
 		 * @return boolean
 		 */
 		public function is_page( $args = array() ) {
-			global $post;
+			global $post, $wp_query;
 
-			if ( is_null( $post ) ) {
+			if ( is_null( $post ) || ! $wp_query->is_main_query() ) {
 				return false;
 			}
 
 			$page = charitable_get_option( 'profile_page', false );
 
-			return false != $page && $page == $post->ID;
+			if ( ! $page || $page != $post->ID ) {
+				return false;
+			}
+
+			return ! $this->is_descendent_page();
+		}
+
+		/**
+		 * Check that this is not a descendant page.
+		 *
+		 * For example, the email verification endpoint uses /profile/ as
+		 * its base, so we need to make sure that `email_verification` is
+		 * not set in the query vars.
+		 *
+		 * @since  1.6.23
+		 *
+		 * @global WP_Query $wp_query
+		 * @return boolean
+		 */
+		public function is_descendent_page() {
+			global $wp_query;
+
+			/**
+			 * Filter the query vars that indicate a descendent page.
+			 *
+			 * @since 1.6.23
+			 *
+			 * @param array List of query vars.
+			 */
+			$descendent_query_vars = apply_filters(
+				'charitable_profile_endpoint_descendent_query_vars',
+				array( 'email_verification' )
+			);
+
+			/* If the query vars keys contains one of the descendent query vars, return true. */
+			return ! empty( array_intersect( array_keys( $wp_query->query_vars ), $descendent_query_vars ) );
 		}
 	}
 
