@@ -169,6 +169,12 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 
 == Changelog ==
 
+= 1.6.23 =
+* NEW: Added option to specify `year_range` parameter for datepicker fields. By default, the datepicker will show the previous 100 years. [#696](https://github.com/Charitable/Charitable/issues/696)
+* NEW: Added `charitable_user_verified` action hook to do something after a user verifies their email address.
+* NEW: Added `charitable_profile_endpoint_descendent_query_vars` filter, which is used internally when registering endpoints through Charitable's Endpoints API to handle cases where endpoints use the Profile endpoint as their base.
+* FIX: In some cases, the js.cookie script was not loaded correctly due to the presence of Javascript module loaders, which resulted in Charitable's session script not working correctly. [#699](https://github.com/Charitable/Charitable/issues/699)
+
 = 1.6.22 =
 * NEW: Added gateway transaction ID to donation meta and as an optional email field. [#694](https://github.com/Charitable/Charitable/issues/694)
 * NEW: Added client-side helper function to check whether the donation being processed is a recurring donation.
