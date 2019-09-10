@@ -15,6 +15,15 @@
         module.exports = factory();
         registeredInModuleLoader = true;
     }
+
+    /**
+     * Customization for Charitable.
+     *
+     * @see https://github.com/Charitable/Charitable/issues/699
+     * @author Eric Daams
+     */
+    registeredInModuleLoader = false;
+
     if (!registeredInModuleLoader) {
         var OldCookies = window.Cookies;
         var api = window.Cookies = factory();

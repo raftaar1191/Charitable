@@ -141,9 +141,13 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 		 * @return void
 		 */
 		public function render_notices() {
-			charitable_template_from_session( 'form-fields/notices.php', array(
-				'notices' => charitable_get_notices()->get_notices(),
-			), 'notices' );
+			charitable_template_from_session(
+				'form-fields/notices.php',
+				array(
+					'notices' => charitable_get_notices()->get_notices(),
+				),
+				'notices'
+			);
 
 			$this->rendered_notices = true;
 		}
@@ -208,9 +212,13 @@ if ( ! class_exists( 'Charitable_Public_Form_View' ) ) :
 			$i = 1;
 
 			foreach ( $fields as $key => $field ) {
-				$this->render_field( $field, $key, array(
-					'index' => $i,
-				) );
+				$this->render_field(
+					$field,
+					$key,
+					array(
+						'index' => $i,
+					)
+				);
 
 				$i += $this->increment_index( $field, $key, $i );
 			}
