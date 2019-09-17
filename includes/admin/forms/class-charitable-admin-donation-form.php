@@ -299,6 +299,14 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 
 			$this->valid = $this->check_required_fields( $this->get_merged_fields() );
 
+			/**
+			 * If required fields are missing, get the error message from the
+			 * notices and add them to the admin notices.
+			 */
+			if ( ! $this->valid ) {
+				charitable_get_admin_notices()->fill_notices_from_frontend();
+			}
+
 			$campaign_donations          = array_key_exists( 'campaign_donations', $_POST ) ? $_POST['campaign_donations'] : array();
 			$_POST['campaign_donations'] = array_filter( $campaign_donations, array( $this, 'filter_campaign_donation' ) );
 
@@ -594,14 +602,16 @@ if ( ! class_exists( 'Charitable_Admin_Donation_Form' ) ) :
 		 * @return array
 		 */
 		protected function get_all_donors() {
-			$donors = new Charitable_Donor_Query( array(
-				'number'         => -1,
-				'orderby'        => 'name',
-				'order'          => 'ASC',
-				'output'         => 'raw',
-				'status'         => false, // Return any.
-				'include_erased' => false,
-			) );
+			$donors = new Charitable_Donor_Query(
+				array(
+					'number'         => -1,
+					'orderby'        => 'name',
+					'order'          => 'ASC',
+					'output'         => 'raw',
+					'status'         => false, // Return any.
+					'include_erased' => false,
+				)
+			);
 
 			$donor_list = array();
 

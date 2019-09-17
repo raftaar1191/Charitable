@@ -12,18 +12,23 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	return;
 }
 
-$campaigns = get_posts( array(
-	'post_type'      => 'campaign',
-	'posts_per_page' => -1,
-	'post_status'    => 'any',
-	'fields'         => 'ids',
-) );
+$campaigns = get_posts(
+	array(
+		'post_type'      => 'campaign',
+		'posts_per_page' => -1,
+		'post_status'    => 'any',
+		'fields'         => 'ids',
+	)
+);
 
 $campaign_donations = $view_args['value'];
 
 if ( empty( $campaign_donations ) ) {
 	$campaign_donations = array(
-		(object) array( 'campaign_id' => '', 'amount' => '' ),
+		(object) array(
+			'campaign_id' => '',
+			'amount'      => '',
+		),
 	);
 }
 
