@@ -2,6 +2,8 @@
 /**
  * Returns an array of all countries, with the country code as the key.
  *
+ * Country codes and names should follow the Unicode CLDR recommendation (http://cldr.unicode.org/translation/country-names).
+ *
  * Credit to WooThemes, mikejolly and shivapoudel. This is shamelessly based on their implementation in WooCommerce.
  *
  * @package   Charitable/i18n
@@ -144,8 +146,8 @@ return array(
 	'LI' => __( 'Liechtenstein', 'charitable' ),
 	'LT' => __( 'Lithuania', 'charitable' ),
 	'LU' => __( 'Luxembourg', 'charitable' ),
-	'MO' => __( 'Macao S.A.R., China', 'charitable' ),
-	'MK' => __( 'Macedonia', 'charitable' ),
+	'MO' => __( 'Macau', 'charitable' ),
+	'MK' => __( 'North Macedonia', 'charitable' ),
 	'MG' => __( 'Madagascar', 'charitable' ),
 	'MW' => __( 'Malawi', 'charitable' ),
 	'MY' => __( 'Malaysia', 'charitable' ),
@@ -183,7 +185,7 @@ return array(
 	'NO' => __( 'Norway', 'charitable' ),
 	'OM' => __( 'Oman', 'charitable' ),
 	'PK' => __( 'Pakistan', 'charitable' ),
-	'PS' => __( 'Palestinian Territory', 'charitable' ),
+	'PS' => __( 'Palestinian Territories', 'charitable' ),
 	'PA' => __( 'Panama', 'charitable' ),
 	'PG' => __( 'Papua New Guinea', 'charitable' ),
 	'PY' => __( 'Paraguay', 'charitable' ),
@@ -226,7 +228,7 @@ return array(
 	'SD' => __( 'Sudan', 'charitable' ),
 	'SR' => __( 'Suriname', 'charitable' ),
 	'SJ' => __( 'Svalbard and Jan Mayen', 'charitable' ),
-	'SZ' => __( 'Swaziland', 'charitable' ),
+	'SZ' => __( 'Eswatini', 'charitable' ),
 	'SE' => __( 'Sweden', 'charitable' ),
 	'CH' => __( 'Switzerland', 'charitable' ),
 	'SY' => __( 'Syria', 'charitable' ),
