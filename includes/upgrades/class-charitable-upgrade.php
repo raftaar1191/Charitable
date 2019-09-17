@@ -5,7 +5,7 @@
  * The responsibility of this class is to manage migrations between versions of Charitable.
  *
  * @package   Charitable/Classes/Charitable_Upgrade
- * @copyright Copyright (c) 2018, Eric Daams
+ * @copyright Copyright (c) 2019, Eric Daams
  * @license   http://opensource.org/licenses/gpl-1.0.0.php GNU Public License
  * @since     1.0.0
  * @version   1.6.0
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Charitable_Upgrade' ) ) :
 
 	/**
-	 * Charitable_EDD_Upgrade
+	 * Charitable_Upgrade
 	 *
 	 * @since 1.0.0
 	 */
