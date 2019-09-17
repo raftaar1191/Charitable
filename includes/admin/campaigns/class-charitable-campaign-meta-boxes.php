@@ -128,7 +128,11 @@ if ( ! class_exists( 'Charitable_Campaign_Meta_Boxes' ) ) :
 		 */
 		public function campaign_form_top( $post ) {
 			if ( Charitable::CAMPAIGN_POST_TYPE == $post->post_type ) {
-				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign-top', $post );
+				$shown = do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign-top', $post );
+			}
+
+			if ( ! $shown ) {
+				do_meta_boxes( Charitable::CAMPAIGN_POST_TYPE, 'campaign', $post );
 			}
 		}
 
