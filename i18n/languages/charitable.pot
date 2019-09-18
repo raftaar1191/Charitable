@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Charitable 1.6.23\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-09-10 04:49:19+00:00\n"
+"POT-Creation-Date: 2019-09-18 00:37:59+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,979 +32,979 @@ msgstr ""
 msgid "Unserializing instances of this class is forbidden."
 msgstr ""
 
-#: i18n/countries.php:20
+#: i18n/countries.php:22
 msgid "Afghanistan"
 msgstr ""
 
-#: i18n/countries.php:21
+#: i18n/countries.php:23
 msgid "&#197;land Islands"
 msgstr ""
 
-#: i18n/countries.php:22
+#: i18n/countries.php:24
 msgid "Albania"
 msgstr ""
 
-#: i18n/countries.php:23
+#: i18n/countries.php:25
 msgid "Algeria"
 msgstr ""
 
-#: i18n/countries.php:24
+#: i18n/countries.php:26
 msgid "Andorra"
 msgstr ""
 
-#: i18n/countries.php:25
+#: i18n/countries.php:27
 msgid "Angola"
 msgstr ""
 
-#: i18n/countries.php:26
+#: i18n/countries.php:28
 msgid "Anguilla"
 msgstr ""
 
-#: i18n/countries.php:27
+#: i18n/countries.php:29
 msgid "Antarctica"
 msgstr ""
 
-#: i18n/countries.php:28
+#: i18n/countries.php:30
 msgid "Antigua and Barbuda"
 msgstr ""
 
-#: i18n/countries.php:29
+#: i18n/countries.php:31
 msgid "Argentina"
 msgstr ""
 
-#: i18n/countries.php:30
+#: i18n/countries.php:32
 msgid "Armenia"
 msgstr ""
 
-#: i18n/countries.php:31
+#: i18n/countries.php:33
 msgid "Aruba"
 msgstr ""
 
-#: i18n/countries.php:32
+#: i18n/countries.php:34
 msgid "Australia"
 msgstr ""
 
-#: i18n/countries.php:33
+#: i18n/countries.php:35
 msgid "Austria"
 msgstr ""
 
-#: i18n/countries.php:34
+#: i18n/countries.php:36
 msgid "Azerbaijan"
 msgstr ""
 
-#: i18n/countries.php:35
+#: i18n/countries.php:37
 msgid "Bahamas"
 msgstr ""
 
-#: i18n/countries.php:36
+#: i18n/countries.php:38
 msgid "Bahrain"
 msgstr ""
 
-#: i18n/countries.php:37
+#: i18n/countries.php:39
 msgid "Bangladesh"
 msgstr ""
 
-#: i18n/countries.php:38
+#: i18n/countries.php:40
 msgid "Barbados"
 msgstr ""
 
-#: i18n/countries.php:39
+#: i18n/countries.php:41
 msgid "Belarus"
 msgstr ""
 
-#: i18n/countries.php:40
+#: i18n/countries.php:42
 msgid "Belgium"
 msgstr ""
 
-#: i18n/countries.php:41
+#: i18n/countries.php:43
 msgid "Belau"
 msgstr ""
 
-#: i18n/countries.php:42
+#: i18n/countries.php:44
 msgid "Belize"
 msgstr ""
 
-#: i18n/countries.php:43
+#: i18n/countries.php:45
 msgid "Benin"
 msgstr ""
 
-#: i18n/countries.php:44
+#: i18n/countries.php:46
 msgid "Bermuda"
 msgstr ""
 
-#: i18n/countries.php:45
+#: i18n/countries.php:47
 msgid "Bhutan"
 msgstr ""
 
-#: i18n/countries.php:46
+#: i18n/countries.php:48
 msgid "Bolivia"
 msgstr ""
 
-#: i18n/countries.php:47
+#: i18n/countries.php:49
 msgid "Bonaire, Saint Eustatius and Saba"
 msgstr ""
 
-#: i18n/countries.php:48
+#: i18n/countries.php:50
 msgid "Bosnia and Herzegovina"
 msgstr ""
 
-#: i18n/countries.php:49
+#: i18n/countries.php:51
 msgid "Botswana"
 msgstr ""
 
-#: i18n/countries.php:50
+#: i18n/countries.php:52
 msgid "Bouvet Island"
 msgstr ""
 
-#: i18n/countries.php:51
+#: i18n/countries.php:53
 msgid "Brazil"
 msgstr ""
 
-#: i18n/countries.php:52
+#: i18n/countries.php:54
 msgid "British Indian Ocean Territory"
 msgstr ""
 
-#: i18n/countries.php:53
+#: i18n/countries.php:55
 msgid "British Virgin Islands"
 msgstr ""
 
-#: i18n/countries.php:54
+#: i18n/countries.php:56
 msgid "Brunei"
 msgstr ""
 
-#: i18n/countries.php:55
+#: i18n/countries.php:57
 msgid "Bulgaria"
 msgstr ""
 
-#: i18n/countries.php:56
+#: i18n/countries.php:58
 msgid "Burkina Faso"
 msgstr ""
 
-#: i18n/countries.php:57
+#: i18n/countries.php:59
 msgid "Burundi"
 msgstr ""
 
-#: i18n/countries.php:58
+#: i18n/countries.php:60
 msgid "Cambodia"
 msgstr ""
 
-#: i18n/countries.php:59
+#: i18n/countries.php:61
 msgid "Cameroon"
 msgstr ""
 
-#: i18n/countries.php:60
+#: i18n/countries.php:62
 msgid "Canada"
 msgstr ""
 
-#: i18n/countries.php:61
+#: i18n/countries.php:63
 msgid "Cape Verde"
 msgstr ""
 
-#: i18n/countries.php:62
+#: i18n/countries.php:64
 msgid "Cayman Islands"
 msgstr ""
 
-#: i18n/countries.php:63
+#: i18n/countries.php:65
 msgid "Central African Republic"
 msgstr ""
 
-#: i18n/countries.php:64
+#: i18n/countries.php:66
 msgid "Chad"
 msgstr ""
 
-#: i18n/countries.php:65
+#: i18n/countries.php:67
 msgid "Chile"
 msgstr ""
 
-#: i18n/countries.php:66
+#: i18n/countries.php:68
 msgid "China"
 msgstr ""
 
-#: i18n/countries.php:67
+#: i18n/countries.php:69
 msgid "Christmas Island"
 msgstr ""
 
-#: i18n/countries.php:68
+#: i18n/countries.php:70
 msgid "Cocos (Keeling) Islands"
 msgstr ""
 
-#: i18n/countries.php:69
+#: i18n/countries.php:71
 msgid "Colombia"
 msgstr ""
 
-#: i18n/countries.php:70
+#: i18n/countries.php:72
 msgid "Comoros"
 msgstr ""
 
-#: i18n/countries.php:71
+#: i18n/countries.php:73
 msgid "Congo (Brazzaville)"
 msgstr ""
 
-#: i18n/countries.php:72
+#: i18n/countries.php:74
 msgid "Congo (Kinshasa)"
 msgstr ""
 
-#: i18n/countries.php:73
+#: i18n/countries.php:75
 msgid "Cook Islands"
 msgstr ""
 
-#: i18n/countries.php:74
+#: i18n/countries.php:76
 msgid "Costa Rica"
 msgstr ""
 
-#: i18n/countries.php:75
+#: i18n/countries.php:77
 msgid "Croatia"
 msgstr ""
 
-#: i18n/countries.php:76
+#: i18n/countries.php:78
 msgid "Cuba"
 msgstr ""
 
-#: i18n/countries.php:77
+#: i18n/countries.php:79
 msgid "Cura&Ccedil;ao"
 msgstr ""
 
-#: i18n/countries.php:78
+#: i18n/countries.php:80
 msgid "Cyprus"
 msgstr ""
 
-#: i18n/countries.php:79
+#: i18n/countries.php:81
 msgid "Czech Republic"
 msgstr ""
 
-#: i18n/countries.php:80
+#: i18n/countries.php:82
 msgid "Denmark"
 msgstr ""
 
-#: i18n/countries.php:81
+#: i18n/countries.php:83
 msgid "Djibouti"
 msgstr ""
 
-#: i18n/countries.php:82
+#: i18n/countries.php:84
 msgid "Dominica"
 msgstr ""
 
-#: i18n/countries.php:83
+#: i18n/countries.php:85
 msgid "Dominican Republic"
 msgstr ""
 
-#: i18n/countries.php:84
+#: i18n/countries.php:86
 msgid "Ecuador"
 msgstr ""
 
-#: i18n/countries.php:85
+#: i18n/countries.php:87
 msgid "Egypt"
 msgstr ""
 
-#: i18n/countries.php:86
+#: i18n/countries.php:88
 msgid "El Salvador"
 msgstr ""
 
-#: i18n/countries.php:87
+#: i18n/countries.php:89
 msgid "Equatorial Guinea"
 msgstr ""
 
-#: i18n/countries.php:88
+#: i18n/countries.php:90
 msgid "Eritrea"
 msgstr ""
 
-#: i18n/countries.php:89
+#: i18n/countries.php:91
 msgid "Estonia"
 msgstr ""
 
-#: i18n/countries.php:90
-msgid "Ethiopia"
-msgstr ""
-
-#: i18n/countries.php:91
-msgid "Falkland Islands"
-msgstr ""
-
 #: i18n/countries.php:92
-msgid "Faroe Islands"
+msgid "Eswatini"
 msgstr ""
 
 #: i18n/countries.php:93
-msgid "Fiji"
+msgid "Ethiopia"
 msgstr ""
 
 #: i18n/countries.php:94
-msgid "Finland"
+msgid "Falkland Islands"
 msgstr ""
 
 #: i18n/countries.php:95
-msgid "France"
+msgid "Faroe Islands"
 msgstr ""
 
 #: i18n/countries.php:96
-msgid "French Guiana"
+msgid "Fiji"
 msgstr ""
 
 #: i18n/countries.php:97
-msgid "French Polynesia"
+msgid "Finland"
 msgstr ""
 
 #: i18n/countries.php:98
-msgid "French Southern Territories"
+msgid "France"
 msgstr ""
 
 #: i18n/countries.php:99
-msgid "Gabon"
+msgid "French Guiana"
 msgstr ""
 
 #: i18n/countries.php:100
-msgid "Gambia"
+msgid "French Polynesia"
 msgstr ""
 
 #: i18n/countries.php:101
-msgid "Georgia"
+msgid "French Southern Territories"
 msgstr ""
 
 #: i18n/countries.php:102
-msgid "Germany"
+msgid "Gabon"
 msgstr ""
 
 #: i18n/countries.php:103
-msgid "Ghana"
+msgid "Gambia"
 msgstr ""
 
 #: i18n/countries.php:104
-msgid "Gibraltar"
+msgid "Georgia"
 msgstr ""
 
 #: i18n/countries.php:105
-msgid "Greece"
+msgid "Germany"
 msgstr ""
 
 #: i18n/countries.php:106
-msgid "Greenland"
+msgid "Ghana"
 msgstr ""
 
 #: i18n/countries.php:107
-msgid "Grenada"
+msgid "Gibraltar"
 msgstr ""
 
 #: i18n/countries.php:108
-msgid "Guadeloupe"
+msgid "Greece"
 msgstr ""
 
 #: i18n/countries.php:109
-msgid "Guatemala"
+msgid "Greenland"
 msgstr ""
 
 #: i18n/countries.php:110
-msgid "Guernsey"
+msgid "Grenada"
 msgstr ""
 
 #: i18n/countries.php:111
-msgid "Guinea"
+msgid "Guadeloupe"
 msgstr ""
 
 #: i18n/countries.php:112
-msgid "Guinea-Bissau"
+msgid "Guatemala"
 msgstr ""
 
 #: i18n/countries.php:113
-msgid "Guyana"
+msgid "Guernsey"
 msgstr ""
 
 #: i18n/countries.php:114
-msgid "Haiti"
+msgid "Guinea"
 msgstr ""
 
 #: i18n/countries.php:115
-msgid "Heard Island and McDonald Islands"
+msgid "Guinea-Bissau"
 msgstr ""
 
 #: i18n/countries.php:116
-msgid "Honduras"
+msgid "Guyana"
 msgstr ""
 
 #: i18n/countries.php:117
-msgid "Hong Kong"
+msgid "Haiti"
 msgstr ""
 
 #: i18n/countries.php:118
-msgid "Hungary"
+msgid "Heard Island and McDonald Islands"
 msgstr ""
 
 #: i18n/countries.php:119
-msgid "Iceland"
+msgid "Honduras"
 msgstr ""
 
 #: i18n/countries.php:120
-msgid "India"
+msgid "Hong Kong"
 msgstr ""
 
 #: i18n/countries.php:121
-msgid "Indonesia"
+msgid "Hungary"
 msgstr ""
 
 #: i18n/countries.php:122
-msgid "Iran"
+msgid "Iceland"
 msgstr ""
 
 #: i18n/countries.php:123
-msgid "Iraq"
+msgid "India"
 msgstr ""
 
 #: i18n/countries.php:124
-msgid "Republic of Ireland"
+msgid "Indonesia"
 msgstr ""
 
 #: i18n/countries.php:125
-msgid "Isle of Man"
+msgid "Iran"
 msgstr ""
 
 #: i18n/countries.php:126
-msgid "Israel"
+msgid "Iraq"
 msgstr ""
 
 #: i18n/countries.php:127
-msgid "Italy"
+msgid "Republic of Ireland"
 msgstr ""
 
 #: i18n/countries.php:128
-msgid "Ivory Coast"
+msgid "Isle of Man"
 msgstr ""
 
 #: i18n/countries.php:129
-msgid "Jamaica"
+msgid "Israel"
 msgstr ""
 
 #: i18n/countries.php:130
-msgid "Japan"
+msgid "Italy"
 msgstr ""
 
 #: i18n/countries.php:131
-msgid "Jersey"
+msgid "Ivory Coast"
 msgstr ""
 
 #: i18n/countries.php:132
-msgid "Jordan"
+msgid "Jamaica"
 msgstr ""
 
 #: i18n/countries.php:133
-msgid "Kazakhstan"
+msgid "Japan"
 msgstr ""
 
 #: i18n/countries.php:134
-msgid "Kenya"
+msgid "Jersey"
 msgstr ""
 
 #: i18n/countries.php:135
-msgid "Kiribati"
+msgid "Jordan"
 msgstr ""
 
 #: i18n/countries.php:136
-msgid "Kuwait"
+msgid "Kazakhstan"
 msgstr ""
 
 #: i18n/countries.php:137
-msgid "Kyrgyzstan"
+msgid "Kenya"
 msgstr ""
 
 #: i18n/countries.php:138
-msgid "Laos"
+msgid "Kiribati"
 msgstr ""
 
 #: i18n/countries.php:139
-msgid "Latvia"
+msgid "Kuwait"
 msgstr ""
 
 #: i18n/countries.php:140
-msgid "Lebanon"
+msgid "Kyrgyzstan"
 msgstr ""
 
 #: i18n/countries.php:141
-msgid "Lesotho"
+msgid "Laos"
 msgstr ""
 
 #: i18n/countries.php:142
-msgid "Liberia"
+msgid "Latvia"
 msgstr ""
 
 #: i18n/countries.php:143
-msgid "Libya"
+msgid "Lebanon"
 msgstr ""
 
 #: i18n/countries.php:144
-msgid "Liechtenstein"
+msgid "Lesotho"
 msgstr ""
 
 #: i18n/countries.php:145
-msgid "Lithuania"
+msgid "Liberia"
 msgstr ""
 
 #: i18n/countries.php:146
-msgid "Luxembourg"
+msgid "Libya"
 msgstr ""
 
 #: i18n/countries.php:147
-msgid "Macao S.A.R., China"
+msgid "Liechtenstein"
 msgstr ""
 
 #: i18n/countries.php:148
-msgid "Macedonia"
+msgid "Lithuania"
 msgstr ""
 
 #: i18n/countries.php:149
-msgid "Madagascar"
+msgid "Luxembourg"
 msgstr ""
 
 #: i18n/countries.php:150
-msgid "Malawi"
+msgid "Macau"
 msgstr ""
 
 #: i18n/countries.php:151
-msgid "Malaysia"
+msgid "Madagascar"
 msgstr ""
 
 #: i18n/countries.php:152
-msgid "Maldives"
+msgid "Malawi"
 msgstr ""
 
 #: i18n/countries.php:153
-msgid "Mali"
+msgid "Malaysia"
 msgstr ""
 
 #: i18n/countries.php:154
-msgid "Malta"
+msgid "Maldives"
 msgstr ""
 
 #: i18n/countries.php:155
-msgid "Marshall Islands"
+msgid "Mali"
 msgstr ""
 
 #: i18n/countries.php:156
-msgid "Martinique"
+msgid "Malta"
 msgstr ""
 
 #: i18n/countries.php:157
-msgid "Mauritania"
+msgid "Marshall Islands"
 msgstr ""
 
 #: i18n/countries.php:158
-msgid "Mauritius"
+msgid "Martinique"
 msgstr ""
 
 #: i18n/countries.php:159
-msgid "Mayotte"
+msgid "Mauritania"
 msgstr ""
 
 #: i18n/countries.php:160
-msgid "Mexico"
+msgid "Mauritius"
 msgstr ""
 
 #: i18n/countries.php:161
-msgid "Micronesia"
+msgid "Mayotte"
 msgstr ""
 
 #: i18n/countries.php:162
-msgid "Moldova"
+msgid "Mexico"
 msgstr ""
 
 #: i18n/countries.php:163
-msgid "Monaco"
+msgid "Micronesia"
 msgstr ""
 
 #: i18n/countries.php:164
-msgid "Mongolia"
+msgid "Moldova"
 msgstr ""
 
 #: i18n/countries.php:165
-msgid "Montenegro"
+msgid "Monaco"
 msgstr ""
 
 #: i18n/countries.php:166
-msgid "Montserrat"
+msgid "Mongolia"
 msgstr ""
 
 #: i18n/countries.php:167
-msgid "Morocco"
+msgid "Montenegro"
 msgstr ""
 
 #: i18n/countries.php:168
-msgid "Mozambique"
+msgid "Montserrat"
 msgstr ""
 
 #: i18n/countries.php:169
-msgid "Myanmar"
+msgid "Morocco"
 msgstr ""
 
 #: i18n/countries.php:170
-msgid "Namibia"
+msgid "Mozambique"
 msgstr ""
 
 #: i18n/countries.php:171
-msgid "Nauru"
+msgid "Myanmar"
 msgstr ""
 
 #: i18n/countries.php:172
-msgid "Nepal"
+msgid "Namibia"
 msgstr ""
 
 #: i18n/countries.php:173
-msgid "Netherlands"
+msgid "Nauru"
 msgstr ""
 
 #: i18n/countries.php:174
-msgid "Netherlands Antilles"
+msgid "Nepal"
 msgstr ""
 
 #: i18n/countries.php:175
-msgid "New Caledonia"
+msgid "Netherlands"
 msgstr ""
 
 #: i18n/countries.php:176
-msgid "New Zealand"
+msgid "Netherlands Antilles"
 msgstr ""
 
 #: i18n/countries.php:177
-msgid "Nicaragua"
+msgid "New Caledonia"
 msgstr ""
 
 #: i18n/countries.php:178
-msgid "Niger"
+msgid "New Zealand"
 msgstr ""
 
 #: i18n/countries.php:179
-msgid "Nigeria"
+msgid "Nicaragua"
 msgstr ""
 
 #: i18n/countries.php:180
-msgid "Niue"
+msgid "Niger"
 msgstr ""
 
 #: i18n/countries.php:181
-msgid "Norfolk Island"
+msgid "Nigeria"
 msgstr ""
 
 #: i18n/countries.php:182
-msgid "North Korea"
+msgid "Niue"
 msgstr ""
 
 #: i18n/countries.php:183
-msgid "Norway"
+msgid "Norfolk Island"
 msgstr ""
 
 #: i18n/countries.php:184
-msgid "Oman"
+msgid "North Korea"
 msgstr ""
 
 #: i18n/countries.php:185
-msgid "Pakistan"
+msgid "North Macedonia"
 msgstr ""
 
 #: i18n/countries.php:186
-msgid "Palestinian Territory"
+msgid "Norway"
 msgstr ""
 
 #: i18n/countries.php:187
-msgid "Panama"
+msgid "Oman"
 msgstr ""
 
 #: i18n/countries.php:188
-msgid "Papua New Guinea"
+msgid "Pakistan"
 msgstr ""
 
 #: i18n/countries.php:189
-msgid "Paraguay"
+msgid "Palestinian Territories"
 msgstr ""
 
 #: i18n/countries.php:190
-msgid "Peru"
+msgid "Panama"
 msgstr ""
 
 #: i18n/countries.php:191
-msgid "Philippines"
+msgid "Papua New Guinea"
 msgstr ""
 
 #: i18n/countries.php:192
-msgid "Pitcairn"
+msgid "Paraguay"
 msgstr ""
 
 #: i18n/countries.php:193
-msgid "Poland"
+msgid "Peru"
 msgstr ""
 
 #: i18n/countries.php:194
-msgid "Portugal"
+msgid "Philippines"
 msgstr ""
 
 #: i18n/countries.php:195
-msgid "Qatar"
+msgid "Pitcairn"
 msgstr ""
 
 #: i18n/countries.php:196
-msgid "Reunion"
+msgid "Poland"
 msgstr ""
 
 #: i18n/countries.php:197
-msgid "Romania"
+msgid "Portugal"
 msgstr ""
 
 #: i18n/countries.php:198
-msgid "Russia"
+msgid "Qatar"
 msgstr ""
 
 #: i18n/countries.php:199
-msgid "Rwanda"
+msgid "Reunion"
 msgstr ""
 
 #: i18n/countries.php:200
-msgid "Saint Barth&eacute;lemy"
+msgid "Romania"
 msgstr ""
 
 #: i18n/countries.php:201
-msgid "Saint Helena"
+msgid "Russia"
 msgstr ""
 
 #: i18n/countries.php:202
-msgid "Saint Kitts and Nevis"
+msgid "Rwanda"
 msgstr ""
 
 #: i18n/countries.php:203
-msgid "Saint Lucia"
+msgid "Saint Barth&eacute;lemy"
 msgstr ""
 
 #: i18n/countries.php:204
-msgid "Saint Martin (French part)"
+msgid "Saint Helena"
 msgstr ""
 
 #: i18n/countries.php:205
-msgid "Saint Martin (Dutch part)"
+msgid "Saint Kitts and Nevis"
 msgstr ""
 
 #: i18n/countries.php:206
-msgid "Saint Pierre and Miquelon"
+msgid "Saint Lucia"
 msgstr ""
 
 #: i18n/countries.php:207
-msgid "Saint Vincent and the Grenadines"
+msgid "Saint Martin (French part)"
 msgstr ""
 
 #: i18n/countries.php:208
-msgid "San Marino"
+msgid "Saint Martin (Dutch part)"
 msgstr ""
 
 #: i18n/countries.php:209
-msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe"
+msgid "Saint Pierre and Miquelon"
 msgstr ""
 
 #: i18n/countries.php:210
-msgid "Saudi Arabia"
+msgid "Saint Vincent and the Grenadines"
 msgstr ""
 
 #: i18n/countries.php:211
-msgid "Senegal"
+msgid "San Marino"
 msgstr ""
 
 #: i18n/countries.php:212
-msgid "Serbia"
+msgid "S&atilde;o Tom&eacute; and Pr&iacute;ncipe"
 msgstr ""
 
 #: i18n/countries.php:213
-msgid "Seychelles"
+msgid "Saudi Arabia"
 msgstr ""
 
 #: i18n/countries.php:214
-msgid "Sierra Leone"
+msgid "Senegal"
 msgstr ""
 
 #: i18n/countries.php:215
-msgid "Singapore"
+msgid "Serbia"
 msgstr ""
 
 #: i18n/countries.php:216
-msgid "Slovakia"
+msgid "Seychelles"
 msgstr ""
 
 #: i18n/countries.php:217
-msgid "Slovenia"
+msgid "Sierra Leone"
 msgstr ""
 
 #: i18n/countries.php:218
-msgid "Solomon Islands"
+msgid "Singapore"
 msgstr ""
 
 #: i18n/countries.php:219
-msgid "Somalia"
+msgid "Slovakia"
 msgstr ""
 
 #: i18n/countries.php:220
-msgid "South Africa"
+msgid "Slovenia"
 msgstr ""
 
 #: i18n/countries.php:221
-msgid "South Georgia/Sandwich Islands"
+msgid "Solomon Islands"
 msgstr ""
 
 #: i18n/countries.php:222
-msgid "South Korea"
+msgid "Somalia"
 msgstr ""
 
 #: i18n/countries.php:223
-msgid "South Sudan"
+msgid "South Africa"
 msgstr ""
 
 #: i18n/countries.php:224
-msgid "Spain"
+msgid "South Georgia/Sandwich Islands"
 msgstr ""
 
 #: i18n/countries.php:225
-msgid "Sri Lanka"
+msgid "South Korea"
 msgstr ""
 
 #: i18n/countries.php:226
-msgid "Sudan"
+msgid "South Sudan"
 msgstr ""
 
 #: i18n/countries.php:227
-msgid "Suriname"
+msgid "Spain"
 msgstr ""
 
 #: i18n/countries.php:228
-msgid "Svalbard and Jan Mayen"
+msgid "Sri Lanka"
 msgstr ""
 
 #: i18n/countries.php:229
-msgid "Swaziland"
+msgid "Sudan"
 msgstr ""
 
 #: i18n/countries.php:230
-msgid "Sweden"
+msgid "Suriname"
 msgstr ""
 
 #: i18n/countries.php:231
-msgid "Switzerland"
+msgid "Svalbard and Jan Mayen"
 msgstr ""
 
 #: i18n/countries.php:232
-msgid "Syria"
+msgid "Sweden"
 msgstr ""
 
 #: i18n/countries.php:233
-msgid "Taiwan"
+msgid "Switzerland"
 msgstr ""
 
 #: i18n/countries.php:234
-msgid "Tajikistan"
+msgid "Syria"
 msgstr ""
 
 #: i18n/countries.php:235
-msgid "Tanzania"
+msgid "Taiwan"
 msgstr ""
 
 #: i18n/countries.php:236
-msgid "Thailand"
+msgid "Tajikistan"
 msgstr ""
 
 #: i18n/countries.php:237
-msgid "Timor-Leste"
+msgid "Tanzania"
 msgstr ""
 
 #: i18n/countries.php:238
-msgid "Togo"
+msgid "Thailand"
 msgstr ""
 
 #: i18n/countries.php:239
-msgid "Tokelau"
+msgid "Timor-Leste"
 msgstr ""
 
 #: i18n/countries.php:240
-msgid "Tonga"
+msgid "Togo"
 msgstr ""
 
 #: i18n/countries.php:241
-msgid "Trinidad and Tobago"
+msgid "Tokelau"
 msgstr ""
 
 #: i18n/countries.php:242
-msgid "Tunisia"
+msgid "Tonga"
 msgstr ""
 
 #: i18n/countries.php:243
-msgid "Turkey"
+msgid "Trinidad and Tobago"
 msgstr ""
 
 #: i18n/countries.php:244
-msgid "Turkmenistan"
+msgid "Tunisia"
 msgstr ""
 
 #: i18n/countries.php:245
-msgid "Turks and Caicos Islands"
+msgid "Turkey"
 msgstr ""
 
 #: i18n/countries.php:246
-msgid "Tuvalu"
+msgid "Turkmenistan"
 msgstr ""
 
 #: i18n/countries.php:247
-msgid "Uganda"
+msgid "Turks and Caicos Islands"
 msgstr ""
 
 #: i18n/countries.php:248
-msgid "Ukraine"
+msgid "Tuvalu"
 msgstr ""
 
 #: i18n/countries.php:249
-msgid "United Arab Emirates"
+msgid "Uganda"
 msgstr ""
 
 #: i18n/countries.php:250
-msgid "United Kingdom (UK)"
+msgid "Ukraine"
 msgstr ""
 
 #: i18n/countries.php:251
-msgid "United States (US)"
+msgid "United Arab Emirates"
 msgstr ""
 
 #: i18n/countries.php:252
-msgid "Uruguay"
+msgid "United Kingdom (UK)"
 msgstr ""
 
 #: i18n/countries.php:253
-msgid "Uzbekistan"
+msgid "United States (US)"
 msgstr ""
 
 #: i18n/countries.php:254
-msgid "Vanuatu"
+msgid "Uruguay"
 msgstr ""
 
 #: i18n/countries.php:255
-msgid "Vatican"
+msgid "Uzbekistan"
 msgstr ""
 
 #: i18n/countries.php:256
-msgid "Venezuela"
+msgid "Vanuatu"
 msgstr ""
 
 #: i18n/countries.php:257
-msgid "Vietnam"
+msgid "Vatican"
 msgstr ""
 
 #: i18n/countries.php:258
-msgid "Wallis and Futuna"
+msgid "Venezuela"
 msgstr ""
 
 #: i18n/countries.php:259
-msgid "Western Sahara"
+msgid "Vietnam"
 msgstr ""
 
 #: i18n/countries.php:260
-msgid "Western Samoa"
+msgid "Wallis and Futuna"
 msgstr ""
 
 #: i18n/countries.php:261
-msgid "Yemen"
+msgid "Western Sahara"
 msgstr ""
 
 #: i18n/countries.php:262
-msgid "Zambia"
+msgid "Western Samoa"
 msgstr ""
 
 #: i18n/countries.php:263
+msgid "Yemen"
+msgstr ""
+
+#: i18n/countries.php:264
+msgid "Zambia"
+msgstr ""
+
+#: i18n/countries.php:265
 msgid "Zimbabwe"
 msgstr ""
 
@@ -4829,7 +4829,7 @@ msgid ""
 "Submitted nonce is \"%3$s\"."
 msgstr ""
 
-#: includes/abstracts/abstract-class-charitable-form.php:346
+#: includes/abstracts/abstract-class-charitable-form.php:347
 msgid ""
 "There were problems with your form submission. The following required "
 "fields were not filled out:"
@@ -5081,7 +5081,7 @@ msgstr ""
 #: includes/admin/class-charitable-admin.php:180
 #: includes/admin/views/metaboxes/campaign-donation-options/suggested-amounts.php:23
 #: includes/admin/views/metaboxes/campaign-donation-options/suggested-amounts.php:24
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:38
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:43
 #: templates/shortcodes/my-donations.php:62
 #: templates/shortcodes/my-donations.php:126
 msgid "Amount"
@@ -5452,31 +5452,31 @@ msgstr ""
 msgid "Send an email receipt to the donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:306
+#: includes/admin/forms/class-charitable-admin-donation-form.php:314
 msgid "You must provide both a campaign and amount."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:312
+#: includes/admin/forms/class-charitable-admin-donation-form.php:320
 msgid "Please choose an existing donor or provide an email address for a new donor."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:348
+#: includes/admin/forms/class-charitable-admin-donation-form.php:356
 msgid "Manual"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:516
+#: includes/admin/forms/class-charitable-admin-donation-form.php:524
 msgid "Donation updated manually by <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:619
+#: includes/admin/forms/class-charitable-admin-donation-form.php:629
 msgid "Select a Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:620
+#: includes/admin/forms/class-charitable-admin-donation-form.php:630
 msgid "Add a New Donor"
 msgstr ""
 
-#: includes/admin/forms/class-charitable-admin-donation-form.php:622
+#: includes/admin/forms/class-charitable-admin-donation-form.php:632
 msgid "Existing Donors"
 msgstr ""
 
@@ -6166,7 +6166,7 @@ msgid "Personal data for this donation was erased on %s."
 msgstr ""
 
 #: includes/admin/views/metaboxes/donation/donation-overview.php:111
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:37
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:42
 #: includes/class-charitable-post-types.php:85
 #: templates/donation-receipt/details.php:25 templates/donation-stats.php:17
 #: templates/shortcodes/my-donations.php:50
@@ -6190,7 +6190,7 @@ msgstr ""
 msgid "Payment Method"
 msgstr ""
 
-#: includes/admin/views/metaboxes/field-types/campaign-donations.php:46
+#: includes/admin/views/metaboxes/field-types/campaign-donations.php:51
 msgid "Select a campaign"
 msgstr ""
 
