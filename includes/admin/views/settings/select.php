@@ -7,12 +7,12 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.7.0
  */
 
 $value = charitable_get_option( $view_args['key'] );
 
-if ( empty( $value ) ) {
+if ( false === $value ) {
 	$value = isset( $view_args['default'] ) ? $view_args['default'] : '';
 }
 ?>
@@ -33,12 +33,12 @@ if ( empty( $value ) ) {
 			</optgroup>
 		<?php else : ?>
 			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $value ); ?>><?php echo $option; ?></option>
-		<?php
+			<?php
 		endif;
 	endforeach
 	?>
 </select>
 <?php if ( isset( $view_args['help'] ) ) : ?>
 	<div class="charitable-help"><?php echo $view_args['help']; ?></div>
-<?php
+	<?php
 endif;

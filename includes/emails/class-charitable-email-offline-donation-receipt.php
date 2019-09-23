@@ -71,10 +71,12 @@ if ( ! class_exists( 'Charitable_Email_Offline_Donation_Receipt' ) && class_exis
 			return array(
 				'offline_instructions' => array(
 					'description' => __( 'Show Offline Donation instructions.', 'charitable' ),
-					'value'       => wpautop( charitable_get_option(
-						array( 'gateways_offline', 'instructions' ),
-						__( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' )
-					) ),
+					'value'       => wpautop(
+						charitable_get_option(
+							array( 'gateways_offline', 'instructions' ),
+							__( 'Thank you for your donation. We will contact you shortly for payment.', 'charitable' )
+						)
+					),
 				),
 			);
 		}

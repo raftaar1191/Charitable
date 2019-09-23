@@ -4,16 +4,16 @@
 "use strict";
 
 module.exports = function(grunt) {
- 
+
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
- 
+
     grunt.initConfig({
 
         'pkg': grunt.file.readJSON('package.json'),
- 
+
         // watch for changes and run sass
-        'watch': {                        
+        'watch': {
             'php': {
                 'files': [
                     'includes/**/*.php',
@@ -22,20 +22,20 @@ module.exports = function(grunt) {
                 'tasks': ['copy']
             },
             'sass': {
-                'files': [ 
+                'files': [
                     'assets/css/',
                     'assets/css/**'
                 ],
                 'tasks': ['sass:dist']
-            }, 
+            },
         },
 
         // Sass
         'sass': {
             'dist': {
-                'files': {                    
-                    'assets/css/charitable-admin-pages.css' : 'assets/css/scss/charitable-admin-pages.scss', 
-                    'assets/css/charitable-admin-menu.css'  : 'assets/css/scss/charitable-admin-menu.scss', 
+                'files': {
+                    'assets/css/charitable-admin-pages.css' : 'assets/css/scss/charitable-admin-pages.scss',
+                    'assets/css/charitable-admin-menu.css'  : 'assets/css/scss/charitable-admin-menu.scss',
                     'assets/css/charitable-admin.css'       : 'assets/css/scss/charitable-admin.scss',
                     'assets/css/charitable-plupload-fields.css' : 'assets/css/scss/charitable-plupload-fields.scss',
                     'assets/css/charitable-datepicker.css'  : 'assets/css/scss/charitable-datepicker.scss',
@@ -64,9 +64,7 @@ module.exports = function(grunt) {
                     '_nx:1,2,4c,5d',
                     '_n_noop:1,2,3d',
                     '_nx_noop:1,2,3c,4d',
-                    ' __ngettext:1,2,3d',
-                    '__ngettext_noop:1,2,3d',
-                    '_c:1,2d',
+                   '_c:1,2d',
                     '_nc:1,2,4c,5d'
                 ]
             },
@@ -74,7 +72,9 @@ module.exports = function(grunt) {
                 'src' : [
                     '**/*.php', // Include all files
                     '!node_modules/**', // Exclude node_modules/
-                    '!build/.*'// Exclude build/
+                      ' __ngettext:1,2,3d',
+                    '__ngettext_noop:1,2,3d',
+                   '!build/.*'// Exclude build/
                 ],
                 'expand' : true
             }
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                                 'Author of the plugin/theme',
                                 'Author URI of the plugin/theme'
                             ];
-                            
+
                             for ( translation in pot.translations[''] ) {
                                 if ( 'undefined' !== typeof pot.translations[''][ translation ].comments.extracted ) {
                                     if ( excluded_meta.indexOf( pot.translations[''][ translation ].comments.extracted ) >= 0 ) {
@@ -130,7 +130,7 @@ module.exports = function(grunt) {
             'all' : [
                 'Gruntfile.js'
             ]
-        },        
+        },
 
         // uglify to concat, minify, and make source maps
         'uglify' : {
@@ -146,9 +146,9 @@ module.exports = function(grunt) {
             'build' : {
                 'files' : [{
                     'expand' : true,   // Enable dynamic expansion.
-                    'src' : [ 
-                        'assets/js/*.js',                         
-                        '!assets/js/*.min.js', 
+                    'src' : [
+                        'assets/js/*.js',
+                        '!assets/js/*.min.js',
                         '!assets/js/libraries/*.js',
                         'assets/js/libraries/leanModal.js',
                         'assets/js/libraries/js-cookie.js'
@@ -187,7 +187,7 @@ module.exports = function(grunt) {
                     '!cypress.json',
                     '!docker-compose.yml',
                     '!composer.json',
-                    '!composer.lock', 
+                    '!composer.lock',
                     '!phpunit.xml',
                     '!phpcs.ruleset.xml',
                     '!phpunit.xml.dist',
@@ -205,7 +205,7 @@ module.exports = function(grunt) {
                     '!**/Gruntfile.js',
                     '!**/package.json',
                     '!**/README.md',
-                    '!**/*~', 
+                    '!**/*~',
                     '!assets/css/scss/**',
                     '!CHANGELOG.md',
                     '!phpdoc.xml',
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
     grunt.registerTask( 'classmap', 'Generate class to file array" task.', function() {
         var map = "<?php\nreturn array(\n";
 
-        //loop through all files in logo directory
+        //loop through all files in includes directory
         grunt.file.recurse("includes", function (abspath, rootdir, subdir, filename) {
             var classname = filename.replace('.php', '');
             var filepath = typeof subdir === 'undefined' ? filename : subdir + '/' + filename;
@@ -269,7 +269,7 @@ module.exports = function(grunt) {
                 classname = classname.replace( '_I18n', '_i18n' );
 
                 map = map.concat( "\t'" + classname + "' => '" + filepath + "',\n" );
-            }     
+            }
         });
 
         map = map.concat( ");\n" );
@@ -281,7 +281,7 @@ module.exports = function(grunt) {
 
     // Default task. - grunt watch
     grunt.registerTask( 'default', 'watch' );
-    
+
     // Build task(s).
     grunt.registerTask( 'build-scripts', [ 'uglify' ] );
     grunt.registerTask( 'build-styles', [ 'cssmin' ] );

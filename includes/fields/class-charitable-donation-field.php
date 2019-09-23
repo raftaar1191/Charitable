@@ -170,13 +170,16 @@ if ( ! class_exists( 'Charitable_Donation_Field' ) ) :
 		 * @return boolean|array
 		 */
 		protected function sanitize_donation_form( $value ) {
-			return $this->sanitize_form_arg( $value, array(
-				'type'      => 'text',
-				'required'  => false,
-				'fullwidth' => false,
-				'default'   => '',
-				'attrs'     => array(),
-			) );
+			return $this->sanitize_form_arg(
+				$value,
+				array(
+					'type'      => 'text',
+					'required'  => false,
+					'fullwidth' => false,
+					'default'   => '',
+					'attrs'     => array(),
+				)
+			);
 		}
 	}
 

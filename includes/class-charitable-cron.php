@@ -82,18 +82,18 @@ if ( ! class_exists( 'Charitable_Cron' ) ) :
 			$yesterday = date( 'Y-m-d H:i:s', strtotime( '-24 hours' ) );
 
 			$args = array(
-				'fields' => 'ids',
-				'post_type' => Charitable::CAMPAIGN_POST_TYPE,
+				'fields'         => 'ids',
+				'post_type'      => Charitable::CAMPAIGN_POST_TYPE,
 				'posts_per_page' => -1,
-				'post_status' => 'publish',
-				'meta_query' => array(
+				'post_status'    => 'publish',
+				'meta_query'     => array(
 					array(
-						'key'       => '_campaign_end_date',
-						'value'     => array( $yesterday, date( 'Y-m-d H:i:s' ) ),
-						'compare'   => 'BETWEEN',
-						'type'      => 'datetime'
-					)
-				)
+						'key'     => '_campaign_end_date',
+						'value'   => array( $yesterday, date( 'Y-m-d H:i:s' ) ),
+						'compare' => 'BETWEEN',
+						'type'    => 'datetime',
+					),
+				),
 			);
 
 			$campaigns = get_posts( $args );
