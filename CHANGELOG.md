@@ -9,6 +9,12 @@
 * FIX: Fixed error that prevented Charitable settings using a select element from correctly showing the current selected value if the value is 0. [#639](https://github.com/Charitable/Charitable/issues/639)
 * UPDATE: Replaced `ambassadors_form` with `campaign_form` in the Campaign Fields API. `ambassadors_form` has thus far been unused; `campaign_form` will be supported in the next release of Charitable Ambassadors.
 
+# 1.6.24
+* UPDATE: Officially adopted Unicode CLDR recommendations for country names. Several country names have been updated. [#704](https://github.com/Charitable/Charitable/issues/704) and [#700](https://github.com/Charitable/Charitable/issues/700)
+* FIX: Show which fields are required in the admin donation form. [#702](https://github.com/Charitable/Charitable/issues/702)
+* FIX: When a manual donation submission fails because of some missing required fields, show the error notice. [#703](https://github.com/Charitable/Charitable/issues/703)
+* FIX: In some cases, the End Date, Goal and Description fields would be removed from the campaign editor in the admin. [#690](https://github.com/Charitable/Charitable/issues/690)
+
 # 1.6.23
 * NEW: Added option to specify `year_range` parameter for datepicker fields. By default, the datepicker will show the previous 100 years. [#696](https://github.com/Charitable/Charitable/issues/696)
 * NEW: Added `charitable_user_verified` action hook to do something after a user verifies their email address.
