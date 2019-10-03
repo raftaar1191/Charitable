@@ -2,11 +2,12 @@
 /**
  * Class that is responsible for generating a CSV export of donations.
  *
- * @package     Charitable/Classes/Charitable_Export_Donations
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Export_Donations
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.25
  */
 
 /* Exit if accessed directly */
@@ -16,15 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Charitable_Export_Donations' ) ) :
 
-	/* Include Charitable_Export base class. */
-	if ( ! class_exists( 'Charitable_Export' ) ) {
-		require_once( charitable()->get_path( 'includes' ) . 'abstracts/abstract-class-charitable-export.php' );
-	}
-
 	/**
 	 * Charitable_Export_Donations
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Export_Donations extends Charitable_Export {
 

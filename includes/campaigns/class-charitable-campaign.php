@@ -907,6 +907,27 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 		}
 
 		/**
+		 * Returns the donation period for the amount in session.
+		 *
+		 * @since  1.6.25
+		 *
+		 * @return false|string
+		 */
+		public function get_donation_period_in_session() {
+			$donation = charitable_get_session()->get_donation_by_campaign( $this->ID );
+
+			if ( ! $donation ) {
+				return false;
+			}
+
+			if ( ! is_array( $donation ) || ! array_key_exists( 'donation_period', $donation ) ) {
+				return 'one-time';
+			}
+
+			return $donation['donation_period'];
+		}
+
+		/**
 		 * Renders the donate button template.
 		 *
 		 * @since  1.0.0

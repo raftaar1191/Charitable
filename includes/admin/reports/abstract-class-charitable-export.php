@@ -1,4 +1,6 @@
-<?php 
+<?php
+/* CLASSMAP: IGNORE */
+
 /**
  * In Charitable 1.5, we moved the location of the base Charitable_Export class.
  *

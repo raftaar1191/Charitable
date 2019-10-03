@@ -377,7 +377,7 @@ return apply_filters(
 			'admin_form'     => false,
 			'email_tag'      => array(
 				'description' => __( 'The payment gateway\'s transaction ID for the donation', 'charitable' ),
-				'preview'     => __( 'XYZ-2132323', 'charitable' ),
+				'preview'     => 'XYZ-2132323',
 			),
 			'show_in_meta'   => true,
 			'show_in_export' => true,

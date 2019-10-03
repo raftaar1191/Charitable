@@ -129,7 +129,7 @@ function charitable_get_campaign_creator_field( Charitable_Campaign $campaign, $
 }
 
 /**
- * Get a particular taxonomy field for a campa
+ * Get a particular taxonomy field for a campaign.
  *
  * @since  1.6.19
  *
@@ -151,4 +151,16 @@ function charitable_get_campaign_taxonomy_terms_list( Charitable_Campaign $campa
 	}
 
 	return implode( ', ', $terms );
+}
+
+/**
+ * Get the featured image for a particular campaign.
+ *
+ * @since  1.6.25
+ *
+ * @param  Charitable_Campaign $campaign The campaign object.
+ * @return string|int
+ */
+function charitable_get_campaign_featured_image( Charitable_Campaign $campaign ) {
+	return get_post_thumbnail_id( $campaign->ID );
 }

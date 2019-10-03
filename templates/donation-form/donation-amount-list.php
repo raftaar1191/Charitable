@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Donation Form
  * @since   1.5.0
- * @version 1.7.0
+ * @version 1.6.25
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,6 +24,7 @@ $form_id   = $view_args['form_id'];
 $suggested = $campaign->get_suggested_donations();
 $custom    = $campaign->get( 'allow_custom_donations' );
 $amount    = $campaign->get_donation_amount_in_session();
+$one_time  = 'one-time' == $campaign->get_donation_period_in_session();
 
 if ( 0 == $amount ) {
 	/**
@@ -48,7 +49,7 @@ if ( count( $suggested ) ) :
 	<ul class="donation-amounts">
 		<?php
 		foreach ( $suggested as $suggestion ) :
-			$checked  = checked( $suggestion['amount'], $amount, false );
+			$checked  = $one_time && checked( $suggestion['amount'], $amount, false );
 			$field_id = esc_attr(
 				sprintf(
 					'form-%s-field-%s',
@@ -67,7 +68,7 @@ if ( count( $suggested ) ) :
 						id="<?php echo $field_id; ?>"
 						type="radio"
 						name="donation_amount"
-						value="<?php echo esc_attr( charitable_get_currency_helper()->sanitize_database_amount( $suggestion['amount'] ) ); ?>" <?php echo $checked ?>
+						value="<?php echo esc_attr( charitable_get_currency_helper()->sanitize_database_amount( $suggestion['amount'] ) ); ?>" <?php echo $checked; ?>
 					/>
 					<?php
 						printf(
@@ -82,8 +83,7 @@ if ( count( $suggested ) ) :
 		endforeach;
 
 		if ( $custom ) :
-
-			$has_custom_donation_amount = ! $amount_is_suggestion && $amount;
+			$has_custom_donation_amount = $one_time && ( ! $amount_is_suggestion && $amount );
 			?>
 			<li class="donation-amount custom-donation-amount">
 				<span class="custom-donation-amount-wrapper">
