@@ -1,13 +1,13 @@
 <?php
 /**
- * email_verification endpoint.
+ * Email verification endpoint.
  *
  * @package   Charitable/Classes/Charitable_Email_Verification_Endpoint
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.25
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 				)
 			);
 
-			$templates = array( 'email-verification-page.php', 'page.php', 'index.php' );
+			$templates = array( 'email-verification-page.php', 'page.php', 'singular.php', 'index.php' );
 
 			if ( $profile ) {
 				return charitable_splice_template( get_page_template_slug( $profile ), $templates );

@@ -1,6 +1,6 @@
 <?php
 /**
- * donation_cancellation endpoint.
+ * Donation cancellation endpoint.
  *
  * @package   Charitable/Classes/Charitable_Donation_Cancellation_Endpoint
  * @author    Eric Daams

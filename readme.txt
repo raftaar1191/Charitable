@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
 Requires at least: 4.1
 Tested up to: 5.2.3
-Stable tag: 1.6.24
+Stable tag: 1.6.25
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,17 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.25 =
+* NEW: Automatically set the selected amount in the donation form by appending query parameters to the donation form URL. For example, going to `https://yoursite.com/campaigns/my-campaign/?amount=10` will load the donation form with a $10 donation preset. [#684](https://github.com/Charitable/Charitable/issues/684)
+* NEW: Mark a user's email address as verified when they complete Ultimate Member's email activation process. [#709](https://github.com/Charitable/Charitable/issues/709)
+* NEW: Registered `image` as a Campaign Field. `$campaign->get( 'image' )` will return the ID of the campaign's featured image.
+* FIX: Add `singular.php` as a fallback template to use for Charitable endpoints.
+* FIX: Ensure that `wp_title` has a page name set for Charitable endpoints. [#660](https://github.com/Charitable/Charitable/issues/660)
+* FIX: Prevent adding duplicate pending processes to the donation form Javascript handler. [#697](https://github.com/Charitable/Charitable/issues/697)
+* FIX: Ensure that shortcodes in the Terms & Conditions text are parsed when the donation form is loaded via AJAX. [#708](https://github.com/Charitable/Charitable/issues/708)
+* FIX: Fixed error that prevented Charitable settings using a select element from correctly showing the current selected value if the value is 0. [#639](https://github.com/Charitable/Charitable/issues/639)
+* UPDATE: Replaced `ambassadors_form` with `campaign_form` in the Campaign Fields API. `ambassadors_form` has thus far been unused; `campaign_form` will be supported in the next release of Charitable Ambassadors.
 
 = 1.6.24 =
 * UPDATE: Officially adopted Unicode CLDR recommendations for country names. Several country names have been updated. [#704](https://github.com/Charitable/Charitable/issues/704) and [#700](https://github.com/Charitable/Charitable/issues/700)

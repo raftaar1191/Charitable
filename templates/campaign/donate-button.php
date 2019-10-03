@@ -5,7 +5,7 @@
  * Override this template by copying it to yourtheme/charitable/campaign/donate-button.php
  *
  * @author  Studio 164a
- * @package Charitable/Templates/Campaign
+ * @package Charitable/Templates/Campaign Page
  * @since   1.3.0
  * @version 1.3.0
  */

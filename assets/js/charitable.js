@@ -685,7 +685,8 @@ CHARITABLE = window.CHARITABLE || {};
      * @return int Index of the process.
      */
     Donation_Form.prototype.add_pending_process = function( process ) {
-        return this.pending_processes.push( process ) - 1;
+        var index = this.pending_processes.indexOf( process );
+        return -1 === index ? ( this.pending_processes.push( process ) - 1 ) : index;
     }
 
     /**

@@ -1,16 +1,18 @@
 <?php
 /**
- * forgot_password endpoint.
+ * Forgot password endpoint.
  *
  * @package   Charitable/Classes/Charitable_Forgot_Password_Endpoint
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.25
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 
@@ -120,12 +122,15 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 				return $template;
 			}
 
-			new Charitable_Ghost_Page( 'forgot-password-page', array(
-				'title'   => __( 'Forgot Password', 'charitable' ),
-				'content' => '<!-- Silence is golden -->',
-			) );
+			new Charitable_Ghost_Page(
+				'forgot-password-page',
+				array(
+					'title'   => __( 'Forgot Password', 'charitable' ),
+					'content' => '<!-- Silence is golden -->',
+				)
+			);
 
-			return charitable_splice_template( get_page_template_slug( $login ), array( 'forgot-password-page.php', 'page.php', 'index.php' ) );
+			return charitable_splice_template( get_page_template_slug( $login ), array( 'forgot-password-page.php', 'page.php', 'singular.php', 'index.php' ) );
 		}
 
 		/**
@@ -142,9 +147,12 @@ if ( ! class_exists( 'Charitable_Forgot_Password_Endpoint' ) ) :
 			if ( isset( $_GET['email_sent'] ) ) {
 				charitable_template( 'account/forgot-password-sent.php' );
 			} else {
-				charitable_template( 'account/forgot-password.php', array(
-					'form' => new Charitable_Forgot_Password_Form(),
-				) );
+				charitable_template(
+					'account/forgot-password.php',
+					array(
+						'form' => new Charitable_Forgot_Password_Form(),
+					)
+				);
 			}
 
 			return ob_get_clean();

@@ -160,6 +160,14 @@ return apply_filters(
 			'email_tag'      => false,
 			'show_in_export' => false,
 		),
+		'image'                    => array(
+			'label'          => __( 'Featured Image', 'charitable' ),
+			'data_type'      => 'meta',
+			'value_callback' => 'charitable_get_campaign_featured_image',
+			'admin_form'     => false,
+			'email_tag'      => false,
+			'show_in_export' => false,
+		),
 		'campaign_creator_name'    => array(
 			'label'          => __( 'Campaign Creator', 'charitable' ),
 			'data_type'      => 'core',

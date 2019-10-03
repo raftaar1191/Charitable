@@ -252,16 +252,19 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		 * Add a donation to a campaign to the session.
 		 *
 		 * @since  1.0.0
+		 * @since  1.6.25 Added $period parameter.
 		 *
-		 * @param  int $campaign_id Campaign ID.
-		 * @param  int $amount      Donation amount.
+		 * @param  int    $campaign_id Campaign ID.
+		 * @param  int    $amount      Donation amount.
+		 * @param  string $period      Set the donation period. Defaults to once.
 		 * @return void
 		 */
-		public function add_donation( $campaign_id, $amount ) {
+		public function add_donation( $campaign_id, $amount, $period = 'once' ) {
 			$donations = $this->get( 'donations' );
 
-			$campaign_donation           = isset( $donations[ $campaign_id ] ) ? $donations[ $campaign_id ] : array();
-			$campaign_donation['amount'] = floatval( $amount );
+			$campaign_donation                    = isset( $donations[ $campaign_id ] ) ? $donations[ $campaign_id ] : array();
+			$campaign_donation['amount']          = floatval( $amount );
+			$campaign_donation['donation_period'] = $period;
 
 			$donations[ $campaign_id ] = $campaign_donation;
 

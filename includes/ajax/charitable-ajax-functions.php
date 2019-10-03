@@ -38,7 +38,12 @@ if ( ! function_exists( 'charitable_ajax_get_donation_form' ) ) :
 
 		$campaign->get_donation_form()->render();
 
-		$output = ob_get_clean();
+		/**
+		 * Strip any shortcodes that haven't been rendered yet.
+		 *
+		 * @see https://github.com/Charitable/Charitable/issues/708
+		 */
+		$output = preg_replace( '~(?:\[/?)[^/\]]+/?\]~s', '', ob_get_clean() );
 
 		wp_send_json_success( $output );
 

@@ -209,14 +209,16 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * If set, add supported donation parameters to the session.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.25
 		 *
 		 * @param  int $campaign_id The campaign receiving the donation.
 		 * @return void
 		 */
 		public function add_donation_params_to_session( $campaign_id ) {
 			if ( array_key_exists( 'amount', $_REQUEST ) ) {
-				charitable_get_session()->add_donation( $campaign_id, $_REQUEST['amount'] );
+				$period = array_key_exists( 'period', $_REQUEST ) ? $_REQUEST['period'] : 'once';
+
+				charitable_get_session()->add_donation( $campaign_id, $_REQUEST['amount'], $period );
 			}
 		}
 	}

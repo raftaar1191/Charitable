@@ -457,10 +457,14 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$amount = $this->get_campaign()->get_donation_amount_in_session();
 
 			if ( ! $amount ) {
-				$content = charitable_template_from_session_content( 'donation_form_current_amount_text', array(
-					'campaign_id' => $this->get_campaign()->ID,
-					'form_id'     => $this->get_form_identifier(),
-				), '' );
+				$content = charitable_template_from_session_content(
+					'donation_form_current_amount_text',
+					array(
+						'campaign_id' => $this->get_campaign()->ID,
+						'form_id'     => $this->get_form_identifier(),
+					),
+					''
+				);
 			} else {
 				$content = charitable_template_donation_form_current_amount_text( $amount, $this->get_form_identifier(), $this->get_campaign()->ID );
 			}
@@ -493,10 +497,13 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return void
 		 */
 		public function render() {
-			charitable_template( 'donation-form/form-donation.php', array(
-				'campaign' => $this->get_campaign(),
-				'form'     => $this,
-			) );
+			charitable_template(
+				'donation-form/form-donation.php',
+				array(
+					'campaign' => $this->get_campaign(),
+					'form'     => $this,
+				)
+			);
 		}
 
 		/**

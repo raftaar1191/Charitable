@@ -20,11 +20,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 
+	/**
+	 * Data processor class.
+	 *
+	 * @since 1.5.9
+	 */
 	class Charitable_Data_Processor {
 		/**
 		 * The raw input data.
 		 *
-		 * @since 1.2.0
+		 * @since 1.5.9
 		 *
 		 * @var   array
 		 */
@@ -33,7 +38,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		/**
 		 * The map of fields.
 		 *
-		 * @since 1.2.0
+		 * @since 1.5.9
 		 *
 		 * @var   array
 		 */
@@ -44,7 +49,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 * as the map of fields, but has the sanitized &
 		 * normalized values from the input data.
 		 *
-		 * @since 1.2.0
+		 * @since 1.5.9
 		 *
 		 * @var   array
 		 */
@@ -170,6 +175,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 *
 		 * @param  array $functions Stack of functions, in order of priority, with $args
 		 *                          passed as the value of the function.
+		 * @param  mixed $default   The default value to return if none of the functions exist.
 		 * @return mixed|null
 		 */
 		protected function apply_function_to_field( $functions, $default = '' ) {
@@ -195,19 +201,24 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 */
 		protected function process_field( $key, $type, $data_type = false ) {
 			/* Retrieve the value. */
-			$value = $this->apply_function_to_field( array(
-				'process_' . $key       => array( $type, $data_type ),
-				'process_' . $data_type => array( $key, $type ),
-				'process_' . $type      => array( $key, $data_type ),
-				'process_generic_field' => array( $key ),
-			) );
+			$value = $this->apply_function_to_field(
+				array(
+					'process_' . $key       => array( $type, $data_type ),
+					'process_' . $data_type => array( $key, $type ),
+					'process_' . $type      => array( $key, $data_type ),
+					'process_generic_field' => array( $key ),
+				)
+			);
 
 			/* Return the value after it is sanitized. */
-			return $this->apply_function_to_field( array(
-				'sanitize_' . $key       => array( $value, $type, $data_type ),
-				'sanitize_' . $data_type => array( $value, $key, $type ),
-				'sanitize_' . $type      => array( $value, $key, $data_type ),
-			), $value );
+			return $this->apply_function_to_field(
+				array(
+					'sanitize_' . $key       => array( $value, $type, $data_type ),
+					'sanitize_' . $data_type => array( $value, $key, $type ),
+					'sanitize_' . $type      => array( $value, $key, $data_type ),
+				),
+				$value
+			);
 		}
 
 		/**
@@ -242,7 +253,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 *
 		 * @since  1.5.9
 		 *
-		 * @param  string $key
+		 * @param  string $key The key of the picture field.
 		 * @return int|false
 		 */
 		protected function process_picture( $key ) {
@@ -272,7 +283,7 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 *
 		 * @since  1.5.9
 		 *
-		 * @param  string|int The number to be sanitized.
+		 * @param  string|int $value The number to be sanitized.
 		 * @return int
 		 */
 		protected function sanitize_number( $value ) {
@@ -333,9 +344,9 @@ if ( ! class_exists( 'Charitable_Data_Processor' ) ) :
 		 * @since  1.0.0
 		 *
 		 * @param  string $file_key  Reference to a single element of `$_FILES`. Call the
-		 * 							 function once for each uploaded file.
+		 *                           function once for each uploaded file.
 		 * @param  array  $overrides Optional. An associative array of names=>values to
-		 * 							 override default variables. Default false.
+		 *                           override default variables. Default false.
 		 * @return array
 		 */
 		protected function get_file_overrides( $file_key, $overrides = array() ) {

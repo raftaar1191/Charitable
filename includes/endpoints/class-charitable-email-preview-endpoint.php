@@ -1,6 +1,6 @@
 <?php
 /**
- * email_preview endpoint.
+ * Email preview endpoint.
  *
  * @package   Charitable/Classes/Charitable_Email_Preview_Endpoint
  * @author    Eric Daams
@@ -10,7 +10,9 @@
  * @version   1.5.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 
@@ -54,10 +56,15 @@ if ( ! class_exists( 'Charitable_Email_Preview_Endpoint' ) ) :
 				return '';
 			}
 
-			return esc_url_raw( add_query_arg( array(
-				'charitable_action' => 'preview_email',
-				'email_id' 			=> $args['email_id'],
-			), home_url() ) );
+			return esc_url_raw(
+				add_query_arg(
+					array(
+						'charitable_action' => 'preview_email',
+						'email_id'          => $args['email_id'],
+					),
+					home_url()
+				)
+			);
 		}
 
 		/**

@@ -2,52 +2,64 @@
 /**
  * Abstract class defining Export model.
  *
- * @package     Charitable/Classes/Charitable_Export
- * @version     1.0.0
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Export
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Export' ) ) :
 
 	/**
 	 * Charitable_Export
 	 *
-	 * @abstract
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	abstract class Charitable_Export {
 
-		/**
-		 * @var     string  The type of export.
-		 */
+		/* The type of export. */
 		const EXPORT_TYPE = '';
 
 		/**
-		 * @var     string[] The CSV's columns.
+		 * The CSV's columns.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   string[]
 		 */
 		protected $columns;
 
 		/**
-		 * @var     mixed[] Optional array of arguments.
+		 * Optional array of arguments.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   mixed[]
 		 */
 		protected $args;
 
 		/**
-		 * @var     mixed[] Array of default arguments.
+		 * Array of default arguments.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @var   mixed[]
 		 */
 		protected $defaults = array();
 
 		/**
 		 * Create class object.
 		 *
-		 * @since   1.0.0
+		 * @since 1.0.0
 		 *
-		 * @param   mixed[] $args
+		 * @param mixed[] $args Mixed arguments.
 		 */
 		public function __construct( $args = array() ) {
 			$this->columns = $this->get_csv_columns();

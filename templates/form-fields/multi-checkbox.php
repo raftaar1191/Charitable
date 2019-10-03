@@ -12,12 +12,12 @@ if ( ! isset( $view_args['form'] ) || ! isset( $view_args['field'] ) ) {
 	return;
 }
 
-$form           = $view_args['form'];
-$field          = $view_args['field'];
-$classes        = $view_args['classes'];
-$is_required    = isset( $field['required'] ) ? $field['required'] : false;
-$options        = isset( $field['options'] ) ? $field['options'] : array();
-$value          = isset( $field['value'] ) ? (array) $field['value'] : array();
+$form        = $view_args['form'];
+$field       = $view_args['field'];
+$classes     = $view_args['classes'];
+$is_required = isset( $field['required'] ) ? $field['required'] : false;
+$options     = isset( $field['options'] ) ? $field['options'] : array();
+$value       = isset( $field['value'] ) ? (array) $field['value'] : array();
 
 if ( empty( $options ) ) {
 	return;
@@ -36,9 +36,9 @@ if ( empty( $options ) ) {
 		<ul class="charitable-checkbox-list options">
 		<?php foreach ( $options as $val => $label ) : ?>
 			<li>
-				<input type="checkbox" 
+				<input type="checkbox"
 					id="<?php echo esc_attr( $field['key'] . '-' . $val ); ?>"
-					name="<?php echo $field['key']; ?>[]" 
+					name="<?php echo $field['key']; ?>[]"
 					value="<?php echo $val; ?>"
 					aria-describedby="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_label"
 					<?php checked( in_array( $val, $value ) ); ?>

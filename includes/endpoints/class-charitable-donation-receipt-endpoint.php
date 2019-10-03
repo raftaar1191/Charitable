@@ -1,16 +1,18 @@
 <?php
 /**
- * donation_receipt endpoint.
+ * Donation receipt endpoint.
  *
  * @package   Charitable/Classes/Charitable_Donation_Receipt_Endpoint
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.25
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 
@@ -68,10 +70,15 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 			if ( $wp_rewrite->using_permalinks() ) {
 				$url = sprintf( '%s/donation-receipt/%d', untrailingslashit( home_url() ), $donation_id );
 			} else {
-				$url = esc_url_raw( add_query_arg( array(
-					'donation_receipt' => 1,
-					'donation_id'      => $donation_id,
-				), home_url() ) );
+				$url = esc_url_raw(
+					add_query_arg(
+						array(
+							'donation_receipt' => 1,
+							'donation_id'      => $donation_id,
+						),
+						home_url()
+					)
+				);
 			}
 
 			return $url;
@@ -122,12 +129,15 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 			 */
 			$donation_receipt_page_title = apply_filters( 'charitable_donation_receipt_page_title', __( 'Your Receipt', 'charitable' ) );
 
-			new Charitable_Ghost_Page( 'donation-receipt-page', array(
-				'title'   => $donation_receipt_page_title,
-				'content' => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
-			) );
+			new Charitable_Ghost_Page(
+				'donation-receipt-page',
+				array(
+					'title'   => $donation_receipt_page_title,
+					'content' => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
+				)
+			);
 
-			return array( 'donation-receipt-page.php', 'page.php', 'index.php' );
+			return array( 'donation-receipt-page.php', 'page.php', 'singular.php', 'index.php' );
 		}
 
 		/**

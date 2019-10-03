@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
- * @version   1.6.0
+ * @version   1.6.25
  */
 
 // Exit if accessed directly.
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 	 * @property string         $data_type
 	 * @property false|callable $value_callback
 	 * @property boolean|array  $admin_form
-	 * @property boolean|array  $ambassadors_form
+	 * @property boolean|array  $campaign_form
 	 * @property boolean        $show_in_export
 	 * @property boolean|array  $email_tag
 	 */
@@ -50,12 +50,12 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 		 * @var   array $args  {
 		 *     Array of field arguments.
 		 *
-		 *     @type string         $label           The label to use in the export, meta, Ambassadors form (unless overridden), admin
-		 *                                           form (unless overriden) and email tag (unless overridden).
-		 *                                           If no `label` is provided in the ambassadors_form args, this label will be used in
-		 *                                           the Ambassadors form. If no `label` is provided in the admin_form args, this label
-		 *                                           will also be used in the admin form. Unless a `description` is set in the `email_tag`
-		 *                                           args, this label will also be used there as the tag description.
+		 *     @type string         $label           The label to use in the export, meta, Ambassadors campaign form (unless overridden),
+		 *                                           admin form (unless overriden) and email tag (unless overridden).
+		 *                                           If no `label` is provided in the campaign_form args, this label will be used in
+		 *                                           the Ambassadors campaign form. If no `label` is provided in the admin_form args, this
+		 *                                           label will also be used in the admin form. Unless a `description` is set in the
+		 *                                           `email_tag` args, this label will also be used there as the tag description.
 		 *     @type string         $data_type       How the data should be saved. This may be set to 'meta' or 'core', through 'core'
 		 *                                           is designed stricly for core Charitable use.
 		 *     @type false|callable $value_callback  A callback function to retrieve the value of the field for a campaign.
@@ -101,8 +101,8 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 		 *         @type false|callable $value_callback A callback function to retrieve the value of the field for a campaign.
 		 *                                              This will override the `value_callback` setting for the field.
 		 *     }
-		 *     @type boolean|array  $ambassadors_form   {
-		 *         Sets whether the field should be shown in the Ambassadors form. To prevent the field being available
+		 *     @type boolean|array  $campaign_form   {
+		 *         Sets whether the field should be shown in the Ambassadors campaign form. To prevent the field being available
 		 *         in the form (not even as a hidden input), set to false. If set to true, the form field will inherit arguments
 		 *         from the `admin_form` (if provided), or use default arguments. For control over how the field should be
 		 *         shown in the form, an array can be passed with the same keys as described for `admin_form` above.
@@ -130,13 +130,13 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 		 */
 		protected function get_defaults() {
 			return array(
-				'label'            => '',
-				'data_type'        => 'meta',
-				'value_callback'   => false,
-				'ambassadors_form' => true,
-				'admin_form'       => true,
-				'show_in_export'   => true,
-				'email_tag'        => true,
+				'label'          => '',
+				'data_type'      => 'meta',
+				'value_callback' => false,
+				'campaign_form'  => true,
+				'admin_form'     => true,
+				'show_in_export' => true,
+				'email_tag'      => true,
 			);
 		}
 
@@ -160,21 +160,24 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 		}
 
 		/**
-		 * Sanitize the ambassadors_form setting.
+		 * Sanitize the campaign_form setting.
 		 *
 		 * @since  1.6.0
 		 *
 		 * @param  mixed $value The argument setting.
 		 * @return boolean|array
 		 */
-		protected function sanitize_ambassadors_form( $value ) {
-			return $this->sanitize_form_arg( $value, array(
-				'type'      => 'text',
-				'required'  => false,
-				'fullwidth' => false,
-				'default'   => '',
-				'attrs'     => array(),
-			) );
+		protected function sanitize_campaign_form( $value ) {
+			return $this->sanitize_form_arg(
+				$value,
+				array(
+					'type'      => 'text',
+					'required'  => false,
+					'fullwidth' => false,
+					'default'   => '',
+					'attrs'     => array(),
+				)
+			);
 		}
 
 		/**
@@ -186,14 +189,17 @@ if ( ! class_exists( 'Charitable_Campaign_Field' ) ) :
 		 * @return boolean|array
 		 */
 		public function sanitize_admin_form( $value ) {
-			return $this->sanitize_form_arg( $value, array(
-				'type'      => 'text',
-				'required'  => false,
-				'fullwidth' => false,
-				'default'   => '',
-				'attrs'     => array(),
-				'section'   => charitable()->campaign_fields()->get_default_section( 'admin' ),
-			) );
+			return $this->sanitize_form_arg(
+				$value,
+				array(
+					'type'      => 'text',
+					'required'  => false,
+					'fullwidth' => false,
+					'default'   => '',
+					'attrs'     => array(),
+					'section'   => charitable()->campaign_fields()->get_default_section( 'admin' ),
+				)
+			);
 		}
 	}
 

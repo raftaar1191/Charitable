@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 
@@ -241,10 +243,14 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 			 * @param array                                     $data      Taxonomy data.
 			 * @param Charitable_Campaign_Processor $processor This processor object.
 			 */
-			$data = apply_filters( 'charitable_campaign_processor_taxonomy_data', array(
-				'campaign_category' => $this->get( 'categories' ),
-				'campaign_tag'      => $this->get( 'tags' ),
-			), $this );
+			$data = apply_filters(
+				'charitable_campaign_processor_taxonomy_data',
+				array(
+					'campaign_category' => $this->get( 'categories' ),
+					'campaign_tag'      => $this->get( 'tags' ),
+				),
+				$this
+			);
 
 			foreach ( $data as $taxonomy => $terms ) {
 				wp_set_object_terms( $this->campaign_id, $terms, $taxonomy, false );

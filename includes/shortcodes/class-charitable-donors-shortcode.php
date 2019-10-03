@@ -32,17 +32,17 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 		 */
 		public static function display( $atts ) {
 			$default = array(
-				'number'			=> 10,
-				'orderby'			=> 'date',
-				'order'			    => 'DESC',
-				'campaign'			=> 0,
+				'number'            => 10,
+				'orderby'           => 'date',
+				'order'             => 'DESC',
+				'campaign'          => 0,
 				'distinct_donors'   => 0,
-				'orientation'      	=> 'horizontal',
-				'show_name'			=> 1,
-				'show_location'		=> 0,
-				'show_amount'		=> 1,
-				'show_avatar'		=> 1,
-				'hide_if_no_donors'	=> 0,
+				'orientation'       => 'horizontal',
+				'show_name'         => 1,
+				'show_location'     => 0,
+				'show_amount'       => 1,
+				'show_avatar'       => 1,
+				'hide_if_no_donors' => 0,
 			);
 
 			$args           = shortcode_atts( $default, $atts, 'charitable_donors' );
@@ -79,22 +79,34 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 * @param  array $args      All the parsed arguments.
 			 * @return array
 			 */
-			$view_args = apply_filters( 'charitable_donors_shortcode_view_args', charitable_array_subset( $args, array(
-				'donors',
-				'number',
-				'orderby',
-				'order',
-				'campaign',
-				'orientation',
-				'distinct_donors',
-				'show_name',
-				'show_location',
-				'show_amount',
-				'show_avatar',
-				'hide_if_no_donors',
-			) ), $args );
+			$view_args = apply_filters(
+				'charitable_donors_shortcode_view_args',
+				charitable_array_subset(
+					$args,
+					array(
+						'donors',
+						'number',
+						'orderby',
+						'order',
+						'campaign',
+						'orientation',
+						'distinct_donors',
+						'show_name',
+						'show_location',
+						'show_amount',
+						'show_avatar',
+						'hide_if_no_donors',
+					)
+				),
+				$args
+			);
 
 			$template->set_view_args( $view_args );
+
+			// echo '<pre>';
+			// var_dump( $template );
+			// var_dump( $view_args );
+			// echo '</pre>';
 
 			ob_start();
 

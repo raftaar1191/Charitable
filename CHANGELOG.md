@@ -1,3 +1,14 @@
+# 1.6.25
+* NEW: Automatically set the selected amount in the donation form by appending query parameters to the donation form URL. For example, going to `https://yoursite.com/campaigns/my-campaign/?amount=10` will load the donation form with a $10 donation preset. [#684](https://github.com/Charitable/Charitable/issues/684)
+* NEW: Mark a user's email address as verified when they complete Ultimate Member's email activation process. [#709](https://github.com/Charitable/Charitable/issues/709)
+* NEW: Registered `image` as a Campaign Field. `$campaign->get( 'image' )` will return the ID of the campaign's featured image.
+* FIX: Add `singular.php` as a fallback template to use for Charitable endpoints.
+* FIX: Ensure that `wp_title` has a page name set for Charitable endpoints. [#660](https://github.com/Charitable/Charitable/issues/660)
+* FIX: Prevent adding duplicate pending processes to the donation form Javascript handler. [#697](https://github.com/Charitable/Charitable/issues/697)
+* FIX: Ensure that shortcodes in the Terms & Conditions text are parsed when the donation form is loaded via AJAX. [#708](https://github.com/Charitable/Charitable/issues/708)
+* FIX: Fixed error that prevented Charitable settings using a select element from correctly showing the current selected value if the value is 0. [#639](https://github.com/Charitable/Charitable/issues/639)
+* UPDATE: Replaced `ambassadors_form` with `campaign_form` in the Campaign Fields API. `ambassadors_form` has thus far been unused; `campaign_form` will be supported in the next release of Charitable Ambassadors.
+
 # 1.6.24
 * UPDATE: Officially adopted Unicode CLDR recommendations for country names. Several country names have been updated. [#704](https://github.com/Charitable/Charitable/issues/704) and [#700](https://github.com/Charitable/Charitable/issues/700)
 * FIX: Show which fields are required in the admin donation form. [#702](https://github.com/Charitable/Charitable/issues/702)
@@ -9,7 +20,6 @@
 * NEW: Added `charitable_user_verified` action hook to do something after a user verifies their email address.
 * NEW: Added `charitable_profile_endpoint_descendent_query_vars` filter, which is used internally when registering endpoints through Charitable's Endpoints API to handle cases where endpoints use the Profile endpoint as their base.
 * FIX: In some cases, the js.cookie script was not loaded correctly due to the presence of Javascript module loaders, which resulted in Charitable's session script not working correctly. [#699](https://github.com/Charitable/Charitable/issues/699)
-
 
 # 1.6.22
 * NEW: Added gateway transaction ID to donation meta and as an optional email field. [#694](https://github.com/Charitable/Charitable/issues/694)

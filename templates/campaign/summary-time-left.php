@@ -5,13 +5,14 @@
  * Override this template by copying it to yourtheme/charitable/campaign/summary-time-left.php
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
+ * @version 1.0.0
  */
 
 $campaign = $view_args['campaign'];
 
 ?>
 <div class="campaign-time-left campaign-summary-item">
-	<?php echo $campaign->get_time_left() ?>
+	<?php echo $campaign->get_time_left(); ?>
 </div>
-
