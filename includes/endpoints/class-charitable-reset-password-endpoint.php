@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.25
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -128,12 +128,15 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 				return $template;
 			}
 
-			new Charitable_Ghost_Page( 'reset-password-page', array(
-				'title'   => __( 'Reset Password', 'charitable' ),
-				'content' => '<!-- Silence is golden -->',
-			) );
+			new Charitable_Ghost_Page(
+				'reset-password-page',
+				array(
+					'title'   => __( 'Reset Password', 'charitable' ),
+					'content' => '<!-- Silence is golden -->',
+				)
+			);
 
-			return charitable_splice_template( get_page_template_slug( $login ), array( 'reset-password-page.php', 'page.php', 'index.php' ) );
+			return charitable_splice_template( get_page_template_slug( $login ), array( 'reset-password-page.php', 'page.php', 'singular.php', 'index.php' ) );
 		}
 
 		/**
@@ -147,9 +150,12 @@ if ( ! class_exists( 'Charitable_Reset_Password_Endpoint' ) ) :
 		public function get_content( $content ) {
 			ob_start();
 
-			charitable_template( 'account/reset-password.php', array(
-				'form' => new Charitable_Reset_Password_Form(),
-			) );
+			charitable_template(
+				'account/reset-password.php',
+				array(
+					'form' => new Charitable_Reset_Password_Form(),
+				)
+			);
 
 			return ob_get_clean();
 		}

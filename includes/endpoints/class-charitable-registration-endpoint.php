@@ -10,7 +10,9 @@
  * @version   1.5.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Registration_Endpoint' ) ) :
 

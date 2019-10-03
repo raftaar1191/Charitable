@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.25
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,8 +19,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 	/**
 	 * Charitable_Campaign_Donation_Endpoint
 	 *
-	 * @abstract
-	 * @since  1.5.0
+	 * @since 1.5.0
 	 */
 	class Charitable_Campaign_Donation_Endpoint extends Charitable_Endpoint {
 
@@ -185,7 +184,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			 */
 			do_action( 'charitable_is_donate_page', $campaign_id, $donation_id );
 
-			return array( 'campaign-donation-page.php', 'page.php', 'index.php' );
+			return array( 'campaign-donation-page.php', 'page.php', 'singular.php', 'index.php' );
 		}
 
 		/**

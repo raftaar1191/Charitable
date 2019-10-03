@@ -1,6 +1,6 @@
 <?php
 /**
- * donation_cancellation endpoint.
+ * Donation cancellation endpoint.
  *
  * @package   Charitable/Classes/Charitable_Donation_Cancellation_Endpoint
  * @author    Eric Daams
@@ -10,7 +10,9 @@
  * @version   1.5.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 
@@ -76,10 +78,15 @@ if ( ! class_exists( 'Charitable_Donation_Cancellation_Endpoint' ) ) :
 				'campaign_id' => $campaign_donation->campaign_id,
 			) );
 
-			return esc_url_raw( add_query_arg( array(
-				'donation_id' => $args['donation_id'],
-				'cancel' => true,
-			), $donation_page ) );
+			return esc_url_raw(
+				add_query_arg(
+					array(
+						'donation_id' => $args['donation_id'],
+						'cancel'      => true,
+					),
+					$donation_page
+				)
+			);
 		}
 
 		/**

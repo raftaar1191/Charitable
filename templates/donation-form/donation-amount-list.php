@@ -24,7 +24,7 @@ $form_id   = $view_args['form_id'];
 $suggested = $campaign->get_suggested_donations();
 $custom    = $campaign->get( 'allow_custom_donations' );
 $amount    = $campaign->get_donation_amount_in_session();
-$one_time  = 'one-time' == $campaign->get_donation_period_in_session();
+$one_time  = 'once' == $campaign->get_donation_period_in_session();
 
 if ( 0 == $amount ) {
 	/**
@@ -49,7 +49,7 @@ if ( count( $suggested ) ) :
 	<ul class="donation-amounts">
 		<?php
 		foreach ( $suggested as $suggestion ) :
-			$checked  = $one_time && checked( $suggestion['amount'], $amount, false );
+			$checked  = $one_time ? checked( $suggestion['amount'], $amount, false ) : '';
 			$field_id = esc_attr(
 				sprintf(
 					'form-%s-field-%s',

@@ -7,10 +7,12 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.22
+ * @version   1.6.25
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Load plugin compatibility files on plugins_loaded hook.
@@ -50,6 +52,11 @@ function charitable_load_compat_functions() {
 	/* Twenty Seventeen */
 	if ( 'twentyseventeen' == wp_get_theme()->stylesheet ) {
 		require_once( $includes_path . 'compat/charitable-twentyseventeen-compat-functions.php' );
+	}
+
+	/* Ultimate Member */
+	if ( class_exists( 'UM' ) ) {
+		require_once( $includes_path . 'compat/charitable-ultimate-member-compat-functions.php' );
 	}
 }
 

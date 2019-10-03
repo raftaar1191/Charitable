@@ -346,8 +346,9 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 			if ( $form->validate_submission() ) {
 
 				$submitted = $form->get_donation_values();
+				$period    = array_key_exists( 'donation_period', $submitted ) ? $submitted['donation_period'] : 'once';
 
-				charitable_get_session()->add_donation( $submitted['campaign_id'], $submitted['amount'] );
+				charitable_get_session()->add_donation( $submitted['campaign_id'], $submitted['amount'], $period );
 
 				/**
 				 * @hook charitable_after_process_donation_amount_form
@@ -459,7 +460,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 				/* Required in case the donor is redirected back to the donation form. */
 				foreach ( $this->get_campaign_donations_data() as $campaign ) {
-					$session->add_donation( $campaign['campaign_id'], $campaign['amount'] );
+					$session->add_donation( $campaign['campaign_id'], $campaign['amount'], $this->get_donation_data_value( 'donation_key', 'once' ) );
 				}
 			}
 
