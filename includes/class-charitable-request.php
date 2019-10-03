@@ -209,7 +209,7 @@ if ( ! class_exists( 'Charitable_Request' ) ) :
 		/**
 		 * If set, add supported donation parameters to the session.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.25
 		 *
 		 * @param  int $campaign_id The campaign receiving the donation.
 		 * @return void

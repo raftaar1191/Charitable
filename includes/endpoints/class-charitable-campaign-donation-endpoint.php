@@ -178,7 +178,7 @@ if ( ! class_exists( 'Charitable_Campaign_Donation_Endpoint' ) ) :
 			 * Do something when the donate page is loaded.
 			 *
 			 * @since 1.0.0
-			 * @since 1.7.0 Added $campaign_id and $donation_id parameters.
+			 * @since 1.6.25 Added $campaign_id and $donation_id parameters.
 			 *
 			 * @param int $campaign_id The campaign receiving the donation.
 			 * @param int $donation_id The donation id, if this is an update to an existing donation.
