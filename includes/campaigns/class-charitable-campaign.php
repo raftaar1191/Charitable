@@ -921,7 +921,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			}
 
 			if ( ! is_array( $donation ) || ! array_key_exists( 'donation_period', $donation ) ) {
-				return 'one-time';
+				return 'once';
 			}
 
 			return $donation['donation_period'];
