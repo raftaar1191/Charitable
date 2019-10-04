@@ -3,20 +3,22 @@
  * Sets up the campaign list table in the admin.
  *
  * @package   Charitable/Classes/Charitable_Campaign_List_Table
- * @version   1.5.0
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.5.0
+ * @version   1.5.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 
 	/**
 	 * Charitable_Campaign_List_Table class.
 	 *
-	 * @final
 	 * @since 1.5.0
 	 */
 	final class Charitable_Campaign_List_Table {
@@ -62,16 +64,19 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 			 *
 			 * @param array $columns The list of columns.
 			 */
-			return apply_filters( 'charitable_campaign_dashboard_column_names', array(
-				'cb'       => '<input type="checkbox"/>',
-				'ID'       => __( '#', 'charitable' ),
-				'title'    => __( 'Title', 'charitable' ),
-				'author'   => __( 'Creator', 'charitable' ),
-				'donated'  => __( 'Donations', 'charitable' ),
-				'end_date' => __( 'End Date', 'charitable' ),
-				'status'   => __( 'Status', 'charitable' ),
-				'date'     => __( 'Date Created', 'charitable' ),
-			) );
+			return apply_filters(
+				'charitable_campaign_dashboard_column_names',
+				array(
+					'cb'       => '<input type="checkbox"/>',
+					'ID'       => __( '#', 'charitable' ),
+					'title'    => __( 'Title', 'charitable' ),
+					'author'   => __( 'Creator', 'charitable' ),
+					'donated'  => __( 'Donations', 'charitable' ),
+					'end_date' => __( 'End Date', 'charitable' ),
+					'status'   => __( 'Status', 'charitable' ),
+					'date'     => __( 'Date Created', 'charitable' ),
+				)
+			);
 		}
 
 		/**
@@ -89,20 +94,20 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 			$campaign = charitable_get_campaign( $post_id );
 
 			switch ( $column_name ) {
-				case 'ID' :
+				case 'ID':
 					$display = $post_id;
 					break;
 
-				case 'donated' :
+				case 'donated':
 					$display = charitable_format_money( $campaign->get_donated_amount() );
 					break;
 
-				case 'end_date' :
+				case 'end_date':
 					$display = $campaign->is_endless() ? '&#8734;' : $campaign->get_end_date();
 					break;
 
-				case 'status' :
-					$status  = $campaign->get_status();
+				case 'status':
+					$status = $campaign->get_status();
 
 					if ( 'finished' == $status && $campaign->has_goal() ) {
 						$status = $campaign->has_achieved_goal() ? 'successful' : 'unsuccessful';
@@ -111,7 +116,7 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 					$display = '<mark class="' . esc_attr( $status ) . '">' . $status . '</mark>';
 					break;
 
-				default :
+				default:
 					$display = '';
 			}
 
@@ -140,8 +145,9 @@ if ( ! class_exists( 'Charitable_Campaign_List_Table' ) ) :
 		public function bulk_messages( $bulk_messages, $bulk_counts ) {
 			$bulk_messages[ Charitable::CAMPAIGN_POST_TYPE ] = array(
 				'updated'   => _n( '%d campaign updated.', '%d campaigns updated.', $bulk_counts['updated'], 'charitable' ),
-				'locked'    => ( 1 == $bulk_counts['locked'] ) ? __( '1 campaign not updated, somebody is editing it.' ) :
-								   _n( '%s campaign not updated, somebody is editing it.', '%s campaigns not updated, somebody is editing them.', $bulk_counts['locked'], 'charitable' ),
+				'locked'    => ( 1 == $bulk_counts['locked'] )
+								? __( '1 campaign not updated, somebody is editing it.' )
+								: _n( '%s campaign not updated, somebody is editing it.', '%s campaigns not updated, somebody is editing them.', $bulk_counts['locked'], 'charitable' ),
 				'deleted'   => _n( '%s campaign permanently deleted.', '%s campaigns permanently deleted.', $bulk_counts['deleted'], 'charitable' ),
 				'trashed'   => _n( '%s campaign moved to the Trash.', '%s campaigns moved to the Trash.', $bulk_counts['trashed'], 'charitable' ),
 				'untrashed' => _n( '%s campaign restored from the Trash.', '%s campaigns restored from the Trash.', $bulk_counts['untrashed'], 'charitable' ),

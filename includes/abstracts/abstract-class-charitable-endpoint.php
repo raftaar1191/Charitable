@@ -7,18 +7,19 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.0
+ * @version   1.6.26
  */
 
-if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 
 	/**
 	 * Charitable_Endpoint
 	 *
-	 * @abstract
-	 * @since  1.5.0
+	 * @since 1.5.0
 	 */
 	abstract class Charitable_Endpoint implements Charitable_Endpoint_Interface {
 
@@ -58,6 +59,18 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		public function add_query_vars( array $vars ) {
 			/* Return vars unchanged by default. */
 			return $vars;
+		}
+
+		/**
+		 * If the user should be redirected somewhere, return a URL. Otherwise,
+		 * simply return false.
+		 *
+		 * @since  1.6.26
+		 *
+		 * @return false|string
+		 */
+		public function get_redirect() {
+			return false;
 		}
 
 		/**

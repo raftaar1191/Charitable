@@ -53,6 +53,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			add_action( 'wp', array( $this, 'disable_endpoint_cache' ) );
 			add_action( 'init', array( $this, 'setup_rewrite_rules' ) );
 			add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+			add_action( 'template_redirect', array( $this, 'maybe_redirect' ) );
 			add_filter( 'template_include', array( $this, 'template_loader' ), 12 );
 			add_filter( 'the_content', array( $this, 'get_content' ) );
 			add_filter( 'body_class', array( $this, 'add_body_classes' ) );
@@ -270,6 +271,31 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			}
 
 			return array_merge( $vars, array( 'donation_id', 'cancel' ) );
+		}
+
+		/**
+		 * Check the current endpoint to see if we should redirect the user to a different page.
+		 *
+		 * @since  1.6.26
+		 *
+		 * @return void
+		 */
+		public function maybe_redirect() {
+			$current_endpoint = $this->get_current_endpoint();
+
+			if ( ! $current_endpoint ) {
+				return;
+			}
+
+			$url = $this->endpoints[ $current_endpoint ]->get_redirect();
+
+			if ( ! $url ) {
+				return;
+			}
+
+			wp_safe_redirect( $url );
+
+			exit;
 		}
 
 		/**
