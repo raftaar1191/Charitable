@@ -42,7 +42,7 @@ add_action( 'um_after_user_is_approved', 'charitable_um_after_user_verified_emai
 
 /**
  * If the Profile page setting in Charitable is set to the same page
- * as the User page in Ultimate Member, it messes up with our redirect rules.
+ * as the User page in Ultimate Member, it messes up with our endpoints.
  *
  * Therefore, to correctly catch which endpoint is being shown, we need
  * to check for the um_user query var and see if it's set to a value indicating
