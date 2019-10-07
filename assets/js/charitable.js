@@ -402,7 +402,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  float
      */
     Donation_Form.prototype.get_custom_amount = function() {
-        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
+        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input,.charitable-donation-options.active .custom-donation-amount' );
 
         if ( 0 === input.length ) {
             input = this.form.find( '.custom-donation-input' );
