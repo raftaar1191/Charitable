@@ -181,15 +181,10 @@ CHARITABLE = window.CHARITABLE || {};
 
             /* Validate the form submission before going further. */
             if ( false === helper.validate() ) {
-
                 helper.hide_processing();
-
                 helper.print_errors();
-
                 helper.scroll_to_top();
-
                 return false;
-
             }
 
             /* If processing has been paused, return false now. */
@@ -873,7 +868,6 @@ CHARITABLE = window.CHARITABLE || {};
  * Set up Toggle object.
  */
 ( function( exports, $ ){
-
     var Toggle = function() {
 
         /**
@@ -955,12 +949,10 @@ CHARITABLE = window.CHARITABLE || {};
          * Sanitize URLs.
          */
         this.sanitize_url = function( input ) {
-
             var url = input.value.toLowerCase();
 
             if ( !/^https?:\/\//i.test( url ) && url.length > 0 ) {
                 url = 'http://' + url;
-
                 input.value = url;
             }
         }
