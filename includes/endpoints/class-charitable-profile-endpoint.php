@@ -115,7 +115,9 @@ if ( ! class_exists( 'Charitable_Profile_Endpoint' ) ) :
 			);
 
 			/* If the query vars keys contains one of the descendent query vars, return true. */
-			return ! empty( array_intersect( array_keys( $wp_query->query_vars ), $descendent_query_vars ) );
+			$found_vars = array_intersect( array_keys( $wp_query->query_vars ), $descendent_query_vars );
+
+			return ! empty( $found_vars );
 		}
 	}
 

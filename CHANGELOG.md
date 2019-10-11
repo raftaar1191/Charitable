@@ -1,3 +1,9 @@
+# 1.6.26
+* FIX: Resolves a bug with Recurring Donations that resulted in a pre-set custom recurring donation amount not being registered as the active choice properly. [#713](https://github.com/Charitable/Charitable/issues/713)
+* FIX: When using Ultimate Member, if your Profile page in Charitable was set to UM's User page, it messed up Charitable's Endpoints API. [#710](https://github.com/Charitable/Charitable/issues/710)
+* FIX: Also with Ultimate Member, fixed issue where Charitable's user email verification process fails while UM is active. [#711](https://github.com/Charitable/Charitable/issues/711)
+* FIX: Fatal error on PHP 5.2. [#712](https://github.com/Charitable/Charitable/issues/712)
+
 # 1.6.25
 * NEW: Automatically set the selected amount in the donation form by appending query parameters to the donation form URL. For example, going to `https://yoursite.com/campaigns/my-campaign/?amount=10` will load the donation form with a $10 donation preset. [#684](https://github.com/Charitable/Charitable/issues/684)
 * NEW: Mark a user's email address as verified when they complete Ultimate Member's email activation process. [#709](https://github.com/Charitable/Charitable/issues/709)

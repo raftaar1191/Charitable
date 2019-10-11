@@ -185,15 +185,10 @@ CHARITABLE = window.CHARITABLE || {};
 
             /* Validate the form submission before going further. */
             if ( false === helper.validate() ) {
-
                 helper.hide_processing();
-
                 helper.print_errors();
-
                 helper.scroll_to_top();
-
                 return false;
-
             }
 
             /* If processing has been paused, return false now. */
@@ -405,7 +400,7 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  float
      */
     Donation_Form.prototype.get_custom_amount = function() {
-        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input' );
+        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input,.charitable-donation-options.active .custom-donation-amount' );
 
         if ( 0 === input.length ) {
             input = this.form.find( '.custom-donation-input' );
@@ -876,7 +871,6 @@ CHARITABLE = window.CHARITABLE || {};
  * Set up Toggle object.
  */
 ( function( exports, $ ){
-
     var Toggle = function() {
 
         /**
@@ -958,12 +952,10 @@ CHARITABLE = window.CHARITABLE || {};
          * Sanitize URLs.
          */
         this.sanitize_url = function( input ) {
-
             var url = input.value.toLowerCase();
 
             if ( !/^https?:\/\//i.test( url ) && url.length > 0 ) {
                 url = 'http://' + url;
-
                 input.value = url;
             }
         }

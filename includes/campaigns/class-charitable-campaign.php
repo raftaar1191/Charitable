@@ -976,11 +976,11 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			$display_option = charitable_get_option( 'donation_form_display', 'separate_page' );
 
 			switch ( $display_option ) {
-				case 'modal' :
+				case 'modal':
 					$template_name = 'campaign-loop/donate-modal.php';
 					break;
 
-				default :
+				default:
 					$template_name = apply_filters( 'charitable_donate_button_loop_template', 'campaign-loop/donate-link.php', $this );
 			}
 

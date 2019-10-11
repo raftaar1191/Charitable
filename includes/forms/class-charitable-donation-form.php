@@ -746,10 +746,12 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			$amount  = self::get_donation_amount();
 
 			if ( $minimum > 0 && $amount < $minimum ) {
-				charitable_get_notices()->add_error( sprintf(
-					__( 'You must donate more than %s.', 'charitable' ),
-					charitable_format_money( $minimum )
-				) );
+				charitable_get_notices()->add_error(
+					sprintf(
+						__( 'You must donate more than %s.', 'charitable' ),
+						charitable_format_money( $minimum )
+					)
+				);
 
 				$ret = false;
 			} elseif ( $minimum == 0 && $amount <= 0 && ! apply_filters( 'charitable_permit_0_donation', false ) ) {

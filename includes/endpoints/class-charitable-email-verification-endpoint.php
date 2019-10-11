@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.25
+ * @version   1.6.26
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -107,14 +107,13 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 		}
 
 		/**
-		 * Return the template to display for this endpoint.
+		 * If the page should redirect, return the URL it should redirect to.
 		 *
-		 * @since  1.5.0
+		 * @since  1.6.26
 		 *
-		 * @param  string $template The default template.
-		 * @return string
+		 * @return false|string
 		 */
-		public function get_template( $template ) {
+		public function get_redirect() {
 			$result = $this->get_verification_check_result();
 
 			/* After successful verification, set a notice and redirect. */
@@ -123,11 +122,22 @@ if ( ! class_exists( 'Charitable_Email_Verification_Endpoint' ) ) :
 				charitable_get_session()->add_notices();
 
 				if ( array_key_exists( 'redirect_to', $_GET ) ) {
-					wp_safe_redirect( $_GET['redirect_to'] );
-					exit();
+					return $_GET['redirect_to'];
 				}
 			}
 
+			return false;
+		}
+
+		/**
+		 * Return the template to display for this endpoint.
+		 *
+		 * @since  1.5.0
+		 *
+		 * @param  string $template The default template.
+		 * @return string
+		 */
+		public function get_template( $template ) {
 			$profile = charitable_get_option( 'profile_page', false );
 
 			new Charitable_Ghost_Page(
