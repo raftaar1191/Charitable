@@ -284,31 +284,36 @@ if ( ! class_exists( 'Charitable_Gateway_Paypal' ) ) :
 			 * @param int                           $donation_id The donation ID.
 			 * @param Charitable_Donation_Processor $processor   The Donation Processor object.
 			 */
-			$paypal_args = apply_filters( 'charitable_paypal_redirect_args', array(
-				'business'      => self::get_paypal_email(),
-				'email'         => isset( $user_data['email'] ) ? $user_data['email'] : '',
-				'first_name'    => isset( $user_data['first_name'] ) ? $user_data['first_name'] : '',
-				'last_name'     => isset( $user_data['last_name'] ) ? $user_data['last_name'] : '',
-				'address1'      => isset( $user_data['address'] ) ? $user_data['address'] : '',
-				'address2'      => isset( $user_data['address_2'] ) ? $user_data['address_2'] : '',
-				'city'          => isset( $user_data['city'] ) ? $user_data['city'] : '',
-				'country'       => isset( $user_data['country'] ) ? $user_data['country'] : '',
-				'zip'           => isset( $user_data['postcode'] ) ? $user_data['postcode'] : '',
-				'invoice'       => $donation_key,
-				'amount'        => $donation->get_total_donation_amount( true ),
-				'item_name'     => html_entity_decode( $donation->get_campaigns_donated_to(), ENT_COMPAT, 'UTF-8' ),
-				'no_shipping'   => '1',
-				'shipping'      => '0',
-				'currency_code' => charitable_get_currency(),
-				'charset'       => get_bloginfo( 'charset' ),
-				'custom'        => $donation_id,
-				'rm'            => '2',
-				'return'        => charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $donation_id ) ),
-				'cancel_return' => charitable_get_permalink( 'donation_cancel_page', array( 'donation_id' => $donation_id ) ),
-				'notify_url'    => charitable_get_ipn_url( Charitable_Gateway_Paypal::ID ),
-				'bn'            => 'Charitable_SP',
-				'cmd'           => 'donations' == $transaction_mode ? '_donations' : '_xclick',
-			), $donation_id, $processor );
+			$paypal_args = apply_filters(
+				'charitable_paypal_redirect_args',
+				array(
+					'business'      => self::get_paypal_email(),
+					'email'         => isset( $user_data['email'] ) ? $user_data['email'] : '',
+					'first_name'    => isset( $user_data['first_name'] ) ? $user_data['first_name'] : '',
+					'last_name'     => isset( $user_data['last_name'] ) ? $user_data['last_name'] : '',
+					'address1'      => isset( $user_data['address'] ) ? $user_data['address'] : '',
+					'address2'      => isset( $user_data['address_2'] ) ? $user_data['address_2'] : '',
+					'city'          => isset( $user_data['city'] ) ? $user_data['city'] : '',
+					'country'       => isset( $user_data['country'] ) ? $user_data['country'] : '',
+					'zip'           => isset( $user_data['postcode'] ) ? $user_data['postcode'] : '',
+					'invoice'       => $donation_key,
+					'amount'        => $donation->get_total_donation_amount( true ),
+					'item_name'     => html_entity_decode( $donation->get_campaigns_donated_to(), ENT_COMPAT, 'UTF-8' ),
+					'no_shipping'   => '1',
+					'shipping'      => '0',
+					'currency_code' => charitable_get_currency(),
+					'charset'       => get_bloginfo( 'charset' ),
+					'custom'        => $donation_id,
+					'rm'            => '2',
+					'return'        => charitable_get_permalink( 'donation_receipt_page', array( 'donation_id' => $donation_id ) ),
+					'cancel_return' => charitable_get_permalink( 'donation_cancel_page', array( 'donation_id' => $donation_id ) ),
+					'notify_url'    => charitable_get_ipn_url( Charitable_Gateway_Paypal::ID ),
+					'bn'            => 'Charitable_SP',
+					'cmd'           => 'donations' == $transaction_mode ? '_donations' : '_xclick',
+				),
+				$donation_id,
+				$processor
+			);
 
 			/* Set up the PayPal redirect URL. */
 			$paypal_redirect  = trailingslashit( $gateway->get_redirect_url() ) . '?';

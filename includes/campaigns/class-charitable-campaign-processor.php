@@ -284,22 +284,25 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 			 *
 			 * @param array $args The list of default arguments.
 			 */
-			return apply_filters( 'charitable_campaign_processor_default_args', array(
-				'ID'                     => 0,
-				'title'                  => '',
-				'content'                => '',
-				'creator'                => get_current_user_id(),
-				'status'                 => 'publish',
-				'parent'                 => 0,
-				'image'                  => 0,
-				'description'            => '',
-				'goal'                   => 0,
-				'end_date'               => 0,
-				'suggested_donations'    => array(),
-				'allow_custom_donations' => 1,
-				'categories'             => array(),
-				'tags'                   => array(),
-			) );
+			return apply_filters(
+				'charitable_campaign_processor_default_args',
+				array(
+					'ID'                     => 0,
+					'title'                  => '',
+					'content'                => '',
+					'creator'                => get_current_user_id(),
+					'status'                 => 'publish',
+					'parent'                 => 0,
+					'image'                  => 0,
+					'description'            => '',
+					'goal'                   => 0,
+					'end_date'               => 0,
+					'suggested_donations'    => array(),
+					'allow_custom_donations' => 1,
+					'categories'             => array(),
+					'tags'                   => array(),
+				)
+			);
 		}
 
 		/**
@@ -566,7 +569,7 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 		}
 
 		/**
-		 * Returns a sanitized meta	key.
+		 * Returns a sanitized meta key.
 		 *
 		 * @since  1.5.9
 		 *
@@ -632,7 +635,9 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 
 			charitable_get_deprecated()->doing_it_wrong(
 				$tag,
-				sprintf( __( '%s is deprecated as a sanitizer on the %s hook. To prevent sanitization, use add_filter( \'charitable_campaign_processor_disable_sanitizer_%s\', \'__return_true\' ) instead.', 'charitable' ),
+				sprintf(
+					/* translators: %1$s: PHP class method; %2$s: hook name; %3$s: key */
+					__( '%1$s is deprecated as a sanitizer on the %2$s hook. To prevent sanitization, use add_filter( \'charitable_campaign_processor_disable_sanitizer_%3$s\', \'__return_true\' ) instead.', 'charitable' ),
 					$method,
 					$tag,
 					$key

@@ -350,7 +350,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				/* Condition 2: There is less than an hour left. */
 
 				$minutes_remaining = ceil( $seconds_left / 60 );
-				$time_left = apply_filters( 'charitabile_campaign_minutes_left',
+				$time_left = apply_filters(
+					'charitabile_campaign_minutes_left',
 					sprintf( _n( '%s Minute Left', '%s Minutes Left', $minutes_remaining, 'charitable' ), '<span class="amount time-left minutes-left">' . $minutes_remaining . '</span>' ),
 					$this
 				);
@@ -360,7 +361,8 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 				/* Condition 3: There is less than a day left. */
 
 				$hours_remaining = floor( $seconds_left / 3600 );
-				$time_left = apply_filters( 'charitabile_campaign_hours_left',
+				$time_left = apply_filters(
+					'charitabile_campaign_hours_left',
 					sprintf( _n( '%s Hour Left', '%s Hours Left', $hours_remaining, 'charitable' ), '<span class="amount time-left hours-left">' . $hours_remaining . '</span>' ),
 					$this
 				);
@@ -368,9 +370,9 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 			} else {
 
 				/* Condition 4: There is more than a day left. */
-
 				$days_remaining = floor( $seconds_left / 86400 );
-				$time_left = apply_filters( 'charitabile_campaign_days_left',
+				$time_left = apply_filters(
+					'charitabile_campaign_days_left',
 					sprintf( _n( '%s Day Left', '%s Days Left', $days_remaining, 'charitable' ), '<span class="amount time-left days-left">' . $days_remaining . '</span>' ),
 					$this
 				);
@@ -986,6 +988,7 @@ if ( ! class_exists( 'Charitable_Campaign' ) ) :
 
 			charitable_template( $template_name, array( 'campaign' => $this ) );
 		}
+
 		/**
 		 * Returns the campaign creator.
 		 *
