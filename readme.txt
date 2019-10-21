@@ -1,7 +1,7 @@
 === Charitable - Donation Plugin ===
 Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
-Tags: donation plugin, donate, wordpress donation plugin, wpcharitable, peer to peer fundraising, recurring donations, donation form, paypal donations, stripe donations, authorize.net donations, wordpress fundraising, giving
+Tags: donate, wordpress donation plugin, wpcharitable, peer to peer, peer to peer fundraising, recurring donations, donation plugin, donation form, paypal donations, stripe donations, give, fundraise, fundraising
 Requires at least: 4.1
 Tested up to: 5.2.3
 Stable tag: 1.6.26
