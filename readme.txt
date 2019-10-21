@@ -1,18 +1,28 @@
 === Charitable - Donation Plugin ===
 Contributors: WPCharitable, ericdaams
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypal%40164a%2ecom
-Tags: donations, donate, donation plugin, fundraising, fundraising plugin, non-profit, non-profits, charity, churches, commerce, crowdfunding, crowd funding, paypal donations, paypal, stripe, stripe donations, campaigns, gifts, giving, wordpress fundraising, wordpress donations, wordpress donation plugin, peer to peer fundraising, peer to peer fundraiser, peer fundraising, social fundraising
+Tags: donation plugin, donate, wordpress donation plugin, wpcharitable, peer to peer fundraising, recurring donations, donation form, paypal donations, stripe donations, authorize.net donations, wordpress fundraising, giving
 Requires at least: 4.1
 Tested up to: 5.2.3
 Stable tag: 1.6.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Grow your online fundraising with Charitable, the powerful WordPress donation plugin with 5-star support.
+Accept donations with Charitable, the only powerful WordPress donation plugin that never charges transaction fees.
 
 == Description ==
 
-**[Charitable](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)** is the donation plugin that gives you everything you need to start accepting donations today, for free. Designed to integrate seamlessly with WordPress, Charitable allows non-profits and developers to create powerful fundraising platforms on their own website.
+= Powerful Free WordPress Donation Plugin =
+
+We believe that collecting online donations should be easy and affordable. That's why Charitable is **the only powerful WordPress donation plugin that never charges transaction fees**.
+
+With Charitable, you can create fundraising campaigns in minutes, whether you need a donation form for your regular ongoing donations, you're raising money for a time-sensitive need, or you are collecting donations for a specific fundraising goal.
+
+Charitable is the top-rated WordPress donation plugin available, with 5-star reviews from 100+ happy users.
+
+Join 10,000+ non-profits growing their online fundraising with Charitable.
+
+> Grow your online fundraising faster with Charitable's premium add-ons, with support for recurring donations, peer to peer fundraising, email marketing integrations, gateway fee recovery and much more. [Click here to unlock the most powerful WordPress fundraising software available.](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)
 
 = Free Features =
 **Unlimited Campaigns**
@@ -35,7 +45,13 @@ Grow your online fundraising with Charitable, the powerful WordPress donation pl
 * Customize your offline donation instructions.
 * More payment gateways available as [paid add-ons](https://www.wpcharitable.com/extensions/category/payment-gateways/?utm_source=readme&utm_medium=description-tab&utm_content=features&utm_campaign=plugin-page-referrals).
 
-**Donation Management**
+**GDPR-Ready Donation Forms**
+
+* Make your donation forms GDPR compatible in just a few clicks.
+* Add Terms & Conditions and a Privacy notice to your donation form.
+* Built-in support for personal data export & erasing tools in WordPress.
+
+**Painless Donation Management**
 
 * Create and edit donations in the dashboard. No add-on necessary.
 * Resend donation emails.
@@ -55,7 +71,7 @@ We built Charitable because we were tired of seeing non-profits use hosted fundr
 
 So we created & launched Charitable in 2015 as a feature-rich, affordable WordPress alternative to hosted fundraising platforms. With Charitable, we won’t charge you any transaction fees for the donations you receive, and you can use the core Charitable plugin for free, forever. We support Charitable’s development through extension purchases, which add extra features.
 
-Two years on, we still actively develop and support Charitable, which is trusted by over 10,000 non-profits all over the world.
+Four years on, we still actively develop and support Charitable, which is trusted by over 10,000 non-profits all over the world.
 
 = Popular Upgrades =
 
@@ -79,6 +95,12 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 * Allow people to create campaigns for personal causes.
 * Pay them automatically using [Stripe Connect](https://www.wpcharitable.com/extensions/charitable-stripe-connect/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals).
 
+**[Recover Payment Gateway Fees](https://www.wpcharitable.com/extensions/charitable-fee-relief/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)**
+
+* Grow your donations by letting your donors cover the payment gateway fees.
+* Supports PayPal, Stripe, Authorize.Net and PayFast.
+* Works with recurring donations.
+
 **Premium Payment Gateways**
 
 * [Stripe](https://www.wpcharitable.com/extensions/charitable-stripe/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
@@ -97,7 +119,6 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 
 **More Extensions**
 
-* [Fee Relief](https://www.wpcharitable.com/extensions/charitable-fee-relief/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Donor Comments](https://www.wpcharitable.com/extensions/charitable-donor-comments/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Anonymous Donations](https://www.wpcharitable.com/extensions/charitable-anonymous-donations/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Gift Aid](https://www.wpcharitable.com/extensions/charitable-gift-aid/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
