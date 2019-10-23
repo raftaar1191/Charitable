@@ -397,10 +397,10 @@ CHARITABLE = window.CHARITABLE || {};
      * @return  float
      */
     Donation_Form.prototype.get_custom_amount = function() {
-        var input = this.form.find( '.charitable-donation-options.active .custom-donation-input,.charitable-donation-options.active .custom-donation-amount' );
+        var input = this.form.find( '.charitable-donation-options.active input.custom-donation-input,.charitable-donation-options.active input.custom-donation-amount' );
 
         if ( 0 === input.length ) {
-            input = this.form.find( '.custom-donation-input' );
+            input = this.form.find( 'input.custom-donation-input' );
         }
 
         return accounting.unformat(
