@@ -23,11 +23,11 @@ foreach ( $notices as $type => $messages ) :
 		$type = 'errors';
 	endif;
 	?>
-	<div class="charitable-notice charitable-form-<?php echo esc_attr( $type ) ?>">
-		<ul class="charitable-notice-<?php echo esc_attr( $type ) ?> <?php echo esc_attr( $type ) ?>">
+	<div class="charitable-notice charitable-form-<?php echo esc_attr( $type ); ?>">
+		<ul class="charitable-notice-<?php echo esc_attr( $type ); ?> <?php echo esc_attr( $type ); ?>">
 			<?php foreach ( $messages as $message ) : ?>
-				<li><?php echo $message ?></li>
+				<li><?php echo $message; ?></li>
 			<?php endforeach ?>
-		</ul><!-- charitable-notice-<?php esc_attr( $type ) ?> -->
+		</ul><!-- charitable-notice-<?php esc_attr( $type ); ?> -->
 	</div><!-- .charitable-notices -->
 <?php endforeach ?>

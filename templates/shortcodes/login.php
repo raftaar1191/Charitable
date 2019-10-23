@@ -12,7 +12,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $login_form_args = array_key_exists( 'login_form_args', $view_args ) ? $view_args['login_form_args'] : array();
 

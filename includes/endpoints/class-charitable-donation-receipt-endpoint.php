@@ -133,7 +133,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 				'donation-receipt-page',
 				array(
 					'title'   => $donation_receipt_page_title,
-					'content' => sprintf( '<p>%s</p>', __( 'Thank you for your donation!', 'charitable' ) ),
+					'content' => '<!-- ' . __( 'Silence is golden', 'charitable' ) . ' -->',
 				)
 			);
 
@@ -145,7 +145,7 @@ if ( ! class_exists( 'Charitable_Donation_Receipt_Endpoint' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $content
+		 * @param  string $content The default content to display.
 		 * @return string
 		 */
 		public function get_content( $content ) {
