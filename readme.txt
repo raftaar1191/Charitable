@@ -22,7 +22,7 @@ Charitable is the top-rated WordPress donation plugin available, with 5-star rev
 
 Join 10,000+ non-profits growing their online fundraising with Charitable.
 
-> Grow your online fundraising faster with Charitable's premium add-ons, with support for recurring donations, peer to peer fundraising, email marketing integrations, gateway fee recovery and much more. [Click here to unlock the most powerful WordPress fundraising software available.](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)
+> Grow your online fundraising faster with Charitable's premium add-ons, with support for recurring donations, peer to peer fundraising, email marketing integrations, gateway fee recovery and much more. [Click here to unlock the most powerful WordPress fundraising software available.](https://www.wpcharitable.com/packages/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)
 
 = Free Features =
 **Unlimited Campaigns**
