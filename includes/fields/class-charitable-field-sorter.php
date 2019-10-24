@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.6.0
- * @version   1.6.0
+ * @version   1.6.27
  */
 
 // Exit if accessed directly.
@@ -77,15 +77,11 @@ if ( ! class_exists( 'Charitable_Field_Sorter' ) ) :
 		 * @return void
 		 */
 		public function set_field_priority( $field ) {
-			$property = $this->property;
 			$settings = $field->{$this->property};
 
-			/* The field was defined with a priority, we don't need to do anything else. */
-			if ( array_key_exists( 'priority', $settings ) ) {
-				return;
-			}
-
-			$priority = $this->calculate_field_priority( $settings );
+			/* The field was defined with a priority, so we will use that as default. */
+			$default  = array_key_exists( 'priority', $settings ) ? $settings['priority'] : false;
+			$priority = $this->calculate_field_priority( $settings, $default );
 
 			$field->set( $this->property, 'priority', $priority );
 		}
@@ -94,11 +90,13 @@ if ( ! class_exists( 'Charitable_Field_Sorter' ) ) :
 		 * Determine a field's priority based on its `show_after` and `show_before` settings.
 		 *
 		 * @since  1.6.0
+		 * @since  1.6.27 Added $default parameter for priority.
 		 *
-		 * @param  array $settings The field settings.
+		 * @param  array     $settings The field settings.
+		 * @param  int|false $default  The default priority.
 		 * @return int
 		 */
-		private function calculate_field_priority( $settings ) {
+		private function calculate_field_priority( $settings, $default ) {
 			$after  = $this->get_referenced_field( 'show_after', $settings );
 			$before = $this->get_referenced_field( 'show_before', $settings );
 
@@ -115,6 +113,11 @@ if ( ! class_exists( 'Charitable_Field_Sorter' ) ) :
 				return $before->{$this->property}['priority'] - 0.5;
 			}
 
+			/* Neither show_after or show_before was set, so return the default if one was set. */
+			if ( $default ) {
+				return $default;
+			}
+
 			/* Otherwise, put it 2 after the most recently registered field. */
 			foreach ( array_reverse( $this->fields ) as $field ) {
 				if ( array_key_exists( 'priority', $field->{$this->property} ) ) {
@@ -122,6 +125,7 @@ if ( ! class_exists( 'Charitable_Field_Sorter' ) ) :
 				}
 			}
 
+			/* Still no luck? Set priority to 2. */
 			return 2;
 		}
 
