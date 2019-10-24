@@ -3,10 +3,10 @@
  * Responsible for managing user sessions.
  *
  * @package   Charitable/Classes/Charitable Session
- * @copyright Copyright (c) 2018, Eric Daams
+ * @copyright Copyright (c) 2019, Eric Daams
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.5.4
+ * @version   1.6.27
  */
 
 // Exit if accessed directly.
@@ -33,12 +33,30 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 		private $session;
 
 		/**
+		 * Whether to disable the cookie.
+		 *
+		 * @since 1.6.27
+		 *
+		 * @var   boolean
+		 */
+		private $disable_cookie;
+
+		/**
 		 * Instantiate session object.
 		 *
 		 * @since 1.0.0
 		 * @since 1.5.4 Access changed to public.
 		 */
 		public function __construct() {
+			/**
+			 * Filter to disable the cookie.
+			 *
+			 * @since 1.6.27
+			 *
+			 * @param boolean $disable Whether to disable the cookie.
+			 */
+			$this->disable_cookie = apply_filters( 'charitable_disable_cookie', false );
+
 			if ( ! $this->should_start_session() ) {
 				return;
 			}
@@ -82,7 +100,7 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 			$this->session = WP_Session::get_instance();
 
 			/* We're missing a Session ID, so we'll need to queue up our session scripts. */
-			if ( ! $this->has_session_id() ) {
+			if ( ! $this->has_session_id() || $this->disable_cookie ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 1 );
 			}
 
@@ -117,23 +135,28 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 
 			wp_enqueue_script(
 				'charitable-sessions',
-				$assets_dir . 'js/charitable-session'. $suffix . '.js',
+				$assets_dir . 'js/charitable-session' . $suffix . '.js',
 				array( 'js-cookie' ),
 				$version,
 				false
 			);
 
-			wp_localize_script( 'charitable-sessions', 'CHARITABLE_SESSION', array(
-				'ajaxurl'            => admin_url( 'admin-ajax.php' ),
-				'id'                 => $this->get_session_id(),
-				'cookie_name'        => WP_SESSION_COOKIE,
-				'expiration'         => $this->set_session_length(),
-				'expiration_variant' => $this->set_session_expiration_variant_length(),
-				'secure'             => (bool) apply_filters( 'wp_session_cookie_secure', false ),
-				'cookie_path'        => COOKIEPATH,
-				'cookie_domain'      => COOKIE_DOMAIN,
-				'generated_id'       => WP_Session_Utils::generate_id(),
-			) );
+			wp_localize_script(
+				'charitable-sessions',
+				'CHARITABLE_SESSION',
+				array(
+					'ajaxurl'            => admin_url( 'admin-ajax.php' ),
+					'id'                 => $this->get_session_id(),
+					'cookie_name'        => WP_SESSION_COOKIE,
+					'expiration'         => $this->set_session_length(),
+					'expiration_variant' => $this->set_session_expiration_variant_length(),
+					'secure'             => (bool) apply_filters( 'wp_session_cookie_secure', false ),
+					'cookie_path'        => COOKIEPATH,
+					'cookie_domain'      => COOKIE_DOMAIN,
+					'generated_id'       => WP_Session_Utils::generate_id(),
+					'disable_cookie'     => $this->disable_cookie,
+				)
+			);
 		}
 
 		/**
@@ -395,7 +418,6 @@ if ( ! class_exists( 'Charitable_Session' ) ) :
 			$start_session = true;
 
 			if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
-
 				$blacklist = $this->get_blacklist();
 				$uri       = ltrim( $_SERVER['REQUEST_URI'], '/' );
 				$uri       = untrailingslashit( $uri );

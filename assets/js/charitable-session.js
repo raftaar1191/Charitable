@@ -2,6 +2,11 @@ CHARITABLE = window.CHARITABLE || {};
 
 ( function( exports ) {
     var Sessions = function() {
+        if ( CHARITABLE_SESSION.disable_cookie ) {
+            Cookies.remove( CHARITABLE_SESSION.cookie_name );
+            return;
+        }
+
         this.session_id = Cookies.get( CHARITABLE_SESSION.cookie_name );
 
         // Set a cookie if none exists.

@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.25
+ * @version   1.6.27
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -57,6 +57,11 @@ function charitable_load_compat_functions() {
 	/* Ultimate Member */
 	if ( class_exists( 'UM' ) ) {
 		require_once( $includes_path . 'compat/charitable-ultimate-member-compat-functions.php' );
+	}
+
+	/* GDPR Cookie Compliance */
+	if ( function_exists( 'gdpr_cookie_is_accepted' ) ) {
+		require_once( $includes_path . 'compat/charitable-gdpr-cookie-compliance-compat-functions.php' );
 	}
 }
 
