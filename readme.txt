@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donate, wordpress donation plugin, wpcharitable, peer to peer fundraising, recurring donations, donation plugin, donation form, paypal donations, stripe donations, give, fundraise, fundraising
 Requires at least: 4.1
 Tested up to: 5.2.3
-Stable tag: 1.6.26
+Stable tag: 1.6.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,48 +24,68 @@ Join 10,000+ non-profits growing their online fundraising with Charitable.
 
 > Grow your online fundraising faster with Charitable's premium add-ons, with support for recurring donations, peer to peer fundraising, email marketing integrations, gateway fee recovery and much more. [Click here to unlock the most powerful WordPress fundraising software available.](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=intro&utm_campaign=plugin-page-referrals)
 
-= Free Features =
-**Unlimited Campaigns**
+= Unlimited fundraising campaigns =
+
+Set up as many campaigns as you would like with Charitable and tailor them to your needs:
 
 * Create as many fundraising campaigns as you need.
 * Set goals for your campaigns.
 * Create time-sensitive campaigns that end automatically when they're finished.
 * Inherits your theme's styles for seamless integration.
 
-**Customizable Donation Forms**
+= Customizable donation forms =
+
+You can completely customize your online fundraising experience.
 
 * Provide suggested amounts, allow people to donate as much as they want, or do both.
 * Load donation forms in a modal, on a separate page, or on the same page as the campaign.
 * Shorten your donation forms by just showing required fields.
 * Embed a donation form on any page.
 
-**PayPal & Offline Payment Support**
+= PayPal donations made simple =
 
-* Easy PayPal setup. Add your PayPal address and you're done.
-* Customize your offline donation instructions.
-* More payment gateways available as [paid add-ons](https://www.wpcharitable.com/extensions/category/payment-gateways/?utm_source=readme&utm_medium=description-tab&utm_content=features&utm_campaign=plugin-page-referrals).
+Start accepting donations through PayPal without hiring a developer.
 
-**GDPR-Ready Donation Forms**
+* Add your PayPal address and you're done.
+* Donors use the secure, familiar PayPal interface to finalize their donation.
+* Automatically track a donation's status after the donor completes their donation.
 
-* Make your donation forms GDPR compatible in just a few clicks.
-* Add Terms & Conditions and a Privacy notice to your donation form.
-* Built-in support for personal data export & erasing tools in WordPress.
+= More ways to give =
 
-**Painless Donation Management**
+Collect donations via cheque, bank transfer or any other offline method.
 
-* Create and edit donations in the dashboard. No add-on necessary.
+* Provide your donor with clear instructions for making their offline donation.
+* Send a unique offline donation receipt to donors after they create an offline donation.
+* Other payment gateways are available as [paid add-ons](https://www.wpcharitable.com/extensions/category/payment-gateways/?utm_source=readme&utm_medium=description-tab&utm_content=features&utm_campaign=plugin-page-referrals).
+
+= GDPR-ready WordPress donation plugin =
+
+Make your donation forms GDPR compatible in just a few clicks.
+
+* Add a Privacy notice and Terms & Conditions to your donation form.
+* Charitable supports the personal data export & personal data eraser in WordPress.
+* Compatible with the GDPR Cookie Compliance plugin.
+
+= Painless donation management =
+
+Create and edit donations directly in the WordPress dashboard. No add-on necessary!
+
 * Resend donation emails.
 * Sort and search donations in the dashboard.
 * Export a CSV report of donations.
 
-**Customizable Emails**
+= Easy to customize emails =
 
-* Automated donation receipt.
-* Offline donation receipts with payment instructions.
-* Admin notifications when people donate or campaigns end.
+Donation receipts, admin notifications and other emails are available out of the box.
+
+* Easily customize your email subject lines, headlines and content.
+* Add custom email tags for dynamic, personalized emails.
+* Send a donation receipt and admin notification automatically for new donations.
+* Send donors instructions for completing their offline donation.
+* Send administrators an email when a fundraising campaign has finished.
 * Password reset & email verification messages.
 
-= Why We Made Charitable =
+= Why we made Charitable =
 
 We built Charitable because we were tired of seeing non-profits use hosted fundraising platforms that charge hefty fees and strip them of the ability to brand & control their donation pages. Other WordPress donation plugins existed, but they missed important functionality or were poorly supported, leaving non-profits to choose between expensive platforms or plugins lacking the features they really needed.
 
@@ -73,7 +93,7 @@ So we created & launched Charitable in 2015 as a feature-rich, affordable WordPr
 
 Four years on, we still actively develop and support Charitable, which is trusted by over 10,000 non-profits all over the world.
 
-= Popular Upgrades =
+= Powerful features to grow your online fundraising =
 
 Looking for more functionality? Our paid extensions give you the flexibility and features you need to grow your fundraising.
 
@@ -89,7 +109,7 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 * Allow your supporters to create fundraising campaigns for your organization.
 * Grow your reach exponentially through your supporters' network of friends and family.
 
-**[Crowdfunding Platforms](https://www.wpcharitable.com/extensions/charitable-ambassadors/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)**
+**[Crowdfunding Platforms with WordPress](https://www.wpcharitable.com/extensions/charitable-ambassadors/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)**
 
 * Front-end campaign submission form.
 * Allow people to create campaigns for personal causes.
@@ -117,7 +137,7 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 * MailPoet
 * Mailster
 
-**More Extensions**
+**Other features**
 
 * [Donor Comments](https://www.wpcharitable.com/extensions/charitable-donor-comments/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Anonymous Donations](https://www.wpcharitable.com/extensions/charitable-anonymous-donations/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
@@ -128,10 +148,7 @@ Looking for more functionality? Our paid extensions give you the flexibility and
 * [Simple Updates](https://www.wpcharitable.com/extensions/charitable-simple-updates/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 * [Geolocation](https://www.wpcharitable.com/extensions/charitable-geolocation/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 
-Ready to upgrade?
-
-* [View pricing options](https://www.wpcharitable.com/packages/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
-* [Browse extensions](https://www.wpcharitable.com/extensions/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
+> [Click here to get all the features you need to scale up your WordPress donations with our affordable packages.](https://www.wpcharitable.com/?utm_source=readme&utm_medium=description-tab&utm_content=upgrades&utm_campaign=plugin-page-referrals)
 
 = Join our community =
 
@@ -141,7 +158,7 @@ When you download Charitable, you are joining over 10,000 other non-profits, dev
 * [Facebook](https://www.facebook.com/wpcharitable/)
 * [Twitter](https://twitter.com/wpcharitable/)
 
-Developers, we would love to invite you to join us in creating the most powerful fundraising plugin! Get started as a contributor on [our GitHub repository](https://github.com/Charitable/Charitable).
+Developers, we would love to invite you to join us in creating the most powerful donation plugin around! Get started as a contributor on [our GitHub repository](https://github.com/Charitable/Charitable).
 
 Using Charitable in a language other than English? Help us make Charitable better for you by [contributing to the translation project in your language.](https://translate.wordpress.org/projects/wp-plugins/charitable)
 
@@ -153,13 +170,18 @@ Using Charitable in a language other than English? Help us make Charitable bette
 
 == Frequently Asked Questions ==
 
-= I don't want to send my donors to PayPal. How can I accept donations right on my site? =
+= Can I accept donations directly on my site? =
 
-You can accept donations with the Offline Donations gateway, which allows your donors to create a donation and make the payment via cheque or bank transfer (you can display your payment details to them).
+Yes you can! If you use PayPal, donors will be redirected to PayPal to complete their donation. However, you can use the Offline Donations gateway to allow your donors to create a donation and make the payment via cheque or bank transfer (you can display your payment details to them).
 
-You can also accept credit card donations with the [Stripe extension](https://www.wpcharitable.com/extensions/charitable-stripe?utm_source=readme&utm_medium=faq-tab&utm_content=avoid-paypal&utm_campaign=plugin-page-referrals). If you want to use a different payment gateway, [let us know](https://www.wpcharitable.com/support?utm_source=readme&utm_medium=faq-tab&utm_content=avoid-paypal&utm_campaign=plugin-page-referrals).
+Better yet, let your donors make credit card donations directly on your WordPress website with the following payment gateway extensions:
 
-= How do I add a grid of campaigns to my page? =
+* [Stripe](https://www.wpcharitable.com/extensions/charitable-stripe?utm_source=readme&utm_medium=faq-tab&utm_content=avoid-paypal&utm_campaign=plugin-page-referrals)
+* [Authorize.Net](https://www.wpcharitable.com/extensions/charitable-authorize-net?utm_source=readme&utm_medium=faq-tab&utm_content=avoid-paypal&utm_campaign=plugin-page-referrals)
+
+Want to use a different payment gateway? [Click here to let us know!](https://www.wpcharitable.com/support?utm_source=readme&utm_medium=faq-tab&utm_content=avoid-paypal&utm_campaign=plugin-page-referrals)
+
+= How do I add a grid of fundraising campaigns to my page? =
 
 Easy. Just add `[campaigns]` into your page content. [Read more](https://www.wpcharitable.com/documentation/the-campaigns-shortcode?utm_source=readme&utm_medium=faq-tab&utm_content=campaigns-shortcode&utm_campaign=plugin-page-referrals).
 
@@ -167,13 +189,27 @@ Easy. Just add `[campaigns]` into your page content. [Read more](https://www.wpc
 
 You can use the `[charitable_donation_form]` shortcode to embed a particular campaign's donation form on a page. [Read more](https://www.wpcharitable.com/documentation/add-your-donation-form-to-a-page/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals)
 
+= Can I collect recurring donations with Charitable? =
+
+You can accept monthly, quarterly or semi-annually or annually recurring donations with the [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=faq-tab&utm_campaign=recurring). This works with PayPal, Stripe, Authorize.Net and PayFast.
+
+= Can I run peer-to-peer fundraising campaigns with Charitable? =
+
+Indeed you can! Charitable is the best way to run peer-to-peer fundraising campaigns with WordPress. Peer-to-peer fundraisers are supported with our [Ambassadors extension](https://www.wpcharitable.com/extensions/charitable-ambassadors/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals)
+
 = Can I let donors pay the gateway processing fees? =
 
 Yes. Our Fee Relief extension adds support for this, with the option to set how fees are calculated for different payment gateways. [Read more](https://www.wpcharitable.com/extensions/charitable-fee-relief/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals)
 
-= Does Charitable support recurring donations? =
+= Can I add donors to my newsletter or email marketing list? =
 
-Yes. Recurring donations support is possible with our [Recurring Donations extension](https://www.wpcharitable.com/extensions/charitable-recurring-donations/?utm_source=readme&utm_medium=faq-tab&utm_campaign=recurring-donations).
+You certainly can. The [Newsletter Connect extension](https://www.wpcharitable.com/extensions/charitable-newsletter-connect/?utm_source=readme&utm_medium=faq-tab&utm_campaign=plugin-page-referrals) supports MailChimp, Campaign Monitor, ActiveCampaign, Mailerlite, MailPoet and Mailster.
+
+= Can I translate Charitable into my language? =
+
+You can. Charitable has full localization support through the `charitable` textdomain. All Charitable extensions are also fully translatable.
+
+[Contribute to the translation project in your language](https://translate.wordpress.org/projects/wp-plugins/charitable) and help us make Charitable better for everyone!
 
 = How do I get support? =
 
@@ -189,6 +225,13 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.27 =
+* NEW: Added `charitable_disable_cookie` filter to provide the ability to completely disable the `charitable_session` cookie. The `charitable_session` cookie is a necessary cookie used to keep track of your donation history whilst your session is active. This allows you to access your donation receipt without being a registered, logged-in user. It is also used when you submit the Campaign Donation widget form to track the amount you would like to donate to the campaign, as well as the donation period (one-time, monthly, etc.). [#717](https://github.com/Charitable/Charitable/issues/717)
+* NEW: Automatically integrated with [GDPR Cookie Compliance plugin](https://wordpress.org/plugins/gdpr-cookie-compliance/). This ensures that if a user opts to have *all* cookies disabled, including necessary ones, the `charitable_session` cookie is removed as well.
+* FIX: In certain cases where Recurring Donations was active on a campaign, adding a custom donation amount would result in a notice about needing to donate more than $0. [#716](https://github.com/Charitable/Charitable/issues/716)
+* FIX: In some cases, if you try to access the donation receipt for a donation you don't have access to (or you need to log in for), the login form would appear twice. [#715](https://github.com/Charitable/Charitable/issues/715)
+* FIX: Improved how fields registered through the Fields APIs are sorted, allowing you to modify the position of a field by setting its `show_before` or `show_after` value. [#707](https://github.com/Charitable/Charitable/issues/707)
 
 = 1.6.26 =
 * FIX: Resolves a bug with Recurring Donations that resulted in a pre-set custom recurring donation amount not being registered as the active choice properly. [#713](https://github.com/Charitable/Charitable/issues/713)

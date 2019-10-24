@@ -7,7 +7,7 @@
  * Author:            WP Charitable
  * Author URI:        https://wpcharitable.com
  * Requires at least: 4.1
- * Tested up to:      5.2.3
+ * Tested up to:      5.2.4
  *
  * Text Domain:       charitable
  * Domain Path:       /i18n/languages/
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Charitable' ) ) :
 	class Charitable {
 
 		/* Plugin version. */
-		const VERSION = '1.6.26';
+		const VERSION = '1.6.27';
 
 		/* Version of database schema. */
 		const DB_VERSION = '20180522';
