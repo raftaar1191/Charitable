@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 
@@ -64,17 +66,26 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 
 			charitable_template( 'shortcodes/login.php', $args );
 
+			/**
+			 * Filter the default output of the login shortcode.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $content The default login shortcode output.
+			 */
 			return apply_filters( 'charitable_login_shortcode', ob_get_clean() );
-
 		}
 
 		/**
 		 * Fingerprint the login form with our charitable=true hidden field.
 		 *
-		 * @since   1.4.0
+		 * @see wp_login_form
 		 *
-		 * @param   string $content
-		 * @return  string
+		 * @since  1.4.0
+		 *
+		 * @param  string $content The default output.
+		 * @param  array  $args    Arguments passed to wp_login_form.
+		 * @return string
 		 */
 		public static function add_hidden_field_to_login_form( $content, $args ) {
 			if ( isset( $args['charitable'] ) && $args['charitable'] ) {
@@ -87,10 +98,12 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 		/**
 		 * Return donations to display with the shortcode.
 		 *
-		 * @since   1.0.0
+		 * @see wp_login_form
 		 *
-		 * @param   array   $args
-		 * @return  mixed[] $args
+		 * @since  1.0.0
+		 *
+		 * @param  array $args Arguments to pass to wp_login_form.
+		 * @return mixed[] $args
 		 */
 		protected static function get_login_form_args( $args ) {
 			$default = array(
@@ -102,6 +115,14 @@ if ( ! class_exists( 'Charitable_Login_Shortcode' ) ) :
 				$default['value_username'] = $_GET['username'];
 			}
 
+			/**
+			 * Filter the arguments to pass to wp_login_form().
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $default The default arguments.
+			 * @param array $args    Passed in arguments.
+			 */
 			return apply_filters( 'charitable_login_form_args', $default, $args );
 		}
 	}

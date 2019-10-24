@@ -1,3 +1,11 @@
+# 1.6.27
+* NEW: Added `charitable_disable_cookie` filter to provide the ability to completely disable the `charitable_session` cookie. The `charitable_session` cookie is a necessary cookie used to keep track of your donation history whilst your session is active. This allows you to access your donation receipt without being a registered, logged-in user. It is also used when you submit the Campaign Donation widget form to track the amount you would like to donate to the campaign, as well as the donation period (one-time, monthly, etc.). [#717](https://github.com/Charitable/Charitable/issues/717)
+* NEW: Automatically integrated with [GDPR Cookie Compliance plugin](https://wordpress.org/plugins/gdpr-cookie-compliance/). This ensures that if a user opts to have *all* cookies disabled, including necessary ones, the `charitable_session` cookie is removed as well.
+* FIX: In certain cases where Recurring Donations was active on a campaign, adding a custom donation amount would result in a notice about needing to donate more than $0. [#716](https://github.com/Charitable/Charitable/issues/716)
+* FIX: In some cases, if you try to access the donation receipt for a donation you don't have access to (or you need to log in for), the login form would appear twice. [#715](https://github.com/Charitable/Charitable/issues/715)
+* FIX: Improved how fields registered through the Fields APIs are sorted, allowing you to modify the position of a field by setting its `show_before` or `show_after` value. [#707](https://github.com/Charitable/Charitable/issues/707)
+
+
 # 1.6.26
 * FIX: Resolves a bug with Recurring Donations that resulted in a pre-set custom recurring donation amount not being registered as the active choice properly. [#713](https://github.com/Charitable/Charitable/issues/713)
 * FIX: When using Ultimate Member, if your Profile page in Charitable was set to UM's User page, it messed up Charitable's Endpoints API. [#710](https://github.com/Charitable/Charitable/issues/710)
