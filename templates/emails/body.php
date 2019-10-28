@@ -10,10 +10,12 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! isset( $view_args['email'] ) ) {
-    return;
+	return;
 }
 
 echo $view_args['email']->get_body();

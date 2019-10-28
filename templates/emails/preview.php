@@ -11,7 +11,7 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 if ( ! isset( $_GET[ 'email_id' ] ) ) {
-    return;
+	return;
 }
 
 $email = charitable_get_helper( 'emails' )->get_email( $_GET[ 'email_id' ] );
