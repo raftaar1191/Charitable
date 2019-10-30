@@ -803,13 +803,9 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 			foreach ( $this->get_merged_fields() as $key => $field ) {
 
 				if ( isset( $field['data_type'] ) || 'gateways' == $key ) {
-
 					if ( 'gateways' == $key ) {
-
 						foreach ( $field as $gateway_id => $gateway_fields ) {
-
 							foreach ( $gateway_fields as $key => $field ) {
-
 								if ( ! isset( $field['type'] ) ) {
 									continue;
 								}
@@ -827,13 +823,11 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 							}
 						}
 					} elseif ( isset( $field['type'] ) ) {
-
 						$data_type  = $field['data_type'];
 						$field_type = $field['type'];
 						$default    = 'checkbox' == $field_type ? false : '';
 
 						$values[ $data_type ][ $key ] = isset( $submitted[ $key ] ) ? $submitted[ $key ] : $default;
-
 					}
 				}
 			}
