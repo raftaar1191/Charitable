@@ -664,7 +664,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @return string[]|false
+		 * @return array[]|false
 		 */
 		public function get_campaign_donations_data() {
 			if ( ! isset( $this->campaign_donations_data ) ) {
@@ -683,7 +683,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 					}
 
 					if ( ! isset( $campaign['campaign_name'] ) ) {
-						$campaign['campaign_name'] = get_the_title( $campaign['campaign_id'] );
+						$campaign['campaign_name'] = get_post_field( 'post_title', $campaign['campaign_id'], 'db' );
 					}
 
 					$this->campaign_donations_data[] = $campaign;

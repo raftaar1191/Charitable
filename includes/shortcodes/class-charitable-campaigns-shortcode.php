@@ -179,16 +179,6 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 				$query_args['order'] = $args['order'];
 			}
 
-			/* Return campaigns, ordered by how much money has been raised. */
-			if ( 'popular' === $args['orderby'] ) {
-				return Charitable_Campaigns::ordered_by_amount( $query_args );
-			}
-
-			/* Return campaigns, ordered by how soon they are ending. */
-			if ( 'ending' === $args['orderby'] ) {
-				return Charitable_Campaigns::ordered_by_ending_soon( $query_args );
-			}
-
 			/* Return campaigns, ordered by date of creation. */
 			if ( 'post_date' === $args['orderby'] ) {
 				$query_args['orderby'] = 'date';
@@ -196,11 +186,33 @@ if ( ! class_exists( 'Charitable_Campaigns_Shortcode' ) ) :
 				if ( ! isset( $query_args['order'] ) ) {
 					$query_args['order'] = 'DESC';
 				}
-			} else {
+			} elseif ( ! in_array( $args['orderby'], array( 'popular', 'ending' ) ) ) {
 				$query_args['orderby'] = $args['orderby'];
 			}
 
-			return Charitable_Campaigns::query( $query_args );
+			/**
+			 * Filter the campaign query args.
+			 *
+			 * @since 1.6.28
+			 *
+			 * @param array $query_args The arguments to be passed to WP_Query.
+			 * @param array $args       The shortcode args.
+			 */
+			$query_args = apply_filters( 'charitable_campaigns_shortcode_query_args', $query_args, $args );
+
+			/**
+			 * Finally, query based on the orderby argument.
+			 */
+			switch ( $args['orderby'] ) {
+				case 'popular':
+					return Charitable_Campaigns::ordered_by_amount( $query_args );
+
+				case 'ending':
+					return Charitable_Campaigns::ordered_by_ending_soon( $query_args );
+
+				default:
+					return Charitable_Campaigns::query( $query_args );
+			}
 		}
 	}
 

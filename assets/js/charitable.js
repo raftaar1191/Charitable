@@ -942,23 +942,40 @@ CHARITABLE = window.CHARITABLE || {};
  * Set up Charitable helper functions.
  */
 ( function( exports, $ ) {
-
-    var Helpers = function() {
-
+    exports.Helpers = {
         /**
          * Sanitize URLs.
          */
-        this.sanitize_url = function( input ) {
+        sanitize_url : function( input ) {
             var url = input.value.toLowerCase();
 
             if ( !/^https?:\/\//i.test( url ) && url.length > 0 ) {
                 url = 'http://' + url;
                 input.value = url;
             }
+        },
+
+        /**
+         * Disable forms after submission.
+         */
+        disable_forms_after_submission : function( forms ) {
+            forms.forEach( function(form) {
+                var $form = $(form);
+
+                if ( $form.length ) {
+
+                    $('body').one( 'submit', $form, function() {
+                        var b = $form.find( 'input[type=submit], button[type=submit]' );
+
+
+
+                        b.attr( 'disabled', 'disabled' );
+                        return true;
+                    } );
+                }
+            } );
         }
-
     };
-
 })( CHARITABLE, jQuery );
 
 /**
@@ -1020,6 +1037,14 @@ CHARITABLE.VersionCompare = function( version, compare ) {
         });
 
         CHARITABLE.Toggle();
+
+        CHARITABLE.Helpers.disable_forms_after_submission(
+            [
+                '#charitable-registration-form',
+                '#charitable-profile-form',
+                '#charitable-campaign-submission-form'
+            ]
+        );
 
     });
 
