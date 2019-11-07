@@ -39,14 +39,22 @@ $highlight_colour = charitable_get_option( 'highlight_colour', $default_colour )
 .charitable-form-fields .charitable-fieldset a:not(.button),
 .charitable-notice,
 .charitable-notice .errors a {
+<<<<<<< HEAD
 	color: <?php echo $highlight_colour; ?>;
+=======
+	color: <?php echo $highlight_colour ?>;
+>>>>>>> release/1.6.28
 }
 
 .campaign-progress-bar .bar,
 .donate-button,
 .charitable-donation-form .donation-amount.selected,
 .charitable-donation-amount-form .donation-amount.selected {
+<<<<<<< HEAD
 	background-color: <?php echo $highlight_colour; ?>;
+=======
+	background-color: <?php echo $highlight_colour ?>;
+>>>>>>> release/1.6.28
 }
 
 .charitable-donation-form .donation-amount.selected,
@@ -54,7 +62,11 @@ $highlight_colour = charitable_get_option( 'highlight_colour', $default_colour )
 .charitable-notice,
 .charitable-drag-drop-images li:hover a.remove-image,
 .supports-drag-drop .charitable-drag-drop-dropzone.drag-over {
+<<<<<<< HEAD
 	border-color: <?php echo $highlight_colour; ?>;
+=======
+	border-color: <?php echo $highlight_colour ?>;
+>>>>>>> release/1.6.28
 }
 
 <?php do_action( 'charitable_custom_styles', $highlight_colour ); ?>

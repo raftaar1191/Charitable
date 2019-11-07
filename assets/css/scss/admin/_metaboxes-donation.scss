@@ -277,6 +277,16 @@ body.post-type-donation {
 #charitable-user-fields-wrap {
     width: 100%;
 
+    &.loading-data {
+        .charitable-overlay {
+            display: block !important;
+            text-align: center;
+        }
+        > *:not(.charitable-overlay) {
+            display: none;
+        }
+    }
+
     #charitable-first-name-wrap,
     #charitable-last-name-wrap {
         width: 48%;

@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.0.0
+ * @version   1.6.28
  */
 
 $value = charitable_get_option( $view_args['key'] );
@@ -21,10 +21,15 @@ $default_editor_args = array(
 	'textarea_name' => sprintf( 'charitable_settings[%s]', $view_args['name'] ),
 );
 $editor_args         = wp_parse_args( $editor_args, $default_editor_args );
+?>
+<div <?php echo charitable_get_arbitrary_attributes( $view_args ); ?>>
+	<?php
+	wp_editor( $value, sprintf( 'charitable_settings_%s', implode( '_', $view_args['key'] ) ), $editor_args );
 
-wp_editor( $value, sprintf( 'charitable_settings_%s', implode( '_', $view_args['key'] ) ), $editor_args );
-
-if ( isset( $view_args['help'] ) ) : ?>
-	<div class="charitable-help"><?php echo $view_args['help']; ?></div>
-<?php
-endif;
+	if ( isset( $view_args['help'] ) ) :
+		?>
+		<div class="charitable-help"><?php echo $view_args['help']; ?></div>
+		<?php
+	endif;
+	?>
+</div>

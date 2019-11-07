@@ -13,6 +13,11 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	return;
 }
 
+if ( false !== strpos( $view_args['wrapper_class'], 'select2' ) ) {
+	wp_enqueue_script( 'select2' );
+	wp_enqueue_style( 'select2-css' );
+}
+
 $is_required = array_key_exists( 'required', $view_args ) && $view_args['required'];
 
 ?>

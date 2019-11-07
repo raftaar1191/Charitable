@@ -148,12 +148,12 @@ if ( ! class_exists( 'Charitable_Admin_Pages' ) ) :
 						'menu_title' => $donation_post_type->labels->menu_name,
 						'menu_slug'  => 'edit.php?post_type=donation',
 					),
-          array(
-					  'page_title' => __( 'Donors', 'charitable' ),
-  					'menu_title' => __( 'Donors', 'charitable' ),
-	  				'menu_slug'  => 'donors',
-		  			'function'   => array( 'Charitable_Donor_List_Table', 'donors_list' ),
-			  	),
+					array(
+						'page_title' => __( 'Donors', 'charitable' ),
+						'menu_title' => __( 'Donors', 'charitable' ),
+						'menu_slug'  => 'donors',
+						'function'   => array( 'Charitable_Donor_List_Table', 'donors_list' ),
+					),
 					array(
 						'page_title' => __( 'Campaign Categories', 'charitable' ),
 						'menu_title' => __( 'Categories', 'charitable' ),

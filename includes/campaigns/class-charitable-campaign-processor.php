@@ -523,10 +523,12 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 
 			/* If the image is unattached to any post, attach it to the campaign. */
 			if ( 0 === $parent ) {
-				wp_update_post( array(
-					'ID'          => $value,
-					'post_parent' => $this->campaign_id,
-				) );
+				wp_update_post(
+					array(
+						'ID'          => $value,
+						'post_parent' => $this->campaign_id,
+					)
+				);
 			}
 		}
 

@@ -176,8 +176,8 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 
 				$dependencies   = array( 'jquery-ui-datepicker', 'jquery-ui-tabs', 'jquery-ui-sortable' );
 				$localized_vars = array(
+					'suggested_amount_placeholder' => __( 'Amount', 'charitable' ),
 					'suggested_amount_description_placeholder' => __( 'Optional Description', 'charitable' ),
-					'suggested_amount_placeholder'             => __( 'Amount', 'charitable' ),
 				);
 
 				if ( 'donation' == $screen->id ) {
@@ -190,12 +190,15 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 					);
 
 					$dependencies[] = 'accounting';
-					$localized_vars = array_merge( $localized_vars, array(
-						'currency_format_num_decimals' => esc_attr( charitable_get_currency_helper()->get_decimals() ),
-						'currency_format_decimal_sep'  => esc_attr( charitable_get_currency_helper()->get_decimal_separator() ),
-						'currency_format_thousand_sep' => esc_attr( charitable_get_currency_helper()->get_thousands_separator() ),
-						'currency_format'              => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ),
-					) );
+					$localized_vars = array_merge(
+						$localized_vars,
+						array(
+							'currency_format_num_decimals' => esc_attr( charitable_get_currency_helper()->get_decimals() ),
+							'currency_format_decimal_sep'  => esc_attr( charitable_get_currency_helper()->get_decimal_separator() ),
+							'currency_format_thousand_sep' => esc_attr( charitable_get_currency_helper()->get_thousands_separator() ),
+							'currency_format'              => esc_attr( charitable_get_currency_helper()->get_accounting_js_format() ),
+						)
+					);
 				}
 
 				wp_register_script(
@@ -258,6 +261,21 @@ if ( ! class_exists( 'Charitable_Admin' ) ) :
 				array( 'jquery-core', 'lean-modal' ),
 				$version,
 				true
+			);
+
+			wp_register_script(
+				'select2',
+				$assets_dir . 'js/libraries/select2' . $suffix . '.js',
+				array( 'jquery-core' ),
+				'4.0.12',
+				true
+			);
+
+			wp_register_style(
+				'select2-css',
+				$assets_dir . 'css/libraries/select2' . $suffix . '.css',
+				array(),
+				'4.0.12'
 			);
 		}
 

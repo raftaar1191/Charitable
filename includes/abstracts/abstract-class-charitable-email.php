@@ -1,16 +1,19 @@
 <?php
 /**
- * Email model
+ * Email model.
  *
- * @version   1.5.0
  * @package   Charitable/Classes/Charitable_Email
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.5.0
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Email' ) ) :
 
@@ -287,7 +290,6 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 		 * @since  1.5.0 $settings argument is now deprecated.
 		 * @since  1.5.7 $settings argument removed from function definition.
 		 *
-		 * @param  array $settings Deprecated argument.
 		 * @return array
 		 */
 		public function email_settings() {
@@ -301,50 +303,55 @@ if ( ! class_exists( 'Charitable_Email' ) ) :
 
 			$email_settings = array(
 				'section_email' => array(
-					'type'      => 'heading',
-					'title'     => $this->get_name(),
-					'priority'  => 2,
+					'type'     => 'heading',
+					'title'    => $this->get_name(),
+					'priority' => 2,
 				),
-				'subject' => array(
-					'type'      => 'text',
-					'title'     => __( 'Email Subject Line', 'charitable' ),
-					'help'      => __( 'The email subject line when it is delivered to recipients.', 'charitable' ),
-					'priority'  => 6,
-					'class'     => 'wide',
-					'default'   => $this->get_default_subject(),
+				'subject'       => array(
+					'type'     => 'text',
+					'title'    => __( 'Email Subject Line', 'charitable' ),
+					'help'     => __( 'The email subject line when it is delivered to recipients.', 'charitable' ),
+					'priority' => 6,
+					'class'    => 'wide',
+					'default'  => $this->get_default_subject(),
 				),
-				'headline' => array(
-					'type'      => 'text',
-					'title'     => __( 'Email Headline', 'charitable' ),
-					'help'      => __( 'The headline displayed at the top of the email.', 'charitable' ),
-					'priority'  => 10,
-					'class'     => 'wide',
-					'default'   => $this->get_default_headline(),
+				'headline'      => array(
+					'type'     => 'text',
+					'title'    => __( 'Email Headline', 'charitable' ),
+					'help'     => __( 'The headline displayed at the top of the email.', 'charitable' ),
+					'priority' => 10,
+					'class'    => 'wide',
+					'default'  => $this->get_default_headline(),
 				),
-				'body' => array(
-					'type'      => 'editor',
-					'title'     => __( 'Email Body', 'charitable' ),
-					'help'      => sprintf( '%s <div class="charitable-shortcode-options">%s</div>',
+				'body'          => array(
+					'type'     => 'editor',
+					'title'    => __( 'Email Body', 'charitable' ),
+					'help'     => sprintf(
+						'%s <div class="charitable-shortcode-options">%s</div>',
 						__( 'The content of the email that will be delivered to recipients. HTML is accepted.', 'charitable' ),
 						$this->get_shortcode_options()
 					),
-					'priority'  => 14,
-					'default'   => $this->get_default_body(),
+					'priority' => 14,
+					'default'  => $this->get_default_body(),
 				),
-				'preview' => array(
-					'type'      => 'content',
-					'title'     => __( 'Preview', 'charitable' ),
-					'content'   => sprintf( '<a href="%s" target="_blank" class="button">%s</a>',
+				'preview'       => array(
+					'type'     => 'content',
+					'title'    => __( 'Preview', 'charitable' ),
+					'content'  => sprintf(
+						'<a href="%s" target="_blank" class="button">%s</a>',
 						esc_url(
-							add_query_arg( array(
-								'charitable_action' => 'preview_email',
-								'email_id' => $this->get_email_id(),
-							), home_url() )
+							add_query_arg(
+								array(
+									'charitable_action' => 'preview_email',
+									'email_id'          => $this->get_email_id(),
+								),
+								home_url()
+							)
 						),
 						__( 'Preview email', 'charitable' )
 					),
-					'priority'  => 18,
-					'save'      => false,
+					'priority' => 18,
+					'save'     => false,
 				),
 			);
 

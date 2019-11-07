@@ -1,3 +1,9 @@
+# 1.6.28
+* NEW: Added `select2` script for easier donor selection when adding a manual donation. [#727](https://github.com/Charitable/Charitable/issues/727)
+* FIX: Display stored donor details when creating a manual donation for an existing donor. [#706](https://github.com/Charitable/Charitable/issues/706)
+* FIX: Prevent form submit buttons from being clicked more than once. This applies to the Registration, Profile and Campaign form. [#723](https://github.com/Charitable/Charitable/issues/723)
+* FIX: If your campaign name contains apostrophes or some other characters, donations to the campaign would have the campaign name escaped. [#725](https://github.com/Charitable/Charitable/issues/725)
+
 # 1.6.27
 * NEW: Added `charitable_disable_cookie` filter to provide the ability to completely disable the `charitable_session` cookie. The `charitable_session` cookie is a necessary cookie used to keep track of your donation history whilst your session is active. This allows you to access your donation receipt without being a registered, logged-in user. It is also used when you submit the Campaign Donation widget form to track the amount you would like to donate to the campaign, as well as the donation period (one-time, monthly, etc.). [#717](https://github.com/Charitable/Charitable/issues/717)
 * NEW: Automatically integrated with [GDPR Cookie Compliance plugin](https://wordpress.org/plugins/gdpr-cookie-compliance/). This ensures that if a user opts to have *all* cookies disabled, including necessary ones, the `charitable_session` cookie is removed as well.
