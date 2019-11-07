@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'charitable_default_highlight_colour', '#f89d35' ) );
 
@@ -25,14 +27,14 @@ $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'c
 .charitable-form-fields .charitable-fieldset a:not(.button),
 .charitable-notice,
 .charitable-notice .errors a {
-    color: <?php echo $highlight_colour ?>;
+	color: <?php echo $highlight_colour ?>;
 }
 
 .campaign-progress-bar .bar,
 .donate-button,
 .charitable-donation-form .donation-amount.selected,
 .charitable-donation-amount-form .donation-amount.selected {
-    background-color: <?php echo $highlight_colour ?>;
+	background-color: <?php echo $highlight_colour ?>;
 }
 
 .charitable-donation-form .donation-amount.selected,
@@ -40,7 +42,7 @@ $highlight_colour = charitable_get_option( 'highlight_colour', apply_filters( 'c
 .charitable-notice,
 .charitable-drag-drop-images li:hover a.remove-image,
 .supports-drag-drop .charitable-drag-drop-dropzone.drag-over {
-    border-color: <?php echo $highlight_colour ?>;
+	border-color: <?php echo $highlight_colour ?>;
 }
 
 <?php do_action( 'charitable_custom_styles', $highlight_colour ) ?>

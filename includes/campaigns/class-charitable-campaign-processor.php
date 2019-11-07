@@ -284,22 +284,25 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 			 *
 			 * @param array $args The list of default arguments.
 			 */
-			return apply_filters( 'charitable_campaign_processor_default_args', array(
-				'ID'                     => 0,
-				'title'                  => '',
-				'content'                => '',
-				'creator'                => get_current_user_id(),
-				'status'                 => 'publish',
-				'parent'                 => 0,
-				'image'                  => 0,
-				'description'            => '',
-				'goal'                   => 0,
-				'end_date'               => 0,
-				'suggested_donations'    => array(),
-				'allow_custom_donations' => 1,
-				'categories'             => array(),
-				'tags'                   => array(),
-			) );
+			return apply_filters(
+				'charitable_campaign_processor_default_args',
+				array(
+					'ID'                     => 0,
+					'title'                  => '',
+					'content'                => '',
+					'creator'                => get_current_user_id(),
+					'status'                 => 'publish',
+					'parent'                 => 0,
+					'image'                  => 0,
+					'description'            => '',
+					'goal'                   => 0,
+					'end_date'               => 0,
+					'suggested_donations'    => array(),
+					'allow_custom_donations' => 1,
+					'categories'             => array(),
+					'tags'                   => array(),
+				)
+			);
 		}
 
 		/**
@@ -520,10 +523,12 @@ if ( ! class_exists( 'Charitable_Campaign_Processor' ) ) :
 
 			/* If the image is unattached to any post, attach it to the campaign. */
 			if ( 0 === $parent ) {
-				wp_update_post( array(
-					'ID'          => $value,
-					'post_parent' => $this->campaign_id,
-				) );
+				wp_update_post(
+					array(
+						'ID'          => $value,
+						'post_parent' => $this->campaign_id,
+					)
+				);
 			}
 		}
 

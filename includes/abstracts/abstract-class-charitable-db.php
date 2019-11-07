@@ -352,13 +352,10 @@ if ( ! class_exists( 'Charitable_DB' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @global $wpdb
 		 * @param  string $sql The SQL statement to execute.
 		 * @return void
 		 */
 		protected function _create_table( $sql ) {
-			global $wpdb;
-
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 			dbDelta( $sql );

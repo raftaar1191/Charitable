@@ -9,8 +9,8 @@
 
 global $post;
 
-$title 		= isset( $view_args['title'] ) 	? $view_args['title'] 	: '';
-$tooltip 	= isset( $view_args['tooltip'] )? '<span class="tooltip"> '. $view_args['tooltip'] . '</span>'	: '';
+$title   = isset( $view_args['title'] ) ? $view_args['title'] : '';
+$tooltip = isset( $view_args['tooltip'] ) ? '<span class="tooltip"> ' . $view_args['tooltip'] . '</span>' : '';
 
 /**
  * Filter the title field placeholder text.
