@@ -10,7 +10,6 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 	}
 
 	var Datepicker = function( $el ) {
-
 		this.$el = $el;
 		options = {
 			dateFormat 	: 'MM d, yy',
@@ -379,6 +378,75 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		});
 	}
 
+	var setup_select2 = function() {
+		if ( ! $.fn.select2 ) {
+			return;
+		}
+
+		$( '.select2 select, select.select2' ).select2();
+	}
+
+	var setup_donor_select = function() {
+		var user_fields;
+
+		var get_user_fields = function() {
+			if ( 'object' === typeof user_fields ) {
+				return user_fields;
+			}
+
+			user_fields = [];
+
+			$( '#charitable-user-fields-wrap' ).find( 'select,input,textarea' ).each( function() {
+				user_fields.push(this.name);
+			});
+
+			return user_fields;
+		};
+
+		$( '.charitable-admin-donation-form #donor-id' ).on( 'change', function() {
+			var donor_id = $(this).val(),
+				$user_fields,
+				field;
+
+			if ( '' === donor_id || 'new' === donor_id ) {
+				return;
+			}
+
+			$user_fields = $( '#charitable-user-fields-wrap' );
+			$user_fields.addClass( 'loading-data' );
+
+			data = {
+				action   : 'charitable_get_donor_data',
+				donor_id : donor_id,
+				fields   : get_user_fields(),
+				nonce    : $(this).data( 'nonce' )
+			};
+
+			$.ajax({
+				type: 'POST',
+				data: data,
+				dataType: 'json',
+				url: ajaxurl,
+				xhrFields: {
+					withCredentials: true
+				},
+				success: function (response) {
+					if ( response.success ) {
+						for ( field in response.data ) {
+							$user_fields.find( "[name=" + field + "]" ).val( response.data[field] );
+						}
+					}
+					$user_fields.removeClass( 'loading-data' );
+				}
+			}).fail(function (data) {
+				if ( window.console && window.console.log ) {
+					console.log( data );
+					$user_fields.removeClass( 'loading-data' );
+				}
+			});
+		});
+	}
+
 	var setup_currency_inputs = function() {
 		if ( 'undefined' === typeof accounting ) {
 			return;
@@ -432,6 +500,8 @@ CHARITABLE_ADMIN = window.CHARITABLE_ADMIN || {};
 		setup_dashboard_widgets();
 		setup_campaign_end_date_field();
 		setup_actions_form();
+		setup_select2();
+		setup_donor_select();
 		setup_currency_inputs();
 
 		$('[data-charitable-add-row]').on( 'click', function() {

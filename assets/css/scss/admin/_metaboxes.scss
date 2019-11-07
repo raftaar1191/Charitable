@@ -175,6 +175,12 @@
             vertical-align: baseline;
         }
     }
+
+    /* Select2 styling */
+    .select2-selection.select2-selection--single { height: 46px; font-size: 14px; }
+    .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 46px; }
+    .select2-container--default .select2-selection--single .select2-selection__arrow { height: 46px; }
+    .select2-results__option { margin-bottom: 0; }
 }
 
 .charitable-checkbox-wrap {

@@ -166,7 +166,8 @@
 .charitable-metabox-wrap {
   width: 100%;
   float: left;
-  margin-bottom: 24px; }
+  margin-bottom: 24px;
+  /* Select2 styling */ }
   .charitable-metabox-wrap .charitable-helper {
     display: block;
     padding-top: 6px;
@@ -195,6 +196,15 @@
     display: block; }
   .charitable-metabox-wrap .charitable-radio-list label {
     vertical-align: baseline; }
+  .charitable-metabox-wrap .select2-selection.select2-selection--single {
+    height: 46px;
+    font-size: 14px; }
+  .charitable-metabox-wrap .select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 46px; }
+  .charitable-metabox-wrap .select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 46px; }
+  .charitable-metabox-wrap .select2-results__option {
+    margin-bottom: 0; }
 
 .charitable-checkbox-wrap label {
   display: inline; }
@@ -792,6 +802,11 @@ body.post-type-donation .donation-erasure-notice {
 
 #charitable-user-fields-wrap {
   width: 100%; }
+  #charitable-user-fields-wrap.loading-data .charitable-overlay {
+    display: block !important;
+    text-align: center; }
+  #charitable-user-fields-wrap.loading-data > *:not(.charitable-overlay) {
+    display: none; }
   #charitable-user-fields-wrap #charitable-first-name-wrap,
   #charitable-user-fields-wrap #charitable-last-name-wrap {
     width: 48%; }

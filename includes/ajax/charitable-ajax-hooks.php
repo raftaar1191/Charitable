@@ -4,15 +4,18 @@
  *
  * Action/filter hooks used for Charitable AJAX setup.
  *
- * @package     Charitable/Functions/AJAX
- * @version     1.2.3
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/AJAX
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.2.3
+ * @version   1.6.28
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Retrieve a campaign's donation form via AJAX.
@@ -29,6 +32,13 @@ add_action( 'wp_ajax_nopriv_get_donation_form', 'charitable_ajax_get_donation_fo
  */
 add_action( 'wp_ajax_charitable_plupload_image_upload', 'charitable_plupload_image_upload' );
 add_action( 'wp_ajax_nopriv_charitable_plupload_image_upload', 'charitable_plupload_image_upload' );
+
+/**
+ * Retrieve the details for a particular donor.
+ *
+ * @see charitable_ajax_get_donor_data
+ */
+add_action( 'wp_ajax_charitable_get_donor_data', 'charitable_ajax_get_donor_data' );
 
 /**
  * Get session content.
