@@ -285,7 +285,7 @@ return apply_filters(
 				'priority'       => 4,
 				'required'       => true,
 				'section'        => 'meta',
-				'default'        => date_i18n( 'F d, Y', time() ),
+				'default'        => date_i18n( 'F d, Y' ),
 				'value_callback' => 'charitable_get_donation_date_for_form_value',
 			),
 			'email_tag'      => array(
