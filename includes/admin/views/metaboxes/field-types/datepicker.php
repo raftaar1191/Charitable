@@ -13,7 +13,14 @@ if ( ! array_key_exists( 'form_view', $view_args ) || ! $view_args['form_view']-
 	return;
 }
 
-$date        = array_key_exists( 'value', $view_args ) ? 'data-date="' . esc_attr( $view_args['value'] ) . '"' : '';
+if ( array_key_exists( 'value', $view_args ) ) {
+	$date = 'data-date="' . esc_attr( date_i18n( 'F d, Y', strtotime( $view_args['value'] ) ) ) . '"';
+} elseif ( array_key_exists( 'default', $view_args ) ) {
+	$date = 'data-date="' . esc_attr( $view_args['default'] ) . '"';
+} else {
+	$date = '';
+}
+
 $is_required = array_key_exists( 'required', $view_args ) && $view_args['required'];
 
 ?>
@@ -30,7 +37,13 @@ $is_required = array_key_exists( 'required', $view_args ) && $view_args['require
 			?>
 		</label>
 	<?php endif ?>
-	<input type="text" id="<?php echo esc_attr( $view_args['id'] ); ?>" name="<?php echo esc_attr( $view_args['key'] ); ?>" class="charitable-datepicker"  tabindex="<?php echo esc_attr( $view_args['tabindex'] ); ?>" <?php echo $date ?> />
+	<input type="text"
+		id="<?php echo esc_attr( $view_args['id'] ); ?>"
+		name="<?php echo esc_attr( $view_args['key'] ); ?>"
+		class="charitable-datepicker"
+		tabindex="<?php echo esc_attr( $view_args['tabindex'] ); ?>"
+		<?php echo $date; ?>
+	/>
 	<?php if ( isset( $view_args['description'] ) ) : ?>
 		<span class="charitable-helper"><?php echo esc_html( $view_args['description'] ); ?></span>
 	<?php endif ?>
