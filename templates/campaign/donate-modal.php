@@ -7,20 +7,23 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.3.2
+ * @version 1.7.0
  */
 
 $campaign = $view_args['campaign'];
+$label    = sprintf(
+	/* translators: %s: campaign title */
+	esc_attr_x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ),
+	get_the_title( $campaign->ID )
+);
 
 ?>
 <div class="campaign-donation">
 	<a data-trigger-modal="charitable-donation-form-modal"
-		class="donate-button button"
+		class="<?php echo charitable_get_button_class( 'donate' ); ?>"
 		href="<?php echo charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign->ID ) ); ?>"
-		aria-label="<?php printf(
-			/* translators: %s: campaign title */
-			esc_attr_x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ), get_the_title( $campaign->ID )
-		); ?>">
+		aria-label="<?php echo $label; ?>"
+	>
 	<?php _e( 'Donate', 'charitable' ); ?>
 	</a>
 </div>

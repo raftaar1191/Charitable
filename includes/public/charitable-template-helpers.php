@@ -342,3 +342,37 @@ function charitable_get_email_verification_link( WP_User $user, $redirect_url = 
 		)
 	);
 }
+
+/**
+ * Get the button classes for a Charitable button.
+ *
+ * @since  1.7.0
+ *
+ * @param  string $button Which button we're showing.
+ * @return string
+ */
+function charitable_get_button_class( $button ) {
+	$classes = [ 'button', 'charitable-button' ];
+
+	switch ( $button ) {
+		case 'donate':
+			$classes[] = 'donate-button';
+			$classes[] = 'button-primary';
+			break;
+
+		default:
+			$classes[] = $button . '-button';
+	}
+
+	/**
+	 * Filter the button classes.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @param array  $classes The button classes.
+	 * @param string $button  The specific button we're showing.
+	 */
+	$classes = apply_filters( 'charitable_button_class', $classes, $button );
+
+	return implode( ' ', $classes );
+}
