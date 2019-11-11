@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.7.0
  */
 
 if ( ! array_key_exists( 'campaign', $view_args ) || ! is_a( $view_args['campaign'], 'Charitable_Campaign' ) ) :
@@ -20,8 +20,18 @@ if ( ! $campaign->can_receive_donations() ) :
 	return;
 endif;
 
+$label = sprintf(
+	/* translators: %s: campaign title */
+	esc_attr_x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ),
+	get_the_title( $campaign->ID )
+);
+
 ?>
 <div class="campaign-donation">
-	<?php /* translators: %s: campaign name */ ?>
-	<a class="donate-button button" href="#charitable-donation-form" aria-label="<?php echo esc_attr( sprintf( _x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ), get_the_title( $campaign->ID ) ) ); ?>"><?php _e( 'Donate', 'charitable' ); ?></a>
+	<a href="#charitable-donation-form"
+		class="<?php echo charitable_get_button_class( 'donate' ); ?>"
+		aria-label="<?php echo $label; ?>"
+	>
+	<?php _e( 'Donate', 'charitable' ); ?>
+	</a>
 </div>
