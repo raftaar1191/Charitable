@@ -158,6 +158,7 @@ return array(
 	'Charitable_Roles' => 'users/class-charitable-roles.php',
 	'Charitable_User' => 'users/class-charitable-user.php',
 	'Charitable_Data_Processor' => 'utilities/class-charitable-data-processor.php',
+	'Charitable_Nav_Menu_Walker' => 'utilities/class-charitable-nav-menu-walker.php',
 	'Charitable_Campaign_Terms_Widget' => 'widgets/class-charitable-campaign-terms-widget.php',
 	'Charitable_Campaigns_Widget' => 'widgets/class-charitable-campaigns-widget.php',
 	'Charitable_Donate_Widget' => 'widgets/class-charitable-donate-widget.php',
