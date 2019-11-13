@@ -94,7 +94,7 @@ if ( ! class_exists( 'Charitable_Registration_Endpoint' ) ) :
 		 * @return object
 		 */
 		public function nav_menu_object() {
-			return $this->get_nav_menu_object( __( 'Registration Page', 'charitable' ) );
+			return $this->get_nav_menu_object( __( 'Register', 'charitable' ) );
 		}
 	}
 

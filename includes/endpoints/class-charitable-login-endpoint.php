@@ -102,7 +102,7 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 		 * @return object
 		 */
 		public function nav_menu_object() {
-			return $this->get_nav_menu_object( __( 'Login Page', 'charitable' ) );
+			return $this->get_nav_menu_object( __( 'Log In', 'charitable' ) );
 		}
 	}
 
