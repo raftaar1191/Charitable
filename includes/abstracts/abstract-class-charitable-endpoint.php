@@ -124,6 +124,43 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		public function is_cacheable() {
 			return $this->cacheable;
 		}
+
+		/**
+		 * Return a nav menu object, or null if the endpoint should not be
+		 * added to navigation menus.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @return object|null
+		 */
+		public function nav_menu_object() {
+			return null;
+		}
+
+		/**
+		 * Return a nav menu object.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @param  string $title Menu item title.
+		 * @return object
+		 */
+		public function get_nav_menu_object( $title ) {
+			$menu_object                   = new stdClass();
+			$menu_object->classes          = array();
+			$menu_object->type             = 'custom';
+			$menu_object->object_id        = self::ID;
+			$menu_object->title            = $title;
+			$menu_object->object           = 'custom';
+			$menu_object->url              = $this->get_page_url();
+			$menu_object->attr_title       = $title;
+			$menu_object->db_id            = '';
+			$menu_object->menu_item_parent = '';
+			$menu_object->target           = '';
+			$menu_object->xfn              = '';
+
+			return $menu_object;
+		}
 	}
 
 endif;

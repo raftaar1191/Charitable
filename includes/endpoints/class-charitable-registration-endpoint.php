@@ -85,6 +85,17 @@ if ( ! class_exists( 'Charitable_Registration_Endpoint' ) ) :
 
 			return false;
 		}
+
+		/**
+		 * Get the nav menu object.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @return object
+		 */
+		public function nav_menu_object() {
+			return $this->get_nav_menu_object( __( 'Registration Page', 'charitable' ) );
+		}
 	}
 
 endif;

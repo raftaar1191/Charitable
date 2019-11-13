@@ -57,6 +57,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			add_filter( 'template_include', array( $this, 'template_loader' ), 12 );
 			add_filter( 'the_content', array( $this, 'get_content' ) );
 			add_filter( 'body_class', array( $this, 'add_body_classes' ) );
+			add_filter( 'nav_menu_meta_box_object', array( $this, 'add_endpoints_menu_meta_box' ) );
 
 			/* Avoid Polylang rewriting the rewrite rules. */
 			add_filter( 'pll_modify_rewrite_rule', array( $this, 'prevent_polylang_rewrite_modification' ), 10, 2 );
@@ -363,6 +364,93 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			$classes[] = $this->endpoints[ $endpoint ]->get_body_class();
 
 			return $classes;
+		}
+
+		/**
+		 * Add a "Charitable" menus meta box.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @param  object $object The meta box object
+		 * @return object
+		 */
+		public function add_endpoints_menu_meta_box( $object ) {
+			add_meta_box(
+				'add-charitable-endpoints',
+				__( 'Charitable', 'charitable' ),
+				[ $this, 'endpoints_menu_meta_box' ],
+				'nav-menus',
+				'side',
+				'low'
+			);
+
+			return $object;
+		}
+
+		/**
+		 * The content of the endpoints menu meta box.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @global int|string $nav_menu_selected_id (id, name or slug) of the currently-selected menu.
+		 * @return void
+		 */
+		public function endpoints_menu_meta_box() {
+			global $nav_menu_selected_id;
+
+			$walker = new Walker_Nav_Menu_Checklist();
+
+			$current_tab = 'all';
+			$endpoints   = $this->get_endpoints_for_nav_menu();
+
+			$removed_args = array( 'action', 'customlink-tab', 'edit-menu-item', 'menu-item', 'page-tab', '_wpnonce' );
+			?>
+			<div id="charitable" class="categorydiv">
+				<ul id="charitable-tabs" class="charitable-tabs add-menu-item-tabs">
+					<li <?php echo ( 'all' == $current_tab ? ' class="tabs"' : '' ); ?>>
+						<a class="nav-tab-link" data-type="tabs-panel-charitable-all" href="<?php if ( $nav_menu_selected_id ) echo esc_url( add_query_arg( 'charitable-tab', 'all', remove_query_arg( $removed_args ) ) ); ?>#tabs-panel-charitable-all">
+							<?php _e( 'View All', 'charitable' ); ?>
+						</a>
+					</li><!-- /.tabs -->
+				</ul>
+				<div id="tabs-panel-charitable-all" class="tabs-panel tabs-panel-view-all <?php echo ( 'all' == $current_tab ? 'tabs-panel-active' : 'tabs-panel-inactive' ); ?>">
+					<ul id="charitable-checklist-all" class="categorychecklist form-no-clear">
+					<?php
+						echo walk_nav_menu_tree( array_map( 'wp_setup_nav_menu_item', $endpoints ), 0, (object) array( 'walker' => $walker ) );
+					?>
+					</ul>
+				</div><!-- /.tabs-panel -->
+				<p class="button-controls wp-clearfix">
+					<span class="list-controls">
+						<a href="<?php echo esc_url( add_query_arg( array( 'charitable-tab' => 'all', 'selectall' => 1, ), remove_query_arg( $removed_args ) ) ); ?>#charitable" class="select-all"><?php _e( 'Select All', 'charitable' ); ?></a>
+					</span>
+					<span class="add-to-menu">
+						<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'charitable' ); ?>" name="add-charitable-menu-item" id="submit-authorarchive" />
+						<span class="spinner"></span>
+					</span>
+				</p>
+			</div><!-- /.categorydiv -->
+			<?php
+		}
+
+		/**
+		 * Return all endpoints that can be added to navigation menus.
+		 *
+		 * @since  1.7.0
+		 *
+		 * @return object[]
+		 */
+		public function get_endpoints_for_nav_menu() {
+			$endpoints = [];
+
+			foreach ( $this->endpoints as $endpoint_id => $endpoint ) {
+				$menu_object = $endpoint->nav_menu_object();
+				if ( ! is_null( $menu_object ) ) {
+					$endpoints[] = $menu_object;
+				}
+			}
+
+			return $endpoints;
 		}
 
 		/**
