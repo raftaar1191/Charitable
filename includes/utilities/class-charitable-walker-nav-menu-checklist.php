@@ -6,8 +6,8 @@
  * @author    Eric Daams
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.7.0
- * @version   1.7.0
+ * @since     1.6.29
+ * @version   1.6.29
  */
 
 // Exit if accessed directly.
@@ -30,7 +30,7 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 	 *
 	 * @see Walker_Nav_Menu::__construct() for a description of parameters.
 	 *
-	 * @since 1.7.0
+	 * @since 1.6.29
 	 *
 	 * @param array|boolean $fields
 	 */
@@ -45,7 +45,7 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 	 *
 	 * @see Walker_Nav_Menu::start_lvl() for description of parameters.
 	 *
-	 * @since  1.7.0
+	 * @since  1.6.29
 	 *
 	 * @param  string $output See {@Walker_Nav_Menu::start_lvl()}.
 	 * @param  int    $depth  See {@Walker_Nav_Menu::start_lvl()}.
@@ -62,7 +62,7 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 	 *
 	 * @see Walker_Nav_Menu::end_lvl() for description of parameters.
 	 *
-	 * @since  1.7.0
+	 * @since  1.6.29
 	 *
 	 * @param  string $output See {@Walker_Nav_Menu::end_lvl()}.
 	 * @param  int    $depth  See {@Walker_Nav_Menu::end_lvl()}.
@@ -78,7 +78,7 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 	 *
 	 * @see Walker::start_el() for description of parameters.
 	 *
-	 * @since  1.7.0
+	 * @since  1.6.29
 	 *
 	 * @param  string       $output Passed by reference. Used to append additional
 	 *                              content.
@@ -92,8 +92,8 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 		global $_nav_menu_placeholder;
 
 		$_nav_menu_placeholder = ( 0 > $_nav_menu_placeholder ) ? intval($_nav_menu_placeholder) - 1 : -1;
-		$possible_object_id = isset( $item->post_type ) && 'nav_menu_item' == $item->post_type ? $item->object_id : $_nav_menu_placeholder;
-		$possible_db_id = ( ! empty( $item->ID ) ) && ( 0 < $possible_object_id ) ? (int) $item->ID : 0;
+		$possible_object_id    = isset( $item->post_type ) && 'nav_menu_item' == $item->post_type ? $item->object_id : $_nav_menu_placeholder;
+		$possible_db_id        = ( ! empty( $item->ID ) ) && ( 0 < $possible_object_id ) ? (int) $item->ID : 0;
 
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
@@ -109,16 +109,7 @@ class Charitable_Walker_Nav_Menu_Checklist extends Walker_Nav_Menu {
 		$output .= isset( $title ) ? esc_html( $title ) : esc_html( $item->title );
 		$output .= '</label>';
 
-		if ( empty( $item->url ) ) {
-			$item->url = $item->guid;
-		}
-
-		if ( ! in_array( array( 'bp-menu', 'bp-'. $item->post_excerpt .'-nav' ), $item->classes ) ) {
-			$item->classes[] = 'bp-menu';
-			$item->classes[] = 'bp-'. $item->post_excerpt .'-nav';
-		}
-
-		// Menu item hidden fields.
+		/* Menu item hidden fields. */
 		$output .= '<input type="hidden" class="menu-item-db-id" name="menu-item[' . $possible_object_id . '][menu-item-db-id]" value="' . $possible_db_id . '" />';
 		$output .= '<input type="hidden" class="menu-item-object" name="menu-item[' . $possible_object_id . '][menu-item-object]" value="'. esc_attr( $item->object ) .'" />';
 		$output .= '<input type="hidden" class="menu-item-parent-id" name="menu-item[' . $possible_object_id . '][menu-item-parent-id]" value="'. esc_attr( $item->menu_item_parent ) .'" />';

@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.29
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Charitable_Registration_Endpoint' ) ) :
 		/**
 		 * Get the nav menu object.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.29
 		 *
 		 * @return object
 		 */

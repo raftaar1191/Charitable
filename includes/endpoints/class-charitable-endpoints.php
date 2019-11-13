@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.14
+ * @version   1.6.29
  */
 
 // Exit if accessed directly.
@@ -58,6 +58,8 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 			add_filter( 'the_content', array( $this, 'get_content' ) );
 			add_filter( 'body_class', array( $this, 'add_body_classes' ) );
 			add_filter( 'nav_menu_meta_box_object', array( $this, 'add_endpoints_menu_meta_box' ) );
+			add_filter( 'customize_nav_menu_available_item_types', array( $this, 'add_endpoints_menu_meta_box_to_customizer' ) );
+			add_filter( 'customize_nav_menu_available_items', array( $this, 'add_endpoints_menu_meta_box_items_to_customizer' ), 10, 4 );
 
 			/* Avoid Polylang rewriting the rewrite rules. */
 			add_filter( 'pll_modify_rewrite_rule', array( $this, 'prevent_polylang_rewrite_modification' ), 10, 2 );
@@ -369,7 +371,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * Add a "Charitable" menus meta box.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.29
 		 *
 		 * @param  object $object The meta box object
 		 * @return object
@@ -390,7 +392,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		/**
 		 * The content of the endpoints menu meta box.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.29
 		 *
 		 * @global int|string $nav_menu_selected_id (id, name or slug) of the currently-selected menu.
 		 * @return void
@@ -398,7 +400,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		public function endpoints_menu_meta_box() {
 			global $nav_menu_selected_id;
 
-			$walker = new Walker_Nav_Menu_Checklist();
+			$walker = new Charitable_Walker_Nav_Menu_Checklist();
 
 			$current_tab = 'all';
 			$endpoints   = $this->get_endpoints_for_nav_menu();
@@ -425,7 +427,7 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 						<a href="<?php echo esc_url( add_query_arg( array( 'charitable-tab' => 'all', 'selectall' => 1, ), remove_query_arg( $removed_args ) ) ); ?>#charitable" class="select-all"><?php _e( 'Select All', 'charitable' ); ?></a>
 					</span>
 					<span class="add-to-menu">
-						<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'charitable' ); ?>" name="add-charitable-menu-item" id="submit-authorarchive" />
+						<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu', 'charitable' ); ?>" name="add-charitable-menu-item" id="submit-charitable" />
 						<span class="spinner"></span>
 					</span>
 				</p>
@@ -434,9 +436,58 @@ if ( ! class_exists( 'Charitable_Endpoints' ) ) :
 		}
 
 		/**
+		 * Add Charitable menu meta box to the Customizer.
+		 *
+		 * @since  1.6.29
+		 *
+		 * @param  array $item_types An associative array structured for the customizer.
+		 * @return array
+		 */
+		public function add_endpoints_menu_meta_box_to_customizer( $item_types ) {
+			return array_merge(
+				$item_types,
+				array(
+					'charitable_nav' => array(
+						'title'  => _x( 'Charitable', 'customizer menu section title', 'charitable' ),
+						'type'   => 'charitable_nav',
+						'object' => 'charitable_nav',
+					),
+				)
+			);
+		}
+
+		/**
+		 * Add meta box items to the Customizer.
+		 *
+		 * @since  1.6.29
+		 *
+		 * @param  array   $items  The array of menu items.
+		 * @param  string  $type   The requested type.
+		 * @param  string  $object The requested object name.
+		 * @param  integer $page   The page num being requested.
+		 * @return array The paginated Charitable user nav items.
+		 */
+		public function add_endpoints_menu_meta_box_items_to_customizer( $items = array(), $type = '', $object = '', $page = 0 ) {
+			if ( 'charitable_nav' !== $object ) {
+				return $items;
+			}
+
+			foreach ( $this->get_endpoints_for_nav_menu() as $item ) {
+				$item               = (array) $item;
+				$item['id']         = 'charitable-' . $item['object_id'];
+				$item['classes']    = implode( ' ', $item['classes'] );
+				$item['type_label'] = _x( 'Custom Link', 'customizer menu type label', 'charitable' );
+
+				$items[] = $item;
+			}
+
+			return array_slice( $items, 10 * $page, 10 );
+		}
+
+		/**
 		 * Return all endpoints that can be added to navigation menus.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.29
 		 *
 		 * @return object[]
 		 */
