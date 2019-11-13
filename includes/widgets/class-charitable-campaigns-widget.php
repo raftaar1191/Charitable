@@ -46,7 +46,6 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 		 * @param 	array $instance
 		 */
 		public function widget( $args, $instance ) {
-
 			$view_args              = array_merge( $args, $instance );
 	        $view_args['campaigns'] = $this->get_widget_campaigns( $instance );
 
@@ -79,8 +78,8 @@ if ( ! class_exists( 'Charitable_Campaigns_Widget' ) ) :
 				<label for="<?php echo $this->get_field_id( 'number' ) ?>"><?php _e( 'Number of campaigns to display:', 'charitable' ) ?></label>
 				<input type="text" name="<?php echo $this->get_field_name( 'number' ) ?>" id="<?php echo $this->get_field_id( 'number' ) ?>" value="<?php echo $args['number'] ?>" />
 			</p>
-			<p>         
-	            <input id="<?php echo esc_attr( $this->get_field_id( 'show_thumbnail' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_thumbnail' ) ); ?>" <?php checked( $args['show_thumbnail'] ) ?>>            
+			<p>
+	            <input id="<?php echo esc_attr( $this->get_field_id( 'show_thumbnail' ) ) ?>" type="checkbox" name="<?php echo esc_attr( $this->get_field_name( 'show_thumbnail' ) ); ?>" <?php checked( $args['show_thumbnail'] ) ?>>
 	            <label for="<?php echo esc_attr( $this->get_field_id( 'show_thumbnail' ) ) ?>"><?php _e( 'Show thumbnail', 'charitable' ) ?></label>
 			</p>
 			<p>
