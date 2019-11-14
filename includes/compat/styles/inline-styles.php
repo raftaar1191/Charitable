@@ -26,5 +26,7 @@ return [
 	'hello-elementor'    => '.donate-button{color: #fff;}',
 	'divi-style'         => '.donate-button.button{color:' . $highlight_colour . ';background:#fff;border-color:' . $highlight_colour . ';}'
 							. '#left-area .donation-amounts{padding: 0;}'
-							. '.charitable-submit-field .button{font-size:20px;}',
+							. '.charitable-submit-field .button{font-size:20px;}'
+							. '.et_pb_widget .charitable-submit-field .button{font-size:1em;}'
+							. '.et_pb_widget .charitable-submit-field .et_pb_button:after{font-size:1.6em;}',
 ];

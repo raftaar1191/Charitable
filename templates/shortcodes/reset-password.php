@@ -6,7 +6,7 @@
  * @author  Rafe Colton
  * @package Charitable/Templates/Account
  * @since   1.4.0
- * @version 1.5.7
+ * @version 1.6.29
  */
 
 // Exit if accessed directly.

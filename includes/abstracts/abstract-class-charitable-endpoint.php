@@ -129,7 +129,7 @@ if ( ! class_exists( 'Charitable_Endpoint' ) ) :
 		 * Return a nav menu object, or null if the endpoint should not be
 		 * added to navigation menus.
 		 *
-		 * @since  1.7.0
+		 * @since  1.6.29
 		 *
 		 * @return object|null
 		 */

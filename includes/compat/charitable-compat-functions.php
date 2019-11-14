@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.27
+ * @version   1.6.29
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -73,7 +73,7 @@ function charitable_load_compat_functions() {
  * @return void
  */
 function charitable_compat_styles() {
-	$styles = include( 'inline/styles.php' );
+	$styles = include( 'styles/inline-styles.php' );
 
 	foreach ( $styles as $stylesheet => $custom_styles ) {
 		wp_add_inline_style( $stylesheet, $custom_styles );
@@ -91,21 +91,22 @@ add_action( 'wp_enqueue_scripts', 'charitable_compat_styles', 20 );
  * @return string
  */
 function charitable_compat_theme_highlight_colour( $colour ) {
-	switch ( strtolower( wp_get_theme()->stylesheet ) ) {
-		case 'twentytwenty': return sanitize_hex_color( twentytwenty_get_color_for_area( 'content', 'accent' ) );
-		case 'twentynineteen': return '#0073aa';
-		case 'hello-elementor': return '#cc3366';
-		case 'divi':
-			switch ( et_get_option( 'color_schemes', 'none' ) ) {
-				case 'none': return '#2ea3f2';
-				case 'green': return '#7cc68d';
-				case 'orange': return '#edb059';
-				case 'pink': return '#c37cc6';
-				case 'red': return '#cd5c5c';
-			}
-			return $colour;
+	$colours    = include( 'styles/highlight-colours.php' );
+	$stylesheet = strtolower( wp_get_theme()->stylesheet );
+
+	if ( 'twentytwenty' === $stylesheet ) {
+		return sanitize_hex_color( twentytwenty_get_color_for_area( 'content', 'accent' ) );
 	}
 
+	if ( 'divi' === $stylesheet ) {
+		$stylesheet = 'divi-' . et_get_option( 'color_schemes', 'none' );
+	}
+
+	if ( array_key_exists( $stylesheet, $colours ) ) {
+		return $colours[ $stylesheet ];
+	}
+
+	/* Return default colour. */
 	return $colour;
 }
 

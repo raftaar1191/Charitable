@@ -2,20 +2,22 @@
 /**
  * Charitable Deprecated Functions.
  *
- * @package     Charitable/Functions/Deprecated
- * @version     1.0.1
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Deprecated
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.1
+ * @version   1.6.29
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @deprecated 1.0.1
  */
-
 function charitable_user_dashboard() {
 	charitable_get_deprecated()->deprecated_function(
 		__FUNCTION__,

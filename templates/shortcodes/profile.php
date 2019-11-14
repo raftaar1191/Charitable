@@ -2,14 +2,16 @@
 /**
  * The template used to display the profile form.
  *
- * @author 	Studio 164a
+ * @author  Studio 164a
  * @package Charitable/Templates/Account
  * @since   1.0.0
- * @version 1.5.7
+ * @version 1.6.29
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $form  = $view_args['form'];
 $donor = charitable_get_user( wp_get_current_user() );
