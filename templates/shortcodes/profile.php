@@ -32,7 +32,7 @@ do_action( 'charitable_user_profile_before', $view_args );
 	 * @param Charitable_Form $form      The form object.
 	 * @param array           $view_args All args passed to template.
 	 */
-	do_action( 'charitable_form_before_fields', $form, $view_args ); 
+	do_action( 'charitable_form_before_fields', $form, $view_args );
 
 	?>
 	<div class="charitable-form-fields cf">
@@ -52,7 +52,7 @@ do_action( 'charitable_user_profile_before', $view_args );
 
 	?>
 	<div class="charitable-form-field charitable-submit-field">
-		<button class="button button-primary" type="submit" name="update-profile"><?php echo apply_filters( 'charitable_profile_form_submit_button_name', __( 'Update', 'charitable' ) ); ?></button>
+		<button class="<?php echo esc_attr( charitable_get_button_class( 'profile' ) ); ?>" type="submit" name="update-profile"><?php echo apply_filters( 'charitable_profile_form_submit_button_name', __( 'Update', 'charitable' ) ); ?></button>
 	</div>
 </form><!-- #charitable-profile-form -->
 <?php

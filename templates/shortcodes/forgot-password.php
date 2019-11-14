@@ -57,7 +57,7 @@ $form = $view_args['form'];
 
 		?>
 		<div class="charitable-form-field charitable-submit-field">
-			<input type="submit" name="submit" class="lostpassword-button" value="<?php esc_attr_e( 'Reset Password', 'charitable' ); ?>" />
+			<input type="submit" name="submit" class="<?php echo esc_attr( charitable_get_button_class( 'lostpassword' ) ); ?>" value="<?php esc_attr_e( 'Reset Password', 'charitable' ); ?>" />
 		</div>
 
 	</form><!-- #lostpasswordform -->

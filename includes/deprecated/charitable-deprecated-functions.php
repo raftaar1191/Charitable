@@ -157,3 +157,24 @@ if ( ! function_exists( 'charitable_add_body_classes' ) ) :
 	}
 
 endif;
+
+/**
+ * Yoast attempts to executes shortcodes from the admin, so we
+ * need to make sure these will work properly.
+ *
+ * @deprecated 2.0.0
+ *
+ * @since  1.5.4
+ * @since  1.6.10 Deprecated.
+ *
+ * @return void
+ */
+function charitable_wpseo_compat_load_template_files() {
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.10',
+		'charitable()->load_template_files()'
+	);
+
+	charitable()->load_template_files();
+}

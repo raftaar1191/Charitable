@@ -367,7 +367,7 @@ function charitable_get_button_class( $button ) {
 	/**
 	 * Filter the button classes.
 	 *
-	 * @since 1.7.0
+	 * @since 1.6.29
 	 *
 	 * @param array  $classes The button classes.
 	 * @param string $button  The specific button we're showing.

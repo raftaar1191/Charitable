@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.6.29
  */
 
 if ( ! array_key_exists( 'campaign', $view_args ) || ! is_a( $view_args['campaign'], 'Charitable_Campaign' ) ) :

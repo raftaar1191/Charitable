@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.6.29
  */
 
 $campaign = $view_args['campaign'];
