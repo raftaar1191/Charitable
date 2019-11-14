@@ -346,7 +346,7 @@ function charitable_get_email_verification_link( WP_User $user, $redirect_url = 
 /**
  * Get the button classes for a Charitable button.
  *
- * @since  1.7.0
+ * @since  1.6.29
  *
  * @param  string $button Which button we're showing.
  * @return string

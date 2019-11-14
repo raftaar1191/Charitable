@@ -5,6 +5,7 @@
  * Override this template by copying it to yourtheme/charitable/campaign-loop/donate-modal-window.php
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Campaign
  * @since   1.0.0
  * @version 1.3.2
  */

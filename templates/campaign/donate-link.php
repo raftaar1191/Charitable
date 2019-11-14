@@ -29,7 +29,7 @@ $label = sprintf(
 ?>
 <div class="campaign-donation">
 	<a href="#charitable-donation-form"
-		class="<?php echo charitable_get_button_class( 'donate' ); ?>"
+		class="<?php echo esc_attr( charitable_get_button_class( 'donate' ) ); ?>"
 		aria-label="<?php echo $label; ?>"
 	>
 	<?php _e( 'Donate', 'charitable' ); ?>

@@ -17,5 +17,5 @@ $campaign = $view_args['campaign'];
 	<?php wp_nonce_field( 'charitable-donate', 'charitable-donate-now' ); ?>
 	<input type="hidden" name="charitable_action" value="start_donation" />
 	<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>" />
-	<button type="submit" name="charitable_submit" class="<?php echo charitable_get_button_class( 'donate' ); ?>"><?php esc_attr_e( 'Donate', 'charitable' ); ?></button>
+	<button type="submit" name="charitable_submit" class="<?php echo esc_attr( charitable_get_button_class( 'donate' ) ); ?>"><?php esc_attr_e( 'Donate', 'charitable' ); ?></button>
 </form>
