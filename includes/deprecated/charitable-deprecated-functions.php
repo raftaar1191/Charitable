@@ -2,20 +2,22 @@
 /**
  * Charitable Deprecated Functions.
  *
- * @package     Charitable/Functions/Deprecated
- * @version     1.0.1
- * @author      Eric Daams
- * @copyright   Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Functions/Deprecated
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.1
+ * @version   1.6.29
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * @deprecated 1.0.1
  */
-
 function charitable_user_dashboard() {
 	charitable_get_deprecated()->deprecated_function(
 		__FUNCTION__,
@@ -157,3 +159,24 @@ if ( ! function_exists( 'charitable_add_body_classes' ) ) :
 	}
 
 endif;
+
+/**
+ * Yoast attempts to executes shortcodes from the admin, so we
+ * need to make sure these will work properly.
+ *
+ * @deprecated 2.0.0
+ *
+ * @since  1.5.4
+ * @since  1.6.10 Deprecated.
+ *
+ * @return void
+ */
+function charitable_wpseo_compat_load_template_files() {
+	charitable_get_deprecated()->deprecated_function(
+		__FUNCTION__,
+		'1.6.10',
+		'charitable()->load_template_files()'
+	);
+
+	charitable()->load_template_files();
+}

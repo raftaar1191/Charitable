@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.6.29
  */
 
 $campaign = $view_args['campaign'];
@@ -20,7 +20,7 @@ $label    = sprintf(
 ?>
 <div class="campaign-donation">
 	<a data-trigger-modal="charitable-donation-form-modal"
-		class="<?php echo charitable_get_button_class( 'donate' ); ?>"
+		class="<?php echo esc_attr( charitable_get_button_class( 'donate' ) ); ?>"
 		href="<?php echo charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign->ID ) ); ?>"
 		aria-label="<?php echo $label; ?>"
 	>

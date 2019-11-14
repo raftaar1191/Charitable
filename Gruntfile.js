@@ -23,8 +23,8 @@ module.exports = function(grunt) {
             },
             'sass': {
                 'files': [
-                    'assets/css/',
-                    'assets/css/**'
+                    'assets/css/scss/',
+                    'assets/css/scss/**'
                 ],
                 'tasks': ['sass:dist']
             },

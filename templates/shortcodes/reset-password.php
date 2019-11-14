@@ -6,7 +6,7 @@
  * @author  Rafe Colton
  * @package Charitable/Templates/Account
  * @since   1.4.0
- * @version 1.5.7
+ * @version 1.6.29
  */
 
 // Exit if accessed directly.
@@ -59,7 +59,7 @@ $form = $view_args['form'];
 
 		?>
 		<div class="charitable-form-field charitable-submit-field resetpass-submit">
-			<input type="submit" name="submit" class="lostpassword-button" id="resetpass-button" value="<?php _e( 'Reset Password', 'charitable' ); ?>">
+			<input type="submit" name="submit" class="<?php echo esc_attr( charitable_get_button_class( 'lostpassword' ) ); ?>" id="resetpass-button" value="<?php _e( 'Reset Password', 'charitable' ); ?>">
 		</div>
 	</form><!-- #resetpassform -->
 	<?php

@@ -7,7 +7,7 @@
  * @author  Studio 164a
  * @package Charitable/Templates/Campaign Page
  * @since   1.0.0
- * @version 1.7.0
+ * @version 1.6.29
  */
 
 if ( ! array_key_exists( 'campaign', $view_args ) || ! is_a( $view_args['campaign'], 'Charitable_Campaign' ) ) :
@@ -29,7 +29,7 @@ $label = sprintf(
 ?>
 <div class="campaign-donation">
 	<a href="#charitable-donation-form"
-		class="<?php echo charitable_get_button_class( 'donate' ); ?>"
+		class="<?php echo esc_attr( charitable_get_button_class( 'donate' ) ); ?>"
 		aria-label="<?php echo $label; ?>"
 	>
 	<?php _e( 'Donate', 'charitable' ); ?>

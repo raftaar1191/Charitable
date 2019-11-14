@@ -9,7 +9,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
- * @version   1.6.19
+ * @version   1.6.29
  */
 
 // Exit if accessed directly.
@@ -346,7 +346,7 @@ function charitable_get_email_verification_link( WP_User $user, $redirect_url = 
 /**
  * Get the button classes for a Charitable button.
  *
- * @since  1.7.0
+ * @since  1.6.29
  *
  * @param  string $button Which button we're showing.
  * @return string
@@ -367,7 +367,7 @@ function charitable_get_button_class( $button ) {
 	/**
 	 * Filter the button classes.
 	 *
-	 * @since 1.7.0
+	 * @since 1.6.29
 	 *
 	 * @param array  $classes The button classes.
 	 * @param string $button  The specific button we're showing.

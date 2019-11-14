@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.6.27
+ * @version   1.6.29
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -66,22 +66,69 @@ function charitable_load_compat_functions() {
 }
 
 /**
- * Yoast attempts to executes shortcodes from the admin, so we
- * need to make sure these will work properly.
+ * Add custom styles for certain themes.
  *
- * @deprecated 2.0.0
- *
- * @since  1.5.4
- * @since  1.6.10 Deprecated.
+ * @since  1.6.29
  *
  * @return void
  */
-function charitable_wpseo_compat_load_template_files() {
-	charitable_get_deprecated()->deprecated_function(
-		__FUNCTION__,
-		'1.6.10',
-		'charitable()->load_template_files()'
-	);
+function charitable_compat_styles() {
+	$styles = include( 'styles/inline-styles.php' );
 
-	charitable()->load_template_files();
+	foreach ( $styles as $stylesheet => $custom_styles ) {
+		wp_add_inline_style( $stylesheet, $custom_styles );
+	}
 }
+
+add_action( 'wp_enqueue_scripts', 'charitable_compat_styles', 20 );
+
+/**
+ * Change the default accent colour based on the current theme.
+ *
+ * @since  1.6.29
+ *
+ * @param  string $colour The default accent colour.
+ * @return string
+ */
+function charitable_compat_theme_highlight_colour( $colour ) {
+	$colours    = include( 'styles/highlight-colours.php' );
+	$stylesheet = strtolower( wp_get_theme()->stylesheet );
+
+	if ( 'twentytwenty' === $stylesheet ) {
+		return sanitize_hex_color( twentytwenty_get_color_for_area( 'content', 'accent' ) );
+	}
+
+	if ( 'divi' === $stylesheet ) {
+		$stylesheet = 'divi-' . et_get_option( 'color_schemes', 'none' );
+	}
+
+	if ( array_key_exists( $stylesheet, $colours ) ) {
+		return $colours[ $stylesheet ];
+	}
+
+	/* Return default colour. */
+	return $colour;
+}
+
+add_filter( 'charitable_default_highlight_colour', 'charitable_compat_theme_highlight_colour' );
+
+/**
+ * Add button classes depending on the theme.
+ *
+ * @since  1.6.29
+ *
+ * @param  array  $classes The classes to add to the button by default.
+ * @param  string $button  The specific button we're showing.
+ * @return array
+ */
+function charitable_compat_button_classes( $classes, $button ) {
+	switch ( strtolower( wp_get_theme()->stylesheet ) ) {
+		case 'divi':
+			$classes[] = 'et_pb_button';
+			break;
+	}
+
+	return $classes;
+}
+
+add_filter( 'charitable_button_class', 'charitable_compat_button_classes', 10, 2 );

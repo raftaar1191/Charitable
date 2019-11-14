@@ -3,15 +3,13 @@
  * Displays the campaign thumbnail.
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Campaign
  * @since   1.0.0
  * @version 1.0.0
  */
 
-$campaign       = $view_args['campaign'];
-$thumbnail_size = apply_filters( 'charitable_campaign_loop_thumbnail_size', 'medium' );
+$campaign = $view_args['campaign'];
 
 if ( has_post_thumbnail( $campaign->ID ) ) :
-
-	echo get_the_post_thumbnail( $campaign->ID, $thumbnail_size );
-
+	echo get_the_post_thumbnail( $campaign->ID, apply_filters( 'charitable_campaign_loop_thumbnail_size', 'medium' ) );
 endif;

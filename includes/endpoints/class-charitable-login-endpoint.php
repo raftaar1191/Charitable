@@ -7,7 +7,7 @@
  * @copyright Copyright (c) 2019, Studio 164a
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.5.0
- * @version   1.5.4
+ * @version   1.6.29
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -92,6 +92,17 @@ if ( ! class_exists( 'Charitable_Login_Endpoint' ) ) :
 			}
 
 			return false;
+		}
+
+		/**
+		 * Get the nav menu object.
+		 *
+		 * @since  1.6.29
+		 *
+		 * @return object
+		 */
+		public function nav_menu_object() {
+			return $this->get_nav_menu_object( __( 'Log In', 'charitable' ) );
 		}
 	}
 

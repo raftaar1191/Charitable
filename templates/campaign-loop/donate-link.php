@@ -5,16 +5,17 @@
  * Override this template by copying it to yourtheme/charitable/campaign-loop/donate-link.php
  *
  * @author  Studio 164a
+ * @package Charitable/Templates/Campaign
  * @since   1.0.0
- * @version 1.5.0
+ * @version 1.6.29
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-/**
- * @var 	Charitable_Campaign
- */
+/* @var Charitable_Campaign */
 $campaign = $view_args['campaign'];
 
 if ( ! $campaign->can_receive_donations() ) :
@@ -23,5 +24,10 @@ endif;
 
 ?>
 <div class="campaign-donation">
-	<a class="donate-button button" href="<?php echo charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign->ID ) ) ?>" aria-label="<?php echo esc_attr( sprintf( _x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ), get_the_title( $campaign->ID ) ) ) ?>"><?php _e( 'Donate', 'charitable' ) ?></a>
+	<a class="<?php echo esc_attr( charitable_get_button_class( 'donate' ) ); ?>"
+		href="<?php echo charitable_get_permalink( 'campaign_donation_page', array( 'campaign_id' => $campaign->ID ) ); ?>"
+		aria-label="<?php echo esc_attr( sprintf( _x( 'Make a donation to %s', 'make a donation to campaign', 'charitable' ), get_the_title( $campaign->ID ) ) ); ?>"
+	>
+		<?php _e( 'Donate', 'charitable' ); ?>
+	</a>
 </div>
