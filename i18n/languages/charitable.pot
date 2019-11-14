@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.28\n"
+"Project-Id-Version: Charitable 1.6.29\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-11-07 09:46:03+00:00\n"
+"POT-Creation-Date: 2019-11-14 07:01:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7380,18 +7380,44 @@ msgstr ""
 msgid "Email Verification"
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:79
+#: includes/endpoints/class-charitable-endpoints.php:82
 msgid "Endpoint %s has already been registered."
 msgstr ""
 
-#: includes/endpoints/class-charitable-endpoints.php:174
+#: includes/endpoints/class-charitable-endpoints.php:177
 #. translators: %s: endpoint id
 msgid "Endpoint %s has not been registered."
+msgstr ""
+
+#: includes/endpoints/class-charitable-endpoints.php:414
+msgid "View All"
+msgstr ""
+
+#: includes/endpoints/class-charitable-endpoints.php:427
+msgid "Select All"
+msgstr ""
+
+#: includes/endpoints/class-charitable-endpoints.php:430
+msgid "Add to Menu"
 msgstr ""
 
 #: includes/endpoints/class-charitable-forgot-password-endpoint.php:128
 #: templates/shortcodes/login.php:39
 msgid "Forgot Password"
+msgstr ""
+
+#: includes/endpoints/class-charitable-login-endpoint.php:105
+msgid "Log In"
+msgstr ""
+
+#: includes/endpoints/class-charitable-profile-endpoint.php:131
+msgid "Profile"
+msgstr ""
+
+#: includes/endpoints/class-charitable-registration-endpoint.php:97
+#: includes/shortcodes/class-charitable-login-shortcode.php:41
+#: templates/shortcodes/registration.php:57
+msgid "Register"
 msgstr ""
 
 #: includes/endpoints/class-charitable-reset-password-endpoint.php:79
@@ -8379,11 +8405,6 @@ msgstr ""
 msgid "You are already logged in!"
 msgstr ""
 
-#: includes/shortcodes/class-charitable-login-shortcode.php:41
-#: templates/shortcodes/registration.php:57
-msgid "Register"
-msgstr ""
-
 #: includes/shortcodes/class-charitable-logout-shortcode.php:42
 msgid "Logout"
 msgstr ""
@@ -8481,7 +8502,7 @@ msgid "Displays your Charitable campaign categories or tags."
 msgstr ""
 
 #: includes/widgets/class-charitable-campaign-terms-widget.php:72
-#: includes/widgets/class-charitable-campaigns-widget.php:75
+#: includes/widgets/class-charitable-campaigns-widget.php:74
 #: includes/widgets/class-charitable-donate-widget.php:81
 #: includes/widgets/class-charitable-donation-stats-widget.php:72
 msgid "Title:"
@@ -8507,23 +8528,23 @@ msgstr ""
 msgid "Displays your Charitable campaigns."
 msgstr ""
 
-#: includes/widgets/class-charitable-campaigns-widget.php:79
+#: includes/widgets/class-charitable-campaigns-widget.php:78
 msgid "Number of campaigns to display:"
 msgstr ""
 
-#: includes/widgets/class-charitable-campaigns-widget.php:84
+#: includes/widgets/class-charitable-campaigns-widget.php:83
 msgid "Show thumbnail"
 msgstr ""
 
-#: includes/widgets/class-charitable-campaigns-widget.php:87
+#: includes/widgets/class-charitable-campaigns-widget.php:86
 msgid "Order:"
 msgstr ""
 
-#: includes/widgets/class-charitable-campaigns-widget.php:89
+#: includes/widgets/class-charitable-campaigns-widget.php:88
 msgid "Date published"
 msgstr ""
 
-#: includes/widgets/class-charitable-campaigns-widget.php:90
+#: includes/widgets/class-charitable-campaigns-widget.php:89
 msgid "Ending soonest"
 msgstr ""
 
@@ -8634,7 +8655,7 @@ msgid "Return home"
 msgstr ""
 
 #: templates/campaign/donate-button.php:20
-#: templates/campaign/donate-link.php:26 templates/campaign/donate-modal.php:24
+#: templates/campaign/donate-link.php:35 templates/campaign/donate-modal.php:27
 #: templates/campaign-loop/donate-link.php:26
 #: templates/campaign-loop/donate-modal.php:21
 #: templates/donation-form/form-donation.php:59
@@ -8899,6 +8920,16 @@ msgctxt "Taxonomy Singular Name"
 msgid "Campaign Tag"
 msgstr ""
 
+#: includes/endpoints/class-charitable-endpoints.php:451
+msgctxt "customizer menu section title"
+msgid "Charitable"
+msgstr ""
+
+#: includes/endpoints/class-charitable-endpoints.php:479
+msgctxt "customizer menu type label"
+msgid "Custom Link"
+msgstr ""
+
 #: includes/forms/class-charitable-donation-form.php:1186
 msgctxt "enable payment gateway"
 msgid "Enable one now"
@@ -8918,9 +8949,8 @@ msgctxt "x and y"
 msgid "%1$s and %2$s"
 msgstr ""
 
-#: templates/campaign/donate-link.php:26 templates/campaign/donate-modal.php:22
+#: templates/campaign/donate-link.php:25 templates/campaign/donate-modal.php:16
 #: templates/campaign-loop/donate-link.php:26
-#. translators: %s: campaign name
 #. translators: %s: campaign title
 msgctxt "make a donation to campaign"
 msgid "Make a donation to %s"

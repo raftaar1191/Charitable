@@ -1,3 +1,9 @@
+# 1.6.29
+* NEW: Improved stylistic integration with the Twenty Twenty theme and some other popular themes (Twenty Nineteen, Divi, Hello Elementor).
+* NEW: Made it easier to add Charitable pages to navigation menus. [#729](https://github.com/Charitable/Charitable/issues/729)
+* NEW: Added the `charitable_button_class` filter to easily add/remove classes to Charitable buttons. [#494](https://github.com/Charitable/Charitable/issues/494)
+* FIX: The default date in the admin donation form was incorrect in certain languages. [#728](https://github.com/Charitable/Charitable/issues/728)
+
 # 1.6.28
 * NEW: Added `select2` script for easier donor selection when adding a manual donation. [#727](https://github.com/Charitable/Charitable/issues/727)
 * FIX: Display stored donor details when creating a manual donation for an existing donor. [#706](https://github.com/Charitable/Charitable/issues/706)
