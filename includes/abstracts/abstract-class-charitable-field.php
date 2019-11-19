@@ -81,7 +81,7 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		 *
 		 * @since  1.6.0
 		 *
-		 * @param  string $key     The field's key.
+		 * @param  string $key     The field argument's key.
 		 * @param  string $setting The individual setting within an array-like argument.
 		 *                         If not set, the entire argument is changed.
 		 * @param  mixed  $value   The field's value.
@@ -116,8 +116,8 @@ if ( ! class_exists( 'Charitable_Field' ) ) :
 		 *
 		 * @since  1.5.0
 		 *
-		 * @param  string $key   The field's key.
-		 * @param  mixed  $value The field's value.
+		 * @param  string $key   The field argument's key.
+		 * @param  mixed  $value The field argument's value.
 		 * @return Charitable_Field
 		 */
 		public function __set( $key, $value ) {
