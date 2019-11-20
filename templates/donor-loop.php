@@ -38,7 +38,7 @@ $style       = '';
 if ( 'horizontal' == $orientation ) {
 	$width = array_key_exists( 'width', $view_args ) ? $view_args['width'] : get_option( 'thumbnail_size_w', 100 );
 	if ( 100 != $width ) {
-		$style = '<style>.donors-list.donors-list-horizontal .donor{ width:' . $width . 'px; }</style>';
+		$style = '<style>.donors-list.donors-list-horizontal .donor{width:' . $width . 'px;}</style>';
 	}
 }
 

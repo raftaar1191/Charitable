@@ -712,7 +712,7 @@ if ( ! class_exists( 'Charitable_Donation_Processor' ) ) :
 
 				$user_data = $this->get_donation_data_value( 'user', array() );
 
-				if ( array_key_exists( 'email', $user_data ) ) {
+				if ( array_key_exists( 'email', $user_data ) && ! empty( $user_data['email'] ) ) {
 					$this->donor_id = charitable_get_table( 'donors' )->get_donor_id_by_email( $user_data['email'] );
 				}
 

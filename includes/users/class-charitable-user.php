@@ -682,31 +682,26 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 				$email = $this->user_email;
 			}
 
-			/**
-			 * Filter whether donors can be added without an email address.
-			 *
-			 * Prior to Charitable 1.6, this was never permitted. As of Charitable 1.6, donors
-			 * without an email address can be added by default, primarily to support manual
-			 * donations without an email address. Use this filter to disable that ability.
-			 *
-			 * NOTE: By default, the public donation form still requires an email address, so this
-			 * primarily affects programmatically created donors, or donors created via manual
-			 * donations in the admin.
-			 *
-			 * @see https://github.com/Charitable/Charitable/issues/535
-			 *
-			 * @since 1.6.0
-			 *
-			 * @param boolean $permitted Whether donors can be added without an email address.
-			 */
-			if ( ! $email && ! charitable_permit_donor_without_email() ) {
-				charitable_get_deprecated()->doing_it_wrong(
-					__METHOD__,
-					__( 'Unable to add donor. Email not set for logged out user.', 'charitable' ),
-					'1.0.0'
-				);
+			$donor_values = array(
+				'user_id'    => $this->ID,
+				'email'      => $email,
+				'first_name' => array_key_exists( 'first_name', $submitted ) ? $submitted['first_name'] : $this->first_name,
+				'last_name'  => array_key_exists( 'last_name', $submitted ) ? $submitted['last_name'] : $this->last_name,
+			);
 
-				return 0;
+			if ( ! $email ) {
+				/* If email-less donations are OK, remove the email from the donor values. */
+				if ( charitable_permit_donor_without_email() ) {
+					unset( $donor_values['email'] );
+				} else {
+					charitable_get_deprecated()->doing_it_wrong(
+						__METHOD__,
+						__( 'Unable to add donor. Email not set for logged out user.', 'charitable' ),
+						'1.0.0'
+					);
+
+					return 0;
+				}
 			}
 
 			/**
@@ -718,17 +713,7 @@ if ( ! class_exists( 'Charitable_User' ) ) :
 			 * @param Charitable_User $user         This instance of `Charitable_User`.
 			 * @param array           $submitted    Submitted values.
 			 */
-			$donor_values = apply_filters(
-				'charitable_donor_values',
-				array(
-					'user_id'    => $this->ID,
-					'email'      => $email,
-					'first_name' => array_key_exists( 'first_name', $submitted ) ? $submitted['first_name'] : $this->first_name,
-					'last_name'  => array_key_exists( 'last_name', $submitted ) ? $submitted['last_name'] : $this->last_name,
-				),
-				$this,
-				$submitted
-			);
+			$donor_values = apply_filters( 'charitable_donor_values', $donor_values, $this, $submitted );
 
 			$donor_id = charitable_get_table( 'donors' )->insert( $donor_values );
 

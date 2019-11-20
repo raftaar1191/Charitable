@@ -11,7 +11,9 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 
@@ -142,7 +144,8 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 			 * @param  array $args       All the parsed arguments.
 			 * @return array
 			 */
-			$query_args = apply_filters( 'charitable_donors_shortcode_donor_query_args',
+			$query_args = apply_filters(
+				'charitable_donors_shortcode_donor_query_args',
 				charitable_array_subset( $args, array( 'number', 'orderby', 'order', 'campaign', 'distinct_donors' ) ),
 				$args
 			);
