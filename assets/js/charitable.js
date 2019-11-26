@@ -963,13 +963,19 @@ CHARITABLE = window.CHARITABLE || {};
                 var $form = $(form);
 
                 if ( $form.length ) {
+                    $form.append( '<input type="hidden" id="charitable-submit-button-value" />' );
 
-                    $('body').one( 'submit', $form, function() {
-                        var b = $form.find( 'input[type=submit], button[type=submit]' );
+                    $('body').one( 'submit', $form, function( event ) {
+                        var name = document.activeElement.name,
+                            value = document.activeElement.value;
 
+                        $form.find( '#charitable-submit-button-value' )
+                            .attr( 'name', name )
+                            .attr( 'value', value );
 
+                        $form.find( 'input[type=submit], button[type=submit]' )
+                            .attr( 'disabled', 'disabled' );
 
-                        b.attr( 'disabled', 'disabled' );
                         return true;
                     } );
                 }
