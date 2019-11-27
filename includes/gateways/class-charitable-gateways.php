@@ -2,36 +2,43 @@
 /**
  * Class that sets up the gateways.
  *
- * @version		1.0.0
- * @package		Charitable/Classes/Charitable_Gateways
- * @author 		Eric Daams
- * @copyright 	Copyright (c) 2019, Studio 164a
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @package   Charitable/Classes/Charitable_Gateways
+ * @author    Eric Daams
+ * @copyright Copyright (c) 2019, Studio 164a
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ * @version   1.6.30
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) { exit; }
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'Charitable_Gateways' ) ) :
 
 	/**
 	 * Charitable_Gateways
 	 *
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	class Charitable_Gateways {
 
 		/**
 		 * The single instance of this class.
 		 *
-		 * @var     Charitable_Gateways|null
+		 * @since 1.0.0
+		 *
+		 * @var   Charitable_Gateways|null
 		 */
 		private static $instance = null;
 
 		/**
 		 * All available payment gateways.
 		 *
-		 * @var 	array
+		 * @since 1.0.0
+		 *
+		 * @var   array
 		 */
 		private $gateways;
 
@@ -42,7 +49,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * which can only be called during the start phase. In other words, don't try
 		 * to instantiate this object.
 		 *
-		 * @since  1.0.0
+		 * @since 1.0.0
 		 */
 		protected function __construct() {
 			add_action( 'init', array( $this, 'register_gateways' ) );
@@ -80,10 +87,20 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * @return void
 		 */
 		public function register_gateways() {
-			$this->gateways = apply_filters( 'charitable_payment_gateways', array(
-				'offline' => 'Charitable_Gateway_Offline',
-				'paypal'  => 'Charitable_Gateway_Paypal',
-			) );
+			/**
+			 * Filter the list of payment gateways.
+			 *
+			 * @since 1.2.0
+			 *
+			 * @param array $gateways The list of gateways in gateway ID => gateway class format.
+			 */
+			$this->gateways = apply_filters(
+				'charitable_payment_gateways',
+				array(
+					'offline' => 'Charitable_Gateway_Offline',
+					'paypal'  => 'Charitable_Gateway_Paypal',
+				)
+			);
 		}
 
 		/**
@@ -111,16 +128,24 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 			}
 
 			switch ( $_REQUEST['charitable_action'] ) {
-				case 'disable_gateway' :
+				case 'disable_gateway':
 					$this->disable_gateway( $gateway );
 					break;
-				case 'enable_gateway' :
+				case 'enable_gateway':
 					$this->enable_gateway( $gateway );
 					break;
-				case 'make_default_gateway' :
+				case 'make_default_gateway':
 					$this->set_default_gateway( $gateway );
 					break;
-				default :
+				default:
+					/**
+					 * Do something when a gateway settings request takes place.
+					 *
+					 * @since 1.0.0
+					 *
+					 * @param string $action     The action taking place.
+					 * @param string $gateway_id The gateway ID.
+					 */
 					do_action( 'charitable_gateway_settings_request', $_REQUEST['charitable_action'], $gateway );
 			}
 		}
@@ -130,7 +155,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @return string
+		 * @return array
 		 */
 		public function get_available_gateways() {
 			return $this->gateways;
@@ -195,7 +220,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 			$gateways = array();
 
 			foreach ( $this->get_active_gateways() as $id => $class ) {
-				$gateway = new $class;
+				$gateway    = new $class;
 				$gateways[] = $gateway->get_name();
 			}
 
@@ -284,13 +309,21 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @since  1.0.0
 		 *
-		 * @param  array 			   $settings Gateway settings.
+		 * @param  array              $settings Gateway settings.
 		 * @param  Charitable_Gateway $gateway  The gateway's helper object.
 		 * @return array
 		 */
 		public function register_gateway_settings( $settings, Charitable_Gateway $gateway ) {
 			add_filter( 'charitable_settings_fields_gateways_gateway_' . $gateway->get_gateway_id(), array( $gateway, 'default_gateway_settings' ), 5 );
 			add_filter( 'charitable_settings_fields_gateways_gateway_' . $gateway->get_gateway_id(), array( $gateway, 'gateway_settings' ), 15 );
+
+			/**
+			 * Filter the settings to show for a particular gateway.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $settings Gateway settings.
+			 */
 			return apply_filters( 'charitable_settings_fields_gateways_gateway_' . $gateway->get_gateway_id(), $settings );
 		}
 
@@ -303,6 +336,14 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 */
 		public function in_test_mode() {
 			$enabled = charitable_get_option( 'test_mode', false );
+
+			/**
+			 * Return whether Charitable is in test mode.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param boolean $enabled Whether test mode is on.
+			 */
 			return apply_filters( 'charitable_in_test_mode', $enabled );
 		}
 
@@ -336,7 +377,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 *
 		 * @since  1.4.0
 		 *
-		 * @param string $feature Feature to check for.
+		 * @param  string $feature Feature to check for.
 		 * @return boolean
 		 */
 		public function any_gateway_supports( $feature ) {
@@ -381,7 +422,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 			$gateways  = array(
 				'payfast'       => __( 'Payfast', 'charitable' ),
 				'payumoney'     => __( 'PayUMoney', 'charitable' ),
-				'stripe'        => __( 'Stripe', 'charitable'  ),
+				'stripe'        => __( 'Stripe', 'charitable' ),
 				'authorize_net' => __( 'Authorize.Net', 'charitable' ),
 			);
 
@@ -415,7 +456,7 @@ if ( ! class_exists( 'Charitable_Gateways' ) ) :
 		 * @return void
 		 */
 		protected function set_default_gateway( $gateway ) {
-			$settings = get_option( 'charitable_settings' );
+			$settings                    = get_option( 'charitable_settings' );
 			$settings['default_gateway'] = $gateway;
 
 			update_option( 'charitable_settings', $settings );
