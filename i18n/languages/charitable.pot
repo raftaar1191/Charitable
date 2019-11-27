@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Charitable package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Charitable 1.6.29\n"
+"Project-Id-Version: Charitable 1.6.30\n"
 "Report-Msgid-Bugs-To: https://www.wpcharitable.com/\n"
-"POT-Creation-Date: 2019-11-14 07:40:35+00:00\n"
+"POT-Creation-Date: 2019-11-27 00:58:41+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -5175,7 +5175,7 @@ msgstr ""
 
 #: includes/admin/customizer/class-charitable-customizer.php:175
 #: includes/db/class-charitable-donors-db.php:267
-#: includes/forms/class-charitable-donation-form.php:953
+#: includes/forms/class-charitable-donation-form.php:952
 #: includes/forms/class-charitable-profile-form.php:327
 #: includes/forms/class-charitable-registration-form.php:165
 #: includes/privacy/charitable-privacy-functions.php:61
@@ -7312,7 +7312,7 @@ msgid "Resend Donation Emails"
 msgstr ""
 
 #: includes/emails/class-charitable-emails.php:157
-#: includes/gateways/class-charitable-gateways.php:98
+#: includes/gateways/class-charitable-gateways.php:115
 #: includes/licensing/class-charitable-licenses.php:682
 msgid "Cheatin' eh?!"
 msgstr ""
@@ -7703,34 +7703,34 @@ msgstr ""
 msgid "%s is not a valid email address."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:716
+#: includes/forms/class-charitable-donation-form.php:715
 msgid "The gateway submitted is not valid."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:751
-#: includes/forms/class-charitable-donation-form.php:759
+#: includes/forms/class-charitable-donation-form.php:750
+#: includes/forms/class-charitable-donation-form.php:758
 #: includes/public/class-charitable-public.php:94
 #. Translators: %s: minimum donatino amount
 msgid "You must donate more than %s."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:992
+#: includes/forms/class-charitable-donation-form.php:991
 msgid "Terms and Conditions"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1185
+#: includes/forms/class-charitable-donation-form.php:1184
 msgid "There are no active payment gateways."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1217
+#: includes/forms/class-charitable-donation-form.php:1216
 msgid "Test mode is active."
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1220
+#: includes/forms/class-charitable-donation-form.php:1219
 msgid "Disable Test Mode"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1286
+#: includes/forms/class-charitable-donation-form.php:1285
 msgid "Your donation could not be processed. No payment gateway was selected."
 msgstr ""
 
@@ -8162,39 +8162,39 @@ msgstr ""
 msgid "Unknown reason"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:105
+#: includes/gateways/class-charitable-gateways.php:122
 msgid "Missing gateway."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:110
+#: includes/gateways/class-charitable-gateways.php:127
 msgid "Invalid gateway."
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:358
+#: includes/gateways/class-charitable-gateways.php:423
 msgid "Payfast"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:359
+#: includes/gateways/class-charitable-gateways.php:424
 msgid "PayUMoney"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:360
+#: includes/gateways/class-charitable-gateways.php:425
 msgid "Stripe"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:361
+#: includes/gateways/class-charitable-gateways.php:426
 msgid "Authorize.Net"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:399
+#: includes/gateways/class-charitable-gateways.php:464
 msgid "Default Gateway Updated"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:426
+#: includes/gateways/class-charitable-gateways.php:491
 msgid "Gateway enabled"
 msgstr ""
 
-#: includes/gateways/class-charitable-gateways.php:464
+#: includes/gateways/class-charitable-gateways.php:529
 msgid "Gateway disabled"
 msgstr ""
 
@@ -8930,7 +8930,7 @@ msgctxt "customizer menu type label"
 msgid "Custom Link"
 msgstr ""
 
-#: includes/forms/class-charitable-donation-form.php:1186
+#: includes/forms/class-charitable-donation-form.php:1185
 msgctxt "enable payment gateway"
 msgid "Enable one now"
 msgstr ""
