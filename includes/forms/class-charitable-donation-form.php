@@ -707,7 +707,6 @@ if ( ! class_exists( 'Charitable_Donation_Form' ) ) :
 		 * @return boolean
 		 */
 		public function validate_gateway() {
-
 			$ret = true;
 
 			/* Validate the gateway. */

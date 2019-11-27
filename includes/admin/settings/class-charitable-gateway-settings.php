@@ -116,10 +116,10 @@ if ( ! class_exists( 'Charitable_Gateway_Settings' ) ) :
 		/**
 		 * Add gateway keys to the settings groups.
 		 *
-		 * @since   1.0.0
+		 * @since  1.0.0
 		 *
-		 * @param   string[] $groups
-		 * @return  string[]
+		 * @param  string[] $groups
+		 * @return string[]
 		 */
 		public function add_gateway_settings_dynamic_groups( $groups ) {
 			foreach ( charitable_get_helper( 'gateways' )->get_active_gateways() as $gateway_key => $gateway ) {
