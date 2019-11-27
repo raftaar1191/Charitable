@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=paypa
 Tags: donate, wordpress donation plugin, wpcharitable, peer to peer fundraising, recurring donations, donation plugin, donation form, paypal donations, stripe donations, give, fundraise, fundraising
 Requires at least: 4.1
 Tested up to: 5.3
-Stable tag: 1.6.29
+Stable tag: 1.6.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,11 @@ You can post in the [support forum](https://wordpress.org/support/plugin/charita
 6. Setting up Charitable: The Email settings area.
 
 == Changelog ==
+
+= 1.6.30 =
+* NEW: Added `charitable_gateway_object_{gateway_id}` filter.
+* FIX: Preserve the name & value of the clicked button when submitting a form. [#723](https://github.com/Charitable/Charitable/issues/723)
+* FIX: Improved styling of the end date field in the admin, related to changes in WordPress 5.3.
 
 = 1.6.29 =
 * NEW: Improved stylistic integration with the Twenty Twenty theme and some other popular themes (Twenty Nineteen, Divi, Hello Elementor).

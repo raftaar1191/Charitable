@@ -1,3 +1,8 @@
+# 1.6.30
+* NEW: Added `charitable_gateway_object_{gateway_id}` filter.
+* FIX: Preserve the name & value of the clicked button when submitting a form. [#723](https://github.com/Charitable/Charitable/issues/723)
+* FIX: Improved styling of the end date field in the admin, related to changes in WordPress 5.3.
+
 # 1.6.29
 * NEW: Improved stylistic integration with the Twenty Twenty theme and some other popular themes (Twenty Nineteen, Divi, Hello Elementor).
 * NEW: Made it easier to add Charitable pages to navigation menus. [#729](https://github.com/Charitable/Charitable/issues/729)

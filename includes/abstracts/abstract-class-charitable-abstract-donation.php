@@ -550,13 +550,13 @@ if ( ! class_exists( 'Charitable_Abstract_Donation' ) ) :
 		 * @return false|Charitable_Gateway
 		 */
 		public function get_gateway_object() {
-			$class = charitable_get_helper( 'gateways' )->get_gateway( $this->get_gateway() );
+			$object = charitable_get_helper( 'gateways' )->get_gateway_object( $this->get_gateway() );
 
-			if ( ! $class ) {
+			if ( is_null( $object ) ) {
 				return false;
 			}
 
-			return new $class;
+			return $object;
 		}
 
 		/**

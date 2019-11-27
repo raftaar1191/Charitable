@@ -105,11 +105,6 @@ if ( ! class_exists( 'Charitable_Donors_Shortcode' ) ) :
 
 			$template->set_view_args( $view_args );
 
-			// echo '<pre>';
-			// var_dump( $template );
-			// var_dump( $view_args );
-			// echo '</pre>';
-
 			ob_start();
 
 			$template->render();

@@ -41,8 +41,8 @@ if ( empty( $options ) ) {
 		<?php endif ?>
 		<ul class="charitable-radio-list <?php echo esc_attr( $view_args['classes'] ); ?>">
 			<?php foreach ( $options as $option => $label ) : ?>
-				<li><input type="radio" 
-						id="<?php echo esc_attr( $field['key'] . '-' . $option ); ?>" 
+				<li><input type="radio"
+						id="<?php echo esc_attr( $field['key'] . '-' . $option ); ?>"
 						name="<?php echo esc_attr( $field['key'] ); ?>"
 						value="<?php echo esc_attr( $option ); ?>"
 						aria-describedby="charitable_field_<?php echo esc_attr( $field['key'] ); ?>_label"
